@@ -1,0 +1,101 @@
+var.url-param {
+    font-weight: bold;
+}
+
+var.url-value {
+    color: #c90c00;
+    padding: 2px;
+}
+
+div.main-url.fixed {
+    position: fixed;
+    bottom: -5px;
+    left: 10px;
+    z-index: 999;
+    background: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+div.main-url {
+    text-align: justify;
+    line-break: loose;
+    word-break: break-all;
+}
+
+.panel-title var, h4.response var {
+    padding: 6px 12px;
+    margin-right: 12px;
+    border-radius: 3px;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+h4.response.warning var {
+    background: rgba(255, 103, 8, 0.2);
+}
+
+h4.response.error var {
+    background: rgba(201, 12, 0, 0.1);
+}
+
+.panel-title code {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1px 4px;
+    margin-top: 2px;
+    border: 1px solid transparent;
+    border-radius: 3px
+}
+
+.panel-title a.transition-title {
+    padding: 6px 0;
+}
+
+body .col-md-10 h2:first-of-type {
+    margin-top: 0;
+}
+
+.method-nav ul {
+    padding-left: 10px;
+}
+
+.method-nav ul li {
+    list-style: none;
+}
+
+.method-nav ul li a {
+    line-height: 26px;
+}
+
+.method-nav ul li a span {
+    color: #fff;
+    padding: 0 5px;
+    box-sizing: padding-box;
+    border-radius: 15px;
+    line-height: 22px;
+}
+
+.POST .panel-heading, span.POST {
+    background: #62c462;
+}
+
+.GET .panel-heading, span.GET {
+    background: #5bc0de;
+}
+
+.DELETE .panel-heading, span.DELETE {
+    background: #ee5f5b;
+}
+
+.PUT .panel-heading, span.PUT {
+    background: #f89406;
+}
+
+.row dl.dl-horizontal dt {
+    width: 80px;
+}
+.row dl.dl-horizontal dd {
+    margin-left: 100px;
+}
