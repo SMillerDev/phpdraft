@@ -14,7 +14,9 @@ spl_autoload_register(
         $classname = ltrim($classname, '\\');
         preg_match('/^(.+)?([^\\\\]+)$/U', $classname, $match);
         $classname = str_replace('\\', '/', $match[1]) . str_replace(['\\', '_'], '/', $match[2]) . '.php';
-        include_once 'src/' . $classname;
+        if (strpos($classname, 'PHPDraft') !== FALSE || strpos($classname, 'Michelf') !== FALSE){
+            include_once $classname;
+        }
     }
 );
 ?>

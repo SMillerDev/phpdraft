@@ -3,12 +3,12 @@
  * This file contains the APIBlueprintElement class
  *
  * @package PHPDraft\Model
- * @author Sean Molenaar<sean@seanmolenaar.eu>
+ * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model;
 
-use \Michelf\Markdown;
+use Michelf\Markdown;
 
 abstract class APIBlueprintElement
 {
@@ -49,8 +49,14 @@ abstract class APIBlueprintElement
      */
     function parse($object)
     {
-        if (isset($object->meta) && isset($object->meta->title))$this->title = $object->meta->title;
-        if (!isset($object->content)) return;
+        if (isset($object->meta) && isset($object->meta->title))
+        {
+            $this->title = $object->meta->title;
+        }
+        if (!isset($object->content))
+        {
+            return;
+        }
         foreach ($object->content as $key => $item)
         {
             if ($item->element === 'copy')
@@ -61,7 +67,10 @@ abstract class APIBlueprintElement
             }
         }
 
-        if (!empty($object->content))$object->content = array_slice($object->content, 0);
+        if (!empty($object->content))
+        {
+            $object->content = array_slice($object->content, 0);
+        }
 
     }
 
@@ -73,6 +82,7 @@ abstract class APIBlueprintElement
     public function get_href()
     {
         $prep = ($this->parent !== NULL) ? $this->parent->get_href() . '-' : '';
+
         return $prep . str_replace(' ', '-', strtolower($this->title));
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit    bootstrap="test.bootstrap.inc.php"
+            backupGlobals="false"
+            backupStaticAttributes="false"
+            syntaxCheck="false"
+            forceCoversAnnotation="true"
+            mapTestClassNameToCoveredClassName="true"
+            colors="true"
+            verbose="true">
+    <php>
+        <ini name="zend.enable_gc" value="1" />
+    </php>
+    <testsuites>
+        <testsuite name="Parse">
+            <file>../src/PHPDraft/Parse/Tests/ApibToJsonTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/JsonToHTMLTest.php</file>
+        </testsuite>
+        <testsuite name="Model">
+            <file>../src/PHPDraft/Model/Tests/DataStructureElementTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>../src/Lunr/</directory>
+            <exclude>
+                <directory>../src/Mitchelf/</directory>
+                <directory>../src/PHPDraft/Parse/Tests/</directory>
+                <directory>../src/PHPDraft/Model/Tests/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log    type="coverage-html"
+                target="../build/coverage"
+                title="Lunr"
+                charset="UTF-8"
+                yui="true"
+                highlight="true"
+                lowUpperBound="35"
+                highLowerBound="70"/>
+        <log    type="coverage-clover"
+                target="../build/logs/clover.xml"/>
+        <log    type="junit"
+                target="../build/logs/junit.xml"
+                logIncompleteSkipped="false"/>
+    </logging>
+</phpunit>

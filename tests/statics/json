@@ -1,0 +1,3382 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Tesla Model S JSON API"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "FORMAT"
+              },
+              "value": {
+                "element": "string",
+                "content": "1A"
+              }
+            }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://owner-api.teslamotors.com"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "copy",
+          "content": "This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.\n\n"
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "resourceGroup"
+            ],
+            "title": "Authentication"
+          },
+          "content": [
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Tokens"
+              },
+              "attributes": {
+                "href": "/oauth/token"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Get an Access Token"
+                  },
+                  "attributes": {
+                    "data": {
+                      "element": "dataStructure",
+                      "content": [
+                        {
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The type of oAuth grant. Always \"password\""
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "grant_type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "password"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client ID"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_id"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "abc"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client secret"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_secret"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "123"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The email for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "email"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "elon@teslamotors.com"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The password for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "password"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "edisonsux"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Performs the login. Takes in an plain text email and password, matching the owner's login information for [https://my.teslamotors.com/user/login](https://my.teslamotors.com/user/login).\n\nReturns a `access_token` which is passed along as a header with all future requests to authenticate the user.\n\nYou must provide the `Authorization: Bearer {access_token}` header in all other requests.\n\nThe current client ID and secret are [available here](http://pastebin.com/fX6ejAHd)\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"access_token\": \"abc123\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 7776000,\n  \"created_at\": 1457385291\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "resourceGroup"
+            ],
+            "title": "Vehicles"
+          },
+          "content": [
+            {
+              "element": "copy",
+              "content": "A logged in user can have multiple vehicles under their account. This resource is primarily responsible for listing the vehicles and the basic details about them.\n\n"
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Vehicle Collection"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "List all Vehicles"
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": [{\n    \"color\": null,\n    \"display_name\": null,\n    \"id\": 321,\n    \"option_codes\": \"MS01,RENA,TM00,DRLH,PF00,BT85,PBCW,RFPO,WT19,IBMB,IDPB,TR00,SU01,SC01,TP01,AU01,CH00,HP00,PA00,PS00,AD02,X020,X025,X001,X003,X007,X011,X013\",\n    \"user_id\": 123,\n    \"vehicle_id\": 1234567890,\n    \"vin\": \"5YJSA1CN5CFP01657\",\n    \"tokens\": [\"x\", \"x\"],\n    \"state\": \"online\"\n  }],\n  \"count\":1\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "State and Settings"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}",
+                "hrefVariables": {
+                  "element": "hrefVariables",
+                  "content": [
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The id of the Vehicle."
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "vehicle_id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "content": 1
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "content": [
+                {
+                  "element": "copy",
+                  "content": "These resources are read-only and determine the state of the vehicle's various sub-systems.\n\n"
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Mobile Access"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/mobile_enabled",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Determines if mobile access to the vehicle is enabled.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n    \"response\": true\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Charge State"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/data_request/charge_state",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Returns the state of charge in the battery.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"charging_state\": \"Complete\",  // \"Charging\", ??\n    \"charge_to_max_range\": false,  // current std/max-range setting\n    \"max_range_charge_counter\": 0,\n    \"fast_charger_present\": false, // connected to Supercharger?\n    \"battery_range\": 239.02,       // rated miles\n    \"est_battery_range\": 155.79,   // range estimated from recent driving\n    \"ideal_battery_range\": 275.09, // ideal miles\n    \"battery_level\": 91,           // integer charge percentage\n    \"battery_current\": -0.6,       // current flowing into battery\n    \"charge_starting_range\": null,\n    \"charge_starting_soc\": null,\n    \"charger_voltage\": 0,          // only has value while charging\n    \"charger_pilot_current\": 40,   // max current allowed by charger & adapter\n    \"charger_actual_current\": 0,   // current actually being drawn\n    \"charger_power\": 0,            // kW (rounded down) of charger\n    \"time_to_full_charge\": null,   // valid only while charging\n    \"charge_rate\": -1.0,           // float mi/hr charging or -1 if not charging\n    \"charge_port_door_open\": true\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Climate Settings"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/data_request/climate_state",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Returns the current temperature and climate control state.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"inside_temp\": 17.0,          // degC inside car\n    \"outside_temp\": 9.5,          // degC outside car or null\n    \"driver_temp_setting\": 22.6,  // degC of driver temperature setpoint\n    \"passenger_temp_setting\": 22.6, // degC of passenger temperature setpoint\n    \"is_auto_conditioning_on\": false, // apparently even if on\n    \"is_front_defroster_on\": null, // null or boolean as integer?\n    \"is_rear_defroster_on\": false,\n    \"fan_status\": 0               // fan speed 0-6 or null\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Driving and Position"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/data_request/drive_state",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Returns the driving and position state of the vehicle.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"shift_state\": null,          //\n    \"speed\": null,                //\n    \"latitude\": 33.794839,        // degrees N of equator\n    \"longitude\": -84.401593,      // degrees W of the prime meridian\n    \"heading\": 4,                 // integer compass heading, 0-359\n    \"gps_as_of\": 1359863204       // Unix timestamp of GPS fix\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "GUI Settings"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/data_request/gui_settings",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Returns various information about the GUI settings of the car, such as unit format and range display.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"gui_distance_units\": \"mi/hr\",\n    \"gui_temperature_units\": \"F\",\n    \"gui_charge_rate_units\": \"mi/hr\",\n    \"gui_24_hour_time\": false,\n    \"gui_range_display\": \"Rated\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Vehicle State"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/data_request/vehicle_state",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Returns the vehicle's physical state, such as which doors are open.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"df\": false,                  // driver's side front door open\n    \"dr\": false,                  // driver's side rear door open\n    \"pf\": false,                  // passenger's side front door open\n    \"pr\": false,                  // passenger's side rear door open\n    \"ft\": false,                  // front trunk is open\n    \"rt\": false,                  // rear trunk is open\n    \"car_verson\": \"1.19.42\",      // car firmware version\n    \"locked\": true,               // car is locked\n    \"sun_roof_installed\": false,  // panoramic roof is installed\n    \"sun_roof_state\": \"unknown\",\n    \"sun_roof_percent_open\": 0,   // null if not installed\n    \"dark_rims\": false,           // gray rims installed\n    \"wheel_type\": \"Base19\",       // wheel type installed\n    \"has_spoiler\": false,         // spoiler is installed\n    \"roof_color\": \"Colored\",      // \"None\" for panoramic roof\n    \"perf_config\": \"Base\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "resourceGroup"
+            ],
+            "title": "Vehicle Commands"
+          },
+          "content": [
+            {
+              "element": "copy",
+              "content": "These commands alter the vehicles state, and return result (true/false) to indicate success, and if failure reason contains the cause of failure.\n\n"
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Wake Up Car"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/wake_up"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Wake Up Car"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/wake_up",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Wakes up the car from the sleep state. Necessary to get some data from the car.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Set Valet Mode"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Set Valet Mode"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "Whether to enable or disable valet mode."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "on"
+                            },
+                            "value": {
+                              "element": "boolean",
+                              "content": true
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "(optional) A 4 digit PIN code to unlock the car."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "password"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1234
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.\nValet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. It also disables Homelink, Bluetooth and\nWifi settings, and the ability to disable mobile access to the car. It also hides your favorites, home, and work\nlocations in navigation.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Reset Valet PIN"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Reset Valet PIN"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Resets the PIN set for valet mode, if set.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Open Charge Port"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Open Charge Port"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Opens the charge port. Does not close the charge port (for now...)\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Set Charge Limit to Standard"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/charge_standard"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Set Charge Limit to Standard"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_standard",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Set the charge mode to standard (90% under the new percentage system introduced in 4.5).\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": false,\n    \"reason\": \"already_standard\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Set Charge Limit to Max Range"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/charge_max_range"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Set Charge Limit to Max Range"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_max_range",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": false,\n    \"reason\": \"already_max_range\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Set Charge Limit"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Set Charge Limit"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The percentage value"
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "limit_value"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 75
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Set the charge limit to a custom percentage.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Start Charging"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/charge_start"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Start Charging"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_start",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Start charging. Must be plugged in, have power available, and not have reached your charge limit.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\" // \"already_started\" if a charge is in progress\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Stop Charging"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/charge_stop"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Stop Charging"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_stop",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Stop charging. Must already be charging.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\" // \"not_charging\" if a charge was not in progress\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Flash Lights"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/flash_lights"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Flash Lights"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/flash_lights",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Flash the lights once.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Honk Horn"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/honk_horn"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Honk Horn"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/honk_horn",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Honk the horn once.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Unlock Doors"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/door_unlock"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Unlock Doors"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/door_unlock",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Unlock the car's doors.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Lock Doors"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/door_lock"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Lock Doors"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/door_lock",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Lock the car's doors.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Set Temperature"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Set Temperature"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The desired temperature on the driver's side in celcius."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "driver_degC"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 23.7
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The desired temperature on the passenger's side in celcius."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "pass_degC"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 18.1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Set the temperature target for the HVAC system.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Start HVAC System"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Start HVAC System"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Start the climate control system. Will cool or heat automatically, depending on set temperature.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Stop HVAC System"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Stop HVAC System"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Stop the climate control system.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Move Pano Roof"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Move Pano Roof"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "\nThe desired state of the panoramic roof. The approximate percent open values for each state are `open` = 100%, `close` = 0%, `comfort` = 80%, and `vent` = ~15%\n\n"
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "state"
+                            },
+                            "value": {
+                              "element": "enum",
+                              "attributes": {
+                                "samples": [
+                                  [
+                                    {
+                                      "element": "string",
+                                      "content": "open"
+                                    }
+                                  ]
+                                ]
+                              },
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "open"
+                                },
+                                {
+                                  "element": "string",
+                                  "content": "close"
+                                },
+                                {
+                                  "element": "string",
+                                  "content": "comfort"
+                                },
+                                {
+                                  "element": "string",
+                                  "content": "vent"
+                                },
+                                {
+                                  "element": "string",
+                                  "content": "move"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The percentage to move the roof to."
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "optional"
+                            ]
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "percent"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 50
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Controls the car's panoramic roof, if installed.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Remote Start"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Remote Start"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The password to the authenticated my.teslamotors.com account."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "password"
+                            },
+                            "value": {
+                              "element": "string",
+                              "content": "edisonsux"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Start the car for keyless driving. Must start driving within 2 minutes of issuing this request.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Open Trunk/Frunk"
+              },
+              "attributes": {
+                "href": "/api/1/vehicles/{vehicle_id}/command/trunk_open"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Open Trunk/Frunk"
+                  },
+                  "attributes": {
+                    "href": "/api/1/vehicles/{vehicle_id}/command/trunk_open",
+                    "hrefVariables": {
+                      "element": "hrefVariables",
+                      "content": [
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The id of the Vehicle."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "vehicle_id"
+                            },
+                            "value": {
+                              "element": "number",
+                              "content": 1
+                            }
+                          }
+                        },
+                        {
+                          "element": "member",
+                          "meta": {
+                            "description": "The trunk to open. `rear` is the only one known currently."
+                          },
+                          "content": {
+                            "key": {
+                              "element": "string",
+                              "content": "which_trunk"
+                            },
+                            "value": {
+                              "element": "string",
+                              "content": "rear"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Open the trunk or frunk. Currently inoperable.\n\n"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

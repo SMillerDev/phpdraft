@@ -105,17 +105,10 @@ class HTTPResponse
     {
         foreach ($objects as $object)
         {
-            $this->structure[] = new DataStructureElement($object, [$this, 'spawn_object']);
+            $deps              = [];
+            $struct            = new DataStructureElement();
+            $struct            = $struct->parse($object, $deps);
+            $this->structure[] = ['struct' => $struct, 'deps' => $deps];
         }
-    }
-
-    /**
-     * Callback to spawn needed data objects
-     * @param $name
-     * @return void
-     */
-    public function spawn_object($name)
-    {
-        $this->parent->spawn_object($name);
     }
 }

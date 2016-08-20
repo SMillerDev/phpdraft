@@ -90,7 +90,7 @@ class TemplateGenerator
             }
         }
 
-        include_once 'src/PHPDraft/HTML/' . $this->template . '.php';
+        include_once 'PHPDraft/HTML/' . $this->template . '.php';
         return '';
     }
 

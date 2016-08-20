@@ -83,7 +83,9 @@ class Transition extends APIBlueprintElement
                     }
                 }
 
-                $this->url_variables[$item->content->key->content] = new DataStructureElement($item);
+                $deps                                              = [];
+                $struct                                            = new DataStructureElement();
+                $this->url_variables[$item->content->key->content] = $struct->parse($item, $deps);
             }
         }
 
@@ -93,7 +95,9 @@ class Transition extends APIBlueprintElement
             {
                 foreach ($base->content as $item)
                 {
-                    $this->data_variables[$item->content->key->content] = new DataStructureElement($item);
+                    $deps                                               = [];
+                    $struct                                             = new DataStructureElement();
+                    $this->data_variables[$item->content->key->content] = $struct->parse($item, $deps);
                 }
             }
         }
@@ -122,10 +126,10 @@ class Transition extends APIBlueprintElement
         $url = $this->href;
         foreach ($this->url_variables as $key => $value)
         {
-            $urlvalue = $value['value'];
-            if (is_array($value['value']) && !is_string($value['value']))
+            $urlvalue = $value->value;
+            if (is_array($value->value) && !is_string($value->value))
             {
-                $urlvalue = $value['value'][0];
+                $urlvalue = $value->value[0];
             }
 
             $url = preg_replace('/({\?' . $key . '})/', '?<var class="url-param">' . $key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
@@ -139,21 +143,5 @@ class Transition extends APIBlueprintElement
     public function get_method()
     {
         return (isset($this->request->method)) ? $this->request->method : 'NONE';
-    }
-
-    /**
-     * Claim a structure as part of this transition
-     *
-     * @param string $objectName
-     * @return void
-     */
-    public function spawn_object($objectName)
-    {
-        if(!in_array($objectName, $this->structures))
-        {
-            array_push($this->structures, $objectName);
-        }
-
-        var_dump($this->structures);
     }
 }
