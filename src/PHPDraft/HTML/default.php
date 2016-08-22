@@ -150,6 +150,13 @@ $base = $this->categories;
                                                 <?php endforeach; ?>
                                             </ul>
                                         <?php endif; ?>
+                                        <?php if (!empty($transition->request->body)): ?>
+                                            <h5>Body</h5>
+                                            <?php foreach ($transition->request->body as $value): ?>
+                                                <?= $value->print_request('application/x-www-form-urlencoded');?>
+                                                <?= $value ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     <?php endif; ?>
 
                                     <?php if ($transition->url_variables !== []): ?>
@@ -214,7 +221,7 @@ $base = $this->categories;
                                             <?php if ($response->structure !== []): ?>
                                                 <h5>Data Structure</h5>
                                                 <dl class="dl-horizontal">
-                                                    <?php foreach ($response->structure[0]['struct']->value as $value): ?>
+                                                    <?php foreach ($response->structure[0]->value as $value): ?>
                                                         <dt><?= $value->key; ?></dt>
                                                         <dd>
                                                             <a href="#object-<?= $value->type; ?>"><?= $value->type; ?></a>

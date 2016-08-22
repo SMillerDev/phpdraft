@@ -139,7 +139,7 @@ class DataStructureElement
             '<s class="pull-right">no example</s>' : '<blockquote>Example: ' . $this->value . '</blockquote>' ;
         $return =
             '<dt>' .
-            '<a name="object-' . $this->key . '">' . $this->key . "</a>" .
+            '<span>' . $this->key . "</span>" .
             "</dt>\t" .
             '<dd>' .
             $type .

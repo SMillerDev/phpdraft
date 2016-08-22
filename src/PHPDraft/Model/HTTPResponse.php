@@ -3,7 +3,7 @@
  * This file contains the HTTPResponse.php
  *
  * @package PHPDraft\Model
- * @author Sean Molenaar<sean@seanmolenaar.eu>
+ * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model;
@@ -55,6 +55,7 @@ class HTTPResponse
         }
 
         $this->parse_content($object);
+
         return $this;
     }
 
@@ -62,13 +63,17 @@ class HTTPResponse
      * Parse request headers
      *
      * @param \stdClass $object An object to parse for headers
+     *
      * @return void
      */
     protected function parse_headers($object)
     {
         foreach ($object->content as $value)
         {
-            if (isset($value->content)) $this->headers[$value->content->key->content] = $value->content->value->content;
+            if (isset($value->content))
+            {
+                $this->headers[$value->content->key->content] = $value->content->value->content;
+            }
         }
     }
 
@@ -76,6 +81,7 @@ class HTTPResponse
      * Parse request content
      *
      * @param \stdClass $object An object to parse for content
+     *
      * @return void
      */
     protected function parse_content($object)
@@ -99,16 +105,19 @@ class HTTPResponse
      * Parse structure of the content
      *
      * @param \stdClass[] $objects Objects containing the structure
+     *
      * @return void
      */
     protected function parse_structure($objects)
     {
         foreach ($objects as $object)
         {
-            $deps              = [];
-            $struct            = new DataStructureElement();
-            $struct            = $struct->parse($object, $deps);
-            $this->structure[] = ['struct' => $struct, 'deps' => $deps];
+            $deps   = [];
+            $struct = new DataStructureElement();
+            $struct->parse($object, $deps);
+            $struct->deps = $deps;
+
+            $this->structure[] = $struct;
         }
     }
 }
