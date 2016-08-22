@@ -76,7 +76,8 @@ class TemplateGenerator
             {
                 if ($value->element === 'copy')
                 {
-                    $this->base_data['DESC'] = preg_replace('/(<\/?p>)/', '', Markdown::defaultTransform($value->content), 2);
+                    $this->base_data['DESC'] =
+                        preg_replace('/(<\/?p>)/', '', Markdown::defaultTransform($value->content), 2);
                     continue;
                 }
 
@@ -91,6 +92,7 @@ class TemplateGenerator
         }
 
         include_once 'PHPDraft/HTML/' . $this->template . '.php';
+
         return '';
     }
 
@@ -122,10 +124,12 @@ class TemplateGenerator
         if ($response <= 299)
         {
             return 'success';
-        } elseif ($response > 299 && $response <= 399)
+        }
+        elseif ($response > 299 && $response <= 399)
         {
             return 'warning';
-        } else
+        }
+        else
         {
             return 'error';
         }
@@ -133,25 +137,16 @@ class TemplateGenerator
 
     /**
      * @param DataStructureElement $object Objects to print
+     *
      * @return string
      */
     function get_data_structure($object)
     {
-        if (!get_class($object) === 'DataStructureElement') return;
-        if ($object->element === 'object')
+        if (!get_class($object) === 'DataStructureElement')
         {
-            $return = '<dl class="dl-horizontal">';
-            foreach ($object->value as $object)
-            {
-                $return .= $this->get_data_structure($object);
-            }
-
-            $return .= '</dl>';
-            return $return;
+            return;
         }
-
-        $return = '<dt>' . $object->key . "</dt>\t" . '<dd>' . '<code>' . $object->type . '</code>' . '<span>' . $object->description . '</span>' . '<blockquote>Example: ' . $object->value . '</blockquote>' . '</dd>';
-        return $return;
+        return $object;
     }
 
 }

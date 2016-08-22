@@ -20,6 +20,7 @@ class Category extends APIBlueprintElement
      * Add a struct dependency
      *
      * @param string $object Name of the struct to add
+     *
      * @internal param string $name Name of the type
      */
     public function add_struct($object)
@@ -39,26 +40,29 @@ class Category extends APIBlueprintElement
     function parse($object)
     {
         parent::parse($object);
-        foreach ($object->content as $key => $item) {
-            switch ($item->element) {
+        foreach ($object->content as $key => $item)
+        {
+            switch ($item->element)
+            {
                 case 'resource':
-                    $resource = new Resource($this);
+                    $resource         = new Resource($this);
                     $this->children[] = $resource->parse($item);
                     break;
                 case 'dataStructure':
-                    echo "<pre>";
-                    $deps = [];
-                    $struct = new DataStructureElement([$this, 'add_struct']);
-                    $struct = $struct->parse($item, $deps);
-                    $struct_array = ['struct' => $struct, 'deps' => $deps];
-                    var_dump($deps);
-                    if (isset($item->content[0]->meta->id)) {
-                        $this->structures[$item->content[0]->meta->id] = $struct_array;
-                    } else {
-                        $this->structures[] = $struct_array;
+                    $deps         = [];
+                    $struct       = new DataStructureElement();
+                    $struct->deps = $deps;
+                    $struct->parse($item, $deps);
+
+                    if (isset($item->content[0]->meta->id))
+                    {
+                        $this->structures[$item->content[0]->meta->id] = $struct;
+                    }
+                    else
+                    {
+                        $this->structures[] = $struct;
                     }
 
-                    echo "</pre>";
                     break;
                 default:
                     continue;

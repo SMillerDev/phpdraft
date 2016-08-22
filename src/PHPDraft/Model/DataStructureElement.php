@@ -42,6 +42,12 @@ class DataStructureElement
     public $status = '';
 
     /**
+     * List of object dependencies
+     * @var string[]
+     */
+    public $deps;
+
+    /**
      * Unreported datatypes
      * @var array
      */
@@ -55,7 +61,7 @@ class DataStructureElement
      *
      * @return DataStructureElement self reference
      */
-    function parse($object, &$dependencies)
+    public function parse($object, &$dependencies)
     {
         if (empty($object) || !isset($object->content))
         {
@@ -66,7 +72,7 @@ class DataStructureElement
         {
             foreach ($object->content as $value)
             {
-                $struct        = new DataStructureElement($this->callback);
+                $struct        = new DataStructureElement();
                 $this->value[] = $struct->parse($value, $dependencies);
             }
 
@@ -87,7 +93,7 @@ class DataStructureElement
         if ($this->type === 'object')
         {
             $value       = isset($object->content->value->content) ? $object->content->value : NULL;
-            $this->value = new DataStructureElement($this->callback);
+            $this->value = new DataStructureElement();
             $this->value = $this->value->parse($value, $dependencies);
 
             return $this;
@@ -110,7 +116,38 @@ class DataStructureElement
             return '{ ... }';
         }
 
-        return json_encode($this->value);
+        if (is_array($this->value))
+        {
+            $return = '<dl class="dl-horizontal">';
+            foreach ($this->value as $object)
+            {
+                if (get_class($object) === get_class($this))
+                {
+                    $return .= $object;
+                }
+            }
+
+            $return .= '</dl>';
+
+            return $return;
+        }
+
+        $type = (!in_array($this->type, $this->defaults)) ?
+            '<a class="code" href="#object-' . $this->type . '">' . $this->type . '</a>' : '<code>'.$this->type.'</code>';
+
+        $value = (empty($this->value)) ?
+            '<s class="pull-right">no example</s>' : '<blockquote>Example: ' . $this->value . '</blockquote>' ;
+        $return =
+            '<dt>' .
+            '<a name="object-' . $this->key . '">' . $this->key . "</a>" .
+            "</dt>\t" .
+            '<dd>' .
+            $type .
+            '<span>' . $this->description . '</span>' .
+            $value .
+            '</dd>';
+
+        return $return;
     }
 
 }
