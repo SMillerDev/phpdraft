@@ -37,7 +37,6 @@ class HTTPRequest
     public function __construct(&$parent)
     {
         $this->parent = &$parent;
-        //TODO: Parse body
     }
 
     public function parse($object)
