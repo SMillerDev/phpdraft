@@ -54,10 +54,26 @@ class ApibToJson
         }
 
         file_put_contents($tmp_dir . '/index.apib', $this->apib);
+        if (!$this->drafter_location()) {
+            $fe = fopen('php://stderr', 'w');
+            fwrite($fe, "Drafter was not installed!\n");
+            exit(1);
+        }
 
-        system('/usr/local/bin/drafter ' . $tmp_dir . '/index.apib -f json > ' . $tmp_dir . '/index.json 2> /dev/null');
+        shell_exec($this->drafter_location(). ' ' . $tmp_dir . '/index.apib -f json -o ' . $tmp_dir . '/index.json 2> /dev/null');
         $this->json = file_get_contents($tmp_dir . '/index.json');
         return $this->apib;
+    }
+
+    /**
+     * Return drafter location if found
+     *
+     * @return bool|string
+     */
+    function drafter_location() {
+        $returnVal = shell_exec('which drafter 2> /dev/null');
+        $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
+        return (empty($returnVal) ? FALSE : $returnVal);
     }
 
     /**
