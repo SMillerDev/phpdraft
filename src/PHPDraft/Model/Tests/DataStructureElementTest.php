@@ -2,7 +2,7 @@
 /**
  * This file contains the APIBlueprintElementTest.php
  *
- * @package php-drafter\Model
+ * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -72,6 +72,11 @@ class DataStructureElementTest extends PHPUnit_Framework_TestCase
         $this->assertSame($dep, $expected);
     }
 
+    /**
+     * Provide objects to parse including expected outcome
+     *
+     * @return array
+     */
     public function parseObjectProvider()
     {
         $return         = [];
@@ -101,6 +106,10 @@ class DataStructureElementTest extends PHPUnit_Framework_TestCase
         return $return;
     }
 
+    /**
+     * JSON to parse including expected gathered dependency list
+     * @return array
+     */
     public function parseObjectDepProvider()
     {
         $return   = [];

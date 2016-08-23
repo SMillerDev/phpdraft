@@ -2,7 +2,7 @@
 /**
  * This file contains the ApibToJson.php
  *
- * @package torch-apidoc\SOMETHING
+ * @package PHPDraft\Parse
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -33,6 +33,8 @@ class ApibToJson
 
     /**
      * ApibToJson constructor.
+     *
+     * @param string $apib API Blueprint text
      */
     public function __construct($apib)
     {
@@ -42,7 +44,9 @@ class ApibToJson
     }
 
     /**
-     * @return string
+     * Parse the API Blueprint text to JSON
+     *
+     * @return string API Blueprint text
      */
     public function parseToJson()
     {
@@ -55,8 +59,7 @@ class ApibToJson
 
         file_put_contents($tmp_dir . '/index.apib', $this->apib);
         if (!$this->drafter_location()) {
-            $fe = fopen('php://stderr', 'w');
-            fwrite($fe, "Drafter was not installed!\n");
+            file_put_contents('php://stderr', "Drafter was not installed!\n");
             exit(1);
         }
 

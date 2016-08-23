@@ -65,6 +65,13 @@ class Transition extends APIBlueprintElement
         $this->parent = $parent;
     }
 
+    /**
+     * Fill class values based on JSON object
+     *
+     * @param \stdClass $object JSON object
+     *
+     * @return $this self-reference
+     */
     function parse($object)
     {
         parent::parse($object);
@@ -121,7 +128,14 @@ class Transition extends APIBlueprintElement
         return $this;
     }
 
-    public function build_url()
+    /**
+     * Build a URL based on the URL variables given
+     *
+     * @param string $base_url the URL to which the URL variables apply
+     *
+     * @return string a HTML representation of the transition URL
+     */
+    public function build_url($base_url = '')
     {
         $url = $this->href;
         foreach ($this->url_variables as $key => $value)
@@ -137,14 +151,26 @@ class Transition extends APIBlueprintElement
             $url = preg_replace('/({' . $key . '})/', '<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
         }
 
-        return $url;
+        return $base_url.$url;
     }
 
+    /**
+     * Get the HTTP method of the child request
+     *
+     * @return string HTTP Method
+     */
     public function get_method()
     {
         return (isset($this->request->method)) ? $this->request->method : 'NONE';
     }
 
+    /**
+     * Generate a cURL request to run the transition
+     *
+     * @param string $base_url base URL of the server
+     *
+     * @return string A cURL CLI command
+     */
     public function get_curl_command($base_url)
     {
         return $this->request->get_curl_command($base_url);

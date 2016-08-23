@@ -11,7 +11,7 @@ namespace PHPDraft\Model;
 class HTTPResponse
 {
     /**
-     * Description
+     * HTTP Status code
      * @var int
      */
     public $statuscode;
@@ -45,6 +45,13 @@ class HTTPResponse
         $this->parent = &$parent;
     }
 
+    /**
+     * Fill class values based on JSON object
+     *
+     * @param \stdClass $object JSON object
+     *
+     * @return $this self-reference
+     */
     public function parse($object)
     {
         $this->statuscode = intval($object->attributes->statusCode);

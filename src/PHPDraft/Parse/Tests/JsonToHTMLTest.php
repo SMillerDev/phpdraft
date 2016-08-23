@@ -26,18 +26,27 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
      */
     protected $reflection;
 
+    /**
+     * Set up
+     */
     public function setUp()
     {
         $this->class = new JsonToHTML(file_get_contents(TEST_STATICS . '/json'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
     }
 
+    /**
+     * Tear down
+     */
     public function tearDown()
     {
         unset($this->class);
         unset($this->reflection);
     }
 
+    /**
+     * Tests if the constructor sets the property correctly
+     */
     public function testSetupCorrectly()
     {
         $property = $this->reflection->getProperty('object');
@@ -45,6 +54,9 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/json')), $property->getValue($this->class));
     }
 
+    /**
+     * Tests if the outputted HTM is as expected.
+     */
     public function testParseToHTML()
     {
         $this->expectOutputString(file_get_contents(TEST_STATICS.'/html'));

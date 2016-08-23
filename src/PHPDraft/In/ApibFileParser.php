@@ -10,8 +10,16 @@ namespace PHPDraft\In;
 
 class ApibFileParser
 {
-    protected $out_string;
+    /**
+     * Complete API Blueprint
+     * @var string
+     */
+    protected $full_apib;
 
+    /**
+     * Location of the API Blueprint to parse
+     * @var string
+     */
     protected $location;
 
     /**
@@ -21,8 +29,8 @@ class ApibFileParser
      */
     public function __construct($filename = 'index.apib')
     {
-        $this->location   = pathinfo($filename, PATHINFO_DIRNAME) . '/';
-        $this->out_string = $this->get_apib($filename);
+        $this->location  = pathinfo($filename, PATHINFO_DIRNAME) . '/';
+        $this->full_apib = $this->get_apib($filename);
     }
 
     /**
@@ -52,7 +60,7 @@ class ApibFileParser
      */
     function __toString()
     {
-        return $this->out_string;
+        return $this->full_apib;
     }
 
 }

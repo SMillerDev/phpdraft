@@ -8,6 +8,8 @@
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\RequestBodyElement;
+
 class HTTPRequest
 {
     /**
@@ -32,13 +34,25 @@ class HTTPRequest
      * Body of the request (if POST or PUT)
      * @var RequestBodyElement[]
      */
-    public $body;
+    public $body = [];
 
+    /**
+     * HTTPRequest constructor.
+     *
+     * @param Transition $parent Parent entity
+     */
     public function __construct(&$parent)
     {
         $this->parent = &$parent;
     }
 
+    /**
+     * Fill class values based on JSON object
+     *
+     * @param \stdClass $object JSON object
+     *
+     * @return $this self-reference
+     */
     public function parse($object)
     {
         $this->method = $object->attributes->method;
@@ -66,6 +80,11 @@ class HTTPRequest
         return $this;
     }
 
+    /**
+     * Parse the objects into a request body
+     *
+     * @param \stdClass[] $objects JSON objects
+     */
     private function parse_structure($objects)
     {
         foreach ($objects as $object)
@@ -79,6 +98,13 @@ class HTTPRequest
         }
     }
 
+    /**
+     * Generate a cURL command for the HTTP request
+     *
+     * @param string $base_url URL to the base server
+     *
+     * @return string An executable cURL command
+     */
     public function get_curl_command($base_url)
     {
         $options = [];
@@ -95,7 +121,7 @@ class HTTPRequest
             $options[] = '-H "'.$header.': '.$value. '"';
         }
         $options[] = '-v';
-        return htmlspecialchars('curl '.join(' ', $options). ' "'.$base_url.$this->parent->build_url().'"');
+        return htmlspecialchars('curl '.join(' ', $options). ' "'.$this->parent->build_url($base_url).'"');
     }
 
 

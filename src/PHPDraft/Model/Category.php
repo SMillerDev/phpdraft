@@ -2,7 +2,7 @@
 /**
  * This file contains the Category.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -17,25 +17,11 @@ class Category extends APIBlueprintElement
     public $structures = [];
 
     /**
-     * Add a struct dependency
+     * Fill class values based on JSON object
      *
-     * @param string $object Name of the struct to add
+     * @param \stdClass $object JSON object
      *
-     * @internal param string $name Name of the type
-     */
-    public function add_struct($object)
-    {
-        echo "<pre>";
-        var_dump($object);
-        echo "</pre>";
-    }
-
-    /**
-     * Parse the category
-     *
-     * @param \stdClass $object
-     *
-     * @return $this
+     * @return $this self-reference
      */
     function parse($object)
     {

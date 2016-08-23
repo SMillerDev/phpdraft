@@ -9,7 +9,7 @@
  *
  * @package    PHPDraft\Core
  * @author     Sean Molenaar <sean@m2mobi.com>
- * @license    https://github.com/SMillerDev/Php-drafter/blob/master/LICENSE GPLv3 License
+ * @license    https://github.com/SMillerDev/phpdraft/blob/master/LICENSE GPLv3 License
  */
 
 $base = __DIR__ . '/..';

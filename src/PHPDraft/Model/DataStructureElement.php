@@ -2,7 +2,7 @@
 /**
  * This file contains the DataStructureElement.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -15,26 +15,31 @@ class DataStructureElement
      * @var string
      */
     public $key;
+
     /**
      * Object JSON type
      * @var string
      */
     public $type;
+
     /**
      * Object description
      * @var string
      */
     public $description;
+
     /**
      * Type of element
      * @var string
      */
     public $element = NULL;
+
     /**
      * Object value
      * @var mixed|DataStructureElement[]
      */
     public $value = NULL;
+
     /**
      * Object status (required|optional)
      * @var string
@@ -48,7 +53,7 @@ class DataStructureElement
     public $deps;
 
     /**
-     * Unreported datatypes
+     * Default datatypes
      * @var array
      */
     protected $defaults = ['boolean', 'string', 'number', 'object', 'array'];
