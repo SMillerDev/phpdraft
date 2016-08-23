@@ -95,8 +95,10 @@ body .col-md-10 h2:first-of-type {
 
 .row dl.dl-horizontal dt {
     width: 80px;
+    line-height: 30px;
 }
 .row dl.dl-horizontal dd {
+    line-height: 30px;
     margin-left: 100px;
 }
 

@@ -140,8 +140,18 @@ class DataStructureElement
         $type = (!in_array($this->type, $this->defaults)) ?
             '<a class="code" href="#object-' . $this->type . '">' . $this->type . '</a>' : '<code>'.$this->type.'</code>';
 
-        $value = (empty($this->value)) ?
-            '<s class="pull-right">no example</s>' : '<blockquote>Example: ' . $this->value . '</blockquote>' ;
+        if (empty($this->value))
+        {
+            $value = '<s class="pull-right">no example</s>';
+        }
+        else if (self::class === get_class($this->value))
+        {
+            $value = '<div class="sub-struct">'.$this->value.'</div>';
+        }
+        else{
+            $value = '<span class="pull-right">Example: ' . $this->value . '</span>';
+        }
+
         $return =
             '<dt>' .
             '<span>' . $this->key . "</span>" .
