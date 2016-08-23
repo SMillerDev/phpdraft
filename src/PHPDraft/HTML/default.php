@@ -1,14 +1,14 @@
 <?php
 /**
- * This file contains the default.php
+ * This file contains the default template
  *
  * @package PHPDraft\HTML
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
+
 /**
  * @var \PHPDraft\Model\APIBlueprintElement[]
  */
-
 $base = $this->categories;
 ?>
 <!DOCTYPE html>
@@ -16,8 +16,8 @@ $base = $this->categories;
 <head>
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
         <?= file_get_contents(__DIR__ . '/index.css');?>
     </style>
@@ -128,11 +128,23 @@ $base = $this->categories;
                                     <em><?= $transition->build_url(); ?></em>
                                 <?php endif; ?>
 
+
+
                                 <h4 class="request">Request
                                     <a class="btn-xs pull-right" role="button" data-toggle="collapse"
                                        href="#request-coll-<?= $transition->get_href(); ?>" aria-expanded="false"
                                        aria-controls="collapseMenu">
                                         <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                    <a type="button"
+                                       class="btn btn-xs pull-right"
+                                       role="button"
+                                       title="cURL command"
+                                       tabindex="0"
+                                       data-placement="left"
+                                       data-toggle="popover"
+                                       data-content="<?= $transition->get_curl_command($this->base_data['HOST']); ?>">
+                                        <span class="glyphicon glyphicon-copy"></span>
                                     </a>
                                 </h4>
                                 <div class="collapse collapsed request-panel"
@@ -153,7 +165,8 @@ $base = $this->categories;
                                         <?php if (!empty($transition->request->body)): ?>
                                             <h5>Body</h5>
                                             <?php foreach ($transition->request->body as $value): ?>
-                                                <?= $value->print_request('application/x-www-form-urlencoded');?>
+                                                <?php $type = (isset($transition->request->headers['Content-Type']))?$transition->request->headers['Content-Type']:NULL;?>
+                                                <?= $value->print_request($type);?>
                                                 <?= $value ?>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -268,7 +281,8 @@ $base = $this->categories;
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+<script><?= file_get_contents(__DIR__ . '/index.js');?></script>
 </body>
 </html>

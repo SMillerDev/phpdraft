@@ -144,4 +144,9 @@ class Transition extends APIBlueprintElement
     {
         return (isset($this->request->method)) ? $this->request->method : 'NONE';
     }
+
+    public function get_curl_command($base_url)
+    {
+        return $this->request->get_curl_command($base_url);
+    }
 }

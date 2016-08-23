@@ -66,13 +66,23 @@ class RequestBodyElement extends DataStructureElement
     {
         if (is_array($this->value))
         {
-            $return = '<code>';
+            $return = '<code class="request-body">';
+            $list = [];
             foreach ($this->value as $object)
             {
                 if (get_class($object) === self::class)
                 {
-                    $return .= $object->print_request($type);
+                    $list[] = $object->print_request($type);
                 }
+            }
+
+            switch ($type) {
+                case 'application/x-www-form-urlencoded':
+                    $return .= join('&amp;', $list);
+                    break;
+                default:
+                    $return .= join(PHP_EOL, $list);
+                    break;
             }
 
             $return .= '</code>';
@@ -85,13 +95,13 @@ class RequestBodyElement extends DataStructureElement
         switch ($type)
         {
             case 'application/x-www-form-urlencoded':
-                return $this->key . "=<kbd>" . $value . '</kbd>';
+                return $this->key . "=<span>" . $value . '</span>';
                 break;
             default:
                 $object             = [];
                 $object[$this->key] = $value;
 
-                return json_encode($object) . PHP_EOL;
+                return json_encode($object);
                 break;
         }
     }

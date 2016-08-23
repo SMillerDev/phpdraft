@@ -79,4 +79,25 @@ class HTTPRequest
             $this->body[] = $struct;
         }
     }
+
+    public function get_curl_command($base_url)
+    {
+        $options = [];
+
+        $type = (isset($this->headers['Content-Type']))?$this->headers['Content-Type']:NULL;
+
+        $options[] = '-X'.$this->method;
+        foreach ($this->body as $body)
+        {
+            $options[] = '--data-binary "'.strip_tags($body->print_request($type)).'"';
+        }
+        foreach ($this->headers as $header=>$value)
+        {
+            $options[] = '-H "'.$header.': '.$value. '"';
+        }
+        $options[] = '-v';
+        return htmlspecialchars('curl '.join(' ', $options). ' "'.$base_url.$this->parent->build_url().'"');
+    }
+
+
 }
