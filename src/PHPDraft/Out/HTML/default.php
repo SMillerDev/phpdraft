@@ -127,9 +127,6 @@ $base = $this->categories;
                                     <span class="base-url"><?= $this->base_data['HOST']; ?></span>
                                     <em><?= $transition->build_url(); ?></em>
                                 <?php endif; ?>
-                                <em><?= $transition->get_curl_command($this->base_data['HOST']); ?></em>
-
-
 
                                 <h4 class="request">Request
                                     <a class="btn-xs pull-right" role="button" data-toggle="collapse"

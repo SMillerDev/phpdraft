@@ -102,10 +102,19 @@ body .col-md-10 h2:first-of-type {
     margin-left: 100px;
 }
 
-a .curl-icon {
-    background-size: 20px 20px;
-    height: 20px;
-    width: 20px;
-    display: inline-block;
-    background: url('https://curl.haxx.se/logo/curl-symbol.png') left center;
+.row dl.dl-horizontal dd a.code,
+.row dl.dl-horizontal dd code{
+    margin-right: 5px;
+}
+
+.example-value{
+    color: rgba(0,0,0,0.4);
+}
+
+a.code {
+    padding: 2px 4px;
+    font-size: 90%;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
