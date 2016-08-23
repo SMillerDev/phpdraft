@@ -2,7 +2,7 @@
 /**
  * This file contains the Resource.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model
  * @author Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -27,6 +27,13 @@ class Resource extends APIBlueprintElement
         $this->parent = $parent;
     }
 
+    /**
+     * Fill class values based on JSON object
+     *
+     * @param \stdClass $object JSON object
+     *
+     * @return $this self-reference
+     */
     function parse($object)
     {
         parent::parse($object);
@@ -37,7 +44,7 @@ class Resource extends APIBlueprintElement
         {
             if ($item->element === 'copy') continue;
             $transition = new Transition($this);
-            array_push($this->children, $transition->parse($item));
+            $this->children[] = $transition->parse($item);
         }
 
         return $this;

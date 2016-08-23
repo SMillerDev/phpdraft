@@ -41,7 +41,7 @@ abstract class APIBlueprintElement
     protected $parent = NULL;
 
     /**
-     * Parse an object to an element
+     * Parse a JSON object to an element
      *
      * @param \stdClass $object an object to parse
      *

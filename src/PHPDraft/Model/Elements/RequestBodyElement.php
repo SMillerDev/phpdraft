@@ -6,8 +6,9 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
-namespace PHPDraft\Model;
+namespace PHPDraft\Model\Elements;
 
+use PHPDraft\Model\DataStructureElement;
 
 class RequestBodyElement extends DataStructureElement
 {
@@ -62,6 +63,13 @@ class RequestBodyElement extends DataStructureElement
         return $this;
     }
 
+    /**
+     * Print the request body as a string
+     *
+     * @param string $type The type of request
+     *
+     * @return string Request body
+     */
     public function print_request($type = 'application/x-www-form-urlencoded')
     {
         if (is_array($this->value))

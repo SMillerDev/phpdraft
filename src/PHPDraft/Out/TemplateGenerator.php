@@ -16,30 +16,27 @@ class TemplateGenerator
 {
     /**
      * JSON object of the API blueprint
-     *
      * @var mixed
      */
     protected $categories = [];
 
     /**
      * The template file to load
-     *
      * @var string
      */
     protected $template;
 
     /**
      * The base URl of the API
-     *
      * @var
      */
     protected $base_data;
 
     /**
      * Structures used in all data
-     * @var DataStructureElement
+     * @var DataStructureElement[]
      */
-    protected $base_structures;
+    protected $base_structures = [];
 
     /**
      * TemplateGenerator constructor.
@@ -52,9 +49,11 @@ class TemplateGenerator
     }
 
     /**
-     * @param mixed $object
+     * Pre-parse objects needed and print HTML
      *
-     * @return string
+     * @param mixed $object JSON to parse from
+     *
+     * @return void
      */
     public function get($object)
     {
@@ -91,11 +90,16 @@ class TemplateGenerator
             }
         }
 
-        include_once 'PHPDraft/HTML/' . $this->template . '.php';
-
-        return '';
+        include_once 'PHPDraft/Out/HTML/' . $this->template . '.php';
     }
 
+    /**
+     * Get an icon for a specific HTTP Method
+     *
+     * @param string $method HTTP method
+     *
+     * @return string class to represent the HTTP Method
+     */
     function get_method_icon($method)
     {
         switch (strtolower($method))
@@ -119,6 +123,13 @@ class TemplateGenerator
         return $class . ' ' . $method;
     }
 
+    /**
+     * Get a bootstrap class to represent the HTTP return code range
+     *
+     * @param int $response HTTP return code
+     *
+     * @return string Class to use
+     */
     function get_response_status($response)
     {
         if ($response <= 299)
@@ -136,9 +147,11 @@ class TemplateGenerator
     }
 
     /**
+     * Determine if an object should be printed
+     *
      * @param DataStructureElement $object Objects to print
      *
-     * @return string
+     * @return string Object representation
      */
     function get_data_structure($object)
     {

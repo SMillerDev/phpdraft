@@ -30,6 +30,8 @@ class JsonToHTML
     }
 
     /**
+     * Get the HTML representation of the JSON object
+     *
      * @param string $template Type of template to display.
      *
      * @return string HTML template to display
@@ -40,6 +42,11 @@ class JsonToHTML
         return $gen->get($this->object);
     }
 
+    /**
+     * Gets the default template HTML
+     * 
+     * @return string
+     */
     function __toString()
     {
         return $this->get_html();

@@ -12,6 +12,10 @@ use PHPDraft\Parse\ApibToJson;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
+/**
+ * Class ApibToJsonTest
+ * @covers PHPDraft\Parse\ApibToJson
+ */
 class ApibToJsonTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -26,18 +30,27 @@ class ApibToJsonTest extends PHPUnit_Framework_TestCase
      */
     protected $reflection;
 
+    /**
+     * Set up
+     */
     public function setUp()
     {
         $this->class = new ApibToJson(file_get_contents(TEST_STATICS . '/apib'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\ApibToJson');
     }
 
+    /**
+     * Tear down
+     */
     public function tearDown()
     {
         unset($this->class);
         unset($this->reflection);
     }
 
+    /**
+     * Test if the value the class is initialized with is correct
+     */
     public function testSetupCorrectly()
     {
         $property = $this->reflection->getProperty('apib');
@@ -45,11 +58,17 @@ class ApibToJsonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(file_get_contents(TEST_STATICS . '/apib'), $property->getValue($this->class));
     }
 
+    /**
+     * Check if the JSON is empty before parsing
+     */
     public function testPreRunStringIsEmpty()
     {
         $this->assertEmpty($this->class->__toString());
     }
 
+    /**
+     * Check if parsing the APIB to JSON gives the expected result
+     */
     public function testParseToJSON()
     {
         $this->class->parseToJson();
