@@ -99,3 +99,11 @@ body .col-md-10 h2:first-of-type {
 .row dl.dl-horizontal dd {
     margin-left: 100px;
 }
+
+a .curl-icon {
+    background-size: 20px 20px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background: url('https://curl.haxx.se/logo/curl-symbol.png') left center;
+}

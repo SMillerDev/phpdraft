@@ -2,7 +2,7 @@
 /**
  * This file contains the APIBlueprintElementTest.php
  *
- * @package php-drafter\SOMETHING
+ * @package php-drafter\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
