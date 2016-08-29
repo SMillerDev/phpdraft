@@ -144,7 +144,7 @@ class DataStructureElement
         {
             $value = '<s class="example-value pull-right">no example</s>';
         }
-        else if (self::class === get_class($this->value))
+        else if (is_object($this->value) && self::class === get_class($this->value))
         {
             $value = '<div class="sub-struct">'.$this->value.'</div>';
         }
