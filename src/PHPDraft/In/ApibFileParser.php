@@ -45,7 +45,7 @@ class ApibFileParser
     {
         $file    = file_get_contents($filename);
         $matches = [];
-        preg_match_all('<!-- include\(([a-z_.]*?).apib\) -->', $file, $matches);
+        preg_match_all('<!-- include\(([a-z_.\/]*?).apib\) -->', $file, $matches);
         foreach ($matches[1] as $value) {
             $file = str_replace('<!-- include(' . $value . '.apib) -->', $this->get_apib($this->location . $value . '.apib'), $file);
         }
