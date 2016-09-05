@@ -52,12 +52,12 @@ $base = $this->categories;
                                 <ul class="list-unstyled">
                                     <?php foreach ($category->children as $resource): ?>
                                         <li>
-                                            <a href="#<?= $resource->get_href(); ?>"><?= $resource->title; ?></a>
+                                            <a href="#<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
                                         </li>
                                         <ul>
                                             <?php foreach ($resource->children as $transition): ?>
                                                 <li>
-                                                    <a href="#<?= $transition->get_href(); ?>">
+                                                    <a href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
                                                         <?= $transition->title; ?>
                                                         <span
                                                             class="pull-right <?= $this->get_method_icon($transition->get_method()); ?>"></span>
@@ -109,7 +109,7 @@ $base = $this->categories;
                 <?php endif;?>
                 <?php foreach ($category->children as $resource): ?>
                     <h3>
-                        <a id="<?= $resource->get_href(); ?>"><?= $resource->title; ?></a>
+                        <a id="<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
                         <small><?= $resource->href; ?></small>
                     </h3>
                     <p><?php $resource->description; ?></p>
@@ -121,7 +121,7 @@ $base = $this->categories;
                                     <var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
                                     <a class="pull-right transition-title"
-                                       id="<?= $transition->get_href(); ?>"><?= $transition->title; ?></a>
+                                       id="<?= str_replace('-', '/', $transition->get_href()); ?>"><?= $transition->title; ?></a>
                                 </h3>
                             </div>
                             <div class="panel-body">
