@@ -7,17 +7,6 @@ var.url-value {
     padding: 2px;
 }
 
-div.main-url.fixed {
-    position: fixed;
-    bottom: -5px;
-    left: 10px;
-    z-index: 999;
-    background: #fff;
-    border-radius: 5px;
-    padding: 5px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-}
-
 div.main-url {
     text-align: justify;
     line-break: loose;
@@ -77,38 +66,25 @@ body .col-md-10 h2:first-of-type {
     line-height: 22px;
 }
 
-.POST .panel-heading, span.POST {
+.POST > .panel-heading, span.POST {
     background: #62c462;
 }
 
-.GET .panel-heading, span.GET {
+.GET > .panel-heading, span.GET {
     background: #5bc0de;
 }
 
-.DELETE .panel-heading, span.DELETE {
+.DELETE > .panel-heading, span.DELETE {
     background: #ee5f5b;
 }
 
-.PUT .panel-heading, span.PUT {
+.PUT > .panel-heading, span.PUT {
     background: #f89406;
 }
 
-.row dl.dl-horizontal dt {
-    width: 80px;
-    line-height: 30px;
-}
-.row dl.dl-horizontal dd {
-    line-height: 30px;
-    margin-left: 100px;
-}
-
-.row dl.dl-horizontal dd a.code,
-.row dl.dl-horizontal dd code{
-    margin-right: 5px;
-}
-
-.example-value{
-    color: rgba(0,0,0,0.4);
+.example-value {
+    color: rgba(0, 0, 0, 0.4);
+    text-align: right;
 }
 
 a.code {
@@ -116,5 +92,32 @@ a.code {
     font-size: 90%;
     background-color: #f9f2f4;
     border-radius: 4px;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.popover {
+    width: auto;
+    max-width: 50%;
+}
+
+.popover-content {
+    width: auto;
+    max-width: 100%;
+    line-break: normal;
+    white-space: pre-wrap;
+}
+
+.panel-body {
+    position: relative;
+}
+
+.curl.btn {
+    z-index: 999;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+h5.response-body, h4.request {
+    cursor: pointer;
 }

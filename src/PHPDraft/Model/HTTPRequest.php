@@ -103,9 +103,11 @@ class HTTPRequest
      *
      * @param string $base_url URL to the base server
      *
+     * @param array  $additional Extra options to pass to cURL
+     *
      * @return string An executable cURL command
      */
-    public function get_curl_command($base_url)
+    public function get_curl_command($base_url, $additional = [])
     {
         $options = [];
 
@@ -120,7 +122,8 @@ class HTTPRequest
         {
             $options[] = '-H "'.$header.': '.$value. '"';
         }
-        $options[] = '-v';
+        $options = array_merge($options, $additional);
+
         return htmlspecialchars('curl '.join(' ', $options). ' "'.$this->parent->build_url($base_url).'"');
     }
 

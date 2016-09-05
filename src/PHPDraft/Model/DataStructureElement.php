@@ -120,7 +120,7 @@ class DataStructureElement
     {
         if ($this->value === NULL && $this->key === NULL)
         {
-            return '{ ... }';
+            return '<span class="example-value pull-right">{ ... }</span>';
         }
 
         if (is_array($this->value))
