@@ -8,55 +8,50 @@
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\ArrayStructureElement;
+
 class DataStructureElement
 {
+    /**
+     * Default datatypes
+     * @var array
+     */
+    const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array'];
     /**
      * Object key
      * @var string
      */
     public $key;
-
     /**
      * Object JSON type
-     * @var string
+     * @var mixed
      */
     public $type;
-
     /**
      * Object description
      * @var string
      */
     public $description;
-
     /**
      * Type of element
      * @var string
      */
     public $element = NULL;
-
     /**
      * Object value
      * @var mixed|DataStructureElement[]
      */
     public $value = NULL;
-
     /**
      * Object status (required|optional)
      * @var string
      */
     public $status = '';
-
     /**
      * List of object dependencies
      * @var string[]
      */
     public $deps;
-
-    /**
-     * Default datatypes
-     * @var array
-     */
-    protected $defaults = ['boolean', 'string', 'number', 'object', 'array'];
 
     /**
      * Parse a JSON object to a data structure
@@ -88,17 +83,24 @@ class DataStructureElement
         $this->type        = $object->content->value->element;
         $this->description = isset($object->meta->description) ? $object->meta->description : NULL;
         $this->status      =
-            isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : NULL;
+            isset($object->attributes->typeAttributes) ? join(', ', $object->attributes->typeAttributes) : NULL;
 
-        if (!in_array($this->type, $this->defaults))
+        if (!in_array($this->type, self::DEFAULTS))
         {
             $dependencies[] = $this->type;
         }
 
-        if ($this->type === 'object')
+        if ($this->type === 'object' || $this->type === 'array')
         {
-            $value       = isset($object->content->value->content) ? $object->content->value : NULL;
-            $this->value = new DataStructureElement();
+            $value = isset($object->content->value->content) ? $object->content->value : NULL;
+            if ($this->type === 'array')
+            {
+                $this->value = new ArrayStructureElement();
+            }
+            else
+            {
+                $this->value = new DataStructureElement();
+            }
             $this->value = $this->value->parse($value, $dependencies);
 
             return $this;
@@ -118,49 +120,56 @@ class DataStructureElement
     {
         if ($this->value === NULL && $this->key === NULL)
         {
-            return '{ ... }';
+            return '<span class="example-value pull-right">{ ... }</span>';
         }
 
         if (is_array($this->value))
         {
-            $return = '<dl class="dl-horizontal">';
+            $return = '<table class="table table-striped">';
             foreach ($this->value as $object)
             {
-                if (get_class($object) === get_class($this))
+                if (get_class($object) === self::class || get_class($object) === ArrayStructureElement::class)
                 {
                     $return .= $object;
                 }
             }
 
-            $return .= '</dl>';
+            $return .= '</table>';
 
             return $return;
         }
 
-        $type = (!in_array($this->type, $this->defaults)) ?
-            '<a class="code" href="#object-' . $this->type . '">' . $this->type . '</a>' : '<code>'.$this->type.'</code>';
+        $type = (!in_array($this->type, self::DEFAULTS)) ?
+            '<a class="code" href="#object-' . $this->type . '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
 
         if (empty($this->value))
         {
-            $value = '<s class="example-value pull-right">no example</s>';
+            $value = '';
         }
-        else if (is_object($this->value) && self::class === get_class($this->value))
+        else
         {
-            $value = '<div class="sub-struct">'.$this->value.'</div>';
-        }
-        else{
-            $value = '<span class="example-value pull-right">Example: ' . $this->value . '</span>';
+            if (is_object($this->value) && self::class === get_class($this->value))
+            {
+                $value = '<div class="sub-struct">' . $this->value . '</div>';
+            }
+            elseif (is_object($this->value) && (ArrayStructureElement::class === get_class($this->value)))
+            {
+                $value = '<div class="array-struct">' . $this->value . '</div>';
+            }
+            else
+            {
+                $value = '<span class="example-value pull-right">' . $this->value . '</span>';
+            }
         }
 
         $return =
-            '<dt>' .
-            '<span>' . $this->key . "</span>" .
-            "</dt>\t" .
-            '<dd>' .
-            $type .
-            '<span>' . $this->description . '</span>' .
-            $value .
-            '</dd>';
+            '<tr>' .
+            '<td>' . '<span>' . $this->key . "</span>" . '</td>' .
+            '<td>' . $type . '</td>' .
+            '<td> <span class="status">' . $this->status . '</span></td>' .
+            '<td><span>' . $this->description . '</span></td>' .
+            '<td>' . $value . '</td>' .
+            '</tr>';
 
         return $return;
     }

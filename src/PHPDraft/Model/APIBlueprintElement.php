@@ -81,8 +81,9 @@ abstract class APIBlueprintElement
      */
     public function get_href()
     {
-        $prep = ($this->parent !== NULL) ? $this->parent->get_href() . '-' : '';
+        $seperator = '-';
+        $prep = ($this->parent !== NULL) ? $this->parent->get_href() . $seperator : '';
 
-        return $prep . str_replace(' ', '-', strtolower($this->title));
+        return $prep . str_replace(' ', $seperator, strtolower($this->title));
     }
 }

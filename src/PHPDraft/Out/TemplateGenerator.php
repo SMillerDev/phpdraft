@@ -134,32 +134,16 @@ class TemplateGenerator
     {
         if ($response <= 299)
         {
-            return 'success';
+            return 'text-success';
         }
         elseif ($response > 299 && $response <= 399)
         {
-            return 'warning';
+            return 'text-warning';
         }
         else
         {
-            return 'error';
+            return 'text-error';
         }
-    }
-
-    /**
-     * Determine if an object should be printed
-     *
-     * @param DataStructureElement $object Objects to print
-     *
-     * @return string Object representation
-     */
-    function get_data_structure($object)
-    {
-        if (!get_class($object) === 'DataStructureElement')
-        {
-            return;
-        }
-        return $object;
     }
 
 }

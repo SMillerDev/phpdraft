@@ -44,7 +44,7 @@ class RequestBodyElement extends DataStructureElement
         $this->status      =
             isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : NULL;
 
-        if (!in_array($this->type, $this->defaults))
+        if (!in_array($this->type, parent::DEFAULTS))
         {
             $dependencies[] = $this->type;
         }

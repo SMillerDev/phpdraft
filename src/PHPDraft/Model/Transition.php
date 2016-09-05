@@ -169,10 +169,12 @@ class Transition extends APIBlueprintElement
      *
      * @param string $base_url base URL of the server
      *
+     * @param array  $additional additional arguments to pass
+     *
      * @return string A cURL CLI command
      */
-    public function get_curl_command($base_url)
+    public function get_curl_command($base_url, $additional = [])
     {
-        return $this->request->get_curl_command($base_url);
+        return $this->request->get_curl_command($base_url, $additional);
     }
 }
