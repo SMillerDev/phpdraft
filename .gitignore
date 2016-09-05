@@ -1,8 +1,10 @@
 /.idea/
 
 # IntelliJ
-/out/
-/build/
+/build/coverage
+/build/logs
+/build/phar
+/build/*.phar
 
 # JIRA plugin
 atlassian-ide-plugin.xml

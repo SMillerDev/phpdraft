@@ -4,13 +4,13 @@ This is a parser for API Blueprint files in PHP.
 ## Usage
 For direct usage you can run:
 ```bash
-$ ./phpdraft.phar blueprint-file.apib > blueprint-webpage.html
+$ ./phpdraft.phar -f blueprint-file.apib > blueprint-webpage.html
 ```
 You can also install it first:
 ```bash
 $ cp phpdraft.phar /usr/bin/phpdraft
 $ chmod +x /usr/bin/phpdraft
-$ phpdraft blueprint-file.apib > blueprint-webpage.html
+$ phpdraft -f blueprint-file.apib > blueprint-webpage.html
 ```
 
 ## Including Files

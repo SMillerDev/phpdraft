@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpdrafter" default="setup">
+    <target name="setup" depends="clean"/>
+
+    <target name="clean" unless="clean.done" description="Cleanup build artifacts">
+        <delete dir="${basedir}/bin"/>
+        <delete dir="${basedir}/build/documentation"/>
+        <delete dir="${basedir}/build/logfiles"/>
+        <delete dir="${basedir}/build/phar"/>
+        <delete>
+            <fileset dir="${basedir}/build">
+                <include name="**/phpdraft*.phar"/>
+                <include name="**/phpdraft*.phar.asc"/>
+            </fileset>
+        </delete>
+
+        <property name="clean.done" value="true"/>
+    </target>
+
+    <target name="signed-phar" depends="phar"
+            description="Create signed PHAR archive of PHPDraft and all its dependencies">
+        <exec executable="gpg" failonerror="true">
+            <arg value="--armor"/>
+            <arg value="--detach-sign"/>
+            <arg path="${basedir}/build/phpdraft-library-${version}.phar"/>
+        </exec>
+
+        <exec executable="gpg" failonerror="true">
+            <arg value="--armor"/>
+            <arg value="--detach-sign"/>
+            <arg path="${basedir}/build/phpdraft-${version}.phar"/>
+        </exec>
+    </target>
+
+    <target name="phar" depends="-phar-determine-version,-phar-prepare"
+            description="Create PHAR archive of PHPDraft and all its dependencies">
+        <antcall target="-phar-build">
+            <param name="type" value="release"/>
+        </antcall>
+    </target>
+
+    <target name="phar-nightly" depends="-phar-prepare"
+            description="Create PHAR archive of PHPDraft and all its dependencies (nightly)">
+        <antcall target="-phar-build">
+            <param name="type" value="nightly"/>
+        </antcall>
+    </target>
+
+    <target name="-phar-prepare" depends="clean">
+        <mkdir dir="${basedir}/build/phar"/>
+        <copy file="${basedir}/LICENSE" tofile="${basedir}/build/phar/LICENSE"/>
+        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt"/>
+    </target>
+
+    <target name="-phar-build" depends="-phar-determine-version">
+        <copy todir="${basedir}/build/phar/phpdraft/src">
+            <fileset dir="${basedir}/src/">
+                <exclude name="**/*Test.php*"/>
+                <include name="**/*.php"/>
+                <include name="**/*.js*"/>
+                <include name="**/*.css*"/>
+            </fileset>
+        </copy>
+        <copy todir="${basedir}/build/phar/phpdraft">
+            <fileset dir="${basedir}">
+                <include name="**/*.json*"/>
+                <include name="**/index.php"/>
+            </fileset>
+        </copy>
+
+        <exec executable="${basedir}/build/phar-version.php" outputproperty="_version">
+            <arg value="${version}"/>
+            <arg value="${type}"/>
+        </exec>
+
+        <exec executable="phpab" taskname="phpab">
+            <arg value="--all"/>
+            <arg value="--static"/>
+            <arg value="--once"/>
+            <arg value="--phar"/>
+            <arg value="--hash"/>
+            <arg value="SHA-1"/>
+            <arg value="--output"/>
+            <arg path="${basedir}/build/phpdraft-library-${_version}.phar"/>
+            <arg value="--template"/>
+            <arg path="${basedir}/build/library-phar-autoload.php.in"/>
+            <arg path="${basedir}/build/phar"/>
+        </exec>
+
+        <exec executable="phpab" taskname="phpab">
+            <arg value="--all"/>
+            <arg value="--nolower"/>
+            <arg value="--static"/>
+            <arg value="--phar"/>
+            <arg value="--hash"/>
+            <arg value="SHA-1"/>
+            <arg value="--output"/>
+            <arg path="${basedir}/build/phpdraft-${_version}.phar"/>
+            <arg value="--template"/>
+            <arg path="${basedir}/build/binary-phar-autoload.php.in"/>
+            <arg path="${basedir}/build/phar"/>
+        </exec>
+
+        <chmod file="${basedir}/build/phpdraft-${_version}.phar" perm="ugo+rx"/>
+    </target>
+
+    <target name="-phar-determine-version">
+        <exec executable="bash" outputproperty="version">
+            <arg value="-c"/>
+            <arg value="php ${basedir}/index.php -v | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'"/>
+        </exec>
+    </target>
+</project>
