@@ -19,7 +19,7 @@ $base = $this->categories;
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
-        <?= file_get_contents(__DIR__ . '/index.css');?>
+        <?= file_get_contents(__DIR__ . '/'.$this->template.'.css');?>
     </style>
 </head>
 <body>
@@ -101,11 +101,11 @@ $base = $this->categories;
         </div>
         <div class="col-md-10">
             <?php foreach ($base as $category): ?>
-                <h2><a name="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
+                <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
                 <p><?= $category->description; ?></p>
                 <?php foreach ($category->children as $resource): ?>
                     <h3>
-                        <a name="<?= $resource->get_href(); ?>"><?= $resource->title; ?></a>
+                        <a id="<?= $resource->get_href(); ?>"><?= $resource->title; ?></a>
                         <small><?= $resource->href; ?></small>
                     </h3>
                     <p><?php $resource->description; ?></p>
@@ -117,7 +117,7 @@ $base = $this->categories;
                                     <var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
                                     <a class="pull-right transition-title"
-                                       name="<?= $transition->get_href(); ?>"><?= $transition->title; ?></a>
+                                       id="<?= $transition->get_href(); ?>"><?= $transition->title; ?></a>
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -163,8 +163,9 @@ $base = $this->categories;
                                         <?php if (!empty($transition->request->body)): ?>
                                             <h5>Body</h5>
                                             <?php foreach ($transition->request->body as $value): ?>
-                                                <?php $type = (isset($transition->request->headers['Content-Type']))?$transition->request->headers['Content-Type']:NULL;?>
-                                                <?= $value->print_request($type);?>
+                                                <?php $type =
+                                                    (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : NULL; ?>
+                                                <?= $value->print_request($type); ?>
                                                 <?= $value ?>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -173,35 +174,17 @@ $base = $this->categories;
                                     <?php if ($transition->url_variables !== []): ?>
                                         <h5>URI Parameters</h5>
                                         <dl class="dl-horizontal">
-                                            <?php foreach ($transition->url_variables as $key => $value): ?>
-                                                <?php $status =
-                                                    ($value->status === '') ? '' : '(' . $value->status . ')'; ?>
-                                                <dt><?= $key; ?></dt>
-                                                <dd>
-                                                    <code><?= $value->type; ?></code>
-                                                    <?= $status; ?>
-                                                    <samp><?= is_array($value->value) ? join('|', $value->value) : $value->value; ?></samp>
-                                                    <p><?= $value->description; ?></p>
-                                                </dd>
+                                            <?php foreach ($transition->url_variables as $value): ?>
+                                                <?= $value; ?>
                                             <?php endforeach; ?>
                                         </dl>
                                     <?php endif; ?>
 
                                     <?php if ($transition->data_variables !== []): ?>
                                         <h5>Data object</h5>
-                                        <dl class="dl-horizontal">
-                                            <?php foreach ($transition->data_variables as $key => $value): ?>
-                                                <?php $status =
-                                                    ($value->status === '') ? '' : '(' . $value->status . ')'; ?>
-                                                <dt><?= $key; ?></dt>
-                                                <dd>
-                                                    <code><?= $value->type; ?></code>
-                                                    <?= $status; ?>
-                                                    <samp><?= is_array($value->value) ? join('|', $value->value) : $value->value; ?></samp>
-                                                    <p><?= $value->description; ?></p>
-                                                </dd>
+                                            <?php foreach ($transition->data_variables as $value): ?>
+                                                <?= $value ?>
                                             <?php endforeach; ?>
-                                        </dl>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (isset($transition->responses)): ?>
@@ -231,22 +214,9 @@ $base = $this->categories;
                                             <?php endif; ?>
                                             <?php if ($response->structure !== []): ?>
                                                 <h5>Data Structure</h5>
-                                                <dl class="dl-horizontal">
-                                                    <?php foreach ($response->structure[0]->value as $value): ?>
-                                                        <dt><?= $value->key; ?></dt>
-                                                        <dd>
-                                                            <a href="#object-<?= $value->type; ?>"><?= $value->type; ?></a>
-                                                            <span><?= $value->description; ?></span>
-                                                            <?php if (isset($value->value->element) && $value->value->element === 'object')
-                                                                : ?>
-                                                                <?= $this->get_data_structure($value->value); ?>
-                                                            <?php else: ?>
-                                                                <blockquote><?= $value->value; ?></blockquote>
-                                                            <?php endif; ?>
-
-                                                        </dd>
-                                                    <?php endforeach; ?>
-                                                </dl>
+                                                <?php foreach ($response->structure as $value): ?>
+                                                    <?= $value; ?>
+                                                <?php endforeach; ?>
                                             <?php endif; ?>
                                             <?php foreach ($response->content as $key => $value): ?>
                                                 <h5><?= $key; ?></h5>
@@ -264,7 +234,7 @@ $base = $this->categories;
                 <div class="panel panel-default <?= $key; ?>">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <a name="object-<?= $key; ?>"><?= $key; ?></a>
+                            <a id="object-<?= $key; ?>"><?= $key; ?></a>
                         </h3>
                     </div>
                     <div class="panel-body">
@@ -281,6 +251,6 @@ $base = $this->categories;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script><?= file_get_contents(__DIR__ . '/index.js');?></script>
+<script><?= file_get_contents(__DIR__ . '/'.$this->template.'.js'); ?></script>
 </body>
 </html>

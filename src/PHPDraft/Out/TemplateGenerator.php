@@ -146,20 +146,4 @@ class TemplateGenerator
         }
     }
 
-    /**
-     * Determine if an object should be printed
-     *
-     * @param DataStructureElement $object Objects to print
-     *
-     * @return string Object representation
-     */
-    function get_data_structure($object)
-    {
-        if (!get_class($object) === 'DataStructureElement')
-        {
-            return;
-        }
-        return $object;
-    }
-
 }
