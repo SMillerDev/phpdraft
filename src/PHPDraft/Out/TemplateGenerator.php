@@ -27,6 +27,12 @@ class TemplateGenerator
     protected $template;
 
     /**
+     * The image to use as a logo
+     * @var string
+     */
+    protected $image;
+
+    /**
      * The base URl of the API
      * @var
      */
@@ -42,10 +48,12 @@ class TemplateGenerator
      * TemplateGenerator constructor.
      *
      * @param string $template name of the template to load
+     * @param string $image    Image to use as Logo
      */
-    public function __construct($template)
+    public function __construct($template, $image)
     {
         $this->template = $template;
+        $this->image = $image;
     }
 
     /**
@@ -57,6 +65,27 @@ class TemplateGenerator
      */
     public function get($object)
     {
+        $include = NULL;
+        if (stream_resolve_include_path($this->template . DIRECTORY_SEPARATOR . $this->template . '.php'))
+        {
+            $include = $this->template . DIRECTORY_SEPARATOR . $this->template . '.php';
+        }
+
+        if (stream_resolve_include_path($this->template . '.php'))
+        {
+            $include = $this->template . '.php';
+        }
+
+        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $this->template . '.php'))
+        {
+            $include = 'PHPDraft/Out/HTML/' . $this->template . '.php';
+        }
+        if ($include === NULL)
+        {
+            file_put_contents('php://stderr', "Couldn't find template '$this->template'\n");
+            exit(1);
+        }
+
         //Prepare base data
         if (is_array($object->content[0]->content))
         {
@@ -64,13 +93,6 @@ class TemplateGenerator
             {
                 $this->base_data[$meta->content->key->content] = $meta->content->value->content;
             }
-
-            $this->base_data['TITLE'] = $object->content[0]->meta->title;
-        }
-
-        //Parse specific data
-        if (is_array($object->content[0]->content))
-        {
             foreach ($object->content[0]->content as $value)
             {
                 if ($value->element === 'copy')
@@ -88,9 +110,11 @@ class TemplateGenerator
                     $this->base_structures = $cat->structures;
                 }
             }
+
+            $this->base_data['TITLE'] = $object->content[0]->meta->title;
         }
 
-        include_once 'PHPDraft/Out/HTML/' . $this->template . '.php';
+        include_once $include;
     }
 
     /**

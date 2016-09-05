@@ -75,4 +75,15 @@ class ApibToJsonTest extends PHPUnit_Framework_TestCase
         $this->assertJsonStringEqualsJsonFile(TEST_STATICS.'/json', $this->class->__toString());
     }
 
+    /**
+     * Check if parsing the APIB to JSON gives the expected result
+     */
+    public function testParseToJSONWithErrors()
+    {
+        $property = $this->reflection->getProperty('apib');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, file_get_contents(TEST_STATICS . '/apib_errors'));
+        $this->class->parseToJson();
+        $this->assertJsonStringEqualsJsonFile(TEST_STATICS.'/json_errors', $this->class->__toString());
+    }
 }

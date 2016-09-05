@@ -128,7 +128,7 @@ class DataStructureElement
             $return = '<table class="table table-striped">';
             foreach ($this->value as $object)
             {
-                if (get_class($object) === self::class || get_class($object) === ArrayStructureElement::class)
+                if (is_string($object) || get_class($object) === self::class || get_class($object) === ArrayStructureElement::class)
                 {
                     $return .= $object;
                 }

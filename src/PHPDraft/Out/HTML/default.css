@@ -42,7 +42,9 @@ h4.response.error var {
     padding: 6px 0;
 }
 
-body .col-md-10 h2:first-of-type {
+body .col-md-10 h2:first-child,
+body .col-md-10 h3:first-child
+{
     margin-top: 0;
 }
 

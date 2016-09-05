@@ -26,7 +26,17 @@ class JsonToHTML
      */
     public function __construct($json)
     {
-        $this->object = json_decode($json);
+        $this->object = $json;
+    }
+
+    /**
+     * Gets the default template HTML
+     *
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->get_html();
     }
 
     /**
@@ -34,22 +44,15 @@ class JsonToHTML
      *
      * @param string $template Type of template to display.
      *
+     * @param string $image    Image to use as a logo
+     *
      * @return string HTML template to display
      */
-    public function get_html($template = 'default')
+    public function get_html($template = 'default', $image = NULL)
     {
-        $gen = new TemplateGenerator($template);
-        return $gen->get($this->object);
-    }
+        $gen = new TemplateGenerator($template, $image);
 
-    /**
-     * Gets the default template HTML
-     * 
-     * @return string
-     */
-    function __toString()
-    {
-        return $this->get_html();
+        return $gen->get($this->object);
     }
 
 }

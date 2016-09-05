@@ -54,13 +54,4 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/json')), $property->getValue($this->class));
     }
 
-    /**
-     * Tests if the outputted HTM is as expected.
-     */
-    public function testParseToHTML()
-    {
-        $this->expectOutputString(file_get_contents(TEST_STATICS.'/html'));
-        $this->class->get_html();
-    }
-
 }

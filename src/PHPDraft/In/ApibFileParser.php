@@ -30,6 +30,7 @@ class ApibFileParser
     public function __construct($filename = 'index.apib')
     {
         $this->location  = pathinfo($filename, PATHINFO_DIRNAME) . '/';
+
         $this->full_apib = $this->get_apib($filename);
     }
 
@@ -43,6 +44,7 @@ class ApibFileParser
      */
     function get_apib($filename)
     {
+        $this->file_check($filename);
         $file    = file_get_contents($filename);
         $matches = [];
         preg_match_all('<!-- include\(([a-z_.\/]*?).apib\) -->', $file, $matches);
@@ -51,6 +53,15 @@ class ApibFileParser
         }
 
         return $file;
+    }
+
+    private function file_check($filename)
+    {
+        if(!file_exists($filename))
+        {
+            file_put_contents('php://stderr', "API File not found: $filename\n");
+            exit(1);
+        }
     }
 
     /**

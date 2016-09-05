@@ -101,8 +101,12 @@ $base = $this->categories;
         </div>
         <div class="col-md-10">
             <?php foreach ($base as $category): ?>
-                <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
-                <p><?= $category->description; ?></p>
+                <?php if(!empty($category->title)):?>
+                    <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
+                <?php endif;?>
+                <?php if(!empty($category->description)):?>
+                    <p><?= $category->description; ?></p>
+                <?php endif;?>
                 <?php foreach ($category->children as $resource): ?>
                     <h3>
                         <a id="<?= $resource->get_href(); ?>"><?= $resource->title; ?></a>
