@@ -1,4 +1,4 @@
-# PHPDraft
+# PHPDraft [![Build Status](https://travis-ci.org/SMillerDev/phpdraft.svg?branch=master)](https://travis-ci.org/SMillerDev/phpdraft)
 This is a parser for API Blueprint files in PHP.
 
 ## Usage
