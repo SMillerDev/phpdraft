@@ -22,7 +22,7 @@ set_include_path(
 );
 
 // Load and setup class file autloader
-require_once '../src/PHPDraft/Core/Autoloader.php';
+require_once 'PHPDraft/Core/Autoloader.php';
 
 $config = json_decode(file_get_contents($base."/config.json"));
 

@@ -1,7 +1,8 @@
 language: php
 php:
-  - '5.5'
   - '5.6'
-  - '7.0'
-  - '7.1'
+
+before_script:
+  - pecl install runkit
+  - echo "runkit.internal_override=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 script: phpunit --configuration tests/phpunit.xml

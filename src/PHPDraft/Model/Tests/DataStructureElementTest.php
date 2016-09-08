@@ -9,23 +9,12 @@
 namespace PHPDraft\Model\Tests;
 
 
+use PHPDraft\Core\TestBase;
 use PHPDraft\Model\DataStructureElement;
-use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
-class DataStructureElementTest extends PHPUnit_Framework_TestCase
+class DataStructureElementTest extends TestBase
 {
-    /**
-     * Test Class
-     * @var DataStructureElement
-     */
-    protected $class;
-
-    /**
-     * Test reflection
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     public function setUp()
     {

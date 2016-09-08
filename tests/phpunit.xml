@@ -13,7 +13,7 @@
     </php>
     <testsuites>
         <testsuite name="Parse">
-            <file>../src/PHPDraft/Parse/Tests/ApibToJsonTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/JsonToHTMLTest.php</file>
         </testsuite>
         <testsuite name="Model">

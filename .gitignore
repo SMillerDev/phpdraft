@@ -5,6 +5,7 @@
 /build/logs
 /build/phar
 /build/*.phar
+/tests/statics/index.*
 
 # JIRA plugin
 atlassian-ide-plugin.xml

@@ -11,7 +11,7 @@ $config = json_decode(file_get_contents(__DIR__."/config.json"));
 require_once 'PHPDraft/Core/Autoloader.php';
 use PHPDraft\In\ApibFileParser;
 use PHPDraft\Out\UI;
-use PHPDraft\Parse\ApibToJson;
+use PHPDraft\Parse\Drafter;
 use PHPDraft\Parse\JsonToHTML;
 
 define('VERSION', '0');
@@ -19,7 +19,7 @@ define('VERSION', '0');
 $values = UI::main($argv);
 
 $apib = new ApibFileParser($values['file']);
-$json = new ApibToJson($apib);
+$json = new Drafter($apib);
 $html = new JsonToHTML($json->parseToJson());
 $html->get_html($values['template'], $values['image']);
 

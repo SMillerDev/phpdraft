@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the ApibToJson.php
+ * This file contains the Drafter.php
  *
  * @package PHPDraft\Parse
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
@@ -8,15 +8,20 @@
 
 namespace PHPDraft\Parse;
 
-class ApibToJson
+class Drafter
 {
+    /**
+     * The API Blueprint output (JSON)
+     *
+     * @var string
+     */
+    public $json;
     /**
      * Configuration
      *
      * @var array
      */
     protected $config;
-
     /**
      * The API Blueprint input
      *
@@ -25,11 +30,11 @@ class ApibToJson
     protected $apib;
 
     /**
-     * The API Blueprint output (JSON)
+     * The location of the drafter executable
      *
      * @var string
      */
-    public $json;
+    protected $drafter;
 
     /**
      * ApibToJson constructor.
@@ -39,8 +44,27 @@ class ApibToJson
     public function __construct($apib)
     {
         global $config;
-        $this->config = $config;
+        $this->config = &$config;
         $this->apib   = $apib;
+
+        if (!$this->location())
+        {
+            throw new \RuntimeException("Drafter was not installed!", 1);
+        }
+        $this->drafter = $this->location();
+    }
+
+    /**
+     * Return drafter location if found
+     *
+     * @return bool|string
+     */
+    function location()
+    {
+        $returnVal = shell_exec('which drafter 2> /dev/null');
+        $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
+
+        return (empty($returnVal) ? FALSE : $returnVal);
     }
 
     /**
@@ -58,20 +82,16 @@ class ApibToJson
         }
 
         file_put_contents($tmp_dir . '/index.apib', $this->apib);
-        if (!$this->drafter_location())
-        {
-            file_put_contents('php://stderr', "Drafter was not installed!\n");
-            exit(1);
-        }
 
-        shell_exec($this->drafter_location() . ' ' . $tmp_dir . '/index.apib -f json -o ' . $tmp_dir . '/index.json 2> /dev/null');
+        shell_exec($this->drafter . ' ' . $tmp_dir . '/index.apib -f json -o ' . $tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($tmp_dir . '/index.json'));
+
         if (json_last_error() !== JSON_ERROR_NONE)
         {
-            file_put_contents('php://stderr', "Drafter generated invalid JSON!\n" . json_last_error_msg() . "\n");
-            file_put_contents('php://stdout', file_get_contents($tmp_dir . '/index.json') . "\n");
-            exit(2);
+            file_put_contents('php://stdout', "ERROR: invalid json in " . $tmp_dir . '/index.json');
+            throw new \RuntimeException("Drafter generated invalid JSON (" . json_last_error_msg() . ")", 2);
         }
+
         $warnings = FALSE;
         foreach ($this->json->content as $item)
         {
@@ -85,24 +105,10 @@ class ApibToJson
         }
         if ($warnings)
         {
-            file_put_contents('php://stderr', "Parsing encountered errors and stopped\n");
-            exit(2);
+            throw new \RuntimeException("Parsing encountered errors and stopped", 2);
         }
 
         return $this->json;
-    }
-
-    /**
-     * Return drafter location if found
-     *
-     * @return bool|string
-     */
-    function drafter_location()
-    {
-        $returnVal = shell_exec('which drafter 2> /dev/null');
-        $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
-
-        return (empty($returnVal) ? FALSE : $returnVal);
     }
 
 }
