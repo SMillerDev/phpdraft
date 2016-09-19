@@ -18,6 +18,21 @@
         </testsuite>
         <testsuite name="Model">
             <file>../src/PHPDraft/Model/Tests/DataStructureElementTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/CategoryTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/HierarchyElementTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/HTTPRequestTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/HTTPResponseTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/ResourceTest.php</file>
+            <file>../src/PHPDraft/Model/Tests/TransitionTest.php</file>
+            <file>../src/PHPDraft/Model/Elements/Tests/ArrayStructureTest.php</file>
+            <file>../src/PHPDraft/Model/Elements/Tests/RequestBodyElementTest.php</file>
+        </testsuite>
+        <testsuite name="In">
+            <file>../src/PHPDraft/In/Tests/ApibFileParserTest.php</file>
+        </testsuite>
+        <testsuite name="Out">
+            <file>../src/PHPDraft/Out/Tests/UITest.php</file>
+            <file>../src/PHPDraft/Out/Tests/TemplateGeneratorTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

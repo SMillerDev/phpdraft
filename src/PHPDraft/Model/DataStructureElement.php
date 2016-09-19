@@ -10,13 +10,9 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ArrayStructureElement;
 
-class DataStructureElement
+class DataStructureElement implements StructureElement
 {
-    /**
-     * Default datatypes
-     * @var array
-     */
-    const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array'];
+
     /**
      * Object key
      * @var string
@@ -68,16 +64,25 @@ class DataStructureElement
             return $this;
         }
         $this->element = $object->element;
+
         if (isset($object->content) && is_array($object->content))
         {
             foreach ($object->content as $value)
             {
-                $struct        = new DataStructureElement();
+                if (in_array($this->element, ['object', 'dataStructure']))
+                {
+                    $struct = new DataStructureElement();
+                }
+                else
+                {
+                    $struct = new EnumStructureElement();
+                }
                 $this->value[] = $struct->parse($value, $dependencies);
             }
 
             return $this;
         }
+
 
         $this->key         = $object->content->key->content;
         $this->type        = $object->content->value->element;
@@ -90,12 +95,16 @@ class DataStructureElement
             $dependencies[] = $this->type;
         }
 
-        if ($this->type === 'object' || $this->type === 'array')
+        if ($this->type === 'object' || $this->type === 'array' || $this->type === 'enum' || !in_array($this->type, self::DEFAULTS))
         {
             $value = isset($object->content->value->content) ? $object->content->value : NULL;
             if ($this->type === 'array')
             {
                 $this->value = new ArrayStructureElement();
+            }
+            elseif ($this->type === 'enum')
+            {
+                $this->value = new EnumStructureElement();
             }
             else
             {
@@ -128,7 +137,15 @@ class DataStructureElement
             $return = '<table class="table table-striped">';
             foreach ($this->value as $object)
             {
-                if (is_string($object) || get_class($object) === self::class || get_class($object) === ArrayStructureElement::class)
+                if (get_class($object) === \stdClass::class)
+                {
+                    return json_encode($object);
+                }
+                if (is_string($object)
+                    || get_class($object) === self::class
+                    || get_class($object) === ArrayStructureElement::class
+                    || get_class($object) === EnumStructureElement::class
+                )
                 {
                     $return .= $object;
                 }
@@ -155,6 +172,10 @@ class DataStructureElement
             elseif (is_object($this->value) && (ArrayStructureElement::class === get_class($this->value)))
             {
                 $value = '<div class="array-struct">' . $this->value . '</div>';
+            }
+            elseif (is_array($this->value) && (EnumStructureElement::class === get_class($this->value[0])))
+            {
+                $value = '<div class="enum-struct">' . $this->value . '</div>';
             }
             else
             {
