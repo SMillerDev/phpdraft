@@ -8,9 +8,6 @@
 
 namespace PHPDraft\Model\Elements;
 
-
-use PHPDraft\Model\DataStructureElement;
-use PHPDraft\Model\EnumStructureElement;
 use PHPDraft\Model\StructureElement;
 
 class ArrayStructureElement extends DataStructureElement implements StructureElement
@@ -60,7 +57,7 @@ class ArrayStructureElement extends DataStructureElement implements StructureEle
         foreach ($this->type as $key => $item)
         {
             $type =
-                (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . $item . '">' . $item . '</a>';
+                (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-', strtolower($item)) . '">' . $item . '</a>';
 
             $value =
                 (isset($this->value[$key])) ? ': <span class="example-value pull-right">' . json_encode($this->value[$key]) . '</span>' : NULL;

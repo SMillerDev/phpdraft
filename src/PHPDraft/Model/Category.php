@@ -8,7 +8,9 @@
 
 namespace PHPDraft\Model;
 
-class Category extends APIBlueprintElement
+use PHPDraft\Model\Elements\DataStructureElement;
+
+class Category extends HierarchyElement
 {
     /**
      * API Structure element

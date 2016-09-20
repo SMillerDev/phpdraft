@@ -2,13 +2,13 @@
 /**
  * This file contains the DataStructureElement.php
  *
- * @package PHPDraft\Model
+ * @package PHPDraft\Model\Elements
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
-namespace PHPDraft\Model;
+namespace PHPDraft\Model\Elements;
 
-use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\StructureElement;
 
 class DataStructureElement implements StructureElement
 {
@@ -157,7 +157,7 @@ class DataStructureElement implements StructureElement
         }
 
         $type = (!in_array($this->type, self::DEFAULTS)) ?
-            '<a class="code" href="#object-' . $this->type . '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
+            '<a class="code" href="#object-' . str_replace(' ', '-', strtolower($this->type)). '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
 
         if (empty($this->value))
         {

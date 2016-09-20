@@ -10,7 +10,7 @@ namespace PHPDraft\Model;
 
 use Michelf\Markdown;
 
-abstract class APIBlueprintElement
+abstract class HierarchyElement
 {
     /**
      * Title of the element
@@ -29,14 +29,14 @@ abstract class APIBlueprintElement
     /**
      * Child elements
      *
-     * @var APIBlueprintElement[]
+     * @var HierarchyElement[]
      */
     public $children = [];
 
     /**
      * Parent Element
      *
-     * @var APIBlueprintElement|NULL
+     * @var HierarchyElement|NULL
      */
     protected $parent = NULL;
 

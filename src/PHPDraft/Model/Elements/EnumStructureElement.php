@@ -6,10 +6,9 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
-namespace PHPDraft\Model;
+namespace PHPDraft\Model\Elements;
 
-
-use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\StructureElement;
 
 class EnumStructureElement implements StructureElement
 {
@@ -69,7 +68,7 @@ class EnumStructureElement implements StructureElement
     function __toString()
     {
         $type = (!in_array($this->element, self::DEFAULTS)) ?
-            '<a class="code" href="#object-' . $this->element . '">' . $this->element . '</a>' : '<code>' . $this->element . '</code>';
+            '<a class="code" href="#object-' . str_replace(' ', '-', strtolower($this->element)) . '">' . $this->element . '</a>' : '<code>' . $this->element . '</code>';
         $return = '<tr>' .
                     '<td><span>' . $this->value . '</span></td>' .
                     '<td>'.$type.'</td>' .

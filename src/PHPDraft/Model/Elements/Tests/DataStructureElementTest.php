@@ -40,6 +40,7 @@ class DataStructureElementTest extends TestBase
     {
         $dep = [];
         $this->class->parse(json_decode($object), $dep);
+        var_dump($this->class);
         $this->assertSame($this->class->key, $expected->key);
         $this->assertSame($this->class->value, $expected->value);
         $this->assertSame($this->class->element, $expected->element);
@@ -82,12 +83,13 @@ class DataStructureElementTest extends TestBase
         $base2->type    = 'Struct1';
 
         $return[] = [
-            '{"element": "member","content": {"key": {"element": "string","content": "Content-Type"},' .
-            '"value": {"element": "Struct2","content": "application/json"}}}',
+            '{"element":"object","content":[{"element":"member","meta":{"description":"API version with optional client
+             architecture identifier"},"content":{"key":{"element":"string"
+             ,"content":"version"},"value":{"element":"Struct2","content":"120.a"}}}',
             $base1,
         ];
         $return[] = [
-            '{"element": "member","content": {"key": {"element": "string","content": "Auth2"},' .
+            '{"element": "object","content": {"key": {"element": "string","content": "Auth2"},' .
             '"value": {"element": "Struct1","content": "something"}}}',
             $base2,
         ];
@@ -103,17 +105,17 @@ class DataStructureElementTest extends TestBase
     {
         $return   = [];
         $return[] = [
-            '{"element": "member","content": {"key": {"element": "string","content": "Content-Type"}' .
-            ',"value": {"element": "Struct2","content": "application/json"}}}',
+            '{"element":"object","content":[{"element":"member","meta":{"description":"API version"},
+            "content":{"key":{"element":"string","content":"version"},"value":{"element":"Struct2","content":"120.a"}}}',
             ['Struct2'],
         ];
         $return[] = [
-            '{"element": "member","content": {"key": {"element": "string","content": "Auth2"}' .
-            ',"value": {"element": "Struct1","content": "something"}}}',
-            ['Struct1'],
+            '{"element":"member","content":{"key":{"element":"string","content":"flight_list"},
+            "value":{"element":"array","content":[{"element":"Flight"}]}}}',
+            ['Flight'],
         ];
         $return[] = [
-            '{"element": "member",
+            '{"element": "object",
                 "meta": {"description": "Update Data Object"},
                 "content": {
                     "key": {"element": "string","content": "data"},

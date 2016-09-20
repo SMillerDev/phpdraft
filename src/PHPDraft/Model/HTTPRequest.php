@@ -32,9 +32,16 @@ class HTTPRequest
 
     /**
      * Body of the request (if POST or PUT)
+     * @var mixed
+     */
+    public $body = NULL;
+
+
+    /**
+     * Structure of the request (if POST or PUT)
      * @var RequestBodyElement[]
      */
-    public $body = [];
+    public $struct = [];
 
     /**
      * HTTPRequest constructor.
@@ -66,6 +73,15 @@ class HTTPRequest
                     $this->parse_structure($value->content);
                     continue;
                 }
+                elseif ($value->element === 'asset')
+                {
+                    if (in_array('messageBody', $value->meta->classes))
+                    {
+                        $this->body[] = (isset($value->content)) ? $value->content : NULL;
+                        $this->headers['Content-Type'] =
+                            (isset($value->attributes->contentType)) ? $value->attributes->contentType : '';
+                    }
+                }
             }
         }
 
@@ -75,6 +91,11 @@ class HTTPRequest
             {
                 $this->headers[$value->content->key->content] = $value->content->value->content;
             }
+        }
+
+        if ($this->body === NULL)
+        {
+            $this->body = &$this->struct;
         }
 
         return $this;
@@ -94,14 +115,14 @@ class HTTPRequest
             $struct->parse($object, $deps);
             $struct->deps = $deps;
 
-            $this->body[] = $struct;
+            $this->struct[] = $struct;
         }
     }
 
     /**
      * Generate a cURL command for the HTTP request
      *
-     * @param string $base_url URL to the base server
+     * @param string $base_url   URL to the base server
      *
      * @param array  $additional Extra options to pass to cURL
      *
@@ -111,20 +132,27 @@ class HTTPRequest
     {
         $options = [];
 
-        $type = (isset($this->headers['Content-Type']))?$this->headers['Content-Type']:NULL;
+        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : NULL;
 
-        $options[] = '-X'.$this->method;
-        foreach ($this->body as $body)
+        $options[] = '-X' . $this->method;
+        if (is_string($this->body))
         {
-            $options[] = '--data-binary "'.strip_tags($body->print_request($type)).'"';
+            $options[] = '--data-binary "' . $this->body . '"';
         }
-        foreach ($this->headers as $header=>$value)
+        else
         {
-            $options[] = '-H "'.$header.': '.$value. '"';
+            foreach ($this->struct as $body)
+            {
+                $options[] = '--data-binary "' . strip_tags($body->print_request($type)) . '"';
+            }
+        }
+        foreach ($this->headers as $header => $value)
+        {
+            $options[] = '-H "' . $header . ': ' . $value . '"';
         }
         $options = array_merge($options, $additional);
 
-        return htmlspecialchars('curl '.join(' ', $options). ' "'.$this->parent->build_url($base_url).'"');
+        return htmlspecialchars('curl ' . join(' ', $options) . ' "' . $this->parent->build_url($base_url) . '"');
     }
 
 
