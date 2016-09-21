@@ -17,7 +17,7 @@ class ArrayStructureTest extends TestBase
     public function setUp()
     {
         $this->class      = new ArrayStructureElement();
-        $this->reflection = new ArrayStructureElement('PHPDraft\Model\DataStructureElement');
+        $this->reflection = new \ReflectionClass('PHPDraft\Model\DataStructureElement');
     }
 
     public function tearDown()

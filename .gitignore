@@ -11,3 +11,4 @@
 atlassian-ide-plugin.xml
 
 config.json
+*.pem

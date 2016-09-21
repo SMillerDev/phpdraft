@@ -9,7 +9,9 @@
 namespace PHPDraft\Out\Tests;
 
 
-class TemplateGeneratorTest
+use PHPDraft\Core\TestBase;
+
+class TemplateGeneratorTest extends TestBase
 {
 
 }
