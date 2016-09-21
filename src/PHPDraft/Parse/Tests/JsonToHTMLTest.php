@@ -31,7 +31,7 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/json')));
+        $this->class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
     }
 
@@ -51,7 +51,7 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
     {
         $property = $this->reflection->getProperty('object');
         $property->setAccessible(TRUE);
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/json')), $property->getValue($this->class));
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $property->getValue($this->class));
     }
 
 }
