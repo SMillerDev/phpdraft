@@ -8,16 +8,14 @@
 
 namespace PHPDraft\Model\Elements;
 
+use PHPDraft\Model\StructureElement;
 
-use PHPDraft\Model\DataStructureElement;
-
-class ArrayStructureElement extends DataStructureElement
+class ArrayStructureElement extends DataStructureElement implements StructureElement
 {
 
     public function parse($item, &$dependencies)
     {
         $this->element = (isset($item->element)) ? $item->element : 'array';
-        $this->element = (isset($item->element)) ? $item->element : NULL;
         $this->value = (isset($item->content)) ? $item->content : NULL;
 
         if (isset($item->content))
@@ -33,6 +31,10 @@ class ArrayStructureElement extends DataStructureElement
                         break;
                     case 'object':
                         $value             = new DataStructureElement();
+                        $this->value[$key] = $value->parse($sub_item, $dependencies);
+                        break;
+                    case 'enum':
+                        $value             = new EnumStructureElement();
                         $this->value[$key] = $value->parse($sub_item, $dependencies);
                         break;
                     default:
@@ -55,7 +57,7 @@ class ArrayStructureElement extends DataStructureElement
         foreach ($this->type as $key => $item)
         {
             $type =
-                (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . $item . '">' . $item . '</a>';
+                (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-', strtolower($item)) . '">' . $item . '</a>';
 
             $value =
                 (isset($this->value[$key])) ? ': <span class="example-value pull-right">' . json_encode($this->value[$key]) . '</span>' : NULL;

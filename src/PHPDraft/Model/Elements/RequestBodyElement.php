@@ -8,9 +8,9 @@
 
 namespace PHPDraft\Model\Elements;
 
-use PHPDraft\Model\DataStructureElement;
+use PHPDraft\Model\StructureElement;
 
-class RequestBodyElement extends DataStructureElement
+class RequestBodyElement extends DataStructureElement implements StructureElement
 {
     /**
      * Parse a JSON object to a data structure
@@ -58,6 +58,13 @@ class RequestBodyElement extends DataStructureElement
             return $this;
         }
 
+        if ($this->type === 'array')
+        {
+            $this->value = '[]';
+
+            return $this;
+        }
+
         $this->value = isset($object->content->value->content) ? $object->content->value->content : NULL;
 
         return $this;
@@ -86,7 +93,7 @@ class RequestBodyElement extends DataStructureElement
 
             switch ($type) {
                 case 'application/x-www-form-urlencoded':
-                    $return .= join('&amp;', $list);
+                    $return .= join('&', $list);
                     break;
                 default:
                     $return .= join(PHP_EOL, $list);
@@ -113,4 +120,15 @@ class RequestBodyElement extends DataStructureElement
                 break;
         }
     }
+
+    /**
+     *
+     * @return string
+     */
+    function __toString()
+    {
+        return parent::__toString();
+    }
+
+
 }

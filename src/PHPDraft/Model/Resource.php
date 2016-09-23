@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Model;
 
-class Resource extends APIBlueprintElement
+class Resource extends HierarchyElement
 {
     /**
      * Location relative to the base URL

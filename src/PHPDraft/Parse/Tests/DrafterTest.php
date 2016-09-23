@@ -24,12 +24,12 @@ class DrafterTest extends TestBase
      */
     public function setUp()
     {
-        global $config;
-        $config->tmpdir = TEST_STATICS;
+        $this->mock_function('sys_get_temp_dir', 'return "'.TEST_STATICS.'";');
         $this->mock_function('shell_exec', 'return "/some/dir/drafter\n";');
-        $this->class      = new Drafter(file_get_contents(TEST_STATICS . '/apib'));
+        $this->class      = new Drafter(file_get_contents(TEST_STATICS . '/drafter/apib'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
         $this->unmock_function('shell_exec');
+        $this->unmock_function('sys_get_temp_dir');
     }
 
     /**
@@ -48,7 +48,7 @@ class DrafterTest extends TestBase
     {
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/apib'), $property->getValue($this->class));
+        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
     }
 
     /**
@@ -65,9 +65,9 @@ class DrafterTest extends TestBase
     public function testParseToJSON()
     {
         $this->mock_function('shell_exec', 'return "";');
-        file_put_contents(TEST_STATICS.'/index.json', file_get_contents(TEST_STATICS.'/json'));
+        file_put_contents(TEST_STATICS.'/drafter/index.json', file_get_contents(TEST_STATICS.'/drafter/json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS.'/json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS.'/drafter/json')), $this->class->json);
         $this->unmock_function('shell_exec');
     }
 
@@ -82,7 +82,7 @@ class DrafterTest extends TestBase
     public function testParseToJSONWithErrors()
     {
         $this->mock_function('shell_exec', 'return "";');
-        file_put_contents(TEST_STATICS.'/index.json', file_get_contents(TEST_STATICS.'/json_errors'));
+        file_put_contents(TEST_STATICS.'/drafter/index.json', file_get_contents(TEST_STATICS.'/drafter/json_errors'));
         $this->class->parseToJson();
         $this->expectOutputString("WARNING: ignoring unrecognized block\nWARNING: no headers specified\nWARNING: ignoring unrecognized block\nWARNING: empty request message-body");
         $this->unmock_function('shell_exec');

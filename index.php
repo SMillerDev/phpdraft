@@ -3,7 +3,6 @@
  * Set up include path for source handling
  */
 set_include_path(get_include_path().":".__DIR__.'/src/');
-$config = json_decode(file_get_contents(__DIR__."/config.json"));
 
 /**
  * Set up required classes (with the autoloader)

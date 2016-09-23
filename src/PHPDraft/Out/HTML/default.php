@@ -101,12 +101,12 @@ $base = $this->categories;
         </div>
         <div class="col-md-10">
             <?php foreach ($base as $category): ?>
-                <?php if(!empty($category->title)):?>
+                <?php if (!empty($category->title)): ?>
                     <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
-                <?php endif;?>
-                <?php if(!empty($category->description)):?>
+                <?php endif; ?>
+                <?php if (!empty($category->description)): ?>
                     <p><?= $category->description; ?></p>
-                <?php endif;?>
+                <?php endif; ?>
                 <?php foreach ($category->children as $resource): ?>
                     <h3>
                         <a id="<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
@@ -167,9 +167,19 @@ $base = $this->categories;
                                             <?php if (!empty($transition->request->body)): ?>
                                                 <h5>Body</h5>
                                                 <?php foreach ($transition->request->body as $value): ?>
-                                                    <?php $type =
-                                                        (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : NULL; ?>
-                                                    <?= $value->print_request($type); ?>
+                                                    <?php if (is_string($value)): ?>
+                                                        <code class="request-body"><?= $value; ?></code>
+                                                    <?php else: ?>
+                                                        <?php $type =
+                                                            (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : NULL; ?>
+                                                        <?= $value->print_request($type); ?>
+                                                        <?= $value ?>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                            <?php if (!empty($transition->request->struct)): ?>
+                                                <h5>Structure</h5>
+                                                <?php foreach ($transition->request->struct as $value): ?>
                                                     <?= $value ?>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
@@ -197,13 +207,16 @@ $base = $this->categories;
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title response"
-                                                data-toggle="collapse"
-                                                data-target="#request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
-                                                    Response <var class="<?= $this->get_response_status($response->statuscode)?>"><?= $response->statuscode; ?></var>
-                                                    <span class="glyphicon indicator glyphicon-menu-down pull-right"></span>
+                                                    data-toggle="collapse"
+                                                    data-target="#request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
+                                                    Response <var
+                                                        class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode; ?></var>
+                                                    <span
+                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
                                                 </h4>
                                             </div>
-                                            <div class="panel-body collapse in response-panel" id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
+                                            <div class="panel-body collapse in response-panel"
+                                                 id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                 <?php if ($response->headers !== []): ?>
                                                     <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
@@ -253,10 +266,10 @@ $base = $this->categories;
                 <?php endforeach; ?>
             <?php endforeach; ?>
             <?php foreach ($this->base_structures as $key => $structure): ?>
-                <div class="panel panel-default <?= $key; ?>">
+                <div class="panel panel-default object-<?= str_replace(' ', '-', strtolower($key)); ?> structure">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <a id="object-<?= str_replace(' ', '_', $key); ?>"><?= $key; ?></a>
+                            <a id="object-<?= str_replace(' ', '-', strtolower($key)); ?>"><?= $key; ?></a>
                         </h3>
                     </div>
                     <div class="panel-body">

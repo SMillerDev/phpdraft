@@ -8,7 +8,9 @@
 
 namespace PHPDraft\Model;
 
-class Transition extends APIBlueprintElement
+use PHPDraft\Model\Elements\DataStructureElement;
+
+class Transition extends HierarchyElement
 {
     /**
      * HTTP method used

@@ -8,6 +8,8 @@
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\DataStructureElement;
+
 class HTTPResponse
 {
     /**

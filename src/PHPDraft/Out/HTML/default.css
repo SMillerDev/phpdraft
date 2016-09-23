@@ -68,19 +68,19 @@ body .col-md-10 h3:first-child
     line-height: 22px;
 }
 
-.POST > .panel-heading, span.POST {
+.POST:not(.structure) > .panel-heading, span.POST {
     background: #62c462;
 }
 
-.GET > .panel-heading, span.GET {
+.GET:not(.structure) > .panel-heading, span.GET {
     background: #5bc0de;
 }
 
-.DELETE > .panel-heading, span.DELETE {
+.DELETE:not(.structure) > .panel-heading, span.DELETE {
     background: #ee5f5b;
 }
 
-.PUT > .panel-heading, span.PUT {
+.PUT:not(.structure) > .panel-heading, span.PUT {
     background: #f89406;
 }
 

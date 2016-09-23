@@ -17,11 +17,11 @@ class Drafter
      */
     public $json;
     /**
-     * Configuration
+     * Temp directory
      *
      * @var array
      */
-    protected $config;
+    protected $tmp_dir;
     /**
      * The API Blueprint input
      *
@@ -43,8 +43,6 @@ class Drafter
      */
     public function __construct($apib)
     {
-        global $config;
-        $this->config = &$config;
         $this->apib   = $apib;
 
         if (!$this->location())
@@ -52,6 +50,8 @@ class Drafter
             throw new \RuntimeException("Drafter was not installed!", 1);
         }
         $this->drafter = $this->location();
+
+        $this->tmp_dir = sys_get_temp_dir().'/drafter';
     }
 
     /**
@@ -74,21 +74,19 @@ class Drafter
      */
     public function parseToJson()
     {
-        $tmp_dir = $this->config->tmpdir;
-
-        if (!file_exists($tmp_dir))
+        if (!file_exists($this->tmp_dir))
         {
-            mkdir($tmp_dir);
+            mkdir($this->tmp_dir);
         }
 
-        file_put_contents($tmp_dir . '/index.apib', $this->apib);
+        file_put_contents($this->tmp_dir . '/index.apib', $this->apib);
 
-        shell_exec($this->drafter . ' ' . $tmp_dir . '/index.apib -f json -o ' . $tmp_dir . '/index.json 2> /dev/null');
-        $this->json = json_decode(file_get_contents($tmp_dir . '/index.json'));
+        shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
+        $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
 
         if (json_last_error() !== JSON_ERROR_NONE)
         {
-            file_put_contents('php://stdout', "ERROR: invalid json in " . $tmp_dir . '/index.json');
+            file_put_contents('php://stdout', "ERROR: invalid json in " . $this->tmp_dir . '/index.json');
             throw new \RuntimeException("Drafter generated invalid JSON (" . json_last_error_msg() . ")", 2);
         }
 
