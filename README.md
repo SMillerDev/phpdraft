@@ -79,6 +79,10 @@ Return the information for the Person
 ## Dependencies
 PHPDraft requires [drafter](https://github.com/apiaryio/drafter) to be installed. Refer to the drafter page for the installation details.
 
+## Building an executable
+Install [phpab](https://github.com/theseer/Autoload) and put it in your path.
+Run `ant phar` or `ant phar-nightly`
+
 ## Libraries
 This app usage the following libraries:
 * https://github.com/michelf/php-markdown.git
