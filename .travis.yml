@@ -7,6 +7,7 @@ before_script:
 - wget --content-disposition "https://github.com/theseer/Autoload/releases/download/1.22.0/phpab-1.22.0.phar"
 - mv phpab-1.22.0.phar phpab
 - chmod +x phpab
+- export PATH=$PATH:$PWD
 script: phpunit --configuration tests/phpunit.xml
 before_deploy:
 - ant phar-nightly
