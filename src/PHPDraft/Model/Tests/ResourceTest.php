@@ -9,11 +9,11 @@
 namespace PHPDraft\Model\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\Resource;
 use ReflectionClass;
 
-class ResourceTest extends TestBase
+class ResourceTest extends BaseTest
 {
     /**
      * Set up

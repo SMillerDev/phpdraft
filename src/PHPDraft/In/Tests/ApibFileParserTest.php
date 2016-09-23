@@ -9,11 +9,11 @@
 namespace PHPDraft\In\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\In\ApibFileParser;
 use ReflectionClass;
 
-class ApibFileParserTest extends TestBase
+class ApibFileParserTest extends BaseTest
 {
     public function setUp()
     {

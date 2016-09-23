@@ -9,11 +9,11 @@
 namespace PHPDraft\Out\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Out\UI;
 use ReflectionClass;
 
-class UITest extends TestBase
+class UITest extends BaseTest
 {
     public function setUp()
     {

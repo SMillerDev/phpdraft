@@ -9,10 +9,10 @@
 namespace PHPDraft\Out\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Out\TemplateGenerator;
 
-class TemplateGeneratorTest extends TestBase
+class TemplateGeneratorTest extends BaseTest
 {
     public function setUp()
     {

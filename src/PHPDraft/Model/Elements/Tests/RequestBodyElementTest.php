@@ -9,10 +9,10 @@
 namespace PHPDraft\Model\Elements\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\Elements\RequestBodyElement;
 
-class RequestBodyElementTest extends TestBase
+class RequestBodyElementTest extends BaseTest
 {
     public function setUp()
     {

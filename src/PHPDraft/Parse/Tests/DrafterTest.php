@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Parse\Drafter;
 use ReflectionClass;
 
@@ -16,7 +16,7 @@ use ReflectionClass;
  * Class DrafterTest
  * @covers PHPDraft\Parse\Drafter
  */
-class DrafterTest extends TestBase
+class DrafterTest extends BaseTest
 {
 
     /**

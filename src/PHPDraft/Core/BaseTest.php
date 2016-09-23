@@ -12,7 +12,7 @@ namespace PHPDraft\Core;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
-class TestBase extends PHPUnit_Framework_TestCase
+class BaseTest extends PHPUnit_Framework_TestCase
 {
     const FUNCTION_ID = '_phpdraftbu';
     /**

@@ -9,11 +9,11 @@
 namespace PHPDraft\Model\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\Transition;
 use ReflectionClass;
 
-class TransitionTest extends TestBase
+class TransitionTest extends BaseTest
 {
     /**
      * Set up

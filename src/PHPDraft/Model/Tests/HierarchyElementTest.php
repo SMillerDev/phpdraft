@@ -9,10 +9,10 @@
 namespace PHPDraft\Model\Tests;
 
 
-use PHPDraft\Core\TestBase;
+use PHPDraft\Core\BaseTest;
 use ReflectionClass;
 
-class HierarchyElementTest extends TestBase
+class HierarchyElementTest extends BaseTest
 {
     /**
      * Set up
