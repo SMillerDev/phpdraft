@@ -158,6 +158,7 @@ class DataStructureElement implements StructureElement
                 if (is_string($object)
                     || get_class($object) === self::class
                     || get_class($object) === ArrayStructureElement::class
+                    || get_class($object) === RequestBodyElement::class
                     || get_class($object) === EnumStructureElement::class
                 )
                 {
@@ -171,7 +172,7 @@ class DataStructureElement implements StructureElement
         }
 
         $type = (!in_array($this->type, self::DEFAULTS)) ?
-            '<a class="code" href="#object-' . str_replace(' ', '-', strtolower($this->type)) . '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
+            '<a class="code" href="#object-' . str_replace(' ', '__', strtolower($this->type)) . '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
 
         if (is_null($this->value))
         {
@@ -179,7 +180,7 @@ class DataStructureElement implements StructureElement
         }
         else
         {
-            if (is_object($this->value) && self::class === get_class($this->value))
+            if (is_object($this->value) && (self::class === get_class($this->value) || RequestBodyElement::class === get_class($this->value)))
             {
                 $value = '<div class="sub-struct">' . $this->value . '</div>';
             }

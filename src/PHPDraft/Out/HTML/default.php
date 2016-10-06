@@ -90,7 +90,7 @@ $base = $this->categories;
                             <ul class="list-unstyled">
                                 <?php foreach ($this->base_structures as $key => $structure): ?>
                                     <li>
-                                        <a href="#object-<?= str_replace(' ', '_', strtolower($key)); ?>"><?= $key; ?></a>
+                                        <a href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -180,9 +180,11 @@ $base = $this->categories;
                                             <?php endif; ?>
                                             <?php if (!empty($transition->request->struct)): ?>
                                                 <h5>Structure</h5>
-                                                <?php foreach ($transition->request->struct as $value): ?>
-                                                    <?= $value ?>
-                                                <?php endforeach; ?>
+                                                <div class="row">
+                                                    <?php foreach ($transition->request->struct as $value): ?>
+                                                        <?= $value ?>
+                                                    <?php endforeach; ?>
+                                                </div>
                                             <?php endif; ?>
                                         <?php endif; ?>
 
@@ -250,7 +252,8 @@ $base = $this->categories;
                                                             <?= $key; ?>
 
                                                         </h5>
-                                                        <pre class="collapse collapsed response-body" id="request-<?= $href ?>"><?= $value; ?></pre>
+                                                        <pre class="collapse collapsed response-body"
+                                                             id="request-<?= $href ?>"><?= $value; ?></pre>
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
@@ -262,23 +265,23 @@ $base = $this->categories;
                     <?php endforeach; ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
-            <?php if(count($this->base_structures) > 0):?>
-            <h2><a id="datastructures">Data structures</a></h2>
-            <?php foreach ($this->base_structures as $key => $structure): ?>
-                <div class="panel panel-default object-<?= str_replace(' ', '_', strtolower($key)); ?> structure">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <a id="object-<?= str_replace(' ', '_', strtolower($key)); ?>"><?= $key; ?></a>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <?= $structure; ?>
+            <?php if (count($this->base_structures) > 0): ?>
+                <h2><a id="datastructures">Data structures</a></h2>
+                <?php foreach ($this->base_structures as $key => $structure): ?>
+                    <div class="panel panel-default object-<?= $this->strip_link_spaces($key); ?> structure">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <?= $structure; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-            <?php endif;?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -288,6 +291,6 @@ $base = $this->categories;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script><?= Minifier::minify_js( file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?></script>
+<script><?= Minifier::minify_js(file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?></script>
 </body>
 </html>

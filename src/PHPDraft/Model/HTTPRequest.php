@@ -71,6 +71,9 @@ class HTTPRequest
                 if ($value->element === 'dataStructure')
                 {
                     $this->parse_structure($value->content);
+                    echo '<pre>';
+                    var_dump($this->struct);
+                    echo '</pre>';
                     continue;
                 }
                 elseif ($value->element === 'asset')
@@ -117,6 +120,7 @@ class HTTPRequest
 
             $this->struct[] = $struct;
         }
+
     }
 
     /**

@@ -170,4 +170,9 @@ class TemplateGenerator
         }
     }
 
+    function strip_link_spaces($key)
+    {
+        return str_replace(' ', '__', strtolower($key));
+    }
+
 }
