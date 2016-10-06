@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Model\Elements;
 
+use Michelf\Markdown;
 use PHPDraft\Model\StructureElement;
 
 class EnumStructureElement implements StructureElement
@@ -51,6 +52,7 @@ class EnumStructureElement implements StructureElement
         $this->element = (isset($item->element)) ? $item->element : NULL;
         $this->description = (isset($item->meta->description)) ? $item->meta->description : NULL;
         $this->value = (isset($item->content)) ? $item->content : NULL;
+        $this->description_as_html();
 
         if (!in_array($this->element, self::DEFAULTS))
         {
@@ -77,5 +79,13 @@ class EnumStructureElement implements StructureElement
         return $return;
     }
 
-
+    /**
+     * Parse the description to HTML
+     *
+     * @return string
+     */
+    public function description_as_html()
+    {
+        $this->description = Markdown::defaultTransform($this->description);
+    }
 }

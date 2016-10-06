@@ -5,9 +5,10 @@
  * @package PHPDraft\HTML
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
+use PHPDraft\Out\Minifier;
 
 /**
- * @var \PHPDraft\Model\APIBlueprintElement[]
+ * @var \PHPDraft\Model\HierarchyElement[]
  */
 $base = $this->categories;
 ?>
@@ -19,7 +20,7 @@ $base = $this->categories;
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
-        <?= file_get_contents(__DIR__ . '/'.$this->template.'.css');?>
+        <?= Minifier::minify_css(file_get_contents(__DIR__ . '/'.$this->template.'.css'));?>
     </style>
 </head>
 <body>
@@ -89,7 +90,7 @@ $base = $this->categories;
                             <ul class="list-unstyled">
                                 <?php foreach ($this->base_structures as $key => $structure): ?>
                                     <li>
-                                        <a href="#object-<?= str_replace(' ', '_', $key); ?>"><?= $key; ?></a>
+                                        <a href="#object-<?= str_replace(' ', '_', strtolower($key)); ?>"><?= $key; ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -249,11 +250,7 @@ $base = $this->categories;
                                                             <?= $key; ?>
 
                                                         </h5>
-                                                        <pre
-                                                            class="collapse collapsed response-body"
-                                                            id="request-<?= $href ?>">
-                                                    <?= $value; ?>
-                                                </pre>
+                                                        <pre class="collapse collapsed response-body" id="request-<?= $href ?>"><?= $value; ?></pre>
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
@@ -265,11 +262,13 @@ $base = $this->categories;
                     <?php endforeach; ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
+            <?php if(count($this->base_structures) > 0):?>
+            <h2><a id="datastructures">Data structures</a></h2>
             <?php foreach ($this->base_structures as $key => $structure): ?>
-                <div class="panel panel-default object-<?= str_replace(' ', '-', strtolower($key)); ?> structure">
+                <div class="panel panel-default object-<?= str_replace(' ', '_', strtolower($key)); ?> structure">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <a id="object-<?= str_replace(' ', '-', strtolower($key)); ?>"><?= $key; ?></a>
+                            <a id="object-<?= str_replace(' ', '_', strtolower($key)); ?>"><?= $key; ?></a>
                         </h3>
                     </div>
                     <div class="panel-body">
@@ -279,6 +278,7 @@ $base = $this->categories;
                     </div>
                 </div>
             <?php endforeach; ?>
+            <?php endif;?>
         </div>
     </div>
 </div>
@@ -288,6 +288,6 @@ $base = $this->categories;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script><?= file_get_contents(__DIR__ . '/' . $this->template . '.js'); ?></script>
+<script><?= Minifier::minify_js( file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?></script>
 </body>
 </html>

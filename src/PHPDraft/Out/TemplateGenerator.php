@@ -10,7 +10,7 @@ namespace PHPDraft\Out;
 
 use Michelf\Markdown;
 use PHPDraft\Model\Category;
-use PHPDraft\Model\DataStructureElement;
+use PHPDraft\Model\Elements\DataStructureElement;
 
 class TemplateGenerator
 {

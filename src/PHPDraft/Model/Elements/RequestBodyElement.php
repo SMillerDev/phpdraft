@@ -41,6 +41,7 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
         $this->key         = $object->content->key->content;
         $this->type        = $object->content->value->element;
         $this->description = isset($object->meta->description) ? $object->meta->description : NULL;
+        $this->description_as_html();
         $this->status      =
             isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : NULL;
 

@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Model\Elements;
 
+use Michelf\Markdown;
 use PHPDraft\Model\StructureElement;
 
 class DataStructureElement implements StructureElement
@@ -90,6 +91,8 @@ class DataStructureElement implements StructureElement
         $this->status      =
             isset($object->attributes->typeAttributes) ? join(', ', $object->attributes->typeAttributes) : NULL;
 
+        $this->description_as_html();
+
         if (!in_array($this->type, self::DEFAULTS))
         {
             $dependencies[] = $this->type;
@@ -115,7 +118,18 @@ class DataStructureElement implements StructureElement
             return $this;
         }
 
-        $this->value = isset($object->content->value->content) ? $object->content->value->content : NULL;
+        if (isset($object->content->value->content))
+        {
+            $this->value = $object->content->value->content;
+        }
+        elseif (isset($object->content->value->attributes->samples))
+        {
+            $this->value = join(' | ', $object->content->value->attributes->samples);
+        }
+        else
+        {
+            $this->value = NULL;
+        }
 
         return $this;
     }
@@ -157,9 +171,9 @@ class DataStructureElement implements StructureElement
         }
 
         $type = (!in_array($this->type, self::DEFAULTS)) ?
-            '<a class="code" href="#object-' . str_replace(' ', '-', strtolower($this->type)). '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
+            '<a class="code" href="#object-' . str_replace(' ', '-', strtolower($this->type)) . '">' . $this->type . '</a>' : '<code>' . $this->type . '</code>';
 
-        if (empty($this->value))
+        if (is_null($this->value))
         {
             $value = '';
         }
@@ -179,7 +193,16 @@ class DataStructureElement implements StructureElement
             }
             else
             {
-                $value = '<span class="example-value pull-right">' . $this->value . '</span>';
+                $value = '<span class="example-value pull-right">';
+                if (is_bool($this->value))
+                {
+                    $value .= ($this->value) ? 'TRUE' : 'FALSE';
+                }
+                else
+                {
+                    $value .= $this->value;
+                }
+                $value .= '</span>';
             }
         }
 
@@ -193,6 +216,16 @@ class DataStructureElement implements StructureElement
             '</tr>';
 
         return $return;
+    }
+
+    /**
+     * Parse the description to HTML
+     *
+     * @return string
+     */
+    public function description_as_html()
+    {
+        $this->description = Markdown::defaultTransform($this->description);
     }
 
 }
