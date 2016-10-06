@@ -40,7 +40,6 @@ class DataStructureElementTest extends BaseTest
     {
         $dep = [];
         $this->class->parse(json_decode($object), $dep);
-        var_dump($this->class);
         $this->assertSame($this->class->key, $expected->key);
         $this->assertSame($this->class->value, $expected->value);
         $this->assertSame($this->class->element, $expected->element);
