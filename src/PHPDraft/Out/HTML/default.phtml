@@ -53,7 +53,7 @@ $base = $this->categories;
                                 <a href="#<?= $category->get_href(); ?>"><?= $category->title; ?></a>
                                 <a class="btn-xs pull-right" role="button" data-toggle="collapse"
                                    href="#collapse-<?= $category->get_href(); ?>" aria-expanded="false"
-                                   aria-controls="collapseMenu">
+                                   aria-controls="collapse-<?= $category->get_href(); ?>">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </a>
                             </h3>
@@ -91,7 +91,7 @@ $base = $this->categories;
                             <a href="#datastructures">Data Structures</a>
                             <a class="btn-xs pull-right" role="button" data-toggle="collapse"
                                href="#collapse-structures" aria-expanded="false"
-                               aria-controls="collapseMenu">
+                               aria-controls="collapse-structures">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </h3>
@@ -138,8 +138,7 @@ $base = $this->categories;
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <a type="button"
-                                   class="btn btn-default curl"
+                                <a class="btn btn-default curl"
                                    role="button"
                                    title="cURL command"
                                    tabindex="0"
@@ -152,7 +151,7 @@ $base = $this->categories;
                                 </a>
                                 <p class="lead"><?= $transition->description; ?></p>
                                 <?php if (!empty($transition->requests)): ?>
-                                    <?php foreach ($transition->requests as $request): ?>
+                                    <?php foreach ($transition->requests as $key=>$request): ?>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="request panel-title"
@@ -163,8 +162,9 @@ $base = $this->categories;
                                                 </h4>
                                             </div>
 
-                                            <div class="collapse in request-panel panel-body"
+                                            <div class="collapse <?php if ($key<1):?>in<?php endif;?> request-panel panel-body"
                                                  id="request-coll-<?= $transition->get_href(); ?>">
+                                                <?= $request->description;?>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
                                                     <span class="base-url"><?= $this->base_data['HOST']; ?></span>
@@ -219,7 +219,7 @@ $base = $this->categories;
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if (isset($transition->responses)): ?>
-                                    <?php foreach ($transition->responses as $response): ?>
+                                    <?php foreach ($transition->responses as $key=>$response): ?>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title response"
@@ -231,8 +231,9 @@ $base = $this->categories;
                                                         class="glyphicon indicator glyphicon-menu-down pull-right"></span>
                                                 </h4>
                                             </div>
-                                            <div class="panel-body collapse in response-panel"
+                                            <div class="panel-body collapse <?php if ($key<1):?>in<?php endif;?> response-panel"
                                                  id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
+                                                <?=$response->description;?>
                                                 <?php if ($response->headers !== []): ?>
                                                     <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">

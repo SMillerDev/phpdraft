@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Model;
 
+use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\RequestBodyElement;
 
 class HTTPRequest implements Comparable
@@ -27,11 +28,19 @@ class HTTPRequest implements Comparable
     public $method;
 
     /**
+     * Description of the request
+     *
+     * @var string
+     */
+    public $description;
+
+    /**
      * Parent class
      *
      * @var Transition
      */
     public $parent;
+
 
     /**
      * Body of the request (if POST or PUT)
@@ -39,8 +48,6 @@ class HTTPRequest implements Comparable
      * @var mixed
      */
     public $body = null;
-
-
     /**
      * Structure of the request (if POST or PUT)
      *
@@ -74,7 +81,9 @@ class HTTPRequest implements Comparable
                 if ($value->element === 'dataStructure') {
                     $this->parse_structure($value);
                     continue;
-                } elseif ($value->element === 'asset') {
+                } elseif ($value->element === 'copy'){
+                    $this->description = MarkdownExtra::defaultTransform($value->content);
+                }elseif ($value->element === 'asset') {
                     if (in_array('messageBody', $value->meta->classes)) {
                         $this->body[]                  = (isset($value->content)) ? $value->content : null;
                         $this->headers['Content-Type'] =

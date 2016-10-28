@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Model;
 
+use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\DataStructureElement;
 
 class HTTPResponse implements Comparable
@@ -18,6 +19,13 @@ class HTTPResponse implements Comparable
      * @var int
      */
     public $statuscode;
+
+    /**
+     * Description of the object
+     *
+     * @var string
+     */
+    public $description;
 
     /**
      * Response headers
@@ -70,6 +78,7 @@ class HTTPResponse implements Comparable
         $this->parse_content($object);
 
         return $this;
+
     }
 
     /**
@@ -100,6 +109,9 @@ class HTTPResponse implements Comparable
         foreach ($object->content as $value) {
             if ($value->element === 'dataStructure') {
                 $this->parse_structure($value->content);
+                continue;
+            }else if ($value->element === 'copy'){
+                $this->description = MarkdownExtra::defaultTransform($value->content);
                 continue;
             }
 
@@ -137,6 +149,6 @@ class HTTPResponse implements Comparable
      */
     public function is_equal_to($b)
     {
-        return (($this->statuscode === $b->statuscode) && ($this->headers === $b->headers) && ($this->content === $b->content));
+        return (($this->statuscode === $b->statuscode) && ($this->description === $b->description));
     }
 }

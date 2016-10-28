@@ -106,6 +106,9 @@ class Transition extends HierarchyElement
             }
             foreach ($transition_item->content as $item) {
                 $value = null;
+                if (!in_array($item->element, ['httpRequest', 'httpResponse'])) {
+                    continue;
+                }
                 switch ($item->element) {
                     case 'httpRequest':
                         $value = new HTTPRequest($this);
@@ -117,6 +120,7 @@ class Transition extends HierarchyElement
                         break;
                     default:
                         continue;
+                        break;
                 }
                 $value->parse($item);
 
@@ -124,12 +128,16 @@ class Transition extends HierarchyElement
                     $list[] = $value;
                     continue;
                 }
+                $add = true;
                 foreach ($list as $existing_value) {
-                    phpdraft_var_dump($value->is_equal_to($existing_value));
-                    if (!$value->is_equal_to($existing_value)) {
-                        $list[] = $value;
+                    if ($value->is_equal_to($existing_value)) {
+                        $add = false;
                     }
                 }
+                if ($add) {
+                    $list[] = $value;
+                }
+
             }
         }
 

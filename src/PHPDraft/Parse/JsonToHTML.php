@@ -60,8 +60,12 @@ class JsonToHTML
     {
         $gen = new TemplateGenerator($template, $image);
 
-        $gen->css[]   = $css;
-        $gen->js[]    = $js;
+        if(!empty($css)){
+            $gen->css[]   = explode(',',$css);
+        }
+        if(!empty($css)){
+            $gen->js[]   = explode(',',$js);
+        }
         $gen->sorting = $this->sorting;
 
         return $gen->get($this->object);

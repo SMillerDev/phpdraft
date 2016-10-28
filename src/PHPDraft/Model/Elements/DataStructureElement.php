@@ -204,7 +204,7 @@ class DataStructureElement implements StructureElement
             '<td>' . '<span>' . $this->key . "</span>" . '</td>' .
             '<td>' . $type . '</td>' .
             '<td> <span class="status">' . $this->status . '</span></td>' .
-            '<td><span>' . $this->description . '</span></td>' .
+            '<td>' . $this->description . '</td>' .
             '<td>' . $value . '</td>' .
             '</tr>';
 

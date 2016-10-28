@@ -102,7 +102,7 @@ class EnumStructureElement implements StructureElement
         $return = '<tr>' .
             '<td><span>' . $this->value . '</span></td>' .
             '<td>' . $type . '</td>' .
-            '<td><span>' . $this->description . '</span></td>' .
+            '<td>' . $this->description . '</td>' .
             '</tr>';
 
         return $return;
