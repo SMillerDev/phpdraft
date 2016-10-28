@@ -3,7 +3,7 @@
  * This file contains the Resource.php
  *
  * @package PHPDraft\Model
- * @author Sean Molenaar<sean@seanmolenaar.eu>
+ * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model;
@@ -38,12 +38,15 @@ class Resource extends HierarchyElement
     {
         parent::parse($object);
 
-        if (isset($object->attributes)) $this->href = $object->attributes->href;
+        if (isset($object->attributes)) {
+            $this->href = $object->attributes->href;
+        }
 
-        foreach ($object->content as $key => $item)
-        {
-            if ($item->element === 'copy') continue;
-            $transition = new Transition($this);
+        foreach ($object->content as $key => $item) {
+            if ($item->element === 'copy') {
+                continue;
+            }
+            $transition       = new Transition($this);
             $this->children[] = $transition->parse($item);
         }
 

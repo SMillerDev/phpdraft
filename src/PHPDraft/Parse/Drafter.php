@@ -43,15 +43,14 @@ class Drafter
      */
     public function __construct($apib)
     {
-        $this->apib   = $apib;
+        $this->apib = $apib;
 
-        if (!$this->location())
-        {
+        if (!$this->location()) {
             throw new \RuntimeException("Drafter was not installed!", 1);
         }
         $this->drafter = $this->location();
 
-        $this->tmp_dir = sys_get_temp_dir().'/drafter';
+        $this->tmp_dir = sys_get_temp_dir() . '/drafter';
     }
 
     /**
@@ -64,7 +63,7 @@ class Drafter
         $returnVal = shell_exec('which drafter 2> /dev/null');
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
-        return (empty($returnVal) ? FALSE : $returnVal);
+        return (empty($returnVal) ? false : $returnVal);
     }
 
     /**
@@ -74,8 +73,7 @@ class Drafter
      */
     public function parseToJson()
     {
-        if (!file_exists($this->tmp_dir))
-        {
+        if (!file_exists($this->tmp_dir)) {
             mkdir($this->tmp_dir);
         }
 
@@ -84,25 +82,21 @@ class Drafter
         shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
 
-        if (json_last_error() !== JSON_ERROR_NONE)
-        {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             file_put_contents('php://stdout', "ERROR: invalid json in " . $this->tmp_dir . '/index.json');
             throw new \RuntimeException("Drafter generated invalid JSON (" . json_last_error_msg() . ")", 2);
         }
 
-        $warnings = FALSE;
-        foreach ($this->json->content as $item)
-        {
-            if ($item->element === 'annotation')
-            {
-                $warnings = TRUE;
+        $warnings = false;
+        foreach ($this->json->content as $item) {
+            if ($item->element === 'annotation') {
+                $warnings = true;
                 $prefix   = strtoupper($item->meta->classes[0]);
                 $error    = $item->content;
                 file_put_contents('php://stdout', "$prefix: $error\n");
             }
         }
-        if ($warnings)
-        {
+        if ($warnings) {
             throw new \RuntimeException("Parsing encountered errors and stopped", 2);
         }
 

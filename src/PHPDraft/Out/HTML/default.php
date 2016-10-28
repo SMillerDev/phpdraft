@@ -19,19 +19,29 @@ $base = $this->categories;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <?php foreach ($this->css as $style): ?>
+        <link rel="stylesheet" href="<?= $style ?>">
+    <?php endforeach; ?>
     <style>
         <?= Minifier::minify_css(file_get_contents(__DIR__ . '/'.$this->template.'.css'));?>
     </style>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1><?= $this->base_data['TITLE']; ?>
+    <div class="media">
+        <div class="media-body">
+            <h1 class="media-heading"><?= $this->base_data['TITLE']; ?>
                 <small><?= $this->base_data['HOST']; ?></small>
             </h1>
             <p class="lead"><?= $this->base_data['DESC']; ?></p>
         </div>
+        <?php if (!empty($this->image)): ?>
+            <div class="media-right">
+                <a href="#">
+                    <img class="media-object" src="<?= $this->image ?>" alt="Image">
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="row">
         <div class="col-md-2 method-nav">
@@ -53,7 +63,8 @@ $base = $this->categories;
                                 <ul class="list-unstyled">
                                     <?php foreach ($category->children as $resource): ?>
                                         <li>
-                                            <a href="#<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
+                                            <a href="#<?= str_replace('-', '/',
+                                                $resource->get_href()); ?>"><?= $resource->title; ?></a>
                                         </li>
                                         <ul>
                                             <?php foreach ($resource->children as $transition): ?>
@@ -122,7 +133,8 @@ $base = $this->categories;
                                     <var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
                                     <a class="pull-right transition-title"
-                                       id="<?= str_replace('-', '/', $transition->get_href()); ?>"><?= $transition->title; ?></a>
+                                       id="<?= str_replace('-', '/',
+                                           $transition->get_href()); ?>"><?= $transition->title; ?></a>
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -133,15 +145,12 @@ $base = $this->categories;
                                    tabindex="0"
                                    data-placement="left"
                                    data-toggle="popover"
-                                   data-content="<?= $transition->get_curl_command($this->base_data['HOST'], []); ?>">
+                                   data-html="true"
+                                   data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST'],
+                                       []); ?></textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
                                 <p class="lead"><?= $transition->description; ?></p>
-                                <?php if ($transition->url_variables !== []): ?>
-                                    <h4>Example URI</h4>
-                                    <span class="base-url"><?= $this->base_data['HOST']; ?></span>
-                                    <em><?= $transition->build_url(); ?></em>
-                                <?php endif; ?>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="request panel-title"
@@ -150,58 +159,57 @@ $base = $this->categories;
                                             <span class="glyphicon indicator glyphicon-menu-down pull-right"></span>
                                         </h4>
                                     </div>
+                                    <?php if (isset($transition->request)): ?>
                                     <div class="collapse in request-panel panel-body"
                                          id="request-coll-<?= $transition->get_href(); ?>">
-                                        <?php if (isset($transition->request)): ?>
-                                            <?php if ($transition->request->headers !== []): ?>
-                                                <h5>Headers</h5>
-                                                <ul class="headers list-unstyled">
-                                                    <?php foreach ($transition->request->headers as $name => $value): ?>
-                                                        <li>
-                                                            <code><span class="attr"><?= $name; ?></span>: <span
-                                                                    class="value"><?= $value; ?></span>
-                                                            </code>
-                                                        </li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            <?php endif; ?>
-                                            <?php if (!empty($transition->request->body)): ?>
-                                                <h5>Body</h5>
-                                                <?php foreach ($transition->request->body as $value): ?>
-                                                    <?php if (is_string($value)): ?>
-                                                        <code class="request-body"><?= $value; ?></code>
-                                                    <?php else: ?>
-                                                        <?php $type =
-                                                            (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : NULL; ?>
-                                                        <?= $value->print_request($type); ?>
-                                                        <?= $value ?>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                            <?php if (!empty($transition->request->struct)): ?>
-                                                <h5>Structure</h5>
-                                                <div class="row">
-                                                    <?php foreach ($transition->request->struct as $value): ?>
-                                                        <?= $value ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
-
                                         <?php if ($transition->url_variables !== []): ?>
-                                            <h5>URI Parameters</h5>
-                                            <dl class="dl-horizontal">
-                                                <?php foreach ($transition->url_variables as $value): ?>
-                                                    <?= $value; ?>
+                                            <h5>Example URI</h5>
+                                            <span class="base-url"><?= $this->base_data['HOST']; ?></span>
+                                            <em><?= $transition->build_url(); ?></em>
+                                        <?php endif; ?>
+                                        <?php if ($transition->request->headers !== []): ?>
+                                            <h5>Headers</h5>
+                                            <ul class="headers list-unstyled">
+                                                <?php foreach ($transition->request->headers as $name => $value): ?>
+                                                    <li>
+                                                        <code><span class="attr"><?= $name; ?></span>: <span
+                                                                class="value"><?= $value; ?></span>
+                                                        </code>
+                                                    </li>
                                                 <?php endforeach; ?>
-                                            </dl>
+                                            </ul>
+                                        <?php endif; ?>
+                                        <?php if (!empty($transition->request->body)): ?>
+                                            <h5>Body</h5>
+                                            <?php foreach ($transition->request->body as $value): ?>
+                                                <?php if (is_string($value)): ?>
+                                                    <code class="request-body"><?= $value; ?></code>
+                                                <?php else: ?>
+                                                    <?php $type =
+                                                        (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : null; ?>
+                                                    <?= $value->print_request($type); ?>
+                                                    <?= $value ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                        <?php if (!empty($transition->request->struct)): ?>
+                                            <h5>Structure</h5>
+                                            <div class="row">
+                                                <?= $transition->request->struct ?>
+                                            </div>
+                                        <?php endif; ?>
                                         <?php endif; ?>
 
-                                        <?php if ($transition->data_variables !== []): ?>
+                                        <?php if ($transition->url_variables !== null): ?>
+                                            <h5>URI Parameters</h5>
+                                            <div class="row">
+                                                <?= $transition->url_variables; ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if ($transition->data_variables !== null): ?>
                                             <h5>Data object</h5>
-                                            <?php foreach ($transition->data_variables as $value): ?>
-                                                <?= $value ?>
-                                            <?php endforeach; ?>
+                                            <?= $transition->data_variables ?>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -243,8 +251,10 @@ $base = $this->categories;
                                                 <?php foreach ($response->content as $key => $value): ?>
                                                     <div>
                                                         <?php $href =
-                                                            $transition->get_href() . '-' . $response->statuscode . '-' . str_replace(['/',
-                                                                                                                                       '+'], '-', $key); ?>
+                                                            $transition->get_href() . '-' . $response->statuscode . '-' . str_replace([
+                                                                '/',
+                                                                '+',
+                                                            ], '-', $key); ?>
                                                         <h5 class="response-body"
                                                             data-toggle="collapse"
                                                             data-target="#request-<?= $href ?>">
@@ -285,6 +295,9 @@ $base = $this->categories;
         </div>
     </div>
 </div>
+<?php foreach ($this->js as $js): ?>
+    <script src="<?= $js ?>"></script>
+<?php endforeach; ?>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>

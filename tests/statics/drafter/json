@@ -2590,7 +2590,7 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the driver's side in celcius."
+                            "description": "The desired temperature on the driver's side in °C."
                           },
                           "content": {
                             "key": {
@@ -2606,7 +2606,7 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the passenger's side in celcius."
+                            "description": "The desired temperature on the passenger's side in °C."
                           },
                           "content": {
                             "key": {

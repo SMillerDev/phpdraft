@@ -22,15 +22,12 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
      */
     public function parse($object, &$dependencies)
     {
-        if (empty($object) || !isset($object->content))
-        {
+        if (empty($object) || !isset($object->content)) {
             return $this;
         }
         $this->element = $object->element;
-        if (isset($object->content) && is_array($object->content))
-        {
-            foreach ($object->content as $value)
-            {
+        if (isset($object->content) && is_array($object->content)) {
+            foreach ($object->content as $value) {
                 $struct        = new RequestBodyElement();
                 $this->value[] = $struct->parse($value, $dependencies);
             }
@@ -40,33 +37,30 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
 
         $this->key         = $object->content->key->content;
         $this->type        = $object->content->value->element;
-        $this->description = isset($object->meta->description) ? $object->meta->description : NULL;
+        $this->description = isset($object->meta->description) ? htmlentities($object->meta->description) : null;
         $this->description_as_html();
-        $this->status      =
-            isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : NULL;
+        $this->status =
+            isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : null;
 
-        if (!in_array($this->type, parent::DEFAULTS))
-        {
+        if (!in_array($this->type, parent::DEFAULTS)) {
             $dependencies[] = $this->type;
         }
 
-        if ($this->type === 'object')
-        {
-            $value       = isset($object->content->value->content) ? $object->content->value : NULL;
+        if ($this->type === 'object') {
+            $value       = isset($object->content->value->content) ? $object->content->value : null;
             $this->value = new RequestBodyElement();
             $this->value = $this->value->parse($value, $dependencies);
 
             return $this;
         }
 
-        if ($this->type === 'array')
-        {
+        if ($this->type === 'array') {
             $this->value = '[]';
 
             return $this;
         }
 
-        $this->value = isset($object->content->value->content) ? $object->content->value->content : NULL;
+        $this->value = isset($object->content->value->content) ? $object->content->value->content : null;
 
         return $this;
     }
@@ -80,14 +74,11 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
      */
     public function print_request($type = 'application/x-www-form-urlencoded')
     {
-        if (is_array($this->value))
-        {
+        if (is_array($this->value)) {
             $return = '<code class="request-body">';
-            $list = [];
-            foreach ($this->value as $object)
-            {
-                if (get_class($object) === self::class)
-                {
+            $list   = [];
+            foreach ($this->value as $object) {
+                if (get_class($object) === self::class) {
                     $list[] = $object->print_request($type);
                 }
             }
@@ -108,8 +99,7 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
 
         $value = (empty($this->value)) ? '?' : $this->value;
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'application/x-www-form-urlencoded':
                 return $this->key . "=<span>" . $value . '</span>';
                 break;

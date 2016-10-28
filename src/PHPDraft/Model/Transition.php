@@ -3,7 +3,7 @@
  * This file contains the Transition
  *
  * @package PHPDraft\Model
- * @author Sean Molenaar<sean@seanmolenaar.eu>
+ * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model;
@@ -21,21 +21,24 @@ class Transition extends HierarchyElement
 
     /**
      * URI
+     *
      * @var string
      */
     public $href;
 
     /**
      * URL variables
-     * @var array
+     *
+     * @var DataStructureElement|NULL
      */
-    public $url_variables = [];
+    public $url_variables = null;
 
     /**
      * Data variables
+     *
      * @var array
      */
-    public $data_variables = [];
+    public $data_variables = null;
 
     /**
      * The request
@@ -53,6 +56,7 @@ class Transition extends HierarchyElement
 
     /**
      * Structures used (if any)
+     *
      * @var DataStructureElement[]
      */
     public $structures = [];
@@ -80,47 +84,25 @@ class Transition extends HierarchyElement
 
         $this->href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
 
-        if (isset($object->attributes->hrefVariables))
-        {
-            foreach ($object->attributes->hrefVariables->content as $item)
-            {
-                if (is_array($item->content->value->content))
-                {
-                    foreach ($item->content->value->content as $key => $value)
-                    {
-                        $item->content->value->content[$key] = (is_object($value)) ? $value->content : $value;
-                    }
-                }
+        if (isset($object->attributes->hrefVariables)) {
 
-                $deps                                              = [];
-                $struct                                            = new DataStructureElement();
-                $this->url_variables[$item->content->key->content] = $struct->parse($item, $deps);
-            }
+            $deps                = [];
+            $struct              = new DataStructureElement();
+            $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
         }
 
-        if (isset($object->attributes->data))
-        {
-            foreach ($object->attributes->data->content as $base)
-            {
-                foreach ($base->content as $item)
-                {
-                    $deps                                               = [];
-                    $struct                                             = new DataStructureElement();
-                    $this->data_variables[$item->content->key->content] = $struct->parse($item, $deps);
-                }
-            }
+        if (isset($object->attributes->data)) {
+            $deps                 = [];
+            $struct               = new DataStructureElement();
+            $this->data_variables = $struct->parse($object->attributes->data, $deps);
         }
 
-        if (isset($object->content[0]->content))
-        {
-            foreach ($object->content[0]->content as $item)
-            {
-                if ($item->element === 'httpRequest')
-                {
+        if (isset($object->content[0]->content)) {
+            foreach ($object->content[0]->content as $item) {
+                if ($item->element === 'httpRequest') {
                     $this->request = new HTTPRequest($this);
                     $this->request->parse($item);
-                } elseif ($item->element === 'httpResponse')
-                {
+                } elseif ($item->element === 'httpResponse') {
                     $response          = new HTTPResponse($this);
                     $this->responses[] = $response->parse($item);
                 }
@@ -135,25 +117,87 @@ class Transition extends HierarchyElement
      *
      * @param string $base_url the URL to which the URL variables apply
      *
+     * @param bool   $clean    Get the URL without HTML
+     *
      * @return string a HTML representation of the transition URL
      */
-    public function build_url($base_url = '')
+    public function build_url($base_url = '', $clean = false)
     {
-        $url = $this->href;
-        foreach ($this->url_variables as $key => $value)
-        {
-            $urlvalue = $value->value;
-            if (is_array($value->value) && !is_string($value->value))
-            {
-                $urlvalue = $value->value[0];
-            }
+        $url = $this->overlap_urls($this->parent->href, $this->href);
+        if ($url === false) {
+            $url = $this->parent->href . $this->href;
+        }
+        if ($this->url_variables !== null) {
+            foreach ($this->url_variables->value as $value) {
+                $urlvalue = $value->value;
+                if (is_subclass_of($value, StructureElement::class)) {
+                    $urlvalue = $value->strval();
+                }
 
-            $url = preg_replace('/({\?' . $key . '})/', '?<var class="url-param">' . $key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
-            $url = preg_replace('/({\&' . $key . '})/', '&<var class="url-param">' . $key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
-            $url = preg_replace('/({' . $key . '})/', '<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
+                $url =
+                    preg_replace('/({\?' . $value->key . '})/',
+                        '?<var class="url-param">' . $value->key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>',
+                        $url);
+                $url =
+                    preg_replace('/({\&' . $value->key . '})/',
+                        '&<var class="url-param">' . $value->key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>',
+                        $url);
+                $url =
+                    preg_replace('/({' . $value->key . '})/',
+                        '<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
+            }
         }
 
-        return $base_url.$url;
+        if ($clean) {
+            return strip_tags($base_url . $url);
+        }
+
+        return $base_url . $url;
+    }
+
+    /**
+     * Overlap the URLS to get one consistent URL
+     *
+     * @param $str1
+     * @param $str2
+     *
+     * @return bool|string
+     *
+     * @see http://stackoverflow.com/questions/2945446/built-in-function-to-combine-overlapping-string-sequences-in-php
+     */
+    private function overlap_urls($str1, $str2)
+    {
+        if ($overlap = $this->find_overlap($str1, $str2)) {
+            $overlap = $overlap[count($overlap) - 1];
+            $str1    = substr($str1, 0, -strlen($overlap));
+            $str2    = substr($str2, strlen($overlap));
+
+            return $str1 . $overlap . $str2;
+        }
+
+        return false;
+    }
+
+    private function find_overlap($str1, $str2)
+    {
+        $return = [];
+        $sl1    = strlen($str1);
+        $sl2    = strlen($str2);
+        $max    = $sl1 > $sl2 ? $sl2 : $sl1;
+        $i      = 1;
+        while ($i <= $max) {
+            $s1 = substr($str1, -$i);
+            $s2 = substr($str2, 0, $i);
+            if ($s1 == $s2) {
+                $return[] = $s1;
+            }
+            $i++;
+        }
+        if (!empty($return)) {
+            return $return;
+        }
+
+        return false;
     }
 
     /**
@@ -169,7 +213,7 @@ class Transition extends HierarchyElement
     /**
      * Generate a cURL request to run the transition
      *
-     * @param string $base_url base URL of the server
+     * @param string $base_url   base URL of the server
      *
      * @param array  $additional additional arguments to pass
      *
@@ -179,4 +223,5 @@ class Transition extends HierarchyElement
     {
         return $this->request->get_curl_command($base_url, $additional);
     }
+
 }

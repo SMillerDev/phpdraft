@@ -14,6 +14,7 @@ class Category extends HierarchyElement
 {
     /**
      * API Structure element
+     *
      * @var DataStructureElement[]
      */
     public $structures = [];
@@ -28,10 +29,8 @@ class Category extends HierarchyElement
     function parse($object)
     {
         parent::parse($object);
-        foreach ($object->content as $key => $item)
-        {
-            switch ($item->element)
-            {
+        foreach ($object->content as $key => $item) {
+            switch ($item->element) {
                 case 'resource':
                     $resource         = new Resource($this);
                     $this->children[] = $resource->parse($item);
@@ -42,12 +41,9 @@ class Category extends HierarchyElement
                     $struct->deps = $deps;
                     $struct->parse($item, $deps);
 
-                    if (isset($item->content[0]->meta->id))
-                    {
+                    if (isset($item->content[0]->meta->id)) {
                         $this->structures[$item->content[0]->meta->id] = $struct;
-                    }
-                    else
-                    {
+                    } else {
                         $this->structures[] = $struct;
                     }
 

@@ -12,12 +12,14 @@ class ApibFileParser
 {
     /**
      * Complete API Blueprint
+     *
      * @var string
      */
     protected $full_apib;
 
     /**
      * Location of the API Blueprint to parse
+     *
      * @var string
      */
     protected $location;
@@ -29,7 +31,7 @@ class ApibFileParser
      */
     public function __construct($filename = 'index.apib')
     {
-        $this->location  = pathinfo($filename, PATHINFO_DIRNAME) . '/';
+        $this->location = pathinfo($filename, PATHINFO_DIRNAME) . '/';
 
         $this->full_apib = $this->get_apib($filename);
     }
@@ -49,7 +51,8 @@ class ApibFileParser
         $matches = [];
         preg_match_all('<!-- include\(([a-z_.\/]*?).apib\) -->', $file, $matches);
         foreach ($matches[1] as $value) {
-            $file = str_replace('<!-- include(' . $value . '.apib) -->', $this->get_apib($this->location . $value . '.apib'), $file);
+            $file = str_replace('<!-- include(' . $value . '.apib) -->',
+                $this->get_apib($this->location . $value . '.apib'), $file);
         }
 
         return $file;
@@ -57,8 +60,7 @@ class ApibFileParser
 
     private function file_check($filename)
     {
-        if(!file_exists($filename))
-        {
+        if (!file_exists($filename)) {
             file_put_contents('php://stderr', "API File not found: $filename\n");
             exit(1);
         }

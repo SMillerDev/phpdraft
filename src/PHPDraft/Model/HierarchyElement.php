@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Model;
 
-use Michelf\Markdown;
+use Michelf\MarkdownExtra;
 
 abstract class HierarchyElement
 {
@@ -38,7 +38,7 @@ abstract class HierarchyElement
      *
      * @var HierarchyElement|NULL
      */
-    protected $parent = NULL;
+    protected $parent = null;
 
     /**
      * Parse a JSON object to an element
@@ -49,26 +49,22 @@ abstract class HierarchyElement
      */
     function parse($object)
     {
-        if (isset($object->meta) && isset($object->meta->title))
-        {
+        if (isset($object->meta) && isset($object->meta->title)) {
             $this->title = $object->meta->title;
         }
-        if (!isset($object->content))
-        {
+        if (!isset($object->content)) {
             return;
         }
-        foreach ($object->content as $key => $item)
-        {
-            if ($item->element === 'copy')
-            {
-                $this->description = preg_replace('/(<\/?p>)?/', '', Markdown::defaultTransform($item->content), 2);
+        foreach ($object->content as $key => $item) {
+            if ($item->element === 'copy') {
+                $this->description =
+                    preg_replace('/(<\/?p>)?/', '', MarkdownExtra::defaultTransform($item->content), 2);
                 unset($object->content[$key]);
                 continue;
             }
         }
 
-        if (!empty($object->content))
-        {
+        if (!empty($object->content)) {
             $object->content = array_slice($object->content, 0);
         }
 
@@ -82,8 +78,8 @@ abstract class HierarchyElement
     public function get_href()
     {
         $seperator = '-';
-        $prep = ($this->parent !== NULL) ? $this->parent->get_href() . $seperator : '';
+        $prep      = ($this->parent !== null) ? $this->parent->get_href() . $seperator : '';
 
-        return $prep . str_replace(' ', '__', strtolower($this->title));
+        return $prep . str_replace(' ', '-', strtolower($this->title));
     }
 }

@@ -14,30 +14,35 @@ class HTTPResponse
 {
     /**
      * HTTP Status code
+     *
      * @var int
      */
     public $statuscode;
 
     /**
      * Response headers
+     *
      * @var array
      */
     public $headers = [];
 
     /**
      * Response bodies
+     *
      * @var array
      */
     public $content = [];
 
     /**
      * Response structure
+     *
      * @var DataStructureElement[]
      */
     public $structure = [];
 
     /**
      * Parent entity
+     *
      * @var Transition
      */
     protected $parent;
@@ -58,8 +63,7 @@ class HTTPResponse
     {
         $this->statuscode = intval($object->attributes->statusCode);
 
-        if (isset($object->attributes))
-        {
+        if (isset($object->attributes)) {
             $this->parse_headers($object->attributes->headers);
         }
 
@@ -77,10 +81,8 @@ class HTTPResponse
      */
     protected function parse_headers($object)
     {
-        foreach ($object->content as $value)
-        {
-            if (isset($value->content))
-            {
+        foreach ($object->content as $value) {
+            if (isset($value->content)) {
                 $this->headers[$value->content->key->content] = $value->content->value->content;
             }
         }
@@ -95,16 +97,13 @@ class HTTPResponse
      */
     protected function parse_content($object)
     {
-        foreach ($object->content as $value)
-        {
-            if ($value->element === 'dataStructure')
-            {
+        foreach ($object->content as $value) {
+            if ($value->element === 'dataStructure') {
                 $this->parse_structure($value->content);
                 continue;
             }
 
-            if (isset($value->attributes))
-            {
+            if (isset($value->attributes)) {
                 $this->content[$value->attributes->contentType] = $value->content;
             }
         }
@@ -119,8 +118,7 @@ class HTTPResponse
      */
     protected function parse_structure($objects)
     {
-        foreach ($objects as $object)
-        {
+        foreach ($objects as $object) {
             $deps   = [];
             $struct = new DataStructureElement();
             $struct->parse($object, $deps);

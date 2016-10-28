@@ -571,8 +571,8 @@ Set the temperature target for the HVAC system.
 + Parameters
 
     + vehicle_id: `1` (number) - The id of the Vehicle.
-    + driver_degC: `23.7` (number) - The desired temperature on the driver's side in celcius.
-    + pass_degC: `18.1` (number) - The desired temperature on the passenger's side in celcius.
+    + driver_degC: `23.7` (number) - The desired temperature on the driver's side in °C.
+    + pass_degC: `18.1` (number) - The desired temperature on the passenger's side in °C.
 
 + Response 200 (application/json)
 

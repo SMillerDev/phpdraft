@@ -13,6 +13,13 @@ use PHPDraft\Out\TemplateGenerator;
 class JsonToHTML
 {
     /**
+     * Type of sorting to do
+     *
+     * @var int
+     */
+    public $sorting;
+
+    /**
      * JSON representation of an API Blueprint
      *
      * @var \stdClass
@@ -42,15 +49,20 @@ class JsonToHTML
     /**
      * Get the HTML representation of the JSON object
      *
-     * @param string $template Type of template to display.
-     *
-     * @param string $image    Image to use as a logo
+     * @param string      $template Type of template to display.
+     * @param string|null $image    Image to use as a logo
+     * @param string|null $css      CSS to load
+     * @param string|null $js       JS to load
      *
      * @return string HTML template to display
      */
-    public function get_html($template = 'default', $image = NULL)
+    public function get_html($template = 'default', $image = null, $css = null, $js = null)
     {
         $gen = new TemplateGenerator($template, $image);
+
+        $gen->css[]   = $css;
+        $gen->js[]    = $js;
+        $gen->sorting = $this->sorting;
 
         return $gen->get($this->object);
     }

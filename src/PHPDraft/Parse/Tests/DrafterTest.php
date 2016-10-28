@@ -24,7 +24,7 @@ class DrafterTest extends BaseTest
      */
     public function setUp()
     {
-        $this->mock_function('sys_get_temp_dir', 'return "'.TEST_STATICS.'";');
+        $this->mock_function('sys_get_temp_dir', 'return "' . TEST_STATICS . '";');
         $this->mock_function('shell_exec', 'return "/some/dir/drafter\n";');
         $this->class      = new Drafter(file_get_contents(TEST_STATICS . '/drafter/apib'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
@@ -47,7 +47,7 @@ class DrafterTest extends BaseTest
     public function testSetupCorrectly()
     {
         $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
     }
 
@@ -65,24 +65,25 @@ class DrafterTest extends BaseTest
     public function testParseToJSON()
     {
         $this->mock_function('shell_exec', 'return "";');
-        file_put_contents(TEST_STATICS.'/drafter/index.json', file_get_contents(TEST_STATICS.'/drafter/json'));
+        file_put_contents(TEST_STATICS . '/drafter/index.json', file_get_contents(TEST_STATICS . '/drafter/json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS.'/drafter/json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
         $this->unmock_function('shell_exec');
     }
 
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers                   PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Parsing encountered errors and stopped
-     * @expectedExceptionCode    2
+     * @covers                      PHPDraft\Parse\Drafter::parseToJson()
+     * @expectedException           \RuntimeException
+     * @expectedExceptionMessage    Parsing encountered errors and stopped
+     * @expectedExceptionCode       2
      */
     public function testParseToJSONWithErrors()
     {
         $this->mock_function('shell_exec', 'return "";');
-        file_put_contents(TEST_STATICS.'/drafter/index.json', file_get_contents(TEST_STATICS.'/drafter/json_errors'));
+        file_put_contents(TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json_errors'));
         $this->class->parseToJson();
         $this->expectOutputString("WARNING: ignoring unrecognized block\nWARNING: no headers specified\nWARNING: ignoring unrecognized block\nWARNING: empty request message-body");
         $this->unmock_function('shell_exec');
@@ -113,7 +114,7 @@ class DrafterTest extends BaseTest
      */
     public function testParseToJSONWithInvalidJSON()
     {
-        $this->mock_function('json_last_error', 'return '.JSON_ERROR_DEPTH.';');
+        $this->mock_function('json_last_error', 'return ' . JSON_ERROR_DEPTH . ';');
         $this->mock_function('json_last_error_msg', 'return "ERROR";');
         $this->class->parseToJson();
         $this->expectOutputString("ERROR: invalid json in /tmp/drafter/index.json");

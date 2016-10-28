@@ -13,9 +13,10 @@ interface StructureElement
 {
     /**
      * Default datatypes
+     *
      * @var array
      */
-    const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array'];
+    const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array', 'enum'];
 
     /**
      * Parse a JSON object to a structure
