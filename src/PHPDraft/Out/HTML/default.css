@@ -12,7 +12,17 @@ div.main-url {
     line-break: loose;
     word-break: break-all;
 }
-
+button.extra-info.btn{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 30px;
+}
+button.extra-info.btn:focus {
+    border-width: 0px;
+    box-shadow: none;
+    outline: 0;
+}
 .request-panel > code, .popover-content {
     word-break: break-all;
 }
