@@ -16,20 +16,22 @@ use PHPDraft\Parse\JsonToHTML;
 define('VERSION', '0');
 $values = UI::main($argv);
 
-$apib = new ApibFileParser($values['file']);
-$json = new Drafter($apib);
-$html = new JsonToHTML($json->parseToJson());
+$apib          = new ApibFileParser($values['file']);
+$json          = new Drafter($apib);
+$html          = new JsonToHTML($json->parseToJson());
 $html->sorting = $values['sorting'];
 $html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
 
 
-function phpdraft_var_dump($var)
+function phpdraft_var_dump(...$vars)
 {
     if (defined('__PHPDRAFT_PHAR__')) {
         return;
     }
     echo '<pre>';
-    var_dump($var);
+    foreach ($vars as $var) {
+        var_dump($var);
+    }
     echo '</pre>';
 }
 

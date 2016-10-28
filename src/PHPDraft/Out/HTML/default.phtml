@@ -151,68 +151,73 @@ $base = $this->categories;
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
                                 <p class="lead"><?= $transition->description; ?></p>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="request panel-title"
-                                            data-toggle="collapse"
-                                            data-target="#request-coll-<?= $transition->get_href(); ?>">Request
-                                            <span class="glyphicon indicator glyphicon-menu-down pull-right"></span>
-                                        </h4>
-                                    </div>
-                                    <?php if (isset($transition->request)): ?>
-                                    <div class="collapse in request-panel panel-body"
-                                         id="request-coll-<?= $transition->get_href(); ?>">
-                                        <?php if ($transition->url_variables !== []): ?>
-                                            <h5>Example URI</h5>
-                                            <span class="base-url"><?= $this->base_data['HOST']; ?></span>
-                                            <em><?= $transition->build_url(); ?></em>
-                                        <?php endif; ?>
-                                        <?php if ($transition->request->headers !== []): ?>
-                                            <h5>Headers</h5>
-                                            <ul class="headers list-unstyled">
-                                                <?php foreach ($transition->request->headers as $name => $value): ?>
-                                                    <li>
-                                                        <code><span class="attr"><?= $name; ?></span>: <span
-                                                                class="value"><?= $value; ?></span>
-                                                        </code>
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        <?php endif; ?>
-                                        <?php if (!empty($transition->request->body)): ?>
-                                            <h5>Body</h5>
-                                            <?php foreach ($transition->request->body as $value): ?>
-                                                <?php if (is_string($value)): ?>
-                                                    <code class="request-body"><?= $value; ?></code>
-                                                <?php else: ?>
-                                                    <?php $type =
-                                                        (isset($transition->request->headers['Content-Type'])) ? $transition->request->headers['Content-Type'] : null; ?>
-                                                    <?= $value->print_request($type); ?>
-                                                    <?= $value ?>
+                                <?php if (!empty($transition->requests)): ?>
+                                    <?php foreach ($transition->requests as $request): ?>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="request panel-title"
+                                                    data-toggle="collapse"
+                                                    data-target="#request-coll-<?= $transition->get_href(); ?>">Request
+                                                    <span
+                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
+                                                </h4>
+                                            </div>
+
+                                            <div class="collapse in request-panel panel-body"
+                                                 id="request-coll-<?= $transition->get_href(); ?>">
+                                                <?php if ($transition->url_variables !== []): ?>
+                                                    <h5>Example URI</h5>
+                                                    <span class="base-url"><?= $this->base_data['HOST']; ?></span>
+                                                    <em><?= $transition->build_url(); ?></em>
                                                 <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                        <?php if (!empty($transition->request->struct)): ?>
-                                            <h5>Structure</h5>
-                                            <div class="row">
-                                                <?= $transition->request->struct ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php endif; ?>
+                                                <?php if ($request->headers !== []): ?>
+                                                    <h5>Headers</h5>
+                                                    <ul class="headers list-unstyled">
+                                                        <?php foreach ($request->headers as $name => $value): ?>
+                                                            <li>
+                                                                <code><span class="attr"><?= $name; ?></span>: <span
+                                                                        class="value"><?= $value; ?></span>
+                                                                </code>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                <?php endif; ?>
+                                                <?php if (!empty($request->body)): ?>
+                                                    <h5>Body</h5>
+                                                    <?php foreach ($request->body as $value): ?>
+                                                        <?php if (is_string($value)): ?>
+                                                            <code class="request-body"><?= $value; ?></code>
+                                                        <?php else: ?>
+                                                            <?php $type =
+                                                                (isset($request->headers['Content-Type'])) ? $request->headers['Content-Type'] : null; ?>
+                                                            <?= $value->print_request($type); ?>
+                                                            <?= $value ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                                <?php if (!empty($request->struct)): ?>
 
-                                        <?php if ($transition->url_variables !== null): ?>
-                                            <h5>URI Parameters</h5>
-                                            <div class="row">
-                                                <?= $transition->url_variables; ?>
-                                            </div>
-                                        <?php endif; ?>
+                                                    <h5>Structure</h5>
+                                                    <div class="row">
+                                                        <?= $request->struct ?>
+                                                    </div>
+                                                <?php endif; ?>
 
-                                        <?php if ($transition->data_variables !== null): ?>
-                                            <h5>Data object</h5>
-                                            <?= $transition->data_variables ?>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
+                                                <?php if ($transition->url_variables !== null): ?>
+                                                    <h5>URI Parameters</h5>
+                                                    <div class="row">
+                                                        <?= $transition->url_variables; ?>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if ($transition->data_variables !== null): ?>
+                                                    <h5>Data object</h5>
+                                                    <?= $transition->data_variables ?>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                                 <?php if (isset($transition->responses)): ?>
                                     <?php foreach ($transition->responses as $response): ?>
                                         <div class="panel panel-default">

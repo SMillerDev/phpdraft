@@ -85,16 +85,16 @@ class TemplateGenerator
     public function get($object)
     {
         $include = null;
-        if (stream_resolve_include_path($this->template . DIRECTORY_SEPARATOR . $this->template . '.php')) {
-            $include = $this->template . DIRECTORY_SEPARATOR . $this->template . '.php';
+        if (stream_resolve_include_path($this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml')) {
+            $include = $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml';
         }
 
-        if (stream_resolve_include_path($this->template . '.php')) {
+        if (stream_resolve_include_path($this->template . '.phtml')) {
             $include = $this->template . '.php';
         }
 
-        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $this->template . '.php')) {
-            $include = 'PHPDraft/Out/HTML/' . $this->template . '.php';
+        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $this->template . '.phtml')) {
+            $include = 'PHPDraft/Out/HTML/' . $this->template . '.phtml';
         }
         if ($include === null) {
             file_put_contents('php://stderr', "Couldn't find template '$this->template'\n");

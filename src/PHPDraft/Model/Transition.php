@@ -43,16 +43,16 @@ class Transition extends HierarchyElement
     /**
      * The request
      *
-     * @var HTTPRequest
+     * @var HTTPRequest[]
      */
-    public $request;
+    public $requests = [];
 
     /**
      * The responses
      *
      * @var HTTPResponse[]
      */
-    public $responses;
+    public $responses = [];
 
     /**
      * Structures used (if any)
@@ -97,14 +97,38 @@ class Transition extends HierarchyElement
             $this->data_variables = $struct->parse($object->attributes->data, $deps);
         }
 
-        if (isset($object->content[0]->content)) {
-            foreach ($object->content[0]->content as $item) {
-                if ($item->element === 'httpRequest') {
-                    $this->request = new HTTPRequest($this);
-                    $this->request->parse($item);
-                } elseif ($item->element === 'httpResponse') {
-                    $response          = new HTTPResponse($this);
-                    $this->responses[] = $response->parse($item);
+        if (!is_array($object->content)) {
+            return $this;
+        }
+        foreach ($object->content as $transition_item) {
+            if (!isset($transition_item->content)) {
+                continue;
+            }
+            foreach ($transition_item->content as $item) {
+                $value = null;
+                switch ($item->element) {
+                    case 'httpRequest':
+                        $value = new HTTPRequest($this);
+                        $list  = &$this->requests;
+                        break;
+                    case 'httpResponse':
+                        $value = new HTTPResponse($this);
+                        $list  = &$this->responses;
+                        break;
+                    default:
+                        continue;
+                }
+                $value->parse($item);
+
+                if (empty($list)) {
+                    $list[] = $value;
+                    continue;
+                }
+                foreach ($list as $existing_value) {
+                    phpdraft_var_dump($value->is_equal_to($existing_value));
+                    if (!$value->is_equal_to($existing_value)) {
+                        $list[] = $value;
+                    }
                 }
             }
         }
@@ -203,11 +227,13 @@ class Transition extends HierarchyElement
     /**
      * Get the HTTP method of the child request
      *
+     * @param int $request Request to get the method for
+     *
      * @return string HTTP Method
      */
-    public function get_method()
+    public function get_method($request = 0)
     {
-        return (isset($this->request->method)) ? $this->request->method : 'NONE';
+        return (isset($this->requests[$request]->method)) ? $this->requests[$request]->method : 'NONE';
     }
 
     /**
@@ -217,11 +243,17 @@ class Transition extends HierarchyElement
      *
      * @param array  $additional additional arguments to pass
      *
+     * @param int    $key        number of the request to generate for
+     *
      * @return string A cURL CLI command
      */
-    public function get_curl_command($base_url, $additional = [])
+    public function get_curl_command($base_url, $additional = [], $key = 0)
     {
-        return $this->request->get_curl_command($base_url, $additional);
+        if (!isset($this->requests[$key])) {
+            return '';
+        }
+
+        return $this->requests[$key]->get_curl_command($base_url, $additional);
     }
 
 }

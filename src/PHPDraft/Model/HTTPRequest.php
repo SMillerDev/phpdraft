@@ -10,7 +10,7 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\RequestBodyElement;
 
-class HTTPRequest
+class HTTPRequest implements Comparable
 {
     /**
      * HTTP Headers
@@ -146,4 +146,15 @@ class HTTPRequest
     }
 
 
+    /**
+     * Check if item is the same as other item
+     *
+     * @param self $b Object to compare to
+     *
+     * @return bool
+     */
+    public function is_equal_to($b)
+    {
+        return (($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers));
+    }
 }

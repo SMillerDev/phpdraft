@@ -10,7 +10,7 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\DataStructureElement;
 
-class HTTPResponse
+class HTTPResponse implements Comparable
 {
     /**
      * HTTP Status code
@@ -126,5 +126,17 @@ class HTTPResponse
 
             $this->structure[] = $struct;
         }
+    }
+
+    /**
+     * Check if item is the same as other item
+     *
+     * @param self $b Object to compare to
+     *
+     * @return bool
+     */
+    public function is_equal_to($b)
+    {
+        return (($this->statuscode === $b->statuscode) && ($this->headers === $b->headers) && ($this->content === $b->content));
     }
 }
