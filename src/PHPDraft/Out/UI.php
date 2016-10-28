@@ -84,7 +84,7 @@ class UI
         echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)\n";
         echo "\t-i\tSpecifies an image to display in the header.\n";
         echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking).\n";
-        echo "\t-c\tSpecifies a JS file to include (value is put in a script element without checking).\n";
+        echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking).\n";
         echo "\t-h\tDisplays this text.\n";
     }
 

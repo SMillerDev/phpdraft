@@ -7,6 +7,19 @@ $(function () {
             }
         });
     });
+    var selectedhost = $('h1.media-heading select.form-control').val();
+    $('h1.media-heading select.form-control').on('change', function () {
+        var html = $('body>div>div.row').html();
+        var re = new RegExp(escapeRegExp(selectedhost), 'g');
+        html = html.replace(re, $('h1.media-heading select.form-control').val());
+        selectedhost = $('h1.media-heading select.form-control').val();
+        $('body>div>div.row').html(html);
+        $('[data-toggle="popover"]').popover();
+    });
+
+    function escapeRegExp(str) {
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    };
 });
 
 $('.collapse.request-panel').on('shown.bs.collapse', function () {

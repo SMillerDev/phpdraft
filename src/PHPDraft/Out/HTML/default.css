@@ -21,6 +21,12 @@ body .media h1.media-heading {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+body .media h1.media-heading .form-control{
+    display: flex;
+    width: auto;
+    float: right;
+}
+
 
 .panel-title var, h4.response var {
     padding: 6px 12px;

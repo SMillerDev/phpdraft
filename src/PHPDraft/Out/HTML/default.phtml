@@ -31,7 +31,16 @@ $base = $this->categories;
     <div class="media">
         <div class="media-body">
             <h1 class="media-heading"><?= $this->base_data['TITLE']; ?>
-                <small><?= $this->base_data['HOST']; ?></small>
+                <?php if (isset($this->base_data['ALT_HOST'])): ?>
+                    <select class="form-control">
+                        <option selected><?= $this->base_data['HOST']; ?></option>
+                        <?php foreach (explode(',', $this->base_data['ALT_HOST']) as $host): ?>
+                            <option><?= $host; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+                    <small><?= $this->base_data['HOST']; ?></small>
+                <?php endif; ?>
             </h1>
             <p class="lead"><?= $this->base_data['DESC']; ?></p>
         </div>
@@ -151,7 +160,7 @@ $base = $this->categories;
                                 </a>
                                 <p class="lead"><?= $transition->description; ?></p>
                                 <?php if (!empty($transition->requests)): ?>
-                                    <?php foreach ($transition->requests as $key=>$request): ?>
+                                    <?php foreach ($transition->requests as $key => $request): ?>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="request panel-title"
@@ -162,9 +171,10 @@ $base = $this->categories;
                                                 </h4>
                                             </div>
 
-                                            <div class="collapse <?php if ($key<1):?>in<?php endif;?> request-panel panel-body"
-                                                 id="request-coll-<?= $transition->get_href(); ?>">
-                                                <?= $request->description;?>
+                                            <div
+                                                class="collapse <?php if ($key < 1): ?>in<?php endif; ?> request-panel panel-body"
+                                                id="request-coll-<?= $transition->get_href(); ?>">
+                                                <?= $request->description; ?>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
                                                     <span class="base-url"><?= $this->base_data['HOST']; ?></span>
@@ -219,7 +229,7 @@ $base = $this->categories;
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if (isset($transition->responses)): ?>
-                                    <?php foreach ($transition->responses as $key=>$response): ?>
+                                    <?php foreach ($transition->responses as $key => $response): ?>
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title response"
@@ -231,9 +241,10 @@ $base = $this->categories;
                                                         class="glyphicon indicator glyphicon-menu-down pull-right"></span>
                                                 </h4>
                                             </div>
-                                            <div class="panel-body collapse <?php if ($key<1):?>in<?php endif;?> response-panel"
-                                                 id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
-                                                <?=$response->description;?>
+                                            <div
+                                                class="panel-body collapse <?php if ($key < 1): ?>in<?php endif; ?> response-panel"
+                                                id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
+                                                <?= $response->description; ?>
                                                 <?php if ($response->headers !== []): ?>
                                                     <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
@@ -310,6 +321,7 @@ $base = $this->categories;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script><?= Minifier::minify_js(file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?></script>
+<!--<script>--><?//= Minifier::minify_js(file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?><!--</script>-->
+<script><?= file_get_contents(__DIR__ . '/' . $this->template . '.js'); ?></script>
 </body>
 </html>
