@@ -14,16 +14,8 @@ $ chmod +x /usr/bin/phpdraft
 $ phpdraft -f blueprint-file.apib > blueprint-webpage.html
 ```
 
-## Including Files
-It is possible to include other files in your blueprint by using a special include directive with a path to the included file relative to the current file's directory. Included files can be written in API Blueprint, Markdown or HTML (or JSON for response examples). Included files can include other files, so be careful of circular references.
-
-```markdown
-<!-- include(filename.md) -->
-```
-
-For tools that do not support this include directive it will just render out as an HTML comment. API Blueprint may support its own mechanism of including files in the future, and this syntax was chosen to not interfere with the [external documents proposal](https://github.com/apiaryio/api-blueprint/issues/20) while allowing `PHPDraft` users to include documents today.
-
-_Thanks to [aglio](https://github.com/danielgtaylor/aglio) for the idea._
+## Extra features
+We got some fun stuff, check the [wiki](https://github.com/SMillerDev/phpdraft/wiki) for more.
 
 ## Writing API documentation
 
