@@ -90,7 +90,7 @@ class TemplateGenerator
         }
 
         if (stream_resolve_include_path($this->template . '.phtml')) {
-            $include = $this->template . '.php';
+            $include = $this->template . '.phtml';
         }
 
         if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $this->template . '.phtml')) {

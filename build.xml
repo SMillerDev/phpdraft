@@ -57,6 +57,7 @@
             <fileset dir="${basedir}/src/">
                 <exclude name="**/*Test.php*"/>
                 <include name="**/*.php"/>
+                <include name="**/*.phtml"/>
                 <include name="**/*.js*"/>
                 <include name="**/*.css*"/>
             </fileset>
