@@ -33,6 +33,8 @@ class ApibFileParser
     {
         $this->location = pathinfo($filename, PATHINFO_DIRNAME) . '/';
 
+        set_include_path(get_include_path().':'.$this->location);
+
         $this->full_apib = $this->get_apib($filename);
     }
 
@@ -49,7 +51,7 @@ class ApibFileParser
         $this->file_check($filename);
         $file    = file_get_contents($filename);
         $matches = [];
-        preg_match_all('<!-- include\(([a-z_.\/]*?).apib\) -->', $file, $matches);
+        preg_match_all('<!-- include\(([a-z0-9_.\/]*?).apib\) -->', $file, $matches);
         foreach ($matches[1] as $value) {
             $file = str_replace('<!-- include(' . $value . '.apib) -->',
                 $this->get_apib($this->location . $value . '.apib'), $file);
