@@ -84,22 +84,7 @@ class TemplateGenerator
      */
     public function get($object)
     {
-        $include = null;
-        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml')) {
-            $include =
-                'templates' . DIRECTORY_SEPARATOR . $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml';
-        }
-        if (stream_resolve_include_path($this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml')) {
-            $include = $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml';
-        }
-
-        if (stream_resolve_include_path($this->template . '.phtml')) {
-            $include = $this->template . '.phtml';
-        }
-
-        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $this->template . '.phtml')) {
-            $include = 'PHPDraft/Out/HTML/' . $this->template . '.phtml';
-        }
+        $include = $this->find_include_file($this->template);
         if ($include === null) {
             file_put_contents('php://stderr', "Couldn't find template '$this->template'\n");
             exit(1);
@@ -141,6 +126,46 @@ class TemplateGenerator
         }
 
         require_once $include;
+    }
+
+    /**
+     * Get the path to a file to include
+     *
+     * @param string $template The name of the template to include
+     * @param string $extension Extension of the file to include
+     *
+     * @return null|string File path or null if not found
+     */
+    function find_include_file($template, $extension = 'phtml')
+    {
+        $include = null;
+        $fextension = '.'.$extension;
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension)) {
+            $include = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension;
+            return $include;
+        }
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . $fextension)) {
+            $include = 'templates' . DIRECTORY_SEPARATOR . $template . $fextension;
+            return $include;
+        }
+        if (stream_resolve_include_path($template . DIRECTORY_SEPARATOR . $template . $fextension)) {
+            $include = $template . DIRECTORY_SEPARATOR . $template . $fextension;
+            return $include;
+        }
+
+        if (stream_resolve_include_path($template . $fextension)) {
+            $include = $template . $fextension;
+            return $include;
+        }
+
+        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $template . $fextension)) {
+            $include = 'PHPDraft/Out/HTML/' . $template . $fextension;
+            return $include;
+        }
+
+        if ($include === null && $extension === 'phtml') {
+            return $this->find_include_file('default', $extension);
+        }
     }
 
     /**

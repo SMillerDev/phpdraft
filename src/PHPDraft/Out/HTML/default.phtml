@@ -23,7 +23,7 @@ $base = $this->categories;
         <link rel="stylesheet" href="<?= $style ?>">
     <?php endforeach; ?>
     <style>
-        <?= Minifier::minify_css(file_get_contents(__DIR__ . '/'.$this->template.'.css'));?>
+        <?= Minifier::minify_css(file_get_contents($this->find_include_file($this->template, 'css'), true));?>
     </style>
 </head>
 <body>
@@ -340,6 +340,6 @@ if (!empty($extras)):
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script><?= Minifier::minify_js(file_get_contents(__DIR__ . '/' . $this->template . '.js')); ?></script>
+<script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), true)); ?></script>
 </body>
 </html>
