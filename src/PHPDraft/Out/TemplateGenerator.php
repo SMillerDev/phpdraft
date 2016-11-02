@@ -85,6 +85,10 @@ class TemplateGenerator
     public function get($object)
     {
         $include = null;
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml')) {
+            $include =
+                'templates' . DIRECTORY_SEPARATOR . $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml';
+        }
         if (stream_resolve_include_path($this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml')) {
             $include = $this->template . DIRECTORY_SEPARATOR . $this->template . '.phtml';
         }
@@ -113,11 +117,13 @@ class TemplateGenerator
                     continue;
                 }
 
-                $cat                = new Category();
-                $this->categories[] = $cat->parse($value);
+                $cat = new Category();
+                $cat = $cat->parse($value);
 
                 if ($value->meta->classes[0] === 'dataStructures') {
                     $this->base_structures = array_merge($this->base_structures, $cat->structures);
+                } else {
+                    $this->categories[] = $cat;
                 }
             }
 
@@ -127,12 +133,14 @@ class TemplateGenerator
             ksort($this->base_structures);
         }
         if ($this->sorting === UI::$PHPD_SORT_OPT_ALL || $this->sorting === UI::$PHPD_SORT_OPT_WEBSERVICES) {
-            usort($this->categories[0]->children, function ($a, $b) {
-                return strcmp($a->title, $b->title);
-            });
+            foreach ($this->categories as &$category) {
+                usort($category->children, function ($a, $b) {
+                    return strcmp($a->title, $b->title);
+                });
+            }
         }
 
-        include_once $include;
+        require_once $include;
     }
 
     /**

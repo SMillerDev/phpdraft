@@ -238,7 +238,10 @@ $base = $this->categories;
                                                     Response <var
                                                         class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode; ?></var>
                                                     <span
-                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
+                                                        class="glyphicon
+                                                        indicator
+                                                        glyphicon-menu-<?php if ($key < 1): ?>down<?php else: ?>up<?php endif; ?>
+                                                        pull-right"></span>
                                                 </h4>
                                             </div>
                                             <div
@@ -312,11 +315,11 @@ $base = $this->categories;
         </div>
     </div>
 </div>
-<?php $extras = array_filter($this->base_data, function ($value){
+<?php $extras = array_filter($this->base_data, function ($value) {
     return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC']);
 }, ARRAY_FILTER_USE_KEY);
 if (!empty($extras)):
-    $extras['host']=$this->base_data['HOST'];?>
+    $extras['host'] = $this->base_data['HOST']; ?>
     <button
         type="button"
         class="btn btn-lg extra-info"
@@ -324,10 +327,10 @@ if (!empty($extras)):
         title="Extra info"
         data-placement="top"
         data-html="true"
-        data-content="<?php foreach ($extras as $key=>$value): ?><p><?= $key;?>: <?= $value;?></p><?php endforeach;?>">
+        data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
         <span class="glyphicon glyphicon-question-sign"></span>
     </button>
-<?php endif;?>
+<?php endif; ?>
 <?php foreach ($this->js as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>

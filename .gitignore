@@ -6,6 +6,8 @@
 /build/phar
 /build/*.phar
 /tests/statics/index.*
+src/Michelf/*
+src/.gitignore
 
 # JIRA plugin
 atlassian-ide-plugin.xml
