@@ -1,5 +1,5 @@
 # PHPDraft [![Build Status](https://travis-ci.org/SMillerDev/phpdraft.svg?branch=master)](https://travis-ci.org/SMillerDev/phpdraft)
-This is a parser for API Blueprint files in PHP.
+This is a parser for API Blueprint files in PHP.[1](#dependencies)
 
 ## Usage
 Requires PHP 5.6+ to run. Unittests require runkit (which is PHP <7.0 only)
