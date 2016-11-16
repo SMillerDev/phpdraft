@@ -1,0 +1,21 @@
+{
+  "name": "smillerdev/phpdraft",
+  "description": "This is a parser for API Blueprint files in PHP.",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Sean Molenaar",
+      "email": "smillerdev@me.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SMillerDev/phpdraft"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  }
+}
