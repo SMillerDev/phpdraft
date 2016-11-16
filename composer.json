@@ -17,5 +17,8 @@
   ],
   "require": {
     "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "theseer/autoload": "^1.22"
   }
 }
