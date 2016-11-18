@@ -1,76 +1,80 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: smillernl
- * Date: 2-9-16
- * Time: 15:21
+ * This file contains the ArrayStructureElement.php
+ *
+ * @package PHPDraft\Model\Elements
+ * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model\Elements;
 
 use PHPDraft\Model\StructureElement;
 
-class ArrayStructureElement extends DataStructureElement implements StructureElement
+/**
+ * Class ArrayStructureElement
+ */
+class ArrayStructureElement extends ObjectStructureElement implements StructureElement
 {
 
     /**
-     * Type of objects in the array
+     * Parse an array object
      *
-     * @var
+     * @param \stdClass $object       APIb Item to parse
+     * @param array     $dependencies List of dependencies build
+     *
+     * @return $this
      */
-    public $type_of;
-
-    public function parse($item, &$dependencies)
+    public function parse($object, &$dependencies)
     {
-        $this->element = (isset($item->element)) ? $item->element : 'array';
-        $this->value   = (isset($item->content)) ? $item->content : null;
+        $this->element = (isset($object->element)) ? $object->element : 'array';
 
-        if (isset($item->content)) {
-            foreach ($item->content as $key => $sub_item) {
-                $this->type[$key] = $sub_item->element;
-                switch ($sub_item->element) {
-                    case 'array':
-                        $value             = new ArrayStructureElement();
-                        $this->value[$key] = $value->parse($sub_item, $dependencies);
-                        break;
-                    case 'object':
-                        $value             = new DataStructureElement();
-                        $this->value[$key] = $value->parse($sub_item, $dependencies);
-                        break;
-                    case 'enum':
-                        $value             = new EnumStructureElement();
-                        $this->value[$key] = $value->parse($sub_item, $dependencies);
-                        break;
-                    default:
-                        $this->value[$key] = (isset($sub_item->content)) ? $sub_item->content : null;
-                        break;
-                }
-            }
+        $this->parse_common($object, $dependencies);
+
+        if(!isset($object->content->value->content))
+        {
+            $this->value = [];
+            return $this;
         }
+
+        foreach ($object->content->value->content as $sub_item)
+        {
+            if (!in_array($sub_item->element, self::DEFAULTS))
+            {
+                $dependencies[] = $sub_item->element;
+            }
+
+            $this->value[] = (isset($sub_item->element)) ? $sub_item->element : '';
+        }
+
+        $this->deps = $dependencies;
 
         return $this;
     }
 
+    /**
+     * Provide HTML representation
+     *
+     * @return string
+     */
     function __toString()
     {
-        if (!is_array($this->type)) {
-            return '';
-        }
         $return = '<ul class="list-group">';
-        foreach ($this->type as $key => $item) {
-            $type =
-                (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
+
+        if (!is_array($this->value))
+        {
+            return '<span class="example-value pull-right">[ ]</span>';
+        }
+
+        foreach ($this->value as $item) {
+            $type = (in_array($this->value, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
                         strtolower($item)) . '">' . $item . '</a>';
 
-            $value =
-                (isset($this->value[$key])) ? ': <span class="example-value pull-right">' . json_encode($this->value[$key]) . '</span>' : null;
-
-            $return .= '<li class="list-group-item">' . $type . $value . '</li>';
+            $return .= '<li class="list-group-item">' . $type . '</li>';
         }
+
         $return .= '</ul>';
 
         return $return;
     }
-
 
 }

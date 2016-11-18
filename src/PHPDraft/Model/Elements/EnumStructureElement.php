@@ -24,13 +24,13 @@ class EnumStructureElement implements StructureElement
      *
      * @var string
      */
-    public $element = null;
+    public $element = NULL;
     /**
      * Object value
      *
      * @var mixed
      */
-    public $value = null;
+    public $value = NULL;
     /**
      * /**
      * List of object dependencies
@@ -42,32 +42,34 @@ class EnumStructureElement implements StructureElement
     /**
      * Parse a JSON object to a structure
      *
-     * @param \stdClass $item         An object to parse
+     * @param \stdClass $object       An object to parse
      * @param array     $dependencies Dependencies of this object
      *
      * @return EnumStructureElement self reference
      */
-    function parse($item, &$dependencies)
+    function parse($object, &$dependencies)
     {
-        $this->element     = (isset($item->element)) ? $item->element : null;
-        $this->description = (isset($item->meta->description)) ? htmlentities($item->meta->description) : null;
-        if (isset($item->content) && is_array($item->content)) {
+        $this->element     = (isset($object->element)) ? $object->element : NULL;
+        $this->description = (isset($object->meta->description)) ? htmlentities($object->meta->description) : NULL;
+        if (isset($object->content) && is_array($object->content))
+        {
             $deps = [];
-            foreach ($item->content as $value) {
+            foreach ($object->content as $value) {
                 $element       = new EnumStructureElement();
                 $this->value[] = $element->parse($value, $deps);
             }
+
             $this->element = $this->element . '(' . $deps[0] . ')';
         } else {
-            $this->value = (isset($item->content)) ? $item->content : null;
+            $this->value = (isset($object->content)) ? $object->content : NULL;
         }
+
         $this->description_as_html();
 
         $dependencies[] = $this->element;
 
         return $this;
     }
-
 
     /**
      * Parse the description to HTML
@@ -86,11 +88,13 @@ class EnumStructureElement implements StructureElement
      */
     function __toString()
     {
-        if (is_array($this->value)) {
+        if (is_array($this->value))
+        {
             $return = '<ul class="list-group">';
             foreach ($this->value as $item) {
                 $return .= '<li class="list-group-item">' . $item->simple_string() . '</li>';
             }
+
             $return .= '</ul>';
 
             return $return;

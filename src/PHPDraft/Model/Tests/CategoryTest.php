@@ -2,19 +2,23 @@
 /**
  * This file contains the CategoryTest.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model\Tests;
 
-
 use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\Category;
 use ReflectionClass;
 
+/**
+ * Class CategoryTest
+ * @covers PHPDraft\Model\Category
+ */
 class CategoryTest extends BaseTest
 {
+
     /**
      * Set up
      */

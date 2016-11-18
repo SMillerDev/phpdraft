@@ -8,14 +8,17 @@
 
 namespace PHPDraft\Model;
 
-use PHPDraft\Model\Elements\DataStructureElement;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
+/**
+ * Class Category
+ */
 class Category extends HierarchyElement
 {
     /**
      * API Structure element
      *
-     * @var DataStructureElement[]
+     * @var ObjectStructureElement[]
      */
     public $structures = [];
 
@@ -29,7 +32,7 @@ class Category extends HierarchyElement
     function parse($object)
     {
         parent::parse($object);
-        foreach ($object->content as $key => $item) {
+        foreach ($object->content as $item) {
             switch ($item->element) {
                 case 'resource':
                     $resource         = new Resource($this);
@@ -37,11 +40,12 @@ class Category extends HierarchyElement
                     break;
                 case 'dataStructure':
                     $deps         = [];
-                    $struct       = new DataStructureElement();
+                    $struct       = new ObjectStructureElement();
                     $struct->deps = $deps;
                     $struct->parse($item, $deps);
 
-                    if (isset($item->content[0]->meta->id)) {
+                    if (isset($item->content[0]->meta->id))
+                    {
                         $this->structures[$item->content[0]->meta->id] = $struct;
                     } else {
                         $this->structures[] = $struct;

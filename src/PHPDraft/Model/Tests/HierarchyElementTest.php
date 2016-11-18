@@ -8,12 +8,16 @@
 
 namespace PHPDraft\Model\Tests;
 
-
 use PHPDraft\Core\BaseTest;
 use ReflectionClass;
 
+/**
+ * Class HierarchyElementTest
+ * @covers PHPDraft\Model\HierarchyElement
+ */
 class HierarchyElementTest extends BaseTest
 {
+
     /**
      * Set up
      */

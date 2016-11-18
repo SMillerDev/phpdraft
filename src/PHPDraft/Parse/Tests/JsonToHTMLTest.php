@@ -12,6 +12,10 @@ use PHPDraft\Parse\JsonToHTML;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
+/**
+ * Class JsonToHTMLTest
+ * @covers PHPDraft\Parse\JsonToHTML
+ */
 class JsonToHTMLTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -31,7 +35,7 @@ class JsonToHTMLTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')));
+        $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
     }
 

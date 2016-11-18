@@ -10,23 +10,31 @@ namespace PHPDraft\Model\Elements;
 
 use PHPDraft\Model\StructureElement;
 
-class RequestBodyElement extends DataStructureElement implements StructureElement
+/**
+ * Class RequestBodyElement
+ */
+class RequestBodyElement extends ObjectStructureElement implements StructureElement
 {
+
     /**
      * Parse a JSON object to a data structure
      *
      * @param \stdClass $object       An object to parse
      * @param array     $dependencies Dependencies of this object
      *
-     * @return DataStructureElement self reference
+     * @return ObjectStructureElement self reference
      */
     public function parse($object, &$dependencies)
     {
-        if (empty($object) || !isset($object->content)) {
+        if (empty($object) || !isset($object->content))
+        {
             return $this;
         }
+
         $this->element = $object->element;
-        if (isset($object->content) && is_array($object->content)) {
+
+        if (isset($object->content) && is_array($object->content))
+        {
             foreach ($object->content as $value) {
                 $struct        = new RequestBodyElement();
                 $this->value[] = $struct->parse($value, $dependencies);
@@ -35,32 +43,26 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
             return $this;
         }
 
-        $this->key         = $object->content->key->content;
-        $this->type        = $object->content->value->element;
-        $this->description = isset($object->meta->description) ? htmlentities($object->meta->description) : null;
-        $this->description_as_html();
-        $this->status =
-            isset($object->attributes->typeAttributes[0]) ? $object->attributes->typeAttributes[0] : null;
+        $this->parse_common($object, $dependencies);
 
-        if (!in_array($this->type, parent::DEFAULTS)) {
-            $dependencies[] = $this->type;
-        }
-
-        if ($this->type === 'object') {
-            $value       = isset($object->content->value->content) ? $object->content->value : null;
+        if ($this->type === 'object')
+        {
+            $value       = isset($object->content->value->content) ? $object->content->value : NULL;
             $this->value = new RequestBodyElement();
             $this->value = $this->value->parse($value, $dependencies);
 
             return $this;
         }
 
-        if ($this->type === 'array') {
-            $this->value = '[]';
+        if ($this->type === 'array')
+        {
+            $this->value = new ArrayStructureElement();
+            $this->value = $this->value->parse($object, $dependencies);
 
             return $this;
         }
 
-        $this->value = isset($object->content->value->content) ? $object->content->value->content : null;
+        $this->value = isset($object->content->value->content) ? $object->content->value->content : NULL;
 
         return $this;
     }
@@ -74,11 +76,13 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
      */
     public function print_request($type = 'application/x-www-form-urlencoded')
     {
-        if (is_array($this->value)) {
+        if (is_array($this->value))
+        {
             $return = '<code class="request-body">';
             $list   = [];
             foreach ($this->value as $object) {
-                if (get_class($object) === self::class) {
+                if (get_class($object) === self::class)
+                {
                     $list[] = $object->print_request($type);
                 }
             }
@@ -101,7 +105,7 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
 
         switch ($type) {
             case 'application/x-www-form-urlencoded':
-                return $this->key . "=<span>" . $value . '</span>';
+                return $this->key . '=<span>' . $value . '</span>';
                 break;
             default:
                 $object             = [];
@@ -120,6 +124,5 @@ class RequestBodyElement extends DataStructureElement implements StructureElemen
     {
         return parent::__toString();
     }
-
 
 }

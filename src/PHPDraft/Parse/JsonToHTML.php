@@ -10,6 +10,9 @@ namespace PHPDraft\Parse;
 
 use PHPDraft\Out\TemplateGenerator;
 
+/**
+ * Class JsonToHTML
+ */
 class JsonToHTML
 {
     /**
@@ -56,16 +59,20 @@ class JsonToHTML
      *
      * @return string HTML template to display
      */
-    public function get_html($template = 'default', $image = null, $css = null, $js = null)
+    public function get_html($template = 'default', $image = NULL, $css = NULL, $js = NULL)
     {
         $gen = new TemplateGenerator($template, $image);
 
-        if(!empty($css)){
-            $gen->css[]   = explode(',',$css);
+        if(!empty($css))
+        {
+            $gen->css[] = explode(',', $css);
         }
-        if(!empty($css)){
-            $gen->js[]   = explode(',',$js);
+
+        if(!empty($css))
+        {
+            $gen->js[] = explode(',', $js);
         }
+
         $gen->sorting = $this->sorting;
 
         return $gen->get($this->object);

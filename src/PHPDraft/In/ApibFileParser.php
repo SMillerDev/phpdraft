@@ -8,6 +8,9 @@
 
 namespace PHPDraft\In;
 
+/**
+ * Class ApibFileParser
+ */
 class ApibFileParser
 {
     /**
@@ -33,7 +36,7 @@ class ApibFileParser
     {
         $this->location = pathinfo($filename, PATHINFO_DIRNAME) . '/';
 
-        set_include_path(get_include_path().':'.$this->location);
+        set_include_path(get_include_path() . ':' . $this->location);
 
         $this->full_apib = $this->get_apib($filename);
     }
@@ -60,9 +63,17 @@ class ApibFileParser
         return $file;
     }
 
+    /**
+     * Check if an APIB file exists
+     *
+     * @param string $filename File to check
+     *
+     * @return void
+     */
     private function file_check($filename)
     {
-        if (!file_exists($filename)) {
+        if (!file_exists($filename))
+        {
             file_put_contents('php://stderr', "API File not found: $filename\n");
             exit(1);
         }

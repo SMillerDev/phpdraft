@@ -8,19 +8,23 @@
 
 namespace PHPDraft\Model\Tests;
 
-
 use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\HTTPResponse;
 use ReflectionClass;
 
+/**
+ * Class HTTPResponseTest
+ * @covers PHPDraft\Model\HTTPResponse
+ */
 class HTTPResponseTest extends BaseTest
 {
+
     /**
      * Set up
      */
     public function setUp()
     {
-        $parent = NULL;
+        $parent           = NULL;
         $this->class      = new HTTPResponse($parent);
         $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPResponse');
     }

@@ -2,28 +2,30 @@
 /**
  * This file contains the TemplateGeneratorTest.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Out
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Out\Tests;
 
-
 use PHPDraft\Core\BaseTest;
 use PHPDraft\Out\TemplateGenerator;
 
+/**
+ * Class TemplateGeneratorTest
+ * @covers PHPDraft\Out\TemplateGenerator
+ */
 class TemplateGeneratorTest extends BaseTest
 {
+
+    /**
+     * Set up tests
+     * @return void
+     */
     public function setUp()
     {
         $this->class      = new TemplateGenerator('default', 'none');
         $this->reflection = new \ReflectionClass('PHPDraft\Out\TemplateGenerator');
-    }
-
-    public function tearDown()
-    {
-        unset($this->class);
-        unset($this->reflection);
     }
 
     /**

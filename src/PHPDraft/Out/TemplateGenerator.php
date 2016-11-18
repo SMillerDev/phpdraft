@@ -10,7 +10,7 @@ namespace PHPDraft\Out;
 
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Category;
-use PHPDraft\Model\Elements\DataStructureElement;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
 class TemplateGenerator
 {
@@ -49,7 +49,7 @@ class TemplateGenerator
      *
      * @var string
      */
-    protected $image = null;
+    protected $image = NULL;
     /**
      * The base URl of the API
      *
@@ -59,7 +59,7 @@ class TemplateGenerator
     /**
      * Structures used in all data
      *
-     * @var DataStructureElement[]
+     * @var ObjectStructureElement[]
      */
     protected $base_structures = [];
 
@@ -85,27 +85,31 @@ class TemplateGenerator
     public function get($object)
     {
         $include = $this->find_include_file($this->template);
-        if ($include === null) {
+        if ($include === NULL)
+        {
             file_put_contents('php://stderr', "Couldn't find template '$this->template'\n");
             exit(1);
         }
 
         //Prepare base data
-        if (is_array($object->content[0]->content)) {
+        if (is_array($object->content[0]->content))
+        {
             foreach ($object->content[0]->attributes->meta as $meta) {
                 $this->base_data[$meta->content->key->content] = $meta->content->value->content;
             }
+
             foreach ($object->content[0]->content as $value) {
-                if ($value->element === 'copy') {
-                    $this->base_data['DESC'] =
-                        preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform($value->content), 2);
+                if ($value->element === 'copy')
+                {
+                    $this->base_data['DESC'] = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform($value->content), 2);
                     continue;
                 }
 
                 $cat = new Category();
                 $cat = $cat->parse($value);
 
-                if ($value->meta->classes[0] === 'dataStructures') {
+                if ($value->meta->classes[0] === 'dataStructures')
+                {
                     $this->base_structures = array_merge($this->base_structures, $cat->structures);
                 } else {
                     $this->categories[] = $cat;
@@ -114,10 +118,14 @@ class TemplateGenerator
 
             $this->base_data['TITLE'] = $object->content[0]->meta->title;
         }
-        if ($this->sorting === UI::$PHPD_SORT_OPT_ALL || $this->sorting === UI::$PHPD_SORT_OPT_STRUCTURES) {
+
+        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_STRUCTURES)
+        {
             ksort($this->base_structures);
         }
-        if ($this->sorting === UI::$PHPD_SORT_OPT_ALL || $this->sorting === UI::$PHPD_SORT_OPT_WEBSERVICES) {
+
+        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_WEBSERVICES)
+        {
             foreach ($this->categories as &$category) {
                 usort($category->children, function ($a, $b) {
                     return strcmp($a->title, $b->title);
@@ -131,39 +139,47 @@ class TemplateGenerator
     /**
      * Get the path to a file to include
      *
-     * @param string $template The name of the template to include
+     * @param string $template  The name of the template to include
      * @param string $extension Extension of the file to include
      *
      * @return null|string File path or null if not found
      */
     function find_include_file($template, $extension = 'phtml')
     {
-        $include = null;
-        $fextension = '.'.$extension;
-        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension)) {
+        $include    = NULL;
+        $fextension = '.' . $extension;
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension))
+        {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension;
             return $include;
         }
-        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . $fextension)) {
+
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . $fextension))
+        {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . $fextension;
             return $include;
         }
-        if (stream_resolve_include_path($template . DIRECTORY_SEPARATOR . $template . $fextension)) {
+
+        if (stream_resolve_include_path($template . DIRECTORY_SEPARATOR . $template . $fextension))
+        {
             $include = $template . DIRECTORY_SEPARATOR . $template . $fextension;
             return $include;
         }
 
-        if (stream_resolve_include_path($template . $fextension)) {
+        if (stream_resolve_include_path($template . $fextension))
+        {
             $include = $template . $fextension;
             return $include;
         }
 
-        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $template . $fextension)) {
+        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $template . $fextension))
+        {
             $include = 'PHPDraft/Out/HTML/' . $template . $fextension;
             return $include;
         }
 
-        if ($include === null && $extension === 'phtml') {
+        if ($include === NULL && in_array($extension, ['phtml', 'js', 'css']))
+        {
             return $this->find_include_file('default', $extension);
         }
     }
@@ -206,15 +222,24 @@ class TemplateGenerator
      */
     function get_response_status($response)
     {
-        if ($response <= 299) {
+        if ($response <= 299)
+        {
             return 'text-success';
-        } elseif ($response > 299 && $response <= 399) {
+        } elseif ($response > 299 && $response <= 399)
+        {
             return 'text-warning';
         } else {
             return 'text-error';
         }
     }
 
+    /**
+     * Strip spaces from links to objects
+     *
+     * @param string $key key with potential spaces
+     *
+     * @return string key without spaces
+     */
     function strip_link_spaces($key)
     {
         return str_replace(' ', '-', strtolower($key));

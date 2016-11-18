@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Model;
 
-use PHPDraft\Model\Elements\DataStructureElement;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
 class Transition extends HierarchyElement
 {
@@ -29,7 +29,7 @@ class Transition extends HierarchyElement
     /**
      * URL variables
      *
-     * @var DataStructureElement|NULL
+     * @var ObjectStructureElement|NULL
      */
     public $url_variables = null;
 
@@ -57,7 +57,7 @@ class Transition extends HierarchyElement
     /**
      * Structures used (if any)
      *
-     * @var DataStructureElement[]
+     * @var ObjectStructureElement[]
      */
     public $structures = [];
 
@@ -87,13 +87,13 @@ class Transition extends HierarchyElement
         if (isset($object->attributes->hrefVariables)) {
 
             $deps                = [];
-            $struct              = new DataStructureElement();
+            $struct              = new ObjectStructureElement();
             $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
         }
 
         if (isset($object->attributes->data)) {
             $deps                 = [];
-            $struct               = new DataStructureElement();
+            $struct               = new ObjectStructureElement();
             $this->data_variables = $struct->parse($object->attributes->data, $deps);
         }
 

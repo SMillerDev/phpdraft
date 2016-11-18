@@ -47,7 +47,7 @@ class DrafterTest extends BaseTest
     public function testSetupCorrectly()
     {
         $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(true);
+        $property->setAccessible(TRUE);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
     }
 
@@ -100,7 +100,7 @@ class DrafterTest extends BaseTest
     public function testSetupWithoutDrafter()
     {
         $this->mock_function('shell_exec', 'return "";');
-        $class = new Drafter('hello');
+        new Drafter('hello');
         $this->unmock_function('shell_exec');
     }
 
@@ -117,8 +117,9 @@ class DrafterTest extends BaseTest
         $this->mock_function('json_last_error', 'return ' . JSON_ERROR_DEPTH . ';');
         $this->mock_function('json_last_error_msg', 'return "ERROR";');
         $this->class->parseToJson();
-        $this->expectOutputString("ERROR: invalid json in /tmp/drafter/index.json");
+        $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
         $this->unmock_function('json_last_error_msg');
         $this->unmock_function('json_last_error');
     }
+
 }

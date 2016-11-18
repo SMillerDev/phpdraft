@@ -9,7 +9,7 @@
 namespace PHPDraft\Model;
 
 use Michelf\MarkdownExtra;
-use PHPDraft\Model\Elements\DataStructureElement;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
 class HTTPResponse implements Comparable
 {
@@ -44,7 +44,7 @@ class HTTPResponse implements Comparable
     /**
      * Response structure
      *
-     * @var DataStructureElement[]
+     * @var ObjectStructureElement[]
      */
     public $structure = [];
 
@@ -132,7 +132,7 @@ class HTTPResponse implements Comparable
     {
         foreach ($objects as $object) {
             $deps   = [];
-            $struct = new DataStructureElement();
+            $struct = new ObjectStructureElement();
             $struct->parse($object, $deps);
             $struct->deps = $deps;
 

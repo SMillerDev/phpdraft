@@ -13,14 +13,19 @@ use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\Resource;
 use ReflectionClass;
 
+/**
+ * Class ResourceTest
+ * @covers PHPDraft\Model\Resource
+ */
 class ResourceTest extends BaseTest
 {
+
     /**
      * Set up
      */
     public function setUp()
     {
-        $parent = NULL;
+        $parent           = NULL;
         $this->class      = new Resource($parent);
         $this->reflection = new ReflectionClass('PHPDraft\Model\Resource');
     }
