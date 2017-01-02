@@ -19,18 +19,21 @@ class BaseTest extends PHPUnit_Framework_TestCase
     const FUNCTION_ID = '_phpdraftbu';
     /**
      * Test Class
+     *
      * @var mixed
      */
     protected $class;
 
     /**
      * Test reflection
+     *
      * @var ReflectionClass
      */
     protected $reflection;
 
     /**
      * Clear up tests
+     *
      * @return void
      */
     public function tearDown()
@@ -76,7 +79,7 @@ class BaseTest extends PHPUnit_Framework_TestCase
             runkit_function_copy($name, $name . self::FUNCTION_ID);
         }
 
-        runkit_function_redefine($name, '', 'return '.(is_string($return)?'"'.$return.'"':$return).'";');
+        runkit_function_redefine($name, '', 'return ' . (is_string($return) ? ('"' . $return . '"') : $return) . ';');
     }
 
     /**
@@ -93,6 +96,7 @@ class BaseTest extends PHPUnit_Framework_TestCase
             \uopz_backup($name);
             \uopz_function($name, function () {
                 global $return;
+
                 return $return;
             });
 
