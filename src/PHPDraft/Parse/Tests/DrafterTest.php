@@ -24,8 +24,8 @@ class DrafterTest extends BaseTest
      */
     public function setUp()
     {
-        $this->mock_function('sys_get_temp_dir', 'return "' . TEST_STATICS . '";');
-        $this->mock_function('shell_exec', 'return "/some/dir/drafter\n";');
+        $this->mock_function('sys_get_temp_dir', TEST_STATICS );
+        $this->mock_function('shell_exec', "/some/dir/drafter\n");
         $this->class      = new Drafter(file_get_contents(TEST_STATICS . '/drafter/apib'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
         $this->unmock_function('shell_exec');
@@ -64,7 +64,7 @@ class DrafterTest extends BaseTest
      */
     public function testParseToJSON()
     {
-        $this->mock_function('shell_exec', 'return "";');
+        $this->mock_function('shell_exec', "");
         file_put_contents(TEST_STATICS . '/drafter/index.json', file_get_contents(TEST_STATICS . '/drafter/json'));
         $this->class->parseToJson();
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
@@ -81,7 +81,7 @@ class DrafterTest extends BaseTest
      */
     public function testParseToJSONWithErrors()
     {
-        $this->mock_function('shell_exec', 'return "";');
+        $this->mock_function('shell_exec', "");
         file_put_contents(TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json_errors'));
         $this->class->parseToJson();
@@ -99,7 +99,7 @@ class DrafterTest extends BaseTest
      */
     public function testSetupWithoutDrafter()
     {
-        $this->mock_function('shell_exec', 'return "";');
+        $this->mock_function('shell_exec', "");
         new Drafter('hello');
         $this->unmock_function('shell_exec');
     }
@@ -114,8 +114,8 @@ class DrafterTest extends BaseTest
      */
     public function testParseToJSONWithInvalidJSON()
     {
-        $this->mock_function('json_last_error', 'return ' . JSON_ERROR_DEPTH . ';');
-        $this->mock_function('json_last_error_msg', 'return "ERROR";');
+        $this->mock_function('json_last_error', JSON_ERROR_DEPTH );
+        $this->mock_function('json_last_error_msg', "ERROR");
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
         $this->unmock_function('json_last_error_msg');
