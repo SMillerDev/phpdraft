@@ -13,9 +13,9 @@ namespace PHPDraft\Out;
  */
 class UI
 {
-    public static $PHPD_SORT_ALL         = 3;
+    public static $PHPD_SORT_ALL = 3;
     public static $PHPD_SORT_WEBSERVICES = 2;
-    public static $PHPD_SORT_STRUCTURES  = 1;
+    public static $PHPD_SORT_STRUCTURES = 1;
     protected $versionStringPrinted;
 
     /**
@@ -27,41 +27,34 @@ class UI
      */
     static function main($argv = [])
     {
-        $options = getopt('f:t:i:c:j:s:hvu');
+        $options = getopt('f:t:i:c:j:s:hvuyo');
 
-        if (!isset($argv[1]))
-        {
+        if (!isset($argv[1])) {
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
             self::help();
             exit(1);
         }
 
         $sorting = -1;
-        if (isset($options['s']))
-        {
+        if (isset($options['s'])) {
             $value = strtoupper($options['s']);
-            if (isset(UI::${'PHPD_SORT_' . $value}))
-            {
+            if (isset(UI::${'PHPD_SORT_' . $value})) {
                 $sorting = UI::${'PHPD_SORT_' . $value};
             }
         }
 
-        if (boolval(preg_match('/^\-/', $argv[1])))
-        {
-            if (isset($options['h']))
-            {
+        if (boolval(preg_match('/^\-/', $argv[1]))) {
+            if (isset($options['h'])) {
                 self::help();
                 exit(0);
             }
 
-            if (isset($options['v']))
-            {
+            if (isset($options['v'])) {
                 self::version();
                 exit(0);
             }
 
-            if (isset($options['f']))
-            {
+            if (isset($options['f'])) {
                 $file = $options['f'];
             } else {
                 file_put_contents('php://stderr', 'No file to parse' . PHP_EOL);
@@ -70,11 +63,14 @@ class UI
         } else {
             $file = $argv[1];
         }
+        if (isset($options['y']) || isset($options['o'])) {
+            define('DRAFTER_ONLINE_MODE', 1);
+        }
 
         $template = (isset($options['t']) && $options['t']) ? $options['t'] : 'default';
-        $image    = (isset($options['i']) && $options['i']) ? $options['i'] : NULL;
-        $css      = (isset($options['c']) && $options['c']) ? $options['i'] : NULL;
-        $js       = (isset($options['j']) && $options['j']) ? $options['i'] : NULL;
+        $image    = (isset($options['i']) && $options['i']) ? $options['i'] : null;
+        $css      = (isset($options['c']) && $options['c']) ? $options['i'] : null;
+        $js       = (isset($options['j']) && $options['j']) ? $options['i'] : null;
 
         return [
             'file'     => $file,
@@ -126,16 +122,6 @@ class UI
     }
 
     /**
-     * Print the version string
-     *
-     * @return void
-     */
-    private function printVersionString()
-    {
-        print self::version() . "\n\n";
-    }
-
-    /**
      * Print the series of the update
      *
      * @return string Series
@@ -144,8 +130,7 @@ class UI
      */
     public static function series()
     {
-        if (strpos(self::release_id(), '-'))
-        {
+        if (strpos(self::release_id(), '-')) {
             $version = explode('-', self::release_id())[0];
         } else {
             $version = self::release_id();
@@ -161,12 +146,39 @@ class UI
      */
     public static function getReleaseChannel()
     {
-        if (strpos(self::release_id(), '-') !== FALSE)
-        {
+        if (strpos(self::release_id(), '-') !== false) {
             return '-nightly';
         }
 
         return '';
+    }
+
+    /**
+     * Ask a question to the user
+     *
+     * @param string $message  The question
+     * @param array  $options  Possible answers
+     *
+     * @param string $positive The parameter that gives a positive outcome
+     *
+     * @return boolean
+     */
+    public static function ask($message, $options, $positive = 'y')
+    {
+        file_put_contents('php://stdout', $message);
+        do {
+            $selection = fgetc(STDIN);
+        } while (trim($selection) == '');
+
+        if (array_key_exists(strtolower($selection), $options)) {
+            return ($selection === $positive);
+        }
+        if (array_search($selection, $options)) {
+            return (array_search($selection, $options) === $positive);
+        }
+        file_put_contents('php://stderr', 'That answer wasn\'t expected, try again.'.PHP_EOL.PHP_EOL);
+
+        return UI::ask($message, $options, $positive);
     }
 
     /**
@@ -181,8 +193,7 @@ class UI
         $this->printVersionString();
         $latestVersion = file_get_contents('https://phar.phpdraft.de/latest-version-of/phpdraft');
         $isOutdated    = version_compare($latestVersion, self::release_id(), '>');
-        if ($isOutdated)
-        {
+        if ($isOutdated) {
             print "You are not using the latest version of PHPDraft.\n";
             print 'Use "phpdraft --self-upgrade" to install PHPDraft ' . $latestVersion . "\n";
         } else {
@@ -190,5 +201,15 @@ class UI
         }
 
         exit(0);
+    }
+
+    /**
+     * Print the version string
+     *
+     * @return void
+     */
+    private function printVersionString()
+    {
+        print self::version() . "\n\n";
     }
 }

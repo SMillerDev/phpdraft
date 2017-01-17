@@ -8,26 +8,8 @@
 
 namespace PHPDraft\Parse;
 
-class Drafter
+class Drafter extends BaseParser
 {
-    /**
-     * The API Blueprint output (JSON)
-     *
-     * @var string
-     */
-    public $json;
-    /**
-     * Temp directory
-     *
-     * @var array
-     */
-    protected $tmp_dir;
-    /**
-     * The API Blueprint input
-     *
-     * @var string
-     */
-    protected $apib;
 
     /**
      * The location of the drafter executable
@@ -43,7 +25,7 @@ class Drafter
      */
     public function __construct($apib)
     {
-        $this->apib = $apib;
+        parent::__construct($apib);
 
         if (!$this->location())
         {
@@ -69,45 +51,12 @@ class Drafter
     }
 
     /**
-     * Parse the API Blueprint text to JSON
+     * Parses the apib for the selected method
      *
-     * @return string API Blueprint text
+     * @return void
      */
-    public function parseToJson()
-    {
-        if (!file_exists($this->tmp_dir))
-        {
-            mkdir($this->tmp_dir);
-        }
-
-        file_put_contents($this->tmp_dir . '/index.apib', $this->apib);
-
+    protected function parse(){
         shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
-
-        if (json_last_error() !== JSON_ERROR_NONE)
-        {
-            file_put_contents('php://stdout', 'ERROR: invalid json in ' . $this->tmp_dir . '/index.json');
-            throw new \RuntimeException('Drafter generated invalid JSON (' . json_last_error_msg() . ')', 2);
-        }
-
-        $warnings = FALSE;
-        foreach ($this->json->content as $item) {
-            if ($item->element === 'annotation')
-            {
-                $warnings = TRUE;
-                $prefix   = strtoupper($item->meta->classes[0]);
-                $error    = $item->content;
-                file_put_contents('php://stdout', "$prefix: $error\n");
-            }
-        }
-
-        if ($warnings)
-        {
-            throw new \RuntimeException('Parsing encountered errors and stopped', 2);
-        }
-
-        return $this->json;
     }
-
 }
