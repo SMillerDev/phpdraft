@@ -143,6 +143,10 @@ class ObjectStructureElement implements StructureElement
                 $struct      = new ArrayStructureElement();
                 $this->value = $struct->parse($object, $dependencies);
                 break;
+            case 'enum':
+                $struct      = new EnumStructureElement();
+                $this->value = $struct->parse($object, $dependencies);
+                break;
             case 'object':
             default:
                 $value  = isset($object->content->value->content) ? $object->content->value->content : NULL;

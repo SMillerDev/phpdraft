@@ -35,16 +35,11 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
 
         if (isset($object->content) && is_array($object->content))
         {
-            foreach ($object->content as $value) {
-                $struct        = new RequestBodyElement();
-                $this->value[] = $struct->parse($value, $dependencies);
-            }
-
+            $this->parse_array_content($object, $dependencies);
             return $this;
         }
 
         $this->parse_common($object, $dependencies);
-
         if ($this->type === 'object')
         {
             $value       = isset($object->content->value->content) ? $object->content->value : NULL;
@@ -53,16 +48,21 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
 
             return $this;
         }
-
-        if ($this->type === 'array')
+        if (in_array($this->type, ['object', 'array', 'enum'], TRUE) || !in_array($this->type, self::DEFAULTS, TRUE))
         {
-            $this->value = new ArrayStructureElement();
-            $this->value = $this->value->parse($object, $dependencies);
-
+            $this->parse_value_structure($object, $dependencies);
             return $this;
         }
 
-        $this->value = isset($object->content->value->content) ? $object->content->value->content : NULL;
+        if (isset($object->content->value->content))
+        {
+            $this->value = $object->content->value->content;
+        } elseif (isset($object->content->value->attributes->samples))
+        {
+            $this->value = join(' | ', $object->content->value->attributes->samples);
+        } else {
+            $this->value = NULL;
+        }
 
         return $this;
     }
@@ -114,6 +114,38 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
                 return json_encode($object);
                 break;
         }
+    }
+
+    /**
+     * Parse $this->value as a structure based on given content
+     *
+     * @param mixed $object       APIB content
+     * @param array $dependencies Object dependencies
+     *
+     * @return void
+     */
+    protected function parse_value_structure($object, &$dependencies)
+    {
+        switch ($this->type) {
+            case 'array':
+                $struct      = new ArrayStructureElement();
+                $this->value = $struct->parse($object, $dependencies);
+                break;
+            case 'enum':
+                $struct      = new EnumStructureElement();
+                $this->value = $struct->parse($object, $dependencies);
+                break;
+            case 'object':
+            default:
+                $value  = isset($object->content->value->content) ? $object->content->value->content : NULL;
+                $struct = new RequestBodyElement();
+
+                $this->value = $struct->parse($value, $dependencies);
+                break;
+        }
+
+        unset($struct);
+        unset($value);
     }
 
     /**

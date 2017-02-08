@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Parse\Tests;
 
+use PHPDraft\Core\BaseTest;
 use PHPDraft\Parse\JsonToHTML;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -16,7 +17,7 @@ use ReflectionClass;
  * Class JsonToHTMLTest
  * @covers PHPDraft\Parse\JsonToHTML
  */
-class JsonToHTMLTest extends PHPUnit_Framework_TestCase
+class JsonToHTMLTest extends BaseTest
 {
     /**
      * Test Class
