@@ -150,7 +150,7 @@ class ObjectStructureElement implements StructureElement
             case 'object':
             default:
                 $value  = isset($object->content->value->content) ? $object->content->value->content : NULL;
-                $struct = new ObjectStructureElement();
+                $struct = $this->new_instance();
 
                 $this->value = $struct->parse($value, $dependencies);
                 break;
@@ -158,6 +158,10 @@ class ObjectStructureElement implements StructureElement
 
         unset($struct);
         unset($value);
+    }
+
+    protected function new_instance(){
+        return new ObjectStructureElement();
     }
 
     /**

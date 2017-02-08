@@ -116,45 +116,8 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
         }
     }
 
-    /**
-     * Parse $this->value as a structure based on given content
-     *
-     * @param mixed $object       APIB content
-     * @param array $dependencies Object dependencies
-     *
-     * @return void
-     */
-    protected function parse_value_structure($object, &$dependencies)
-    {
-        switch ($this->type) {
-            case 'array':
-                $struct      = new ArrayStructureElement();
-                $this->value = $struct->parse($object, $dependencies);
-                break;
-            case 'enum':
-                $struct      = new EnumStructureElement();
-                $this->value = $struct->parse($object, $dependencies);
-                break;
-            case 'object':
-            default:
-                $value  = isset($object->content->value->content) ? $object->content->value->content : NULL;
-                $struct = new RequestBodyElement();
-
-                $this->value = $struct->parse($value, $dependencies);
-                break;
-        }
-
-        unset($struct);
-        unset($value);
-    }
-
-    /**
-     *
-     * @return string
-     */
-    function __toString()
-    {
-        return parent::__toString();
+    protected function new_instance(){
+        return new RequestBodyElement();
     }
 
 }
