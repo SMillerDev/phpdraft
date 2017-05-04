@@ -9,6 +9,7 @@
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use QL\UriTemplate\UriTemplate;
 
 class Transition extends HierarchyElement
 {
@@ -160,24 +161,17 @@ class Transition extends HierarchyElement
             $url = $this->parent->href . $this->href;
         }
         if ($this->url_variables !== null) {
+            $tpl = new UriTemplate($url);
+            $vars = [];
             foreach ($this->url_variables->value as $value) {
                 $urlvalue = $value->value;
                 if (is_subclass_of($value, StructureElement::class)) {
                     $urlvalue = $value->strval();
                 }
 
-                $url =
-                    preg_replace('/({\?' . $value->key . '})/',
-                        '?<var class="url-param">' . $value->key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>',
-                        $url);
-                $url =
-                    preg_replace('/({\&' . $value->key . '})/',
-                        '&<var class="url-param">' . $value->key . '</var>=<var class="url-value">' . urlencode($urlvalue) . '</var>',
-                        $url);
-                $url =
-                    preg_replace('/({' . $value->key . '})/',
-                        '<var class="url-value">' . urlencode($urlvalue) . '</var>', $url);
+                $vars[$value->key] = $urlvalue;
             }
+            $url = $tpl->expand($vars);
         }
 
         if ($clean) {

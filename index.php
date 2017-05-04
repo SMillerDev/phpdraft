@@ -7,7 +7,8 @@ set_include_path(get_include_path() . ":" . __DIR__ . '/src/');
 /**
  * Set up required classes (with the autoloader)
  */
-require_once 'PHPDraft/Core/Autoloader.php';
+//require_once 'PHPDraft/Core/Autoloader.php';
+require_once 'vendor/autoload.php';
 use PHPDraft\In\ApibFileParser;
 use PHPDraft\Out\UI;
 use PHPDraft\Parse\Drafter;

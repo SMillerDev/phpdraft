@@ -61,11 +61,17 @@
                 <include name="**/*.js*"/>
                 <include name="**/*.css*"/>
             </fileset>
+            <fileset dir="vendor/michelf/php-markdown/">
+                <include name="**/*.php"/>
+            </fileset>
+            <fileset dir="vendor/ql/uri-template/src">
+                <include name="**/*.php"/>
+            </fileset>
         </copy>
         <copy todir="${basedir}/build/phar/phpdraft">
             <fileset dir="${basedir}">
-                <include name="**/*.json*"/>
                 <include name="**/index.php"/>
+                <exclude name="vendor/**"/>
             </fileset>
         </copy>
 
@@ -74,7 +80,7 @@
             <arg value="${type}"/>
         </exec>
 
-        <exec executable="phpab" taskname="phpab">
+        <exec executable="${basedir}vendor/bin/phpab" taskname="phpab">
             <arg value="--all"/>
             <arg value="--static"/>
             <arg value="--once"/>
@@ -88,7 +94,7 @@
             <arg path="${basedir}/build/phar"/>
         </exec>
 
-        <exec executable="phpab" taskname="phpab">
+        <exec executable="${basedir}vendor/bin/phpab" taskname="phpab">
             <arg value="--all"/>
             <arg value="--nolower"/>
             <arg value="--static"/>

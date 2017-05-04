@@ -16,9 +16,21 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "composer/installers": "~1.0",
+    "ql/uri-template": "1.*",
+    "michelf/php-markdown": "1.*"
   },
   "require-dev": {
-    "theseer/autoload": "^1.22"
+    "theseer/autoload": "^1.22",
+    "phpunit/phpunit": "5.7.*"
+  },
+  "autoload": {
+    "psr-4": { "PHPDraft\\": "src/PHPDraft" }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
   }
 }
