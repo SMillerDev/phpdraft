@@ -72,7 +72,7 @@ Return the information for the Person
 PHPDraft requires [drafter](https://github.com/apiaryio/drafter) to be installed. Refer to the drafter page for the installation details.
 
 ## Building an executable
-Install [phpab](https://github.com/theseer/Autoload) and put it in your path.
+Install the binary dependencies with composer (`composer install`).
 Run `ant phar` or `ant phar-nightly`
 
 ## Libraries
