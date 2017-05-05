@@ -63,7 +63,10 @@
             </fileset>
             <fileset dir="vendor/michelf/php-markdown/">
                 <include name="**/*.php"/>
+                <exclude name="**/Readme.php"/>
             </fileset>
+        </copy>
+        <copy todir="${basedir}/build/phar/phpdraft/src/QL">
             <fileset dir="vendor/ql/uri-template/src">
                 <include name="**/*.php"/>
             </fileset>
@@ -74,6 +77,13 @@
                 <exclude name="vendor/**"/>
             </fileset>
         </copy>
+
+        <exec executable="perl">
+            <arg value="-pi"/>
+            <arg value="-e"/>
+            <arg value="s/\'vendor\/autoload.php/__DIR__\ .\ \'src\/PHPDraft\/Core\/Autoloader.php/g"/>
+            <arg value="${basedir}/build/phar/phpdraft/index.php"/>
+        </exec>
 
         <exec executable="${basedir}/build/phar-version.php" outputproperty="_version">
             <arg value="${version}"/>
@@ -109,6 +119,33 @@
         </exec>
 
         <chmod file="${basedir}/build/phpdraft-${_version}.phar" perm="ugo+rx"/>
+    </target>
+
+    <target name="-dependencies-installed">
+        <available file="${basedir}/composer.lock" property="dependencies-installed"/>
+    </target>
+
+    <target name="install-dependencies" unless="dependencies-installed" depends="-dependencies-installed,validate-composer-json" description="Install dependencies with Composer">
+        <exec executable="composer" taskname="composer">
+            <arg value="update"/>
+            <arg value="--no-interaction"/>
+            <arg value="--no-progress"/>
+            <arg value="--no-ansi"/>
+            <arg value="--no-suggest"/>
+            <arg value="--optimize-autoloader"/>
+            <arg value="--prefer-stable"/>
+        </exec>
+    </target>
+
+    <target name="validate-composer-json" unless="validate-composer-json.done" description="Validate composer.json">
+        <exec executable="composer" failonerror="true" taskname="composer">
+            <arg value="validate"/>
+            <arg value="--no-check-lock"/>
+            <arg value="--strict"/>
+            <arg value="${basedir}/composer.json"/>
+        </exec>
+
+        <property name="validate-composer-json.done" value="true"/>
     </target>
 
     <target name="-phar-determine-version">
