@@ -81,7 +81,7 @@
         <exec executable="perl">
             <arg value="-pi"/>
             <arg value="-e"/>
-            <arg value="s/\'vendor\/autoload.php/__DIR__\ .\ \'src\/PHPDraft\/Core\/Autoloader.php/g"/>
+            <arg value="s/\'vendor\/autoload.php/__DIR__\ .\ \'\/src\/PHPDraft\/Core\/Autoloader.php/g"/>
             <arg value="${basedir}/build/phar/phpdraft/index.php"/>
         </exec>
 
