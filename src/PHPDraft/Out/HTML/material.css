@@ -51,3 +51,8 @@ h2.mdl-card__title-text {
 table.table p {
     margin-bottom: 0px;
 }
+
+.showSearch {
+    background: #122b40 center / cover;
+    color: #cccccc;
+}
