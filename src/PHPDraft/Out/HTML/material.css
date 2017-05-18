@@ -1,0 +1,53 @@
+.demo-layout-transparent {
+    background: rgba(0,0,0,0) center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+       your background is light. */
+    color: white;
+}
+main {
+    width: 100%;
+}
+
+.demo-card-wide.mdl-card {
+    width: 100%;
+    margin-bottom: 30px;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: #cccccc center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+h2.mdl-card__title-text {
+    display: inline-block;
+    width: 100%;
+}
+.page-content {
+    width: 80%;
+    margin: 0px auto;
+}
+.pull-right {
+    text-align: right !important;
+    float: right !important;
+}
+
+.text-success {
+    color: #3c763d;
+}
+
+.text-warning {
+    color: #8a6d3b;
+}
+
+.text-error {
+    color: #761c19;
+}
+
+table.table p {
+    margin-bottom: 0px;
+}

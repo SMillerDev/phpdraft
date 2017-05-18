@@ -1,5 +1,7 @@
 FORMAT: 1A
 HOST: https://owner-api.teslamotors.com
+EXTRA_HOSTS: https://test.owner-api.teslamotors.com
+SOMETHING: INFO
 
 # Tesla Model S JSON API
 This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.
@@ -289,11 +291,13 @@ locations in navigation.
 
             Authorization: Bearer {access_token}
 
++ Attributes
+    + on: true (boolean) - Whether to enable or disable valet mode.
+    + password: 1234 (number) - (optional) A 4 digit PIN code to unlock the car.
+
 + Parameters
 
     + vehicle_id: `1` (number) - The id of the Vehicle.
-    + on: true (boolean) - Whether to enable or disable valet mode.
-    + password: 1234 (number) - (optional) A 4 digit PIN code to unlock the car.
 
 + Response 200 (application/json)
 
@@ -695,10 +699,12 @@ Open the trunk or frunk. Currently inoperable.
 
             Authorization: Bearer {access_token}
 
++ Attributes
+    + which_trunk: `rear` (string) - The trunk to open. `rear` is the only one known currently.
+
 + Parameters
 
     + vehicle_id: `1` (number) - The id of the Vehicle.
-    + which_trunk: `rear` (string) - The trunk to open. `rear` is the only one known currently.
 
 + Response 200 (application/json)
 

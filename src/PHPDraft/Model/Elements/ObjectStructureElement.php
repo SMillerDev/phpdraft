@@ -214,7 +214,7 @@ class ObjectStructureElement implements StructureElement
 
         if (is_array($this->value))
         {
-            $return = '<table class="table table-striped">';
+            $return = '<table class="table table-striped mdl-data-table mdl-js-data-table ">';
             foreach ($this->value as $object) {
                 if (is_string($object)
                     || in_array(get_class($object), [

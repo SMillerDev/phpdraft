@@ -6,11 +6,6 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 use PHPDraft\Out\Minifier;
-
-/**
- * @var \PHPDraft\Model\HierarchyElement[]
- */
-$base = $this->categories;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +49,7 @@ $base = $this->categories;
     </div>
     <div class="row">
         <div class="col-md-2 method-nav">
-            <?php foreach ($base as $category): ?>
+            <?php foreach ($this->categories as $category): ?>
                 <?php if ($category->children !== []): ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -121,7 +116,7 @@ $base = $this->categories;
             <div class="main-url"><?= $this->base_data['HOST']; ?></div>
         </div>
         <div class="col-md-10">
-            <?php foreach ($base as $category): ?>
+            <?php foreach ($this->categories as $category): ?>
                 <?php if (!empty($category->title)): ?>
                     <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
                 <?php endif; ?>
