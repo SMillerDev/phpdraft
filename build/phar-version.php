@@ -7,7 +7,7 @@ if (!isset($argv[1]) || !isset($argv[2])) {
 file_put_contents(
     __DIR__ . '/phar/phpdraft/index.php',
     str_replace(
-        "define('VERSION', '');",
+        "define('VERSION', '0');",
         "define('VERSION', '" . $argv[1] . "');",
         file_get_contents(__DIR__ . '/phar/phpdraft/index.php')
     )
