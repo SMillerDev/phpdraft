@@ -72,7 +72,7 @@ abstract class BaseParser
 
         if (json_last_error() !== JSON_ERROR_NONE)
         {
-            file_put_contents('php://stdout', 'ERROR: invalid json in ' . $this->tmp_dir . '/index.json');
+            file_put_contents('php://stderr', 'ERROR: invalid json in ' . $this->tmp_dir . '/index.json');
             throw new \RuntimeException('Drafter generated invalid JSON (' . json_last_error_msg() . ')', 2);
         }
 
@@ -82,6 +82,7 @@ abstract class BaseParser
                 $warnings = true;
                 $prefix   = strtoupper($item->meta->classes[0]);
                 $error    = $item->content;
+                file_put_contents('php://stderr', "$prefix: $error\n");
                 file_put_contents('php://stdout', "<pre>$prefix: $error</pre>\n");
             }
         }
