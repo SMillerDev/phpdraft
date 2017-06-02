@@ -23,7 +23,7 @@ abstract class BaseParser
     /**
      * Temp directory
      *
-     * @var array
+     * @var string
      */
     protected $tmp_dir;
 
