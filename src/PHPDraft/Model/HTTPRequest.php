@@ -137,21 +137,23 @@ class HTTPRequest implements Comparable
         $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : null;
 
         $options[] = '-X' . $this->method;
-        if (is_string($this->body)) {
-            $options[] = '--data-binary "' . $this->body . '"';
+        if (empty($this->body)){
+            //NO-OP
+        }elseif (is_string($this->body)) {
+            $options[] = '--data-binary ' . escapeshellarg($this->body);
         } elseif (is_array($this->body)) {
-            $options[] = '--data-binary "' . join('', $this->body) . '"';
+            $options[] = '--data-binary ' . escapeshellarg(join('', $this->body));
         } elseif (is_subclass_of($this->struct, StructureElement::class)) {
             foreach ($this->struct->value as $body) {
-                $options[] = '--data-binary "' . strip_tags($body->print_request($type)) . '"';
+                $options[] = '--data-binary ' . escapeshellarg(strip_tags($body->print_request($type)));
             }
         }
         foreach ($this->headers as $header => $value) {
-            $options[] = '-H "' . $header . ': ' . $value . '"';
+            $options[] = '-H ' . escapeshellarg($header . ': ' . $value);
         }
         $options = array_merge($options, $additional);
 
-        return htmlspecialchars('curl ' . join(' ', $options) . ' "' . $this->parent->build_url($base_url, true) . '"');
+        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . escapeshellarg($this->parent->build_url($base_url, true)));
     }
 
 
