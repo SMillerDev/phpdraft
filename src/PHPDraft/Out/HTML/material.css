@@ -27,6 +27,11 @@ h2.mdl-card__title-text {
     display: inline-block;
     width: 100%;
 }
+li.mdl-list__ite code{
+    font-size: 12px;
+    font-weight: normal;
+}
+
 .page-content {
     width: 80%;
     margin: 0px auto;

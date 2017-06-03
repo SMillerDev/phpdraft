@@ -157,7 +157,6 @@ class HTTPRequest implements Comparable
         return htmlspecialchars('curl ' . join(' ', $options) . ' ' . escapeshellarg($this->parent->build_url($base_url, true)));
     }
 
-
     /**
      * Check if item is the same as other item
      *

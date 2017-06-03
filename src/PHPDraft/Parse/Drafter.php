@@ -28,7 +28,7 @@ class Drafter extends BaseParser
 
         if (!$this->location())
         {
-            throw new \RuntimeException('Drafter was not installed!', 1);
+            throw new ResourceException('Drafter was not installed!', 1);
         }
 
         $this->drafter = $this->location();

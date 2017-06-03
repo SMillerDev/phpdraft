@@ -91,8 +91,7 @@ class ApibFileParser
     private function file_check($filename)
     {
         if (!file_exists($filename)) {
-            file_put_contents('php://stderr', "API File not found: $filename\n");
-            exit(1);
+            throw new \RuntimeException("API File not found: $filename", 1);
         }
     }
 

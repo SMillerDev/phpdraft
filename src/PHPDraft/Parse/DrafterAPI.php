@@ -29,7 +29,7 @@ class DrafterAPI extends BaseParser
         curl_exec($ch);
 
         if (curl_errno($ch) !== CURLE_OK) {
-            throw new \RuntimeException('Drafter webservice is not available!', 1);
+            throw new ResourceException('Drafter webservice is not available!', 1);
         }
         curl_close($ch);
     }
@@ -46,7 +46,7 @@ class DrafterAPI extends BaseParser
         $response = curl_exec($ch);
 
         if (curl_errno($ch) !== 0) {
-            throw new \RuntimeException('Drafter webservice failed to parse input', 1);
+            throw new ResourceException('Drafter webservice failed to parse input', 1);
         }
 
         $this->json = json_decode($response);

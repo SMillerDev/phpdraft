@@ -47,7 +47,7 @@ class UI
         if (!isset($argv[1])) {
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
             self::help();
-            exit(1);
+            throw new \RuntimeException('', 1);
         }
 
         $sorting = -1;
@@ -61,19 +61,18 @@ class UI
         if (boolval(preg_match('/^\-/', $argv[1]))) {
             if (isset($options['h'])) {
                 self::help();
-                exit(0);
+                throw new \RuntimeException('', 0);
             }
 
             if (isset($options['v'])) {
                 self::version();
-                exit(0);
+                throw new \RuntimeException('', 0);
             }
 
             if (isset($options['f'])) {
                 $file = $options['f'];
             } else {
-                file_put_contents('php://stderr', 'No file to parse' . PHP_EOL);
-                exit(1);
+                throw new \RuntimeException('No file to parse', 1);
             }
         } else {
             $file = $argv[1];

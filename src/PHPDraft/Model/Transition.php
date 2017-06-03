@@ -87,6 +87,7 @@ class Transition extends HierarchyElement
 
         $this->href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
 
+
         if (isset($object->attributes->hrefVariables)) {
 
             $deps                = [];

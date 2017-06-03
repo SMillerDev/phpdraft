@@ -87,8 +87,7 @@ class TemplateGenerator
         $include = $this->find_include_file($this->template);
         if ($include === NULL)
         {
-            file_put_contents('php://stderr', "Couldn't find template '$this->template'\n");
-            exit(1);
+            throw new \RuntimeException("Couldn't find template '$this->template'", 1);
         }
 
         //Prepare base data
