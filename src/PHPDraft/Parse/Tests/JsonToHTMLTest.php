@@ -59,4 +59,23 @@ class JsonToHTMLTest extends BaseTest
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $property->getValue($this->class));
     }
 
+    /**
+     * Tests if the constructor sets the property correctly
+     */
+    public function testGetHTML()
+    {
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html_basic'));
+        $this->class->get_html();
+    }
+
+    /**
+     * Tests if the constructor sets the property correctly
+     */
+    public function testGetHTMLAdvanced()
+    {
+        $return = $this->class->get_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
+        $this->assertSame([['test.css', 'index.css']], $return->css);
+        $this->assertSame([['index.js', 'test.js']], $return->js);
+    }
+
 }

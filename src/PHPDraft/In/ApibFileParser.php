@@ -28,17 +28,30 @@ class ApibFileParser
     protected $location;
 
     /**
+     * Filename to parse
+     *
+     * @var
+     */
+    private $filename;
+
+    /**
      * FileParser constructor.
      *
      * @param string $filename File to parse
      */
     public function __construct($filename = 'index.apib')
     {
-        $this->location = pathinfo($filename, PATHINFO_DIRNAME) . '/';
+        $this->filename = $filename;
+        $this->location = pathinfo($this->filename, PATHINFO_DIRNAME) . '/';
 
         set_include_path(get_include_path() . ':' . $this->location);
+    }
 
-        $this->full_apib = $this->get_apib($filename);
+    public function parse()
+    {
+        $this->full_apib = $this->get_apib($this->filename);
+
+        return $this;
     }
 
     /**
@@ -49,7 +62,7 @@ class ApibFileParser
      *
      * @return string The full API blueprint file
      */
-    function get_apib($filename)
+    private function get_apib($filename)
     {
         $this->file_check($filename);
         $file    = file_get_contents($filename);
@@ -90,7 +103,7 @@ class ApibFileParser
      *
      * @return string The schema as a string
      */
-    function get_schema($url)
+    private function get_schema($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

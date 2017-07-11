@@ -2,11 +2,11 @@
 /**
  * This file contains the StructureElement.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model\Elements
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
-namespace PHPDraft\Model;
+namespace PHPDraft\Model\Elements;
 
 
 interface StructureElement
@@ -24,7 +24,7 @@ interface StructureElement
      * @param \stdClass $object       An object to parse
      * @param array     $dependencies Dependencies of this object
      *
-     * @return StructureElement self reference
+     * @return self self reference
      */
     function parse($object, &$dependencies);
 

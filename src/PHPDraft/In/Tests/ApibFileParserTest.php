@@ -14,7 +14,7 @@ use ReflectionClass;
 
 /**
  * Class ApibFileParserTest
- * @covers PHPDraft\In\ApibFileParser
+ * @covers \PHPDraft\In\ApibFileParser
  */
 class ApibFileParserTest extends BaseTest
 {
@@ -33,11 +33,49 @@ class ApibFileParserTest extends BaseTest
      * Test if setup is successful
      * @return void
      */
-    public function testSetup()
+    public function testLocationSetup()
     {
         $property = $this->reflection->getProperty('location');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertSame(__DIR__ . '/', $property->getValue($this->class));
+    }
+
+    /**
+     * Test if setup is successful
+     * @return void
+     */
+    public function testFilenameSetup()
+    {
+        $property = $this->reflection->getProperty('filename');
+        $property->setAccessible(true);
+        $this->assertSame(__DIR__ . '/ApibFileParserTest.php', $property->getValue($this->class));
+    }
+
+    /**
+     * Test if setup is successful
+     * @return void
+     */
+    public function testParseBasic()
+    {
+        $property = $this->reflection->getProperty('filename');
+        $property->setAccessible(true);
+        $property->setValue($this->class, TEST_STATICS . '/drafter/including_apib');
+        $loc_property = $this->reflection->getProperty('location');
+        $loc_property->setAccessible(true);
+        $loc_property->setValue($this->class, TEST_STATICS . '/drafter/');
+
+        $this->mock_function('curl_exec', 'hello');
+        $this->class->parse();
+        $this->unmock_function('curl_exec');
+
+        $full_property = $this->reflection->getProperty('full_apib');
+        $full_property->setAccessible(true);
+
+        $text = "FORMAT: 1A\nHOST: https://owner-api.teslamotors.com\nEXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
+        $text .="# Tesla Model S JSON API\nThis is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.\n\nTEST\nhello";
+
+        $this->assertSame($text, $full_property->getValue($this->class));
+        $this->assertSame($text, $this->class->__toString());
     }
 
 }

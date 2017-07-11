@@ -2,71 +2,17 @@
 /**
  * This file contains the RequestBodyElement
  *
- * @package PHPDraft\Model
+ * @package PHPDraft\Model\Elements
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model\Elements;
 
-use PHPDraft\Model\StructureElement;
-
 /**
  * Class RequestBodyElement
  */
-class RequestBodyElement extends ObjectStructureElement implements StructureElement
+class RequestBodyElement extends ObjectStructureElement
 {
-
-    /**
-     * Parse a JSON object to a data structure
-     *
-     * @param \stdClass $object       An object to parse
-     * @param array     $dependencies Dependencies of this object
-     *
-     * @return ObjectStructureElement self reference
-     */
-    public function parse($object, &$dependencies)
-    {
-        if (empty($object) || !isset($object->content))
-        {
-            return $this;
-        }
-
-        $this->element = $object->element;
-
-        if (isset($object->content) && is_array($object->content))
-        {
-            $this->parse_array_content($object, $dependencies);
-            return $this;
-        }
-
-        $this->parse_common($object, $dependencies);
-        if ($this->type === 'object')
-        {
-            $value       = isset($object->content->value->content) ? $object->content->value : NULL;
-            $this->value = new RequestBodyElement();
-            $this->value = $this->value->parse($value, $dependencies);
-
-            return $this;
-        }
-        if (in_array($this->type, ['object', 'array', 'enum'], TRUE) || !in_array($this->type, self::DEFAULTS, TRUE))
-        {
-            $this->parse_value_structure($object, $dependencies);
-            return $this;
-        }
-
-        if (isset($object->content->value->content))
-        {
-            $this->value = $object->content->value->content;
-        } elseif (isset($object->content->value->attributes->samples))
-        {
-            $this->value = join(' | ', $object->content->value->attributes->samples);
-        } else {
-            $this->value = NULL;
-        }
-
-        return $this;
-    }
-
     /**
      * Print the request body as a string
      *
@@ -80,14 +26,16 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
         {
             $return = '<code class="request-body">';
             $list   = [];
-            foreach ($this->value as $object) {
+            foreach ($this->value as $object)
+            {
                 if (get_class($object) === self::class)
                 {
                     $list[] = $object->print_request($type);
                 }
             }
 
-            switch ($type) {
+            switch ($type)
+            {
                 case 'application/x-www-form-urlencoded':
                     $return .= join('&', $list);
                     break;
@@ -103,7 +51,8 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
 
         $value = (empty($this->value)) ? '?' : $this->value;
 
-        switch ($type) {
+        switch ($type)
+        {
             case 'application/x-www-form-urlencoded':
                 return $this->key . '=<span>' . $value . '</span>';
                 break;
@@ -116,7 +65,12 @@ class RequestBodyElement extends ObjectStructureElement implements StructureElem
         }
     }
 
-    protected function new_instance(){
+    /**
+     * Return a new instance
+     * @return RequestBodyElement
+     */
+    protected function new_instance()
+    {
         return new RequestBodyElement();
     }
 

@@ -79,7 +79,9 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
             runkit_function_copy($name, $name . self::FUNCTION_ID);
         }
 
-        runkit_function_redefine($name, '', 'return ' . (is_string($return) ? ('"' . $return . '"') : $return) . ';');
+        runkit_function_redefine($name, function () use ($return) {
+                return $return;
+        });
     }
 
     /**
@@ -94,9 +96,7 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
     {
         if (PHP_MAJOR_VERSION < 7) {
             \uopz_backup($name);
-            \uopz_function($name, function () {
-                global $return;
-
+            \uopz_function($name, function () use ($return){
                 return $return;
             });
 
@@ -157,5 +157,25 @@ abstract class BaseTest extends PHPUnit_Framework_TestCase
         }
 
         uopz_unset_return($name);
+    }
+
+    /**
+     * Redefine a constant
+     *
+     * @param string $name  Constant to redefine
+     * @param mixed  $value Value to define to
+     */
+    public function redefine($name, $value)
+    {
+        if (extension_loaded('runkit') === true) {
+            \runkit_constant_redefine($name, $value);
+            return;
+        }
+
+        if (extension_loaded('uopz') === true) {
+            \uopz_redefine($name, $value);
+            return;
+        }
+
     }
 }

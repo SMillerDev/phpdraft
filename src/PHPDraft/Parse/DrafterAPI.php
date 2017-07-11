@@ -2,12 +2,9 @@
 /**
  * This file contains the DrafterAPI.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Parse
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
-
-//TODO: Change this
-
 namespace PHPDraft\Parse;
 
 
@@ -31,12 +28,10 @@ class DrafterAPI extends BaseParser
 
         curl_exec($ch);
 
-        if (curl_errno($ch) !== 0) {
+        if (curl_errno($ch) !== CURLE_OK) {
             throw new \RuntimeException('Drafter webservice is not available!', 1);
         }
         curl_close($ch);
-
-        $this->tmp_dir = sys_get_temp_dir() . '/drafter';
     }
 
     /**

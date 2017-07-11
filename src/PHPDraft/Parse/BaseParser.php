@@ -2,15 +2,15 @@
 /**
  * This file contains the BaseParser.php
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Parse
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
-
-//TODO: Change this
-
 namespace PHPDraft\Parse;
 
-
+/**
+ * Class BaseParser
+ * @package PHPDraft\Parse
+ */
 abstract class BaseParser
 {
     /**
@@ -42,6 +42,7 @@ abstract class BaseParser
     public function __construct($apib)
     {
         $this->apib = $apib;
+        $this->tmp_dir = sys_get_temp_dir() . '/drafter';
     }
 
     /**
@@ -63,7 +64,7 @@ abstract class BaseParser
     public function parseToJson()
     {
         if (!file_exists($this->tmp_dir)) {
-            mkdir($this->tmp_dir);
+            mkdir($this->tmp_dir, 0777, TRUE);
         }
 
         file_put_contents($this->tmp_dir . '/index.apib', $this->apib);

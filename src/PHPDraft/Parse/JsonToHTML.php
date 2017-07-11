@@ -57,7 +57,7 @@ class JsonToHTML
      * @param string|null $css      CSS to load
      * @param string|null $js       JS to load
      *
-     * @return string HTML template to display
+     * @return TemplateGenerator HTML template to display
      */
     public function get_html($template = 'default', $image = NULL, $css = NULL, $js = NULL)
     {
@@ -68,14 +68,16 @@ class JsonToHTML
             $gen->css[] = explode(',', $css);
         }
 
-        if(!empty($css))
+        if(!empty($js))
         {
             $gen->js[] = explode(',', $js);
         }
 
         $gen->sorting = $this->sorting;
 
-        return $gen->get($this->object);
+        $gen->get($this->object);
+
+        return $gen;
     }
 
 }

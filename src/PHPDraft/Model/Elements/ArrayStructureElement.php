@@ -8,12 +8,10 @@
 
 namespace PHPDraft\Model\Elements;
 
-use PHPDraft\Model\StructureElement;
-
 /**
  * Class ArrayStructureElement
  */
-class ArrayStructureElement extends ObjectStructureElement implements StructureElement
+class ArrayStructureElement extends BasicStructureElement
 {
 
     /**
@@ -22,7 +20,7 @@ class ArrayStructureElement extends ObjectStructureElement implements StructureE
      * @param \stdClass $object       APIb Item to parse
      * @param array     $dependencies List of dependencies build
      *
-     * @return $this
+     * @return self Self reference
      */
     public function parse($object, &$dependencies)
     {
@@ -66,7 +64,7 @@ class ArrayStructureElement extends ObjectStructureElement implements StructureE
         }
 
         foreach ($this->value as $item) {
-            $type = (in_array($this->value, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
+            $type = (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
                         strtolower($item)) . '">' . $item . '</a>';
 
             $return .= '<li class="list-group-item">' . $type . '</li>';
@@ -77,4 +75,13 @@ class ArrayStructureElement extends ObjectStructureElement implements StructureE
         return $return;
     }
 
+    /**
+     * Get a new instance of a class
+     *
+     * @return self
+     */
+    protected function new_instance()
+    {
+        return new ArrayStructureElement();
+    }
 }
