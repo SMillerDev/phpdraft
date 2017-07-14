@@ -13,10 +13,25 @@ namespace PHPDraft\Out;
  */
 class UI
 {
+    /**
+     * Sets sorting to all parts
+     *
+     * @var int
+     */
     public static $PHPD_SORT_ALL = 3;
+
+    /**
+     * Sets sorting to all webservices
+     *
+     * @var int
+     */
     public static $PHPD_SORT_WEBSERVICES = 2;
+
+    /**
+     * Sets sorting to all data structures
+     * @var int
+     */
     public static $PHPD_SORT_STRUCTURES = 1;
-    protected $versionStringPrinted;
 
     /**
      * Serve all options
@@ -25,7 +40,7 @@ class UI
      *
      * @return array results of the invocation
      */
-    static function main($argv = [])
+    public static function main($argv = [])
     {
         $options = getopt('f:t:i:c:j:s:hvuyo');
 
@@ -87,7 +102,7 @@ class UI
      *
      * @return void
      */
-    static function help()
+    public function help()
     {
         echo 'This is a parser for API Blueprint files in PHP.' . PHP_EOL . PHP_EOL;
         echo "The following options can be used:.\n";
@@ -105,7 +120,7 @@ class UI
      *
      * @return void
      */
-    static function version()
+    public function version()
     {
         $version = self::release_id();
         echo 'PHPDraft: ' . $version;
@@ -116,7 +131,7 @@ class UI
      *
      * @return string
      */
-    static function release_id()
+    public function release_id()
     {
         return (VERSION === '0') ? @exec('git describe --tags 2>&1') : VERSION;
     }
@@ -125,10 +140,8 @@ class UI
      * Print the series of the update
      *
      * @return string Series
-     *
-     * @since Method available since Release 1.4
      */
-    public static function series()
+    public function series()
     {
         if (strpos(self::release_id(), '-')) {
             $version = explode('-', self::release_id())[0];
@@ -140,11 +153,11 @@ class UI
     }
 
     /**
-     * @return string
+     * Get the manner of releasing
      *
-     * @since Method available since Release 4.0.0
+     * @return string
      */
-    public static function getReleaseChannel()
+    public function getReleaseChannel()
     {
         if (strpos(self::release_id(), '-') !== false) {
             return '-nightly';
@@ -179,37 +192,5 @@ class UI
         file_put_contents('php://stderr', 'That answer wasn\'t expected, try again.'.PHP_EOL.PHP_EOL);
 
         return UI::ask($message, $options, $positive);
-    }
-
-    /**
-     * Handle the check for a version
-     *
-     * @since Method available since Release 1.4
-     *
-     * @return void
-     */
-    protected function handleVersionCheck()
-    {
-        $this->printVersionString();
-        $latestVersion = file_get_contents('https://phar.phpdraft.de/latest-version-of/phpdraft');
-        $isOutdated    = version_compare($latestVersion, self::release_id(), '>');
-        if ($isOutdated) {
-            print "You are not using the latest version of PHPDraft.\n";
-            print 'Use "phpdraft --self-upgrade" to install PHPDraft ' . $latestVersion . "\n";
-        } else {
-            print "You are using the latest version of PHPDraft.\n";
-        }
-
-        exit(0);
-    }
-
-    /**
-     * Print the version string
-     *
-     * @return void
-     */
-    private function printVersionString()
-    {
-        print self::version() . "\n\n";
     }
 }

@@ -8,58 +8,11 @@
 
 namespace PHPDraft\Model\Elements;
 
-use Michelf\MarkdownExtra;
-use PHPDraft\Model\StructureElement;
-
 /**
  * Class ObjectStructureElement
  */
-class ObjectStructureElement implements StructureElement
+class ObjectStructureElement extends BasicStructureElement
 {
-
-    /**
-     * Object key
-     *
-     * @var string
-     */
-    public $key;
-    /**
-     * Object JSON type
-     *
-     * @var mixed
-     */
-    public $type;
-    /**
-     * Object description
-     *
-     * @var string
-     */
-    public $description;
-    /**
-     * Type of element
-     *
-     * @var string
-     */
-    public $element = NULL;
-    /**
-     * Object value
-     *
-     * @var mixed|ObjectStructureElement[]
-     */
-    public $value = NULL;
-    /**
-     * Object status (required|optional)
-     *
-     * @var string
-     */
-    public $status = '';
-    /**
-     * List of object dependencies
-     *
-     * @var string[]
-     */
-    public $deps;
-
     /**
      * Parse a JSON object to a data structure
      *
@@ -89,43 +42,24 @@ class ObjectStructureElement implements StructureElement
         if (in_array($this->type, ['object', 'array', 'enum'], TRUE) || !in_array($this->type, self::DEFAULTS, TRUE))
         {
             $this->parse_value_structure($object, $dependencies);
+
             return $this;
         }
 
         if (isset($object->content->value->content))
         {
             $this->value = $object->content->value->content;
-        } elseif (isset($object->content->value->attributes->samples))
+        }
+        elseif (isset($object->content->value->attributes->samples))
         {
             $this->value = join(' | ', $object->content->value->attributes->samples);
-        } else {
+        }
+        else
+        {
             $this->value = NULL;
         }
 
         return $this;
-    }
-
-    /**
-     * Parse common fields to give context
-     *
-     * @param mixed $object       APIB object
-     * @param array $dependencies Object dependencies
-     *
-     * @return void
-     */
-    protected function parse_common($object, &$dependencies)
-    {
-        $this->key         = $object->content->key->content;
-        $this->type        = $object->content->value->element;
-        $this->description = isset($object->meta->description) ? htmlentities($object->meta->description) : NULL;
-        $this->status      = isset($object->attributes->typeAttributes) ? join(', ', $object->attributes->typeAttributes) : NULL;
-
-        $this->description_as_html();
-
-        if (!in_array($this->type, self::DEFAULTS))
-        {
-            $dependencies[] = $this->type;
-        }
     }
 
     /**
@@ -138,7 +72,8 @@ class ObjectStructureElement implements StructureElement
      */
     protected function parse_value_structure($object, &$dependencies)
     {
-        switch ($this->type) {
+        switch ($this->type)
+        {
             case 'array':
                 $struct      = new ArrayStructureElement();
                 $this->value = $struct->parse($object, $dependencies);
@@ -160,7 +95,13 @@ class ObjectStructureElement implements StructureElement
         unset($value);
     }
 
-    protected function new_instance(){
+    /**
+     * Get a new instance of a class
+     *
+     * @return ObjectStructureElement
+     */
+    protected function new_instance()
+    {
         return new ObjectStructureElement();
     }
 
@@ -179,8 +120,10 @@ class ObjectStructureElement implements StructureElement
             if ($this->element === 'enum')
             {
                 $struct = new EnumStructureElement();
-            } else {
-                $struct = new ObjectStructureElement();
+            }
+            else
+            {
+                $struct = $this->new_instance();
             }
 
             $this->value[] = $struct->parse($value, $dependencies);
@@ -188,16 +131,6 @@ class ObjectStructureElement implements StructureElement
         }
 
         unset($value);
-    }
-
-    /**
-     * Parse the description to HTML
-     *
-     * @return string
-     */
-    public function description_as_html()
-    {
-        $this->description = MarkdownExtra::defaultTransform($this->description);
     }
 
     /**
@@ -215,15 +148,9 @@ class ObjectStructureElement implements StructureElement
         if (is_array($this->value))
         {
             $return = '<table class="table table-striped mdl-data-table mdl-js-data-table ">';
-            foreach ($this->value as $object) {
-                if (is_string($object)
-                    || in_array(get_class($object), [
-                        ObjectStructureElement::class,
-                        ArrayStructureElement::class,
-                        EnumStructureElement::class,
-                        RequestBodyElement::class,
-                    ], TRUE)
-                )
+            foreach ($this->value as $object)
+            {
+                if (is_string($object) || is_subclass_of(get_class($object), BasicStructureElement::class))
                 {
                     $return .= $object;
                 }
@@ -233,7 +160,6 @@ class ObjectStructureElement implements StructureElement
 
             return $return;
         }
-
 
 
         if (is_null($this->value))
@@ -251,7 +177,7 @@ class ObjectStructureElement implements StructureElement
             return $this->construct_string_return('<div class="array-struct">' . $this->value . '</div>');
         }
 
-        if (is_array($this->value) && (EnumStructureElement::class === get_class($this->value)))
+        if (is_object($this->value) && (EnumStructureElement::class === get_class($this->value)))
         {
             return $this->construct_string_return('<div class="enum-struct">' . $this->value . '</div>');
         }
@@ -260,7 +186,9 @@ class ObjectStructureElement implements StructureElement
         if (is_bool($this->value))
         {
             $value .= ($this->value) ? 'true' : 'false';
-        } else {
+        }
+        else
+        {
             $value .= $this->value;
         }
 
@@ -277,20 +205,17 @@ class ObjectStructureElement implements StructureElement
      *
      * @return string
      */
-    function construct_string_return($value)
+    protected function construct_string_return($value)
     {
         if (!in_array($this->type, self::DEFAULTS))
         {
             $type = '<a class="code" href="#object-' . str_replace(' ', '-',
                     strtolower($this->type)) . '">' . $this->type . '</a>';
         }
-        else{
-            if ($this->type === 'array')
-            {
-                $type = '<code>[ ' . join(',', $this->value->value) . ' ]</code>';
-            }else {
-                $type = '<code>' . $this->type . '</code>';
-            }
+        else
+        {
+
+            $type = '<code>' . $this->type . '</code>';
         }
 
         $return =
@@ -303,25 +228,6 @@ class ObjectStructureElement implements StructureElement
             '</tr>';
 
         return $return;
-    }
-
-    /**
-     * @return mixed|ObjectStructureElement|ObjectStructureElement[]
-     */
-    function strval()
-    {
-        if (is_array($this->value))
-        {
-            $key = rand(0, count($this->value));
-            if (is_subclass_of($this->value[$key], StructureElement::class))
-            {
-                return $this->value[$key]->strval();
-            }
-
-            return $this->value[$key];
-        }
-
-        return $this->value;
     }
 
 }

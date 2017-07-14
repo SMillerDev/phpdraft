@@ -13,7 +13,9 @@
     </php>
     <testsuites>
         <testsuite name="Parse">
+            <file>../src/PHPDraft/Parse/Tests/BaseParserTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
             <file>../src/PHPDraft/Parse/Tests/JsonToHTMLTest.php</file>
         </testsuite>
         <testsuite name="Model">
@@ -23,6 +25,8 @@
             <file>../src/PHPDraft/Model/Tests/HTTPResponseTest.php</file>
             <file>../src/PHPDraft/Model/Tests/ResourceTest.php</file>
             <file>../src/PHPDraft/Model/Tests/TransitionTest.php</file>
+            <file>../src/PHPDraft/Model/Elements/Tests/BasicStructureElementTest.php</file>
+            <file>../src/PHPDraft/Model/Elements/Tests/EnumStructureElementTest.php</file>
             <file>../src/PHPDraft/Model/Elements/Tests/ObjectStructureElementTest.php</file>
             <file>../src/PHPDraft/Model/Elements/Tests/ArrayStructureElementTest.php</file>
             <file>../src/PHPDraft/Model/Elements/Tests/RequestBodyElementTest.php</file>
@@ -40,14 +44,15 @@
             <directory>../src/PHPDraft/</directory>
             <exclude>
                 <file>../src/PHPDraft/Out/Minifier.php</file>
-                <directory>../src/Mitchelf</directory>
-                <directory>../src/PHPDraft/Parse/Tests</directory>
-                <directory>../src/PHPDraft/Model/Tests</directory>
-                <directory>../src/PHPDraft/Model/Elements/Tests</directory>
-                <directory>../src/PHPDraft/Out/Tests</directory>
-                <directory>../src/PHPDraft/Out/HTML</directory>
-                <directory>../src/PHPDraft/In/Tests</directory>
-                <directory>../src/PHPDraft/Core</directory>
+                <directory>../src/PHPDraft/Parse/Tests/</directory>
+                <directory>../src/PHPDraft/Model/Tests/</directory>
+                <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
+                <directory>../src/PHPDraft/Out/Tests/</directory>
+                <directory>../src/PHPDraft/Out/HTML/</directory>
+                <directory>../src/PHPDraft/In/Tests/</directory>
+                <directory>../src/PHPDraft/Core/</directory>
+                <file>../src/PHPDraft/Model/Comparable.php</file>
+                <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
             </exclude>
         </whitelist>
     </filter>

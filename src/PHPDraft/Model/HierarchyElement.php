@@ -50,14 +50,14 @@ abstract class HierarchyElement
      *
      * @return void
      */
-    function parse($object)
+    public function parse($object)
     {
         if (isset($object->meta) && isset($object->meta->title))
         {
             $this->title = $object->meta->title;
         }
 
-        if (!isset($object->content))
+        if (!isset($object->content) || !is_array($object->content))
         {
             return;
         }
@@ -66,7 +66,7 @@ abstract class HierarchyElement
         {
             if ($item->element === 'copy')
             {
-                $this->description = preg_replace('/(<\/?p>)?/', '', MarkdownExtra::defaultTransform($item->content), 2);
+                $this->description = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform($item->content), 2);
                 unset($object->content[$key]);
                 continue;
             }

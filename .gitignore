@@ -4,6 +4,7 @@
 /build/coverage
 /build/logs
 /build/phar
+/build/tmp
 /build/*.phar
 /tests/statics/index.*
 src/Michelf/*

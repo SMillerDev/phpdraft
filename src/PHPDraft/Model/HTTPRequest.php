@@ -10,6 +10,7 @@ namespace PHPDraft\Model;
 
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\RequestBodyElement;
+use PHPDraft\Model\Elements\StructureElement;
 
 class HTTPRequest implements Comparable
 {
@@ -51,7 +52,7 @@ class HTTPRequest implements Comparable
     /**
      * Structure of the request (if POST or PUT)
      *
-     * @var RequestBodyElement[]
+     * @var RequestBodyElement
      */
     public $struct = [];
 

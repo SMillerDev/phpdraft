@@ -10,7 +10,6 @@ namespace PHPDraft\Parse;
 
 class Drafter extends BaseParser
 {
-
     /**
      * The location of the drafter executable
      *
@@ -33,8 +32,6 @@ class Drafter extends BaseParser
         }
 
         $this->drafter = $this->location();
-
-        $this->tmp_dir = sys_get_temp_dir() . '/drafter';
     }
 
     /**
@@ -55,7 +52,8 @@ class Drafter extends BaseParser
      *
      * @return void
      */
-    protected function parse(){
+    protected function parse()
+    {
         shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
     }

@@ -8,7 +8,9 @@
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\UriTemplate;
 
 class Transition extends HierarchyElement
@@ -131,7 +133,7 @@ class Transition extends HierarchyElement
                 }
                 $add = true;
                 foreach ($list as $existing_value) {
-                    if ($value->is_equal_to($existing_value)) {
+                    if ($existing_value->is_equal_to($value)) {
                         $add = false;
                     }
                 }
@@ -165,8 +167,8 @@ class Transition extends HierarchyElement
             $vars = [];
             foreach ($this->url_variables->value as $value) {
                 $urlvalue = $value->value;
-                if (is_subclass_of($value, StructureElement::class)) {
-                    $urlvalue = $value->strval();
+                if (is_subclass_of($value, BasicStructureElement::class)) {
+                    $urlvalue = $value->string_value();
                 }
 
                 $vars[$value->key] = $urlvalue;
@@ -184,8 +186,8 @@ class Transition extends HierarchyElement
     /**
      * Overlap the URLS to get one consistent URL
      *
-     * @param $str1
-     * @param $str2
+     * @param string $str1 First part
+     * @param string $str2 Second part
      *
      * @return bool|string
      *
@@ -204,6 +206,14 @@ class Transition extends HierarchyElement
         return false;
     }
 
+    /**
+     * Find overlap in strings
+     *
+     * @param string $str1 First part
+     * @param string $str2 Second part
+     *
+     * @return array|bool
+     */
     private function find_overlap($str1, $str2)
     {
         $return = [];

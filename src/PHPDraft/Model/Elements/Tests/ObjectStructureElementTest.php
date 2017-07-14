@@ -9,13 +9,15 @@
 namespace PHPDraft\Model\Tests;
 
 use PHPDraft\Core\BaseTest;
+use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use ReflectionClass;
 
 /**
  * Class ObjectStructureElementTest
  *
- * @covers PHPDraft\Model\Elements\ObjectStructureElement
+ * @covers \PHPDraft\Model\Elements\ObjectStructureElement
  */
 class ObjectStructureElementTest extends BaseTest
 {
@@ -32,6 +34,17 @@ class ObjectStructureElementTest extends BaseTest
     }
 
     /**
+     * Test the setup of new instances
+     */
+    public function testNewInstance()
+    {
+        $method = $this->reflection->getMethod('new_instance');
+        $method->setAccessible(TRUE);
+        $return = $method->invoke($this->class);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+    }
+
+    /**
      * Parse different objects
      *
      * @dataProvider parseObjectProvider
@@ -39,7 +52,7 @@ class ObjectStructureElementTest extends BaseTest
      * @param string                 $object   JSON Object
      * @param ObjectStructureElement $expected Expected Object output
      *
-     * @covers       PHPDraft\Model\Elements\ObjectStructureElement::parse
+     * @covers       \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testSuccesfulParse($object, $expected)
     {
@@ -74,6 +87,12 @@ class ObjectStructureElementTest extends BaseTest
         $base2->element     = 'member';
         $base2->type        = 'string';
         $base2->description = "<p>desc2</p>\n";
+
+        $base3              = clone $base2;
+        $base3->value       = 'test1 | test2 | test3';
+
+        $base4              = clone $base2;
+        $base4->value       = NULL;
 
         $return[] = [
             '{
@@ -119,8 +138,249 @@ class ObjectStructureElementTest extends BaseTest
             }',
             $base2,
         ];
+        $return[] = [
+            '{
+                "element": "member",
+                "meta": {
+                    "description": "desc2"
+                },
+                "attributes": {
+                    "typeAttributes": [ "required" ]
+                },
+                "content": {
+                    "key": {
+                        "element": "string",
+                        "content": "Auth2"
+                    },
+                    "value": {
+                        "element": "string",
+                        "attributes": 
+                            {"samples":["test1", "test2", "test3"]}
+                    }
+                }
+            }',
+            $base3,
+        ];
+        $return[] = [
+            '{
+                "element": "member",
+                "meta": {
+                    "description": "desc2"
+                },
+                "attributes": {
+                    "typeAttributes": [ "required" ]
+                },
+                "content": {
+                    "key": {
+                        "element": "string",
+                        "content": "Auth2"
+                    },
+                    "value": {
+                        "element": "string"
+                    }
+                }
+            }',
+            $base4,
+        ];
 
         return $return;
     }
 
+    /**
+     * Test the setup of new instances
+     */
+    public function testEmptyParse()
+    {
+        $deps = [];
+        $return = $this->class->parse(NULL, $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        $object = new \stdClass();
+        $object->key = 'key';
+        $return = $this->class->parse($object, $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testArrayContentEnumContentParse()
+    {
+        $deps = [];
+        $object = '{"element":"enum","content": [{"content":{"key":{"content":"key"},"value":{"element":"value"}}}]}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        foreach ($return->value as $item)
+        {
+            $this->assertInstanceOf(EnumStructureElement::class, $item);
+        }
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testArrayContentObjectContentParse()
+    {
+        $deps = [];
+        $object = '{"element":"object","content": [[]]}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        foreach ($return->value as $item)
+        {
+            $this->assertInstanceOf(ObjectStructureElement::class, $item);
+        }
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testValueStructureEnumContentParse()
+    {
+        $deps = [];
+        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"enum"}}}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        $this->assertInstanceOf(EnumStructureElement::class, $return->value);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testValueStructureArrayContentParse()
+    {
+        $deps = [];
+        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"array"}}}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        $this->assertInstanceOf(ArrayStructureElement::class, $return->value);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testValueStructureObjectContentParse()
+    {
+        $deps = [];
+        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return->value);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testValueStructureObjectContentParseContent()
+    {
+        $deps = [];
+        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object", "content":{}}}}';
+
+        $return = $this->class->parse(json_decode($object), $deps);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return);
+        $this->assertInstanceOf(ObjectStructureElement::class, $return->value);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringBasic()
+    {
+        $return = $this->class->__toString();
+        $this->assertSame('<span class="example-value pull-right">{  }</span>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringArray()
+    {
+        $this->class->value = ['hello'];
+        $return = $this->class->__toString();
+        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table ">hello</table>', $return);
+
+        $this->class->value = [new ArrayStructureElement()];
+        $return = $this->class->__toString();
+        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table "><span class="example-value pull-right">[ ]</span></table>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringNullValue()
+    {
+        $this->class->key = 'hello';
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringObjectValue()
+    {
+        $this->class->key = 'hello';
+        $this->class->value = new ObjectStructureElement();
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringArrayValue()
+    {
+        $this->class->key = 'hello';
+        $this->class->value = new ArrayStructureElement();
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><span class="example-value pull-right">[ ]</span></div></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringEnumValue()
+    {
+        $this->class->key = 'hello';
+        $this->class->value = new EnumStructureElement();
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><span class="example-value pull-right">//list of options</span></div></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringBoolValue()
+    {
+        $this->class->key = 'hello';
+        $this->class->value = TRUE;
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">true</span></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringOtherValue()
+    {
+        $this->class->key = 'hello';
+        $this->class->value = 'world';
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+    }
+
+    /**
+     * Test the setup of new instances
+     */
+    public function testToStringOtherValueTypeKnown()
+    {
+        $this->class->type = 'string';
+        $this->class->key = 'hello';
+        $this->class->value = 'world';
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>string</code></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+    }
 }

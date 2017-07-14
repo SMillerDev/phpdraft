@@ -69,9 +69,8 @@ class HTTPResponse implements Comparable
      */
     public function parse($object)
     {
-        $this->statuscode = intval($object->attributes->statusCode);
-
         if (isset($object->attributes)) {
+            $this->statuscode = intval($object->attributes->statusCode);
             $this->parse_headers($object->attributes->headers);
         }
 

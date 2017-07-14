@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the ArrayStructureTest.php
+ * This file contains the EnumStructureElementTest.php
  *
  * @package PHPDraft\Model\Elements
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
@@ -9,23 +9,72 @@
 namespace PHPDraft\Model\Elements\Tests;
 
 use PHPDraft\Core\BaseTest;
-use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\EnumStructureElement;
 
 /**
- * Class ArrayStructureTest
- * @covers PHPDraft\Model\Elements\ArrayStructureElement
+ * Class EnumStructureElementTest
+ * @covers \PHPDraft\Model\Elements\EnumStructureElement
  */
-class ArrayStructureElementTest extends BaseTest
+class EnumStructureElementTest extends BaseTest
 {
-
     /**
      * Set up tests
      * @return void
      */
     public function setUp()
     {
-        $this->class      = new ArrayStructureElement();
-        $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\ArrayStructureElement');
+        $this->class      = new EnumStructureElement();
+        $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\EnumStructureElement');
+    }
+
+    /**
+     * Test if the value the class is initialized with is correct
+     */
+    public function testSetupCorrectly()
+    {
+        $property = $this->reflection->getProperty('element');
+        $property->setAccessible(TRUE);
+        $this->assertNull($property->getValue($this->class));
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testNewInstance()
+    {
+        $method = $this->reflection->getMethod('new_instance');
+        $method->setAccessible(TRUE);
+        $return = $method->invoke($this->class);
+        $this->assertInstanceOf(EnumStructureElement::class, $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToString()
+    {
+        $return = $this->class->__toString();
+        $this->assertSame('<span class="example-value pull-right">//list of options</span>', $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToStringWithArray()
+    {
+        $this->class->value = ['hello'=>'string', 'test'=>'int'];
+        $return = $this->class->__toString();
+        $this->assertSame('<ul class="list-group"><li class="list-group-item">hello</li><li class="list-group-item"><a href="#object-int">test</a></li></ul>', $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToStringWithComplexArray()
+    {
+        $this->class->value = ['hello'=>'bike', 'test'=>'Car'];
+        $return = $this->class->__toString();
+        $this->assertSame('<ul class="list-group"><li class="list-group-item"><a href="#object-bike">hello</a></li><li class="list-group-item"><a href="#object-car">test</a></li></ul>', $return);
     }
 
     /**
@@ -33,10 +82,10 @@ class ArrayStructureElementTest extends BaseTest
      *
      * @dataProvider parseObjectProvider
      *
-     * @param string                $object   JSON Object
-     * @param ArrayStructureElement $expected Expected Object output
+     * @param string               $object   JSON Object
+     * @param EnumStructureElement $expected Expected Object output
      *
-     * @covers       \PHPDraft\Model\Elements\ArrayStructureElement::parse
+     * @covers       \PHPDraft\Model\Elements\EnumStructureElement::parse
      */
     public function testSuccesfulParse($object, $expected)
     {
@@ -53,25 +102,25 @@ class ArrayStructureElementTest extends BaseTest
     public function parseObjectProvider()
     {
         $return             = [];
-        $base1              = new ArrayStructureElement();
+        $base1              = new EnumStructureElement();
         $base1->key         = 'greet_list';
-        $base1->value       = ['hello'];
+        $base1->value       = ['world' => 'hello'];
         $base1->status      = 'required';
         $base1->element     = 'member';
         $base1->type        = 'array';
         $base1->description = "\n";
         $base1->deps        = ['hello'];
 
-        $base2              = new ArrayStructureElement();
+        $base2              = new EnumStructureElement();
         $base2->key         = 'car_id_list';
-        $base2->value       = ['Car identifier'];
+        $base2->value       = ['world' => 'Car identifier'];
         $base2->status      = 'optional';
         $base2->element     = 'member';
         $base2->type        = 'array';
         $base2->description = "<p>List of car identifiers to retrieve</p>\n";
         $base2->deps        = ['Car identifier'];
 
-        $base3              = new ArrayStructureElement();
+        $base3              = new EnumStructureElement();
         $base3->key         = 'car_id_list';
         $base3->value       = [];
         $base3->status      = 'optional';
@@ -97,7 +146,8 @@ class ArrayStructureElementTest extends BaseTest
                         "element": "array",
                         "content": [
                             {
-                                "element": "hello"
+                                "element": "hello",
+                                "content": "world"
                             }
                         ]
                     }
@@ -125,7 +175,8 @@ class ArrayStructureElementTest extends BaseTest
                         "element": "array",
                         "content": [
                             {
-                                "element": "Car identifier"
+                                "element": "Car identifier",
+                                "content": "world"
                             }
                         ]
                     }
@@ -158,45 +209,5 @@ class ArrayStructureElementTest extends BaseTest
         ];
 
         return $return;
-    }
-
-    /**
-     * Test setup of new instances
-     */
-    public function testNewInstance()
-    {
-        $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(TRUE);
-        $return = $method->invoke($this->class);
-        $this->assertInstanceOf(ArrayStructureElement::class, $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
-    public function testToString()
-    {
-        $return = $this->class->__toString();
-        $this->assertSame('<span class="example-value pull-right">[ ]</span>', $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
-    public function testToStringWithArray()
-    {
-        $this->class->value = ['string', 'int'];
-        $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item">string</li><li class="list-group-item"><a href="#object-int">int</a></li></ul>', $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
-    public function testToStringWithComplexArray()
-    {
-        $this->class->value = ['Bike', 'car'];
-        $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item"><a href="#object-bike">Bike</a></li><li class="list-group-item"><a href="#object-car">car</a></li></ul>', $return);
     }
 }

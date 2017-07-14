@@ -2,16 +2,13 @@
 /**
  * This file contains the ${FILE_NAME}
  *
- * @package php-drafter\SOMETHING
+ * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model\Elements;
 
-use Michelf\MarkdownExtra;
-use PHPDraft\Model\StructureElement;
-
-class EnumStructureElement extends ObjectStructureElement implements StructureElement
+class EnumStructureElement extends BasicStructureElement
 {
     /**
      * Parse an array object
@@ -72,5 +69,15 @@ class EnumStructureElement extends ObjectStructureElement implements StructureEl
         $return .= '</ul>';
 
         return $return;
+    }
+
+    /**
+     * Get a new instance of a class
+     *
+     * @return self
+     */
+    protected function new_instance()
+    {
+        return new EnumStructureElement();
     }
 }

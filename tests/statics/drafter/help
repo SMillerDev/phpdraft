@@ -1,0 +1,10 @@
+This is a parser for API Blueprint files in PHP.
+
+The following options can be used:.
+	-f	Specifies the file to parse.
+	-t	Specifies the template to use. (defaults to 'default')
+	-s	Sort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)
+	-i	Specifies an image to display in the header.
+	-c	Specifies a CSS file to include (value is put in a link element without checking).
+	-j	Specifies a JS file to include (value is put in a script element without checking).
+	-h	Displays this text.

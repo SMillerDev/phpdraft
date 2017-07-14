@@ -19,18 +19,25 @@ define('VERSION', '0');
 $values = UI::main($argv);
 
 $apib = new ApibFileParser($values['file']);
+$apib = $apib->parse();
+
 $json = new DrafterAPI($apib);
-if (!(defined('DRAFTER_ONLINE_MODE') && DRAFTER_ONLINE_MODE === 1)) {
-    try {
+if (!(defined('DRAFTER_ONLINE_MODE') && DRAFTER_ONLINE_MODE === 1))
+{
+    try
+    {
         $json = new Drafter($apib);
-    } catch (RuntimeException $exception) {
-        file_put_contents('php://stderr', $exception->getMessage()."\n");
+    }
+    catch (RuntimeException $exception)
+    {
+        file_put_contents('php://stderr', $exception->getMessage() . "\n");
         $options = [
             'y' => 'Yes',
             'n' => 'No',
         ];
-        $answer = UI::ask('Do you want to use the online version? [y/n]', $options, 'y');
-        if (!$answer) {
+        $answer  = UI::ask('Do you want to use the online version? [y/n]', $options, 'y');
+        if (!$answer)
+        {
             file_put_contents('php://stderr', 'Could not find a suitable drafter version');
             exit(1);
         }
@@ -39,19 +46,19 @@ if (!(defined('DRAFTER_ONLINE_MODE') && DRAFTER_ONLINE_MODE === 1)) {
 
 $html          = new JsonToHTML($json->parseToJson());
 $html->sorting = $values['sorting'];
-$html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
+$generator     = $html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
 
 
 function phpdraft_var_dump(...$vars)
 {
-    if (defined('__PHPDRAFT_PHAR__')) {
+    if (defined('__PHPDRAFT_PHAR__'))
+    {
         return;
     }
     echo '<pre>';
-    foreach ($vars as $var) {
+    foreach ($vars as $var)
+    {
         var_dump($var);
     }
     echo '</pre>';
 }
-
-?>

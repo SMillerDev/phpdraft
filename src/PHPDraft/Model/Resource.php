@@ -42,7 +42,7 @@ class Resource extends HierarchyElement
             $this->href = $object->attributes->href;
         }
 
-        foreach ($object->content as $key => $item) {
+        foreach ($object->content as $item) {
             if ($item->element === 'copy') {
                 continue;
             }

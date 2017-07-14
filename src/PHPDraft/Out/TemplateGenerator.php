@@ -144,7 +144,7 @@ class TemplateGenerator
      *
      * @return null|string File path or null if not found
      */
-    function find_include_file($template, $extension = 'phtml')
+    public function find_include_file($template, $extension = 'phtml')
     {
         $include    = NULL;
         $fextension = '.' . $extension;
@@ -182,6 +182,8 @@ class TemplateGenerator
         {
             return $this->find_include_file('default', $extension);
         }
+
+        return NULL;
     }
 
     /**
@@ -191,26 +193,27 @@ class TemplateGenerator
      *
      * @return string class to represent the HTTP Method
      */
-    function get_method_icon($method)
+    public function get_method_icon($method)
     {
+        $class = 'glyphicon ';
         switch (strtolower($method)) {
             case 'post':
-                $class = 'glyphicon glyphicon-plus';
+                $class .= 'glyphicon-plus ';
                 break;
             case 'put':
-                $class = 'glyphicon glyphicon-pencil';
+                $class .= 'glyphicon-pencil ';
                 break;
             case 'get':
-                $class = 'glyphicon glyphicon-arrow-down';
+                $class .= 'glyphicon-arrow-down ';
                 break;
             case 'delete':
-                $class = 'glyphicon glyphicon-remove';
+                $class .= 'glyphicon-remove ';
                 break;
             default:
-                $class = '';
+                break;
         }
 
-        return $class . ' ' . $method;
+        return $class . strtoupper($method);
     }
 
     /**
@@ -220,7 +223,7 @@ class TemplateGenerator
      *
      * @return string Class to use
      */
-    function get_response_status($response)
+    public function get_response_status($response)
     {
         if ($response <= 299)
         {
@@ -240,7 +243,7 @@ class TemplateGenerator
      *
      * @return string key without spaces
      */
-    function strip_link_spaces($key)
+    public function strip_link_spaces($key)
     {
         return str_replace(' ', '-', strtolower($key));
     }
