@@ -187,7 +187,17 @@ class ArrayStructureElementTest extends BaseTest
     {
         $this->class->value = ['string', 'int'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item">string</li><li class="list-group-item"><a href="#object-int">int</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item"><a href="#object-int">int</a></li></ul>', $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToStringWithString()
+    {
+        $this->class->value = 'hello';
+        $return = $this->class->__toString();
+        $this->assertSame('<span class="example-value pull-right">[ ]</span>', $return);
     }
 
     /**
@@ -197,6 +207,6 @@ class ArrayStructureElementTest extends BaseTest
     {
         $this->class->value = ['Bike', 'car'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item"><a href="#object-bike">Bike</a></li><li class="list-group-item"><a href="#object-car">car</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">Bike</a></li><li class="list-group-item mdl-list__item"><a href="#object-car">car</a></li></ul>', $return);
     }
 }

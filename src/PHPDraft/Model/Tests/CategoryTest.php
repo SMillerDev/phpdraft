@@ -105,6 +105,26 @@ class CategoryTest extends HierarchyElementChildTest
     }
 
     /**
+     * Test basic parse functions where 'element=dataStructure'
+     */
+    public function testParseIsCalledObjectMetaID()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+
+        $json = '{"content":[{"element":"dataStructure", "content":[{"meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}]}]}';
+
+        $this->class->parse(json_decode($json));
+
+        $this->assertSame($this->parent, $property->getValue($this->class));
+
+        $s_property = $this->reflection->getProperty('structures');
+        $s_property->setAccessible(TRUE);
+        $this->assertNotEmpty($s_property->getValue($this->class));
+    }
+
+    /**
      * Test basic parse functions where 'element=henk'
      */
     public function testParseIsCalledDef()

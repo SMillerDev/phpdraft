@@ -57,7 +57,82 @@ table.table p {
     margin-bottom: 0px;
 }
 
+div .mdl-card__supporting-text table {
+    width: 100%;
+    max-width: 100%;
+    border: 0px solid #000000;
+}
+
+div .mdl-card__supporting-text {
+    width: 96%;
+    padding: 2%;
+}
+
+.mdl-card__supporting-text .list-group-item.mdl-list__item{
+    padding: 8px;
+    width: 100%;
+    clear: both;
+    display: block;
+    text-align: end;
+    font-size: 13px;
+    border-bottom: 1px solid #cccccc;
+    line-height: 31px;
+}
+
+.mdl-card__supporting-text .list-group-item.mdl-list__item:last-of-type{
+    border-bottom: 0px solid #cccccc;
+}
+
 .showSearch {
     background: #122b40 center / cover;
     color: #cccccc;
+}
+
+dialog {
+    position: absolute;
+    right: 100%;
+    width: 1000px !important;
+    height: -moz-fit-content;
+    height: -webkit-fit-content;
+    height: fit-content;
+    margin: auto;
+    margin-left: -400px;
+    border: solid;
+    padding: 1em;
+    background: white;
+    color: black;
+    display: block;
+}
+
+dialog textarea {
+    width: 100%;
+    max-width: 100%;
+    line-break: strict;
+    word-break: break-all;
+    border-color: #cccccc;
+    height: 100%;
+}
+dialog .mdl-textfield {
+    width: 100%;
+}
+
+dialog:not([open]) {
+    display: none;
+}
+
+dialog + .backdrop {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0,0,0,0.1);
+}
+
+._dialog_overlay {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+dialog.fixed {
+    position: fixed;
+    top: 50%;
+    transform: translate(0, -50%);
 }

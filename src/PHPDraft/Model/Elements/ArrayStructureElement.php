@@ -56,7 +56,7 @@ class ArrayStructureElement extends BasicStructureElement
      */
     function __toString()
     {
-        $return = '<ul class="list-group">';
+        $return = '<ul class="list-group mdl-list">';
 
         if (!is_array($this->value))
         {
@@ -67,7 +67,7 @@ class ArrayStructureElement extends BasicStructureElement
             $type = (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
                         strtolower($item)) . '">' . $item . '</a>';
 
-            $return .= '<li class="list-group-item">' . $type . '</li>';
+            $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
         }
 
         $return .= '</ul>';

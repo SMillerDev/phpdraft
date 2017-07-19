@@ -77,16 +77,37 @@ class BaseParserTest extends BaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      */
-    public function testParseToJSONMkTmp()
+    public function testParseToJSONMkDir()
     {
-        $property = $this->reflection->getProperty('tmp_dir');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, dirname(dirname(TEST_STATICS)) . '/build/tmp');
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
         $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json'));
         $this->class->parseToJson();
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
+    }
+
+    /**
+     * Check if parsing the APIB to JSON gives the expected result
+     */
+    public function testParseToJSONMkTmp()
+    {
+        $tmp_dir = dirname(dirname(TEST_STATICS)) . '/build/tmp';
+        if (file_exists($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib')){
+            unlink($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib');
+        }
+        if (file_exists($tmp_dir)){
+            rmdir($tmp_dir);
+        }
+        $property = $this->reflection->getProperty('tmp_dir');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $tmp_dir);
+        $this->class->expects($this->once())
+                    ->method('parse')
+                    ->will($this->returnValue(NULL));
+        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json'));
+        $this->class->parseToJson();
+        $this->assertDirectoryExists($tmp_dir);
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
     }
 
