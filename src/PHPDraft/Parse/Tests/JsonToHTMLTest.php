@@ -71,6 +71,23 @@ class JsonToHTMLTest extends BaseTest
     /**
      * Tests if the constructor sets the property correctly
      */
+    public function testGetHTMLMaterial()
+    {
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html_material'));
+        $this->class->get_html('material');
+    }
+
+    /**
+     * Tests if the constructor sets the property correctly
+     */
+    public function testToString()
+    {
+        $this->assertNotEmpty($this->class->__toString());
+    }
+
+    /**
+     * Tests if the constructor sets the property correctly
+     */
     public function testGetHTMLAdvanced()
     {
         $return = $this->class->get_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');

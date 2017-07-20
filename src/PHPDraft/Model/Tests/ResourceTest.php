@@ -106,7 +106,7 @@ class ResourceTest extends BaseTest
         $property->setAccessible(TRUE);
         $property->setValue($this->class, $this->parent);
 
-        $obj = '{"content":[{"element":"copy", "content":""},{"element":"hello", "content":""}]}';
+        $obj = '{"content":[{"element":"copy", "content":""},{"element":"hello", "content":""}, {"element":"hello", "content":""}]}';
 
         $this->class->parse(json_decode($obj));
 

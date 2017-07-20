@@ -212,6 +212,26 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
+    public function testParseIsCalledIsArrayContentDefault()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+
+        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
+
+        $this->class->parse(json_decode($obj));
+
+        $this->assertSame($this->parent, $property->getValue($this->class));
+
+        $href_property = $this->reflection->getProperty('href');
+        $href_property->setAccessible(TRUE);
+        $this->assertSame('something', $href_property->getValue($this->class));
+    }
+
+    /**
+     * Test basic parse functions
+     */
     public function testParseIsCalledIsArrayContentRequestList()
     {
         $property = $this->reflection->getProperty('parent');

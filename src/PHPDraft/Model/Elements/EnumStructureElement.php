@@ -20,13 +20,16 @@ class EnumStructureElement extends BasicStructureElement
      */
     public function parse($object, &$dependencies)
     {
-        $this->element = (isset($object->element)) ? $object->element : 'array';
+        $this->element = (isset($object->element)) ? $object->element : 'enum';
 
         $this->parse_common($object, $dependencies);
 
+        $this->key   = is_null($this->key) ? $object->content : $this->key;
+        $this->type  = is_null($this->type) ? $object->element : $this->type;
+
         if(!isset($object->content->value->content))
         {
-            $this->value = [];
+            $this->value = $this->key;
             return $this;
         }
 
@@ -52,7 +55,14 @@ class EnumStructureElement extends BasicStructureElement
      */
     function __toString()
     {
-        $return = '<ul class="list-group">';
+        $return = '<ul class="list-group mdl-list">';
+
+        if (is_string($this->value))
+        {
+            $type = (in_array($this->element, self::DEFAULTS)) ? $this->element : '<a href="#object-' . str_replace(' ', '-',
+                    strtolower($this->element)) . '">' . $this->element . '</a>';
+            return '<tr><td>' . $this->key . '</td><td><code>' . $type . '</code></td><td>' . $this->description . '</td></tr>';
+        }
 
         if (!is_array($this->value))
         {
@@ -63,7 +73,7 @@ class EnumStructureElement extends BasicStructureElement
             $type = (in_array($item, self::DEFAULTS)) ? $key : '<a href="#object-' . str_replace(' ', '-',
                     strtolower($item)) . '">' . $key . '</a>';
 
-            $return .= '<li class="list-group-item">' . $type . '</li>';
+            $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
         }
 
         $return .= '</ul>';

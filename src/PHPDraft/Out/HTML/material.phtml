@@ -13,8 +13,11 @@ use PHPDraft\Out\Minifier;
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
     <?php foreach ($this->css as $style): ?>
         <link rel="stylesheet" href="<?= $style ?>">
     <?php endforeach; ?>
@@ -53,7 +56,7 @@ use PHPDraft\Out\Minifier;
             <?php if (!empty($this->base_structures)): ?>
                 <a class="mdl-navigation__link" href="#"><b>Objects</b></a>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
-                    <a class="mdl-navigation__link" href="#<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
+                    <a class="mdl-navigation__link" href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
                 <?php endforeach; ?>
             <?php endif; ?>
         </nav>
@@ -187,12 +190,29 @@ use PHPDraft\Out\Minifier;
                                 </div>
                             </div>
                             <div class="mdl-card__menu">
-                                <button  id="<?=$transition->get_href();?>" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <button id="show-dialog-<?=$transition->get_href();?>" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
-                                <div class="mdl-tooltip" for="<?=$transition->get_href();?>">
-                                    <?= $transition->get_curl_command($this->base_data['HOST'], []); ?>
-                                </div>
+                                <dialog class="mdl-dialog" id="mdl-dialog-<?=$transition->get_href();?>">
+                                    <h4 class="mdl-dialog__title">CURL Command</h4>
+                                    <div class="mdl-dialog__content">
+                                        <b>This might be useful for debugging</b>
+                                        <div class="mdl-textfield mdl-js-textfield">
+                                            <textarea class="mdl-textfield__input" type="text" rows= "7" autofocus readonly><?= $transition->get_curl_command($this->base_data['HOST'], []); ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mdl-dialog__actions">
+                                        <button type="button" class="mdl-button close">OK</button>
+                                    </div>
+                                </dialog>
+                                <script>
+                                    $('#show-dialog-<?=$transition->get_href();?>').on('click', function () {
+                                        $('#mdl-dialog-<?=$transition->get_href();?>').show();
+                                    });
+                                    $('#mdl-dialog-<?=$transition->get_href();?> .close').on('click', function () {
+                                        $('#mdl-dialog-<?=$transition->get_href();?>').hide();
+                                    })
+                                </script>
                             </div>
                         </div>
                     <?php endforeach;?>
@@ -233,9 +253,6 @@ if (!empty($extras)):
 <?php foreach ($this->js as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
 <script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), true)); ?></script>
 </body>
 </html>

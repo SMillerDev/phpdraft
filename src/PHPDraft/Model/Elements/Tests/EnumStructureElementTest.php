@@ -64,7 +64,31 @@ class EnumStructureElementTest extends BaseTest
     {
         $this->class->value = ['hello'=>'string', 'test'=>'int'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item">hello</li><li class="list-group-item"><a href="#object-int">test</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">hello</li><li class="list-group-item mdl-list__item"><a href="#object-int">test</a></li></ul>', $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToStringWithString()
+    {
+        $this->class->value = 'hello';
+        $this->class->key = 'key';
+        $this->class->element = 'string';
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td>key</td><td><code>string</code></td><td></td></tr>', $return);
+    }
+
+    /**
+     * Test setup of new instances
+     */
+    public function testToStringWithStringComplex()
+    {
+        $this->class->value = 'hello';
+        $this->class->key = 'key';
+        $this->class->element = 'Car';
+        $return = $this->class->__toString();
+        $this->assertSame('<tr><td>key</td><td><code><a href="#object-car">Car</a></code></td><td></td></tr>', $return);
     }
 
     /**
@@ -74,7 +98,7 @@ class EnumStructureElementTest extends BaseTest
     {
         $this->class->value = ['hello'=>'bike', 'test'=>'Car'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group"><li class="list-group-item"><a href="#object-bike">hello</a></li><li class="list-group-item"><a href="#object-car">test</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">hello</a></li><li class="list-group-item mdl-list__item"><a href="#object-car">test</a></li></ul>', $return);
     }
 
     /**
@@ -122,7 +146,7 @@ class EnumStructureElementTest extends BaseTest
 
         $base3              = new EnumStructureElement();
         $base3->key         = 'car_id_list';
-        $base3->value       = [];
+        $base3->value       = 'car_id_list';
         $base3->status      = 'optional';
         $base3->element     = 'member';
         $base3->type        = 'array';

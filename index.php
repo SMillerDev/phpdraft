@@ -16,38 +16,42 @@ use PHPDraft\Parse\DrafterAPI;
 use PHPDraft\Parse\JsonToHTML;
 
 define('VERSION', '0');
-$values = UI::main($argv);
-
-$apib = new ApibFileParser($values['file']);
-$apib = $apib->parse();
-
-$json = new DrafterAPI($apib);
-if (!(defined('DRAFTER_ONLINE_MODE') && DRAFTER_ONLINE_MODE === 1))
+try
 {
-    try
+    $values = UI::main($argv);
+    $apib = new ApibFileParser($values['file']);
+    $apib = $apib->parse();
+
+    $json = new DrafterAPI($apib);
+    if (!(defined('DRAFTER_ONLINE_MODE') && DRAFTER_ONLINE_MODE === 1))
     {
-        $json = new Drafter($apib);
-    }
-    catch (RuntimeException $exception)
-    {
-        file_put_contents('php://stderr', $exception->getMessage() . "\n");
-        $options = [
-            'y' => 'Yes',
-            'n' => 'No',
-        ];
-        $answer  = UI::ask('Do you want to use the online version? [y/n]', $options, 'y');
-        if (!$answer)
+        try
         {
-            file_put_contents('php://stderr', 'Could not find a suitable drafter version');
-            exit(1);
+            $json = new Drafter($apib);
+        }
+        catch (\PHPDraft\Parse\ResourceException $exception)
+        {
+            file_put_contents('php://stderr', $exception->getMessage() . "\n");
+            $options = [
+                'y' => 'Yes',
+                'n' => 'No',
+            ];
+            $answer  = UI::ask('Do you want to use the online version? [y/n]', $options, 'y');
+            if (!$answer)
+            {
+                throw new \RuntimeException('Could not find a suitable drafter version', 1);
+            }
         }
     }
+
+    $html          = new JsonToHTML($json->parseToJson());
+    $html->sorting = $values['sorting'];
+    $generator     = $html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
+} catch (RuntimeException $exception)
+{
+    file_put_contents('php://stderr', $exception->getMessage().PHP_EOL);
+    exit($exception->getCode());
 }
-
-$html          = new JsonToHTML($json->parseToJson());
-$html->sorting = $values['sorting'];
-$generator     = $html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
-
 
 function phpdraft_var_dump(...$vars)
 {

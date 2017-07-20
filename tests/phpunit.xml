@@ -51,6 +51,7 @@
                 <directory>../src/PHPDraft/Out/HTML/</directory>
                 <directory>../src/PHPDraft/In/Tests/</directory>
                 <directory>../src/PHPDraft/Core/</directory>
+                <file>../src/PHPDraft/Parse/ResourceException.php</file>
                 <file>../src/PHPDraft/Model/Comparable.php</file>
                 <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
             </exclude>
