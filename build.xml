@@ -7,6 +7,7 @@
         <delete dir="${basedir}/build/documentation"/>
         <delete dir="${basedir}/build/logfiles"/>
         <delete dir="${basedir}/build/phar"/>
+        <delete dir="${basedir}/build/out"/>
         <delete>
             <fileset dir="${basedir}/build">
                 <include name="**/phpdraft*.phar"/>
@@ -48,6 +49,7 @@
 
     <target name="-phar-prepare" depends="clean">
         <mkdir dir="${basedir}/build/phar"/>
+        <mkdir dir="${basedir}/build/out"/>
         <copy file="${basedir}/LICENSE" tofile="${basedir}/build/phar/LICENSE"/>
         <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt"/>
     </target>
@@ -98,7 +100,7 @@
             <arg value="--hash"/>
             <arg value="SHA-1"/>
             <arg value="--output"/>
-            <arg path="${basedir}/build/phpdraft-library-${_version}.phar"/>
+            <arg path="${basedir}/build/out/phpdraft-library-${_version}.phar"/>
             <arg value="--template"/>
             <arg path="${basedir}/build/library-phar-autoload.php.in"/>
             <arg path="${basedir}/build/phar"/>
@@ -112,7 +114,7 @@
             <arg value="--hash"/>
             <arg value="SHA-1"/>
             <arg value="--output"/>
-            <arg path="${basedir}/build/phpdraft-${_version}.phar"/>
+            <arg path="${basedir}/build/out/phpdraft-${_version}.phar"/>
             <arg value="--template"/>
             <arg path="${basedir}/build/binary-phar-autoload.php.in"/>
             <arg path="${basedir}/build/phar"/>

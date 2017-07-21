@@ -5,6 +5,7 @@
 /build/logs
 /build/phar
 /build/tmp
+/build/out
 /build/*.phar
 /tests/statics/index.*
 src/Michelf/*

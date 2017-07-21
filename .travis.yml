@@ -10,14 +10,13 @@ before_script:
 - export PATH=$PATH:$PWD
 script: vendor/bin/phpunit --configuration tests/phpunit.xml
 before_deploy:
-- ant phar-nightly
+- ant phar
 deploy:
   provider: releases
   api_key:
     secure: ix+vqDv/6NmNrk2r7ayF2dzyA2UBOuGlsQFE0z8dsLQdnVR3pJzjK2zkOE+aPtsj8cagdtRzPkDWoN+eBOfGxeQpxOoOlm63H5zMIvc21kckQR3AWUj0TNnXW0G7F1HpVFFjtzM5c4+wI38P2nmbed8uFCCQpLgLFXNHI2xsTfRDt5XUgvu18TrA/UwFdbQZgrWSW9Y3OL2IStbWFEvJo0YQG/EIMLmdU2oiFqySLuJSoJfqSzBVgeKoKbuzwt34gcIJezqCsF/wfhfpfTD/cGfrWzo7LwLbAf8qUBiy5vUehpDQXVtOMMq5qypLXCXJqjBvLEJsrP7uwFz4dB6CpQu/nuAc37i4ePYkmiRsBHMFAcRidAENop+5AABYg1zMI4gi8I3uvPUE5XHs8LAqVdH5bRWkU87rmt74O497nwWgpbw4odCkd/xDiYp0TsO7yumWjgryXDruCaIwk9imKR0XmFg0F7Zmr5Ju/btOnTWV57QFnIUzit2P8f8keExA17+Bw7lvLc9eW5NBXUVmwlNJuY5WWj4LpfcmLikFBCoGG0T0l1XRNiDqXOEOOMa+ykznLesG9RtLmTEpneK3bm87bcIqITn8oUE69FlrgD7hDsmptCZT7b0Mhp1uzekU1H9oURdxHuFxgHsS8r4jNBbRH7fNWqxx7GFAwf1CJpk=
-  file:
-  - build/phpdraft-nightly.phar
-  - build/phpdraft-library-nightly.phar
+  file_glob: true
+  file: build/out/*
   skip_cleanup: true
   on:
     tags: true
