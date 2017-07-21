@@ -55,7 +55,7 @@ class ApibFileParserTest extends BaseTest
      * Test if exception when the file doesn't exist
      * @expectedException \RuntimeException
      * @expectedExceptionCode 1
-     * @expectedExceptionMessageRegExp "API File not found: [a-zA-Z0-9\/]*\/drafter\/non_existing_including_apib"
+     * @expectedExceptionMessageRegExp "API File not found: [\w\W]*\/drafter\/non_existing_including_apib"
      *
      * @return void
      */

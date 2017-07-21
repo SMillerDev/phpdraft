@@ -46,7 +46,7 @@ class UI
 
         if (!isset($argv[1])) {
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
-            self::help();
+            (new UI)->help();
             throw new \RuntimeException('', 1);
         }
 
@@ -60,12 +60,12 @@ class UI
 
         if (boolval(preg_match('/^\-/', $argv[1]))) {
             if (isset($options['h'])) {
-                self::help();
+                (new UI)->help();
                 throw new \RuntimeException('', 0);
             }
 
             if (isset($options['v'])) {
-                self::version();
+                (new UI)->version();
                 throw new \RuntimeException('', 0);
             }
 
@@ -104,14 +104,14 @@ class UI
     public function help()
     {
         echo 'This is a parser for API Blueprint files in PHP.' . PHP_EOL . PHP_EOL;
-        echo "The following options can be used:.\n";
-        echo "\t-f\tSpecifies the file to parse.\n";
-        echo "\t-t\tSpecifies the template to use. (defaults to 'default')\n";
-        echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)\n";
-        echo "\t-i\tSpecifies an image to display in the header.\n";
-        echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking).\n";
-        echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking).\n";
-        echo "\t-h\tDisplays this text.\n";
+        echo "The following options can be used:.".PHP_EOL;
+        echo "\t-f\tSpecifies the file to parse.".PHP_EOL;
+        echo "\t-t\tSpecifies the template to use. (defaults to 'default')".PHP_EOL;
+        echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)".PHP_EOL;
+        echo "\t-i\tSpecifies an image to display in the header.".PHP_EOL;
+        echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking).".PHP_EOL;
+        echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking).".PHP_EOL;
+        echo "\t-h\tDisplays this text.".PHP_EOL;
     }
 
     /**
