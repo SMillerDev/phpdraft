@@ -230,7 +230,7 @@ use PHPDraft\Out\Minifier;
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                     Response <var
-                                                        class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode; ?></var>
+                                                        class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode." ".$this->http_status->getReasonPhrase($response->statuscode)?></var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
