@@ -415,7 +415,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--authentication-tokens-get-an-access-token-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -517,7 +517,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-vehicle-collection-list-all-vehicles-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -628,7 +628,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-mobile-access-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -723,7 +723,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-charge-state-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -837,7 +837,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-climate-settings-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -941,7 +941,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-driving-and-position-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1043,7 +1043,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-gui-settings-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1144,7 +1144,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicles-state-and-settings-vehicle-state-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1264,7 +1264,7 @@
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-wake-up-car-wake-up-car-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1372,7 +1372,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-set-valet-mode-set-valet-mode-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1475,7 +1475,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-reset-valet-pin-reset-valet-pin-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1578,7 +1578,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-open-charge-port-open-charge-port-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1681,7 +1681,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-set-charge-limit-to-standard-set-charge-limit-to-standard-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1784,7 +1784,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-set-charge-limit-to-max-range-set-charge-limit-to-max-range-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1888,7 +1888,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-set-charge-limit-set-charge-limit-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -1991,7 +1991,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-start-charging-start-charging-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2094,7 +2094,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-stop-charging-stop-charging-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2197,7 +2197,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-flash-lights-flash-lights-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2300,7 +2300,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-honk-horn-honk-horn-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2403,7 +2403,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-unlock-doors-unlock-doors-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2506,7 +2506,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-lock-doors-lock-doors-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2611,7 +2611,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-set-temperature-set-temperature-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2714,7 +2714,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-start-hvac-system-start-hvac-system-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2817,7 +2817,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-stop-hvac-system-stop-hvac-system-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -2922,7 +2922,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-move-pano-roof-move-pano-roof-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -3026,7 +3026,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-remote-start-remote-start-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator
@@ -3130,7 +3130,7 @@ locations in navigation.
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--vehicle-commands-open-trunk/frunk-open-trunk/frunk-200">
                                                     Response <var
-                                                        class="text-success">200</var>
+                                                        class="text-success">200 OK</var>
                                                     <span
                                                         class="glyphicon
                                                         indicator

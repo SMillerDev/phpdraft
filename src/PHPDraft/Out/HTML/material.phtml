@@ -6,6 +6,7 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 use PHPDraft\Out\Minifier;
+use Enjoy\HttpStatusCode\Statuscodes;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +97,8 @@ use PHPDraft\Out\Minifier;
                                 <?php if (!empty($transition->responses)): ?>
                                     <?php foreach ($transition->responses as $key => $response): ?>
                                         <a href="#<?= $transition->get_href() . '-' . $response->statuscode; ?>-panel"
-                                           class="mdl-tabs__tab <?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode; ?></a>
+                                           class="mdl-tabs__tab <?= $this->get_response_status($response->statuscode) ?>"
+                                            title="<?= StatusCodes::getMessageForCode($response->statuscode)?>"><?= $response->statuscode; ?></a>
                                     <?php endforeach;?>
                                 <?php endif;?>
                                     </div>
