@@ -8,6 +8,7 @@
 
 namespace PHPDraft\Out;
 
+use Lukasoppermann\Httpstatus\Httpstatus;
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\ObjectStructureElement;
@@ -57,6 +58,12 @@ class TemplateGenerator
      */
     protected $base_data;
     /**
+     * The Http Status resolver
+     *
+     * @var Httpstatus
+     */
+    protected $http_status;
+    /**
      * Structures used in all data
      *
      * @var ObjectStructureElement[]
@@ -73,6 +80,7 @@ class TemplateGenerator
     {
         $this->template = $template;
         $this->image    = $image;
+        $this->http_status = new Httpstatus();
     }
 
     /**
