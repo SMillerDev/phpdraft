@@ -1,7 +1,7 @@
 {
   "name": "smillerdev/phpdraft",
   "description": "This is a parser for API Blueprint files in PHP.",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "license": "GPL-3.0",
   "authors": [
     {
