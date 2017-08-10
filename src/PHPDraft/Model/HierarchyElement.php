@@ -66,7 +66,7 @@ abstract class HierarchyElement
         {
             if ($item->element === 'copy')
             {
-                $this->description = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform($item->content), 2);
+                $this->description = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform(htmlentities($item->content)), 2);
                 unset($object->content[$key]);
                 continue;
             }

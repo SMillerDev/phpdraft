@@ -108,7 +108,7 @@ class TemplateGenerator
             foreach ($object->content[0]->content as $value) {
                 if ($value->element === 'copy')
                 {
-                    $this->base_data['DESC'] = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform($value->content), 2);
+                    $this->base_data['DESC'] = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform(htmlentities($value->content)), 2);
                     continue;
                 }
 

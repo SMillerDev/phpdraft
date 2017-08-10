@@ -112,7 +112,7 @@ class HTTPResponse implements Comparable
                 $this->parse_structure($value->content);
                 continue;
             }else if ($value->element === 'copy'){
-                $this->description = MarkdownExtra::defaultTransform($value->content);
+                $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
                 continue;
             }
 

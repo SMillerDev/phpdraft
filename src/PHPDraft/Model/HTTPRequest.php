@@ -83,7 +83,7 @@ class HTTPRequest implements Comparable
                     $this->parse_structure($value);
                     continue;
                 } elseif ($value->element === 'copy'){
-                    $this->description = MarkdownExtra::defaultTransform($value->content);
+                    $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
                 }elseif ($value->element === 'asset') {
                     if (in_array('messageBody', $value->meta->classes)) {
                         $this->body[]                  = (isset($value->content)) ? $value->content : null;

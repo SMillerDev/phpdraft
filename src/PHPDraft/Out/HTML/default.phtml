@@ -216,7 +216,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
 
                                                 <?php if ($transition->data_variables !== null): ?>
                                                     <h5>Request object</h5>
-                                                    <?= $transition->data_variables ?>
+                                                    <div class="row">
+                                                        <?= $transition->data_variables ?>
+                                                    </div>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
