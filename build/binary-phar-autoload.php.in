@@ -28,7 +28,7 @@ if ($execute) {
         exit;
     }
 
-    require_once __PHPDRAFT_PHAR_ROOT__.DIRECTORY_SEPARATOR.'phpdraft'.DIRECTORY_SEPARATOR.'index.php';
+    require_once __PHPDRAFT_PHAR_ROOT__.DIRECTORY_SEPARATOR.'phpdraft'.DIRECTORY_SEPARATOR.'phpdraft';
 }
 
 __HALT_COMPILER();

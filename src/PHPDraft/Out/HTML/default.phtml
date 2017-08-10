@@ -201,7 +201,6 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                                 <?php if (!empty($request->struct)): ?>
-
                                                     <h5>Structure</h5>
                                                     <div class="row">
                                                         <?= $request->struct ?>
@@ -216,7 +215,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                 <?php endif; ?>
 
                                                 <?php if ($transition->data_variables !== null): ?>
-                                                    <h5>Data object</h5>
+                                                    <h5>Request object</h5>
                                                     <?= $transition->data_variables ?>
                                                 <?php endif; ?>
                                             </div>

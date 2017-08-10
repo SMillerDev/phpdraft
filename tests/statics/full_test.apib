@@ -77,6 +77,24 @@ Returns a specific Post.
 
     [Post][]
 
+### Update a Post [PUT]
+Updates a specific Post.
+
++ Parameters
+    + post_id: `2` (string) - The id of the Post.
+
++ Attributes
+    + Key: `key` (string) - Key for the object
+    + Object
+        + Key1: `key1` (string) - Key1 for the object
+        + Key2: `key2` (string) - Key2 for the object
+
++ Request (application/json)
+
++ Response 200
+
+    [Post][]
+
 ### Delete a Post [DELETE]
 Delete a Post. The current user must be the same user who created the Post. It
 returns the deleted Post on success.

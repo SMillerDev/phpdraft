@@ -73,9 +73,14 @@
                 <include name="**/*.php"/>
             </fileset>
         </copy>
+        <copy todir="${basedir}/build/phar/phpdraft/src/Lukasoppermann/Httpstatus">
+            <fileset dir="vendor/lukasoppermann/http-status/src">
+                <include name="**/*.php"/>
+            </fileset>
+        </copy>
         <copy todir="${basedir}/build/phar/phpdraft">
             <fileset dir="${basedir}">
-                <include name="**/index.php"/>
+                <include name="**/phpdraft"/>
                 <exclude name="vendor/**"/>
             </fileset>
         </copy>
@@ -84,7 +89,7 @@
             <arg value="-pi"/>
             <arg value="-e"/>
             <arg value="s/\'vendor\/autoload.php/__DIR__\ .\ \'\/src\/PHPDraft\/Core\/Autoloader.php/g"/>
-            <arg value="${basedir}/build/phar/phpdraft/index.php"/>
+            <arg value="${basedir}/build/phar/phpdraft/phpdraft"/>
         </exec>
 
         <exec executable="${basedir}/build/phar-version.php" outputproperty="_version">
@@ -153,7 +158,7 @@
     <target name="-phar-determine-version">
         <exec executable="bash" outputproperty="version">
             <arg value="-c"/>
-            <arg value="php ${basedir}/index.php -v | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'"/>
+            <arg value="php ${basedir}/phpdraft -v | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'"/>
         </exec>
     </target>
 </project>
