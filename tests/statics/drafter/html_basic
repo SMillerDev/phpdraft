@@ -402,12 +402,14 @@
                                                                                                                                                                                                 
                                                 
                                                                                                     <h5>Request object</h5>
-                                                    <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
+                                                    <div class="row">
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
 </td><td><span class="example-value pull-right">password</span></td></tr><tr><td><span>client_id</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client ID</p>
 </td><td><span class="example-value pull-right">abc</span></td></tr><tr><td><span>client_secret</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client secret</p>
 </td><td><span class="example-value pull-right">123</span></td></tr><tr><td><span>email</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The email for my.teslamotors.com</p>
 </td><td><span class="example-value pull-right">elon@teslamotors.com</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The password for my.teslamotors.com</p>
-</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table></table>                                                                                            </div>
+</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table></table>                                                    </div>
+                                                                                            </div>
                                         </div>
                                                                                                                                                                                 <div class="panel panel-default">
                                             <div class="panel-heading">
