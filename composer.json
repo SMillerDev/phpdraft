@@ -13,7 +13,8 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/SMillerDev/phpdraft"
+      "url": "https://github.com/SMillerDev/phpdraft",
+      "no-api": true
     }
   ],
   "require": {
