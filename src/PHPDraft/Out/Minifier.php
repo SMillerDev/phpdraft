@@ -1,13 +1,15 @@
 <?php
 /**
- * This file contains the Minifier.php
+ * This file contains the Minifier.php.
  *
  * @package PHPDraft\Out
+ *
  * @author  Taufik Nurrohman
+ *
  * @see     https://gist.github.com/tovic/d7b310dea3b33e4732c0
  */
-namespace PHPDraft\Out;
 
+namespace PHPDraft\Out;
 
 class Minifier
 {
@@ -18,7 +20,7 @@ class Minifier
     const X = "\x1A";
 
     /**
-     * Minify given HTML
+     * Minify given HTML.
      *
      * @param string $input input to minify
      *
@@ -35,9 +37,9 @@ class Minifier
         $input  =
             preg_split('#(' . self::CH . '|<pre(?:>|\s[^<>]*?>)[\s\S]*?<\/pre>|<code(?:>|\s[^<>]*?>)[\s\S]*?<\/code>|<script(?:>|\s[^<>]*?>)[\s\S]*?<\/script>|<style(?:>|\s[^<>]*?>)[\s\S]*?<\/style>|<textarea(?:>|\s[^<>]*?>)[\s\S]*?<\/textarea>|<[^<>]+?>)#i',
                 $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $output = "";
+        $output = '';
         foreach ($input as $v) {
-            if ($v !== ' ' && trim($v) === "") {
+            if ($v !== ' ' && trim($v) === '') {
                 continue;
             }
             if ($v[0] === '<' && substr($v, -1) === '>') {
@@ -81,7 +83,7 @@ class Minifier
     }
 
     /**
-     * Generic minify cleanup. Prepends whitespace with a chosen character
+     * Generic minify cleanup. Prepends whitespace with a chosen character.
      *
      * @param string $input Input to prepend whitespace for
      *
@@ -93,7 +95,7 @@ class Minifier
     }
 
     /**
-     * Part of the HTML minification process
+     * Part of the HTML minification process.
      *
      * @param string $input input to minify
      *
@@ -104,7 +106,7 @@ class Minifier
         return preg_replace_callback('#<\s*([^\/\s]+)\s*(?:>|(\s[^<>]+?)\s*>)#', function ($m) {
             if (isset($m[2])) {
                 // Minify inline CSS declaration(s)
-                if (stripos($m[2], ' style=') !== false) {
+                if (stripos($m[2], ' style=') !== FALSE) {
                     $m[2] = preg_replace_callback('#( style=)([\'"]?)(.*?)\2#i', function ($m) {
                         return $m[1] . $m[2] . self::minify_css($m[3]) . $m[2];
                     }, $m[2]);
@@ -135,7 +137,7 @@ class Minifier
     }
 
     /**
-     * Minify given CSS
+     * Minify given CSS.
      *
      * @param string $input input to minify
      *
@@ -152,9 +154,9 @@ class Minifier
         $input  =
             preg_split('#(' . self::SS . '|' . self::CC . ')#', $input, -1,
                 PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $output = "";
+        $output = '';
         foreach ($input as $v) {
-            if (trim($v) === "") {
+            if (trim($v) === '') {
                 continue;
             }
             if (
@@ -187,7 +189,7 @@ class Minifier
     }
 
     /**
-     * Part of the CSS minification process
+     * Part of the CSS minification process.
      *
      * @param string $input input to minify
      *
@@ -196,7 +198,7 @@ class Minifier
     protected static function _minify_css($input)
     {
         // Keep important white-space(s) in `calc()`
-        if (stripos($input, 'calc(') !== false) {
+        if (stripos($input, 'calc(') !== FALSE) {
             $input = preg_replace_callback('#\b(calc\()\s*(.*?)\s*\)#i', function ($m) {
                 return $m[1] . preg_replace('#\s+#', self::X . '\s', $m[2]) . ')';
             }, $input);
@@ -264,7 +266,7 @@ class Minifier
     }
 
     /**
-     * Generic minify cleanup. Removes chosen character from prepended whitespace
+     * Generic minify cleanup. Removes chosen character from prepended whitespace.
      *
      * @param string $input Input to change whitespace for
      *
@@ -276,7 +278,7 @@ class Minifier
     }
 
     /**
-     * Minify given JS
+     * Minify given JS.
      *
      * @param string $input input to minify
      *
@@ -291,9 +293,9 @@ class Minifier
         $input  =
             preg_split('#(' . self::SS . '|' . self::CC . '|\/[^\n]+?\/(?=[.,;]|[gimuy]|$))#', $input, -1,
                 PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $output = "";
+        $output = '';
         foreach ($input as $v) {
-            if (trim($v) === "") {
+            if (trim($v) === '') {
                 continue;
             }
             if (
@@ -330,7 +332,7 @@ class Minifier
     }
 
     /**
-     * Part of the JS minification process
+     * Part of the JS minification process.
      *
      * @param string $input input to minify
      *
@@ -353,7 +355,7 @@ class Minifier
             ],
             [
                 // [^1]
-                "",
+                '',
                 // [^2]
                 '$1',
                 // [^3]

@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the Transition
+ * This file contains the Transition.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -10,55 +11,54 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\UriTemplate;
 
 class Transition extends HierarchyElement
 {
     /**
-     * HTTP method used
+     * HTTP method used.
      *
      * @var string
      */
     public $method;
 
     /**
-     * URI
+     * URI.
      *
      * @var string
      */
     public $href;
 
     /**
-     * URL variables
+     * URL variables.
      *
-     * @var ObjectStructureElement|NULL
+     * @var ObjectStructureElement|null
      */
-    public $url_variables = null;
+    public $url_variables = NULL;
 
     /**
-     * Data variables
+     * Data variables.
      *
      * @var array
      */
-    public $data_variables = null;
+    public $data_variables = NULL;
 
     /**
-     * The request
+     * The request.
      *
      * @var HTTPRequest[]
      */
     public $requests = [];
 
     /**
-     * The responses
+     * The responses.
      *
      * @var HTTPResponse[]
      */
     public $responses = [];
 
     /**
-     * Structures used (if any)
+     * Structures used (if any).
      *
      * @var ObjectStructureElement[]
      */
@@ -67,7 +67,7 @@ class Transition extends HierarchyElement
     /**
      * Transition constructor.
      *
-     * @param Resource $parent A reference to the parent object
+     * @param resource $parent A reference to the parent object
      */
     public function __construct(&$parent)
     {
@@ -75,21 +75,19 @@ class Transition extends HierarchyElement
     }
 
     /**
-     * Fill class values based on JSON object
+     * Fill class values based on JSON object.
      *
      * @param \stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    function parse($object)
+    public function parse($object)
     {
         parent::parse($object);
 
         $this->href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
 
-
         if (isset($object->attributes->hrefVariables)) {
-
             $deps                = [];
             $struct              = new ObjectStructureElement();
             $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
@@ -109,7 +107,7 @@ class Transition extends HierarchyElement
                 continue;
             }
             foreach ($transition_item->content as $item) {
-                $value = null;
+                $value = NULL;
                 if (!in_array($item->element, ['httpRequest', 'httpResponse'])) {
                     continue;
                 }
@@ -132,16 +130,15 @@ class Transition extends HierarchyElement
                     $list[] = $value;
                     continue;
                 }
-                $add = true;
+                $add = TRUE;
                 foreach ($list as $existing_value) {
                     if ($existing_value->is_equal_to($value)) {
-                        $add = false;
+                        $add = FALSE;
                     }
                 }
                 if ($add) {
                     $list[] = $value;
                 }
-
             }
         }
 
@@ -149,22 +146,21 @@ class Transition extends HierarchyElement
     }
 
     /**
-     * Build a URL based on the URL variables given
+     * Build a URL based on the URL variables given.
      *
      * @param string $base_url the URL to which the URL variables apply
-     *
      * @param bool   $clean    Get the URL without HTML
      *
      * @return string a HTML representation of the transition URL
      */
-    public function build_url($base_url = '', $clean = false)
+    public function build_url($base_url = '', $clean = FALSE)
     {
         $url = $this->overlap_urls($this->parent->href, $this->href);
-        if ($url === false) {
+        if ($url === FALSE) {
             $url = $this->parent->href . $this->href;
         }
-        if ($this->url_variables !== null) {
-            $tpl = new UriTemplate($url);
+        if ($this->url_variables !== NULL) {
+            $tpl  = new UriTemplate($url);
             $vars = [];
             foreach ($this->url_variables->value as $value) {
                 $urlvalue = $value->value;
@@ -185,7 +181,7 @@ class Transition extends HierarchyElement
     }
 
     /**
-     * Overlap the URLS to get one consistent URL
+     * Overlap the URLS to get one consistent URL.
      *
      * @param string $str1 First part
      * @param string $str2 Second part
@@ -204,11 +200,11 @@ class Transition extends HierarchyElement
             return $str1 . $overlap . $str2;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
-     * Find overlap in strings
+     * Find overlap in strings.
      *
      * @param string $str1 First part
      * @param string $str2 Second part
@@ -234,11 +230,11 @@ class Transition extends HierarchyElement
             return $return;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
-     * Get the HTTP method of the child request
+     * Get the HTTP method of the child request.
      *
      * @param int $request Request to get the method for
      *
@@ -250,12 +246,10 @@ class Transition extends HierarchyElement
     }
 
     /**
-     * Generate a cURL request to run the transition
+     * Generate a cURL request to run the transition.
      *
      * @param string $base_url   base URL of the server
-     *
      * @param array  $additional additional arguments to pass
-     *
      * @param int    $key        number of the request to generate for
      *
      * @return string A cURL CLI command
@@ -268,5 +262,4 @@ class Transition extends HierarchyElement
 
         return $this->requests[$key]->get_curl_command($base_url, $additional);
     }
-
 }

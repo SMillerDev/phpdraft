@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the JsonToHTML
+ * This file contains the JsonToHTML.
  *
  * @package PHPDraft\Parse
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -11,19 +12,19 @@ namespace PHPDraft\Parse;
 use PHPDraft\Out\TemplateGenerator;
 
 /**
- * Class JsonToHTML
+ * Class JsonToHTML.
  */
 class JsonToHTML
 {
     /**
-     * Type of sorting to do
+     * Type of sorting to do.
      *
      * @var int
      */
     public $sorting;
 
     /**
-     * JSON representation of an API Blueprint
+     * JSON representation of an API Blueprint.
      *
      * @var \stdClass
      */
@@ -40,17 +41,17 @@ class JsonToHTML
     }
 
     /**
-     * Gets the default template HTML
+     * Gets the default template HTML.
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->get_html();
     }
 
     /**
-     * Get the HTML representation of the JSON object
+     * Get the HTML representation of the JSON object.
      *
      * @param string      $template Type of template to display.
      * @param string|null $image    Image to use as a logo
@@ -63,13 +64,11 @@ class JsonToHTML
     {
         $gen = new TemplateGenerator($template, $image);
 
-        if(!empty($css))
-        {
+        if (!empty($css)) {
             $gen->css[] = explode(',', $css);
         }
 
-        if(!empty($js))
-        {
+        if (!empty($js)) {
             $gen->js[] = explode(',', $js);
         }
 
@@ -79,5 +78,4 @@ class JsonToHTML
 
         return $gen;
     }
-
 }

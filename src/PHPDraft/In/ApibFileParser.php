@@ -1,34 +1,35 @@
 <?php
 /**
- * This file contains the ApibFileParser
+ * This file contains the ApibFileParser.
  *
  * @package PHPDraft\In
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\In;
 
 /**
- * Class ApibFileParser
+ * Class ApibFileParser.
  */
 class ApibFileParser
 {
     /**
-     * Complete API Blueprint
+     * Complete API Blueprint.
      *
      * @var string
      */
     protected $full_apib;
 
     /**
-     * Location of the API Blueprint to parse
+     * Location of the API Blueprint to parse.
      *
      * @var string
      */
     protected $location;
 
     /**
-     * Filename to parse
+     * Filename to parse.
      *
      * @var
      */
@@ -56,7 +57,7 @@ class ApibFileParser
 
     /**
      * Parse a given API Blueprint file
-     * This changes all `include(file)` tags to the contents of the file
+     * This changes all `include(file)` tags to the contents of the file.
      *
      * @param string $filename File to parse
      *
@@ -82,7 +83,7 @@ class ApibFileParser
     }
 
     /**
-     * Check if an APIB file exists
+     * Check if an APIB file exists.
      *
      * @param string $filename File to check
      *
@@ -96,7 +97,7 @@ class ApibFileParser
     }
 
     /**
-     * Get an external Schema by URL
+     * Get an external Schema by URL.
      *
      * @param string $url URL to fetch the schema from
      *
@@ -115,13 +116,12 @@ class ApibFileParser
     }
 
     /**
-     * Return the value of the class
+     * Return the value of the class.
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->full_apib;
     }
-
 }

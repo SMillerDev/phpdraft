@@ -1,40 +1,42 @@
 <?php
 /**
- * This file contains the UI.php
+ * This file contains the UI.php.
  *
  * @package PHPDraft\Out
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Out;
 
 /**
- * Class UI
+ * Class UI.
  */
 class UI
 {
     /**
-     * Sets sorting to all parts
+     * Sets sorting to all parts.
      *
      * @var int
      */
     public static $PHPD_SORT_ALL = 3;
 
     /**
-     * Sets sorting to all webservices
+     * Sets sorting to all webservices.
      *
      * @var int
      */
     public static $PHPD_SORT_WEBSERVICES = 2;
 
     /**
-     * Sets sorting to all data structures
+     * Sets sorting to all data structures.
+     *
      * @var int
      */
     public static $PHPD_SORT_STRUCTURES = 1;
 
     /**
-     * Serve all options
+     * Serve all options.
      *
      * @param array $argv Arguments passed
      *
@@ -46,26 +48,29 @@ class UI
 
         if (!isset($argv[1])) {
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
-            (new UI)->help();
+            (new self())->help();
+
             throw new \RuntimeException('', 1);
         }
 
         $sorting = -1;
         if (isset($options['s'])) {
             $value = strtoupper($options['s']);
-            if (isset(UI::${'PHPD_SORT_' . $value})) {
-                $sorting = UI::${'PHPD_SORT_' . $value};
+            if (isset(self::${'PHPD_SORT_' . $value})) {
+                $sorting = self::${'PHPD_SORT_' . $value};
             }
         }
 
         if (boolval(preg_match('/^\-/', $argv[1]))) {
             if (isset($options['h'])) {
-                (new UI)->help();
+                (new self())->help();
+
                 throw new \RuntimeException('', 0);
             }
 
             if (isset($options['v'])) {
-                (new UI)->version();
+                (new self())->version();
+
                 throw new \RuntimeException('', 0);
             }
 
@@ -82,9 +87,9 @@ class UI
         }
 
         $template = (isset($options['t']) && $options['t']) ? $options['t'] : 'default';
-        $image    = (isset($options['i']) && $options['i']) ? $options['i'] : null;
-        $css      = (isset($options['c']) && $options['c']) ? $options['i'] : null;
-        $js       = (isset($options['j']) && $options['j']) ? $options['i'] : null;
+        $image    = (isset($options['i']) && $options['i']) ? $options['i'] : NULL;
+        $css      = (isset($options['c']) && $options['c']) ? $options['i'] : NULL;
+        $js       = (isset($options['j']) && $options['j']) ? $options['i'] : NULL;
 
         return [
             'file'     => $file,
@@ -97,25 +102,25 @@ class UI
     }
 
     /**
-     * Provide help
+     * Provide help.
      *
      * @return void
      */
     public function help()
     {
         echo 'This is a parser for API Blueprint files in PHP.' . PHP_EOL . PHP_EOL;
-        echo "The following options can be used:.".PHP_EOL;
-        echo "\t-f\tSpecifies the file to parse.".PHP_EOL;
-        echo "\t-t\tSpecifies the template to use. (defaults to 'default')".PHP_EOL;
-        echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)".PHP_EOL;
-        echo "\t-i\tSpecifies an image to display in the header.".PHP_EOL;
-        echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking).".PHP_EOL;
-        echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking).".PHP_EOL;
-        echo "\t-h\tDisplays this text.".PHP_EOL;
+        echo 'The following options can be used:.' . PHP_EOL;
+        echo "\t-f\tSpecifies the file to parse." . PHP_EOL;
+        echo "\t-t\tSpecifies the template to use. (defaults to 'default')" . PHP_EOL;
+        echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)" . PHP_EOL;
+        echo "\t-i\tSpecifies an image to display in the header." . PHP_EOL;
+        echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking)." . PHP_EOL;
+        echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking)." . PHP_EOL;
+        echo "\t-h\tDisplays this text." . PHP_EOL;
     }
 
     /**
-     * Return the version
+     * Return the version.
      *
      * @return void
      */
@@ -126,7 +131,7 @@ class UI
     }
 
     /**
-     * Get the version number
+     * Get the version number.
      *
      * @return string
      */
@@ -136,7 +141,7 @@ class UI
     }
 
     /**
-     * Print the series of the update
+     * Print the series of the update.
      *
      * @return string Series
      */
@@ -152,13 +157,13 @@ class UI
     }
 
     /**
-     * Get the manner of releasing
+     * Get the manner of releasing.
      *
      * @return string
      */
     public function getReleaseChannel()
     {
-        if (strpos(self::release_id(), '-') !== false) {
+        if (strpos(self::release_id(), '-') !== FALSE) {
             return '-nightly';
         }
 
@@ -166,14 +171,13 @@ class UI
     }
 
     /**
-     * Ask a question to the user
+     * Ask a question to the user.
      *
      * @param string $message  The question
      * @param array  $options  Possible answers
-     *
      * @param string $positive The parameter that gives a positive outcome
      *
-     * @return boolean
+     * @return bool
      */
     public static function ask($message, $options, $positive = 'y')
     {
@@ -183,13 +187,13 @@ class UI
         } while (trim($selection) == '');
 
         if (array_key_exists(strtolower($selection), $options)) {
-            return ($selection === $positive);
+            return $selection === $positive;
         }
         if (array_search($selection, $options)) {
-            return (array_search($selection, $options) === $positive);
+            return array_search($selection, $options) === $positive;
         }
-        file_put_contents('php://stderr', 'That answer wasn\'t expected, try again.'.PHP_EOL.PHP_EOL);
+        file_put_contents('php://stderr', 'That answer wasn\'t expected, try again.' . PHP_EOL . PHP_EOL);
 
-        return UI::ask($message, $options, $positive);
+        return self::ask($message, $options, $positive);
     }
 }

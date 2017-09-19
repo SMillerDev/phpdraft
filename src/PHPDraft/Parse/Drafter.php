@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the Drafter.php
+ * This file contains the Drafter.php.
  *
  * @package PHPDraft\Parse
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -11,7 +12,7 @@ namespace PHPDraft\Parse;
 class Drafter extends BaseParser
 {
     /**
-     * The location of the drafter executable
+     * The location of the drafter executable.
      *
      * @var string
      */
@@ -26,8 +27,7 @@ class Drafter extends BaseParser
     {
         parent::__construct($apib);
 
-        if (!$this->location())
-        {
+        if (!$this->location()) {
             throw new ResourceException('Drafter was not installed!', 1);
         }
 
@@ -35,20 +35,20 @@ class Drafter extends BaseParser
     }
 
     /**
-     * Return drafter location if found
+     * Return drafter location if found.
      *
      * @return bool|string
      */
-    function location()
+    public function location()
     {
         $returnVal = shell_exec('which drafter 2> /dev/null');
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
-        return (empty($returnVal) ? FALSE : $returnVal);
+        return empty($returnVal) ? FALSE : $returnVal;
     }
 
     /**
-     * Parses the apib for the selected method
+     * Parses the apib for the selected method.
      *
      * @return void
      */

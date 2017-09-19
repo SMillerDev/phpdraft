@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the HTTPResponse.php
+ * This file contains the HTTPResponse.php.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -14,42 +15,42 @@ use PHPDraft\Model\Elements\ObjectStructureElement;
 class HTTPResponse implements Comparable
 {
     /**
-     * HTTP Status code
+     * HTTP Status code.
      *
      * @var int
      */
     public $statuscode;
 
     /**
-     * Description of the object
+     * Description of the object.
      *
      * @var string
      */
     public $description;
 
     /**
-     * Response headers
+     * Response headers.
      *
      * @var array
      */
     public $headers = [];
 
     /**
-     * Response bodies
+     * Response bodies.
      *
      * @var array
      */
     public $content = [];
 
     /**
-     * Response structure
+     * Response structure.
      *
      * @var ObjectStructureElement[]
      */
     public $structure = [];
 
     /**
-     * Parent entity
+     * Parent entity.
      *
      * @var Transition
      */
@@ -61,7 +62,7 @@ class HTTPResponse implements Comparable
     }
 
     /**
-     * Fill class values based on JSON object
+     * Fill class values based on JSON object.
      *
      * @param \stdClass $object JSON object
      *
@@ -79,11 +80,10 @@ class HTTPResponse implements Comparable
         $this->parse_content($object);
 
         return $this;
-
     }
 
     /**
-     * Parse request headers
+     * Parse request headers.
      *
      * @param \stdClass $object An object to parse for headers
      *
@@ -99,7 +99,7 @@ class HTTPResponse implements Comparable
     }
 
     /**
-     * Parse request content
+     * Parse request content.
      *
      * @param \stdClass $object An object to parse for content
      *
@@ -111,7 +111,7 @@ class HTTPResponse implements Comparable
             if ($value->element === 'dataStructure') {
                 $this->parse_structure($value->content);
                 continue;
-            }else if ($value->element === 'copy'){
+            } elseif ($value->element === 'copy') {
                 $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
                 continue;
             }
@@ -123,7 +123,7 @@ class HTTPResponse implements Comparable
     }
 
     /**
-     * Parse structure of the content
+     * Parse structure of the content.
      *
      * @param \stdClass[] $objects Objects containing the structure
      *
@@ -142,7 +142,7 @@ class HTTPResponse implements Comparable
     }
 
     /**
-     * Check if item is the same as other item
+     * Check if item is the same as other item.
      *
      * @param self $b Object to compare to
      *
@@ -150,6 +150,6 @@ class HTTPResponse implements Comparable
      */
     public function is_equal_to($b)
     {
-        return (($this->statuscode === $b->statuscode) && ($this->description === $b->description));
+        return ($this->statuscode === $b->statuscode) && ($this->description === $b->description);
     }
 }

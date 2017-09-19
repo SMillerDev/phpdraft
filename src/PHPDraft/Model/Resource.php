@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the Resource.php
+ * This file contains the Resource.php.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -11,7 +12,7 @@ namespace PHPDraft\Model;
 class Resource extends HierarchyElement
 {
     /**
-     * Location relative to the base URL
+     * Location relative to the base URL.
      *
      * @var string
      */
@@ -28,13 +29,13 @@ class Resource extends HierarchyElement
     }
 
     /**
-     * Fill class values based on JSON object
+     * Fill class values based on JSON object.
      *
      * @param \stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    function parse($object)
+    public function parse($object)
     {
         parent::parse($object);
 
@@ -52,5 +53,4 @@ class Resource extends HierarchyElement
 
         return $this;
     }
-
 }
