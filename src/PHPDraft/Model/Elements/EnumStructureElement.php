@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the ${FILE_NAME}
+ * This file contains the ${FILE_NAME}.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -11,7 +12,7 @@ namespace PHPDraft\Model\Elements;
 class EnumStructureElement extends BasicStructureElement
 {
     /**
-     * Parse an array object
+     * Parse an array object.
      *
      * @param \stdClass $object       APIb Item to parse
      * @param array     $dependencies List of dependencies build
@@ -27,16 +28,14 @@ class EnumStructureElement extends BasicStructureElement
         $this->key   = is_null($this->key) ? $object->content : $this->key;
         $this->type  = is_null($this->type) ? $object->element : $this->type;
 
-        if(!isset($object->content->value->content))
-        {
+        if (!isset($object->content->value->content)) {
             $this->value = $this->key;
+
             return $this;
         }
 
-        foreach ($object->content->value->content as $sub_item)
-        {
-            if (!in_array($sub_item->element, self::DEFAULTS))
-            {
+        foreach ($object->content->value->content as $sub_item) {
+            if (!in_array($sub_item->element, self::DEFAULTS)) {
                 $dependencies[] = $sub_item->element;
             }
 
@@ -49,23 +48,22 @@ class EnumStructureElement extends BasicStructureElement
     }
 
     /**
-     * Provide HTML representation
+     * Provide HTML representation.
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         $return = '<ul class="list-group mdl-list">';
 
-        if (is_string($this->value))
-        {
+        if (is_string($this->value)) {
             $type = (in_array($this->element, self::DEFAULTS)) ? $this->element : '<a href="#object-' . str_replace(' ', '-',
                     strtolower($this->element)) . '">' . $this->element . '</a>';
+
             return '<tr><td>' . $this->key . '</td><td><code>' . $type . '</code></td><td>' . $this->description . '</td></tr>';
         }
 
-        if (!is_array($this->value))
-        {
+        if (!is_array($this->value)) {
             return '<span class="example-value pull-right">//list of options</span>';
         }
 
@@ -82,12 +80,12 @@ class EnumStructureElement extends BasicStructureElement
     }
 
     /**
-     * Get a new instance of a class
+     * Get a new instance of a class.
      *
      * @return self
      */
     protected function new_instance()
     {
-        return new EnumStructureElement();
+        return new self();
     }
 }

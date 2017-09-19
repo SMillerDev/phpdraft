@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the TemplateGenerator.php
+ * This file contains the TemplateGenerator.php.
  *
  * @package PHPDraft\Out
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -16,55 +17,55 @@ use PHPDraft\Model\Elements\ObjectStructureElement;
 class TemplateGenerator
 {
     /**
-     * Type of sorting to do on objects
+     * Type of sorting to do on objects.
      *
      * @var int
      */
     public $sorting;
     /**
-     * CSS Files to load
+     * CSS Files to load.
      *
      * @var array
      */
     public $css = [];
     /**
-     * JS Files to load
+     * JS Files to load.
      *
      * @var array
      */
     public $js = [];
     /**
-     * JSON object of the API blueprint
+     * JSON object of the API blueprint.
      *
      * @var mixed
      */
     protected $categories = [];
     /**
-     * The template file to load
+     * The template file to load.
      *
      * @var string
      */
     protected $template;
     /**
-     * The image to use as a logo
+     * The image to use as a logo.
      *
      * @var string
      */
     protected $image = NULL;
     /**
-     * The base URl of the API
+     * The base URl of the API.
      *
      * @var
      */
     protected $base_data;
     /**
-     * The Http Status resolver
+     * The Http Status resolver.
      *
      * @var Httpstatus
      */
     protected $http_status;
     /**
-     * Structures used in all data
+     * Structures used in all data.
      *
      * @var ObjectStructureElement[]
      */
@@ -78,13 +79,13 @@ class TemplateGenerator
      */
     public function __construct($template, $image)
     {
-        $this->template = $template;
-        $this->image    = $image;
+        $this->template    = $template;
+        $this->image       = $image;
         $this->http_status = new Httpstatus();
     }
 
     /**
-     * Pre-parse objects needed and print HTML
+     * Pre-parse objects needed and print HTML.
      *
      * @param mixed $object JSON to parse from
      *
@@ -93,21 +94,18 @@ class TemplateGenerator
     public function get($object)
     {
         $include = $this->find_include_file($this->template);
-        if ($include === NULL)
-        {
+        if ($include === NULL) {
             throw new \RuntimeException("Couldn't find template '$this->template'", 1);
         }
 
         //Prepare base data
-        if (is_array($object->content[0]->content))
-        {
+        if (is_array($object->content[0]->content)) {
             foreach ($object->content[0]->attributes->meta as $meta) {
                 $this->base_data[$meta->content->key->content] = $meta->content->value->content;
             }
 
             foreach ($object->content[0]->content as $value) {
-                if ($value->element === 'copy')
-                {
+                if ($value->element === 'copy') {
                     $this->base_data['DESC'] = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform(htmlentities($value->content)), 2);
                     continue;
                 }
@@ -115,8 +113,7 @@ class TemplateGenerator
                 $cat = new Category();
                 $cat = $cat->parse($value);
 
-                if ($value->meta->classes[0] === 'dataStructures')
-                {
+                if ($value->meta->classes[0] === 'dataStructures') {
                     $this->base_structures = array_merge($this->base_structures, $cat->structures);
                 } else {
                     $this->categories[] = $cat;
@@ -126,13 +123,11 @@ class TemplateGenerator
             $this->base_data['TITLE'] = $object->content[0]->meta->title;
         }
 
-        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_STRUCTURES)
-        {
+        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_STRUCTURES) {
             ksort($this->base_structures);
         }
 
-        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_WEBSERVICES)
-        {
+        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_WEBSERVICES) {
             foreach ($this->categories as &$category) {
                 usort($category->children, function ($a, $b) {
                     return strcmp($a->title, $b->title);
@@ -144,7 +139,7 @@ class TemplateGenerator
     }
 
     /**
-     * Get the path to a file to include
+     * Get the path to a file to include.
      *
      * @param string $template  The name of the template to include
      * @param string $extension Extension of the file to include
@@ -155,38 +150,37 @@ class TemplateGenerator
     {
         $include    = NULL;
         $fextension = '.' . $extension;
-        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension))
-        {
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension)) {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension;
+
             return $include;
         }
 
-        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . $fextension))
-        {
+        if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . $fextension)) {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . $fextension;
+
             return $include;
         }
 
-        if (stream_resolve_include_path($template . DIRECTORY_SEPARATOR . $template . $fextension))
-        {
+        if (stream_resolve_include_path($template . DIRECTORY_SEPARATOR . $template . $fextension)) {
             $include = $template . DIRECTORY_SEPARATOR . $template . $fextension;
+
             return $include;
         }
 
-        if (stream_resolve_include_path($template . $fextension))
-        {
+        if (stream_resolve_include_path($template . $fextension)) {
             $include = $template . $fextension;
+
             return $include;
         }
 
-        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $template . $fextension))
-        {
+        if (stream_resolve_include_path('PHPDraft/Out/HTML/' . $template . $fextension)) {
             $include = 'PHPDraft/Out/HTML/' . $template . $fextension;
+
             return $include;
         }
 
-        if ($include === NULL && in_array($extension, ['phtml', 'js', 'css']))
-        {
+        if ($include === NULL && in_array($extension, ['phtml', 'js', 'css'])) {
             return $this->find_include_file('default', $extension);
         }
 
@@ -194,7 +188,7 @@ class TemplateGenerator
     }
 
     /**
-     * Get an icon for a specific HTTP Method
+     * Get an icon for a specific HTTP Method.
      *
      * @param string $method HTTP method
      *
@@ -224,7 +218,7 @@ class TemplateGenerator
     }
 
     /**
-     * Get a bootstrap class to represent the HTTP return code range
+     * Get a bootstrap class to represent the HTTP return code range.
      *
      * @param int $response HTTP return code
      *
@@ -232,11 +226,9 @@ class TemplateGenerator
      */
     public function get_response_status($response)
     {
-        if ($response <= 299)
-        {
+        if ($response <= 299) {
             return 'text-success';
-        } elseif ($response > 299 && $response <= 399)
-        {
+        } elseif ($response > 299 && $response <= 399) {
             return 'text-warning';
         } else {
             return 'text-error';
@@ -244,7 +236,7 @@ class TemplateGenerator
     }
 
     /**
-     * Strip spaces from links to objects
+     * Strip spaces from links to objects.
      *
      * @param string $key key with potential spaces
      *
@@ -254,5 +246,4 @@ class TemplateGenerator
     {
         return str_replace(' ', '-', strtolower($key));
     }
-
 }

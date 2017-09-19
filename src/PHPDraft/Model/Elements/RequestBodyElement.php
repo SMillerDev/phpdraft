@@ -1,20 +1,21 @@
 <?php
 /**
- * This file contains the RequestBodyElement
+ * This file contains the RequestBodyElement.
  *
  * @package PHPDraft\Model\Elements
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
 namespace PHPDraft\Model\Elements;
 
 /**
- * Class RequestBodyElement
+ * Class RequestBodyElement.
  */
 class RequestBodyElement extends ObjectStructureElement
 {
     /**
-     * Print the request body as a string
+     * Print the request body as a string.
      *
      * @param string $type The type of request
      *
@@ -22,20 +23,16 @@ class RequestBodyElement extends ObjectStructureElement
      */
     public function print_request($type = 'application/x-www-form-urlencoded')
     {
-        if (is_array($this->value))
-        {
+        if (is_array($this->value)) {
             $return = '<code class="request-body">';
             $list   = [];
-            foreach ($this->value as $object)
-            {
-                if (get_class($object) === self::class)
-                {
+            foreach ($this->value as $object) {
+                if (get_class($object) === self::class) {
                     $list[] = $object->print_request($type);
                 }
             }
 
-            switch ($type)
-            {
+            switch ($type) {
                 case 'application/x-www-form-urlencoded':
                     $return .= join('&', $list);
                     break;
@@ -51,8 +48,7 @@ class RequestBodyElement extends ObjectStructureElement
 
         $value = (empty($this->value)) ? '?' : $this->value;
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'application/x-www-form-urlencoded':
                 return $this->key . '=<span>' . $value . '</span>';
                 break;
@@ -66,12 +62,12 @@ class RequestBodyElement extends ObjectStructureElement
     }
 
     /**
-     * Return a new instance
+     * Return a new instance.
+     *
      * @return RequestBodyElement
      */
     protected function new_instance()
     {
-        return new RequestBodyElement();
+        return new self();
     }
-
 }

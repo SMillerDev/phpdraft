@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the Category.php
+ * This file contains the Category.php.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -11,25 +12,25 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 
 /**
- * Class Category
+ * Class Category.
  */
 class Category extends HierarchyElement
 {
     /**
-     * API Structure element
+     * API Structure element.
      *
      * @var ObjectStructureElement[]
      */
     public $structures = [];
 
     /**
-     * Fill class values based on JSON object
+     * Fill class values based on JSON object.
      *
      * @param \stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    function parse($object)
+    public function parse($object)
     {
         parent::parse($object);
         foreach ($object->content as $item) {
@@ -44,8 +45,7 @@ class Category extends HierarchyElement
                     $struct->deps = $deps;
                     $struct->parse($item, $deps);
 
-                    if (is_array($item->content) && isset($item->content[0]->meta->id))
-                    {
+                    if (is_array($item->content) && isset($item->content[0]->meta->id)) {
                         $this->structures[$item->content[0]->meta->id] = $struct;
                     } else {
                         $this->structures[] = $struct;

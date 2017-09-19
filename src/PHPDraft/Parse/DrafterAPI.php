@@ -1,12 +1,13 @@
 <?php
 /**
- * This file contains the DrafterAPI.php
+ * This file contains the DrafterAPI.php.
  *
  * @package PHPDraft\Parse
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
-namespace PHPDraft\Parse;
 
+namespace PHPDraft\Parse;
 
 class DrafterAPI extends BaseParser
 {
@@ -19,12 +20,12 @@ class DrafterAPI extends BaseParser
     {
         parent::__construct($apib);
 
-        $ch = $this->curl_init_drafter("# Hello API
+        $ch = $this->curl_init_drafter('# Hello API
 ## /message
 ### GET
             + Response 200 (text/plain)
 
-        Hello World!");
+        Hello World!');
 
         curl_exec($ch);
 
@@ -35,7 +36,7 @@ class DrafterAPI extends BaseParser
     }
 
     /**
-     * Parses the apib for the selected method
+     * Parses the apib for the selected method.
      *
      * @return void
      */
@@ -53,7 +54,7 @@ class DrafterAPI extends BaseParser
     }
 
     /**
-     * Init curl for drafter webservice
+     * Init curl for drafter webservice.
      *
      * @param string $message API blueprint to parse
      *
@@ -63,17 +64,17 @@ class DrafterAPI extends BaseParser
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://api.apiblueprint.org/parser");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_URL, 'https://api.apiblueprint.org/parser');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
-        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Content-Type: text/vnd.apiblueprint",
-            "Accept: application/vnd.refract.parse-result+json",
+            'Content-Type: text/vnd.apiblueprint',
+            'Accept: application/vnd.refract.parse-result+json',
         ]);
 
         return $ch;

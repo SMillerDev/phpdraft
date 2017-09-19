@@ -1,8 +1,9 @@
 <?php
 /**
- * This file contains the HTTPRequest.php
+ * This file contains the HTTPRequest.php.
  *
  * @package PHPDraft\Model
+ *
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
@@ -15,42 +16,41 @@ use PHPDraft\Model\Elements\StructureElement;
 class HTTPRequest implements Comparable
 {
     /**
-     * HTTP Headers
+     * HTTP Headers.
      *
      * @var array
      */
     public $headers = [];
 
     /**
-     * The HTTP Method
+     * The HTTP Method.
      *
      * @var string
      */
     public $method;
 
     /**
-     * Description of the request
+     * Description of the request.
      *
      * @var string
      */
     public $description;
 
     /**
-     * Parent class
+     * Parent class.
      *
      * @var Transition
      */
     public $parent;
 
-
     /**
-     * Body of the request (if POST or PUT)
+     * Body of the request (if POST or PUT).
      *
      * @var mixed
      */
-    public $body = null;
+    public $body = NULL;
     /**
-     * Structure of the request (if POST or PUT)
+     * Structure of the request (if POST or PUT).
      *
      * @var RequestBodyElement
      */
@@ -67,7 +67,7 @@ class HTTPRequest implements Comparable
     }
 
     /**
-     * Fill class values based on JSON object
+     * Fill class values based on JSON object.
      *
      * @param \stdClass $object JSON object
      *
@@ -82,11 +82,11 @@ class HTTPRequest implements Comparable
                 if ($value->element === 'dataStructure') {
                     $this->parse_structure($value);
                     continue;
-                } elseif ($value->element === 'copy'){
+                } elseif ($value->element === 'copy') {
                     $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
-                }elseif ($value->element === 'asset') {
+                } elseif ($value->element === 'asset') {
                     if (in_array('messageBody', $value->meta->classes)) {
-                        $this->body[]                  = (isset($value->content)) ? $value->content : null;
+                        $this->body[]                  = (isset($value->content)) ? $value->content : NULL;
                         $this->headers['Content-Type'] =
                             (isset($value->attributes->contentType)) ? $value->attributes->contentType : '';
                     }
@@ -100,7 +100,7 @@ class HTTPRequest implements Comparable
             }
         }
 
-        if ($this->body === null) {
+        if ($this->body === NULL) {
             $this->body = &$this->struct;
         }
 
@@ -108,7 +108,7 @@ class HTTPRequest implements Comparable
     }
 
     /**
-     * Parse the objects into a request body
+     * Parse the objects into a request body.
      *
      * @param \stdClass $objects JSON objects
      */
@@ -123,10 +123,9 @@ class HTTPRequest implements Comparable
     }
 
     /**
-     * Generate a cURL command for the HTTP request
+     * Generate a cURL command for the HTTP request.
      *
      * @param string $base_url   URL to the base server
-     *
      * @param array  $additional Extra options to pass to cURL
      *
      * @return string An executable cURL command
@@ -135,12 +134,12 @@ class HTTPRequest implements Comparable
     {
         $options = [];
 
-        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : null;
+        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : NULL;
 
         $options[] = '-X' . $this->method;
-        if (empty($this->body)){
+        if (empty($this->body)) {
             //NO-OP
-        }elseif (is_string($this->body)) {
+        } elseif (is_string($this->body)) {
             $options[] = '--data-binary ' . escapeshellarg($this->body);
         } elseif (is_array($this->body)) {
             $options[] = '--data-binary ' . escapeshellarg(join('', $this->body));
@@ -154,11 +153,11 @@ class HTTPRequest implements Comparable
         }
         $options = array_merge($options, $additional);
 
-        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . escapeshellarg($this->parent->build_url($base_url, true)));
+        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . escapeshellarg($this->parent->build_url($base_url, TRUE)));
     }
 
     /**
-     * Check if item is the same as other item
+     * Check if item is the same as other item.
      *
      * @param self $b Object to compare to
      *
@@ -166,6 +165,6 @@ class HTTPRequest implements Comparable
      */
     public function is_equal_to($b)
     {
-        return (($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers));
+        return ($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers);
     }
 }
