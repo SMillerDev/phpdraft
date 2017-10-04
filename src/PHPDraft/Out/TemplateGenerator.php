@@ -79,9 +79,12 @@ class TemplateGenerator
      */
     public function __construct($template, $image)
     {
-        $this->template    = $template;
-        $this->image       = $image;
-        $this->http_status = new Httpstatus();
+        $template_parts             = explode('__', $template);
+        $this->template             = $template_parts[0];
+        $this->base_data['COLOR_1'] = isset($template_parts[1]) ? $template_parts[1] : 'green';
+        $this->base_data['COLOR_2'] = isset($template_parts[2]) ? $template_parts[2] : 'light_green';
+        $this->image                = $image;
+        $this->http_status          = new Httpstatus();
     }
 
     /**

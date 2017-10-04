@@ -14,7 +14,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.<?= $this->base_data['COLOR_1']?>-<?= $this->base_data['COLOR_2']?>.min.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -237,7 +237,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
     </main>
 </div>
 <?php $extras = array_filter($this->base_data, function ($value) {
-    return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC']);
+    return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
 }, ARRAY_FILTER_USE_KEY);
 if (!empty($extras)):
     $extras['host'] = $this->base_data['HOST']; ?>
