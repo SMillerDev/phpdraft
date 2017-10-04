@@ -86,14 +86,19 @@ class UI
             define('DRAFTER_ONLINE_MODE', 1);
         }
 
-        $template = (isset($options['t']) && $options['t']) ? $options['t'] : 'default';
-        $image    = (isset($options['i']) && $options['i']) ? $options['i'] : NULL;
-        $css      = (isset($options['c']) && $options['c']) ? $options['i'] : NULL;
-        $js       = (isset($options['j']) && $options['j']) ? $options['i'] : NULL;
+        $template = (new self())->var_or_default($options['t'], 'default');
+        $image    = (new self())->var_or_default($options['i']);
+        $css      = (new self())->var_or_default($options['c']);
+        $js       = (new self())->var_or_default($options['j']);
+        $color1   = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
+        $color1   = (new self())->var_or_default($color1);
+        $color2   = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');
+        $color2   = (new self())->var_or_default($color2);
+        $colors   = (is_null($color1) || is_null($color2)) ? '' : '__' . $color1 . '__' . $color2;
 
         return [
             'file'     => $file,
-            'template' => $template,
+            'template' => $template . $colors,
             'image'    => $image,
             'css'      => $css,
             'js'       => $js,
@@ -117,6 +122,23 @@ class UI
         echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking)." . PHP_EOL;
         echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking)." . PHP_EOL;
         echo "\t-h\tDisplays this text." . PHP_EOL;
+    }
+
+    /**
+     * Check if a variable exists, otherwise return a default.
+     *
+     * @param mixed $var
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    private function var_or_default(&$var, $default = NULL)
+    {
+        if (!isset($var) || is_null($var)) {
+            return $default;
+        }
+
+        return $var;
     }
 
     /**

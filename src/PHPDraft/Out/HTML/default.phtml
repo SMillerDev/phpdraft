@@ -312,7 +312,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
     </div>
 </div>
 <?php $extras = array_filter($this->base_data, function ($value) {
-    return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC']);
+    return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
 }, ARRAY_FILTER_USE_KEY);
 if (!empty($extras)):
     $extras['host'] = $this->base_data['HOST']; ?>
