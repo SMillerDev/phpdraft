@@ -1,4 +1,4 @@
-# PHPDraft [![Build Status](https://travis-ci.org/SMillerDev/phpdraft.svg?branch=master)](https://travis-ci.org/SMillerDev/phpdraft) [![Style Status](https://styleci.io/repos/65147997/shield)](https://styleci.io/repos/65147997)
+# PHPDraft [![Build Status](https://travis-ci.org/SMillerDev/phpdraft.svg?branch=master)](https://travis-ci.org/SMillerDev/phpdraft) [![Style Status](https://styleci.io/repos/65147997/shield)](https://styleci.io/repos/65147997) [![codecov](https://codecov.io/gh/SMillerDev/phpdraft/branch/master/graph/badge.svg)](https://codecov.io/gh/SMillerDev/phpdraft)
 This is a parser for API Blueprint files in PHP.[1](#dependencies)
 
 ## Usage
