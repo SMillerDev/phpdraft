@@ -44,7 +44,7 @@ class UI
      */
     public static function main($argv = [])
     {
-        $options = getopt('f:t:i:c:j:s:hvuyo');
+        $options = getopt('f:t:i:c:j:s:hvyo');
 
         if (!isset($argv[1])) {
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
@@ -116,11 +116,14 @@ class UI
         echo 'This is a parser for API Blueprint files in PHP.' . PHP_EOL . PHP_EOL;
         echo 'The following options can be used:.' . PHP_EOL;
         echo "\t-f\tSpecifies the file to parse." . PHP_EOL;
+        echo "\t-y\tAlways accept using the online mode." . PHP_EOL;
+        echo "\t-o\tAlways use the online mode." . PHP_EOL;
         echo "\t-t\tSpecifies the template to use. (defaults to 'default')" . PHP_EOL;
         echo "\t-s\tSort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file)" . PHP_EOL;
         echo "\t-i\tSpecifies an image to display in the header." . PHP_EOL;
         echo "\t-c\tSpecifies a CSS file to include (value is put in a link element without checking)." . PHP_EOL;
         echo "\t-j\tSpecifies a JS file to include (value is put in a script element without checking)." . PHP_EOL;
+        echo "\t-v\tPrint the version for PHPDraft." . PHP_EOL;
         echo "\t-h\tDisplays this text." . PHP_EOL;
     }
 
