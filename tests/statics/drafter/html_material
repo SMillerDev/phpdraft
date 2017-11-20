@@ -220,6 +220,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/oauth/token&method=POST" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-authentication-tokens-get-an-access-token" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -315,6 +318,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-vehicle-collection-list-all-vehicles" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -398,6 +404,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-mobile-access" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -495,6 +504,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-charge-state" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -582,6 +594,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-climate-settings" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -667,6 +682,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-driving-and-position" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -751,6 +769,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-gui-settings" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -846,6 +867,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicles-state-and-settings-vehicle-state" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -935,6 +959,9 @@
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-wake-up-car-wake-up-car" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1026,6 +1053,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-set-valet-mode-set-valet-mode" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1112,6 +1142,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-reset-valet-pin-reset-valet-pin" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1198,6 +1231,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-open-charge-port-open-charge-port" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1284,6 +1320,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-set-charge-limit-to-standard-set-charge-limit-to-standard" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1370,6 +1409,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-set-charge-limit-to-max-range-set-charge-limit-to-max-range" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1457,6 +1499,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?args={\"percent\":[\"75\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-set-charge-limit-set-charge-limit" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1543,6 +1588,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-start-charging-start-charging" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1629,6 +1677,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-stop-charging-stop-charging" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1715,6 +1766,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-flash-lights-flash-lights" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1801,6 +1855,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-honk-horn-honk-horn" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1887,6 +1944,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-unlock-doors-unlock-doors" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -1973,6 +2033,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-lock-doors-lock-doors" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2061,6 +2124,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?args={\"driver_temp\":[\"23.7\"],\"passenger_temp\":[\"18.1\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-set-temperature-set-temperature" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2147,6 +2213,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-start-hvac-system-start-hvac-system" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2233,6 +2302,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-stop-hvac-system-stop-hvac-system" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2321,6 +2393,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?args={\"state\":[\"%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E\"],\"percent\":[\"50\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-move-pano-roof-move-pano-roof" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2408,6 +2483,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?args={\"password\":[\"edisonsux\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-remote-start-remote-start" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -2495,6 +2573,9 @@ locations in navigation.
                                                                                                                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-vehicle-commands-open-trunk/frunk-open-trunk/frunk" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>

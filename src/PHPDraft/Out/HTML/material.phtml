@@ -192,6 +192,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <a href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">play_arrow</i>
+                                </a>
                                 <button id="show-dialog-<?=$transition->get_href();?>" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>
@@ -200,7 +203,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                     <div class="mdl-dialog__content">
                                         <b>This might be useful for debugging</b>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <textarea class="mdl-textfield__input" type="text" rows= "7" autofocus readonly><?= $transition->get_curl_command($this->base_data['HOST'], []); ?></textarea>
+                                            <textarea class="mdl-textfield__input" type="text" rows= "7" autofocus readonly><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>
                                         </div>
                                     </div>
                                     <div class="mdl-dialog__actions">

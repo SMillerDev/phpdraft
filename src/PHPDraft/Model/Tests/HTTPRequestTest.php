@@ -231,6 +231,41 @@ class HTTPRequestTest extends BaseTest
     }
 
     /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlStructBodyFilled()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+        $property = $this->reflection->getProperty('body');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, 1000);
+
+        $struct = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
+                       ->disableOriginalConstructor()
+                       ->getMock();
+        $struct_ar = $this->getMockBuilder('\PHPDraft\Model\Elements\RequestBodyElement')
+                          ->disableOriginalConstructor()
+                          ->getMock();
+
+        $struct_ar->expects($this->once())
+                  ->method('print_request')
+                  ->with(NULL)
+                  ->will($this->returnValue('TEST'));
+
+        $struct->value = [ $struct_ar ];
+
+        $property = $this->reflection->getProperty('struct');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $struct);
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://www.hurl.it/?url=&method=&body=TEST', $return);
+    }
+
+    /**
      * Test basic parse functions
      */
     public function testParseIsCalled()

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style>
-        var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;left:10px;border-radius:30px}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-panel>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}.panel-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.panel-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.panel-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}.method-nav ul{padding-left:10px}.method-nav ul li{list-style:none}.method-nav ul li a{line-height:26px}.method-nav ul li a span{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.POST:not(.structure)>.panel-heading,span.POST{background:#62c462}.GET:not(.structure)>.panel-heading,span.GET{background:#5bc0de}.DELETE:not(.structure)>.panel-heading,span.DELETE{background:#ee5f5b}.PUT:not(.structure)>.panel-heading,span.PUT{background:#f89406}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.panel-body{position:relative}.curl.btn{z-index:999;position:absolute;right:15px;top:15px}h5.response-body,h4.request{cursor:pointer}    </style>
+        var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;left:10px;border-radius:30px}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-panel>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}.panel-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.panel-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.panel-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}.method-nav ul{padding-left:10px}.method-nav ul li{list-style:none}.method-nav ul li a{line-height:26px}.method-nav ul li a span{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.POST:not(.structure)>.panel-heading,span.POST{background:#62c462}.GET:not(.structure)>.panel-heading,span.GET{background:#5bc0de}.DELETE:not(.structure)>.panel-heading,span.DELETE{background:#ee5f5b}.PUT:not(.structure)>.panel-heading,span.PUT{background:#f89406}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.panel-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}h5.response-body,h4.request{cursor:pointer}    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -376,6 +376,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/oauth/token&method=POST"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Performs the login. Takes in an plain text email and password, matching the owner's login information for <a href="https://my.teslamotors.com/user/login">https://my.teslamotors.com/user/login</a>.
 
 <p>Returns a <code>access_token</code> which is passed along as a header with all future requests to authenticate the user.</p>
@@ -484,6 +492,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)
 </p>
                                                                                                             <div class="panel panel-default">
@@ -591,6 +607,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Determines if mobile access to the vehicle is enabled.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -685,6 +709,14 @@
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Returns the state of charge in the battery.
 </p>
@@ -800,6 +832,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Returns the current temperature and climate control state.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -904,6 +944,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Returns the driving and position state of the vehicle.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1006,6 +1054,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Returns various information about the GUI settings of the car, such as unit format and range display.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1106,6 +1162,14 @@
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Returns the vehicle's physical state, such as which doors are open.
 </p>
@@ -1227,6 +1291,14 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Wakes up the car from the sleep state. Necessary to get some data from the car.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1329,6 +1401,14 @@
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.
 Valet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. It also disables Homelink, Bluetooth and
@@ -1438,6 +1518,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Resets the PIN set for valet mode, if set.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1540,6 +1628,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Opens the charge port. Does not close the charge port (for now...)
 </p>
@@ -1644,6 +1740,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Set the charge mode to standard (90% under the new percentage system introduced in 4.5).
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1747,6 +1851,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!
 </p>
                                                                                                             <div class="panel panel-default">
@@ -1849,6 +1961,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit?percent=75'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?args={\"percent\":[\"75\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Set the charge limit to a custom percentage.
 </p>
@@ -1954,6 +2074,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Start charging. Must be plugged in, have power available, and not have reached your charge limit.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2056,6 +2184,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Stop charging. Must already be charging.
 </p>
@@ -2160,6 +2296,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Flash the lights once.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2262,6 +2406,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Honk the horn once.
 </p>
@@ -2366,6 +2518,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Unlock the car's doors.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2469,6 +2629,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Lock the car's doors.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2571,6 +2739,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps?driver_temp=23.7&amp;passenger_temp=18.1'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?args={\"driver_temp\":[\"23.7\"],\"passenger_temp\":[\"18.1\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Set the temperature target for the HVAC system.
 </p>
@@ -2677,6 +2853,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Start the climate control system. Will cool or heat automatically, depending on set temperature.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2780,6 +2964,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Stop the climate control system.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -2882,6 +3074,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E&amp;percent=50'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?args={\"state\":[\"%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E\"],\"percent\":[\"50\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Controls the car's panoramic roof, if installed.
 </p>
@@ -2988,6 +3188,14 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive?password=edisonsux'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?args={\"password\":[\"edisonsux\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
                                 <p class="lead">Start the car for keyless driving. Must start driving within 2 minutes of issuing this request.
 </p>
                                                                                                             <div class="panel panel-default">
@@ -3091,6 +3299,14 @@ locations in navigation.
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead">Open the trunk or frunk. Currently inoperable.
 </p>

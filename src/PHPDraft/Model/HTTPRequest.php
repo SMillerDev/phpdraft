@@ -167,4 +167,53 @@ class HTTPRequest implements Comparable
     {
         return ($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers);
     }
+
+    /**
+     * Generate a URL for the hurl.it service.
+     *
+     * @param string $base_url   URL to the base server
+     * @param array  $additional Extra options to pass to the service
+     *
+     * @return string
+     */
+    public function get_hurl_link($base_url, $additional = [])
+    {
+        $options = [];
+
+        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : NULL;
+
+        $url = $this->parent->build_url($base_url, TRUE);
+        $url = explode('?', $url);
+        if (isset($url[1])) {
+            $params = [];
+            foreach (explode('&', $url[1]) as $args) {
+                $arg             = explode('=', $args);
+                $params[$arg[0]] = [$arg[1]];
+            }
+            $options[] = 'args=' . json_encode($params);
+        }
+        $options[] = 'url=' . $url[0];
+        $options[] = 'method=' . strtoupper($this->method);
+        if (empty($this->body)) {
+            //NO-OP
+        } elseif (is_string($this->body)) {
+            $options[] = 'body=' . urlencode($this->body);
+        } elseif (is_array($this->body)) {
+            $options[] = 'body=' . urlencode(join('', $this->body));
+        } elseif (is_subclass_of($this->struct, StructureElement::class)) {
+            foreach ($this->struct->value as $body) {
+                $options[] = 'body=' . urlencode(strip_tags($body->print_request($type)));
+            }
+        }
+        $headers = [];
+        if (!empty($this->headers)) {
+            foreach ($this->headers as $header => $value) {
+                $headers[$header] = [$value];
+            }
+            $options[] = 'headers=' . json_encode($headers);
+        }
+        $options = array_merge($options, $additional);
+
+        return str_replace('"', '\"', 'https://www.hurl.it/?' . join('&', $options));
+    }
 }
