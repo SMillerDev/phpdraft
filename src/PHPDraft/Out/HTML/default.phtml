@@ -150,9 +150,16 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    data-placement="left"
                                    data-toggle="popover"
                                    data-html="true"
-                                   data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST'],
-                                       []); ?></textarea>">
+                                   data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
                                 </a>
                                 <p class="lead"><?= $transition->description; ?></p>
                                 <?php if (!empty($transition->requests)): ?>

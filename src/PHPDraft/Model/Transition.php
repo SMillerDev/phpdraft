@@ -262,4 +262,22 @@ class Transition extends HierarchyElement
 
         return $this->requests[$key]->get_curl_command($base_url, $additional);
     }
+
+    /**
+     * Generate a URL for the hurl.it service.
+     *
+     * @param string $base_url   base URL of the server
+     * @param array  $additional additional arguments to pass
+     * @param int    $key        number of the request to generate for
+     *
+     * @return string
+     */
+    public function get_hurl_link($base_url, $additional = [], $key = 0)
+    {
+        if (!isset($this->requests[$key])) {
+            return '';
+        }
+
+        return $this->requests[$key]->get_hurl_link($base_url, $additional);
+    }
 }

@@ -137,11 +137,20 @@ a.code {
     position: relative;
 }
 
-.curl.btn {
+.curl.btn, .hurl.btn {
     z-index: 999;
     position: absolute;
-    right: 15px;
     top: 15px;
+}
+.curl.btn {
+    right: 15px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px
+}
+.hurl.btn {
+    right: 54px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px
 }
 
 h5.response-body, h4.request {

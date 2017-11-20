@@ -293,6 +293,38 @@ class TransitionTest extends HierarchyElementChildTest
     }
 
     /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlURLNoKey()
+    {
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('', $return);
+    }
+
+    /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlURLKey()
+    {
+        $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+        $mock_req->expects($this->once())
+                 ->method('get_hurl_link')
+                 ->with('https://ur.l', [])
+                 ->will($this->returnValue('https://hurl.it'));
+        $requests = [$mock_req];
+        $req_property = $this->reflection->getProperty('requests');
+        $req_property->setAccessible(TRUE);
+        $req_property->setValue($this->class, $requests);
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://hurl.it', $return);
+    }
+
+    /**
      * Test basic get_method functions
      */
     public function testGetMethodNotSet()
