@@ -27,7 +27,7 @@ class BaseParserTest extends BaseTest
         $this->mock_function('sys_get_temp_dir', TEST_STATICS);
         $this->mock_function('shell_exec', "/some/dir/drafter\n");
         $this->class      = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
-                                 ->setConstructorArgs([file_get_contents(TEST_STATICS . '/drafter/apib')])
+                                 ->setConstructorArgs([file_get_contents(TEST_STATICS . '/drafter/apib/index.apib')])
                                  ->getMockForAbstractClass();
         $this->reflection = new ReflectionClass($this->class);
         $this->unmock_function('shell_exec');
@@ -50,7 +50,7 @@ class BaseParserTest extends BaseTest
     {
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
+        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
     /**
@@ -69,9 +69,9 @@ class BaseParserTest extends BaseTest
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
-        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json'));
+        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
     }
 
     /**
@@ -82,9 +82,9 @@ class BaseParserTest extends BaseTest
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
-        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json'));
+        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
     }
 
     /**
@@ -105,10 +105,10 @@ class BaseParserTest extends BaseTest
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
-        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json'));
+        $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
         $this->assertDirectoryExists($tmp_dir);
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
     }
 
     /**

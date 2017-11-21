@@ -376,15 +376,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/oauth/token&method=POST"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Foauth%2Ftoken&method=POST"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Performs the login. Takes in an plain text email and password, matching the owner's login information for <a href="https://my.teslamotors.com/user/login">https://my.teslamotors.com/user/login</a>.
+                                                                <p class="lead">Performs the login. Takes in an plain text email and password, matching the owner's login information for <a href="https://my.teslamotors.com/user/login">https://my.teslamotors.com/user/login</a>.
 
 <p>Returns a <code>access_token</code> which is passed along as a header with all future requests to authenticate the user.</p>
 
@@ -492,15 +492,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)
+                                                                <p class="lead">Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -607,15 +607,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fmobile_enabled&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Determines if mobile access to the vehicle is enabled.
+                                                                <p class="lead">Determines if mobile access to the vehicle is enabled.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -643,7 +643,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -710,15 +710,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fcharge_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Returns the state of charge in the battery.
+                                                                <p class="lead">Returns the state of charge in the battery.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -746,7 +746,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -832,15 +832,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fclimate_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Returns the current temperature and climate control state.
+                                                                <p class="lead">Returns the current temperature and climate control state.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -868,7 +868,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -944,15 +944,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fdrive_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Returns the driving and position state of the vehicle.
+                                                                <p class="lead">Returns the driving and position state of the vehicle.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -980,7 +980,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1054,15 +1054,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fgui_settings&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Returns various information about the GUI settings of the car, such as unit format and range display.
+                                                                <p class="lead">Returns various information about the GUI settings of the car, such as unit format and range display.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1090,7 +1090,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1163,15 +1163,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state&method=GET&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fvehicle_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Returns the vehicle's physical state, such as which doors are open.
+                                                                <p class="lead">Returns the vehicle's physical state, such as which doors are open.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1199,7 +1199,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1291,15 +1291,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fwake_up&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Wakes up the car from the sleep state. Necessary to get some data from the car.
+                                                                <p class="lead">Wakes up the car from the sleep state. Necessary to get some data from the car.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1327,7 +1327,7 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1402,15 +1402,15 @@
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_valet_mode&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.
+                                                                <p class="lead">Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.
 Valet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. It also disables Homelink, Bluetooth and
 Wifi settings, and the ability to disable mobile access to the car. It also hides your favorites, home, and work
 locations in navigation.
@@ -1441,11 +1441,14 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>on</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td><p>Whether to enable or disable valet mode.</p>
-</td><td><span class="example-value pull-right">true</span></td></tr><tr><td><span>password</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>(optional) A 4 digit PIN code to unlock the car.</p>
-</td><td><span class="example-value pull-right">1234</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
+                                                                                                    <h5>Request object</h5>
+                                                    <div class="row">
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>on</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td><p>Whether to enable or disable valet mode.</p>
+</td><td><span class="example-value pull-right">true</span></td></tr><tr><td><span>password</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>(optional) A 4 digit PIN code to unlock the car.</p>
+</td><td><span class="example-value pull-right">1234</span></td></tr></table></table>                                                    </div>
                                                                                             </div>
                                         </div>
                                                                                                                                                                                 <div class="panel panel-default">
@@ -1518,15 +1521,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Freset_valet_pin&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Resets the PIN set for valet mode, if set.
+                                                                <p class="lead">Resets the PIN set for valet mode, if set.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1554,7 +1557,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1629,15 +1632,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_port_door_open&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Opens the charge port. Does not close the charge port (for now...)
+                                                                <p class="lead">Opens the charge port. Does not close the charge port (for now...)
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1665,7 +1668,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1740,15 +1743,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_standard&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Set the charge mode to standard (90% under the new percentage system introduced in 4.5).
+                                                                <p class="lead">Set the charge mode to standard (90% under the new percentage system introduced in 4.5).
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1776,7 +1779,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1851,15 +1854,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_max_range&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!
+                                                                <p class="lead">Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1887,7 +1890,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1962,15 +1965,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit?percent=75'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?args={\"percent\":[\"75\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?args=%7B%22percent%22%3A%5B%2275%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_charge_limit&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Set the charge limit to a custom percentage.
+                                                                <p class="lead">Set the charge limit to a custom percentage.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -1998,8 +2001,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>limit_value</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The percentage value</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>limit_value</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The percentage value</p>
 </td><td><span class="example-value pull-right">75</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2074,15 +2077,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_start&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Start charging. Must be plugged in, have power available, and not have reached your charge limit.
+                                                                <p class="lead">Start charging. Must be plugged in, have power available, and not have reached your charge limit.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2110,7 +2113,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2185,15 +2188,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_stop&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Stop charging. Must already be charging.
+                                                                <p class="lead">Stop charging. Must already be charging.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2221,7 +2224,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2296,15 +2299,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fflash_lights&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Flash the lights once.
+                                                                <p class="lead">Flash the lights once.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2332,7 +2335,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2407,15 +2410,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fhonk_horn&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Honk the horn once.
+                                                                <p class="lead">Honk the horn once.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2443,7 +2446,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2518,15 +2521,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fdoor_unlock&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Unlock the car's doors.
+                                                                <p class="lead">Unlock the car's doors.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2554,7 +2557,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2629,15 +2632,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fdoor_lock&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Lock the car's doors.
+                                                                <p class="lead">Lock the car's doors.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2665,7 +2668,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2740,15 +2743,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps?driver_temp=23.7&amp;passenger_temp=18.1'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?args={\"driver_temp\":[\"23.7\"],\"passenger_temp\":[\"18.1\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?args=%7B%22driver_temp%22%3A%5B%2223.7%22%5D%2C%22passenger_temp%22%3A%5B%2218.1%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_temps&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Set the temperature target for the HVAC system.
+                                                                <p class="lead">Set the temperature target for the HVAC system.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2776,9 +2779,9 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>driver_degC</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
-</td><td><span class="example-value pull-right">23.7</span></td></tr><tr><td><span>pass_degC</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>driver_degC</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
+</td><td><span class="example-value pull-right">23.7</span></td></tr><tr><td><span>pass_degC</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
 </td><td><span class="example-value pull-right">18.1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2853,15 +2856,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fauto_conditioning_start&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Start the climate control system. Will cool or heat automatically, depending on set temperature.
+                                                                <p class="lead">Start the climate control system. Will cool or heat automatically, depending on set temperature.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -2889,7 +2892,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2964,15 +2967,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fauto_conditioning_stop&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Stop the climate control system.
+                                                                <p class="lead">Stop the climate control system.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -3000,7 +3003,7 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -3075,15 +3078,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E&amp;percent=50'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?args={\"state\":[\"%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E\"],\"percent\":[\"50\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?args=%7B%22state%22%3A%5B%22%253Cul%2520class%253D%2522list-group%2520mdl-list%2522%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Eopen%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Eclose%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Ecomfort%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Event%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Emove%253C%252Fli%253E%253C%252Ful%253E%22%5D%2C%22percent%22%3A%5B%2250%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fsun_roof_control&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Controls the car's panoramic roof, if installed.
+                                                                <p class="lead">Controls the car's panoramic roof, if installed.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -3111,8 +3114,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status"></span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status">required</span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
 </td><td><div class="enum-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">open</li><li class="list-group-item mdl-list__item">close</li><li class="list-group-item mdl-list__item">comfort</li><li class="list-group-item mdl-list__item">vent</li><li class="list-group-item mdl-list__item">move</li></ul></div></td></tr><tr><td><span>percent</span></td><td><code>number</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
 </td><td><span class="example-value pull-right">50</span></td></tr></table>                                                    </div>
                                                 
@@ -3188,15 +3191,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive?password=edisonsux'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?args={\"password\":[\"edisonsux\"]}&url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?args=%7B%22password%22%3A%5B%22edisonsux%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fremote_start_drive&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Start the car for keyless driving. Must start driving within 2 minutes of issuing this request.
+                                                                <p class="lead">Start the car for keyless driving. Must start driving within 2 minutes of issuing this request.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -3224,8 +3227,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The password to the authenticated my.teslamotors.com account.</p>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The password to the authenticated my.teslamotors.com account.</p>
 </td><td><span class="example-value pull-right">edisonsux</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -3300,15 +3303,15 @@ locations in navigation.
                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open'</textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <a class="btn btn-default hurl"
+                                                                <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
                                    target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open&method=POST&headers={\"Authorization\":[\"Bearer {access_token}\"]}"
+                                   href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Ftrunk_open&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
-                                <p class="lead">Open the trunk or frunk. Currently inoperable.
+                                                                <p class="lead">Open the trunk or frunk. Currently inoperable.
 </p>
                                                                                                             <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -3336,10 +3339,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>which_trunk</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The trunk to open. <code>rear</code> is the only one known currently.</p>
-</td><td><span class="example-value pull-right">rear</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
+                                                                                                    <h5>Request object</h5>
+                                                    <div class="row">
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>which_trunk</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The trunk to open. <code>rear</code> is the only one known currently.</p>
+</td><td><span class="example-value pull-right">rear</span></td></tr></table></table>                                                    </div>
                                                                                             </div>
                                         </div>
                                                                                                                                                                                 <div class="panel panel-default">
@@ -3389,6 +3395,16 @@ locations in navigation.
                                                                     </div>
     </div>
 </div>
+    <button
+        type="button"
+        class="btn btn-lg extra-info"
+        data-toggle="popover"
+        title="Extra info"
+        data-placement="top"
+        data-html="true"
+        data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
+        <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>

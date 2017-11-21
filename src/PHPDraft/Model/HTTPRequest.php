@@ -190,16 +190,16 @@ class HTTPRequest implements Comparable
                 $arg             = explode('=', $args);
                 $params[$arg[0]] = [$arg[1]];
             }
-            $options[] = 'args=' . json_encode($params);
+            $options[] = 'args=' . urlencode(json_encode($params));
         }
-        $options[] = 'url=' . $url[0];
+        $options[] = 'url=' . urlencode($url[0]);
         $options[] = 'method=' . strtoupper($this->method);
         if (empty($this->body)) {
             //NO-OP
         } elseif (is_string($this->body)) {
             $options[] = 'body=' . urlencode($this->body);
         } elseif (is_array($this->body)) {
-            $options[] = 'body=' . urlencode(join('', $this->body));
+            $options[] = 'body=' . urlencode(join(',', $this->body));
         } elseif (is_subclass_of($this->struct, StructureElement::class)) {
             foreach ($this->struct->value as $body) {
                 $options[] = 'body=' . urlencode(strip_tags($body->print_request($type)));
@@ -210,10 +210,10 @@ class HTTPRequest implements Comparable
             foreach ($this->headers as $header => $value) {
                 $headers[$header] = [$value];
             }
-            $options[] = 'headers=' . json_encode($headers);
+            $options[] = 'headers=' . urlencode(json_encode($headers));
         }
         $options = array_merge($options, $additional);
 
-        return str_replace('"', '\"', 'https://www.hurl.it/?' . join('&', $options));
+        return 'https://www.hurl.it/?' . join('&', $options);
     }
 }

@@ -46,13 +46,49 @@
                 "content": "https://owner-api.teslamotors.com"
               }
             }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "EXTRA_HOSTS"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://test.owner-api.teslamotors.com"
+              }
+            }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "SOMETHING"
+              },
+              "value": {
+                "element": "string",
+                "content": "INFO"
+              }
+            }
           }
         ]
       },
       "content": [
         {
           "element": "copy",
-          "content": "This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.\n\n"
+          "content": "This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely."
         },
         {
           "element": "category",
@@ -73,97 +109,154 @@
               },
               "content": [
                 {
-                  "element": "copy",
-                  "content": "### Get an Access Token [JOKE]\n\nPerforms the login. Takes in an plain text email and password, matching the owner's login information for [https://my.teslamotors.com/user/login](https://my.teslamotors.com/user/login).\n\nReturns a `access_token` which is passed along as a header with all future requests to authenticate the user.\n\nYou must provide the `Authorization: Bearer {access_token}` header in all other requests.\n\nThe current client ID and secret are [available here](http://pastebin.com/fX6ejAHd)\n\n"
-                },
-                {
-                  "element": "dataStructure",
-                  "content": [
-                    {
-                      "element": "object",
-                      "meta": {
-                        "id": "Tokens"
-                      },
+                  "element": "transition",
+                  "meta": {
+                    "title": "Get an Access Token"
+                  },
+                  "attributes": {
+                    "data": {
+                      "element": "dataStructure",
                       "content": [
                         {
-                          "element": "member",
-                          "meta": {
-                            "description": "The type of oAuth grant. Always \"password\""
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "grant_type"
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The type of oAuth grant. Always \"password\""
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "grant_type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "password"
+                                }
+                              }
                             },
-                            "value": {
-                              "element": "string",
-                              "content": "password"
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client ID"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_id"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "abc"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client secret"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_secret"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "123"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The email for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "email"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "elon@teslamotors.com"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The password for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "password"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "edisonsux"
+                                }
+                              }
                             }
-                          }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Performs the login. Takes in an plain text email and password, matching the owner's login information for [https://my.teslamotors.com/user/login](https://my.teslamotors.com/user/login).\n\nReturns a `access_token` which is passed along as a header with all future requests to authenticate the user.\n\nYou must provide the `Authorization: Bearer {access_token}` header in all other requests.\n\nThe current client ID and secret are [available here](http://pastebin.com/fX6ejAHd)"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": []
                         },
                         {
-                          "element": "member",
-                          "meta": {
-                            "description": "The oAuth client ID"
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "client_id"
-                            },
-                            "value": {
-                              "element": "string",
-                              "content": "abc"
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "200",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
                             }
-                          }
-                        },
-                        {
-                          "element": "member",
-                          "meta": {
-                            "description": "The oAuth client secret"
                           },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "client_secret"
-                            },
-                            "value": {
-                              "element": "string",
-                              "content": "123"
+                          "content": [
+                            {
+                              "element": "asset",
+                              "meta": {
+                                "classes": [
+                                  "messageBody"
+                                ]
+                              },
+                              "attributes": {
+                                "contentType": "application/json"
+                              },
+                              "content": "{\n  \"access_token\": \"abc123\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 7776000,\n  \"created_at\": 1457385291\n}\n"
                             }
-                          }
-                        },
-                        {
-                          "element": "member",
-                          "meta": {
-                            "description": "The email for my.teslamotors.com"
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "email"
-                            },
-                            "value": {
-                              "element": "string",
-                              "content": "elon@teslamotors.com"
-                            }
-                          }
-                        },
-                        {
-                          "element": "member",
-                          "meta": {
-                            "description": "The password for my.teslamotors.com"
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "password"
-                            },
-                            "value": {
-                              "element": "string",
-                              "content": "edisonsux"
-                            }
-                          }
+                          ]
                         }
                       ]
                     }
@@ -184,7 +277,7 @@
           "content": [
             {
               "element": "copy",
-              "content": "A logged in user can have multiple vehicles under their account. This resource is primarily responsible for listing the vehicles and the basic details about them.\n\n"
+              "content": "A logged in user can have multiple vehicles under their account. This resource is primarily responsible for listing the vehicles and the basic details about them."
             },
             {
               "element": "resource",
@@ -203,7 +296,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)\n\n"
+                      "content": "Retrieve a list of your owned vehicles (includes vehicles not yet shipped!)"
                     },
                     {
                       "element": "httpTransaction",
@@ -211,7 +304,25 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET"
+                            "method": "GET",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Authorization"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "Bearer {access_token}"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
                           },
                           "content": []
                         },
@@ -274,6 +385,11 @@
                       "meta": {
                         "description": "The id of the Vehicle."
                       },
+                      "attributes": {
+                        "typeAttributes": [
+                          "required"
+                        ]
+                      },
                       "content": {
                         "key": {
                           "element": "string",
@@ -291,7 +407,7 @@
               "content": [
                 {
                   "element": "copy",
-                  "content": "These resources are read-only and determine the state of the vehicle's various sub-systems.\n\n"
+                  "content": "These resources are read-only and determine the state of the vehicle's various sub-systems."
                 },
                 {
                   "element": "transition",
@@ -307,6 +423,11 @@
                           "element": "member",
                           "meta": {
                             "description": "The id of the Vehicle."
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -325,7 +446,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Determines if mobile access to the vehicle is enabled.\n\n"
+                      "content": "Determines if mobile access to the vehicle is enabled."
                     },
                     {
                       "element": "httpTransaction",
@@ -412,6 +533,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -429,7 +555,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Returns the state of charge in the battery.\n\n"
+                      "content": "Returns the state of charge in the battery."
                     },
                     {
                       "element": "httpTransaction",
@@ -516,6 +642,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -533,7 +664,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Returns the current temperature and climate control state.\n\n"
+                      "content": "Returns the current temperature and climate control state."
                     },
                     {
                       "element": "httpTransaction",
@@ -620,6 +751,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -637,7 +773,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Returns the driving and position state of the vehicle.\n\n"
+                      "content": "Returns the driving and position state of the vehicle."
                     },
                     {
                       "element": "httpTransaction",
@@ -724,6 +860,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -741,7 +882,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Returns various information about the GUI settings of the car, such as unit format and range display.\n\n"
+                      "content": "Returns various information about the GUI settings of the car, such as unit format and range display."
                     },
                     {
                       "element": "httpTransaction",
@@ -828,6 +969,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -845,7 +991,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Returns the vehicle's physical state, such as which doors are open.\n\n"
+                      "content": "Returns the vehicle's physical state, such as which doors are open."
                     },
                     {
                       "element": "httpTransaction",
@@ -932,7 +1078,7 @@
           "content": [
             {
               "element": "copy",
-              "content": "These commands alter the vehicles state, and return result (true/false) to indicate success, and if failure reason contains the cause of failure.\n\n"
+              "content": "These commands alter the vehicles state, and return result (true/false) to indicate success, and if failure reason contains the cause of failure."
             },
             {
               "element": "resource",
@@ -958,6 +1104,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -975,7 +1126,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Wakes up the car from the sleep state. Necessary to get some data from the car.\n\n"
+                      "content": "Wakes up the car from the sleep state. Necessary to get some data from the car."
                     },
                     {
                       "element": "httpTransaction",
@@ -1073,6 +1224,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1083,38 +1239,48 @@
                               "content": 1
                             }
                           }
-                        },
+                        }
+                      ]
+                    },
+                    "data": {
+                      "element": "dataStructure",
+                      "content": [
                         {
-                          "element": "member",
-                          "meta": {
-                            "description": "Whether to enable or disable valet mode."
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "on"
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "Whether to enable or disable valet mode."
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "on"
+                                },
+                                "value": {
+                                  "element": "boolean",
+                                  "content": true
+                                }
+                              }
                             },
-                            "value": {
-                              "element": "boolean",
-                              "content": true
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "(optional) A 4 digit PIN code to unlock the car."
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "password"
+                                },
+                                "value": {
+                                  "element": "number",
+                                  "content": 1234
+                                }
+                              }
                             }
-                          }
-                        },
-                        {
-                          "element": "member",
-                          "meta": {
-                            "description": "(optional) A 4 digit PIN code to unlock the car."
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "password"
-                            },
-                            "value": {
-                              "element": "number",
-                              "content": 1234
-                            }
-                          }
+                          ]
                         }
                       ]
                     }
@@ -1122,7 +1288,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.\nValet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. It also disables Homelink, Bluetooth and\nWifi settings, and the ability to disable mobile access to the car. It also hides your favorites, home, and work\nlocations in navigation.\n\n"
+                      "content": "Sets valet mode on or off with a PIN to disable it from within the car. Reuses last PIN from previous valet session.\nValet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. It also disables Homelink, Bluetooth and\nWifi settings, and the ability to disable mobile access to the car. It also hides your favorites, home, and work\nlocations in navigation."
                     },
                     {
                       "element": "httpTransaction",
@@ -1220,6 +1386,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1237,7 +1408,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Resets the PIN set for valet mode, if set.\n\n"
+                      "content": "Resets the PIN set for valet mode, if set."
                     },
                     {
                       "element": "httpTransaction",
@@ -1335,6 +1506,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1352,7 +1528,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Opens the charge port. Does not close the charge port (for now...)\n\n"
+                      "content": "Opens the charge port. Does not close the charge port (for now...)"
                     },
                     {
                       "element": "httpTransaction",
@@ -1450,6 +1626,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1467,7 +1648,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Set the charge mode to standard (90% under the new percentage system introduced in 4.5).\n\n"
+                      "content": "Set the charge mode to standard (90% under the new percentage system introduced in 4.5)."
                     },
                     {
                       "element": "httpTransaction",
@@ -1565,6 +1746,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1582,7 +1768,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!\n\n"
+                      "content": "Set the charge mode to max range (100% under the new percentage system introduced in 4.5). Use sparingly!"
                     },
                     {
                       "element": "httpTransaction",
@@ -1680,6 +1866,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1695,6 +1886,11 @@
                           "element": "member",
                           "meta": {
                             "description": "The percentage value"
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -1713,7 +1909,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Set the charge limit to a custom percentage.\n\n"
+                      "content": "Set the charge limit to a custom percentage."
                     },
                     {
                       "element": "httpTransaction",
@@ -1811,6 +2007,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1828,7 +2029,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Start charging. Must be plugged in, have power available, and not have reached your charge limit.\n\n"
+                      "content": "Start charging. Must be plugged in, have power available, and not have reached your charge limit."
                     },
                     {
                       "element": "httpTransaction",
@@ -1926,6 +2127,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -1943,7 +2149,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Stop charging. Must already be charging.\n\n"
+                      "content": "Stop charging. Must already be charging."
                     },
                     {
                       "element": "httpTransaction",
@@ -2041,6 +2247,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2058,7 +2269,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Flash the lights once.\n\n"
+                      "content": "Flash the lights once."
                     },
                     {
                       "element": "httpTransaction",
@@ -2156,6 +2367,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2173,7 +2389,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Honk the horn once.\n\n"
+                      "content": "Honk the horn once."
                     },
                     {
                       "element": "httpTransaction",
@@ -2271,6 +2487,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2288,7 +2509,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Unlock the car's doors.\n\n"
+                      "content": "Unlock the car's doors."
                     },
                     {
                       "element": "httpTransaction",
@@ -2386,6 +2607,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2403,7 +2629,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Lock the car's doors.\n\n"
+                      "content": "Lock the car's doors."
                     },
                     {
                       "element": "httpTransaction",
@@ -2501,6 +2727,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2515,7 +2746,12 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the driver's side in celcius."
+                            "description": "The desired temperature on the driver's side in °C."
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -2531,7 +2767,12 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the passenger's side in celcius."
+                            "description": "The desired temperature on the passenger's side in °C."
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -2550,7 +2791,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Set the temperature target for the HVAC system.\n\n"
+                      "content": "Set the temperature target for the HVAC system."
                     },
                     {
                       "element": "httpTransaction",
@@ -2648,6 +2889,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2665,7 +2911,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Start the climate control system. Will cool or heat automatically, depending on set temperature.\n\n"
+                      "content": "Start the climate control system. Will cool or heat automatically, depending on set temperature."
                     },
                     {
                       "element": "httpTransaction",
@@ -2763,6 +3009,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2780,7 +3031,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Stop the climate control system.\n\n"
+                      "content": "Stop the climate control system."
                     },
                     {
                       "element": "httpTransaction",
@@ -2878,6 +3129,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -2892,7 +3148,12 @@
                         {
                           "element": "member",
                           "meta": {
-                            "description": "\nThe desired state of the panoramic roof. The approximate percent open values for each state are `open` = 100%, `close` = 0%, `comfort` = 80%, and `vent` = ~15%\n\n"
+                            "description": "\nThe desired state of the panoramic roof. The approximate percent open values for each state are `open` = 100%, `close` = 0%, `comfort` = 80%, and `vent` = ~15%\n"
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -2963,7 +3224,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Controls the car's panoramic roof, if installed.\n\n"
+                      "content": "Controls the car's panoramic roof, if installed."
                     },
                     {
                       "element": "httpTransaction",
@@ -3061,6 +3322,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -3076,6 +3342,11 @@
                           "element": "member",
                           "meta": {
                             "description": "The password to the authenticated my.teslamotors.com account."
+                          },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
                           },
                           "content": {
                             "key": {
@@ -3094,7 +3365,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Start the car for keyless driving. Must start driving within 2 minutes of issuing this request.\n\n"
+                      "content": "Start the car for keyless driving. Must start driving within 2 minutes of issuing this request."
                     },
                     {
                       "element": "httpTransaction",
@@ -3192,6 +3463,11 @@
                           "meta": {
                             "description": "The id of the Vehicle."
                           },
+                          "attributes": {
+                            "typeAttributes": [
+                              "required"
+                            ]
+                          },
                           "content": {
                             "key": {
                               "element": "string",
@@ -3202,22 +3478,32 @@
                               "content": 1
                             }
                           }
-                        },
+                        }
+                      ]
+                    },
+                    "data": {
+                      "element": "dataStructure",
+                      "content": [
                         {
-                          "element": "member",
-                          "meta": {
-                            "description": "The trunk to open. `rear` is the only one known currently."
-                          },
-                          "content": {
-                            "key": {
-                              "element": "string",
-                              "content": "which_trunk"
-                            },
-                            "value": {
-                              "element": "string",
-                              "content": "rear"
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The trunk to open. `rear` is the only one known currently."
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "which_trunk"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "rear"
+                                }
+                              }
                             }
-                          }
+                          ]
                         }
                       ]
                     }
@@ -3225,7 +3511,7 @@
                   "content": [
                     {
                       "element": "copy",
-                      "content": "Open the trunk or frunk. Currently inoperable.\n\n"
+                      "content": "Open the trunk or frunk. Currently inoperable."
                     },
                     {
                       "element": "httpTransaction",
@@ -3302,98 +3588,7 @@
           ]
         }
       ]
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ]
-      },
-      "attributes": {
-        "code": 5,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                1169,
-                229
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "ignoring unrecognized block"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ]
-      },
-      "attributes": {
-        "code": 3,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                1739,
-                11
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "no headers specified"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ]
-      },
-      "attributes": {
-        "code": 5,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                1754,
-                37
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "ignoring unrecognized block"
-    },
-    {
-      "element": "annotation",
-      "meta": {
-        "classes": [
-          "warning"
-        ]
-      },
-      "attributes": {
-        "code": 6,
-        "sourceMap": [
-          {
-            "element": "sourceMap",
-            "content": [
-              [
-                1725,
-                67
-              ]
-            ]
-          }
-        ]
-      },
-      "content": "empty request message-body"
     }
   ]
 }
+

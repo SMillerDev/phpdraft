@@ -11,7 +11,6 @@ namespace PHPDraft\Model\Tests;
 use PHPDraft\Core\BaseTest;
 use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\HTTPRequest;
-use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 
 /**
@@ -23,7 +22,7 @@ class HTTPRequestTest extends BaseTest
     /**
      * Mock of the parent class
      *
-     * @var HierarchyElement|PHPUnit_Framework_MockObject_MockObject
+     * @var HierarchyElement
      */
     protected $parent;
 
@@ -162,6 +161,25 @@ class HTTPRequestTest extends BaseTest
     }
 
     /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlWithHeaders()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+
+        $headers = ['header'=>'value'];
+        $property = $this->reflection->getProperty('headers');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $headers);
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://www.hurl.it/?url=&method=&headers=%7B%22header%22%3A%5B%22value%22%5D%7D', $return);
+    }
+
+    /**
      * Test basic get_curl_command functions
      */
     public function testGetCurlCommandStringBody()
@@ -179,6 +197,23 @@ class HTTPRequestTest extends BaseTest
     }
 
     /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlStringBody()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+        $property = $this->reflection->getProperty('body');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, 'body');
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://www.hurl.it/?url=&method=&body=body', $return);
+    }
+
+    /**
      * Test basic get_curl_command functions
      */
     public function testGetCurlCommandArrayBody()
@@ -193,6 +228,23 @@ class HTTPRequestTest extends BaseTest
         $return = $this->class->get_curl_command('https://ur.l');
 
         $this->assertSame('curl -X --data-binary \'thisisabody\' \'\'', $return);
+    }
+
+    /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlArrayBody()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+        $property = $this->reflection->getProperty('body');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, ['this', 'is', 'a', 'body']);
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://www.hurl.it/?url=&method=&body=this%2Cis%2Ca%2Cbody', $return);
     }
 
     /**
@@ -263,6 +315,29 @@ class HTTPRequestTest extends BaseTest
         $return = $this->class->get_hurl_link('https://ur.l');
 
         $this->assertSame('https://www.hurl.it/?url=&method=&body=TEST', $return);
+    }
+
+    /**
+     * Test basic get_hurl_link functions
+     */
+    public function testGetHurlUrlArgs()
+    {
+        $property = $this->reflection->getProperty('parent');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, $this->parent);
+        $property = $this->reflection->getProperty('method');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->class, 'GET');
+
+        $this->parent->expects($this->once())
+                     ->method('build_url')
+                     ->with('https://ur.l')
+                     ->will($this->returnValue('http://ur.l/index?lang=nl&key=value'));
+
+
+        $return = $this->class->get_hurl_link('https://ur.l');
+
+        $this->assertSame('https://www.hurl.it/?args=%7B%22lang%22%3A%5B%22nl%22%5D%2C%22key%22%3A%5B%22value%22%5D%7D&url=http%3A%2F%2Fur.l%2Findex&method=GET', $return);
     }
 
     /**

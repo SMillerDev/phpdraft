@@ -153,6 +153,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
+                                <?php if (defined('THIRD_PARTY_ALLOWED') && THIRD_PARTY_ALLOWED): ?>
                                 <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
@@ -161,6 +162,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    tabindex="0">
                                     <span class="glyphicon glyphicon-play"></span>
                                 </a>
+                                <?php endif;?>
                                 <p class="lead"><?= $transition->description; ?></p>
                                 <?php if (!empty($transition->requests)): ?>
                                     <?php foreach ($transition->requests as $key => $request): ?>

@@ -192,9 +192,11 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                 </div>
                             </div>
                             <div class="mdl-card__menu">
+                                <?php if (defined('THIRD_PARTY_ALLOWED') && THIRD_PARTY_ALLOWED): ?>
                                 <a href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">play_arrow</i>
                                 </a>
+                                <?php endif;?>
                                 <button id="show-dialog-<?=$transition->get_href();?>" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">bug_report</i>
                                 </button>

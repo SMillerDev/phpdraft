@@ -10,7 +10,6 @@ namespace PHPDraft\Parse\Tests;
 
 use PHPDraft\Core\BaseTest;
 use PHPDraft\Parse\JsonToHTML;
-use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
 /**
@@ -36,7 +35,7 @@ class JsonToHTMLTest extends BaseTest
      */
     public function setUp()
     {
-        $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')));
+        $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
     }
 
@@ -56,7 +55,7 @@ class JsonToHTMLTest extends BaseTest
     {
         $property = $this->reflection->getProperty('object');
         $property->setAccessible(TRUE);
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json')), $property->getValue($this->class));
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $property->getValue($this->class));
     }
 
     /**
@@ -64,8 +63,24 @@ class JsonToHTMLTest extends BaseTest
      */
     public function testGetHTML()
     {
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html_basic'));
+        $old = THIRD_PARTY_ALLOWED;
+        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/basic.html'));
         $this->class->get_html();
+        $this->redefine('THIRD_PARTY_ALLOWED', $old);
+    }
+
+    /**
+     * Tests if the constructor sets the property correctly
+     */
+    public function testGetHTMLInheritance()
+    {
+        $old = THIRD_PARTY_ALLOWED;
+        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
+//        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
+        $class->get_html();
+        $this->redefine('THIRD_PARTY_ALLOWED', $old);
     }
 
     /**
@@ -73,8 +88,11 @@ class JsonToHTMLTest extends BaseTest
      */
     public function testGetHTMLMaterial()
     {
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html_material'));
+        $old = THIRD_PARTY_ALLOWED;
+        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/material.html'));
         $this->class->get_html('material');
+        $this->redefine('THIRD_PARTY_ALLOWED', $old);
     }
 
     /**

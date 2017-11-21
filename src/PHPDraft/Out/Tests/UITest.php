@@ -69,7 +69,7 @@ class UITest extends BaseTest
     public function testHelp()
     {
         $this->class->help();
-        $this->expectOutputString(file_get_contents(TEST_STATICS.'/drafter/help'));
+        $this->expectOutputString(file_get_contents(TEST_STATICS.'/drafter/help.txt'));
     }
 
     /**

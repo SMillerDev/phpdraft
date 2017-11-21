@@ -162,13 +162,13 @@ class Transition extends HierarchyElement
         if ($this->url_variables !== NULL) {
             $tpl  = new UriTemplate($url);
             $vars = [];
-            foreach ($this->url_variables->value as $value) {
-                $urlvalue = $value->value;
-                if (is_subclass_of($value, BasicStructureElement::class)) {
-                    $urlvalue = $value->string_value();
+            foreach ($this->url_variables->value as $item) {
+                $urlvalue = $item->value;
+                if (is_subclass_of($item, BasicStructureElement::class)) {
+                    $urlvalue = $item->string_value();
                 }
 
-                $vars[$value->key] = $urlvalue;
+                $vars[$item->key] = $urlvalue;
             }
             $url = $tpl->expand($vars);
         }

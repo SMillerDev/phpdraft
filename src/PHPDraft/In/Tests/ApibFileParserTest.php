@@ -75,10 +75,10 @@ class ApibFileParserTest extends BaseTest
     {
         $property = $this->reflection->getProperty('filename');
         $property->setAccessible(true);
-        $property->setValue($this->class, TEST_STATICS . '/drafter/including_apib');
+        $property->setValue($this->class, TEST_STATICS . '/drafter/apib/including.apib');
         $loc_property = $this->reflection->getProperty('location');
         $loc_property->setAccessible(true);
-        $loc_property->setValue($this->class, TEST_STATICS . '/drafter/');
+        $loc_property->setValue($this->class, TEST_STATICS . '/drafter/apib/');
 
         $this->mock_function('curl_exec', 'hello');
         $this->class->parse();

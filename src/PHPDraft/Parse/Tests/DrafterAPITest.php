@@ -37,7 +37,7 @@ class DrafterAPITest extends BaseTest
     {
         $this->mock_function('sys_get_temp_dir', TEST_STATICS);
         $this->mock_function('curl_exec', "/some/dir/drafter\n");
-        $this->class      = new DrafterAPI(file_get_contents(TEST_STATICS . '/drafter/apib'));
+        $this->class      = new DrafterAPI(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\DrafterAPI');
         $this->unmock_function('curl_exec');
         $this->unmock_function('sys_get_temp_dir');
@@ -60,7 +60,7 @@ class DrafterAPITest extends BaseTest
         $this->setUpWith(0);
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
+        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
     /**
@@ -76,7 +76,7 @@ class DrafterAPITest extends BaseTest
 
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib'), $property->getValue($this->class));
+        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
     /**

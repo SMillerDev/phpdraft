@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tesla Model S JSON API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+        var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;left:10px;border-radius:30px}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-panel>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}.panel-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.panel-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.panel-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}.method-nav ul{padding-left:10px}.method-nav ul li{list-style:none}.method-nav ul li a{line-height:26px}.method-nav ul li a span{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.POST:not(.structure)>.panel-heading,span.POST{background:#62c462}.GET:not(.structure)>.panel-heading,span.GET{background:#5bc0de}.DELETE:not(.structure)>.panel-heading,span.DELETE{background:#ee5f5b}.PUT:not(.structure)>.panel-heading,span.PUT{background:#f89406}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.panel-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}h5.response-body,h4.request{cursor:pointer}    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="media">
+        <div class="media-body">
+            <h1 class="media-heading">Tesla Model S JSON API                                    <small>https://owner-api.teslamotors.com</small>
+                            </h1>
+            <p class="lead">This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.
+</p>
+        </div>
+            </div>
+    <div class="row">
+        <div class="col-md-2 method-nav">
+                                                <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="#authentication">Authentication</a>
+                                <a class="btn-xs pull-right" role="button" data-toggle="collapse"
+                                   href="#collapse-authentication" aria-expanded="false"
+                                   aria-controls="collapse-authentication">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            </h3>
+                        </div>
+                        <div class="collapse collapsed in" id="collapse-authentication">
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+                                                                            <li>
+                                            <a href="#authentication/tokens">Tokens</a>
+                                        </li>
+                                        <ul>
+                                                                                            <li>
+                                                    <a href="#authentication/tokens/get/an/access/token">
+                                                        Get an Access Token                                                        <span
+                                                            class="pull-right glyphicon glyphicon-plus POST"></span>
+                                                    </a>
+                                                </li>
+                                                                                    </ul>
+                                                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                                                        <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a href="#datastructures">Data Structures</a>
+                            <a class="btn-xs pull-right" role="button" data-toggle="collapse"
+                               href="#collapse-structures" aria-expanded="false"
+                               aria-controls="collapse-structures">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="collapse collapsed in" id="collapse-structures">
+                        <div class="panel-body">
+                            <ul class="list-unstyled">
+                                                                    <li>
+                                        <a href="#object-org">Org</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="#object-user">User</a>
+                                    </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+                        <div class="main-url">https://owner-api.teslamotors.com</div>
+        </div>
+        <div class="col-md-10">
+                                                <h2><a id="authentication">Authentication</a></h2>
+                                                                    <h3>
+                        <a id="authentication/tokens">Tokens</a>
+                        <small>/oauth/token</small>
+                    </h3>
+                    <p></p>
+                                            <div
+                            class="panel panel-default POST">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <var>POST</var>
+                                    <code>/oauth/token</code>
+                                    <a class="pull-right transition-title"
+                                       id="authentication/tokens/get/an/access/token">Get an Access Token</a>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <a class="btn btn-default curl"
+                                   role="button"
+                                   title="cURL command"
+                                   tabindex="0"
+                                   data-placement="left"
+                                   data-toggle="popover"
+                                   data-html="true"
+                                   data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
+                                    <span class="glyphicon glyphicon-copy"></span>
+                                </a>
+                                <a class="btn btn-default hurl"
+                                   role="button"
+                                   title="Try request"
+                                   target="_blank"
+                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/oauth/token&method=POST"
+                                   tabindex="0">
+                                    <span class="glyphicon glyphicon-play"></span>
+                                </a>
+                                <p class="lead">Performs the login. Takes in an plain text email and password, matching the owner's login information for <a href="https://my.teslamotors.com/user/login">https://my.teslamotors.com/user/login</a>.
+
+<p>Returns a <code>access_token</code> which is passed along as a header with all future requests to authenticate the user.</p>
+
+<p>You must provide the <code>Authorization: Bearer {access_token}</code> header in all other requests.</p>
+
+<p>The current client ID and secret are <a href="http://pastebin.com/fX6ejAHd">available here</a></p>
+</p>
+                                                                                                            <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="request panel-title"
+                                                    data-toggle="collapse"
+                                                    data-target="#request-coll-authentication-tokens-get-an-access-token">Request
+                                                    <span
+                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
+                                                </h4>
+                                            </div>
+
+                                            <div
+                                                class="collapse in request-panel panel-body"
+                                                id="request-coll-authentication-tokens-get-an-access-token">
+                                                                                                                                                    <h5>Example URI</h5>
+                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/oauth/token</em>
+                                                                                                                                                                                                
+                                                
+                                                                                                    <h5>Request object</h5>
+                                                    <div class="row">
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
+</td><td><span class="example-value pull-right">password</span></td></tr><tr><td><span>client_id</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client ID</p>
+</td><td><span class="example-value pull-right">abc</span></td></tr><tr><td><span>client_secret</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client secret</p>
+</td><td><span class="example-value pull-right">123</span></td></tr><tr><td><span>email</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The email for my.teslamotors.com</p>
+</td><td><span class="example-value pull-right">elon@teslamotors.com</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The password for my.teslamotors.com</p>
+</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table></table>                                                    </div>
+                                                                                            </div>
+                                        </div>
+                                                                                                                                                                                <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title response"
+                                                    data-toggle="collapse"
+                                                    data-target="#request-coll--authentication-tokens-get-an-access-token-204">
+                                                    Response <var
+                                                        class="text-success">204 No Content</var>
+                                                    <span
+                                                        class="glyphicon
+                                                        indicator
+                                                        glyphicon-menu-down                                                        pull-right"></span>
+                                                </h4>
+                                            </div>
+                                            <div
+                                                class="panel-body collapse in response-panel"
+                                                id="request-coll--authentication-tokens-get-an-access-token-204">
+                                                                                                                                                    <h5>Headers</h5>
+                                                    <ul class="headers list-unstyled">
+                                                                                                                    <li>
+                                                                <code><span class="attr">Content-Type</span>: <span
+                                                                        class="value">application/json</span>
+                                                                </code>
+                                                            </li>
+                                                                                                            </ul>
+                                                                                                                                                                                            </div>
+                                        </div>
+                                                                                                </div>
+                        </div>
+                                                                            <h2><a id="datastructures">Data structures</a></h2>
+                                    <div class="panel panel-default object-org structure">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a id="object-org">Org</a>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>name</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
+</td><td><span class="example-value pull-right">Apiary</span></td></tr></table></table>                            </div>
+                        </div>
+                    </div>
+                                    <div class="panel panel-default object-user structure">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a id="object-user">User</a>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>username</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
+</td><td><span class="example-value pull-right">pavan</span></td></tr><tr><td><span>id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>Id of the user</p>
+</td><td><span class="example-value pull-right">5</span></td></tr><tr><td><span>address</span></td><td><code>object</code></td><td> <span class="status"></span></td><td><p>The address of the user</p>
+</td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr><tr><td><span>array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>array description</p>
+</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li></ul></div></td></tr><tr><td><span>inline array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>desc</p>
+</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li></ul></div></td></tr><tr><td><span>multilined description</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>some dummy text</p>
+
+<p>and it continue there
+and will end there</p>
+</td><td></td></tr></table></table>                            </div>
+                        </div>
+                    </div>
+                                    </div>
+    </div>
+</div>
+    <button
+        type="button"
+        class="btn btn-lg extra-info"
+        data-toggle="popover"
+        title="Extra info"
+        data-placement="top"
+        data-html="true"
+        data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
+        <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script>$(function(){$('[data-toggle="popover"]').popover();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")}});$('.collapse.request-panel').on('shown.bs.collapse',function(){$(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up')});$('.collapse.response-panel').on('shown.bs.collapse',function(){$(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass("glyphicon-menu-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass("glyphicon-menu-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up')});</script>
+</body>
+</html>

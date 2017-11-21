@@ -85,6 +85,7 @@ class UI
         if (isset($options['y']) || isset($options['o'])) {
             define('DRAFTER_ONLINE_MODE', 1);
         }
+        define('THIRD_PARTY_ALLOWED', !getenv('PHPDRAFT_THIRD_PARTY'));
 
         $template = (new self())->var_or_default($options['t'], 'default');
         $image    = (new self())->var_or_default($options['i']);

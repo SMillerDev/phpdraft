@@ -1,0 +1,526 @@
+{
+  "element": "parseResult",
+  "content": [
+    {
+      "element": "category",
+      "meta": {
+        "classes": [
+          "api"
+        ],
+        "title": "Tesla Model S JSON API"
+      },
+      "attributes": {
+        "meta": [
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "FORMAT"
+              },
+              "value": {
+                "element": "string",
+                "content": "1A"
+              }
+            }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "HOST"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://owner-api.teslamotors.com"
+              }
+            }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "EXTRA_HOSTS"
+              },
+              "value": {
+                "element": "string",
+                "content": "https://test.owner-api.teslamotors.com"
+              }
+            }
+          },
+          {
+            "element": "member",
+            "meta": {
+              "classes": [
+                "user"
+              ]
+            },
+            "content": {
+              "key": {
+                "element": "string",
+                "content": "SOMETHING"
+              },
+              "value": {
+                "element": "string",
+                "content": "INFO"
+              }
+            }
+          }
+        ]
+      },
+      "content": [
+        {
+          "element": "copy",
+          "content": "This is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely."
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "resourceGroup"
+            ],
+            "title": "Authentication"
+          },
+          "content": [
+            {
+              "element": "resource",
+              "meta": {
+                "title": "Tokens"
+              },
+              "attributes": {
+                "href": "/oauth/token"
+              },
+              "content": [
+                {
+                  "element": "transition",
+                  "meta": {
+                    "title": "Get an Access Token"
+                  },
+                  "attributes": {
+                    "data": {
+                      "element": "dataStructure",
+                      "content": [
+                        {
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The type of oAuth grant. Always \"password\""
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "grant_type"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "password"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client ID"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_id"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "abc"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The oAuth client secret"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "client_secret"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "123"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The email for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "email"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "elon@teslamotors.com"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The password for my.teslamotors.com"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "password"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "edisonsux"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "content": [
+                    {
+                      "element": "copy",
+                      "content": "Performs the login. Takes in an plain text email and password, matching the owner's login information for [https://my.teslamotors.com/user/login](https://my.teslamotors.com/user/login).\n\nReturns a `access_token` which is passed along as a header with all future requests to authenticate the user.\n\nYou must provide the `Authorization: Bearer {access_token}` header in all other requests.\n\nThe current client ID and secret are [available here](http://pastebin.com/fX6ejAHd)"
+                    },
+                    {
+                      "element": "httpTransaction",
+                      "content": [
+                        {
+                          "element": "httpRequest",
+                          "attributes": {
+                            "method": "POST"
+                          },
+                          "content": []
+                        },
+                        {
+                          "element": "httpResponse",
+                          "attributes": {
+                            "statusCode": "204",
+                            "headers": {
+                              "element": "httpHeaders",
+                              "content": [
+                                {
+                                  "element": "member",
+                                  "content": {
+                                    "key": {
+                                      "element": "string",
+                                      "content": "Content-Type"
+                                    },
+                                    "value": {
+                                      "element": "string",
+                                      "content": "application/json"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "content": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "element": "category",
+          "meta": {
+            "classes": [
+              "dataStructures"
+            ]
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "content": [
+                {
+                  "element": "object",
+                  "meta": {
+                    "id": "Org"
+                  },
+                  "content": [
+                    {
+                      "element": "member",
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "name"
+                        },
+                        "value": {
+                          "element": "string",
+                          "content": "Apiary"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "dataStructure",
+              "content": [
+                {
+                  "element": "object",
+                  "meta": {
+                    "id": "User",
+                    "description": "User of the application"
+                  },
+                  "content": [
+                    {
+                      "element": "member",
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "username"
+                        },
+                        "value": {
+                          "element": "string",
+                          "content": "pavan"
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "Id of the user"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "id"
+                        },
+                        "value": {
+                          "element": "number",
+                          "content": 5
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "The address of the user"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "address"
+                        },
+                        "value": {
+                          "element": "object",
+                          "content": [
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The street of the user"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "street"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "Heregracht 266"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "The city of the user"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "city"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "Amsterdam"
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "meta": {
+                                "description": "zip description"
+                              },
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "content": "zipcode"
+                                },
+                                "value": {
+                                  "element": "object",
+                                  "content": [
+                                    {
+                                      "element": "member",
+                                      "meta": {
+                                        "description": "zip numbers"
+                                      },
+                                      "content": {
+                                        "key": {
+                                          "element": "string",
+                                          "content": "numbers"
+                                        },
+                                        "value": {
+                                          "element": "number",
+                                          "content": 1234
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "element": "member",
+                                      "meta": {
+                                        "description": "zip letters"
+                                      },
+                                      "content": {
+                                        "key": {
+                                          "element": "string",
+                                          "content": "letters"
+                                        },
+                                        "value": {
+                                          "element": "string",
+                                          "content": "AB"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "element": "member",
+                              "content": {
+                                "key": {
+                                  "element": "string",
+                                  "attributes": {
+                                    "variable": true
+                                  },
+                                  "content": "variable"
+                                },
+                                "value": {
+                                  "element": "string",
+                                  "content": "trololo"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "array description"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "array"
+                        },
+                        "value": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "3"
+                            },
+                            {
+                              "element": "string",
+                              "content": "4"
+                            },
+                            {
+                              "element": "string",
+                              "content": "5"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "desc"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "inline array"
+                        },
+                        "value": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "1"
+                            },
+                            {
+                              "element": "string",
+                              "content": "2"
+                            },
+                            {
+                              "element": "string",
+                              "content": "3"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "element": "member",
+                      "meta": {
+                        "description": "some dummy text\n\nand it continue there\nand will end there"
+                      },
+                      "content": {
+                        "key": {
+                          "element": "string",
+                          "content": "multilined description"
+                        },
+                        "value": {
+                          "element": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
