@@ -43,6 +43,7 @@ class UI
      * @param array $argv Arguments passed
      *
      * @return array results of the invocation
+     * @throws \PHPDraft\Parse\ExecutionException When something failed in execution
      */
     public static function main($argv = [])
     {
@@ -84,10 +85,10 @@ class UI
         } else {
             $file = $argv[1];
         }
-        if (isset($options['y']) || isset($options['o'])) {
+        define('THIRD_PARTY_ALLOWED', getenv('PHPDRAFT_THIRD_PARTY') !== '0');
+        if ((isset($options['y']) || isset($options['o'])) && THIRD_PARTY_ALLOWED) {
             define('DRAFTER_ONLINE_MODE', 1);
         }
-        define('THIRD_PARTY_ALLOWED', !getenv('PHPDRAFT_THIRD_PARTY'));
 
         $template = (new self())->var_or_default($options['t'], 'default');
         $image    = (new self())->var_or_default($options['i']);

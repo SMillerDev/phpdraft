@@ -59,6 +59,7 @@ class JsonToHTML
      * @param string|null $js       JS to load
      *
      * @return TemplateGenerator HTML template to display
+     * @throws \PHPDraft\Parse\ExecutionException As a runtime exception
      */
     public function get_html($template = 'default', $image = NULL, $css = NULL, $js = NULL)
     {

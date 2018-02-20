@@ -153,7 +153,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
                                     <span class="glyphicon glyphicon-copy"></span>
                                 </a>
-                                <?php if (defined('THIRD_PARTY_ALLOWED') && THIRD_PARTY_ALLOWED): ?>
+                                <?php if (THIRD_PARTY_ALLOWED): ?>
                                 <a class="btn btn-default hurl"
                                    role="button"
                                    title="Try request"
