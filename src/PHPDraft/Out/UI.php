@@ -42,8 +42,9 @@ class UI
      *
      * @param array $argv Arguments passed
      *
-     * @return array results of the invocation
      * @throws \PHPDraft\Parse\ExecutionException When something failed in execution
+     *
+     * @return array results of the invocation
      */
     public static function main($argv = [])
     {
