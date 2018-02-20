@@ -76,7 +76,7 @@ abstract class BaseParser
         if (json_last_error() !== JSON_ERROR_NONE) {
             file_put_contents('php://stderr', 'ERROR: invalid json in ' . $this->tmp_dir . '/index.json');
 
-            throw new \RuntimeException('Drafter generated invalid JSON (' . json_last_error_msg() . ')', 2);
+            throw new ExecutionException('Drafter generated invalid JSON (' . json_last_error_msg() . ')', 2);
         }
 
         $warnings = FALSE;
@@ -91,7 +91,7 @@ abstract class BaseParser
         }
 
         if ($warnings) {
-            throw new \RuntimeException('Parsing encountered errors and stopped', 2);
+            throw new ExecutionException('Parsing encountered errors and stopped', 2);
         }
 
         return $this->json;

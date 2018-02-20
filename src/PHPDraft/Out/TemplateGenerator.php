@@ -13,6 +13,7 @@ use Lukasoppermann\Httpstatus\Httpstatus;
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Parse\ExecutionException;
 
 class TemplateGenerator
 {
@@ -98,7 +99,7 @@ class TemplateGenerator
     {
         $include = $this->find_include_file($this->template);
         if ($include === NULL) {
-            throw new \RuntimeException("Couldn't find template '$this->template'", 1);
+            throw new ExecutionException("Couldn't find template '$this->template'", 1);
         }
 
         //Prepare base data

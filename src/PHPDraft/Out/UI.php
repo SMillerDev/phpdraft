@@ -9,6 +9,8 @@
 
 namespace PHPDraft\Out;
 
+use PHPDraft\Parse\ExecutionException;
+
 /**
  * Class UI.
  */
@@ -50,7 +52,7 @@ class UI
             file_put_contents('php://stderr', 'Not enough arguments' . PHP_EOL);
             (new self())->help();
 
-            throw new \RuntimeException('', 1);
+            throw new ExecutionException('', 1);
         }
 
         $sorting = -1;
@@ -65,19 +67,19 @@ class UI
             if (isset($options['h'])) {
                 (new self())->help();
 
-                throw new \RuntimeException('', 0);
+                throw new ExecutionException('', 0);
             }
 
             if (isset($options['v'])) {
                 (new self())->version();
 
-                throw new \RuntimeException('', 0);
+                throw new ExecutionException('', 0);
             }
 
             if (isset($options['f'])) {
                 $file = $options['f'];
             } else {
-                throw new \RuntimeException('No file to parse', 1);
+                throw new ExecutionException('No file to parse', 1);
             }
         } else {
             $file = $argv[1];

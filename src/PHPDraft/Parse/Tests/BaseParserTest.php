@@ -9,7 +9,6 @@
 namespace PHPDraft\Parse\Tests;
 
 use PHPDraft\Core\BaseTest;
-use PHPDraft\Parse\Drafter;
 use ReflectionClass;
 
 /**
@@ -115,7 +114,7 @@ class BaseParserTest extends BaseTest
      * Check if parsing the fails when invalid JSON
      *
      * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException \RuntimeException
+     * @expectedException        \PHPDraft\Parse\ExecutionException
      * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
      * @expectedExceptionCode    2
      */

@@ -9,10 +9,9 @@
 namespace PHPDraft\Parse\Tests;
 
 use PHPDraft\Core\BaseTest;
-use PHPDraft\Parse\Drafter;
 use PHPDraft\Parse\DrafterAPI;
+
 use ReflectionClass;
-use SebastianBergmann\GlobalState\RuntimeException;
 
 /**
  * Class DrafterAPITest
@@ -66,7 +65,7 @@ class DrafterAPITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @expectedException RuntimeException
+     * @expectedException \PHPDraft\Parse\ResourceException
      * @expectedExceptionMessage Drafter webservice is not available!
      * @expectedExceptionCode    1
      */
@@ -92,7 +91,7 @@ class DrafterAPITest extends BaseTest
      * Check if parsing the fails without drafter
      *
      * @covers                   \PHPDraft\Parse\DrafterAPI::parseToJson()
-     * @expectedException \RuntimeException
+     * @expectedException        \PHPDraft\Parse\ResourceException
      * @expectedExceptionMessage Drafter webservice failed to parse input
      * @expectedExceptionCode    1
      */

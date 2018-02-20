@@ -69,19 +69,19 @@ class JsonToHTMLTest extends BaseTest
         $this->class->get_html();
         $this->redefine('THIRD_PARTY_ALLOWED', $old);
     }
-
-    /**
-     * Tests if the constructor sets the property correctly
-     */
-    public function testGetHTMLInheritance()
-    {
-        $old = THIRD_PARTY_ALLOWED;
-        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
-        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
+//
+//    /**
+//     * Tests if the constructor sets the property correctly
+//     */
+//    public function testGetHTMLInheritance()
+//    {
+//        $old = THIRD_PARTY_ALLOWED;
+//        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+//        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
 //        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
-        $class->get_html();
-        $this->redefine('THIRD_PARTY_ALLOWED', $old);
-    }
+//        $class->get_html();
+//        $this->redefine('THIRD_PARTY_ALLOWED', $old);
+//    }
 
     /**
      * Tests if the constructor sets the property correctly

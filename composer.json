@@ -24,7 +24,7 @@
     "lukasoppermann/http-status": "2.*"
   },
   "require-dev": {
-    "phpunit/phpunit": "5.7.*",
+    "phpunit/phpunit": "7.*",
     "theseer/autoload": "1.*"
   },
   "autoload": {

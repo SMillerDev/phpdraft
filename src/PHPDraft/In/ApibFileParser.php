@@ -9,6 +9,8 @@
 
 namespace PHPDraft\In;
 
+use PHPDraft\Parse\ExecutionException;
+
 /**
  * Class ApibFileParser.
  */
@@ -92,7 +94,7 @@ class ApibFileParser
     private function file_check($filename)
     {
         if (!file_exists($filename)) {
-            throw new \RuntimeException("API File not found: $filename", 1);
+            throw new ExecutionException("API File not found: $filename", 1);
         }
     }
 

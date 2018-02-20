@@ -97,7 +97,7 @@ class DrafterTest extends BaseTest
      * Check if parsing the APIB to JSON gives the expected result
      *
      * @covers                      \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException           \RuntimeException
+     * @expectedException           \PHPDraft\Parse\ExecutionException
      * @expectedExceptionMessage    Parsing encountered errors and stopped
      * @expectedExceptionCode       2
      */
@@ -115,7 +115,7 @@ class DrafterTest extends BaseTest
      * Check if parsing the fails without drafter
      *
      * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException \RuntimeException
+     * @expectedException        \PHPDraft\Parse\ResourceException
      * @expectedExceptionMessage Drafter was not installed!
      * @expectedExceptionCode    1
      */
@@ -130,7 +130,7 @@ class DrafterTest extends BaseTest
      * Check if parsing the fails when invalid JSON
      *
      * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException \RuntimeException
+     * @expectedException        \PHPDraft\Parse\ExecutionException
      * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
      * @expectedExceptionCode    2
      */
