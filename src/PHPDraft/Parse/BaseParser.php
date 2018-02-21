@@ -44,7 +44,7 @@ abstract class BaseParser
      *
      * @return \PHPDraft\Parse\BaseParser
      */
-    public function init($apib): BaseParser
+    public function init($apib): self
     {
         $this->apib    = $apib;
         $this->tmp_dir = sys_get_temp_dir() . '/drafter';
@@ -65,8 +65,9 @@ abstract class BaseParser
     /**
      * Parse the API Blueprint text to JSON.
      *
-     * @return string API Blueprint text
      * @throws \PHPDraft\Parse\ExecutionException When the JSON is invalid or warnings are thrown in parsing
+     *
+     * @return string API Blueprint text
      */
     public function parseToJson()
     {
