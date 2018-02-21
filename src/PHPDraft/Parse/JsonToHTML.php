@@ -44,6 +44,7 @@ class JsonToHTML
      * Gets the default template HTML.
      *
      * @return string
+     * @throws \PHPDraft\Parse\ExecutionException When parsing fails
      */
     public function __toString()
     {

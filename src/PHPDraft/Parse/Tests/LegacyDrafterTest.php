@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the DrafterTest.php
+ * This file contains the LegacyDrafterTest.php
  *
  * @package PHPDraft\Parse
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
@@ -9,16 +9,14 @@
 namespace PHPDraft\Parse\Tests;
 
 use PHPDraft\Core\BaseTest;
-use PHPDraft\Parse\Drafter;
-use PHPDraft\Parse\DrafterAPI;
-use PHPDraft\Parse\ExecutionException;
+use PHPDraft\Parse\LegacyDrafter;
 use ReflectionClass;
 
 /**
- * Class DrafterTest
- * @covers \PHPDraft\Parse\Drafter
+ * Class LegacyDrafterTest
+ * @covers \PHPDraft\Parse\LegacyDrafter
  */
-class DrafterTest extends BaseTest
+class LegacyDrafterTest extends BaseTest
 {
 
     /**
@@ -28,13 +26,9 @@ class DrafterTest extends BaseTest
     {
         $this->mock_function('sys_get_temp_dir', TEST_STATICS);
         $this->mock_function('shell_exec', "/some/dir/drafter\n");
-        $this->class      = new Drafter();
-        $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
-        try {
-            $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
-        } catch (ExecutionException $exception) {
-            // Notihing
-        }
+        $this->class      = new LegacyDrafter();
+        $this->reflection = new ReflectionClass('PHPDraft\Parse\LegacyDrafter');
+        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $this->unmock_function('shell_exec');
         $this->unmock_function('sys_get_temp_dir');
     }
@@ -56,14 +50,9 @@ class DrafterTest extends BaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @expectedException \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionCode 100
-     * @expectedExceptionMessage The new Drafter V4 is not supported yet.
      */
     public function testSetupCorrectly()
     {
-        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
@@ -126,12 +115,12 @@ class DrafterTest extends BaseTest
     /**
      * Check if parsing the fails without drafter
      *
-     * @covers                   \PHPDraft\Parse\Drafter::available()
+     * @covers \PHPDraft\Parse\Drafter::available()
      */
-    public function testSetupWithoutDrafter()
+    public function testAvailableIsFalseWhenNoDrafter()
     {
         $this->mock_function('shell_exec', "");
-        $this->assertFalse(Drafter::available());
+        $this->assertFalse(LegacyDrafter::available());
         $this->unmock_function('shell_exec');
     }
 

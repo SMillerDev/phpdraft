@@ -87,14 +87,14 @@ class TemplateGeneratorTest extends BaseTest
     {
         $return = [];
 
-        $return[] = ['POST', 'glyphicon glyphicon-plus POST'];
-        $return[] = ['post', 'glyphicon glyphicon-plus POST'];
-        $return[] = ['get', 'glyphicon glyphicon-arrow-down GET'];
-        $return[] = ['put', 'glyphicon glyphicon-pencil PUT'];
-        $return[] = ['delete', 'glyphicon glyphicon-remove DELETE'];
-        $return[] = ['head', 'glyphicon HEAD'];
-        $return[] = ['options', 'glyphicon OPTIONS'];
-        $return[] = ['PATCH', 'glyphicon PATCH'];
+        $return[] = ['POST', 'fas fa-plus-square POST'];
+        $return[] = ['post', 'fas fa-plus-square POST'];
+        $return[] = ['get', 'fas fa-arrow-circle-down GET'];
+        $return[] = ['put', 'fas fa-pencil-square PUT'];
+        $return[] = ['delete', 'fas fa-minus-square DELETE'];
+        $return[] = ['head', 'fas HEAD'];
+        $return[] = ['options', 'fas OPTIONS'];
+        $return[] = ['PATCH', 'fas PATCH'];
 
         return $return;
     }

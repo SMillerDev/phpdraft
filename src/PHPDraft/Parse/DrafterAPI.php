@@ -15,24 +15,13 @@ class DrafterAPI extends BaseParser
      * ApibToJson constructor.
      *
      * @param string $apib API Blueprint text
+     *
+     * @return \PHPDraft\Parse\BaseParser
      */
-    public function __construct($apib)
+    public function init($apib): BaseParser
     {
-        parent::__construct($apib);
-
-        $ch = $this->curl_init_drafter('# Hello API
-## /message
-### GET
-            + Response 200 (text/plain)
-
-        Hello World!');
-
-        curl_exec($ch);
-
-        if (curl_errno($ch) !== CURLE_OK) {
-            throw new ResourceException('Drafter webservice is not available!', 1);
-        }
-        curl_close($ch);
+        parent::init($apib);
+        return $this;
     }
 
     /**
@@ -42,7 +31,7 @@ class DrafterAPI extends BaseParser
      */
     protected function parse()
     {
-        $ch = $this->curl_init_drafter($this->apib);
+        $ch = DrafterAPI::curl_init_drafter($this->apib);
 
         $response = curl_exec($ch);
 
@@ -60,7 +49,7 @@ class DrafterAPI extends BaseParser
      *
      * @return resource
      */
-    private function curl_init_drafter($message)
+    public static function curl_init_drafter($message)
     {
         $ch = curl_init();
 
@@ -78,5 +67,31 @@ class DrafterAPI extends BaseParser
         ]);
 
         return $ch;
+    }
+
+    /**
+     * Check if a given parser is available.
+     *
+     * @return bool
+     */
+    public static function available(): bool
+    {
+        if (!defined('DRAFTER_ONLINE_MODE') || DRAFTER_ONLINE_MODE !== 1) {
+            return FALSE;
+        }
+
+        $ch = DrafterAPI::curl_init_drafter('# Hello API
+## /message
+### GET
+            + Response 200 (text/plain)
+
+        Hello World!');
+
+        curl_exec($ch);
+
+        if (curl_errno($ch) !== CURLE_OK) {
+            return FALSE;
+        }
+        curl_close($ch);
     }
 }

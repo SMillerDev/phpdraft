@@ -200,19 +200,19 @@ class TemplateGenerator
      */
     public function get_method_icon($method)
     {
-        $class = 'glyphicon ';
+        $class = 'fas ';
         switch (strtolower($method)) {
             case 'post':
-                $class .= 'glyphicon-plus ';
+                $class .= 'fa-plus-square ';
                 break;
             case 'put':
-                $class .= 'glyphicon-pencil ';
+                $class .= 'fa-pencil-square ';
                 break;
             case 'get':
-                $class .= 'glyphicon-arrow-down ';
+                $class .= 'fa-arrow-circle-down ';
                 break;
             case 'delete':
-                $class .= 'glyphicon-remove ';
+                $class .= 'fa-minus-square ';
                 break;
             default:
                 break;

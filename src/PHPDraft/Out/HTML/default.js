@@ -22,20 +22,20 @@ $(function () {
     };
 });
 
-$('.collapse.request-panel').on('shown.bs.collapse', function () {
-    $(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+$('.collapse.request-card').on('shown.bs.collapse', function () {
+    $(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down');
 }).on('hidden.bs.collapse', function () {
-    $(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+    $(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up');
 });
 
-$('.collapse.response-panel').on('shown.bs.collapse', function () {
-    $(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass("glyphicon-menu-down");
+$('.collapse.response-card').on('shown.bs.collapse', function () {
+    $(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down");
 }).on('hidden.bs.collapse', function () {
-    $(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass("glyphicon-menu-up");
+    $(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up");
 });
 
 $('pre.collapse.response-body').on('shown.bs.collapse', function () {
-    $(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+    $(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down');
 }).on('hidden.bs.collapse', function () {
-    $(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+    $(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up');
 });

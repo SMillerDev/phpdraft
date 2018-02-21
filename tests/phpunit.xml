@@ -15,6 +15,7 @@
         <testsuite name="Parse">
             <file>../src/PHPDraft/Parse/Tests/BaseParserTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/LegacyDrafterTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
             <file>../src/PHPDraft/Parse/Tests/JsonToHTMLTest.php</file>
         </testsuite>

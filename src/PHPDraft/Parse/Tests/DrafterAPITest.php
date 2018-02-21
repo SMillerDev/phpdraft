@@ -19,26 +19,15 @@ use ReflectionClass;
  */
 class DrafterAPITest extends BaseTest
 {
-
     /**
-     * Set up
-     *
-     * @param int $code curl code
+     * Basic setup
      */
-    public function setUpWith($code)
-    {
-        $this->mock_function('curl_errno', $code);
-        $this->setUpBasic();
-        $this->unmock_function('curl_errno');
-    }
-
-    public function setUpBasic()
+    public function setUp()
     {
         $this->mock_function('sys_get_temp_dir', TEST_STATICS);
-        $this->mock_function('curl_exec', "/some/dir/drafter\n");
-        $this->class      = new DrafterAPI(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+        $this->class      = new DrafterAPI();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\DrafterAPI');
-        $this->unmock_function('curl_exec');
+        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $this->unmock_function('sys_get_temp_dir');
     }
 
@@ -56,26 +45,39 @@ class DrafterAPITest extends BaseTest
      */
     public function testSetupCorrectly()
     {
-        $this->setUpWith(0);
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
     /**
-     * Test if the value the class is initialized with is correct
+     * Test if the drafter api can be used
      *
-     * @expectedException \PHPDraft\Parse\ResourceException
-     * @expectedExceptionMessage Drafter webservice is not available!
-     * @expectedExceptionCode    1
      */
-    public function testSetupFailed()
+    public function testAvailableFails()
     {
-        $this->setUpWith(1);
+        $this->mock_function('curl_exec', "/some/dir/drafter\n");
+        $this->mock_function('curl_errno', 1);
 
-        $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
+        $this->assertFalse(DrafterAPI::available());
+
+        $this->unmock_function('curl_errno');
+        $this->unmock_function('curl_exec');
+    }
+
+    /**
+     * Test if the drafter api can be used
+     *
+     */
+    public function testAvailableSuccess()
+    {
+        $this->mock_function('curl_exec', "/some/dir/drafter\n");
+        $this->mock_function('curl_errno', 0);
+
+        $this->assertFalse(DrafterAPI::available());
+
+        $this->unmock_function('curl_errno');
+        $this->unmock_function('curl_exec');
     }
 
     /**
@@ -83,7 +85,6 @@ class DrafterAPITest extends BaseTest
      */
     public function testPreRunStringIsEmpty()
     {
-        $this->setUpWith(0);
         $this->assertEmpty($this->class->json);
     }
 
@@ -97,7 +98,6 @@ class DrafterAPITest extends BaseTest
      */
     public function testParseWithFailingWebservice()
     {
-        $this->setUpWith(0);
         $this->mock_function('curl_errno', 1);
         $this->class->parseToJson();
         $this->unmock_function('curl_errno');
@@ -110,7 +110,6 @@ class DrafterAPITest extends BaseTest
      */
     public function testParseSuccess()
     {
-        $this->setUpWith(0);
         $this->mock_function('json_last_error', 0);
         $this->mock_function('curl_errno', 0);
         $this->mock_function('curl_exec', '{"content":[{"element":"world"}]}');

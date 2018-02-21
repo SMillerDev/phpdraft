@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the Drafter.php.
+ * This file contains the LegacyDrafter.php.
  *
  * @package PHPDraft\Parse
  *
@@ -9,7 +9,7 @@
 
 namespace PHPDraft\Parse;
 
-class Drafter extends BaseParser
+class LegacyDrafter extends BaseParser
 {
     /**
      * The location of the drafter executable.
@@ -28,9 +28,7 @@ class Drafter extends BaseParser
     public function init($apib): BaseParser
     {
         parent::init($apib);
-        $this->drafter = Drafter::location();
-
-        throw new ExecutionException('The new Drafter V4 is not supported yet.', 100);
+        $this->drafter = LegacyDrafter::location();
 
         return $this;
     }
@@ -47,18 +45,6 @@ class Drafter extends BaseParser
 
         return empty($returnVal) ? FALSE : $returnVal;
     }
-
-    /**
-     * Parses the apib for the selected method.
-     *
-     * @return void
-     */
-    protected function parse()
-    {
-        shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
-        $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
-    }
-
     /**
      * Check if a given parser is available.
      *
@@ -69,8 +55,19 @@ class Drafter extends BaseParser
         $path = self::location();
 
         $version = shell_exec('drafter -v 2> /dev/null');
-        $version = preg_match('/^v4/', $version);
+        $version = preg_match('/^v3/', $version);
 
-        return $path && $version === 1;
+        return ($path && $version === 1);
+    }
+
+    /**
+     * Parses the apib for the selected method.
+     *
+     * @return void
+     */
+    protected function parse()
+    {
+        shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
+        $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
     }
 }

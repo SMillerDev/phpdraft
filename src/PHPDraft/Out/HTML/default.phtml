@@ -12,9 +12,10 @@ use Enjoy\HttpStatusCode\Statuscodes;
 <html lang="en">
 <head>
     <title><?= $this->base_data['TITLE']; ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" crossorigin="anonymous">
     <?php foreach ($this->css as $style): ?>
         <link rel="stylesheet" href="<?= $style ?>">
     <?php endforeach; ?>
@@ -52,19 +53,19 @@ use Enjoy\HttpStatusCode\Statuscodes;
         <div class="col-md-2 method-nav">
             <?php foreach ($this->categories as $category): ?>
                 <?php if ($category->children !== []): ?>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">
                                 <a href="#<?= $category->get_href(); ?>"><?= $category->title; ?></a>
-                                <a class="btn-xs pull-right" role="button" data-toggle="collapse"
+                                <a class="btn btn-xs float-right" role="button" data-toggle="collapse"
                                    href="#collapse-<?= $category->get_href(); ?>" aria-expanded="false"
                                    aria-controls="collapse-<?= $category->get_href(); ?>">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <i class="fas fa-plus"></i>
                                 </a>
-                            </h3>
+                            </h5>
                         </div>
-                        <div class="collapse collapsed in" id="collapse-<?= $category->get_href(); ?>">
-                            <div class="panel-body">
+                        <div class="collapse show" id="collapse-<?= $category->get_href(); ?>">
+                            <div class="card-body">
                                 <ul class="list-unstyled">
                                     <?php foreach ($category->children as $resource): ?>
                                         <li>
@@ -77,7 +78,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                     <a href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
                                                         <?= $transition->title; ?>
                                                         <span
-                                                            class="pull-right <?= $this->get_method_icon($transition->get_method()); ?>"></span>
+                                                            class="float-right <?= $this->get_method_icon($transition->get_method()); ?>"></span>
                                                     </a>
                                                 </li>
                                             <?php endforeach; ?>
@@ -90,19 +91,19 @@ use Enjoy\HttpStatusCode\Statuscodes;
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (!empty($this->base_structures)): ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
                             <a href="#datastructures">Data Structures</a>
-                            <a class="btn-xs pull-right" role="button" data-toggle="collapse"
+                            <a class="btn btn-xs float-right" role="button" data-toggle="collapse"
                                href="#collapse-structures" aria-expanded="false"
                                aria-controls="collapse-structures">
-                                <span class="glyphicon glyphicon-plus"></span>
+                                <i class="fas fa-plus"></i>
                             </a>
-                        </h3>
+                        </h5>
                     </div>
-                    <div class="collapse collapsed in" id="collapse-structures">
-                        <div class="panel-body">
+                    <div class="collapse show id="collapse-structures">
+                        <div class="card-body">
                             <ul class="list-unstyled">
                                 <?php foreach ($this->base_structures as $key => $structure): ?>
                                     <li>
@@ -132,17 +133,17 @@ use Enjoy\HttpStatusCode\Statuscodes;
                     <p><?php $resource->description; ?></p>
                     <?php foreach ($resource->children as $transition): ?>
                         <div
-                            class="panel panel-default <?= $transition->get_method(); ?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
+                            class="card <?= $transition->get_method(); ?>">
+                            <div class="card-header">
+                                <h5 class="card-title">
                                     <var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
-                                    <a class="pull-right transition-title"
+                                    <a class="float-right transition-title"
                                        id="<?= str_replace('-', '/',
                                            $transition->get_href()); ?>"><?= $transition->title; ?></a>
-                                </h3>
+                                </h5>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <a class="btn btn-default curl"
                                    role="button"
                                    title="cURL command"
@@ -151,7 +152,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    data-toggle="popover"
                                    data-html="true"
                                    data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
-                                    <span class="glyphicon glyphicon-copy"></span>
+                                    <i class="fas fa-copy"></i>
                                 </a>
                                 <?php if (THIRD_PARTY_ALLOWED): ?>
                                 <a class="btn btn-default hurl"
@@ -160,24 +161,23 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                    target="_blank"
                                    href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>"
                                    tabindex="0">
-                                    <span class="glyphicon glyphicon-play"></span>
+                                    <i class="fas fa-play"></i>
                                 </a>
                                 <?php endif;?>
                                 <p class="lead"><?= $transition->description; ?></p>
                                 <?php if (!empty($transition->requests)): ?>
                                     <?php foreach ($transition->requests as $key => $request): ?>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="request panel-title"
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="request card-title"
                                                     data-toggle="collapse"
                                                     data-target="#request-coll-<?= $transition->get_href(); ?>">Request
-                                                    <span
-                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
-                                                </h4>
+                                                    <i class="fas indicator fa-angle-down float-right"></i>
+                                                </h6>
                                             </div>
 
                                             <div
-                                                class="collapse <?php if ($key < 1): ?>in<?php endif; ?> request-panel panel-body"
+                                                class="collapse <?php if ($key < 1): ?>show<?php endif; ?> request-card card-body"
                                                 id="request-coll-<?= $transition->get_href(); ?>">
                                                 <?= $request->description; ?>
                                                 <?php if ($transition->url_variables !== []): ?>
@@ -235,22 +235,18 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                 <?php endif; ?>
                                 <?php if (isset($transition->responses)): ?>
                                     <?php foreach ($transition->responses as $key => $response): ?>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title response"
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title response"
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                     Response <var
                                                         class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode." ".$this->http_status->getReasonPhrase($response->statuscode)?></var>
-                                                    <span
-                                                        class="glyphicon
-                                                        indicator
-                                                        glyphicon-menu-<?php if ($key < 1): ?>down<?php else: ?>up<?php endif; ?>
-                                                        pull-right"></span>
-                                                </h4>
+                                                    <i class="fas indicator fa-angle-<?= ($key < 1) ? 'down' : 'up'; ?> float-right"></i>
+                                                </h6>
                                             </div>
                                             <div
-                                                class="panel-body collapse <?php if ($key < 1): ?>in<?php endif; ?> response-panel"
+                                                class="card-body collapse <?php if ($key < 1): ?>show<?php endif; ?> response-card"
                                                 id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                 <?= $response->description; ?>
                                                 <?php if ($response->headers !== []): ?>
@@ -283,11 +279,11 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <h5 class="response-body"
                                                             data-toggle="collapse"
                                                             data-target="#request-<?= $href ?>">
-                                                            <span class="glyphicon indicator glyphicon-menu-up"></span>
+                                                            <i class="fas indicator fa-angle-up"></i>
                                                             <?= $key; ?>
 
                                                         </h5>
-                                                        <pre class="collapse collapsed response-body"
+                                                        <pre class="collapse response-body"
                                                              id="request-<?= $href ?>"><?= $value; ?></pre>
                                                     </div>
                                                 <?php endforeach; ?>
@@ -303,13 +299,13 @@ use Enjoy\HttpStatusCode\Statuscodes;
             <?php if (count($this->base_structures) > 0): ?>
                 <h2><a id="datastructures">Data structures</a></h2>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
-                    <div class="panel panel-default object-<?= $this->strip_link_spaces($key); ?> structure">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
+                    <div class="card object-<?= $this->strip_link_spaces($key); ?> structure">
+                        <div class="card-header">
+                            <h5 class="card-title">
                                 <a id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
-                            </h3>
+                            </h5>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
                                 <?= $structure; ?>
                             </div>
@@ -333,17 +329,20 @@ if (!empty($extras)):
         data-placement="top"
         data-html="true"
         data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
-        <span class="glyphicon glyphicon-question-sign"></span>
+        <i class="fas fa-question-circle"></i>
     </button>
 <?php endif; ?>
 <?php foreach ($this->js as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" 
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
         crossorigin="anonymous"></script>
 <script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), true)); ?></script>
 </body>

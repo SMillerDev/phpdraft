@@ -26,8 +26,8 @@ class BaseParserTest extends BaseTest
         $this->mock_function('sys_get_temp_dir', TEST_STATICS);
         $this->mock_function('shell_exec', "/some/dir/drafter\n");
         $this->class      = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
-                                 ->setConstructorArgs([file_get_contents(TEST_STATICS . '/drafter/apib/index.apib')])
                                  ->getMockForAbstractClass();
+        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $this->reflection = new ReflectionClass($this->class);
         $this->unmock_function('shell_exec');
         $this->unmock_function('sys_get_temp_dir');

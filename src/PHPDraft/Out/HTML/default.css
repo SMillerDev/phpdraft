@@ -23,7 +23,7 @@ button.extra-info.btn:focus {
     box-shadow: none;
     outline: 0;
 }
-.request-panel > code, .popover-content {
+.request-card > code, .popover-content {
     word-break: break-all;
 }
 
@@ -37,8 +37,11 @@ body .media h1.media-heading .form-control{
     float: right;
 }
 
+div.card {
+    margin: 10px auto;
+}
 
-.panel-title var, h4.response var {
+.card-title var, h4.response var {
     padding: 6px 12px;
     margin-right: 12px;
     border-radius: 3px;
@@ -54,7 +57,7 @@ h4.response.error var {
     background: rgba(201, 12, 0, 0.1);
 }
 
-.panel-title code {
+.card-title code {
     color: #000;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 1px 4px;
@@ -63,7 +66,7 @@ h4.response.error var {
     border-radius: 3px
 }
 
-.panel-title a.transition-title {
+.card-title a.transition-title {
     padding: 6px 0;
 }
 
@@ -84,7 +87,7 @@ body .col-md-10 h3:first-child {
     line-height: 26px;
 }
 
-.method-nav ul li a span {
+.method-nav ul li a i {
     color: #fff;
     padding: 0 5px;
     box-sizing: padding-box;
@@ -92,19 +95,19 @@ body .col-md-10 h3:first-child {
     line-height: 22px;
 }
 
-.POST:not(.structure) > .panel-heading, span.POST {
+.POST:not(.structure) > .card-header, span.POST {
     background: #62c462;
 }
 
-.GET:not(.structure) > .panel-heading, span.GET {
+.GET:not(.structure) > .card-header, span.GET {
     background: #5bc0de;
 }
 
-.DELETE:not(.structure) > .panel-heading, span.DELETE {
+.DELETE:not(.structure) > .card-header, span.DELETE {
     background: #ee5f5b;
 }
 
-.PUT:not(.structure) > .panel-heading, span.PUT {
+.PUT:not(.structure) > .card-header, span.PUT {
     background: #f89406;
 }
 
@@ -133,7 +136,7 @@ a.code {
     white-space: pre-wrap;
 }
 
-.panel-body {
+.card-body {
     position: relative;
 }
 
@@ -153,6 +156,6 @@ a.code {
     border-bottom-right-radius: 0px
 }
 
-h5.response-body, h4.request {
+/*h5.response-body, h4.request {
     cursor: pointer;
-}
+}*/
