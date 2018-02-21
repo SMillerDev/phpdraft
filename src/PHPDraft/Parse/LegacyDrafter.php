@@ -28,7 +28,7 @@ class LegacyDrafter extends BaseParser
     public function init($apib): BaseParser
     {
         parent::init($apib);
-        $this->drafter = LegacyDrafter::location();
+        $this->drafter = self::location();
 
         return $this;
     }
@@ -45,6 +45,7 @@ class LegacyDrafter extends BaseParser
 
         return empty($returnVal) ? FALSE : $returnVal;
     }
+
     /**
      * Check if a given parser is available.
      *
@@ -57,7 +58,7 @@ class LegacyDrafter extends BaseParser
         $version = shell_exec('drafter -v 2> /dev/null');
         $version = preg_match('/^v3/', $version);
 
-        return ($path && $version === 1);
+        return $path && $version === 1;
     }
 
     /**

@@ -28,10 +28,9 @@ class Drafter extends BaseParser
     public function init($apib): BaseParser
     {
         parent::init($apib);
-        $this->drafter = Drafter::location();
+        $this->drafter = self::location();
 
         throw new ExecutionException('The new Drafter V4 is not supported yet.', 100);
-
         return $this;
     }
 
