@@ -2,7 +2,7 @@
 This is a parser for API Blueprint files in PHP.[1](#dependencies)
 
 ## Usage
-Requires PHP 5.6+ to run. Unittests require runkit or uopz
+Requires PHP 7.0+ to run. Unittests require runkit or uopz
 For direct usage you can run:
 ```bash
 $ ./phpdraft.phar -f blueprint-file.apib > blueprint-webpage.html
