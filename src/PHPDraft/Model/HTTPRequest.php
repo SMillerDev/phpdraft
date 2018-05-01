@@ -30,6 +30,13 @@ class HTTPRequest implements Comparable
     public $method;
 
     /**
+     * Title of the request.
+     *
+     * @var string
+     */
+    public $title;
+
+    /**
      * Description of the request.
      *
      * @var string
@@ -49,6 +56,14 @@ class HTTPRequest implements Comparable
      * @var mixed
      */
     public $body = NULL;
+
+    /**
+     * Identifier for the request
+     *
+     * @var string
+     */
+    protected $id;
+
     /**
      * Structure of the request (if POST or PUT).
      *
@@ -75,7 +90,9 @@ class HTTPRequest implements Comparable
      */
     public function parse($object)
     {
+        $this->id = md5(microtime());
         $this->method = $object->attributes->method;
+        $this->title = isset($object->meta->title) ? $object->meta->title : NULL;
 
         if (($this->method === 'POST' || $this->method === 'PUT') && !empty($object->content)) {
             foreach ($object->content as $value) {
@@ -120,6 +137,11 @@ class HTTPRequest implements Comparable
         $struct->deps = $deps;
 
         $this->struct = $struct;
+    }
+
+    public function get_id()
+    {
+        return $this->id;
     }
 
     /**

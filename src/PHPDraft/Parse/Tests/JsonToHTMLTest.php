@@ -37,6 +37,7 @@ class JsonToHTMLTest extends BaseTest
     {
         $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
+        $this->mock_function('microtime', 'sometime');
     }
 
     /**
@@ -44,6 +45,7 @@ class JsonToHTMLTest extends BaseTest
      */
     public function tearDown()
     {
+        $this->unmock_function('microtime');
         unset($this->class);
         unset($this->reflection);
     }

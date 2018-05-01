@@ -1,8 +1,8 @@
-.demo-layout-transparent {
+.phpdrafter-layout-transparent {
     background: rgba(0,0,0,0) center / cover;
 }
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
+.phpdrafter-layout-transparent .mdl-layout__header,
+.phpdrafter-layout-transparent .mdl-layout__drawer-button {
     /* This background is dark, so we set text to white. Use 87% black instead if
        your background is light. */
     color: white;
@@ -11,16 +11,16 @@ main {
     width: 100%;
 }
 
-.demo-card-wide.mdl-card {
+.phpdrafter-card-wide.mdl-card {
     width: 100%;
     margin-bottom: 30px;
 }
-.demo-card-wide > .mdl-card__title {
+.phpdrafter-card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
     background: #cccccc center / cover;
 }
-.demo-card-wide > .mdl-card__menu {
+.phpdrafter-card-wide > .mdl-card__menu {
     color: #fff;
 }
 h2.mdl-card__title-text {
@@ -89,14 +89,11 @@ div .mdl-card__supporting-text {
 }
 
 dialog {
-    position: absolute;
-    right: 100%;
     width: 1000px !important;
     height: -moz-fit-content;
     height: -webkit-fit-content;
     height: fit-content;
     margin: auto;
-    margin-left: -400px;
     border: solid;
     padding: 1em;
     background: white;
@@ -135,4 +132,36 @@ dialog.fixed {
     position: fixed;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+body {
+    --put-color: rgb(248, 148, 6);
+    --post-color: rgb(98, 196, 98);
+    --get-color: rgb(91, 192, 222);
+    --delete-color: rgb(238, 95, 91);
+    --head-color: rgb(222, 121, 91);
+    --patch-color: rgb(196, 98, 196);
+}
+
+.mdl-card__title a {
+    color: inherit;
+}
+
+.PUT .mdl-card__title {
+    background: var(--put-color);
+}
+.POST .mdl-card__title {
+    background: var(--post-color);
+}
+.GET .mdl-card__title {
+    background: var(--get-color);
+}
+.DELETE .mdl-card__title {
+    background: var(--delete-color);
+}
+.HEAD .mdl-card__title {
+    background: var(--head-color);
+}
+.PATCH .mdl-card__title {
+    background: var(--patch-color);
 }

@@ -29,6 +29,13 @@ class HTTPResponse implements Comparable
     public $description;
 
     /**
+     * Identifier for the request
+     *
+     * @var string
+     */
+    protected $id;
+
+    /**
      * Response headers.
      *
      * @var array
@@ -58,6 +65,7 @@ class HTTPResponse implements Comparable
 
     public function __construct($parent)
     {
+        $this->id     = md5(microtime());
         $this->parent = &$parent;
     }
 
@@ -80,6 +88,11 @@ class HTTPResponse implements Comparable
         $this->parse_content($object);
 
         return $this;
+    }
+
+    public function get_id()
+    {
+        return $this->id;
     }
 
     /**

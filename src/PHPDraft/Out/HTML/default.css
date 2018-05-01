@@ -12,17 +12,20 @@ div.main-url {
     line-break: loose;
     word-break: break-all;
 }
-button.extra-info.btn{
+
+button.extra-info.btn {
     position: fixed;
     bottom: 10px;
     left: 10px;
     border-radius: 30px;
 }
+
 button.extra-info.btn:focus {
     border-width: 0px;
     box-shadow: none;
     outline: 0;
 }
+
 .request-card > code, .popover-content {
     word-break: break-all;
 }
@@ -31,7 +34,8 @@ body .media h1.media-heading {
     margin-top: 20px;
     margin-bottom: 10px;
 }
-body .media h1.media-heading .form-control{
+
+body .media h1.media-heading .form-control {
     display: flex;
     width: auto;
     float: right;
@@ -95,22 +99,6 @@ body .col-md-10 h3:first-child {
     line-height: 22px;
 }
 
-.POST:not(.structure) > .card-header, span.POST {
-    background: #62c462;
-}
-
-.GET:not(.structure) > .card-header, span.GET {
-    background: #5bc0de;
-}
-
-.DELETE:not(.structure) > .card-header, span.DELETE {
-    background: #ee5f5b;
-}
-
-.PUT:not(.structure) > .card-header, span.PUT {
-    background: #f89406;
-}
-
 .example-value {
     color: rgba(0, 0, 0, 0.4);
     text-align: right;
@@ -145,17 +133,66 @@ a.code {
     position: absolute;
     top: 15px;
 }
+
 .curl.btn {
     right: 15px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px
 }
+
 .hurl.btn {
     right: 54px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px
 }
 
-/*h5.response-body, h4.request {
-    cursor: pointer;
-}*/
+body {
+    --put-color: rgb(248, 148, 6);
+    --post-color: rgb(98, 196, 98);
+    --get-color: rgb(91, 192, 222);
+    --delete-color: rgb(238, 95, 91);
+    --head-color: rgb(222, 121, 91);
+    --patch-color: rgb(196, 98, 196);
+}
+
+.PUT:not(.structure) > .card-header{
+    background: var(--put-color);
+}
+span.PUT {
+    color: var(--put-color);
+}
+
+.POST:not(.structure) > .card-header{
+    background: var(--post-color);
+}
+span.POST {
+    color: var(--post-color);
+}
+
+.GET:not(.structure) > .card-header{
+    background: var(--get-color);
+}
+span.GET {
+    color: var(--get-color);
+}
+
+.DELETE:not(.structure) > .card-header{
+    background: var(--delete-color);
+}
+span.DELETE {
+    color: var(--delete-color);
+}
+
+.HEAD:not(.structure) > .card-header{
+    background: var(--head-color);
+}
+span.HEAD {
+    color: var(--head-color);
+}
+
+.PATCH:not(.structure) > .card-header{
+    background: var(--patch-color);
+}
+span.PATCH {
+    color: var(--patch-color);
+}

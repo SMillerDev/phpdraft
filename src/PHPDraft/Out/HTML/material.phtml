@@ -5,8 +5,10 @@
  * @package PHPDraft\HTML
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
+
 use PHPDraft\Out\Minifier;
 use Enjoy\HttpStatusCode\Statuscodes;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +16,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.<?= $this->base_data['COLOR_1']?>-<?= $this->base_data['COLOR_2']?>.min.css" />
+    <link rel="stylesheet"
+          href="https://code.getmdl.io/1.3.0/material.<?= $this->base_data['COLOR_1'] ?>-<?= $this->base_data['COLOR_2'] ?>.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -23,11 +26,11 @@ use Enjoy\HttpStatusCode\Statuscodes;
         <link rel="stylesheet" href="<?= $style ?>">
     <?php endforeach; ?>
     <style>
-        <?= Minifier::minify_css(file_get_contents($this->find_include_file($this->template, 'css'), true));?>
+        <?= Minifier::minify_css(file_get_contents($this->find_include_file($this->template, 'css'), TRUE));?>
     </style>
 </head>
 <body>
-<div class="demo-layout-waterfall mdl-layout mdl-js-layout">
+<div class="phpdrafter-layout-waterfall mdl-layout mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
             <!-- Title -->
@@ -43,11 +46,12 @@ use Enjoy\HttpStatusCode\Statuscodes;
                 <?php if ($category->children !== []): ?>
                     <?php foreach ($category->children as $resource): ?>
                         <a class="mdl-navigation__link" href="#<?= str_replace('-', '/', $resource->get_href()); ?>">
-                             - <?= $resource->title; ?>
+                            - <?= $resource->title; ?>
                         </a>
                         <?php foreach ($resource->children as $transition): ?>
-                            <a class="mdl-navigation__link" href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
-                                 -- <?= $transition->title; ?>
+                            <a class="mdl-navigation__link"
+                               href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
+                                -- <?= $transition->title; ?>
                                 <span class="pull-right <?= $this->get_method_icon($transition->get_method()); ?>"></span>
                             </a>
                         <?php endforeach; ?>
@@ -57,7 +61,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
             <?php if (!empty($this->base_structures)): ?>
                 <a class="mdl-navigation__link" href="#"><b>Objects</b></a>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
-                    <a class="mdl-navigation__link" href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
+                    <a class="mdl-navigation__link"
+                       href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
                 <?php endforeach; ?>
             <?php endif; ?>
         </nav>
@@ -80,7 +85,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                         <p><?= $resource->description; ?></p>
                     <?php endif; ?>
                     <?php foreach ($resource->children as $transition): ?>
-                        <div class="demo-card-wide mdl-card mdl-shadow--2dp <?= $transition->get_method(); ?>">
+                        <div class="phpdrafter-card-wide mdl-card mdl-shadow--2dp <?= $transition->get_method(); ?>">
                             <div class="mdl-card__title">
                                 <h2 class="mdl-card__title-text"><var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
@@ -90,27 +95,71 @@ use Enjoy\HttpStatusCode\Statuscodes;
                             </div>
                             <div class="mdl-card__supporting-text">
                                 <?= $transition->description; ?>
-                                <?php if (!empty($transition->requests) || !empty($transition->responses)): ?>
+                                <?php if (!empty($transition->requests) || !empty($transition->responses)): $i = 0;?>
                                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                                     <div class="mdl-tabs__tab-bar">
-                                <?php if (!empty($transition->requests)): ?>
-                                    <a href="#<?= $transition->get_href(); ?>-request-panel" class="mdl-tabs__tab is-active"><b>Request</b></a>
-                                <?php endif;?>
-                                <?php if (!empty($transition->responses)): ?>
-                                    <?php foreach ($transition->responses as $key => $response): ?>
-                                        <a href="#<?= $transition->get_href() . '-' . $response->statuscode; ?>-panel"
-                                           class="mdl-tabs__tab <?= $this->get_response_status($response->statuscode) ?>"
-                                            title="<?= $response->statuscode." ".$this->http_status->getReasonPhrase($response->statuscode)?>"><?= $response->statuscode; ?></a>
-                                    <?php endforeach;?>
-                                <?php endif;?>
+                                        <?php if (!empty($transition->requests)): ?>
+                                            <?php foreach ($transition->requests as $request): ?>
+                                                <a href="#request-panel-<?= $request->get_id(); ?>"
+                                                   class="mdl-tabs__tab<?= ($i < 1) ? ' is-active' : '' ?>">
+                                                    <b>Request</b> <?= (empty($request->title) ? '' : ' ' . $request->title) ?>
+                                                </a>
+                                            <?php $i++; endforeach; ?>
+                                        <?php endif; ?>
+                                        <?php if (!empty($transition->responses)): ?>
+                                            <?php foreach ($transition->responses as $response): ?>
+                                                <a href="#response-panel-<?= $response->get_id(); ?>"
+                                                   class="mdl-tabs__tab<?= ($i < 1) ? ' is-active' : '' ?> <?= $this->get_response_status($response->statuscode) ?>"
+                                                   title="<?= $response->statuscode . ' ' . $this->http_status->getReasonPhrase($response->statuscode) ?>"><?= $response->statuscode; ?></a>
+                                            <?php $i++; endforeach; ?>
+                                        <?php endif; ?>
                                     </div>
-                                <?php if (!empty($transition->requests)): ?>
-                                    <?php foreach ($transition->requests as $key => $request): ?>
-                                            <div class="mdl-tabs__panel is-active" id="<?= $transition->get_href(); ?>-request-panel">
+                                    <?php $i = 0; if (!empty($transition->requests)): ?>
+                                        <?php foreach ($transition->requests as $key => $request): ?>
+                                            <dialog class="mdl-dialog"
+                                                    id="mdl-dialog-<?= $request->get_id(); ?>">
+                                                <h4 class="mdl-dialog__title">CURL Command</h4>
+                                                <div class="mdl-dialog__content">
+                                                    <b>This might be useful for debugging</b>
+                                                    <div class="mdl-textfield mdl-js-textfield">
+                                                            <textarea class="mdl-textfield__input" rows="7"
+                                                                      title="CURL Command"
+                                                                      autofocus
+                                                                      readonly><?= $request->get_curl_command($this->base_data['HOST']); ?></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="mdl-dialog__actions">
+                                                    <button type="button" class="mdl-button close">OK</button>
+                                                </div>
+                                            </dialog>
+                                            <div class="mdl-tabs__panel <?= ($i < 1) ? 'is-active' : '' ?>"
+                                                 id="request-panel-<?= $request->get_id(); ?>">
                                                 <?= $request->description; ?>
+                                                <?php if (THIRD_PARTY_ALLOWED): ?>
+                                                    <a href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>"
+                                                       target="_blank" role="button"
+                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
+                                                        <i class="material-icons">play_arrow</i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <button id="show-dialog-<?= $request->get_id(); ?>" type="button"
+                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
+                                                    <i class="material-icons">bug_report</i>
+                                                </button>
+                                                <script>
+                                                  let button_<?=$request->get_id();?> = document.querySelector('#show-dialog-<?=$request->get_id();?>');
+                                                  let dialog_<?=$request->get_id();?> = document.querySelector('#mdl-dialog-<?=$request->get_id();?>');
+                                                  button_<?=$request->get_id();?>.addEventListener('click', function() {
+                                                    dialog_<?=$request->get_id();?>.showModal();
+                                                  });
+                                                  dialog_<?=$request->get_id();?>.querySelector('.close').addEventListener('click', function() {
+                                                    dialog_<?=$request->get_id();?>.close();
+                                                  });
+                                                </script>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
-                                                    <span class="base-url"><?= $this->base_data['HOST']; ?></span><em><?= $transition->build_url(); ?></em>
+                                                    <span class="base-url"><?= $this->base_data['HOST']; ?></span>
+                                                    <em><?= $transition->build_url(); ?></em>
                                                 <?php endif; ?>
                                                 <?php if ($request->headers !== []): ?>
                                                     <h5>Headers</h5>
@@ -118,7 +167,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <?php foreach ($request->headers as $name => $value): ?>
                                                             <li class="mdl-list__item">
                                                                 <code>
-                                                                    <span class="attr"><?= $name; ?></span>: <span class="value"><?= $value; ?></span>
+                                                                    <span class="attr"><?= $name; ?></span>: <span
+                                                                            class="value"><?= $value; ?></span>
                                                                 </code>
                                                             </li>
                                                         <?php endforeach; ?>
@@ -130,7 +180,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <?php if (is_string($value)): ?>
                                                             <code class="request-body"><?= $value; ?></code>
                                                         <?php else: ?>
-                                                            <?php $type = (isset($request->headers['Content-Type'])) ? $request->headers['Content-Type'] : null; ?>
+                                                            <?php $type =
+                                                                (isset($request->headers['Content-Type'])) ? $request->headers['Content-Type'] : NULL; ?>
                                                             <?= $value->print_request($type); ?>
                                                             <?= $value ?>
                                                         <?php endif; ?>
@@ -140,20 +191,21 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                     <h5>Structure</h5>
                                                     <?= $request->struct ?>
                                                 <?php endif; ?>
-                                                <?php if ($transition->url_variables !== null): ?>
+                                                <?php if ($transition->url_variables !== NULL): ?>
                                                     <h5>URI Parameters</h5>
                                                     <?= $transition->url_variables; ?>
                                                 <?php endif; ?>
-                                                <?php if ($transition->data_variables !== null): ?>
+                                                <?php if ($transition->data_variables !== NULL): ?>
                                                     <h5>Request object</h5>
                                                     <?= $transition->data_variables ?>
                                                 <?php endif; ?>
                                             </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <?php if (!empty($transition->responses)): ?>
-                                    <?php foreach ($transition->responses as $key => $response): ?>
-                                            <div class="mdl-tabs__panel" id="<?= $transition->get_href() . '-' . $response->statuscode; ?>-panel">
+                                        <?php $i++; endforeach; ?>
+                                    <?php endif; ?>
+                                    <?php if (!empty($transition->responses)): ?>
+                                        <?php foreach ($transition->responses as $key => $response): ?>
+                                            <div class="mdl-tabs__panel <?= ($i < 1) ? 'is-active' : '' ?>"
+                                                 id="response-panel-<?= $response->get_id(); ?>">
                                                 <?= $response->description; ?>
                                                 <?php if ($response->headers !== []): ?>
                                                     <h5>Headers</h5>
@@ -161,7 +213,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <?php foreach ($response->headers as $name => $value): ?>
                                                             <li class="mdl-list__item">
                                                                 <code>
-                                                                    <span class="attr"><?= $name; ?></span>: <span class="value"><?= $value; ?></span>
+                                                                    <span class="attr"><?= $name; ?></span>: <span
+                                                                            class="value"><?= $value; ?></span>
                                                                 </code>
                                                             </li>
                                                         <?php endforeach; ?>
@@ -175,64 +228,31 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                 <?php endif; ?>
                                                 <div class="mdl-grid">
                                                     <?php foreach ($response->content as $key => $value): ?>
-                                                        <div class="mdl-cell mdl-cell--<?= 12/count($response->content)?>-col">
-                                                            <?php $href =
-                                                                $transition->get_href() . '-' . $response->statuscode . '-' . str_replace([
-                                                                    '/',
-                                                                    '+',
-                                                                ], '-', $key); ?>
+                                                        <div class="mdl-cell mdl-cell--<?= 12 / count($response->content) ?>-col">
                                                             <h5 class="response-body"><?= $key; ?></h5>
-                                                            <pre class="response-body" id="request-<?= $href ?>"><?= $value; ?></pre>
+                                                            <pre class="response-body"
+                                                                 id="request-<?= $response->get_id(); ?>"><?= $value; ?></pre>
                                                         </div>
                                                     <?php endforeach; ?>
                                                 </div>
                                             </div>
 
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            <?php endif;?>
+                                        <?php $i++; endforeach; ?>
+                                    <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="mdl-card__menu">
-                                <?php if (THIRD_PARTY_ALLOWED): ?>
-                                <a href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>" target="_blank" role="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="material-icons">play_arrow</i>
-                                </a>
-                                <?php endif;?>
-                                <button id="show-dialog-<?=$transition->get_href();?>" type="button" class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                    <i class="material-icons">bug_report</i>
-                                </button>
-                                <dialog class="mdl-dialog" id="mdl-dialog-<?=$transition->get_href();?>">
-                                    <h4 class="mdl-dialog__title">CURL Command</h4>
-                                    <div class="mdl-dialog__content">
-                                        <b>This might be useful for debugging</b>
-                                        <div class="mdl-textfield mdl-js-textfield">
-                                            <textarea class="mdl-textfield__input" type="text" rows= "7" autofocus readonly><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="mdl-dialog__actions">
-                                        <button type="button" class="mdl-button close">OK</button>
-                                    </div>
-                                </dialog>
-                                <script>
-                                    $('#show-dialog-<?=$transition->get_href();?>').on('click', function () {
-                                        $('#mdl-dialog-<?=$transition->get_href();?>').show();
-                                    });
-                                    $('#mdl-dialog-<?=$transition->get_href();?> .close').on('click', function () {
-                                        $('#mdl-dialog-<?=$transition->get_href();?>').hide();
-                                    })
-                                </script>
-                            </div>
                         </div>
-                    <?php endforeach;?>
-                <?php endforeach;?>
-            <?php endforeach;?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
             <?php if (count($this->base_structures) > 0): ?>
                 <h3><a id="datastructures">Data structures</a></h3>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
-                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                    <div class="phpdrafter-card-wide mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text"><a id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a></h2>
+                            <h2 class="mdl-card__title-text"><a
+                                        id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a></h2>
                         </div>
                         <div class="mdl-card__supporting-text">
                             <?= $structure; ?>
@@ -249,19 +269,19 @@ use Enjoy\HttpStatusCode\Statuscodes;
 if (!empty($extras)):
     $extras['host'] = $this->base_data['HOST']; ?>
     <button
-        type="button"
-        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
-        data-toggle="popover"
-        title="Extra info"
-        data-placement="top"
-        data-html="true"
-        data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
+            type="button"
+            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+            data-toggle="popover"
+            title="Extra info"
+            data-placement="top"
+            data-html="true"
+            data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
         <i class="material-icons">help outline</i>
     </button>
 <?php endif; ?>
 <?php foreach ($this->js as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>
-<script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), true)); ?></script>
+<script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), TRUE)); ?></script>
 </body>
 </html>

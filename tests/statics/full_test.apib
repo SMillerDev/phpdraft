@@ -238,6 +238,7 @@ Manipulate users.
 
     + Parameters
         + limit: 1
+        + hello: world
 
 + Response 200 (application/json)
 
@@ -288,12 +289,12 @@ User of the application
     and it continue there
     and will end there
 
-## Item
-+ Object (object)
-    + string_l2 (string)
-    + object_l2 (object)
-        + string_l3 (string)
-        + object_l3 (object)
-            + string1_l4 (string)
-            + string2_l4 (string)
-            + string3_l4 (string)
+## Nested Item (object)
++ Object (object)                   - Main object
+    + string_l2 (string)            - String in L2
+    + object_l2 (object)            - Object in L2
+        + string_l3 (string)        - String in L3
+        + object_l3 (object)        - Object in L3
+            + string1_l4 (string)   - String in L4
+            + string2_l4 (string)   - String in L4
+            + string3_l4 (string)   - String in L4
