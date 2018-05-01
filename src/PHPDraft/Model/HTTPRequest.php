@@ -79,6 +79,7 @@ class HTTPRequest implements Comparable
     public function __construct(&$parent)
     {
         $this->parent = &$parent;
+        $this->id     = md5(microtime());
     }
 
     /**
@@ -90,7 +91,6 @@ class HTTPRequest implements Comparable
      */
     public function parse($object)
     {
-        $this->id     = md5(microtime());
         $this->method = $object->attributes->method;
         $this->title  = isset($object->meta->title) ? $object->meta->title : NULL;
 

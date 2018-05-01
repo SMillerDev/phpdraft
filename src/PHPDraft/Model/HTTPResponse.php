@@ -65,8 +65,8 @@ class HTTPResponse implements Comparable
 
     public function __construct($parent)
     {
-        $this->id     = md5(microtime());
         $this->parent = &$parent;
+        $this->id     = md5(microtime());
     }
 
     /**

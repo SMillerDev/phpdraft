@@ -33,7 +33,9 @@ class HTTPResponseTest extends BaseTest
         $parent           = NULL;
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
                                  ->getMock();
+        $this->mock_function('microtime', 'test');
         $this->class      = new HTTPResponse($parent);
+        $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPResponse');
     }
 
@@ -54,6 +56,18 @@ class HTTPResponseTest extends BaseTest
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
         $this->assertNull($property->getValue($this->class));
+
+        $id_property = $this->reflection->getProperty('id');
+        $id_property->setAccessible(TRUE);
+        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $id_property->getValue($this->class));
+    }
+
+    /**
+     * Tests if get_id returns the correct ID.
+     */
+    public function testGetId()
+    {
+        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $this->class->get_id());
     }
 
     /**

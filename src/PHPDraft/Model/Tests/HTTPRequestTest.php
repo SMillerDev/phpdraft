@@ -36,7 +36,9 @@ class HTTPRequestTest extends BaseTest
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
+        $this->mock_function('microtime', 'test');
         $this->class      = new HTTPRequest($parent);
+        $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPRequest');
     }
 
@@ -54,9 +56,21 @@ class HTTPRequestTest extends BaseTest
      */
     public function testSetupCorrectly()
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
-        $this->assertNull($property->getValue($this->class));
+        $parent_property = $this->reflection->getProperty('parent');
+        $parent_property->setAccessible(TRUE);
+        $this->assertNull($parent_property->getValue($this->class));
+
+        $id_property = $this->reflection->getProperty('id');
+        $id_property->setAccessible(TRUE);
+        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $id_property->getValue($this->class));
+    }
+
+    /**
+     * Tests if get_id returns the correct ID.
+     */
+    public function testGetId()
+    {
+        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $this->class->get_id());
     }
 
     /**
