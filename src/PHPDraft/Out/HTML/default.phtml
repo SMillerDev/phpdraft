@@ -130,7 +130,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
                         <a id="<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
                         <small><?= $resource->href; ?></small>
                     </h3>
-                    <p><?php $resource->description; ?></p>
+                    <?php if (!empty($resource->description)): ?>
+                        <p><?= $resource->description; ?></p>
+                    <?php endif; ?>
                     <?php foreach ($resource->children as $transition): ?>
                         <div
                             class="card <?= $transition->get_method(); ?>">
