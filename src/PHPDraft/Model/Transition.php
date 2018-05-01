@@ -151,8 +151,9 @@ class Transition extends HierarchyElement
      * @param string $base_url the URL to which the URL variables apply
      * @param bool   $clean    Get the URL without HTML
      *
-     * @return string a HTML representation of the transition URL
      * @throws \QL\UriTemplate\Exception
+     *
+     * @return string a HTML representation of the transition URL
      */
     public function build_url($base_url = '', $clean = FALSE)
     {

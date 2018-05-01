@@ -29,7 +29,7 @@ class HTTPResponse implements Comparable
     public $description;
 
     /**
-     * Identifier for the request
+     * Identifier for the request.
      *
      * @var string
      */

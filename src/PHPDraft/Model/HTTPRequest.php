@@ -58,7 +58,7 @@ class HTTPRequest implements Comparable
     public $body = NULL;
 
     /**
-     * Identifier for the request
+     * Identifier for the request.
      *
      * @var string
      */
@@ -90,9 +90,9 @@ class HTTPRequest implements Comparable
      */
     public function parse($object)
     {
-        $this->id = md5(microtime());
+        $this->id     = md5(microtime());
         $this->method = $object->attributes->method;
-        $this->title = isset($object->meta->title) ? $object->meta->title : NULL;
+        $this->title  = isset($object->meta->title) ? $object->meta->title : NULL;
 
         if (($this->method === 'POST' || $this->method === 'PUT') && !empty($object->content)) {
             foreach ($object->content as $value) {
