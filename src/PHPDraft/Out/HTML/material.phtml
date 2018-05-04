@@ -16,12 +16,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet"
-          href="https://code.getmdl.io/1.3.0/material.<?= $this->base_data['COLOR_1'] ?>-<?= $this->base_data['COLOR_2'] ?>.min.css"/>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.<?= $this->base_data['COLOR_1'] ?>-<?= $this->base_data['COLOR_2'] ?>.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <?php foreach ($this->css as $style): ?>
         <link rel="stylesheet" href="<?= $style ?>">
     <?php endforeach; ?>
