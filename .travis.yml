@@ -21,6 +21,7 @@ after_success:
 
 before_deploy:
 - ant phar
+- sha256sum build/out/*
 deploy:
   provider: releases
   api_key:
