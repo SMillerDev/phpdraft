@@ -67,13 +67,13 @@ class ApibFileParser
      */
     private function get_apib($filename)
     {
-        $this->file_check($filename);
-        $file    = file_get_contents($filename);
+        $path    = $this->file_path($filename);
+        $file    = file_get_contents($path);
         $matches = [];
-        preg_match_all('<!-- include\(([a-z0-9_.\/]*?)(\.[a-z]*?)\) -->', $file, $matches);
+        preg_match_all('<!-- include\(([\S\s]*?)(\.[a-z]*?)\) -->', $file, $matches);
         for ($i = 0; $i < count($matches[1]); $i++) {
             $file = str_replace('<!-- include(' . $matches[1][$i] . $matches[2][$i] . ') -->',
-                $this->get_apib($this->location . $matches[1][$i] . $matches[2][$i]), $file);
+                $this->get_apib($matches[1][$i] . $matches[2][$i]), $file);
         }
 
         preg_match_all('<!-- schema\(([a-z0-9_.\/\:]*?)\) -->', $file, $matches);
@@ -91,13 +91,20 @@ class ApibFileParser
      *
      * @throws ExecutionException when the file could not be found.
      *
-     * @return void
+     * @return string
      */
-    private function file_check($filename)
+    private function file_path($filename)
     {
-        if (!file_exists($filename)) {
+        $path = $this->location . $filename;
+        if (file_exists($path)) {
+            return $path;
+        }
+        $path = stream_resolve_include_path($filename);
+        if ($path === FALSE || !file_exists($path)) {
             throw new ExecutionException("API File not found: $filename", 1);
         }
+
+        return $path;
     }
 
     /**

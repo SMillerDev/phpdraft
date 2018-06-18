@@ -3,9 +3,7 @@
 <phpunit    bootstrap="test.bootstrap.inc.php"
             backupGlobals="false"
             backupStaticAttributes="false"
-            syntaxCheck="false"
             forceCoversAnnotation="true"
-            mapTestClassNameToCoveredClassName="true"
             colors="true"
             verbose="true">
     <php>
@@ -45,13 +43,13 @@
             <directory>../src/PHPDraft/</directory>
             <exclude>
                 <file>../src/PHPDraft/Out/Minifier.php</file>
-                <directory>../src/PHPDraft/Parse/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
-                <directory>../src/PHPDraft/Out/Tests/</directory>
-                <directory>../src/PHPDraft/Out/HTML/</directory>
-                <directory>../src/PHPDraft/In/Tests/</directory>
-                <directory>../src/PHPDraft/Core/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Parse/Tests/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Model/Tests/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Model/Elements/Tests/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Out/Tests/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Out/HTML/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/In/Tests/</directory>
+                <directory suffix="*Test.php">../src/PHPDraft/Core/</directory>
                 <file>../src/PHPDraft/Parse/ResourceException.php</file>
                 <file>../src/PHPDraft/Model/Comparable.php</file>
                 <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
@@ -61,16 +59,11 @@
     <logging>
         <log    type="coverage-html"
                 target="../build/coverage"
-                title="PHPDraft"
-                charset="UTF-8"
-                yui="true"
-                highlight="true"
                 lowUpperBound="35"
                 highLowerBound="70"/>
         <log    type="coverage-clover"
                 target="../build/logs/clover.xml"/>
         <log    type="junit"
-                target="../build/logs/junit.xml"
-                logIncompleteSkipped="false"/>
+                target="../build/logs/junit.xml"/>
     </logging>
 </phpunit>
