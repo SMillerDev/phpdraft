@@ -20,8 +20,9 @@ class ApibFileParserTest extends BaseTest
 {
 
     /**
-     * Set up tests
-     * @return void
+     * Set up tests.
+     *
+     * @return void Test is now set up.
      */
     public function setUp()
     {
@@ -88,7 +89,8 @@ class ApibFileParserTest extends BaseTest
         $full_property->setAccessible(true);
 
         $text = "FORMAT: 1A\nHOST: https://owner-api.teslamotors.com\nEXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
-        $text .="# Tesla Model S JSON API\nThis is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.\n\nTEST\nhello";
+        $text .="# Tesla Model S JSON API\nThis is unofficial documentation of the Tesla Model S JSON API used by the iOS and Android apps. It features functionality to monitor and control the Model S remotely.\n\nTEST";
+        $text .="\n\n# Hello\nThis is a test.\nhello";
 
         $this->assertSame($text, $full_property->getValue($this->class));
         $this->assertSame($text, $this->class->__toString());

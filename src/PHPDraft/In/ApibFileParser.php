@@ -70,10 +70,10 @@ class ApibFileParser
         $this->file_check($filename);
         $file    = file_get_contents($filename);
         $matches = [];
-        preg_match_all('<!-- include\(([a-z0-9_.\/]*?).apib\) -->', $file, $matches);
-        foreach ($matches[1] as $value) {
-            $file = str_replace('<!-- include(' . $value . '.apib) -->',
-                $this->get_apib($this->location . $value . '.apib'), $file);
+        preg_match_all('<!-- include\(([a-z0-9_.\/]*?)(\.[a-z]*?)\) -->', $file, $matches);
+        for ($i = 0; $i < count($matches[1]); $i++) {
+            $file = str_replace('<!-- include(' . $matches[1][$i] . $matches[2][$i] . ') -->',
+                $this->get_apib($this->location . $matches[1][$i] . $matches[2][$i]), $file);
         }
 
         preg_match_all('<!-- schema\(([a-z0-9_.\/\:]*?)\) -->', $file, $matches);
@@ -88,6 +88,8 @@ class ApibFileParser
      * Check if an APIB file exists.
      *
      * @param string $filename File to check
+     *
+     * @throws ExecutionException when the file could not be found.
      *
      * @return void
      */
