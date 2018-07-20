@@ -1,6 +1,9 @@
 # PHPDraft [![Build Status](https://travis-ci.org/SMillerDev/phpdraft.svg?branch=master)](https://travis-ci.org/SMillerDev/phpdraft) [![Style Status](https://styleci.io/repos/65147997/shield)](https://styleci.io/repos/65147997) [![codecov](https://codecov.io/gh/SMillerDev/phpdraft/branch/master/graph/badge.svg)](https://codecov.io/gh/SMillerDev/phpdraft)
 This is a parser for API Blueprint files in PHP.[1](#dependencies)
 
+## Dependencies
+PHPDraft requires [drafter](https://github.com/apiaryio/drafter) to be installed. Refer to the drafter page for the installation details. If you don't want to install drafter, you can pass `-o` to the command to make it use [https://api.apiblueprint.org/parser](https://api.apiblueprint.org/parser)
+
 ## Usage
 Requires PHP 7.0+ to run. Unittests require runkit or uopz
 For direct usage you can run:
@@ -66,10 +69,6 @@ Return the information for the Person
     [Person][]
 
 ```
-
-
-## Dependencies
-PHPDraft requires [drafter](https://github.com/apiaryio/drafter) to be installed. Refer to the drafter page for the installation details.
 
 ## Building an executable
 Install the binary dependencies with composer (`composer install`).
