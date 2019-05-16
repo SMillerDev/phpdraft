@@ -9,8 +9,6 @@
 namespace PHPDraft\Model\Tests;
 
 use PHPDraft\Model\Category;
-use PHPDraft\Model\HierarchyElement;
-use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 
 /**

@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Out\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Out\UI;
 use ReflectionClass;
 
@@ -17,7 +17,7 @@ use ReflectionClass;
  *
  * @covers \PHPDraft\Out\UI
  */
-class UITest extends BaseTest
+class UITest extends LunrBaseTest
 {
 
     /**
@@ -25,7 +25,7 @@ class UITest extends BaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new UI();
         $this->reflection = new ReflectionClass('PHPDraft\Out\UI');
@@ -34,10 +34,10 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testReleaseIDIsNull()
+    public function testReleaseIDIsNull(): void
     {
         define('VERSION', '0');
-        $this->mock_function('exec', 12);
+        $this->mock_function('exec', function() { return 12;});
         $return = $this->class->release_id();
         $this->assertSame(12, $return);
         $this->unmock_function('exec');
@@ -46,9 +46,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testReleaseIDIsNotNull()
+    public function testReleaseIDIsNotNull(): void
     {
-        $this->redefine('VERSION', '1.2.3');
+        $this->constant_redefine('VERSION', '1.2.3');
         $return = $this->class->release_id();
         $this->assertSame('1.2.3', $return);
     }
@@ -56,9 +56,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testVersion()
+    public function testVersion(): void
     {
-        $this->redefine('VERSION', '1.2.4');
+        $this->constant_redefine('VERSION', '1.2.4');
         $this->class->version();
         $this->expectOutputString('PHPDraft: 1.2.4');
     }
@@ -66,7 +66,7 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testHelp()
+    public function testHelp(): void
     {
         $this->class->help();
         $this->expectOutputString(file_get_contents(TEST_STATICS.'/drafter/help.txt'));
@@ -75,9 +75,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSeries()
+    public function testSeries(): void
     {
-        $this->redefine('VERSION', '1.2.4');
+        $this->constant_redefine('VERSION', '1.2.4');
         $return = $this->class->series();
         $this->assertSame('1.2', $return);
     }
@@ -85,9 +85,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testReleaseChannel()
+    public function testReleaseChannel(): void
     {
-        $this->redefine('VERSION', '1.2.4-beta');
+        $this->constant_redefine('VERSION', '1.2.4-beta');
         $return = $this->class->getReleaseChannel();
         $this->assertSame('-nightly', $return);
     }
@@ -95,9 +95,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testReleaseChannelNormal()
+    public function testReleaseChannelNormal(): void
     {
-        $this->redefine('VERSION', '1.2.4');
+        $this->constant_redefine('VERSION', '1.2.4');
         $return = $this->class->getReleaseChannel();
         $this->assertSame('', $return);
     }
@@ -105,9 +105,9 @@ class UITest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSeriesNightly()
+    public function testSeriesNightly(): void
     {
-        $this->redefine('VERSION', '1.2.4-beta');
+        $this->constant_redefine('VERSION', '1.2.4-beta');
         $return = $this->class->series();
         $this->assertSame('1.2', $return);
     }

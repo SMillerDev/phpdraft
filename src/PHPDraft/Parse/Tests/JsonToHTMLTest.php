@@ -8,15 +8,15 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Parse\JsonToHTML;
 use ReflectionClass;
 
 /**
  * Class JsonToHTMLTest
- * @covers PHPDraft\Parse\JsonToHTML
+ * @covers \PHPDraft\Parse\JsonToHTML
  */
-class JsonToHTMLTest extends BaseTest
+class JsonToHTMLTest extends LunrBaseTest
 {
     /**
      * Test Class
@@ -33,17 +33,17 @@ class JsonToHTMLTest extends BaseTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
-        $this->mock_function('microtime', 'sometime');
+        $this->mock_function('microtime', function () { return 'sometime'; });
     }
 
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->unmock_function('microtime');
         unset($this->class);
@@ -53,7 +53,7 @@ class JsonToHTMLTest extends BaseTest
     /**
      * Tests if the constructor sets the property correctly
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('object');
         $property->setAccessible(TRUE);
@@ -63,44 +63,45 @@ class JsonToHTMLTest extends BaseTest
     /**
      * Tests if the constructor sets the property correctly
      */
-    public function testGetHTML()
+    public function testGetHTML(): void
     {
         $old = THIRD_PARTY_ALLOWED;
-        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/basic.html'));
         $this->class->get_html();
-        $this->redefine('THIRD_PARTY_ALLOWED', $old);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
     }
-//
-//    /**
-//     * Tests if the constructor sets the property correctly
-//     */
-//    public function testGetHTMLInheritance()
-//    {
-//        $old = THIRD_PARTY_ALLOWED;
-//        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
-//        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
-//        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
-//        $class->get_html();
-//        $this->redefine('THIRD_PARTY_ALLOWED', $old);
-//    }
 
     /**
      * Tests if the constructor sets the property correctly
      */
-    public function testGetHTMLMaterial()
+    public function testGetHTMLInheritance(): void
+    {
+        $this->markTestSkipped('Not testing.');
+        $old = THIRD_PARTY_ALLOWED;
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
+        $class->get_html();
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
+    }
+
+    /**
+     * Tests if the constructor sets the property correctly
+     */
+    public function testGetHTMLMaterial(): void
     {
         $old = THIRD_PARTY_ALLOWED;
-        $this->redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/material.html'));
         $this->class->get_html('material');
-        $this->redefine('THIRD_PARTY_ALLOWED', $old);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
     }
 
     /**
      * Tests if the constructor sets the property correctly
      */
-    public function testToString()
+    public function testToString(): void
     {
         $this->assertNotEmpty($this->class->__toString());
     }
@@ -108,7 +109,7 @@ class JsonToHTMLTest extends BaseTest
     /**
      * Tests if the constructor sets the property correctly
      */
-    public function testGetHTMLAdvanced()
+    public function testGetHTMLAdvanced(): void
     {
         $return = $this->class->get_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
         $this->assertSame([['test.css', 'index.css']], $return->css);

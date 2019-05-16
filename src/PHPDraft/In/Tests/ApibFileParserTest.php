@@ -8,7 +8,7 @@
 
 namespace PHPDraft\In\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\In\ApibFileParser;
 use ReflectionClass;
 
@@ -16,7 +16,7 @@ use ReflectionClass;
  * Class ApibFileParserTest
  * @covers \PHPDraft\In\ApibFileParser
  */
-class ApibFileParserTest extends BaseTest
+class ApibFileParserTest extends LunrBaseTest
 {
 
     /**
@@ -24,7 +24,7 @@ class ApibFileParserTest extends BaseTest
      *
      * @return void Test is now set up.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new ApibFileParser(__DIR__ . '/ApibFileParserTest.php');
         $this->reflection = new ReflectionClass('PHPDraft\In\ApibFileParser');
@@ -34,7 +34,7 @@ class ApibFileParserTest extends BaseTest
      * Test if setup is successful
      * @return void
      */
-    public function testLocationSetup()
+    public function testLocationSetup(): void
     {
         $property = $this->reflection->getProperty('location');
         $property->setAccessible(true);
@@ -45,7 +45,7 @@ class ApibFileParserTest extends BaseTest
      * Test if setup is successful
      * @return void
      */
-    public function testFilenameSetup()
+    public function testFilenameSetup(): void
     {
         $property = $this->reflection->getProperty('filename');
         $property->setAccessible(true);
@@ -60,7 +60,7 @@ class ApibFileParserTest extends BaseTest
      *
      * @return void
      */
-    public function testFilenameSetupWrong()
+    public function testFilenameSetupWrong(): void
     {
         $property = $this->reflection->getProperty('filename');
         $property->setAccessible(true);
@@ -72,7 +72,7 @@ class ApibFileParserTest extends BaseTest
      * Test if setup is successful
      * @return void
      */
-    public function testParseBasic()
+    public function testParseBasic(): void
     {
         $property = $this->reflection->getProperty('filename');
         $property->setAccessible(true);
@@ -81,7 +81,7 @@ class ApibFileParserTest extends BaseTest
         $loc_property->setAccessible(true);
         $loc_property->setValue($this->class, TEST_STATICS . '/drafter/apib/');
 
-        $this->mock_function('curl_exec', 'hello');
+        $this->mock_function('curl_exec', function() { return 'hello';});
         $this->class->parse();
         $this->unmock_function('curl_exec');
 

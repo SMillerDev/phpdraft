@@ -20,7 +20,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -42,7 +42,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -52,7 +52,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -72,7 +72,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIssetHrefVariables()
+    public function testParseIsCalledIssetHrefVariables(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -92,7 +92,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIssetData()
+    public function testParseIsCalledIssetData(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -112,7 +112,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsNotArrayContent()
+    public function testParseIsCalledIsNotArrayContent(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -132,7 +132,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentNoChild()
+    public function testParseIsCalledIsArrayContentNoChild(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -152,7 +152,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentWrongChild()
+    public function testParseIsCalledIsArrayContentWrongChild(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -172,7 +172,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentRequest()
+    public function testParseIsCalledIsArrayContentRequest(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -192,7 +192,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentResponse()
+    public function testParseIsCalledIsArrayContentResponse(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -212,7 +212,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentDefault()
+    public function testParseIsCalledIsArrayContentDefault(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -232,7 +232,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsArrayContentRequestList()
+    public function testParseIsCalledIsArrayContentRequestList(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -263,7 +263,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandNoKey()
+    public function testGetCurlCommandNoKey(): void
     {
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -273,7 +273,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandKey()
+    public function testGetCurlCommandKey(): void
     {
         $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
                          ->disableOriginalConstructor()
@@ -295,7 +295,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlURLNoKey()
+    public function testGetHurlURLNoKey(): void
     {
         $return = $this->class->get_hurl_link('https://ur.l');
 
@@ -305,7 +305,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlURLKey()
+    public function testGetHurlURLKey(): void
     {
         $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
                          ->disableOriginalConstructor()
@@ -327,7 +327,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_method functions
      */
-    public function testGetMethodNotSet()
+    public function testGetMethodNotSet(): void
     {
         $return = $this->class->get_method();
 
@@ -337,7 +337,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic get_method functions
      */
-    public function testGetMethodSet()
+    public function testGetMethodSet(): void
     {
         $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
                          ->disableOriginalConstructor()
@@ -358,7 +358,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic build_url functions
      */
-    public function testBuildURLBase()
+    public function testBuildURLBase(): void
     {
         $parent = $this->getMockBuilder('\PHPDraft\Model\Resource')
                        ->disableOriginalConstructor()
@@ -382,7 +382,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic build_url functions
      */
-    public function testBuildURLOverlap()
+    public function testBuildURLOverlap(): void
     {
         $parent = $this->getMockBuilder('\PHPDraft\Model\Resource')
                        ->disableOriginalConstructor()
@@ -406,7 +406,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic build_url functions
      */
-    public function testBuildURLClean()
+    public function testBuildURLClean(): void
     {
         $parent = $this->getMockBuilder('\PHPDraft\Model\Resource')
                        ->disableOriginalConstructor()
@@ -422,7 +422,7 @@ class TransitionTest extends HierarchyElementChildTest
         $req_property->setAccessible(TRUE);
         $req_property->setValue($this->class, '/url/level');
 
-        $this->mock_function('strip_tags', "STRIPPED");
+        $this->mock_function('strip_tags', function() { return "STRIPPED";});
 
         $return = $this->class->build_url('', TRUE);
 
@@ -434,7 +434,7 @@ class TransitionTest extends HierarchyElementChildTest
     /**
      * Test basic build_url functions
      */
-    public function testBuildURLVars()
+    public function testBuildURLVars(): void
     {
         $parent = $this->getMockBuilder('\PHPDraft\Model\Resource')
                        ->disableOriginalConstructor()

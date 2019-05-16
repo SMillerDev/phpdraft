@@ -8,14 +8,14 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\EnumStructureElement;
 
 /**
  * Class EnumStructureElementTest
  * @covers \PHPDraft\Model\Elements\EnumStructureElement
  */
-class EnumStructureElementTest extends BaseTest
+class EnumStructureElementTest extends LunrBaseTest
 {
     /**
      * Set up tests

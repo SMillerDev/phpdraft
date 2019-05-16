@@ -8,20 +8,22 @@
 
 namespace PHPDraft\Model\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
+use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\HTTPResponse;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
  * Class HTTPResponseTest
  * @covers \PHPDraft\Model\HTTPResponse
  */
-class HTTPResponseTest extends BaseTest
+class HTTPResponseTest extends LunrBaseTest
 {
     /**
      * Mock of the parent class
      *
-     * @var HierarchyElement|PHPUnit_Framework_MockObject_MockObject
+     * @var HierarchyElement|MockObject
      */
     protected $parent;
 
@@ -33,10 +35,10 @@ class HTTPResponseTest extends BaseTest
         $parent           = NULL;
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
                                  ->getMock();
-        $this->mock_function('microtime', 'test');
+        $this->mock_function('microtime', function() {return 'test';});
         $this->class      = new HTTPResponse($parent);
         $this->unmock_function('microtime');
-        $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPResponse');
+        $this->reflection = new ReflectionClass('\PHPDraft\Model\HTTPResponse');
     }
 
     /**

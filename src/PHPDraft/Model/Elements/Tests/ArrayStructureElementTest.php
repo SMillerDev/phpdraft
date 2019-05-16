@@ -8,14 +8,14 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 
 /**
  * Class ArrayStructureTest
- * @covers PHPDraft\Model\Elements\ArrayStructureElement
+ * @covers \PHPDraft\Model\Elements\ArrayStructureElement
  */
-class ArrayStructureElementTest extends BaseTest
+class ArrayStructureElementTest extends LunrBaseTest
 {
 
     /**

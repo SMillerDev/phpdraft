@@ -8,12 +8,12 @@
 
 namespace PHPDraft\Model\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 
 /**
  * Class ObjectElementTest
  */
-class ObjectElementTest extends BaseTest
+class ObjectElementTest extends LunrBaseTest
 {
     public function testKeySetup()
     {

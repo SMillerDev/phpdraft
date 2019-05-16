@@ -121,7 +121,7 @@ class Transition extends HierarchyElement
                         $list  = &$this->responses;
                         break;
                     default:
-                        continue;
+                        continue 2;
                         break;
                 }
                 $value->parse($item);

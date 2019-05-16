@@ -8,21 +8,21 @@
 
 namespace PHPDraft\Model\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\HierarchyElement;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
  * Class HierarchyElementTest
  * @covers \PHPDraft\Model\HierarchyElement
  */
-class HierarchyElementTest extends BaseTest
+class HierarchyElementTest extends LunrBaseTest
 {
     /**
      * Mock of the parent class
      *
-     * @var HierarchyElement|PHPUnit_Framework_MockObject_MockObject
+     * @var HierarchyElement|MockObject
      */
     protected $parent;
 

@@ -53,7 +53,7 @@ class Category extends HierarchyElement
 
                     break;
                 default:
-                    continue;
+                    continue 2;
                     break;
             }
         }

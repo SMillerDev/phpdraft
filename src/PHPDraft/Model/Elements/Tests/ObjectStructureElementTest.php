@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Model\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
@@ -19,7 +19,7 @@ use ReflectionClass;
  *
  * @covers \PHPDraft\Model\Elements\ObjectStructureElement
  */
-class ObjectStructureElementTest extends BaseTest
+class ObjectStructureElementTest extends LunrBaseTest
 {
 
     /**

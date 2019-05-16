@@ -50,9 +50,14 @@ class ApibFileParser
         set_include_path(get_include_path() . ':' . $this->location);
     }
 
+    /**
+     * Get parse the apib file.
+     *
+     * @return $this self reference.
+     */
     public function parse()
     {
-        $this->full_apib = $this->get_apib($this->filename);
+        $this->full_apib = $this->get_apib($this->filename, $this->location);
 
         return $this;
     }
@@ -61,19 +66,22 @@ class ApibFileParser
      * Parse a given API Blueprint file
      * This changes all `include(file)` tags to the contents of the file.
      *
-     * @param string $filename File to parse
+     * @param string      $filename File to parse.
+     * @param string|null $rel_path File location to look.
      *
-     * @return string The full API blueprint file
+     * @throws ExecutionException when the file could not be found.
+     *
+     * @return string The full API blueprint file.
      */
-    private function get_apib($filename)
+    private function get_apib($filename, $rel_path = NULL)
     {
-        $path    = $this->file_path($filename);
+        $path    = $this->file_path($filename, $rel_path);
         $file    = file_get_contents($path);
         $matches = [];
         preg_match_all('<!-- include\(([\S\s]*?)(\.[a-z]*?)\) -->', $file, $matches);
         for ($i = 0; $i < count($matches[1]); $i++) {
             $file = str_replace('<!-- include(' . $matches[1][$i] . $matches[2][$i] . ') -->',
-                $this->get_apib($matches[1][$i] . $matches[2][$i]), $file);
+                $this->get_apib($matches[1][$i] . $matches[2][$i], dirname($path)), $file);
         }
 
         preg_match_all('<!-- schema\(([a-z0-9_.\/\:]*?)\) -->', $file, $matches);
@@ -88,23 +96,35 @@ class ApibFileParser
      * Check if an APIB file exists.
      *
      * @param string $filename File to check
+     * @param string|null $rel_path File location to look.
      *
      * @throws ExecutionException when the file could not be found.
      *
      * @return string
      */
-    private function file_path($filename)
+    private function file_path($filename, $rel_path = NULL)
     {
-        $path = $this->location . $filename;
-        if (file_exists($path)) {
-            return $path;
-        }
-        $path = stream_resolve_include_path($filename);
-        if ($path === FALSE || !file_exists($path)) {
-            throw new ExecutionException("API File not found: $filename", 1);
+        // Absolute path
+        if (file_exists($filename)) {
+            return $filename;
         }
 
-        return $path;
+        // Path relative to the top file
+        if ($rel_path !== null && file_exists($rel_path . $filename)) {
+            return $rel_path . $filename;
+        }
+
+        // Path relative to the top file
+        if (file_exists($this->location . $filename)) {
+            return $this->location . $filename;
+        }
+
+        $included_path = stream_resolve_include_path($filename);
+        if ($included_path !== FALSE) {
+            return $included_path;
+        }
+
+        throw new ExecutionException("API File not found: $filename", 1);
     }
 
     /**

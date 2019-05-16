@@ -8,28 +8,31 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use ReflectionClass;
 
 /**
  * Class BasicStructureElementTest
  * @covers \PHPDraft\Model\Elements\BasicStructureElement
  */
-class BasicStructureElementTest extends BaseTest
+class BasicStructureElementTest extends LunrBaseTest
 {
 
     /**
      * Set up tests
+     *
      * @return void
+     * @throws \ReflectionException
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = $this->getMockBuilder('\PHPDraft\Model\Elements\BasicStructureElement')
                                  ->disableOriginalConstructor()
                                  ->getMockForAbstractClass();
-        $this->reflection = new \ReflectionClass($this->class);
+        $this->reflection = new ReflectionClass($this->class);
     }
 
     /**
@@ -70,7 +73,7 @@ class BasicStructureElementTest extends BaseTest
         $property->setAccessible(TRUE);
         $property->setValue($this->class, $value);
 
-        $this->mock_function('rand', 0);
+        $this->mock_function('rand', function() { return 0;});
         $return = $this->class->string_value();
         $this->unmock_function('rand');
 

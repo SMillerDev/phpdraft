@@ -8,32 +8,32 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Parse\Drafter;
-use PHPDraft\Parse\DrafterAPI;
 use PHPDraft\Parse\ExecutionException;
 use ReflectionClass;
 
 /**
  * Class DrafterTest
+ *
  * @covers \PHPDraft\Parse\Drafter
  */
-class DrafterTest extends BaseTest
+class DrafterTest extends LunrBaseTest
 {
 
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', TEST_STATICS);
-        $this->mock_function('shell_exec', "/some/dir/drafter\n");
+        $this->mock_function('sys_get_temp_dir', function () { return TEST_STATICS; });
+        $this->mock_function('shell_exec', function () { return "/some/dir/drafter\n"; });
         $this->class      = new Drafter();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
         try {
             $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         } catch (ExecutionException $exception) {
-            // Notihing
+            // Nothing
         }
         $this->unmock_function('shell_exec');
         $this->unmock_function('sys_get_temp_dir');
@@ -42,7 +42,7 @@ class DrafterTest extends BaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if (file_exists(TEST_STATICS . '/drafter/index.json')) {
             unlink(TEST_STATICS . '/drafter/index.json');
@@ -57,22 +57,26 @@ class DrafterTest extends BaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      * @expectedException \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionCode 100
+     * @expectedExceptionCode    100
      * @expectedExceptionMessage The new Drafter V4 is not supported yet.
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(TRUE);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
+        $property->setAccessible(true);
+        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'),
+            $property->getValue($this->class));
     }
 
     /**
      * Check if the JSON is empty before parsing
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testPreRunStringIsEmpty()
+    public function testPreRunStringIsEmpty(): void
     {
         $this->assertEmpty($this->class->json);
     }
@@ -80,27 +84,33 @@ class DrafterTest extends BaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      */
-    public function testParseToJSON()
+    public function testParseToJSON(): void
     {
-        $this->mock_function('json_last_error', JSON_ERROR_NONE);
-        $this->mock_function('shell_exec', "");
-        file_put_contents(TEST_STATICS . '/drafter/index.json', file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->mock_function('json_last_error', function () { return JSON_ERROR_NONE; });
+        $this->mock_function('shell_exec', function () { return ""; });
+        file_put_contents(TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')),
+            $this->class->json);
         $this->unmock_function('shell_exec');
         $this->unmock_function('json_last_error');
     }
 
     /**
      * Check if parsing the APIB to JSON gives the expected result with inheritance
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testParseToJSONInheritance()
+    public function testParseToJSONInheritance(): void
     {
-        $this->mock_function('json_last_error', JSON_ERROR_NONE);
-        $this->mock_function('shell_exec', "");
-        file_put_contents(TEST_STATICS . '/drafter/index.json', file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json'));
+        $this->mock_function('json_last_error', function () { return JSON_ERROR_NONE; });
+        $this->mock_function('shell_exec', function () { return ""; });
+        file_put_contents(TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json'));
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')), $this->class->json);
+        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')),
+            $this->class->json);
         $this->unmock_function('shell_exec');
         $this->unmock_function('json_last_error');
     }
@@ -108,14 +118,14 @@ class DrafterTest extends BaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers                      \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException           \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionMessage    Parsing encountered errors and stopped
-     * @expectedExceptionCode       2
+     * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
+     * @expectedException        \PHPDraft\Parse\ExecutionException
+     * @expectedExceptionMessage Parsing encountered errors and stopped
+     * @expectedExceptionCode    2
      */
-    public function testParseToJSONWithErrors()
+    public function testParseToJSONWithErrors(): void
     {
-        $this->mock_function('shell_exec', "");
+        $this->mock_function('shell_exec', function () { return ""; });
         file_put_contents(TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json/error.json'));
         $this->class->parseToJson();
@@ -126,11 +136,11 @@ class DrafterTest extends BaseTest
     /**
      * Check if parsing the fails without drafter
      *
-     * @covers                   \PHPDraft\Parse\Drafter::available()
+     * @covers \PHPDraft\Parse\Drafter::available()
      */
-    public function testSetupWithoutDrafter()
+    public function testSetupWithoutDrafter(): void
     {
-        $this->mock_function('shell_exec', "");
+        $this->mock_function('shell_exec', function () { return ""; });
         $this->assertFalse(Drafter::available());
         $this->unmock_function('shell_exec');
     }
@@ -143,10 +153,10 @@ class DrafterTest extends BaseTest
      * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
      * @expectedExceptionCode    2
      */
-    public function testParseToJSONWithInvalidJSON()
+    public function testParseToJSONWithInvalidJSON(): void
     {
-        $this->mock_function('json_last_error', JSON_ERROR_DEPTH);
-        $this->mock_function('json_last_error_msg', "ERROR");
+        $this->mock_function('json_last_error', function () { return JSON_ERROR_DEPTH; });
+        $this->mock_function('json_last_error_msg', function () { return "ERROR"; });
         file_put_contents(TEST_STATICS . '/drafter/index.json', '["hello: \'world}');
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');

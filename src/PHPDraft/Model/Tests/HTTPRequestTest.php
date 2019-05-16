@@ -8,7 +8,7 @@
 
 namespace PHPDraft\Model\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\HTTPRequest;
 use ReflectionClass;
@@ -17,7 +17,7 @@ use ReflectionClass;
  * Class HTTPRequestTest
  * @covers \PHPDraft\Model\HTTPRequest
  */
-class HTTPRequestTest extends BaseTest
+class HTTPRequestTest extends LunrBaseTest
 {
     /**
      * Mock of the parent class
@@ -36,7 +36,7 @@ class HTTPRequestTest extends BaseTest
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->mock_function('microtime', 'test');
+        $this->mock_function('microtime', function() { return 'test'; });
         $this->class      = new HTTPRequest($parent);
         $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPRequest');

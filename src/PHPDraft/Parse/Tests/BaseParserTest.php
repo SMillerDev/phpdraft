@@ -8,23 +8,23 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use PHPDraft\Core\BaseTest;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
  * Class BaseParserTest
  * @covers \PHPDraft\Parse\BaseParser
  */
-class BaseParserTest extends BaseTest
+class BaseParserTest extends LunrBaseTest
 {
 
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', TEST_STATICS);
-        $this->mock_function('shell_exec', "/some/dir/drafter\n");
+        $this->mock_function('sys_get_temp_dir', function () {return TEST_STATICS;});
+        $this->mock_function('shell_exec', function () {return "/some/dir/drafter\n";});
         $this->class      = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
                                  ->getMockForAbstractClass();
         $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
@@ -36,7 +36,7 @@ class BaseParserTest extends BaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -44,8 +44,10 @@ class BaseParserTest extends BaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(TRUE);
@@ -54,16 +56,20 @@ class BaseParserTest extends BaseTest
 
     /**
      * Check if the JSON is empty before parsing
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testPreRunStringIsEmpty()
+    public function testPreRunStringIsEmpty(): void
     {
         $this->assertEmpty($this->class->json);
     }
 
     /**
      * Check if parsing the APIB to JSON gives the expected result
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testParseToJSON()
+    public function testParseToJSON(): void
     {
         $this->class->expects($this->once())
                     ->method('parse')
@@ -75,8 +81,10 @@ class BaseParserTest extends BaseTest
 
     /**
      * Check if parsing the APIB to JSON gives the expected result
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testParseToJSONMkDir()
+    public function testParseToJSONMkDir(): void
     {
         $this->class->expects($this->once())
                     ->method('parse')
@@ -88,8 +96,10 @@ class BaseParserTest extends BaseTest
 
     /**
      * Check if parsing the APIB to JSON gives the expected result
+     *
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
-    public function testParseToJSONMkTmp()
+    public function testParseToJSONMkTmp(): void
     {
         $tmp_dir = dirname(dirname(TEST_STATICS)) . '/build/tmp';
         if (file_exists($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib')){
@@ -118,13 +128,13 @@ class BaseParserTest extends BaseTest
      * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
      * @expectedExceptionCode    2
      */
-    public function testParseToJSONWithInvalidJSON()
+    public function testParseToJSONWithInvalidJSON(): void
     {
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
-        $this->mock_function('json_last_error', JSON_ERROR_DEPTH);
-        $this->mock_function('json_last_error_msg', "ERROR");
+        $this->mock_function('json_last_error', function () {return JSON_ERROR_DEPTH;});
+        $this->mock_function('json_last_error_msg', function () {return "ERROR";});
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
         $this->unmock_function('json_last_error_msg');
