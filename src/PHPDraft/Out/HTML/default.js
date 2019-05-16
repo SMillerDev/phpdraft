@@ -40,3 +40,5 @@ $('pre.collapse.response-body').on('shown.bs.collapse', function () {
 }).on('hidden.bs.collapse', function () {
     $(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up');
 });
+
+anchors.add();
