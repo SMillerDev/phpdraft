@@ -9,6 +9,7 @@
 namespace PHPDraft\Model\Elements;
 
 use Michelf\MarkdownExtra;
+use stdClass;
 
 abstract class BasicStructureElement implements StructureElement
 {
@@ -58,26 +59,26 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Parse a JSON object to a structure.
      *
-     * @param \stdClass $object       An object to parse
-     * @param array     $dependencies Dependencies of this object
+     * @param stdClass $object       An object to parse
+     * @param array    $dependencies Dependencies of this object
      *
      * @return StructureElement self reference
      */
-    abstract public function parse($object, &$dependencies);
+    abstract public function parse($object, array &$dependencies): StructureElement;
 
     /**
      * Print a string representation.
      *
      * @return string
      */
-    abstract public function __toString();
+    abstract public function __toString(): string;
 
     /**
      * Get a new instance of a class.
      *
      * @return self
      */
-    abstract protected function new_instance();
+    abstract protected function new_instance(): StructureElement;
 
     /**
      * Parse common fields to give context.
@@ -87,7 +88,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return void
      */
-    protected function parse_common($object, &$dependencies)
+    protected function parse_common($object, array &$dependencies): void
     {
         $this->key          = (isset($object->content->key->content)) ? $object->content->key->content : NULL;
         $this->type         = (isset($object->content->value->element)) ? $object->content->value->element : NULL;
@@ -107,12 +108,14 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return void
      */
-    public function description_as_html()
+    public function description_as_html(): void
     {
         $this->description = MarkdownExtra::defaultTransform($this->description);
     }
 
     /**
+     * Get a string representation of the value.
+     *
      * @return mixed|ObjectStructureElement|ObjectStructureElement[]
      */
     public function string_value()

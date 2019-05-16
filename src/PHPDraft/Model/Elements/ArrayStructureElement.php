@@ -22,7 +22,7 @@ class ArrayStructureElement extends BasicStructureElement
      *
      * @return self Self reference
      */
-    public function parse($object, &$dependencies)
+    public function parse($object, array &$dependencies): StructureElement
     {
         $this->element = (isset($object->element)) ? $object->element : 'array';
 
@@ -52,7 +52,7 @@ class ArrayStructureElement extends BasicStructureElement
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $return = '<ul class="list-group mdl-list">';
 
@@ -77,7 +77,7 @@ class ArrayStructureElement extends BasicStructureElement
      *
      * @return self
      */
-    protected function new_instance()
+    protected function new_instance(): StructureElement
     {
         return new self();
     }

@@ -12,6 +12,8 @@ namespace PHPDraft\Model;
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
+use QL\UriTemplate\Exception;
+use stdClass;
 
 class HTTPRequest implements Comparable
 {
@@ -76,7 +78,7 @@ class HTTPRequest implements Comparable
      *
      * @param Transition $parent Parent entity
      */
-    public function __construct(&$parent)
+    public function __construct(Transition &$parent)
     {
         $this->parent = &$parent;
         $this->id     = md5(microtime());
@@ -85,11 +87,11 @@ class HTTPRequest implements Comparable
     /**
      * Fill class values based on JSON object.
      *
-     * @param \stdClass $object JSON object
+     * @param stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse($object)
+    public function parse(stdClass $object): self
     {
         $this->method = $object->attributes->method;
         $this->title  = isset($object->meta->title) ? $object->meta->title : NULL;
@@ -127,9 +129,9 @@ class HTTPRequest implements Comparable
     /**
      * Parse the objects into a request body.
      *
-     * @param \stdClass $objects JSON objects
+     * @param stdClass $objects JSON objects
      */
-    private function parse_structure($objects)
+    private function parse_structure(stdClass $objects): void
     {
         $deps   = [];
         $struct = new RequestBodyElement();
@@ -139,7 +141,7 @@ class HTTPRequest implements Comparable
         $this->struct = $struct;
     }
 
-    public function get_id()
+    public function get_id(): string
     {
         return $this->id;
     }
@@ -150,13 +152,15 @@ class HTTPRequest implements Comparable
      * @param string $base_url   URL to the base server
      * @param array  $additional Extra options to pass to cURL
      *
+     * @throws Exception
+     *
      * @return string An executable cURL command
      */
-    public function get_curl_command($base_url, $additional = [])
+    public function get_curl_command(string $base_url, array $additional = []): string
     {
         $options = [];
 
-        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : NULL;
+        $type = $this->headers['Content-Type'] ?? NULL;
 
         $options[] = '-X' . $this->method;
         if (empty($this->body)) {
@@ -185,7 +189,7 @@ class HTTPRequest implements Comparable
      *
      * @return bool
      */
-    public function is_equal_to($b)
+    public function is_equal_to($b): bool
     {
         return ($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers);
     }
@@ -196,9 +200,11 @@ class HTTPRequest implements Comparable
      * @param string $base_url   URL to the base server
      * @param array  $additional Extra options to pass to the service
      *
+     * @throws Exception
+     *
      * @return string
      */
-    public function get_hurl_link($base_url, $additional = [])
+    public function get_hurl_link(string $base_url, array $additional = []): string
     {
         $options = [];
 

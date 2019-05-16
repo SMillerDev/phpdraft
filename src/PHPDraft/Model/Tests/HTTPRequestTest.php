@@ -31,12 +31,12 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $parent           = NULL;
+        $parent           = $this->createMock('\PHPDraft\Model\Transition');
 
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->mock_function('microtime', function() { return 'test'; });
+        $this->mock_function('microtime', function() { return 1000; });
         $this->class      = new HTTPRequest($parent);
         $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPRequest');
@@ -56,13 +56,8 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testSetupCorrectly()
     {
-        $parent_property = $this->reflection->getProperty('parent');
-        $parent_property->setAccessible(TRUE);
-        $this->assertNull($parent_property->getValue($this->class));
-
-        $id_property = $this->reflection->getProperty('id');
-        $id_property->setAccessible(TRUE);
-        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $id_property->getValue($this->class));
+        $this->assertIsObject($this->get_reflection_property_value('parent'));
+        $this->assertEquals('a9b7ba70783b617e9998dc4dd82eb3c5', $this->get_reflection_property_value('id'));
     }
 
     /**
@@ -70,7 +65,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetId()
     {
-        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $this->class->get_id());
+        $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->class->get_id());
     }
 
     /**

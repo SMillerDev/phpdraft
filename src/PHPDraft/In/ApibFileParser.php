@@ -42,7 +42,7 @@ class ApibFileParser
      *
      * @param string $filename File to parse
      */
-    public function __construct($filename = 'index.apib')
+    public function __construct(string $filename = 'index.apib')
     {
         $this->filename = $filename;
         $this->location = pathinfo($this->filename, PATHINFO_DIRNAME) . '/';
@@ -53,9 +53,11 @@ class ApibFileParser
     /**
      * Get parse the apib file.
      *
+     * @throws ExecutionException
+     *
      * @return $this self reference.
      */
-    public function parse()
+    public function parse(): self
     {
         $this->full_apib = $this->get_apib($this->filename, $this->location);
 
@@ -73,7 +75,7 @@ class ApibFileParser
      *
      * @return string The full API blueprint file.
      */
-    private function get_apib($filename, $rel_path = NULL)
+    private function get_apib(string $filename, ?string $rel_path = NULL): string
     {
         $path    = $this->file_path($filename, $rel_path);
         $file    = file_get_contents($path);
@@ -95,14 +97,14 @@ class ApibFileParser
     /**
      * Check if an APIB file exists.
      *
-     * @param string $filename File to check
+     * @param string      $filename File to check
      * @param string|null $rel_path File location to look.
      *
      * @throws ExecutionException when the file could not be found.
      *
      * @return string
      */
-    private function file_path($filename, $rel_path = NULL)
+    private function file_path(string $filename, ?string $rel_path = NULL): string
     {
         // Absolute path
         if (file_exists($filename)) {
@@ -110,7 +112,7 @@ class ApibFileParser
         }
 
         // Path relative to the top file
-        if ($rel_path !== null && file_exists($rel_path . $filename)) {
+        if ($rel_path !== NULL && file_exists($rel_path . $filename)) {
             return $rel_path . $filename;
         }
 
@@ -134,7 +136,7 @@ class ApibFileParser
      *
      * @return string The schema as a string
      */
-    private function get_schema($url)
+    private function get_schema(string $url): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -151,7 +153,7 @@ class ApibFileParser
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->full_apib;
     }

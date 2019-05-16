@@ -12,16 +12,44 @@ set_include_path(get_include_path() . ":" . __DIR__ . '/src/');
 //require_once 'PHPDraft/Core/Autoloader.php';
 require_once 'vendor/autoload.php';
 
+use Garden\Cli\Cli;
 use PHPDraft\In\ApibFileParser;
-use PHPDraft\Out\UI;
+use PHPDraft\Out\Sorting;
+use PHPDraft\Out\Version;
+use PHPDraft\Parse\ExecutionException;
 use PHPDraft\Parse\JsonToHTML;
 use PHPDraft\Parse\ParserFactory;
+use PHPDraft\Parse\ResourceException;
 
 define('VERSION', '0');
 try
 {
-    $values  = UI::main($argv);
-    $apib    = new ApibFileParser($values['file']);
+    // Define the cli options.
+    $cli = new Cli();
+    $cli->description('Parse API Blueprint files.')
+        ->opt('file:f', 'Specifies the file to parse.', true, 'string')
+        ->opt('yes:y', 'Always accept using the online mode.', false)
+        ->opt('online:o', 'Always use the online mode.', false)
+        ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false, 'string')
+        ->opt('sort:s', 'Sort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file).', false, 'string')
+        ->opt('header_image:i', 'Specifies an image to display in the header.', false, 'string')
+        ->opt('css:c', 'Specifies a CSS file to include (value is put in a link element without checking).', false, 'string')
+        ->opt('javascript:j', 'Specifies a JS file to include (value is put in a script element without checking).', false, 'string')
+        ->opt('version:v', 'Print the version for PHPDraft.', false);
+
+    // Parse and return cli args.
+    $args = $cli->parse($argv, FALSE);
+    if (isset($args['version'])) {
+        Version::version();
+        throw new ExecutionException('', 0);
+    }
+
+    define('THIRD_PARTY_ALLOWED', getenv('PHPDRAFT_THIRD_PARTY') !== '0');
+    if ((isset($args['y']) || isset($args['o'])) && THIRD_PARTY_ALLOWED) {
+        define('DRAFTER_ONLINE_MODE', 1);
+    }
+
+    $apib    = new ApibFileParser($args->getOpt('file'));
     $apib    = $apib->parse();
     $offline = FALSE;
     $online  = FALSE;
@@ -31,17 +59,31 @@ try
         $parser = ParserFactory::get();
         $parser = $parser->init($apib);
     }
-    catch (\PHPDraft\Parse\ResourceException $exception)
+    catch (ResourceException $exception)
     {
         file_put_contents('php://stderr', "No drafter available.\n");
         return;
     }
 
     $html          = new JsonToHTML($parser->parseToJson());
-    $html->sorting = $values['sorting'];
-    $generator     = $html->get_html($values['template'], $values['image'], $values['css'], $values['js']);
+    $name          = 'PHPD_SORT_' . strtoupper($args->getOpt('sort', ''));
+    $html->sorting = Sorting::${$name} ?? -1;
+
+    $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
+    $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');
+    $colors        = (is_null($color1) || is_null($color2)) ? '' : '__' . $color1 . '__' . $color2;
+    $generator     = $html->get_html(
+            $args->getOpt('template', 'default') . $colors,
+            $args['header_image'],
+            $args['css'],
+            $args['javascript']);
 }
-catch (\PHPDraft\Parse\ExecutionException $exception)
+catch (ExecutionException $exception)
+{
+    file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
+    exit($exception->getCode());
+}
+catch (Exception $exception)
 {
     file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
     exit($exception->getCode());

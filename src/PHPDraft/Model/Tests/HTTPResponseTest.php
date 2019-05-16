@@ -11,6 +11,7 @@ namespace PHPDraft\Model\Tests;
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\HTTPResponse;
+use PHPDraft\Model\Transition;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
@@ -28,15 +29,22 @@ class HTTPResponseTest extends LunrBaseTest
     protected $parent;
 
     /**
+     * Mock of the parent class
+     *
+     * @var Transition|MockObject
+     */
+    protected $parent_transition;
+
+    /**
      * Set up
      */
     public function setUp()
     {
-        $parent           = NULL;
-        $this->parent     = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
-                                 ->getMock();
-        $this->mock_function('microtime', function() {return 'test';});
-        $this->class      = new HTTPResponse($parent);
+        $this->parent_transition = $this->createMock('\PHPDraft\Model\Transition');
+        $this->parent            = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
+                                        ->getMock();
+        $this->mock_function('microtime', function() {return 1000;});
+        $this->class      = new HTTPResponse($this->parent_transition);
         $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('\PHPDraft\Model\HTTPResponse');
     }
@@ -55,13 +63,8 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testSetupCorrectly()
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
-        $this->assertNull($property->getValue($this->class));
-
-        $id_property = $this->reflection->getProperty('id');
-        $id_property->setAccessible(TRUE);
-        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $id_property->getValue($this->class));
+        $this->assertSame($this->parent_transition, $this->get_reflection_property_value('parent'));
+        $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->get_reflection_property_value('id'));
     }
 
     /**
@@ -69,7 +72,7 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testGetId()
     {
-        $this->assertSame('098f6bcd4621d373cade4e832627b4f6', $this->class->get_id());
+        $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->class->get_id());
     }
 
     /**

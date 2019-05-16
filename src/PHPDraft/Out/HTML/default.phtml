@@ -6,9 +6,7 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 use PHPDraft\Out\Minifier;
-use Enjoy\HttpStatusCode\Statuscodes;
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <title><?= $this->base_data['TITLE']; ?></title>
@@ -50,84 +48,56 @@ use Enjoy\HttpStatusCode\Statuscodes;
         <?php endif; ?>
     </div>
     <div class="row">
-        <div class="col-md-2 method-nav">
-            <?php foreach ($this->categories as $category): ?>
+        <nav class="navbar col-md-2 method-nav sticky-top" id="navbar">
+            <?php foreach ($this->categories as &$category):?>
                 <?php if ($category->children !== []): ?>
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                <a href="#<?= $category->get_href(); ?>"><?= $category->title; ?></a>
-                                <a class="btn btn-xs float-right" role="button" data-toggle="collapse"
-                                   href="#collapse-<?= $category->get_href(); ?>" aria-expanded="false"
-                                   aria-controls="collapse-<?= $category->get_href(); ?>">
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                            </h5>
-                        </div>
-                        <div class="collapse show" id="collapse-<?= $category->get_href(); ?>">
-                            <div class="card-body">
-                                <ul class="list-unstyled">
-                                    <?php foreach ($category->children as $resource): ?>
-                                        <li>
-                                            <a href="#<?= str_replace('-', '/',
-                                                $resource->get_href()); ?>"><?= $resource->title; ?></a>
-                                        </li>
-                                        <ul>
-                                            <?php foreach ($resource->children as $transition): ?>
-                                                <li>
-                                                    <a href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
-                                                        <?= $transition->title; ?>
-                                                        <span
-                                                            class="float-right <?= $this->get_method_icon($transition->get_method()); ?>"></span>
-                                                    </a>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <nav id="navbar-<?= $category->title; ?>" class="navbar navbar-light category">
+                        <a class="navbar-brand" href="#<?= $category->get_href(); ?>"><?= $category->title; ?></a>
+                        <?php foreach ($category->children as $resource): ?>
+                            <nav class="nav nav-pills flex-column resource">
+                                <a class="nav-link" href="#<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
+                                <?php foreach ($resource->children as $transition): ?>
+                                    <nav class="nav nav-pills flex-column transition">
+                                        <a class="nav-link" href="#<?= str_replace('-', '/', $transition->get_href()); ?>">
+                                            <?= $transition->title; ?>
+                                            <span class="float-right align-baseline <?= $this->get_method_icon($transition->get_method()); ?>"></span>
+                                        </a>
+                                    </nav>
+                                <?php endforeach; ?>
+                            </nav>
+                        <?php endforeach; ?>
+                    </nav>
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (!empty($this->base_structures)): ?>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">
-                            <a href="#datastructures">Data Structures</a>
-                            <a class="btn btn-xs float-right" role="button" data-toggle="collapse"
-                               href="#collapse-structures" aria-expanded="false"
-                               aria-controls="collapse-structures">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </h5>
-                    </div>
-                    <div class="collapse show id="collapse-structures">
-                        <div class="card-body">
-                            <ul class="list-unstyled">
-                                <?php foreach ($this->base_structures as $key => $structure): ?>
-                                    <li>
-                                        <a href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <nav id="datastructures" class="navbar navbar-light structures">
+                    <a class="navbar-brand" href="#<?= $category->get_href(); ?>">Data Structures</a>
+                    <?php foreach ($this->base_structures as $key => $structure): ?>
+                        <nav class="nav nav-pills flex-column structure">
+                            <a class="nav-link" href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
+                        </nav>
+                    <?php endforeach; ?>
+                </nav>
             <?php endif; ?>
-            <div class="main-url"><?= $this->base_data['HOST']; ?></div>
-        </div>
-        <div class="col-md-10">
-            <?php foreach ($this->categories as $category): ?>
+            <a class="main-url nav-link"><?= $this->base_data['HOST']; ?></a>
+        </nav>
+        <div class="col-md-10 main-content">
+            <?php foreach ($this->categories as &$category): ?>
                 <?php if (!empty($category->title)): ?>
-                    <h2><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h2>
+                    <h2>
+                        <a id="<?= $category->get_href(); ?>"data-anchor-id="<?= $category->get_href(); ?>"><?= $category->title; ?></a>
+                    </h2>
                 <?php endif; ?>
                 <?php if (!empty($category->description)): ?>
                     <p><?= $category->description; ?></p>
                 <?php endif; ?>
                 <?php foreach ($category->children as $resource): ?>
                     <h3>
-                        <a id="<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
+                        <a class="resource-title"
+                           id="<?= str_replace('-', '/', $resource->get_href()); ?>"
+                           data-anchor-id="<?= str_replace('-', '/', $resource->get_href()); ?>">
+                            <?= $resource->title; ?>
+                        </a>
                         <small><?= $resource->href; ?></small>
                     </h3>
                     <?php if (!empty($resource->description)): ?>
@@ -141,8 +111,10 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                     <var><?= $transition->get_method(); ?></var>
                                     <code><?= $transition->href; ?></code>
                                     <a class="float-right transition-title"
-                                       id="<?= str_replace('-', '/',
-                                           $transition->get_href()); ?>"><?= $transition->title; ?></a>
+                                       id="<?= str_replace('-', '/', $transition->get_href()); ?>"
+                                       data-anchor-id="<?= str_replace('-', '/', $transition->get_href()); ?>">
+                                        <?= $transition->title; ?>
+                                    </a>
                                 </h5>
                             </div>
                             <div class="card-body">
@@ -163,7 +135,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
 
                                             <div
                                                 class="collapse <?php if ($key < 1): ?>show<?php endif; ?> request-card card-body"
-                                                id="request-coll-<?= $request->get_id(); ?>">
+                                                id="request-coll-<?= $request->get_id(); ?>"
+                                                data-anchor-id="request-coll-<?= $request->get_id(); ?>">
                                                 <?= $request->description; ?>
                                                 <a class="btn btn-default curl"
                                                    role="button"
@@ -175,16 +148,6 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                    data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
                                                     <i class="fas fa-copy"></i>
                                                 </a>
-                                                <?php if (THIRD_PARTY_ALLOWED): ?>
-                                                    <a class="btn btn-default hurl"
-                                                       role="button"
-                                                       title="Try request"
-                                                       target="_blank"
-                                                       href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>"
-                                                       tabindex="0">
-                                                        <i class="fas fa-play"></i>
-                                                    </a>
-                                                <?php endif;?>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
                                                     <span class="base-url"><?= $this->base_data['HOST']; ?></span><em><?= $transition->build_url(); ?></em>
@@ -252,7 +215,8 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                             </div>
                                             <div
                                                 class="card-body collapse <?php if ($key < 1): ?>show<?php endif; ?> response-card"
-                                                id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
+                                                id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>"
+                                                data-anchor-id="request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                 <?= $response->description; ?>
                                                 <?php if ($response->headers !== []): ?>
                                                     <h5>Headers</h5>
@@ -289,7 +253,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
 
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-<?= $href ?>"><?= $value; ?></pre>
+                                                             id="response-<?= $href ?>" data-anchor-id="response-<?= $href ?>">
+                                                            <?= $value; ?>
+                                                        </pre>
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
@@ -302,12 +268,12 @@ use Enjoy\HttpStatusCode\Statuscodes;
                 <?php endforeach; ?>
             <?php endforeach; ?>
             <?php if (count($this->base_structures) > 0): ?>
-                <h2><a id="datastructures">Data structures</a></h2>
+                <h2><a data-anchor-id="datastructures" id="datastructures">Data structures</a></h2>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
                     <div class="card object-<?= $this->strip_link_spaces($key); ?> structure">
                         <div class="card-header">
                             <h5 class="card-title">
-                                <a id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
+                                <a id="object-<?= $this->strip_link_spaces($key); ?>" data-anchor-id="object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
                             </h5>
                         </div>
                         <div class="card-body">

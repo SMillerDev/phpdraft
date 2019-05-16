@@ -33,10 +33,9 @@ class ResourceTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $parent           = NULL;
-        $this->parent = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
-                             ->getMock();
-        $this->class      = new Resource($parent);
+        $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Category')
+                                 ->getMock();
+        $this->class      = new Resource($this->parent);
         $this->reflection = new ReflectionClass('PHPDraft\Model\Resource');
     }
 
@@ -54,9 +53,7 @@ class ResourceTest extends LunrBaseTest
      */
     public function testSetupCorrectly()
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
-        $this->assertNull($property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
     }
 
     /**

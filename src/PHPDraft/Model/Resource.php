@@ -9,6 +9,8 @@
 
 namespace PHPDraft\Model;
 
+use stdClass;
+
 class Resource extends HierarchyElement
 {
     /**
@@ -23,7 +25,7 @@ class Resource extends HierarchyElement
      *
      * @param Category $parent A reference to the parent object
      */
-    public function __construct(&$parent)
+    public function __construct(Category &$parent)
     {
         $this->parent = $parent;
     }
@@ -31,11 +33,11 @@ class Resource extends HierarchyElement
     /**
      * Fill class values based on JSON object.
      *
-     * @param \stdClass $object JSON object
+     * @param stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse($object)
+    public function parse(stdClass $object): self
     {
         parent::parse($object);
 

@@ -17,5 +17,5 @@ interface Comparable
      *
      * @return bool
      */
-    public function is_equal_to($b);
+    public function is_equal_to($b): bool;
 }

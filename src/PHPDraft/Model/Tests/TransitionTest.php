@@ -24,8 +24,8 @@ class TransitionTest extends HierarchyElementChildTest
     {
         parent::setUp();
 
-        $parent           = NULL;
-        $this->class      = new Transition($parent);
+        $this->parent     = $this->createMock('\PHPDraft\Model\Resource');
+        $this->class      = new Transition($this->parent);
         $this->reflection = new ReflectionClass('PHPDraft\Model\Transition');
     }
 
@@ -44,9 +44,7 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
-        $this->assertNull($property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
     }
 
     /**
@@ -54,15 +52,13 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalled(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"attributes":{"href":"something"}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
         $href_property = $this->reflection->getProperty('href');
         $href_property->setAccessible(TRUE);

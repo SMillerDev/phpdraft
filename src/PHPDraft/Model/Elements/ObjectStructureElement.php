@@ -9,6 +9,8 @@
 
 namespace PHPDraft\Model\Elements;
 
+use stdClass;
+
 /**
  * Class ObjectStructureElement.
  */
@@ -17,12 +19,12 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Parse a JSON object to a data structure.
      *
-     * @param \stdClass $object       An object to parse
-     * @param array     $dependencies Dependencies of this object
+     * @param stdClass $object       An object to parse
+     * @param array    $dependencies Dependencies of this object
      *
      * @return ObjectStructureElement self reference
      */
-    public function parse($object, &$dependencies)
+    public function parse($object, array &$dependencies): StructureElement
     {
         if (empty($object) || !isset($object->content)) {
             return $this;
@@ -63,7 +65,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return void
      */
-    protected function parse_value_structure($object, &$dependencies)
+    protected function parse_value_structure($object, array &$dependencies)
     {
         switch ($this->type) {
             case 'array':
@@ -92,7 +94,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return ObjectStructureElement
      */
-    protected function new_instance()
+    protected function new_instance(): StructureElement
     {
         return new self();
     }
@@ -105,7 +107,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return void
      */
-    protected function parse_array_content($object, &$dependencies)
+    protected function parse_array_content($object, array &$dependencies): void
     {
         foreach ($object->content as $value) {
             if ($this->element === 'enum') {
@@ -126,7 +128,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->value === NULL && $this->key === NULL) {
             return '<span class="example-value pull-right">{  }</span>';
@@ -180,7 +182,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return string
      */
-    protected function construct_string_return($value)
+    protected function construct_string_return(string $value): string
     {
         if (!in_array($this->type, self::DEFAULTS)) {
             $type = '<a class="code" href="#object-' . str_replace(' ', '-',

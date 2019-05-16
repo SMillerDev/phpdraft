@@ -23,15 +23,16 @@ class Drafter extends BaseParser
      *
      * @param string $apib API Blueprint text
      *
+     * @throws ExecutionException
+     *
      * @return \PHPDraft\Parse\Drafter
      */
-    public function init($apib): BaseParser
+    public function init(string $apib): BaseParser
     {
         parent::init($apib);
         $this->drafter = self::location();
 
         throw new ExecutionException('The new Drafter V4 is not supported yet.', 100);
-        return $this;
     }
 
     /**
@@ -52,7 +53,7 @@ class Drafter extends BaseParser
      *
      * @return void
      */
-    protected function parse()
+    protected function parse(): void
     {
         shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));

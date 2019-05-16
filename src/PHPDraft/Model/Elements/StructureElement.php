@@ -9,6 +9,8 @@
 
 namespace PHPDraft\Model\Elements;
 
+use stdClass;
+
 interface StructureElement
 {
     /**
@@ -21,17 +23,17 @@ interface StructureElement
     /**
      * Parse a JSON object to a structure.
      *
-     * @param \stdClass $object       An object to parse
-     * @param array     $dependencies Dependencies of this object
+     * @param stdClass $object       An object to parse
+     * @param array    $dependencies Dependencies of this object
      *
      * @return self self reference
      */
-    public function parse($object, &$dependencies);
+    public function parse($object, array &$dependencies): self;
 
     /**
      * Print a string representation.
      *
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 }

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.green-light_green.min.css"/>
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <style>
         .phpdrafter-layout-transparent{background:rgba(0,0,0,0) center/cover}.phpdrafter-layout-transparent .mdl-layout__header,.phpdrafter-layout-transparent .mdl-layout__drawer-button{ color:white}main{width:100%}.phpdrafter-card-wide.mdl-card{width:100%;margin-bottom:30px}.phpdrafter-card-wide>.mdl-card__title{color:#fff;height:176px;background:#ccc center/cover}.phpdrafter-card-wide>.mdl-card__menu{color:#fff}h2.mdl-card__title-text{display:inline-block;width:100%}li.mdl-list__ite code{font-size:12px;font-weight:normal}.page-content{width:80%;margin:0 auto}.pull-right{text-align:right!important;float:right!important}.text-success{color:#3c763d}.text-warning{color:#8a6d3b}.text-error{color:#761c19}table.table p{margin-bottom:0}div .mdl-card__supporting-text table{width:100%;max-width:100%;border:0 solid #000}div .mdl-card__supporting-text{width:96%;padding:2%}.mdl-card__supporting-text .list-group-item.mdl-list__item{padding:8px;width:100%;clear:both;display:block;text-align:end;font-size:13px;border-bottom:1px solid #ccc;line-height:31px}.mdl-card__supporting-text .list-group-item.mdl-list__item:last-of-type{border-bottom:0 solid #ccc}.showSearch{background:#122b40 center/cover;color:#ccc}dialog{width:1000px!important;height:-moz-fit-content;height:-webkit-fit-content;height:fit-content;margin:auto;border:solid;padding:1em;background:white;color:black;display:block}dialog textarea{width:100%;max-width:100%;line-break:strict;word-break:break-all;border-color:#ccc;height:100%}dialog .mdl-textfield{width:100%}dialog:not([open]){display:none}dialog+.backdrop{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.1)}._dialog_overlay{position:fixed;top:0;right:0;bottom:0;left:0}dialog.fixed{position:fixed;top:50%;transform:translate(0,-50%)}body{--put-color:rgb(248,148,6);--post-color:rgb(98,196,98);--get-color:rgb(91,192,222);--delete-color:rgb(238,95,91);--head-color:rgb(222,121,91);--patch-color:rgb(196,98,196)}.mdl-card__title a{color:inherit}.PUT .mdl-card__title{background:var(--put-color)}.POST .mdl-card__title{background:var(--post-color)}.GET .mdl-card__title{background:var(--get-color)}.DELETE .mdl-card__title{background:var(--delete-color)}.HEAD .mdl-card__title{background:var(--head-color)}.PATCH .mdl-card__title{background:var(--patch-color)}    </style>
 </head>
@@ -27,159 +25,159 @@
                             - Tokens                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#authentication/tokens/get/an/access/token">
-                                -- Get an Access Token                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Get an Access Token                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                                         <a class="mdl-navigation__link" href="#vehicles">Vehicles</a>
                                                             <a class="mdl-navigation__link" href="#vehicles/vehicle/collection">
                             - Vehicle Collection                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/vehicle/collection/list/all/vehicles">
-                                -- List all Vehicles                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- List all Vehicles                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicles/state/and/settings">
                             - State and Settings                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/mobile/access">
-                                -- Mobile Access                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- Mobile Access                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/charge/state">
-                                -- Charge State                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- Charge State                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/climate/settings">
-                                -- Climate Settings                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- Climate Settings                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/driving/and/position">
-                                -- Driving and Position                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- Driving and Position                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/gui/settings">
-                                -- GUI Settings                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- GUI Settings                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicles/state/and/settings/vehicle/state">
-                                -- Vehicle State                                <span class="pull-right fas fa-arrow-circle-down GET"></span>
+                                -- Vehicle State                                <span class="pull-right fas GET fa-arrow-circle-down"></span>
                             </a>
                                                                                         <a class="mdl-navigation__link" href="#vehicle-commands">Vehicle Commands</a>
                                                             <a class="mdl-navigation__link" href="#vehicle/commands/wake/up/car">
                             - Wake Up Car                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/wake/up/car/wake/up/car">
-                                -- Wake Up Car                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Wake Up Car                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/set/valet/mode">
                             - Set Valet Mode                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/set/valet/mode/set/valet/mode">
-                                -- Set Valet Mode                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Set Valet Mode                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/reset/valet/pin">
                             - Reset Valet PIN                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/reset/valet/pin/reset/valet/pin">
-                                -- Reset Valet PIN                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Reset Valet PIN                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/open/charge/port">
                             - Open Charge Port                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/open/charge/port/open/charge/port">
-                                -- Open Charge Port                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Open Charge Port                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/set/charge/limit/to/standard">
                             - Set Charge Limit to Standard                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/set/charge/limit/to/standard/set/charge/limit/to/standard">
-                                -- Set Charge Limit to Standard                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Set Charge Limit to Standard                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/set/charge/limit/to/max/range">
                             - Set Charge Limit to Max Range                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/set/charge/limit/to/max/range/set/charge/limit/to/max/range">
-                                -- Set Charge Limit to Max Range                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Set Charge Limit to Max Range                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/set/charge/limit">
                             - Set Charge Limit                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/set/charge/limit/set/charge/limit">
-                                -- Set Charge Limit                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Set Charge Limit                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/start/charging">
                             - Start Charging                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/start/charging/start/charging">
-                                -- Start Charging                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Start Charging                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/stop/charging">
                             - Stop Charging                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/stop/charging/stop/charging">
-                                -- Stop Charging                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Stop Charging                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/flash/lights">
                             - Flash Lights                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/flash/lights/flash/lights">
-                                -- Flash Lights                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Flash Lights                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/honk/horn">
                             - Honk Horn                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/honk/horn/honk/horn">
-                                -- Honk Horn                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Honk Horn                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/unlock/doors">
                             - Unlock Doors                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/unlock/doors/unlock/doors">
-                                -- Unlock Doors                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Unlock Doors                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/lock/doors">
                             - Lock Doors                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/lock/doors/lock/doors">
-                                -- Lock Doors                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Lock Doors                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/set/temperature">
                             - Set Temperature                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/set/temperature/set/temperature">
-                                -- Set Temperature                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Set Temperature                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/start/hvac/system">
                             - Start HVAC System                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/start/hvac/system/start/hvac/system">
-                                -- Start HVAC System                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Start HVAC System                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/stop/hvac/system">
                             - Stop HVAC System                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/stop/hvac/system/stop/hvac/system">
-                                -- Stop HVAC System                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Stop HVAC System                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/move/pano/roof">
                             - Move Pano Roof                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/move/pano/roof/move/pano/roof">
-                                -- Move Pano Roof                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Move Pano Roof                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/remote/start">
                             - Remote Start                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/remote/start/remote/start">
-                                -- Remote Start                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Remote Start                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                     <a class="mdl-navigation__link" href="#vehicle/commands/open/trunk/frunk">
                             - Open Trunk/Frunk                        </a>
                                                     <a class="mdl-navigation__link"
                                href="#vehicle/commands/open/trunk/frunk/open/trunk/frunk">
-                                -- Open Trunk/Frunk                                <span class="pull-right fas fa-plus-square POST"></span>
+                                -- Open Trunk/Frunk                                <span class="pull-right fas POST fa-plus-square"></span>
                             </a>
                                                                                             </nav>
     </div>
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content main-content">
         <div class="page-content">
                                                 <h3><a id="authentication">Authentication</a></h3>
                                                                     <h4>
@@ -228,26 +226,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Foauth%2Ftoken&method=POST"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/oauth/token</em>
                                                                                                                                                                                                                                                                                                                                                     <h5>Request object</h5>
@@ -329,26 +308,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -440,26 +400,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fmobile_enabled&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/mobile_enabled</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -536,26 +477,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fcharge_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/data_request/charge_state</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -651,26 +573,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fclimate_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/data_request/climate_state</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -756,26 +659,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fdrive_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/data_request/drive_state</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -859,26 +743,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fgui_settings&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/data_request/gui_settings</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -961,26 +826,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fdata_request%2Fvehicle_state&method=GET&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/data_request/vehicle_state</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1081,26 +927,7 @@
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fwake_up&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/wake_up</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1187,26 +1014,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_valet_mode&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/set_valet_mode</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1293,26 +1101,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Freset_valet_pin&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/reset_valet_pin</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1396,26 +1185,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_port_door_open&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/charge_port_door_open</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1499,26 +1269,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_standard&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/charge_standard</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1602,26 +1353,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_max_range&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/charge_max_range</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1705,26 +1437,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?args=%7B%22percent%22%3A%5B%2275%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_charge_limit&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/set_charge_limit?percent=75</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1809,26 +1522,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_start&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/charge_start</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -1912,26 +1606,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fcharge_stop&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/charge_stop</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2015,26 +1690,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fflash_lights&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/flash_lights</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2118,26 +1774,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fhonk_horn&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/honk_horn</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2221,26 +1858,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fdoor_unlock&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/door_unlock</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2324,26 +1942,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fdoor_lock&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/door_lock</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2427,26 +2026,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?args=%7B%22driver_temp%22%3A%5B%2223.7%22%5D%2C%22passenger_temp%22%3A%5B%2218.1%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fset_temps&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/set_temps?driver_temp=23.7&passenger_temp=18.1</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2532,26 +2112,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fauto_conditioning_start&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/auto_conditioning_start</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2635,26 +2196,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fauto_conditioning_stop&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/auto_conditioning_stop</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2738,26 +2280,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?args=%7B%22state%22%3A%5B%22%253Cul%2520class%253D%2522list-group%2520mdl-list%2522%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Eopen%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Eclose%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Ecomfort%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Event%253C%252Fli%253E%253Cli%2520class%253D%2522list-group-item%2520mdl-list__item%2522%253Emove%253C%252Fli%253E%253C%252Ful%253E%22%5D%2C%22percent%22%3A%5B%2250%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fsun_roof_control&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E&percent=50</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2843,26 +2366,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?args=%7B%22password%22%3A%5B%22edisonsux%22%5D%7D&url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Fremote_start_drive&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/remote_start_drive?password=edisonsux</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -2947,26 +2451,7 @@ locations in navigation.
                                             </dialog>
                                             <div class="mdl-tabs__panel is-active"
                                                  id="request-panel-2ac45426fe30662e1aeccb55d1a177e6">
-                                                                                                                                                    <a href="https://www.hurl.it/?url=https%3A%2F%2Fowner-api.teslamotors.com%2Fapi%2F1%2Fvehicles%2F1%2Fcommand%2Ftrunk_open&method=POST&headers=%7B%22Authorization%22%3A%5B%22Bearer+%7Baccess_token%7D%22%5D%7D"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                                                                <button id="show-dialog-2ac45426fe30662e1aeccb55d1a177e6" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#show-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  let dialog_2ac45426fe30662e1aeccb55d1a177e6 = document.querySelector('#mdl-dialog-2ac45426fe30662e1aeccb55d1a177e6');
-                                                  button_2ac45426fe30662e1aeccb55d1a177e6.addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.showModal();
-                                                  });
-                                                  dialog_2ac45426fe30662e1aeccb55d1a177e6.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_2ac45426fe30662e1aeccb55d1a177e6.close();
-                                                  });
-                                                </script>
-                                                                                                    <h5>Example URI</h5>
+                                                                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span>
                                                     <em>/api/1/vehicles/1/command/trunk_open</em>
                                                                                                                                                     <h5>Headers</h5>
@@ -3025,6 +2510,11 @@ locations in navigation.
             data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
         <i class="material-icons">help outline</i>
     </button>
-<script></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" integrity="sha256-m1eTvwEHwmsw4+XKF7BshClVJEPwTVycveNl0CS0Mkk=" crossorigin="anonymous"></script>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script>
+
+anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
 </body>
 </html>

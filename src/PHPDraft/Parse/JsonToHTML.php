@@ -10,6 +10,7 @@
 namespace PHPDraft\Parse;
 
 use PHPDraft\Out\TemplateGenerator;
+use stdClass;
 
 /**
  * Class JsonToHTML.
@@ -26,16 +27,16 @@ class JsonToHTML
     /**
      * JSON representation of an API Blueprint.
      *
-     * @var \stdClass
+     * @var stdClass
      */
     protected $object;
 
     /**
      * JsonToHTML constructor.
      *
-     * @param string $json JSON representation of an API Blueprint
+     * @param stdClass $json JSON representation of an API Blueprint
      */
-    public function __construct($json)
+    public function __construct(stdClass $json)
     {
         $this->object = $json;
     }
@@ -43,7 +44,7 @@ class JsonToHTML
     /**
      * Gets the default template HTML.
      *
-     * @throws \PHPDraft\Parse\ExecutionException When parsing fails
+     * @throws ExecutionException When parsing fails
      *
      * @return string
      */
@@ -60,11 +61,11 @@ class JsonToHTML
      * @param string|null $css      CSS to load
      * @param string|null $js       JS to load
      *
-     * @throws \PHPDraft\Parse\ExecutionException As a runtime exception
+     * @throws ExecutionException As a runtime exception
      *
      * @return TemplateGenerator HTML template to display
      */
-    public function get_html($template = 'default', $image = NULL, $css = NULL, $js = NULL)
+    public function get_html(string $template = 'default', ?string $image = NULL, ?string $css = NULL, ?string $js = NULL): TemplateGenerator
     {
         $gen = new TemplateGenerator($template, $image);
 

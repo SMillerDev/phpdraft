@@ -16,8 +16,9 @@ div.main-url {
 button.extra-info.btn {
     position: fixed;
     bottom: 10px;
-    left: 10px;
+    right: 10px;
     border-radius: 30px;
+    z-index: 999;
 }
 
 button.extra-info.btn:focus {
@@ -79,24 +80,47 @@ body .col-md-10 h3:first-child {
     margin-top: 0;
 }
 
-.method-nav ul {
-    padding-left: 10px;
+@media (min-width: 768px) {
+    .method-nav {
+        max-height: 100vh;
+        overflow-x: visible;
+        overflow-y: scroll;
+        top: 0;
+        box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.2) inset, 0px 0px 1px rgba(102, 102, 102, 0.4);
+    }
+}
+.method-nav {
+    padding: 0px 10px;
+}
+.method-nav nav {
+    width: 100%;
+}
+.method-nav nav.category,
+.method-nav nav.structures,
+.method-nav nav.structures a.nav-link,
+.method-nav nav.resource a.nav-link {
+    padding-left: 0px;
 }
 
-.method-nav ul li {
-    list-style: none;
+.method-nav nav.resource .transition a.nav-link {
+    padding-left: .5rem;
 }
 
-.method-nav ul li a {
+
+.method-nav a.nav-link {
     line-height: 26px;
 }
 
-.method-nav ul li a i {
+.method-nav a.nav-link i {
     color: #fff;
     padding: 0 5px;
     box-sizing: padding-box;
     border-radius: 15px;
     line-height: 22px;
+}
+
+.main-content {
+    position: relative;
 }
 
 .example-value {

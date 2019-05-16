@@ -10,6 +10,7 @@
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use stdClass;
 
 /**
  * Class Category.
@@ -26,11 +27,11 @@ class Category extends HierarchyElement
     /**
      * Fill class values based on JSON object.
      *
-     * @param \stdClass $object JSON object
+     * @param stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse($object)
+    public function parse(stdClass $object)
     {
         parent::parse($object);
         foreach ($object->content as $item) {
