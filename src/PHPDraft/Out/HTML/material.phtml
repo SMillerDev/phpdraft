@@ -62,7 +62,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
             <?php endif; ?>
         </nav>
     </div>
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content main-content">
         <div class="page-content">
             <?php foreach ($this->categories as $category): ?>
                 <?php if (!empty($category->title)): ?>
@@ -130,27 +130,6 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                             <div class="mdl-tabs__panel <?= ($i < 1) ? 'is-active' : '' ?>"
                                                  id="request-panel-<?= $request->get_id(); ?>">
                                                 <?= $request->description; ?>
-                                                <?php if (THIRD_PARTY_ALLOWED): ?>
-                                                    <a href="<?= $transition->get_hurl_link($this->base_data['HOST']); ?>"
-                                                       target="_blank" role="button"
-                                                       class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                        <i class="material-icons">play_arrow</i>
-                                                    </a>
-                                                <?php endif; ?>
-                                                <button id="show-dialog-<?= $request->get_id(); ?>" type="button"
-                                                        class="mdl-button mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect pull-right">
-                                                    <i class="material-icons">bug_report</i>
-                                                </button>
-                                                <script>
-                                                  let button_<?=$request->get_id();?> = document.querySelector('#show-dialog-<?=$request->get_id();?>');
-                                                  let dialog_<?=$request->get_id();?> = document.querySelector('#mdl-dialog-<?=$request->get_id();?>');
-                                                  button_<?=$request->get_id();?>.addEventListener('click', function() {
-                                                    dialog_<?=$request->get_id();?>.showModal();
-                                                  });
-                                                  dialog_<?=$request->get_id();?>.querySelector('.close').addEventListener('click', function() {
-                                                    dialog_<?=$request->get_id();?>.close();
-                                                  });
-                                                </script>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
                                                     <span class="base-url"><?= $this->base_data['HOST']; ?></span>

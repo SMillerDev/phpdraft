@@ -10,6 +10,7 @@
 namespace PHPDraft\Model;
 
 use Michelf\MarkdownExtra;
+use stdClass;
 
 /**
  * Class HierarchyElement.
@@ -47,11 +48,11 @@ abstract class HierarchyElement
     /**
      * Parse a JSON object to an element.
      *
-     * @param \stdClass $object an object to parse
+     * @param stdClass $object an object to parse
      *
      * @return void
      */
-    public function parse($object)
+    public function parse(stdClass $object)
     {
         if (isset($object->meta) && isset($object->meta->title)) {
             $this->title = $object->meta->title;
@@ -79,7 +80,7 @@ abstract class HierarchyElement
      *
      * @return string
      */
-    public function get_href()
+    public function get_href(): string
     {
         $seperator = '-';
         $prep      = ($this->parent !== NULL) ? $this->parent->get_href() . $seperator : '';

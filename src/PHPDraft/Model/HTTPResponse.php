@@ -11,6 +11,7 @@ namespace PHPDraft\Model;
 
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use stdClass;
 
 class HTTPResponse implements Comparable
 {
@@ -63,7 +64,7 @@ class HTTPResponse implements Comparable
      */
     protected $parent;
 
-    public function __construct($parent)
+    public function __construct(Transition $parent)
     {
         $this->parent = &$parent;
         $this->id     = md5(microtime());
@@ -72,11 +73,11 @@ class HTTPResponse implements Comparable
     /**
      * Fill class values based on JSON object.
      *
-     * @param \stdClass $object JSON object
+     * @param stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse($object)
+    public function parse(stdClass $object): self
     {
         if (isset($object->attributes->statusCode)) {
             $this->statuscode = intval($object->attributes->statusCode);
@@ -90,7 +91,7 @@ class HTTPResponse implements Comparable
         return $this;
     }
 
-    public function get_id()
+    public function get_id(): string
     {
         return $this->id;
     }
@@ -98,11 +99,11 @@ class HTTPResponse implements Comparable
     /**
      * Parse request headers.
      *
-     * @param \stdClass $object An object to parse for headers
+     * @param stdClass $object An object to parse for headers
      *
      * @return void
      */
-    protected function parse_headers($object)
+    protected function parse_headers(stdClass $object): void
     {
         foreach ($object->content as $value) {
             if (isset($value->content)) {
@@ -114,11 +115,11 @@ class HTTPResponse implements Comparable
     /**
      * Parse request content.
      *
-     * @param \stdClass $object An object to parse for content
+     * @param stdClass $object An object to parse for content
      *
      * @return void
      */
-    protected function parse_content($object)
+    protected function parse_content(stdClass $object): void
     {
         foreach ($object->content as $value) {
             if ($value->element === 'dataStructure') {
@@ -138,11 +139,11 @@ class HTTPResponse implements Comparable
     /**
      * Parse structure of the content.
      *
-     * @param \stdClass[] $objects Objects containing the structure
+     * @param stdClass[] $objects Objects containing the structure
      *
      * @return void
      */
-    protected function parse_structure($objects)
+    protected function parse_structure(array $objects): void
     {
         foreach ($objects as $object) {
             $deps   = [];
@@ -161,7 +162,7 @@ class HTTPResponse implements Comparable
      *
      * @return bool
      */
-    public function is_equal_to($b)
+    public function is_equal_to($b): bool
     {
         return ($this->statuscode === $b->statuscode) && ($this->description === $b->description);
     }

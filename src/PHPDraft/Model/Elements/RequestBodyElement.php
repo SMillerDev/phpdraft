@@ -17,11 +17,11 @@ class RequestBodyElement extends ObjectStructureElement
     /**
      * Print the request body as a string.
      *
-     * @param string $type The type of request
+     * @param string|null $type The type of request
      *
      * @return string Request body
      */
-    public function print_request($type = 'application/x-www-form-urlencoded')
+    public function print_request(?string $type = 'application/x-www-form-urlencoded')
     {
         if (is_array($this->value)) {
             $return = '<code class="request-body">';
@@ -66,7 +66,7 @@ class RequestBodyElement extends ObjectStructureElement
      *
      * @return RequestBodyElement
      */
-    protected function new_instance()
+    protected function new_instance(): StructureElement
     {
         return new self();
     }

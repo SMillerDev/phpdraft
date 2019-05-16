@@ -19,15 +19,18 @@
   ],
   "require": {
     "php": "~7.1",
-    "ql/uri-template": "1.*",
-    "michelf/php-markdown": "1.*",
-    "lukasoppermann/http-status": "2.*",
-    "ext-json": "*"
+    "ql/uri-template": "~1.0",
+    "vanilla/garden-cli": "~2.0",
+    "michelf/php-markdown": "~1.8",
+    "lukasoppermann/http-status": "~2.0",
+    "ext-json": "*",
+    "ext-curl": "*"
   },
   "require-dev": {
     "lunr/halo": "*",
     "phpunit/phpunit": "~7.0",
-    "theseer/autoload": "1.*"
+    "theseer/autoload": "~1.0",
+    "phing/phing": "~2.0"
   },
   "autoload": {
     "psr-4": { "PHPDraft\\": "src/PHPDraft" }

@@ -12,6 +12,7 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use QL\UriTemplate\UriTemplate;
+use stdClass;
 
 class Transition extends HierarchyElement
 {
@@ -67,9 +68,9 @@ class Transition extends HierarchyElement
     /**
      * Transition constructor.
      *
-     * @param resource $parent A reference to the parent object
+     * @param \PHPDraft\Model\Resource $parent A reference to the parent object
      */
-    public function __construct(&$parent)
+    public function __construct(\PHPDraft\Model\Resource &$parent)
     {
         $this->parent = $parent;
     }
@@ -77,11 +78,11 @@ class Transition extends HierarchyElement
     /**
      * Fill class values based on JSON object.
      *
-     * @param \stdClass $object JSON object
+     * @param stdClass $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse($object)
+    public function parse(stdClass $object): self
     {
         parent::parse($object);
 
@@ -155,9 +156,9 @@ class Transition extends HierarchyElement
      *
      * @return string a HTML representation of the transition URL
      */
-    public function build_url($base_url = '', $clean = FALSE)
+    public function build_url(string $base_url = '', bool $clean = FALSE): string
     {
-        $url = $this->overlap_urls($this->parent->href, $this->href);
+        $url = $this->overlap_urls($this->parent->href ?? '', $this->href);
         if ($url === FALSE) {
             $url = $this->parent->href . $this->href;
         }
@@ -192,7 +193,7 @@ class Transition extends HierarchyElement
      *
      * @see http://stackoverflow.com/questions/2945446/built-in-function-to-combine-overlapping-string-sequences-in-php
      */
-    private function overlap_urls($str1, $str2)
+    private function overlap_urls(string $str1, string $str2)
     {
         if ($overlap = $this->find_overlap($str1, $str2)) {
             $overlap = $overlap[count($overlap) - 1];
@@ -213,7 +214,7 @@ class Transition extends HierarchyElement
      *
      * @return array|bool
      */
-    private function find_overlap($str1, $str2)
+    private function find_overlap(string $str1, string $str2)
     {
         $return = [];
         $sl1    = strlen($str1);
@@ -242,7 +243,7 @@ class Transition extends HierarchyElement
      *
      * @return string HTTP Method
      */
-    public function get_method($request = 0)
+    public function get_method(int $request = 0): string
     {
         return (isset($this->requests[$request]->method)) ? $this->requests[$request]->method : 'NONE';
     }
@@ -256,7 +257,7 @@ class Transition extends HierarchyElement
      *
      * @return string A cURL CLI command
      */
-    public function get_curl_command($base_url, $additional = [], $key = 0)
+    public function get_curl_command(string $base_url, array $additional = [], int $key = 0): string
     {
         if (!isset($this->requests[$key])) {
             return '';
@@ -274,7 +275,7 @@ class Transition extends HierarchyElement
      *
      * @return string
      */
-    public function get_hurl_link($base_url, $additional = [], $key = 0)
+    public function get_hurl_link(string $base_url, array $additional = [], int $key = 0): string
     {
         if (!isset($this->requests[$key])) {
             return '';

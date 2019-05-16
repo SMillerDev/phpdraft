@@ -19,7 +19,7 @@ class EnumStructureElement extends BasicStructureElement
      *
      * @return $this
      */
-    public function parse($object, &$dependencies)
+    public function parse($object, array &$dependencies): StructureElement
     {
         $this->element = (isset($object->element)) ? $object->element : 'enum';
 
@@ -52,7 +52,7 @@ class EnumStructureElement extends BasicStructureElement
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $return = '<ul class="list-group mdl-list">';
 
@@ -84,7 +84,7 @@ class EnumStructureElement extends BasicStructureElement
      *
      * @return self
      */
-    protected function new_instance()
+    protected function new_instance(): StructureElement
     {
         return new self();
     }

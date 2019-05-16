@@ -25,7 +25,7 @@ class LegacyDrafter extends BaseParser
      *
      * @return \PHPDraft\Parse\Drafter
      */
-    public function init($apib): BaseParser
+    public function init(string $apib): BaseParser
     {
         parent::init($apib);
         $this->drafter = self::location();
@@ -66,7 +66,7 @@ class LegacyDrafter extends BaseParser
      *
      * @return void
      */
-    protected function parse()
+    protected function parse(): void
     {
         shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
         $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the UITest.php
+ * This file contains the VersionTest.php
  *
  * @package PHPDraft\Out
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
@@ -9,15 +9,15 @@
 namespace PHPDraft\Out\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPDraft\Out\UI;
+use PHPDraft\Out\Version;
 use ReflectionClass;
 
 /**
- * Class UITest
+ * Class VersionTest
  *
- * @covers \PHPDraft\Out\UI
+ * @covers \PHPDraft\Out\Version
  */
-class UITest extends LunrBaseTest
+class VersionTest extends LunrBaseTest
 {
 
     /**
@@ -27,8 +27,8 @@ class UITest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new UI();
-        $this->reflection = new ReflectionClass('PHPDraft\Out\UI');
+        $this->class      = new Version();
+        $this->reflection = new ReflectionClass('PHPDraft\Out\Version');
     }
 
     /**

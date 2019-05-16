@@ -75,23 +75,26 @@ class TemplateGenerator
     /**
      * TemplateGenerator constructor.
      *
-     * @param string $template name of the template to load
-     * @param string $image    Image to use as Logo
+     * @param string      $template Name of the template to load
+     * @param string|null $image    Image to use as Logo
      */
-    public function __construct($template, $image)
+    public function __construct(string $template, ?string $image)
     {
         $template_parts             = explode('__', $template);
         $this->template             = $template_parts[0];
-        $this->base_data['COLOR_1'] = isset($template_parts[1]) ? $template_parts[1] : 'green';
-        $this->base_data['COLOR_2'] = isset($template_parts[2]) ? $template_parts[2] : 'light_green';
+        $this->base_data['COLOR_1'] = $template_parts[1] ?? 'green';
+        $this->base_data['COLOR_2'] = $template_parts[2] ?? 'light_green';
         $this->image                = $image;
         $this->http_status          = new Httpstatus();
+        $this->sorting              = Sorting::$PHPD_SORT_NONE;
     }
 
     /**
      * Pre-parse objects needed and print HTML.
      *
      * @param mixed $object JSON to parse from
+     *
+     * @throws ExecutionException
      *
      * @return void
      */
@@ -127,11 +130,11 @@ class TemplateGenerator
             $this->base_data['TITLE'] = $object->content[0]->meta->title;
         }
 
-        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_STRUCTURES) {
+        if (Sorting::sortStructures($this->sorting)) {
             ksort($this->base_structures);
         }
 
-        if ($this->sorting === UI::$PHPD_SORT_ALL || $this->sorting === UI::$PHPD_SORT_WEBSERVICES) {
+        if (Sorting::sortServices($this->sorting)) {
             foreach ($this->categories as &$category) {
                 usort($category->children, function ($a, $b) {
                     return strcmp($a->title, $b->title);
@@ -150,7 +153,7 @@ class TemplateGenerator
      *
      * @return null|string File path or null if not found
      */
-    public function find_include_file($template, $extension = 'phtml')
+    public function find_include_file(string $template, string $extension = 'phtml'): ?string
     {
         $include    = NULL;
         $fextension = '.' . $extension;
@@ -198,27 +201,42 @@ class TemplateGenerator
      *
      * @return string class to represent the HTTP Method
      */
-    public function get_method_icon($method)
+    public function get_method_icon(string $method): string
     {
-        $class = 'fas ';
+        $class = ['fas', strtoupper($method)];
         switch (strtolower($method)) {
             case 'post':
-                $class .= 'fa-plus-square ';
+                $class[] = 'fa-plus-square';
                 break;
             case 'put':
-                $class .= 'fa-pencil-square ';
+                $class[] = 'fa-pen-square';
                 break;
             case 'get':
-                $class .= 'fa-arrow-circle-down ';
+                $class[] = 'fa-arrow-circle-down';
                 break;
             case 'delete':
-                $class .= 'fa-minus-square ';
+                $class[] = 'fa-minus-square';
+                break;
+            case 'head':
+                $class[] = 'fa-info';
+                break;
+            case 'connect':
+                $class[] = 'fa-ethernet';
+                break;
+            case 'options':
+                $class[] = 'fa-sliders-h';
+                break;
+            case 'trace':
+                $class[] = 'fa-route';
+                break;
+            case 'patch':
+                $class[] = 'fa-band-aid';
                 break;
             default:
                 break;
         }
 
-        return $class . strtoupper($method);
+        return join(' ', $class);
     }
 
     /**
@@ -228,7 +246,7 @@ class TemplateGenerator
      *
      * @return string Class to use
      */
-    public function get_response_status($response)
+    public function get_response_status(int $response): string
     {
         if ($response <= 299) {
             return 'text-success';
@@ -246,7 +264,7 @@ class TemplateGenerator
      *
      * @return string key without spaces
      */
-    public function strip_link_spaces($key)
+    public function strip_link_spaces(string $key): string
     {
         return str_replace(' ', '-', strtolower($key));
     }

@@ -6,6 +6,10 @@ EXTRA_HOST: https://test.alpha-api.app.net
 This API Blueprint demonstrates a real world example documenting a portion of
 [App.net API](http://developers.app.net).
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque laoreet tortor gravida, convallis turpis tempus, vulputate metus. In in efficitur libero. Proin non purus ac libero venenatis mollis eu ac massa. Proin lobortis et leo vel posuere. Curabitur cursus congue vestibulum. Vestibulum at pulvinar purus. Sed placerat augue ipsum, quis imperdiet libero consectetur nec. Vivamus est tortor, laoreet quis volutpat at, congue quis leo. Etiam diam arcu, molestie sed tincidunt in, aliquet et justo. Maecenas dui diam, commodo nec lacinia ultricies, auctor a ex. Nunc hendrerit posuere lacinia. Vestibulum condimentum diam eu tristique tincidunt. Maecenas nec tellus a metus interdum maximus. Vivamus tincidunt, dui pulvinar faucibus sodales, diam quam fermentum lectus, non tincidunt libero urna consequat leo.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec tristique justo mi, sed ornare libero porta quis. Sed dapibus gravida mauris quis porttitor. Donec egestas sem eget sodales suscipit. Sed interdum neque augue, id faucibus elit condimentum pellentesque. Mauris quis tortor ligula. Nulla facilisi. Cras finibus vestibulum lacus, et dapibus tortor convallis sed. Curabitur molestie velit faucibus ligula consequat, pretium ultricies nunc aliquam. Maecenas lacinia lacus eu lectus pellentesque eleifend. Mauris faucibus magna a dolor interdum, nec mollis neque finibus. Nullam vel consectetur lorem. Nullam convallis nibh quis leo laoreet pharetra. Morbi feugiat bibendum consectetur. Fusce a congue purus. Praesent semper sodales magna non efficitur.
+
 NOTE: This document is a **work in progress**.
 
 # Group Posts
@@ -155,7 +159,7 @@ your followers’ streams.
 + Parameters
     + post_id: `1` (string) - The id of the Post.
 
-### Star a Post [POST]
+### Star a Post [PATCH]
 Save a given Post to the current User’s stars. This is just a “save” action,
 not a sharing action.
 
@@ -164,6 +168,21 @@ not a sharing action.
 + Response 200
 
     [Post][]
+
+### Check existence of a Post [HEAD]
+Check if it exists
+
++ Response 200
+
+### Connect to a Post [CONNECT]
+Connect to a Post
+
++ Response 200
+
+### Check post options [OPTIONS]
+Check post options
+
++ Response 200
 
 ### Unstar a Post [DELETE]
 Remove a Star from a Post.

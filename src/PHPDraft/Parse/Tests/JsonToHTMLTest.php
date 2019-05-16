@@ -38,6 +38,8 @@ class JsonToHTMLTest extends LunrBaseTest
         $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')));
         $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
         $this->mock_function('microtime', function () { return 'sometime'; });
+
+        $this->class->sorting = -1;
     }
 
     /**

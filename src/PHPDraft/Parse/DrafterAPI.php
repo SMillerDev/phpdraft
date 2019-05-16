@@ -18,7 +18,7 @@ class DrafterAPI extends BaseParser
      *
      * @return \PHPDraft\Parse\BaseParser
      */
-    public function init($apib): BaseParser
+    public function init(string $apib): BaseParser
     {
         parent::init($apib);
 
@@ -30,7 +30,7 @@ class DrafterAPI extends BaseParser
      *
      * @return void
      */
-    protected function parse()
+    protected function parse(): void
     {
         $ch = self::curl_init_drafter($this->apib);
 
@@ -48,9 +48,9 @@ class DrafterAPI extends BaseParser
      *
      * @param string $message API blueprint to parse
      *
-     * @return resource
+     * @return false|resource
      */
-    public static function curl_init_drafter($message)
+    public static function curl_init_drafter(string $message)
     {
         $ch = curl_init();
 
@@ -94,5 +94,7 @@ class DrafterAPI extends BaseParser
             return FALSE;
         }
         curl_close($ch);
+
+        return TRUE;
     }
 }

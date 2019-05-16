@@ -78,6 +78,11 @@
                 <include name="**/*.php"/>
             </fileset>
         </copy>
+        <copy todir="${basedir}/build/phar/phpdraft/src/Garden/Cli">
+            <fileset dir="vendor/vanilla/garden-cli/src">
+                <include name="**/*.php"/>
+            </fileset>
+        </copy>
         <copy todir="${basedir}/build/phar/phpdraft">
             <fileset dir="${basedir}">
                 <include name="**/phpdraft"/>

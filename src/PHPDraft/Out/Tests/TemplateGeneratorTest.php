@@ -87,14 +87,17 @@ class TemplateGeneratorTest extends LunrBaseTest
     {
         $return = [];
 
-        $return[] = ['POST', 'fas fa-plus-square POST'];
-        $return[] = ['post', 'fas fa-plus-square POST'];
-        $return[] = ['get', 'fas fa-arrow-circle-down GET'];
-        $return[] = ['put', 'fas fa-pencil-square PUT'];
-        $return[] = ['delete', 'fas fa-minus-square DELETE'];
-        $return[] = ['head', 'fas HEAD'];
-        $return[] = ['options', 'fas OPTIONS'];
-        $return[] = ['PATCH', 'fas PATCH'];
+        $return[] = ['POST', 'fas POST fa-plus-square'];
+        $return[] = ['post', 'fas POST fa-plus-square'];
+        $return[] = ['get', 'fas GET fa-arrow-circle-down'];
+        $return[] = ['put', 'fas PUT fa-pen-square'];
+        $return[] = ['delete', 'fas DELETE fa-minus-square'];
+        $return[] = ['head', 'fas HEAD fa-info'];
+        $return[] = ['options', 'fas OPTIONS fa-sliders-h'];
+        $return[] = ['PATCH', 'fas PATCH fa-band-aid'];
+        $return[] = ['connect', 'fas CONNECT fa-ethernet'];
+        $return[] = ['trace', 'fas TRACE fa-route'];
+        $return[] = ['cow', 'fas COW'];
 
         return $return;
     }
