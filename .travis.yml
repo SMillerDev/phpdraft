@@ -18,7 +18,7 @@ before_script:
 - export PATH=$PATH:$PWD
 script:
   - vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
-  - sonar-scanner
+  - sonar-scanner -Dsonar.projectVersion=$(git describe --tags --dirty)
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
