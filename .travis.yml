@@ -16,7 +16,9 @@ before_script:
 - travis_retry composer install --no-interaction --prefer-source --dev
 - pecl install uopz
 - export PATH=$PATH:$PWD
-script: vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
+script:
+  - vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
+  - sonar-scanner
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
@@ -35,3 +37,8 @@ deploy:
     tags: true
 after_deploy:
   - ./vendor/bin/phing clean
+
+addons:
+  sonarcloud:
+    organization: "smillerdev-github"
+
