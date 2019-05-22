@@ -13,8 +13,8 @@ matrix:
 
 before_script:
 - travis_retry composer self-update
-- travis_retry composer install --no-interaction --prefer-source --dev
 - pecl install uopz
+- travis_retry composer install --no-interaction --prefer-source --dev
 - export PATH=$PATH:$PWD
 script:
   - vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
