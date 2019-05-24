@@ -3,13 +3,13 @@
     <target name="setup" depends="clean"/>
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
-        <delete dir="${basedir}/bin"/>
-        <delete dir="${basedir}/build/documentation"/>
-        <delete dir="${basedir}/build/logfiles"/>
-        <delete dir="${basedir}/build/phar"/>
-        <delete dir="${basedir}/build/out"/>
+        <delete dir="${project.basedir}/bin"/>
+        <delete dir="${project.basedir}/build/documentation"/>
+        <delete dir="${project.basedir}/build/logfiles"/>
+        <delete dir="${project.basedir}/build/phar"/>
+        <delete dir="${project.basedir}/build/out"/>
         <delete>
-            <fileset dir="${basedir}/build">
+            <fileset dir="${project.basedir}/build">
                 <include name="**/phpdraft*.phar"/>
                 <include name="**/phpdraft*.phar.asc"/>
             </fileset>
@@ -23,40 +23,41 @@
         <exec executable="gpg" failonerror="true">
             <arg value="--armor"/>
             <arg value="--detach-sign"/>
-            <arg path="${basedir}/build/phpdraft-library-${version}.phar"/>
+            <arg path="${project.basedir}/build/phpdraft-library-${version}.phar"/>
         </exec>
 
         <exec executable="gpg" failonerror="true">
             <arg value="--armor"/>
             <arg value="--detach-sign"/>
-            <arg path="${basedir}/build/phpdraft-${version}.phar"/>
+            <arg path="${project.basedir}/build/phpdraft-${version}.phar"/>
         </exec>
     </target>
 
-    <target name="phar" depends="-phar-determine-version,-phar-prepare"
+    <target name="phar" depends="-phar-prepare"
             description="Create PHAR archive of PHPDraft and all its dependencies">
-        <antcall target="-phar-build">
+        <phingcall target="-phar-build">
             <param name="type" value="release"/>
-        </antcall>
+        </phingcall>
     </target>
 
     <target name="phar-nightly" depends="-phar-prepare"
             description="Create PHAR archive of PHPDraft and all its dependencies (nightly)">
-        <antcall target="-phar-build">
+        <phingcall target="-phar-build">
             <param name="type" value="nightly"/>
-        </antcall>
+        </phingcall>
     </target>
 
     <target name="-phar-prepare" depends="clean">
-        <mkdir dir="${basedir}/build/phar"/>
-        <mkdir dir="${basedir}/build/out"/>
-        <copy file="${basedir}/LICENSE" tofile="${basedir}/build/phar/LICENSE"/>
-        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt"/>
+        <mkdir dir="${project.basedir}/build/phar"/>
+        <mkdir dir="${project.basedir}/build/out"/>
+        <copy file="${project.basedir}/LICENSE" tofile="${project.basedir}/build/phar/LICENSE"/>
+        <exec executable="${project.basedir}/build/phar-manifest.php" output="${project.basedir}/build/phar/manifest.txt"/>
     </target>
 
     <target name="-phar-build" depends="-phar-determine-version">
-        <copy todir="${basedir}/build/phar/phpdraft/src">
-            <fileset dir="${basedir}/src/">
+        <fail unless="version" message="No version defined!" />
+        <copy todir="${project.basedir}/build/phar/phpdraft/src">
+            <fileset dir="${project.basedir}/src/">
                 <exclude name="**/*Test.php*"/>
                 <include name="**/*.php"/>
                 <include name="**/*.phtml"/>
@@ -68,23 +69,23 @@
                 <exclude name="**/Readme.php"/>
             </fileset>
         </copy>
-        <copy todir="${basedir}/build/phar/phpdraft/src/QL">
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/QL">
             <fileset dir="vendor/ql/uri-template/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>
-        <copy todir="${basedir}/build/phar/phpdraft/src/Lukasoppermann/Httpstatus">
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Lukasoppermann/Httpstatus">
             <fileset dir="vendor/lukasoppermann/http-status/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>
-        <copy todir="${basedir}/build/phar/phpdraft/src/Garden/Cli">
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Garden/Cli">
             <fileset dir="vendor/vanilla/garden-cli/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>
-        <copy todir="${basedir}/build/phar/phpdraft">
-            <fileset dir="${basedir}">
+        <copy todir="${project.basedir}/build/phar/phpdraft">
+            <fileset dir="${project.basedir}">
                 <include name="**/phpdraft"/>
                 <exclude name="vendor/**"/>
             </fileset>
@@ -94,15 +95,18 @@
             <arg value="-pi"/>
             <arg value="-e"/>
             <arg value="s/\'vendor\/autoload.php/__DIR__\ .\ \'\/src\/PHPDraft\/Core\/Autoloader.php/g"/>
-            <arg value="${basedir}/build/phar/phpdraft/phpdraft"/>
+            <arg value="${project.basedir}/build/phar/phpdraft/phpdraft"/>
         </exec>
 
-        <exec executable="${basedir}/build/phar-version.php" outputproperty="_version">
+        <exec executable="php" outputProperty="_version">
+            <arg file="${project.basedir}/build/phar-version.php"/>
             <arg value="${version}"/>
             <arg value="${type}"/>
         </exec>
+        <echo message="Building version: ${version}, type: ${type}, output: ${_version}"/>
+        <fail unless="_version" message="Could not construct version parameter!" />
 
-        <exec executable="${basedir}/vendor/bin/phpab" taskname="phpab">
+        <exec executable="${project.basedir}/vendor/bin/phpab" taskname="phpab">
             <arg value="--all"/>
             <arg value="--static"/>
             <arg value="--once"/>
@@ -110,13 +114,13 @@
             <arg value="--hash"/>
             <arg value="SHA-1"/>
             <arg value="--output"/>
-            <arg path="${basedir}/build/out/phpdraft-library-${_version}.phar"/>
+            <arg path="${project.basedir}/build/out/phpdraft-library-${_version}.phar"/>
             <arg value="--template"/>
-            <arg path="${basedir}/build/library-phar-autoload.php.in"/>
-            <arg path="${basedir}/build/phar"/>
+            <arg path="${project.basedir}/build/library-phar-autoload.php.in"/>
+            <arg path="${project.basedir}/build/phar"/>
         </exec>
 
-        <exec executable="${basedir}/vendor/bin/phpab" taskname="phpab">
+        <exec executable="${project.basedir}/vendor/bin/phpab" taskname="phpab">
             <arg value="--all"/>
             <arg value="--nolower"/>
             <arg value="--static"/>
@@ -124,17 +128,17 @@
             <arg value="--hash"/>
             <arg value="SHA-1"/>
             <arg value="--output"/>
-            <arg path="${basedir}/build/out/phpdraft-${_version}.phar"/>
+            <arg path="${project.basedir}/build/out/phpdraft-${_version}.phar"/>
             <arg value="--template"/>
-            <arg path="${basedir}/build/binary-phar-autoload.php.in"/>
-            <arg path="${basedir}/build/phar"/>
+            <arg path="${project.basedir}/build/binary-phar-autoload.php.in"/>
+            <arg path="${project.basedir}/build/phar"/>
         </exec>
 
-        <chmod file="${basedir}/build/phpdraft-${_version}.phar" perm="ugo+rx"/>
+        <chmod file="${project.basedir}/build/out/phpdraft-${_version}.phar" mode="0555"/>
     </target>
 
     <target name="-dependencies-installed">
-        <available file="${basedir}/composer.lock" property="dependencies-installed"/>
+        <available file="${project.basedir}/composer.lock" property="dependencies-installed"/>
     </target>
 
     <target name="install-dependencies" unless="dependencies-installed" depends="-dependencies-installed,validate-composer-json" description="Install dependencies with Composer">
@@ -154,16 +158,13 @@
             <arg value="validate"/>
             <arg value="--no-check-lock"/>
             <arg value="--strict"/>
-            <arg value="${basedir}/composer.json"/>
+            <arg value="${project.basedir}/composer.json"/>
         </exec>
 
         <property name="validate-composer-json.done" value="true"/>
     </target>
 
     <target name="-phar-determine-version">
-        <exec executable="bash" outputproperty="version">
-            <arg value="-c"/>
-            <arg value="php ${basedir}/phpdraft -v | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'"/>
-        </exec>
+        <exec command="${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'" outputproperty="version"/>
     </target>
 </project>

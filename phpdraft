@@ -1,5 +1,4 @@
 #!/usr/bin/env php
-
 <?php
 /**
  * Set up include path for source handling
@@ -9,7 +8,6 @@ set_include_path(get_include_path() . ":" . __DIR__ . '/src/');
 /**
  * Set up required classes (with the autoloader)
  */
-//require_once 'PHPDraft/Core/Autoloader.php';
 require_once 'vendor/autoload.php';
 
 use Garden\Cli\Cli;
@@ -27,7 +25,7 @@ try
     // Define the cli options.
     $cli = new Cli();
     $cli->description('Parse API Blueprint files.')
-        ->opt('file:f', 'Specifies the file to parse.', true, 'string')
+        ->opt('file:f', 'Specifies the file to parse.', false, 'string')
         ->opt('yes:y', 'Always accept using the online mode.', false)
         ->opt('online:o', 'Always use the online mode.', false)
         ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false, 'string')
@@ -42,6 +40,9 @@ try
     if (isset($args['version'])) {
         Version::version();
         throw new ExecutionException('', 0);
+    }
+    if (!isset($args['file'])) {
+        throw new ExecutionException('Missing required option: file', 1);
     }
 
     define('THIRD_PARTY_ALLOWED', getenv('PHPDRAFT_THIRD_PARTY') !== '0');
@@ -61,8 +62,7 @@ try
     }
     catch (ResourceException $exception)
     {
-        file_put_contents('php://stderr', "No drafter available.\n");
-        return;
+        throw new ExecutionException('No drafter available', 255);
     }
 
     $html          = new JsonToHTML($parser->parseToJson());

@@ -22,7 +22,6 @@ set_include_path(
 );
 
 // Load and setup class file autloader
-//require_once 'PHPDraft/Core/Autoloader.php';
 require_once $base . '/vendor/autoload.php';
 
 define('THIRD_PARTY_ALLOWED', TRUE);
