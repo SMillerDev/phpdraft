@@ -5,40 +5,35 @@ php:
 - 7.3
 - 7.4snapshot
 - nightly
-env: # important!
+env: 
 matrix:
   allow_failures:
   - php: 7.4snapshot
   - php: nightly
-
 before_script:
 - travis_retry composer self-update
 - pecl install uopz
 - travis_retry composer install --no-interaction --prefer-source --dev
 - export PATH=$PATH:$PWD
 script:
-  - vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
-  - sonar-scanner -Dsonar.projectVersion=$(git describe --tags --dirty)
-
+- vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
+- sonar-scanner -Dsonar.projectVersion=$(git describe --tags --dirty)
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
-
+- bash <(curl -s https://codecov.io/bash)
 before_deploy:
-- ./vendor/bin/phing phar
+- "./vendor/bin/phing phar"
 - sha256sum build/out/*
 deploy:
   provider: releases
   api_key:
-    secure: ix+vqDv/6NmNrk2r7ayF2dzyA2UBOuGlsQFE0z8dsLQdnVR3pJzjK2zkOE+aPtsj8cagdtRzPkDWoN+eBOfGxeQpxOoOlm63H5zMIvc21kckQR3AWUj0TNnXW0G7F1HpVFFjtzM5c4+wI38P2nmbed8uFCCQpLgLFXNHI2xsTfRDt5XUgvu18TrA/UwFdbQZgrWSW9Y3OL2IStbWFEvJo0YQG/EIMLmdU2oiFqySLuJSoJfqSzBVgeKoKbuzwt34gcIJezqCsF/wfhfpfTD/cGfrWzo7LwLbAf8qUBiy5vUehpDQXVtOMMq5qypLXCXJqjBvLEJsrP7uwFz4dB6CpQu/nuAc37i4ePYkmiRsBHMFAcRidAENop+5AABYg1zMI4gi8I3uvPUE5XHs8LAqVdH5bRWkU87rmt74O497nwWgpbw4odCkd/xDiYp0TsO7yumWjgryXDruCaIwk9imKR0XmFg0F7Zmr5Ju/btOnTWV57QFnIUzit2P8f8keExA17+Bw7lvLc9eW5NBXUVmwlNJuY5WWj4LpfcmLikFBCoGG0T0l1XRNiDqXOEOOMa+ykznLesG9RtLmTEpneK3bm87bcIqITn8oUE69FlrgD7hDsmptCZT7b0Mhp1uzekU1H9oURdxHuFxgHsS8r4jNBbRH7fNWqxx7GFAwf1CJpk=
+    secure: kczFxjr8lzBJDDAAfN2i7BrPpWvAmJA+yPP8YjQYFRViZ5oUdPod0FTGRR9wkT69gfrLmlD8ajTJvmMIR6P33cyQbiDw+4nnbNuUIHrTUw9mV/3zjsq+BtarraVw1pmTleCTlRPbnWKHBZayXSKYthTo+KEaYKlrXkMir5qK3qv9JYzBxosWQmWs78Noa96bBj2LFmNJ/eoxtsGnwvAVgByonXY9DVzPQjiVG7TAxsv6ka6Q5HfqaJqd4upeDpZhtIB1U22sJbDOEHn5y7bjH+tmBcNAjLO1l3ZAgASzznvbIpD7G9WvKXk8dXMPZx2hryY6n2nMIx60n5vrXtuLSNCaINNgRK45GI/W5ho6m6dB5aa9JDLAR3AdsfkGzCprQkhEAyug5IpKh5x7FFJIGMDqaoHH3v8NGY+QwllAyI2g7LtEF+5Ia38PJVI2ATcV6CGW8xhvZ/2+5cWBv9JXWmpCp3RiDYwZCg97jL2tPFcPZ3rGuoSuZSgrj6T8lEoMwM6u/eksIblyZX0/QfFys5zyd1Ga9ulYOYgt6cIVENrpo1J6QwT1dLETJW9EoDHL+2qPViYNLohwx7s7YH/3V9jYNyzai8CtXnT8FEfxlnrSfbuCifW0/A0SMcT4O0utf+/o58UicAifa6TYZivazONiWGEPs8cHktiQVznQ4Rg=
   file_glob: true
   file: build/out/*
   skip_cleanup: true
   on:
     tags: true
 after_deploy:
-  - ./vendor/bin/phing clean
-
+- "./vendor/bin/phing clean"
 addons:
   sonarcloud:
-    organization: "smillerdev-github"
-
+    organization: smillerdev-github
