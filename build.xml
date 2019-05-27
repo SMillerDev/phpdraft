@@ -84,6 +84,12 @@
                 <include name="**/*.php"/>
             </fileset>
         </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Psr/Log">
+            <fileset dir="vendor/psr/log/Psr/Log">
+                <include name="**/*.php"/>
+                <exclude name="**/*Test.php*"/>
+            </fileset>
+        </copy>
         <copy todir="${project.basedir}/build/phar/phpdraft">
             <fileset dir="${project.basedir}">
                 <include name="**/phpdraft"/>
@@ -165,6 +171,6 @@
     </target>
 
     <target name="-phar-determine-version">
-        <exec command="${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'" outputproperty="version"/>
+        <exec command="php ${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'" outputproperty="version"/>
     </target>
 </project>

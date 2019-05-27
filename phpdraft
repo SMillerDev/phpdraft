@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * Set up include path for source handling

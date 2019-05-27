@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 if (version_compare('7.1.0', PHP_VERSION, '>')) {
     fwrite(
