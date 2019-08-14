@@ -1,6 +1,6 @@
 <?php
 /**
- * This file contains the TemplateGenerator.php.
+ * This file contains the LegacyTemplateGenerator.php.
  *
  * @package PHPDraft\Out
  *
@@ -15,63 +15,8 @@ use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
 
-class TemplateGenerator extends BaseTemplateGenerator
+class LegacyTemplateGenerator extends BaseTemplateGenerator
 {
-    /**
-     * Type of sorting to do on objects.
-     *
-     * @var int
-     */
-    public $sorting;
-    /**
-     * CSS Files to load.
-     *
-     * @var array
-     */
-    public $css = [];
-    /**
-     * JS Files to load.
-     *
-     * @var array
-     */
-    public $js = [];
-    /**
-     * JSON object of the API blueprint.
-     *
-     * @var mixed
-     */
-    protected $categories = [];
-    /**
-     * The template file to load.
-     *
-     * @var string
-     */
-    protected $template;
-    /**
-     * The image to use as a logo.
-     *
-     * @var string
-     */
-    protected $image = NULL;
-    /**
-     * The base URl of the API.
-     *
-     * @var
-     */
-    protected $base_data;
-    /**
-     * The Http Status resolver.
-     *
-     * @var Httpstatus
-     */
-    protected $http_status;
-    /**
-     * Structures used in all data.
-     *
-     * @var ObjectStructureElement[]
-     */
-    protected $base_structures = [];
-
     /**
      * TemplateGenerator constructor.
      *
@@ -107,7 +52,7 @@ class TemplateGenerator extends BaseTemplateGenerator
 
         //Prepare base data
         if (is_array($object->content[0]->content)) {
-            foreach ($object->content[0]->attributes->metadata->content as $meta) {
+            foreach ($object->content[0]->attributes->meta as $meta) {
                 $this->base_data[$meta->content->key->content] = $meta->content->value->content;
             }
 
@@ -120,14 +65,14 @@ class TemplateGenerator extends BaseTemplateGenerator
                 $cat = new Category();
                 $cat = $cat->parse($value);
 
-                if ($value->meta->classes->content[0]->content === 'dataStructures') {
+                if ($value->meta->classes[0] === 'dataStructures') {
                     $this->base_structures = array_merge($this->base_structures, $cat->structures);
                 } else {
                     $this->categories[] = $cat;
                 }
             }
 
-            $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? $object->content[0]->meta->title->content;
+            $this->base_data['TITLE'] = $object->content[0]->meta->title;
         }
 
         if (Sorting::sortStructures($this->sorting)) {

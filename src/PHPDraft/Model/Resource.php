@@ -42,7 +42,7 @@ class Resource extends HierarchyElement
         parent::parse($object);
 
         if (isset($object->attributes)) {
-            $this->href = $object->attributes->href;
+            $this->href = $object->attributes->href->content ?? $object->attributes->href;
         }
 
         foreach ($object->content as $item) {

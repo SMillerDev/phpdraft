@@ -93,7 +93,7 @@ class HTTPRequest implements Comparable
      */
     public function parse(stdClass $object): self
     {
-        $this->method = $object->attributes->method;
+        $this->method = $object->attributes->method->content ?? $object->attributes->method;
         $this->title  = isset($object->meta->title) ? $object->meta->title : NULL;
 
         if (($this->method === 'POST' || $this->method === 'PUT') && !empty($object->content)) {

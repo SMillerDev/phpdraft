@@ -15,6 +15,7 @@ use PHPDraft\Out\Sorting;
 use PHPDraft\Out\Version;
 use PHPDraft\Parse\ExecutionException;
 use PHPDraft\Parse\JsonToHTML;
+use PHPDraft\Parse\LegacyHtmlGenerator;
 use PHPDraft\Parse\ParserFactory;
 use PHPDraft\Parse\ResourceException;
 
@@ -56,15 +57,16 @@ try
 
     try
     {
-        $parser = ParserFactory::get();
+        $parser = ParserFactory::getDrafter();
         $parser = $parser->init($apib);
+        $data   = $parser->parseToJson();
     }
     catch (ResourceException $exception)
     {
         throw new ExecutionException('No drafter available', 255);
     }
 
-    $html          = new JsonToHTML($parser->parseToJson());
+    $html          = ParserFactory::getJson()->init($data);
     $name          = 'PHPD_SORT_' . strtoupper($args->getOpt('sort', ''));
     $html->sorting = Sorting::${$name} ?? -1;
 

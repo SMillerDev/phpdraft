@@ -55,7 +55,7 @@ abstract class HierarchyElement
     public function parse(stdClass $object)
     {
         if (isset($object->meta) && isset($object->meta->title)) {
-            $this->title = $object->meta->title;
+            $this->title = $object->meta->title->content ?? $object->meta->title;
         }
 
         if (!isset($object->content) || !is_array($object->content)) {

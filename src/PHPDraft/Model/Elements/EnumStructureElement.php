@@ -34,7 +34,8 @@ class EnumStructureElement extends BasicStructureElement
             return $this;
         }
 
-        foreach ($object->content->value->content as $sub_item) {
+        $enumerations = $object->content->value->attributes->enumerations->content ?? $object->content->value->content;
+        foreach ($enumerations as $sub_item) {
             if (!in_array($sub_item->element, self::DEFAULTS)) {
                 $dependencies[] = $sub_item->element;
             }

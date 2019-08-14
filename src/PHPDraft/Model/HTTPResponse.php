@@ -79,7 +79,9 @@ class HTTPResponse implements Comparable
      */
     public function parse(stdClass $object): self
     {
-        if (isset($object->attributes->statusCode)) {
+        if (isset($object->attributes->statusCode->content)) {
+            $this->statuscode = intval($object->attributes->statusCode->content);
+        } elseif (isset($object->attributes->statusCode)) {
             $this->statuscode = intval($object->attributes->statusCode);
         }
         if (isset($object->attributes->headers)) {
@@ -130,7 +132,9 @@ class HTTPResponse implements Comparable
                 continue;
             }
 
-            if (isset($value->attributes)) {
+            if (isset($value->attributes->contentType->content)) {
+                $this->content[$value->attributes->contentType->content] = $value->content;
+            } elseif (isset($value->attributes->contentType)) {
                 $this->content[$value->attributes->contentType] = $value->content;
             }
         }

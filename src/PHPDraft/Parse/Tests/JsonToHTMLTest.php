@@ -9,18 +9,18 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPDraft\Parse\JsonToHTML;
+use PHPDraft\Parse\LegacyHtmlGenerator;
 use ReflectionClass;
 
 /**
  * Class JsonToHTMLTest
- * @covers \PHPDraft\Parse\JsonToHTML
+ * @covers \PHPDraft\Parse\LegacyHtmlGenerator
  */
 class JsonToHTMLTest extends LunrBaseTest
 {
     /**
      * Test Class
-     * @var JsonToHTML
+     * @var LegacyHtmlGenerator
      */
     protected $class;
 
@@ -35,8 +35,11 @@ class JsonToHTMLTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')));
-        $this->reflection = new ReflectionClass('PHPDraft\Parse\JsonToHTML');
+        $data        = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->class = new LegacyHtmlGenerator();
+        $this->class->init($data);
+
+        $this->reflection = new ReflectionClass('PHPDraft\Parse\LegacyHtmlGenerator');
         $this->mock_function('microtime', function () { return 'sometime'; });
 
         $this->class->sorting = -1;

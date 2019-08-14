@@ -70,7 +70,7 @@ class Transition extends HierarchyElement
      *
      * @param \PHPDraft\Model\Resource $parent A reference to the parent object
      */
-    public function __construct(\PHPDraft\Model\Resource &$parent)
+    public function __construct(Resource &$parent)
     {
         $this->parent = $parent;
     }
@@ -87,6 +87,7 @@ class Transition extends HierarchyElement
         parent::parse($object);
 
         $this->href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
+        $this->href = $this->href->content ?? $this->href;
 
         if (isset($object->attributes->hrefVariables)) {
             $deps                = [];
