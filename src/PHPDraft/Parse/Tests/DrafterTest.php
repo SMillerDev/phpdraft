@@ -58,9 +58,6 @@ class DrafterTest extends LunrBaseTest
      * Test if the value the class is initialized with is correct
      *
      * @covers \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionCode    100
-     * @expectedExceptionMessage The new Drafter V4 is not supported yet.
      */
     public function testSetupCorrectly(): void
     {
