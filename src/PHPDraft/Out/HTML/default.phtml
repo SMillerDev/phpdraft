@@ -129,7 +129,7 @@ use PHPDraft\Out\Minifier;
                                                     <?php if (!empty($request->title)): ?>
                                                         <var><?= $request->title;?></var>
                                                     <?php endif;?>
-                                                    <i class="fas indicator fa-angle-down float-right"></i>
+                                                    <i class="fas indicator fa-angle-down float-right" aria-hidden="true"></i>
                                                 </h6>
                                             </div>
 
@@ -146,7 +146,7 @@ use PHPDraft\Out\Minifier;
                                                    data-toggle="popover"
                                                    data-html="true"
                                                    data-content="<textarea rows='8' cols='75'><?= $transition->get_curl_command($this->base_data['HOST']); ?></textarea>">
-                                                    <i class="fas fa-copy"></i>
+                                                    <i class="fas fa-copy" aria-hidden="true"></i>
                                                 </a>
                                                 <?php if ($transition->url_variables !== []): ?>
                                                     <h5>Example URI</h5>
@@ -210,7 +210,7 @@ use PHPDraft\Out\Minifier;
                                                     data-target="#request-coll--<?= $transition->get_href() . '-' . $response->statuscode; ?>">
                                                     Response <var
                                                         class="<?= $this->get_response_status($response->statuscode) ?>"><?= $response->statuscode." ".$this->http_status->getReasonPhrase($response->statuscode)?></var>
-                                                    <i class="fas indicator fa-angle-<?= ($key < 1) ? 'down' : 'up'; ?> float-right"></i>
+                                                    <i aria-hidden="true" class="fas indicator fa-angle-<?= ($key < 1) ? 'down' : 'up'; ?> float-right"></i>
                                                 </h6>
                                             </div>
                                             <div
@@ -235,7 +235,7 @@ use PHPDraft\Out\Minifier;
                                                     <div class="row">
                                                         <?php foreach ($response->structure as $value): ?>
                                                             <?= $value; ?>
-                                                  <?php endforeach; ?>
+                                   <?php endforeach; ?>
                                                     </div>
                                                 <?php endif; ?>
                                                 <?php foreach ($response->content as $response_key => $value): ?>
@@ -248,7 +248,7 @@ use PHPDraft\Out\Minifier;
                                                         <h5 class="response-body"
                                                             data-toggle="collapse"
                                                             data-target="#response-<?= $href ?>">
-                                                            <i class="fas indicator fa-angle-up"></i>
+                                                            <i aria-hidden="true" class="fas indicator fa-angle-up"></i>
                                                             <?= $response_key; ?>
 
                                                         </h5>
@@ -300,7 +300,7 @@ if (!empty($extras)):
         data-placement="top"
         data-html="true"
         data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
-        <i class="fas fa-question-circle"></i>
+        <i aria-hidden="true" class="fas fa-question-circle"></i>
     </button>
 <?php endif; ?>
 <?php foreach ($this->js as $js): ?>
