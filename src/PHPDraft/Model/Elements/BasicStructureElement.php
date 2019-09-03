@@ -88,10 +88,10 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return void
      */
-    protected function parse_common($object, array &$dependencies): void
+    protected function parse_common(stdClass $object, array &$dependencies): void
     {
-        $this->key          = (isset($object->content->key->content)) ? $object->content->key->content : NULL;
-        $this->type         = (isset($object->content->value->element)) ? $object->content->value->element : NULL;
+        $this->key          = $object->content->key->content ?? NULL;
+        $this->type         = $object->content->value->element ?? NULL;
         $this->description  = NULL;
         if (isset($object->meta->description->content)){
             $this->description = htmlentities($object->meta->description->content);

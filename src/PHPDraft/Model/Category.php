@@ -25,6 +25,13 @@ class Category extends HierarchyElement
     public $structures = [];
 
     /**
+     * Category type.
+     *
+     * @var ?string
+     */
+    public $type = NULL;
+
+    /**
      * Fill class values based on JSON object.
      *
      * @param stdClass $object JSON object
@@ -34,6 +41,9 @@ class Category extends HierarchyElement
     public function parse(stdClass $object)
     {
         parent::parse($object);
+
+        $this->type = $object->meta->classes->content ?? NULL;
+
         foreach ($object->content as $item) {
             switch ($item->element) {
                 case 'resource':
@@ -48,6 +58,8 @@ class Category extends HierarchyElement
 
                     if (is_array($item->content) && isset($item->content[0]->meta->id)) {
                         $this->structures[$item->content[0]->meta->id] = $struct;
+                    } elseif (isset($item->content->meta->id->content)) {
+                        $this->structures[$item->content->meta->id->content] = $struct;
                     } else {
                         $this->structures[] = $struct;
                     }

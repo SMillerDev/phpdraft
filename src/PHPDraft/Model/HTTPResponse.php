@@ -124,11 +124,14 @@ class HTTPResponse implements Comparable
     protected function parse_content(stdClass $object): void
     {
         foreach ($object->content as $value) {
-            if ($value->element === 'dataStructure') {
-                $this->parse_structure($value->content);
-                continue;
-            } elseif ($value->element === 'copy') {
+            if ($value->element === 'copy') {
                 $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
+                continue;
+            }
+
+            if ($value->element === 'dataStructure') {
+                $content = is_array($value->content) ? $value->content : [$value->content];
+                $this->parse_structure($content);
                 continue;
             }
 

@@ -91,10 +91,11 @@ abstract class BaseParser
         foreach ($this->json->content as $item) {
             if ($item->element === 'annotation') {
                 $warnings = TRUE;
-                $prefix   = strtoupper($item->meta->classes[0]);
+                $line     = $item->attributes->sourceMap->content[0]->content[0]->content[0]->attributes->line->content ?? 'UNKNOWN';
+                $prefix   = (is_array($item->meta->classes)) ? strtoupper($item->meta->classes[0]) : strtoupper($item->meta->classes->content[0]->content);
                 $error    = $item->content;
-                file_put_contents('php://stderr', "$prefix: $error\n");
-                file_put_contents('php://stdout', "<pre>$prefix: $error</pre>\n");
+                file_put_contents('php://stderr', "$prefix: $error (line $line)\n");
+                file_put_contents('php://stdout', "<pre>$prefix: $error (line $line)</pre>\n");
             }
         }
 

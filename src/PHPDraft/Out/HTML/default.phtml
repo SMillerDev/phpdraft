@@ -235,21 +235,21 @@ use PHPDraft\Out\Minifier;
                                                     <div class="row">
                                                         <?php foreach ($response->structure as $value): ?>
                                                             <?= $value; ?>
-                                                        <?php endforeach; ?>
+                                                  <?php endforeach; ?>
                                                     </div>
                                                 <?php endif; ?>
-                                                <?php foreach ($response->content as $key => $value): ?>
+                                                <?php foreach ($response->content as $response_key => $value): ?>
                                                     <div>
                                                         <?php $href =
                                                             $response->get_id() . '-' . $response->statuscode . '-' . str_replace([
                                                                 '/',
                                                                 '+',
-                                                            ], '-', $key); ?>
+                                                            ], '-', $response_key); ?>
                                                         <h5 class="response-body"
                                                             data-toggle="collapse"
                                                             data-target="#response-<?= $href ?>">
                                                             <i class="fas indicator fa-angle-up"></i>
-                                                            <?= $key; ?>
+                                                            <?= $response_key; ?>
 
                                                         </h5>
                                                         <pre class="collapse response-body"
