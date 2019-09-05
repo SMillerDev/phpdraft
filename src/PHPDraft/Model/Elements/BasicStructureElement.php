@@ -93,7 +93,7 @@ abstract class BasicStructureElement implements StructureElement
     {
         $this->key          = $object->content->key->content ?? null;
         $this->type         = $object->content->value->element ?? null;
-        $this->description  = null;
+        $this->description  = $object->content->meta->description->content ?? $object->meta->description->content ?? NULL;
         if (isset($object->meta->description->content)) {
             $this->description = htmlentities($object->meta->description->content);
         } elseif (isset($object->meta->description)) {

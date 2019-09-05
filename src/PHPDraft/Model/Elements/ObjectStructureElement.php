@@ -34,6 +34,10 @@ class ObjectStructureElement extends BasicStructureElement
         if (!isset($object->content) && isset($object->meta)) {
             $this->element = $object->element;
             $this->parse_common($object, $dependencies);
+        }
+
+        if (empty($object) || !isset($object->content) || in_array($object->element, ['dataStructure', 'hrefVariables'])) {
+            file_put_contents('php://stderr', 'WARNING: Found empty data structure. ' . json_encode($object, JSON_PRETTY_PRINT) . PHP_EOL);
             return $this;
         }
 
