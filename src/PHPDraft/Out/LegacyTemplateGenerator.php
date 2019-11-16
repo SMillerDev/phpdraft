@@ -12,7 +12,6 @@ namespace PHPDraft\Out;
 use Lukasoppermann\Httpstatus\Httpstatus;
 use Michelf\MarkdownExtra;
 use PHPDraft\Model\Category;
-use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
 
 class LegacyTemplateGenerator extends BaseTemplateGenerator
