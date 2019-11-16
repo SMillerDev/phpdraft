@@ -93,15 +93,17 @@ abstract class BasicStructureElement implements StructureElement
         $this->key          = $object->content->key->content ?? NULL;
         $this->type         = $object->content->value->element ?? NULL;
         $this->description  = NULL;
-        if (isset($object->meta->description->content)){
+        if (isset($object->meta->description->content)) {
             $this->description = htmlentities($object->meta->description->content);
         } elseif (isset($object->meta->description)) {
             $this->description = htmlentities($object->meta->description);
         }
 
         $this->status  = NULL;
-        if (isset($object->attributes->typeAttributes->content)){
-            $data = array_map(function ($item) { return $item->content; }, $object->attributes->typeAttributes->content);
+        if (isset($object->attributes->typeAttributes->content)) {
+            $data = array_map(function ($item) {
+                return $item->content;
+            }, $object->attributes->typeAttributes->content);
             $this->status = join(', ', $data);
         } elseif (isset($object->attributes->typeAttributes)) {
             $this->status = join(', ', $object->attributes->typeAttributes);

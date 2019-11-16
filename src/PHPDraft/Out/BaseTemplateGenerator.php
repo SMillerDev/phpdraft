@@ -9,7 +9,6 @@
 
 namespace PHPDraft\Out;
 
-
 use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 
@@ -50,7 +49,7 @@ abstract class BaseTemplateGenerator
      *
      * @var string
      */
-    protected $image = null;
+    protected $image = NULL;
     /**
      * The base URl of the API.
      *

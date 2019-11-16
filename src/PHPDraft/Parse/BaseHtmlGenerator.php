@@ -9,9 +9,7 @@
 
 namespace PHPDraft\Parse;
 
-
 use PHPDraft\Out\BaseTemplateGenerator;
-use PHPDraft\Out\TemplateGenerator;
 use stdClass;
 
 abstract class BaseHtmlGenerator
@@ -38,6 +36,7 @@ abstract class BaseHtmlGenerator
     public function init(stdClass $json): self
     {
         $this->object = $json;
+
         return $this;
     }
 
@@ -53,5 +52,5 @@ abstract class BaseHtmlGenerator
         return $this->get_html();
     }
 
-    public abstract function get_html(string $template = 'default', ?string $image = NULL, ?string $css = NULL, ?string $js = NULL): BaseTemplateGenerator;
+    abstract public function get_html(string $template = 'default', ?string $image = NULL, ?string $css = NULL, ?string $js = NULL): BaseTemplateGenerator;
 }
