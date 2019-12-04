@@ -64,7 +64,7 @@
                 <include name="**/*.js*"/>
                 <include name="**/*.css*"/>
             </fileset>
-            <fileset dir="vendor/michelf/php-markdown/">
+            <fileset dir="vendor/michelf/php-markdown/Michelf/">
                 <include name="**/*.php"/>
                 <exclude name="**/Readme.php"/>
             </fileset>

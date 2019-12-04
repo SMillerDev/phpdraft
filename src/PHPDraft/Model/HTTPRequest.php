@@ -99,7 +99,7 @@ class HTTPRequest implements Comparable
     public function parse(stdClass $object): self
     {
         $this->method = $object->attributes->method->content ?? $object->attributes->method;
-        $this->title  = isset($object->meta->title) ? $object->meta->title : NULL;
+        $this->title  = $object->meta->title->content ?? $object->meta->title ?? NULL;
 
         if (!empty($object->content)) {
             foreach ($object->content as $value) {
