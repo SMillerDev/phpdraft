@@ -12,7 +12,6 @@
 src/Michelf/*
 src/.gitignore
 vendor/**
-composer.lock
 
 # JIRA plugin
 atlassian-ide-plugin.xml

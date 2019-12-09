@@ -3,11 +3,11 @@
     <target name="setup" depends="clean"/>
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
-        <delete dir="${project.basedir}/bin"/>
-        <delete dir="${project.basedir}/build/documentation"/>
-        <delete dir="${project.basedir}/build/logfiles"/>
+        <delete dir="${project.basedir}/build/coverage"/>
+        <delete dir="${project.basedir}/build/logs"/>
         <delete dir="${project.basedir}/build/phar"/>
         <delete dir="${project.basedir}/build/out"/>
+        <delete dir="${project.basedir}/build/tmp"/>
         <delete>
             <fileset dir="${project.basedir}/build">
                 <include name="**/phpdraft*.phar"/>
