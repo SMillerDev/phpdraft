@@ -2,7 +2,7 @@
   "name": "smillerdev/phpdraft",
   "description": "This is a parser for API Blueprint files in PHP.",
   "minimum-stability": "stable",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "bin": ["phpdraft"],
   "authors": [
     {
@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": "~7.1",
+    "php": "~7.2",
     "ql/uri-template": "~1.0",
     "vanilla/garden-cli": "~2.0",
     "michelf/php-markdown": "~1.9",
@@ -31,6 +31,16 @@
     "phpunit/phpunit": "~7.0",
     "theseer/autoload": "~1.0",
     "phing/phing": "~2.0"
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml"
+    ],
+    "phar": [
+      "vendor/bin/phing phar-nightly",
+      "vendor/bin/phing signed-phar",
+      "sha256sum build/out/*"
+    ]
   },
   "autoload": {
     "psr-4": { "PHPDraft\\": "src/PHPDraft" }

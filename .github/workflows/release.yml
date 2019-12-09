@@ -1,0 +1,58 @@
+name: PHP release
+
+on:
+  release:
+    types: [published, created, edited]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: 7.4
+        extensions: curl,json,mbstring
+        coverage: none
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Compile phar
+      run: composer run-script phar
+
+    - name: Upload binary to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/out/phpdraft-${{ github.ref }}.phar
+        asset_name: phpdraft-${{ github.ref }}.phar
+        tag: ${{ github.ref }}
+        overwrite: false
+
+    - name: Upload library to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/out/phpdraft-library-${{ github.ref }}.phar
+        asset_name: phpdraft-library-${{ github.ref }}.phar
+        tag: ${{ github.ref }}
+        overwrite: false
