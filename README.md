@@ -72,7 +72,7 @@ Return the information for the Person
 
 ## Building an executable
 Install the binary dependencies with composer (`composer install`).
-Run `ant phar` or `ant phar-nightly`
+Run `phing phar` or `phing phar-nightly`
 
 ## Libraries
 This app usage the following libraries:
