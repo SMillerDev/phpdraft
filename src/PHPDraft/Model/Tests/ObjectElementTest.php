@@ -15,37 +15,37 @@ use Lunr\Halo\LunrBaseTest;
  */
 class ObjectElementTest extends LunrBaseTest
 {
-    public function testKeySetup()
+    public function testKeySetup(): void
     {
         $this->assertSame(NULL, $this->class->key);
     }
 
-    public function testTypeSetup()
+    public function testTypeSetup(): void
     {
         $this->assertSame(NULL, $this->class->type);
     }
 
-    public function testDescriptionSetup()
+    public function testDescriptionSetup(): void
     {
         $this->assertSame(NULL, $this->class->description);
     }
 
-    public function testElementSetup()
+    public function testElementSetup(): void
     {
         $this->assertSame(NULL, $this->class->element);
     }
 
-    public function testValueSetup()
+    public function testValueSetup(): void
     {
         $this->assertSame(NULL, $this->class->value);
     }
 
-    public function testStatusSetup()
+    public function testStatusSetup(): void
     {
         $this->assertSame('', $this->class->status);
     }
 
-    public function testDepsSetup()
+    public function testDepsSetup(): void
     {
         $this->assertSame(NULL, $this->class->deps);
     }

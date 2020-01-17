@@ -24,7 +24,7 @@ class HierarchyElementChildTest extends LunrBaseTest
      */
     protected $parent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->parent = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
                              ->getMock();
@@ -33,7 +33,7 @@ class HierarchyElementChildTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testTitleSetup()
+    public function testTitleSetup(): void
     {
         $this->assertSame(NULL, $this->class->title);
     }
@@ -41,7 +41,7 @@ class HierarchyElementChildTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testDescriptionSetup()
+    public function testDescriptionSetup(): void
     {
         $this->assertSame(NULL, $this->class->description);
     }
@@ -49,7 +49,7 @@ class HierarchyElementChildTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testChildrenSetup()
+    public function testChildrenSetup(): void
     {
         $this->assertSame([], $this->class->children);
     }
@@ -57,7 +57,7 @@ class HierarchyElementChildTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);

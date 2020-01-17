@@ -29,7 +29,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
 
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
@@ -42,7 +42,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -51,7 +51,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -61,7 +61,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -81,7 +81,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledLoop()
+    public function testParseIsCalledLoop(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -105,7 +105,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledSlice()
+    public function testParseIsCalledSlice(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -130,7 +130,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic get_href
      */
-    public function testGetHrefIsCalledWithParent()
+    public function testGetHrefIsCalledWithParent(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -148,7 +148,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic get_href
      */
-    public function testGetHrefIsCalledWithoutParent()
+    public function testGetHrefIsCalledWithoutParent(): void
     {
         $result = $this->class->get_href();
 
@@ -158,7 +158,7 @@ class HierarchyElementTest extends LunrBaseTest
     /**
      * Test basic get_href
      */
-    public function testGetHrefIsCalledWithTitleWithSpaces()
+    public function testGetHrefIsCalledWithTitleWithSpaces(): void
     {
         $property = $this->reflection->getProperty('title');
         $property->setAccessible(TRUE);

@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "lunr/halo": "dev-master",
-    "phpunit/phpunit": "~7.0",
+    "phpunit/phpunit": "~8.0",
     "theseer/autoload": "~1.0",
     "phing/phing": "~2.0"
   },

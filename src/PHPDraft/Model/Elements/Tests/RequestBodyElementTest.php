@@ -25,7 +25,7 @@ class RequestBodyElementTest extends LunrBaseTest
      * Set up tests
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new RequestBodyElement();
         $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\RequestBodyElement');
@@ -34,7 +34,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
         $property->setAccessible(TRUE);
@@ -44,7 +44,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testNewInstance()
+    public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
         $method->setAccessible(TRUE);
@@ -55,7 +55,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testPrintBasic()
+    public function testPrintBasic(): void
     {
         $this->class->key = 'key';
         $return = $this->class->print_request();
@@ -65,7 +65,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testPrintBasicArray()
+    public function testPrintBasicArray(): void
     {
         $this->class->key = 'key';
         $this->class->value = 'value';
@@ -79,7 +79,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testPrintJson()
+    public function testPrintJson(): void
     {
         $this->class->key = 'key';
         $return = $this->class->print_request('application/json');
@@ -89,7 +89,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testPrintJsonArray()
+    public function testPrintJsonArray(): void
     {
         $this->class->key = 'key';
         $this->class->value = 'value';
@@ -125,7 +125,7 @@ class RequestBodyElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider()
+    public function parseObjectProvider(): array
     {
         $return             = [];
         $base1              = new RequestBodyElement();
@@ -245,7 +245,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testEmptyParse()
+    public function testEmptyParse(): void
     {
         $deps = [];
         $return = $this->class->parse(NULL, $deps);
@@ -259,7 +259,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testArrayContentEnumContentParse()
+    public function testArrayContentEnumContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": [{"content":{"key":{"content":"key"},"value":{"element":"value"}}}]}';
@@ -275,7 +275,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testArrayContentObjectContentParse()
+    public function testArrayContentObjectContentParse(): void
     {
         $deps = [];
         $object = '{"element":"object","content": [[]]}';
@@ -291,7 +291,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureEnumContentParse()
+    public function testValueStructureEnumContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"enum"}}}';
@@ -304,7 +304,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureArrayContentParse()
+    public function testValueStructureArrayContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"array"}}}';
@@ -317,7 +317,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureObjectContentParse()
+    public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
@@ -330,7 +330,7 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureObjectContentParseContent()
+    public function testValueStructureObjectContentParseContent(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object", "content":{}}}}';

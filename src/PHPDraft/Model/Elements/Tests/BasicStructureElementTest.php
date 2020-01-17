@@ -38,7 +38,7 @@ class BasicStructureElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
         $property->setAccessible(TRUE);
@@ -48,7 +48,7 @@ class BasicStructureElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testDescriptionAsHTML()
+    public function testDescriptionAsHTML(): void
     {
         $property = $this->reflection->getProperty('description');
         $property->setAccessible(TRUE);
@@ -80,7 +80,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $this->assertSame($string_value, $return);
     }
 
-    public function stringValueProvider()
+    public function stringValueProvider(): array
     {
         $return = [];
 
@@ -99,7 +99,7 @@ class BasicStructureElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testParseCommonDeps()
+    public function testParseCommonDeps(): void
     {
         $dep = [];
 
@@ -143,7 +143,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $this->assertEquals([], $dep);
     }
 
-    public function parseValueProvider()
+    public function parseValueProvider(): array
     {
         $return = [];
 

@@ -22,7 +22,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      * Set up tests
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new ArrayStructureElement();
         $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\ArrayStructureElement');
@@ -50,7 +50,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider()
+    public function parseObjectProvider(): array
     {
         $return             = [];
         $base1              = new ArrayStructureElement();
@@ -163,7 +163,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testNewInstance()
+    public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
         $method->setAccessible(TRUE);
@@ -174,7 +174,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToString()
+    public function testToString(): void
     {
         $return = $this->class->__toString();
         $this->assertSame('<span class="example-value pull-right">[ ]</span>', $return);
@@ -183,7 +183,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithArray()
+    public function testToStringWithArray(): void
     {
         $this->class->value = ['string', 'int'];
         $return = $this->class->__toString();
@@ -193,7 +193,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithString()
+    public function testToStringWithString(): void
     {
         $this->class->value = 'hello';
         $return = $this->class->__toString();
@@ -203,7 +203,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithComplexArray()
+    public function testToStringWithComplexArray(): void
     {
         $this->class->value = ['Bike', 'car'];
         $return = $this->class->__toString();

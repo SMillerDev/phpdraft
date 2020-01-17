@@ -123,16 +123,18 @@ class BaseParserTest extends LunrBaseTest
     /**
      * Check if parsing the fails when invalid JSON
      *
-     * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException        \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
-     * @expectedExceptionCode    2
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONWithInvalidJSON(): void
     {
         $this->class->expects($this->once())
                     ->method('parse')
                     ->will($this->returnValue(NULL));
+
+        $this->expectException('\PHPDraft\Parse\ExecutionException');
+        $this->expectExceptionMessage('Drafter generated invalid JSON (ERROR)');
+        $this->expectExceptionCode(2);
+
         $this->mock_function('json_last_error', function () {return JSON_ERROR_DEPTH;});
         $this->mock_function('json_last_error_msg', function () {return "ERROR";});
         $this->class->parseToJson();

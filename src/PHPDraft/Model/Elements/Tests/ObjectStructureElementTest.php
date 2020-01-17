@@ -27,7 +27,7 @@ class ObjectStructureElementTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new ObjectStructureElement();
         $this->reflection = new ReflectionClass('PHPDraft\Model\Elements\ObjectStructureElement');
@@ -36,7 +36,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testNewInstance()
+    public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
         $method->setAccessible(TRUE);
@@ -69,7 +69,7 @@ class ObjectStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider()
+    public function parseObjectProvider(): array
     {
         $return             = [];
         $base1              = new ObjectStructureElement();
@@ -189,7 +189,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testEmptyParse()
+    public function testEmptyParse(): void
     {
         $deps = [];
         $return = $this->class->parse(NULL, $deps);
@@ -203,7 +203,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testArrayContentEnumContentParse()
+    public function testArrayContentEnumContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": [{"content":{"key":{"content":"key"},"value":{"element":"value"}}}]}';
@@ -219,7 +219,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testArrayContentObjectContentParse()
+    public function testArrayContentObjectContentParse(): void
     {
         $deps = [];
         $object = '{"element":"object","content": [[]]}';
@@ -235,7 +235,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureEnumContentParse()
+    public function testValueStructureEnumContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"enum"}}}';
@@ -248,7 +248,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureArrayContentParse()
+    public function testValueStructureArrayContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"array"}}}';
@@ -261,7 +261,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureObjectContentParse()
+    public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
@@ -274,7 +274,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testValueStructureObjectContentParseContent()
+    public function testValueStructureObjectContentParseContent(): void
     {
         $deps = [];
         $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object", "content":{}}}}';
@@ -287,7 +287,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringBasic()
+    public function testToStringBasic(): void
     {
         $return = $this->class->__toString();
         $this->assertSame('<span class="example-value pull-right">{  }</span>', $return);
@@ -296,7 +296,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringArray()
+    public function testToStringArray(): void
     {
         $this->class->value = ['hello'];
         $return = $this->class->__toString();
@@ -310,7 +310,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringNullValue()
+    public function testToStringNullValue(): void
     {
         $this->class->key = 'hello';
         $return = $this->class->__toString();
@@ -320,7 +320,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringObjectValue()
+    public function testToStringObjectValue(): void
     {
         $this->class->key = 'hello';
         $this->class->value = new ObjectStructureElement();
@@ -331,7 +331,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringArrayValue()
+    public function testToStringArrayValue(): void
     {
         $this->class->key = 'hello';
         $this->class->value = new ArrayStructureElement();
@@ -342,7 +342,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringEnumValue()
+    public function testToStringEnumValue(): void
     {
         $this->class->key = 'hello';
         $this->class->value = new EnumStructureElement();
@@ -353,7 +353,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringBoolValue()
+    public function testToStringBoolValue(): void
     {
         $this->class->key = 'hello';
         $this->class->value = TRUE;
@@ -364,7 +364,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringOtherValue()
+    public function testToStringOtherValue(): void
     {
         $this->class->key = 'hello';
         $this->class->value = 'world';
@@ -375,7 +375,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Test the setup of new instances
      */
-    public function testToStringOtherValueTypeKnown()
+    public function testToStringOtherValueTypeKnown(): void
     {
         $this->class->type = 'string';
         $this->class->key = 'hello';

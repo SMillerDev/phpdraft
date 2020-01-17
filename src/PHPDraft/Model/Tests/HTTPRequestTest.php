@@ -29,7 +29,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         $parent           = $this->createMock('\PHPDraft\Model\Transition');
 
@@ -45,7 +45,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -54,7 +54,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $this->assertIsObject($this->get_reflection_property_value('parent'));
         $this->assertEquals('a9b7ba70783b617e9998dc4dd82eb3c5', $this->get_reflection_property_value('id'));
@@ -63,7 +63,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Tests if get_id returns the correct ID.
      */
-    public function testGetId()
+    public function testGetId(): void
     {
         $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->class->get_id());
     }
@@ -71,7 +71,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnStatusCode()
+    public function testEqualOnStatusCode(): void
     {
         $property = $this->reflection->getProperty('method');
         $property->setAccessible(TRUE);
@@ -87,7 +87,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnDesc()
+    public function testEqualOnDesc(): void
     {
         $property = $this->reflection->getProperty('body');
         $property->setAccessible(TRUE);
@@ -103,7 +103,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnHeaders()
+    public function testEqualOnHeaders(): void
     {
         $property = $this->reflection->getProperty('headers');
         $property->setAccessible(TRUE);
@@ -119,7 +119,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnBoth()
+    public function testEqualOnBoth(): void
     {
         $s_property = $this->reflection->getProperty('method');
         $s_property->setAccessible(TRUE);
@@ -139,7 +139,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandNoKey()
+    public function testGetCurlCommandNoKey(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -153,7 +153,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandWithHeaders()
+    public function testGetCurlCommandWithHeaders(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -172,7 +172,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlWithHeaders()
+    public function testGetHurlWithHeaders(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -191,7 +191,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandStringBody()
+    public function testGetCurlCommandStringBody(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -208,7 +208,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlStringBody()
+    public function testGetHurlStringBody(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -225,7 +225,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandArrayBody()
+    public function testGetCurlCommandArrayBody(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -242,7 +242,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlArrayBody()
+    public function testGetHurlArrayBody(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -259,7 +259,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_curl_command functions
      */
-    public function testGetCurlCommandStructBodyFilled()
+    public function testGetCurlCommandStructBodyFilled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -294,7 +294,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlStructBodyFilled()
+    public function testGetHurlStructBodyFilled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -329,7 +329,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic get_hurl_link functions
      */
-    public function testGetHurlUrlArgs()
+    public function testGetHurlUrlArgs(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -352,7 +352,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -372,7 +372,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWithHeaders()
+    public function testParseIsCalledWithHeaders(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -392,7 +392,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWithPOST()
+    public function testParseIsCalledWithPOST(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -416,7 +416,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWithPOSTCopy()
+    public function testParseIsCalledWithPOSTCopy(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -440,7 +440,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWithPOSTStruct()
+    public function testParseIsCalledWithPOSTStruct(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -460,7 +460,7 @@ class HTTPRequestTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWithPOSTAsset()
+    public function testParseIsCalledWithPOSTAsset(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);

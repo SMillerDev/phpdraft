@@ -97,13 +97,14 @@ class DrafterAPITest extends LunrBaseTest
     /**
      * Check if parsing the fails without drafter
      *
-     * @covers                   \PHPDraft\Parse\DrafterAPI::parseToJson()
-     * @expectedException        \PHPDraft\Parse\ResourceException
-     * @expectedExceptionMessage Drafter webservice failed to parse input
-     * @expectedExceptionCode    1
+     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testParseWithFailingWebservice(): void
     {
+        $this->expectException('\PHPDraft\Parse\ResourceException');
+        $this->expectExceptionMessage('Drafter webservice failed to parse input');
+        $this->expectExceptionCode(1);
+
         $this->mock_function('curl_errno', function() { return 1;});
         $this->class->parseToJson();
         $this->unmock_function('curl_errno');

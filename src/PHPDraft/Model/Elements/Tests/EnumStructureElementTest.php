@@ -21,7 +21,7 @@ class EnumStructureElementTest extends LunrBaseTest
      * Set up tests
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new EnumStructureElement();
         $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\EnumStructureElement');
@@ -30,7 +30,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
         $property->setAccessible(TRUE);
@@ -40,7 +40,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testNewInstance()
+    public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
         $method->setAccessible(TRUE);
@@ -51,7 +51,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToString()
+    public function testToString(): void
     {
         $return = $this->class->__toString();
         $this->assertSame('<span class="example-value pull-right">//list of options</span>', $return);
@@ -60,7 +60,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithArray()
+    public function testToStringWithArray(): void
     {
         $this->class->value = ['hello'=>'string', 'test'=>'int'];
         $return = $this->class->__toString();
@@ -70,7 +70,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithString()
+    public function testToStringWithString(): void
     {
         $this->class->value = 'hello';
         $this->class->key = 'key';
@@ -82,7 +82,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithStringComplex()
+    public function testToStringWithStringComplex(): void
     {
         $this->class->value = 'hello';
         $this->class->key = 'key';
@@ -94,7 +94,7 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToStringWithComplexArray()
+    public function testToStringWithComplexArray(): void
     {
         $this->class->value = ['hello'=>'bike', 'test'=>'Car'];
         $return = $this->class->__toString();
@@ -123,7 +123,7 @@ class EnumStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider()
+    public function parseObjectProvider(): array
     {
         $return             = [];
         $base1              = new EnumStructureElement();

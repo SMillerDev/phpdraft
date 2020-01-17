@@ -38,7 +38,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->parent_transition = $this->createMock('\PHPDraft\Model\Transition');
         $this->parent            = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
@@ -52,7 +52,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -61,7 +61,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $this->assertSame($this->parent_transition, $this->get_reflection_property_value('parent'));
         $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->get_reflection_property_value('id'));
@@ -70,7 +70,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Tests if get_id returns the correct ID.
      */
-    public function testGetId()
+    public function testGetId(): void
     {
         $this->assertSame('a9b7ba70783b617e9998dc4dd82eb3c5', $this->class->get_id());
     }
@@ -78,7 +78,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -98,7 +98,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledExtraHeaders()
+    public function testParseIsCalledExtraHeaders(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -118,7 +118,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledWOAttributes()
+    public function testParseIsCalledWOAttributes(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -138,7 +138,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledCopyContent()
+    public function testParseIsCalledCopyContent(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -158,7 +158,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledStructContentEmpty()
+    public function testParseIsCalledStructContentEmpty(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -178,7 +178,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledStructContent()
+    public function testParseIsCalledStructContent(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -198,7 +198,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledStructContentHasAttr()
+    public function testParseIsCalledStructContentHasAttr(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -219,7 +219,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnStatusCode()
+    public function testEqualOnStatusCode(): void
     {
         $property = $this->reflection->getProperty('statuscode');
         $property->setAccessible(TRUE);
@@ -235,7 +235,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnDesc()
+    public function testEqualOnDesc(): void
     {
         $property = $this->reflection->getProperty('description');
         $property->setAccessible(TRUE);
@@ -251,7 +251,7 @@ class HTTPResponseTest extends LunrBaseTest
     /**
      * Test basic is_equal_to functions
      */
-    public function testEqualOnBoth()
+    public function testEqualOnBoth(): void
     {
         $s_property = $this->reflection->getProperty('statuscode');
         $s_property->setAccessible(TRUE);

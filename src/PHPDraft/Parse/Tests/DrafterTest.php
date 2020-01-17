@@ -115,13 +115,14 @@ class DrafterTest extends LunrBaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException        \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionMessage Parsing encountered errors and stopped
-     * @expectedExceptionCode    2
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONWithErrors(): void
     {
+        $this->expectException('\PHPDraft\Parse\ExecutionException');
+        $this->expectExceptionMessage('Parsing encountered errors and stopped');
+        $this->expectExceptionCode(2);
+
         $this->mock_function('shell_exec', function () { return ""; });
         file_put_contents(TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json/error.json'));
@@ -145,13 +146,14 @@ class DrafterTest extends LunrBaseTest
     /**
      * Check if parsing the fails when invalid JSON
      *
-     * @covers                   \PHPDraft\Parse\Drafter::parseToJson()
-     * @expectedException        \PHPDraft\Parse\ExecutionException
-     * @expectedExceptionMessage Drafter generated invalid JSON (ERROR)
-     * @expectedExceptionCode    2
+     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONWithInvalidJSON(): void
     {
+        $this->expectException('\PHPDraft\Parse\ExecutionException');
+        $this->expectExceptionMessage('Drafter generated invalid JSON (ERROR)');
+        $this->expectExceptionCode(2);
+
         $this->mock_function('json_last_error', function () { return JSON_ERROR_DEPTH; });
         $this->mock_function('json_last_error_msg', function () { return "ERROR"; });
         file_put_contents(TEST_STATICS . '/drafter/index.json', '["hello: \'world}');

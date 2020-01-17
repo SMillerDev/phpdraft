@@ -20,7 +20,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->class      = new Category();
@@ -30,7 +30,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->parent);
@@ -40,7 +40,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testStructuresSetup()
+    public function testStructuresSetup(): void
     {
         $this->assertSame([], $this->class->structures);
     }
@@ -48,7 +48,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -65,7 +65,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions where 'element=resource'
      */
-    public function testParseIsCalledResource()
+    public function testParseIsCalledResource(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -85,7 +85,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions where 'element=dataStructure'
      */
-    public function testParseIsCalledObject()
+    public function testParseIsCalledObject(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -105,7 +105,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions where 'element=dataStructure'
      */
-    public function testParseIsCalledObjectMetaID()
+    public function testParseIsCalledObjectMetaID(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -125,7 +125,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic parse functions where 'element=henk'
      */
-    public function testParseIsCalledDef()
+    public function testParseIsCalledDef(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -149,7 +149,7 @@ class CategoryTest extends HierarchyElementChildTest
     /**
      * Test basic get_href
      */
-    public function testGetHrefIsCalledWithParent()
+    public function testGetHrefIsCalledWithParent(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);

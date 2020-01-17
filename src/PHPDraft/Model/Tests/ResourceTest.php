@@ -31,7 +31,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Set up
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Category')
                                  ->getMock();
@@ -42,7 +42,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Tear down
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -51,7 +51,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testSetupCorrectly()
+    public function testSetupCorrectly(): void
     {
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
     }
@@ -59,7 +59,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalled()
+    public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -79,7 +79,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledNoHREF()
+    public function testParseIsCalledNoHREF(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -99,7 +99,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsCopy()
+    public function testParseIsCalledIsCopy(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
@@ -119,7 +119,7 @@ class ResourceTest extends LunrBaseTest
     /**
      * Test basic parse functions
      */
-    public function testParseIsCalledIsNotCopy()
+    public function testParseIsCalledIsNotCopy(): void
     {
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(TRUE);
