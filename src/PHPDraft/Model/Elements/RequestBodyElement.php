@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the RequestBodyElement.
  *
@@ -51,13 +52,11 @@ class RequestBodyElement extends ObjectStructureElement
         switch ($type) {
             case 'application/x-www-form-urlencoded':
                 return $this->key . '=<span>' . $value . '</span>';
-                break;
             default:
                 $object             = [];
                 $object[$this->key] = $value;
 
                 return json_encode($object);
-                break;
         }
     }
 

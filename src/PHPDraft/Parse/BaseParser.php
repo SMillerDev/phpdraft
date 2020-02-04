@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the BaseParser.php.
  *
@@ -71,10 +72,10 @@ abstract class BaseParser
      *
      * @return object JSON output.
      */
-    public function parseToJson(): stdClass
+    public function parseToJson(): object
     {
         if (!file_exists($this->tmp_dir)) {
-            mkdir($this->tmp_dir, 0777, TRUE);
+            mkdir($this->tmp_dir, 0777, true);
         }
 
         file_put_contents($this->tmp_dir . '/index.apib', $this->apib);
@@ -87,10 +88,10 @@ abstract class BaseParser
             throw new ExecutionException('Drafter generated invalid JSON (' . json_last_error_msg() . ')', 2);
         }
 
-        $warnings = FALSE;
+        $warnings = false;
         foreach ($this->json->content as $item) {
             if ($item->element === 'annotation') {
-                $warnings = TRUE;
+                $warnings = true;
                 $line     = $item->attributes->sourceMap->content[0]->content[0]->content[0]->attributes->line->content ?? 'UNKNOWN';
                 $prefix   = (is_array($item->meta->classes)) ? strtoupper($item->meta->classes[0]) : strtoupper($item->meta->classes->content[0]->content);
                 $error    = $item->content;

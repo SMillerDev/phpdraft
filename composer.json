@@ -30,7 +30,9 @@
     "lunr/halo": "dev-master",
     "phpunit/phpunit": "~8.0",
     "theseer/autoload": "~1.0",
-    "phing/phing": "~2.0"
+    "phing/phing": "~2.0",
+    "phpstan/phpstan-phpunit": "^0.12.6",
+    "phpstan/phpstan": "^0.12.8"
   },
   "scripts": {
     "test": [

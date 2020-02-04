@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the BasicStructureElementTest.php
  *
@@ -41,7 +42,7 @@ class BasicStructureElementTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertNull($property->getValue($this->class));
     }
 
@@ -51,7 +52,7 @@ class BasicStructureElementTest extends LunrBaseTest
     public function testDescriptionAsHTML(): void
     {
         $property = $this->reflection->getProperty('description');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, '_Hello world_');
 
         $this->class->description_as_html();
@@ -69,11 +70,11 @@ class BasicStructureElementTest extends LunrBaseTest
      */
     public function testStringValue($value, $string_value)
     {
-        $property = $this->reflection->getProperty('value');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, $value);
+        $this->set_reflection_property_value('value', $value);
 
-        $this->mock_function('rand', function() { return 0;});
+        $this->mock_function('rand', function () {
+            return 0;
+        });
         $return = $this->class->string_value();
         $this->unmock_function('rand');
 
@@ -86,7 +87,7 @@ class BasicStructureElementTest extends LunrBaseTest
 
         $return[] = ['hello', 'hello'];
         $return[] = [1, 1];
-        $return[] = [TRUE, TRUE];
+        $return[] = [true, true];
         $return[] = [[1], 1];
 
         $obj        = new ArrayStructureElement();
@@ -111,7 +112,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $answer->description = PHP_EOL;
 
         $method = $this->reflection->getMethod('parse_common');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $method->invokeArgs($this->class, [json_decode($json), &$dep]);
 
         $this->assertEquals($answer->key, $this->class->key);
@@ -133,7 +134,7 @@ class BasicStructureElementTest extends LunrBaseTest
     {
         $dep = [];
         $method = $this->reflection->getMethod('parse_common');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $method->invokeArgs($this->class, [$value, &$dep]);
 
         $this->assertEquals($expected_value->key, $this->class->key);
@@ -165,7 +166,7 @@ class BasicStructureElementTest extends LunrBaseTest
 
         $obj3 = clone $obj;
         $obj3->meta->description = '__hello__';
-        $answer->description = '<p><strong>hello</strong></p>'.PHP_EOL;
+        $answer->description = '<p><strong>hello</strong></p>' . PHP_EOL;
 
         $return[] = [$obj3, $answer];
 

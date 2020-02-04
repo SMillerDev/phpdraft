@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the CategoryTest.php
  *
@@ -51,7 +52,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = new \stdClass();
@@ -68,7 +69,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testParseIsCalledResource(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $json = '{"content":[{"element":"resource", "content":[{"element":"copy", "content":""}]}]}';
@@ -78,7 +79,7 @@ class CategoryTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $cproperty = $this->reflection->getProperty('children');
-        $cproperty->setAccessible(TRUE);
+        $cproperty->setAccessible(true);
         $this->assertNotEmpty($cproperty->getValue($this->class));
     }
 
@@ -88,7 +89,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testParseIsCalledObject(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $json = '{"content":[{"element":"dataStructure", "content":{"key":{"content":"none"}, "value":{"element":"none"}}}]}';
@@ -98,7 +99,7 @@ class CategoryTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(TRUE);
+        $s_property->setAccessible(true);
         $this->assertNotEmpty($s_property->getValue($this->class));
     }
 
@@ -108,7 +109,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testParseIsCalledObjectMetaID(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $json = '{"content":[{"element":"dataStructure", "content":[{"meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}]}]}';
@@ -118,7 +119,7 @@ class CategoryTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(TRUE);
+        $s_property->setAccessible(true);
         $this->assertNotEmpty($s_property->getValue($this->class));
     }
 
@@ -128,7 +129,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testParseIsCalledDef(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $json = '{"content":[{"element":"henk", "content":[{"element":"copy", "content":""}]}]}';
@@ -138,11 +139,11 @@ class CategoryTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $c_property = $this->reflection->getProperty('children');
-        $c_property->setAccessible(TRUE);
+        $c_property->setAccessible(true);
         $this->assertEmpty($c_property->getValue($this->class));
 
         $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(TRUE);
+        $s_property->setAccessible(true);
         $this->assertEmpty($s_property->getValue($this->class));
     }
 
@@ -152,7 +153,7 @@ class CategoryTest extends HierarchyElementChildTest
     public function testGetHrefIsCalledWithParent(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $this->parent->expects($this->once())

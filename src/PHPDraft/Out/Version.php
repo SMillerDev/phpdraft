@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the Version.php.
  *
@@ -58,7 +59,7 @@ class Version
      */
     public function getReleaseChannel(): string
     {
-        if (strpos(self::release_id(), '-') !== FALSE) {
+        if (strpos(self::release_id(), '-') !== false) {
             return '-nightly';
         }
 

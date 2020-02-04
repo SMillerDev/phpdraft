@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ApibFileParser.
  *
@@ -33,7 +34,7 @@ class ApibFileParser
     /**
      * Filename to parse.
      *
-     * @var
+     * @var string
      */
     private $filename;
 
@@ -75,15 +76,18 @@ class ApibFileParser
      *
      * @return string The full API blueprint file.
      */
-    private function get_apib(string $filename, ?string $rel_path = NULL): string
+    private function get_apib(string $filename, ?string $rel_path = null): string
     {
         $path    = $this->file_path($filename, $rel_path);
         $file    = file_get_contents($path);
         $matches = [];
         preg_match_all('<!-- include\(([\S\s]*?)(\.[a-z]*?)\) -->', $file, $matches);
         for ($i = 0; $i < count($matches[1]); $i++) {
-            $file = str_replace('<!-- include(' . $matches[1][$i] . $matches[2][$i] . ') -->',
-                $this->get_apib($matches[1][$i] . $matches[2][$i], dirname($path)), $file);
+            $file = str_replace(
+                '<!-- include(' . $matches[1][$i] . $matches[2][$i] . ') -->',
+                $this->get_apib($matches[1][$i] . $matches[2][$i], dirname($path)),
+                $file
+            );
         }
 
         preg_match_all('<!-- schema\(([a-z0-9_.\/\:]*?)\) -->', $file, $matches);
@@ -104,7 +108,7 @@ class ApibFileParser
      *
      * @return string
      */
-    private function file_path(string $filename, ?string $rel_path = NULL): string
+    private function file_path(string $filename, ?string $rel_path = null): string
     {
         // Absolute path
         if (file_exists($filename)) {
@@ -112,7 +116,7 @@ class ApibFileParser
         }
 
         // Path relative to the top file
-        if ($rel_path !== NULL && file_exists($rel_path . $filename)) {
+        if ($rel_path !== null && file_exists($rel_path . $filename)) {
             return $rel_path . $filename;
         }
 
@@ -122,7 +126,7 @@ class ApibFileParser
         }
 
         $included_path = stream_resolve_include_path($filename);
-        if ($included_path !== FALSE) {
+        if ($included_path !== false) {
             return $included_path;
         }
 

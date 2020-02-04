@@ -14,8 +14,6 @@ use PHPDraft\In\ApibFileParser;
 use PHPDraft\Out\Sorting;
 use PHPDraft\Out\Version;
 use PHPDraft\Parse\ExecutionException;
-use PHPDraft\Parse\JsonToHTML;
-use PHPDraft\Parse\LegacyHtmlGenerator;
 use PHPDraft\Parse\ParserFactory;
 use PHPDraft\Parse\ResourceException;
 

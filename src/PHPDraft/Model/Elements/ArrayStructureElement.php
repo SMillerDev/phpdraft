@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ArrayStructureElement.php.
  *
@@ -17,12 +18,12 @@ class ArrayStructureElement extends BasicStructureElement
     /**
      * Parse an array object.
      *
-     * @param \stdClass $object       APIb Item to parse
-     * @param array     $dependencies List of dependencies build
+     * @param object $object       APIB Item to parse
+     * @param array  $dependencies List of dependencies build
      *
      * @return self Self reference
      */
-    public function parse($object, array &$dependencies): StructureElement
+    public function parse(object $object, array &$dependencies): StructureElement
     {
         $this->element = (isset($object->element)) ? $object->element : 'array';
 
@@ -61,8 +62,11 @@ class ArrayStructureElement extends BasicStructureElement
         }
 
         foreach ($this->value as $item) {
-            $type = (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(' ', '-',
-                        strtolower($item)) . '">' . $item . '</a>';
+            $type = (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(
+                ' ',
+                '-',
+                strtolower($item)
+            ) . '">' . $item . '</a>';
 
             $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ObjectElementTest.php
  *
@@ -17,27 +18,27 @@ class ObjectElementTest extends LunrBaseTest
 {
     public function testKeySetup(): void
     {
-        $this->assertSame(NULL, $this->class->key);
+        $this->assertSame(null, $this->class->key);
     }
 
     public function testTypeSetup(): void
     {
-        $this->assertSame(NULL, $this->class->type);
+        $this->assertSame(null, $this->class->type);
     }
 
     public function testDescriptionSetup(): void
     {
-        $this->assertSame(NULL, $this->class->description);
+        $this->assertSame(null, $this->class->description);
     }
 
     public function testElementSetup(): void
     {
-        $this->assertSame(NULL, $this->class->element);
+        $this->assertSame(null, $this->class->element);
     }
 
     public function testValueSetup(): void
     {
-        $this->assertSame(NULL, $this->class->value);
+        $this->assertSame(null, $this->class->value);
     }
 
     public function testStatusSetup(): void
@@ -47,6 +48,6 @@ class ObjectElementTest extends LunrBaseTest
 
     public function testDepsSetup(): void
     {
-        $this->assertSame(NULL, $this->class->deps);
+        $this->assertSame(null, $this->class->deps);
     }
 }

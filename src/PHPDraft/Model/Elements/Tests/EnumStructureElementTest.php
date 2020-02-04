@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the EnumStructureElementTest.php
  *
@@ -33,7 +34,7 @@ class EnumStructureElementTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertNull($property->getValue($this->class));
     }
 
@@ -43,7 +44,7 @@ class EnumStructureElementTest extends LunrBaseTest
     public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(EnumStructureElement::class, $return);
     }
@@ -62,7 +63,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithArray(): void
     {
-        $this->class->value = ['hello'=>'string', 'test'=>'int'];
+        $this->class->value = ['hello' => 'string', 'test' => 'int'];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">hello</li><li class="list-group-item mdl-list__item"><a href="#object-int">test</a></li></ul>', $return);
     }
@@ -96,7 +97,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
-        $this->class->value = ['hello'=>'bike', 'test'=>'Car'];
+        $this->class->value = ['hello' => 'bike', 'test' => 'Car'];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">hello</a></li><li class="list-group-item mdl-list__item"><a href="#object-car">test</a></li></ul>', $return);
     }
@@ -151,7 +152,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base3->element     = 'member';
         $base3->type        = 'array';
         $base3->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base3->deps        = NULL;
+        $base3->deps        = null;
 
         $return[] = [
             '{

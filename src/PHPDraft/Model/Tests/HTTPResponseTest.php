@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the HTTPResponseTest.php
  *
@@ -43,7 +44,9 @@ class HTTPResponseTest extends LunrBaseTest
         $this->parent_transition = $this->createMock('\PHPDraft\Model\Transition');
         $this->parent            = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
                                         ->getMock();
-        $this->mock_function('microtime', function() {return 1000;});
+        $this->mock_function('microtime', function () {
+            return 1000;
+        });
         $this->class      = new HTTPResponse($this->parent_transition);
         $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('\PHPDraft\Model\HTTPResponse');
@@ -81,7 +84,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"statusCode":1000, "headers":{"content":[]}}, "content":[]}';
@@ -91,7 +94,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('statuscode');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame(1000, $href_property->getValue($this->class));
     }
 
@@ -101,7 +104,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledExtraHeaders(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"statusCode":1000, "headers":{"content":[{"content":{"key":{"content":"contentKEY"}, "value":{"content":"contentVALUE"}}}]}}, "content":[]}';
@@ -111,8 +114,8 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('headers');
-        $href_property->setAccessible(TRUE);
-        $this->assertSame(['contentKEY'=>'contentVALUE'], $href_property->getValue($this->class));
+        $href_property->setAccessible(true);
+        $this->assertSame(['contentKEY' => 'contentVALUE'], $href_property->getValue($this->class));
     }
 
     /**
@@ -121,7 +124,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledWOAttributes(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[]}';
@@ -131,7 +134,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('statuscode');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertNull($href_property->getValue($this->class));
     }
 
@@ -141,7 +144,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledCopyContent(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[{"element":"copy", "content":""}]}';
@@ -151,8 +154,8 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('description');
-        $href_property->setAccessible(TRUE);
-        $this->assertSame(''.PHP_EOL, $href_property->getValue($this->class));
+        $href_property->setAccessible(true);
+        $this->assertSame('' . PHP_EOL, $href_property->getValue($this->class));
     }
 
     /**
@@ -161,7 +164,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledStructContentEmpty(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[{"element":"dataStructure", "content":[]}]}';
@@ -171,7 +174,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('structure');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertEmpty($href_property->getValue($this->class));
     }
 
@@ -181,7 +184,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledStructContent(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[{"element":"dataStructure", "content":[{}]}]}';
@@ -191,7 +194,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('structure');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertNotEmpty($href_property->getValue($this->class));
     }
 
@@ -201,7 +204,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledStructContentHasAttr(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[{"content":"hello", "attributes":{"contentType":"content"}, "element":"hello"}]}';
@@ -211,7 +214,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('content');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertArrayHasKey('content', $href_property->getValue($this->class));
         $this->assertSame('hello', $href_property->getValue($this->class)['content']);
     }
@@ -222,7 +225,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testEqualOnStatusCode(): void
     {
         $property = $this->reflection->getProperty('statuscode');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, 200);
 
         $obj = '{"statuscode":200, "description":"hello"}';
@@ -238,7 +241,7 @@ class HTTPResponseTest extends LunrBaseTest
     public function testEqualOnDesc(): void
     {
         $property = $this->reflection->getProperty('description');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, 'hello');
 
         $obj = '{"statuscode":300, "description":"hello"}';
@@ -254,11 +257,11 @@ class HTTPResponseTest extends LunrBaseTest
     public function testEqualOnBoth(): void
     {
         $s_property = $this->reflection->getProperty('statuscode');
-        $s_property->setAccessible(TRUE);
+        $s_property->setAccessible(true);
         $s_property->setValue($this->class, 200);
 
         $property = $this->reflection->getProperty('description');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, 'hello');
 
         $obj = '{"statuscode":200, "description":"hello"}';
@@ -267,6 +270,4 @@ class HTTPResponseTest extends LunrBaseTest
 
         $this->assertTrue($return);
     }
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the VersionTest.php
  *
@@ -37,7 +38,9 @@ class VersionTest extends LunrBaseTest
     public function testReleaseIDIsNull(): void
     {
         define('VERSION', '0');
-        $this->mock_function('exec', function() { return 12;});
+        $this->mock_function('exec', function () {
+            return 12;
+        });
         $return = $this->class->release_id();
         $this->assertSame(12, $return);
         $this->unmock_function('exec');
@@ -69,7 +72,7 @@ class VersionTest extends LunrBaseTest
     public function testHelp(): void
     {
         $this->class->help();
-        $this->expectOutputString(file_get_contents(TEST_STATICS.'/drafter/help.txt'));
+        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/help.txt'));
     }
 
     /**

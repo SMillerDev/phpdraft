@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the Category.php.
  *
@@ -29,7 +30,7 @@ class Category extends HierarchyElement
      *
      * @var ?string
      */
-    public $type = NULL;
+    public $type = null;
 
     /**
      * Fill class values based on JSON object.
@@ -42,7 +43,7 @@ class Category extends HierarchyElement
     {
         parent::parse($object);
 
-        $this->type = $object->meta->classes->content ?? NULL;
+        $this->type = $object->meta->classes->content ?? null;
 
         foreach ($object->content as $item) {
             switch ($item->element) {
@@ -67,7 +68,6 @@ class Category extends HierarchyElement
                     break;
                 default:
                     continue 2;
-                    break;
             }
         }
 

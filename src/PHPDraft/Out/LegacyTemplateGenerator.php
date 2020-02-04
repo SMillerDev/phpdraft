@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the LegacyTemplateGenerator.php.
  *
@@ -45,7 +46,7 @@ class LegacyTemplateGenerator extends BaseTemplateGenerator
     public function get($object)
     {
         $include = $this->find_include_file($this->template);
-        if ($include === NULL) {
+        if ($include === null) {
             throw new ExecutionException("Couldn't find template '$this->template'", 1);
         }
 
@@ -102,7 +103,7 @@ class LegacyTemplateGenerator extends BaseTemplateGenerator
      */
     public function find_include_file(string $template, string $extension = 'phtml'): ?string
     {
-        $include    = NULL;
+        $include    = null;
         $fextension = '.' . $extension;
         if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension)) {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension;
@@ -134,11 +135,11 @@ class LegacyTemplateGenerator extends BaseTemplateGenerator
             return $include;
         }
 
-        if ($include === NULL && in_array($extension, ['phtml', 'js', 'css'])) {
+        if ($include === null && in_array($extension, ['phtml', 'js', 'css'])) {
             return $this->find_include_file('default', $extension);
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -197,7 +198,7 @@ class LegacyTemplateGenerator extends BaseTemplateGenerator
     {
         if ($response <= 299) {
             return 'text-success';
-        } elseif ($response > 299 && $response <= 399) {
+        } elseif (($response > 299) && ($response <= 399)) {
             return 'text-warning';
         } else {
             return 'text-error';

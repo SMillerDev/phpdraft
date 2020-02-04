@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the HierarchyElementTest.php
  *
@@ -54,7 +55,7 @@ class HierarchyElementTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertNull($property->getValue($this->class));
     }
 
@@ -64,7 +65,7 @@ class HierarchyElementTest extends LunrBaseTest
     public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":""}';
@@ -74,7 +75,7 @@ class HierarchyElementTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('title');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('TEST', $href_property->getValue($this->class));
     }
 
@@ -84,7 +85,7 @@ class HierarchyElementTest extends LunrBaseTest
     public function testParseIsCalledLoop(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":[{"element":"copy", "content":"hello"}]}';
@@ -94,12 +95,12 @@ class HierarchyElementTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('title');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('TEST', $href_property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('description');
-        $href_property->setAccessible(TRUE);
-        $this->assertSame('hello'.PHP_EOL, $href_property->getValue($this->class));
+        $href_property->setAccessible(true);
+        $this->assertSame('hello' . PHP_EOL, $href_property->getValue($this->class));
     }
 
     /**
@@ -108,7 +109,7 @@ class HierarchyElementTest extends LunrBaseTest
     public function testParseIsCalledSlice(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":[{"element":"copy", "content":"hello"}, {"element":"test", "content":"hello"}]}';
@@ -118,12 +119,12 @@ class HierarchyElementTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('title');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('TEST', $href_property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('description');
-        $href_property->setAccessible(TRUE);
-        $this->assertSame('hello'.PHP_EOL, $href_property->getValue($this->class));
+        $href_property->setAccessible(true);
+        $this->assertSame('hello' . PHP_EOL, $href_property->getValue($this->class));
     }
 
 
@@ -133,7 +134,7 @@ class HierarchyElementTest extends LunrBaseTest
     public function testGetHrefIsCalledWithParent(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $this->parent->expects($this->once())
@@ -161,11 +162,11 @@ class HierarchyElementTest extends LunrBaseTest
     public function testGetHrefIsCalledWithTitleWithSpaces(): void
     {
         $property = $this->reflection->getProperty('title');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, 'some title');
 
         $parent_property = $this->reflection->getProperty('parent');
-        $parent_property->setAccessible(TRUE);
+        $parent_property->setAccessible(true);
         $parent_property->setValue($this->class, $this->parent);
 
         $this->parent->expects($this->once())

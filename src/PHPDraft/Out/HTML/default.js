@@ -17,10 +17,12 @@ $(function () {
         $('[data-toggle="popover"]').popover();
     });
 
-    function escapeRegExp(str) {
+    function escapeRegExp(str)
+    {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     };
-    $('table:not(.table)').each(function(){ $(this).addClass('table');});
+    $('table:not(.table)').each(function () {
+        $(this).addClass('table');});
 });
 
 $('.collapse.request-card').on('shown.bs.collapse', function () {

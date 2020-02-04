@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the DrafterTest.php
  *
@@ -26,8 +27,12 @@ class DrafterTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', function () { return TEST_STATICS; });
-        $this->mock_function('shell_exec', function () { return "/some/dir/drafter\n"; });
+        $this->mock_function('sys_get_temp_dir', function () {
+            return TEST_STATICS;
+        });
+        $this->mock_function('shell_exec', function () {
+            return "/some/dir/drafter\n";
+        });
         $this->class      = new Drafter();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
         try {
@@ -64,8 +69,10 @@ class DrafterTest extends LunrBaseTest
         $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
         $property = $this->reflection->getProperty('apib');
         $property->setAccessible(true);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'),
-            $property->getValue($this->class));
+        $this->assertEquals(
+            file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'),
+            $property->getValue($this->class)
+        );
     }
 
     /**
@@ -83,13 +90,21 @@ class DrafterTest extends LunrBaseTest
      */
     public function testParseToJSON(): void
     {
-        $this->mock_function('json_last_error', function () { return JSON_ERROR_NONE; });
-        $this->mock_function('shell_exec', function () { return ""; });
-        file_put_contents(TEST_STATICS . '/drafter/index.json',
-            file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->mock_function('json_last_error', function () {
+            return JSON_ERROR_NONE;
+        });
+        $this->mock_function('shell_exec', function () {
+            return "";
+        });
+        file_put_contents(
+            TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json/index.json')
+        );
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')),
-            $this->class->json);
+        $this->assertEquals(
+            json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')),
+            $this->class->json
+        );
         $this->unmock_function('shell_exec');
         $this->unmock_function('json_last_error');
     }
@@ -101,13 +116,21 @@ class DrafterTest extends LunrBaseTest
      */
     public function testParseToJSONInheritance(): void
     {
-        $this->mock_function('json_last_error', function () { return JSON_ERROR_NONE; });
-        $this->mock_function('shell_exec', function () { return ""; });
-        file_put_contents(TEST_STATICS . '/drafter/index.json',
-            file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json'));
+        $this->mock_function('json_last_error', function () {
+            return JSON_ERROR_NONE;
+        });
+        $this->mock_function('shell_exec', function () {
+            return "";
+        });
+        file_put_contents(
+            TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')
+        );
         $this->class->parseToJson();
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')),
-            $this->class->json);
+        $this->assertEquals(
+            json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')),
+            $this->class->json
+        );
         $this->unmock_function('shell_exec');
         $this->unmock_function('json_last_error');
     }
@@ -123,9 +146,13 @@ class DrafterTest extends LunrBaseTest
         $this->expectExceptionMessage('Parsing encountered errors and stopped');
         $this->expectExceptionCode(2);
 
-        $this->mock_function('shell_exec', function () { return ""; });
-        file_put_contents(TEST_STATICS . '/drafter/index.json',
-            file_get_contents(TEST_STATICS . '/drafter/json/error.json'));
+        $this->mock_function('shell_exec', function () {
+            return "";
+        });
+        file_put_contents(
+            TEST_STATICS . '/drafter/index.json',
+            file_get_contents(TEST_STATICS . '/drafter/json/error.json')
+        );
         $this->class->parseToJson();
         $this->expectOutputString("WARNING: ignoring unrecognized block\nWARNING: no headers specified\nWARNING: ignoring unrecognized block\nWARNING: empty request message-body");
         $this->unmock_function('shell_exec');
@@ -138,7 +165,9 @@ class DrafterTest extends LunrBaseTest
      */
     public function testSetupWithoutDrafter(): void
     {
-        $this->mock_function('shell_exec', function () { return ""; });
+        $this->mock_function('shell_exec', function () {
+            return "";
+        });
         $this->assertFalse(Drafter::available());
         $this->unmock_function('shell_exec');
     }
@@ -154,13 +183,16 @@ class DrafterTest extends LunrBaseTest
         $this->expectExceptionMessage('Drafter generated invalid JSON (ERROR)');
         $this->expectExceptionCode(2);
 
-        $this->mock_function('json_last_error', function () { return JSON_ERROR_DEPTH; });
-        $this->mock_function('json_last_error_msg', function () { return "ERROR"; });
+        $this->mock_function('json_last_error', function () {
+            return JSON_ERROR_DEPTH;
+        });
+        $this->mock_function('json_last_error_msg', function () {
+            return "ERROR";
+        });
         file_put_contents(TEST_STATICS . '/drafter/index.json', '["hello: \'world}');
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
         $this->unmock_function('json_last_error_msg');
         $this->unmock_function('json_last_error');
     }
-
 }
