@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the Minifier.php.
  *
@@ -35,8 +36,12 @@ class Minifier
         $input = preg_replace('#(<(?:img|input)(?:\s[^<>]*?)?\s*\/?>)\s+#i', '$1' . self::X . '\s', $input);
         // Create chunk(s) of HTML tag(s), ignored HTML group(s), HTML comment(s) and text
         $input  =
-            preg_split('#(' . self::CH . '|<pre(?:>|\s[^<>]*?>)[\s\S]*?<\/pre>|<code(?:>|\s[^<>]*?>)[\s\S]*?<\/code>|<script(?:>|\s[^<>]*?>)[\s\S]*?<\/script>|<style(?:>|\s[^<>]*?>)[\s\S]*?<\/style>|<textarea(?:>|\s[^<>]*?>)[\s\S]*?<\/textarea>|<[^<>]+?>)#i',
-                $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+            preg_split(
+                '#(' . self::CH . '|<pre(?:>|\s[^<>]*?>)[\s\S]*?<\/pre>|<code(?:>|\s[^<>]*?>)[\s\S]*?<\/code>|<script(?:>|\s[^<>]*?>)[\s\S]*?<\/script>|<style(?:>|\s[^<>]*?>)[\s\S]*?<\/style>|<textarea(?:>|\s[^<>]*?>)[\s\S]*?<\/textarea>|<[^<>]+?>)#i',
+                $input,
+                -1,
+                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+            );
         $output = '';
         foreach ($input as $v) {
             if ($v !== ' ' && trim($v) === '') {
@@ -75,7 +80,8 @@ class Minifier
                 // [^2]
                 '$1',
             ],
-            $output);
+            $output
+        );
         $output = self::__minify_v($output);
 
         // Remove white-space(s) after ignored tag-open and before ignored tag-close (except `<textarea>`)
@@ -106,7 +112,7 @@ class Minifier
         return preg_replace_callback('#<\s*([^\/\s]+)\s*(?:>|(\s[^<>]+?)\s*>)#', function ($m) {
             if (isset($m[2])) {
                 // Minify inline CSS declaration(s)
-                if (stripos($m[2], ' style=') !== FALSE) {
+                if (stripos($m[2], ' style=') !== false) {
                     $m[2] = preg_replace_callback('#( style=)([\'"]?)(.*?)\2#i', function ($m) {
                         return $m[1] . $m[2] . self::minify_css($m[3]) . $m[2];
                     }, $m[2]);
@@ -129,7 +135,8 @@ class Minifier
                         // [^3]
                         '/',
                     ],
-                    str_replace("\n", ' ', $m[2])) . '>';
+                    str_replace("\n", ' ', $m[2])
+                ) . '>';
             }
 
             return '<' . $m[1] . '>';
@@ -152,8 +159,12 @@ class Minifier
         $input = preg_replace('#(' . self::CC . ')\s+(' . self::CC . ')#', '$1' . self::X . '\s$2', $input);
         // Create chunk(s) of string(s), comment(s) and text
         $input  =
-            preg_split('#(' . self::SS . '|' . self::CC . ')#', $input, -1,
-                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+            preg_split(
+                '#(' . self::SS . '|' . self::CC . ')#',
+                $input,
+                -1,
+                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+            );
         $output = '';
         foreach ($input as $v) {
             if (trim($v) === '') {
@@ -183,7 +194,8 @@ class Minifier
                 // '$1$3',
                 '$1$2$4$5',
             ],
-            $output);
+            $output
+        );
 
         return self::__minify_v($output);
     }
@@ -198,7 +210,7 @@ class Minifier
     protected static function _minify_css($input)
     {
         // Keep important white-space(s) in `calc()`
-        if (stripos($input, 'calc(') !== FALSE) {
+        if (stripos($input, 'calc(') !== false) {
             $input = preg_replace_callback('#\b(calc\()\s*(.*?)\s*\)#i', function ($m) {
                 return $m[1] . preg_replace('#\s+#', self::X . '\s', $m[2]) . ')';
             }, $input);
@@ -262,7 +274,8 @@ class Minifier
                 // [^12]
                 ' ',
             ],
-            $input);
+            $input
+        );
     }
 
     /**
@@ -291,8 +304,12 @@ class Minifier
         }
         // Create chunk(s) of string(s), comment(s), regex(es) and text
         $input  =
-            preg_split('#(' . self::SS . '|' . self::CC . '|\/[^\n]+?\/(?=[.,;]|[gimuy]|$))#', $input, -1,
-                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+            preg_split(
+                '#(' . self::SS . '|' . self::CC . '|\/[^\n]+?\/(?=[.,;]|[gimuy]|$))#',
+                $input,
+                -1,
+                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+            );
         $output = '';
         foreach ($input as $v) {
             if (trim($v) === '') {
@@ -304,8 +321,11 @@ class Minifier
                 ($v[0] === '/' && substr($v, -1) === '/')
             ) {
                 // Remove if not detected as important comment ...
-                if (strpos($v, '//') === 0 || (strpos($v, '/*') === 0 && strpos($v, '/*!') !== 0 && strpos($v,
-                            '/*@cc_on') !== 0)
+                if (
+                    strpos($v, '//') === 0 || (strpos($v, '/*') === 0 && strpos($v, '/*!') !== 0 && strpos(
+                        $v,
+                        '/*@cc_on'
+                    ) !== 0)
                 ) {
                     continue;
                 }
@@ -328,7 +348,8 @@ class Minifier
                 // [^2]
                 '$1.$3',
             ],
-            $output);
+            $output
+        );
     }
 
     /**
@@ -365,6 +386,7 @@ class Minifier
                 '!1',
                 'return ',
             ],
-            $input);
+            $input
+        );
     }
 }

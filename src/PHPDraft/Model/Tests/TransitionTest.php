@@ -1,10 +1,12 @@
 <?php
+
 /**
  * This file contains the TransitionTest.php
  *
  * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
+
 namespace PHPDraft\Model\Tests;
 
 use PHPDraft\Model\Transition;
@@ -61,7 +63,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -71,7 +73,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIssetHrefVariables(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "hrefVariables":"hello"}, "content":[]}';
@@ -81,7 +83,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -91,7 +93,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIssetData(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[]}';
@@ -101,7 +103,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -111,7 +113,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsNotArrayContent(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":""}';
@@ -121,7 +123,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -131,7 +133,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentNoChild(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123"}]}';
@@ -141,7 +143,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -151,7 +153,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentWrongChild(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"test"}]}]}';
@@ -161,7 +163,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -171,7 +173,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentRequest(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
@@ -181,7 +183,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -191,7 +193,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentResponse(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpResponse", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
@@ -201,7 +203,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -211,7 +213,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentDefault(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
@@ -221,7 +223,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -231,7 +233,7 @@ class TransitionTest extends HierarchyElementChildTest
     public function testParseIsCalledIsArrayContentRequestList(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
@@ -239,10 +241,10 @@ class TransitionTest extends HierarchyElementChildTest
                          ->getMock();
         $mock_req->expects($this->once())
                  ->method('is_equal_to')
-                 ->will($this->returnValue(TRUE));
+                 ->will($this->returnValue(true));
         $requests = [$mock_req];
         $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
         $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
@@ -252,7 +254,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -280,7 +282,7 @@ class TransitionTest extends HierarchyElementChildTest
                  ->will($this->returnValue('curl_command'));
         $requests = [$mock_req];
         $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
         $return = $this->class->get_curl_command('https://ur.l');
@@ -312,7 +314,7 @@ class TransitionTest extends HierarchyElementChildTest
                  ->will($this->returnValue('https://hurl.it'));
         $requests = [$mock_req];
         $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
         $return = $this->class->get_hurl_link('https://ur.l');
@@ -343,7 +345,7 @@ class TransitionTest extends HierarchyElementChildTest
 
         $requests = [$mock_req];
         $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
         $return = $this->class->get_method();
@@ -363,11 +365,11 @@ class TransitionTest extends HierarchyElementChildTest
         $parent->method = '/base';
 
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $parent);
 
         $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, '/url');
 
         $return = $this->class->build_url();
@@ -387,11 +389,11 @@ class TransitionTest extends HierarchyElementChildTest
         $parent->method = '/url';
 
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $parent);
 
         $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, '/url/level');
 
         $return = $this->class->build_url();
@@ -411,16 +413,18 @@ class TransitionTest extends HierarchyElementChildTest
         $parent->method = '/url';
 
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $parent);
 
         $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, '/url/level');
 
-        $this->mock_function('strip_tags', function() { return "STRIPPED";});
+        $this->mock_function('strip_tags', function () {
+            return "STRIPPED";
+        });
 
-        $return = $this->class->build_url('', TRUE);
+        $return = $this->class->build_url('', true);
 
         $this->unmock_function('strip_tags');
 
@@ -439,7 +443,7 @@ class TransitionTest extends HierarchyElementChildTest
         $parent->method = '/url';
 
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $parent);
 
         $var1 = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
@@ -455,11 +459,11 @@ class TransitionTest extends HierarchyElementChildTest
         $vars->value = [ $var1 ];
 
         $property = $this->reflection->getProperty('url_variables');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $vars);
 
         $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(TRUE);
+        $req_property->setAccessible(true);
         $req_property->setValue($this->class, '/url/level');
 
         $return = $this->class->build_url();

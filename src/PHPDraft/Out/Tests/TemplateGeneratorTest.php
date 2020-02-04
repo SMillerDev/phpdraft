@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the TemplateGeneratorTest.php
  *
@@ -34,10 +35,10 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('template');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertSame('default', $property->getValue($this->class));
         $property = $this->reflection->getProperty('image');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertSame('none', $property->getValue($this->class));
     }
 
@@ -140,7 +141,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testIncludeFileNone(): void
     {
         $return = $this->class->find_include_file('gfsdfdsf', 'xyz');
-        $this->assertSame(NULL, $return);
+        $this->assertSame(null, $return);
     }
 
     /**

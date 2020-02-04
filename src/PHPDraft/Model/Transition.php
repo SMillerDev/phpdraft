@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the Transition.
  *
@@ -11,6 +12,7 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\UriTemplate;
 use stdClass;
 
@@ -35,12 +37,12 @@ class Transition extends HierarchyElement
      *
      * @var ObjectStructureElement|null
      */
-    public $url_variables = NULL;
+    public $url_variables = null;
 
     /**
      * Data variables.
      *
-     * @var array
+     * @var array|StructureElement|null
      */
     public $data_variables = NULL;
 
@@ -109,7 +111,7 @@ class Transition extends HierarchyElement
                 continue;
             }
             foreach ($transition_item->content as $item) {
-                $value = NULL;
+                $value = null;
                 if (!in_array($item->element, ['httpRequest', 'httpResponse'])) {
                     continue;
                 }
@@ -124,7 +126,6 @@ class Transition extends HierarchyElement
                         break;
                     default:
                         continue 2;
-                        break;
                 }
                 $value->parse($item);
 
@@ -132,10 +133,10 @@ class Transition extends HierarchyElement
                     $list[] = $value;
                     continue;
                 }
-                $add = TRUE;
+                $add = true;
                 foreach ($list as $existing_value) {
                     if ($existing_value->is_equal_to($value)) {
-                        $add = FALSE;
+                        $add = false;
                     }
                 }
                 if ($add) {
@@ -157,13 +158,13 @@ class Transition extends HierarchyElement
      *
      * @return string a HTML representation of the transition URL
      */
-    public function build_url(string $base_url = '', bool $clean = FALSE): string
+    public function build_url(string $base_url = '', bool $clean = false): string
     {
         $url = $this->overlap_urls($this->parent->href ?? '', $this->href);
-        if ($url === FALSE) {
+        if ($url === false) {
             $url = $this->parent->href . $this->href;
         }
-        if ($this->url_variables !== NULL) {
+        if ($this->url_variables !== null) {
             $tpl  = new UriTemplate($url);
             $vars = [];
             foreach ($this->url_variables->value as $item) {
@@ -204,7 +205,7 @@ class Transition extends HierarchyElement
             return $str1 . $overlap . $str2;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -234,7 +235,7 @@ class Transition extends HierarchyElement
             return $return;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**

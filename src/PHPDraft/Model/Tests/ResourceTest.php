@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ResourceTest.php
  *
@@ -7,7 +8,6 @@
  */
 
 namespace PHPDraft\Model\Tests;
-
 
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\HierarchyElement;
@@ -62,7 +62,7 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalled(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"attributes":{"href":"something"}, "content":[]}';
@@ -72,7 +72,7 @@ class ResourceTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertSame('something', $href_property->getValue($this->class));
     }
 
@@ -82,7 +82,7 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalledNoHREF(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[]}';
@@ -92,7 +92,7 @@ class ResourceTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertNull($href_property->getValue($this->class));
     }
 
@@ -102,7 +102,7 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalledIsCopy(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $obj = '{"content":[{"element":"copy", "content":""},{"element":"hello", "content":""}, {"element":"hello", "content":""}]}';
@@ -112,7 +112,7 @@ class ResourceTest extends LunrBaseTest
         $this->assertSame($this->parent, $property->getValue($this->class));
 
         $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(TRUE);
+        $href_property->setAccessible(true);
         $this->assertNull($href_property->getValue($this->class));
     }
 
@@ -122,11 +122,11 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalledIsNotCopy(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $this->parent);
 
         $child_property = $this->reflection->getProperty('children');
-        $child_property->setAccessible(TRUE);
+        $child_property->setAccessible(true);
         $this->assertEmpty($child_property->getValue($this->class));
 
         $obj = '{"content":[{"element":"hello", "content":""}]}';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the RequestBodyElementTest.php
  *
@@ -37,7 +38,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('element');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertNull($property->getValue($this->class));
     }
 
@@ -47,7 +48,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(RequestBodyElement::class, $return);
     }
@@ -148,7 +149,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $base3->value       = 'test1 | test2 | test3';
 
         $base4              = clone $base2;
-        $base4->value       = NULL;
+        $base4->value       = null;
 
         $return[] = [
             '{
@@ -248,7 +249,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testEmptyParse(): void
     {
         $deps = [];
-        $return = $this->class->parse(NULL, $deps);
+        $return = $this->class->parse(null, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
         $object = new \stdClass();
         $object->key = 'key';
@@ -266,8 +267,7 @@ class RequestBodyElementTest extends LunrBaseTest
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        foreach ($return->value as $item)
-        {
+        foreach ($return->value as $item) {
             $this->assertInstanceOf(EnumStructureElement::class, $item);
         }
     }
@@ -282,8 +282,7 @@ class RequestBodyElementTest extends LunrBaseTest
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        foreach ($return->value as $item)
-        {
+        foreach ($return->value as $item) {
             $this->assertInstanceOf(ObjectStructureElement::class, $item);
         }
     }

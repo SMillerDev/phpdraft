@@ -9,17 +9,6 @@ on:
     - master
 
 jobs:
-  phpcs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: PHP Code Scanner Scan
-        uses: rtCamp/action-phpcs-code-review@master
-        continue-on-error: true
-        env:
-          GH_BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: "PSR12"
   test:
     runs-on: ubuntu-latest
     name: PHP ${{ matrix.php-versions }}
@@ -36,7 +25,7 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         extensions: curl,json,mbstring,uopz
         coverage: pcov
-        tools: pecl
+        tools: pecl,phpstan,phpunit,cs2pr,phpcs
 
     - name: Get Composer Cache Directory
       id: composer-cache
@@ -60,6 +49,12 @@ jobs:
 
     - name: Setup Problem Matchers for PHPUnit
       run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+    - name: PHPStan
+      run: phpstan analyse --level=3 --error-format=checkstyle src/ | cs2pr
+
+    - name: PHPCS
+      run: phpcs --standard=PSR12 --ignore=\*/Tests/\*,\*Minifier.php --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength src/ | cs2pr
 
     - name: Upload coverage result
       uses: actions/upload-artifact@v1

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the StructureElement.php.
  *
@@ -18,17 +19,17 @@ interface StructureElement
      *
      * @var array
      */
-    const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array', 'enum'];
+    public const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array', 'enum'];
 
     /**
      * Parse a JSON object to a structure.
      *
-     * @param stdClass $object       An object to parse
-     * @param array    $dependencies Dependencies of this object
+     * @param object $object       An object to parse
+     * @param array  $dependencies Dependencies of this object
      *
      * @return self self reference
      */
-    public function parse($object, array &$dependencies): self;
+    public function parse(object $object, array &$dependencies): self;
 
     /**
      * Print a string representation.
@@ -36,4 +37,12 @@ interface StructureElement
      * @return string
      */
     public function __toString(): string;
+
+
+    /**
+     * Get a string representation of the value.
+     *
+     * @return string
+     */
+    public function string_value();
 }

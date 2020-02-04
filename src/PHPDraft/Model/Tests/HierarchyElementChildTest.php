@@ -1,10 +1,12 @@
 <?php
+
 /**
  * This file contains the HierarchyElementChildTest.php
  *
  * @package PHPDraft\Model
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
+
 namespace PHPDraft\Model\Tests;
 
 use Lunr\Halo\LunrBaseTest;
@@ -35,7 +37,7 @@ class HierarchyElementChildTest extends LunrBaseTest
      */
     public function testTitleSetup(): void
     {
-        $this->assertSame(NULL, $this->class->title);
+        $this->assertSame(null, $this->class->title);
     }
 
     /**
@@ -43,7 +45,7 @@ class HierarchyElementChildTest extends LunrBaseTest
      */
     public function testDescriptionSetup(): void
     {
-        $this->assertSame(NULL, $this->class->description);
+        $this->assertSame(null, $this->class->description);
     }
 
     /**
@@ -60,7 +62,7 @@ class HierarchyElementChildTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertNull($property->getValue($this->class));
     }
 }

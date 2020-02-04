@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the BaseTemplateGenerator.php.
  *
@@ -47,13 +48,13 @@ abstract class BaseTemplateGenerator
     /**
      * The image to use as a logo.
      *
-     * @var string
+     * @var string|null
      */
-    protected $image = NULL;
+    protected $image = null;
     /**
-     * The base URl of the API.
+     * The base data of the API.
      *
-     * @var
+     * @var array
      */
     protected $base_data;
     /**

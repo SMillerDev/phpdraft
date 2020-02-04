@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ObjectStructureElementTest.php
  *
@@ -6,7 +7,7 @@
  * @author  Sean Molenaar<sean@seanmolenaar.eu>
  */
 
-namespace PHPDraft\Model\Tests;
+namespace PHPDraft\Model\Elements\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
@@ -39,7 +40,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
     }
@@ -92,7 +93,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base3->value       = 'test1 | test2 | test3';
 
         $base4              = clone $base2;
-        $base4->value       = NULL;
+        $base4->value       = null;
 
         $return[] = [
             '{
@@ -192,7 +193,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testEmptyParse(): void
     {
         $deps = [];
-        $return = $this->class->parse(NULL, $deps);
+        $return = $this->class->parse(null, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
         $object = new \stdClass();
         $object->key = 'key';
@@ -210,8 +211,7 @@ class ObjectStructureElementTest extends LunrBaseTest
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        foreach ($return->value as $item)
-        {
+        foreach ($return->value as $item) {
             $this->assertInstanceOf(EnumStructureElement::class, $item);
         }
     }
@@ -226,8 +226,7 @@ class ObjectStructureElementTest extends LunrBaseTest
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        foreach ($return->value as $item)
-        {
+        foreach ($return->value as $item) {
             $this->assertInstanceOf(ObjectStructureElement::class, $item);
         }
     }
@@ -356,7 +355,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testToStringBoolValue(): void
     {
         $this->class->key = 'hello';
-        $this->class->value = TRUE;
+        $this->class->value = true;
         $return = $this->class->__toString();
         $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">true</span></td></tr>', $return);
     }

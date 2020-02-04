@@ -31,4 +31,9 @@ if (defined('TEST_STATICS') === FALSE)
     define('TEST_STATICS', __DIR__ . '/statics');
 }
 
+if (defined('VERSION') === FALSE)
+{
+    define('VERSION', '0');
+}
+
 ?>

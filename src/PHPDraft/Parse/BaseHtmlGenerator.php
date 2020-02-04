@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the BaseHtmlGenerator.
  *
@@ -40,17 +41,5 @@ abstract class BaseHtmlGenerator
         return $this;
     }
 
-    /**
-     * Gets the default template HTML.
-     *
-     * @throws ExecutionException When parsing fails
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->get_html();
-    }
-
-    abstract public function get_html(string $template = 'default', ?string $image = NULL, ?string $css = NULL, ?string $js = NULL): BaseTemplateGenerator;
+    abstract public function get_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): BaseTemplateGenerator;
 }

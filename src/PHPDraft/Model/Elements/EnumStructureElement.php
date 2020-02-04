@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ${FILE_NAME}.
  *
@@ -14,12 +15,12 @@ class EnumStructureElement extends BasicStructureElement
     /**
      * Parse an array object.
      *
-     * @param \stdClass $object       APIb Item to parse
-     * @param array     $dependencies List of dependencies build
+     * @param object $object       APIB Item to parse
+     * @param array  $dependencies List of dependencies build
      *
      * @return $this
      */
-    public function parse($object, array &$dependencies): StructureElement
+    public function parse(object $object, array &$dependencies): StructureElement
     {
         $this->element = (isset($object->element)) ? $object->element : 'enum';
 
@@ -58,8 +59,11 @@ class EnumStructureElement extends BasicStructureElement
         $return = '<ul class="list-group mdl-list">';
 
         if (is_string($this->value)) {
-            $type = (in_array($this->element, self::DEFAULTS)) ? $this->element : '<a href="#object-' . str_replace(' ', '-',
-                    strtolower($this->element)) . '">' . $this->element . '</a>';
+            $type = (in_array($this->element, self::DEFAULTS)) ? $this->element : '<a href="#object-' . str_replace(
+                ' ',
+                '-',
+                strtolower($this->element)
+            ) . '">' . $this->element . '</a>';
 
             return '<tr><td>' . $this->key . '</td><td><code>' . $type . '</code></td><td>' . $this->description . '</td></tr>';
         }
@@ -68,9 +72,12 @@ class EnumStructureElement extends BasicStructureElement
             return '<span class="example-value pull-right">//list of options</span>';
         }
 
-        foreach ($this->value as $key=>$item) {
-            $type = (in_array($item, self::DEFAULTS)) ? $key : '<a href="#object-' . str_replace(' ', '-',
-                    strtolower($item)) . '">' . $key . '</a>';
+        foreach ($this->value as $key => $item) {
+            $type = (in_array($item, self::DEFAULTS)) ? $key : '<a href="#object-' . str_replace(
+                ' ',
+                '-',
+                strtolower($item)
+            ) . '">' . $key . '</a>';
 
             $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
         }

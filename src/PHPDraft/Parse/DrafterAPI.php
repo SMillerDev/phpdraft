@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the DrafterAPI.php.
  *
@@ -55,10 +56,10 @@ class DrafterAPI extends BaseParser
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'https://api.apiblueprint.org/parser');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
 
-        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POST, true);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
 
@@ -78,7 +79,7 @@ class DrafterAPI extends BaseParser
     public static function available(): bool
     {
         if (!defined('DRAFTER_ONLINE_MODE') || DRAFTER_ONLINE_MODE !== 1) {
-            return FALSE;
+            return false;
         }
 
         $ch = self::curl_init_drafter('# Hello API
@@ -91,10 +92,10 @@ class DrafterAPI extends BaseParser
         curl_exec($ch);
 
         if (curl_errno($ch) !== CURLE_OK) {
-            return FALSE;
+            return false;
         }
         curl_close($ch);
 
-        return TRUE;
+        return true;
     }
 }

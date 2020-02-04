@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the TemplateGenerator.php.
  *
@@ -50,13 +51,13 @@ class TemplateGenerator extends BaseTemplateGenerator
     /**
      * The image to use as a logo.
      *
-     * @var string
+     * @var string|null
      */
-    protected $image = NULL;
+    protected $image = null;
     /**
-     * The base URl of the API.
+     * The base data of the API.
      *
-     * @var
+     * @var array
      */
     protected $base_data;
     /**
@@ -101,7 +102,7 @@ class TemplateGenerator extends BaseTemplateGenerator
     public function get($object)
     {
         $include = $this->find_include_file($this->template);
-        if ($include === NULL) {
+        if ($include === null) {
             throw new ExecutionException("Couldn't find template '$this->template'", 1);
         }
 
@@ -158,7 +159,7 @@ class TemplateGenerator extends BaseTemplateGenerator
      */
     public function find_include_file(string $template, string $extension = 'phtml'): ?string
     {
-        $include    = NULL;
+        $include    = null;
         $fextension = '.' . $extension;
         if (stream_resolve_include_path('templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension)) {
             $include = 'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . $fextension;
@@ -190,11 +191,11 @@ class TemplateGenerator extends BaseTemplateGenerator
             return $include;
         }
 
-        if ($include === NULL && in_array($extension, ['phtml', 'js', 'css'])) {
+        if ($include === null && in_array($extension, ['phtml', 'js', 'css'])) {
             return $this->find_include_file('default', $extension);
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -253,7 +254,7 @@ class TemplateGenerator extends BaseTemplateGenerator
     {
         if ($response <= 299) {
             return 'text-success';
-        } elseif ($response > 299 && $response <= 399) {
+        } elseif (($response > 299) && ($response <= 399)) {
             return 'text-warning';
         } else {
             return 'text-error';

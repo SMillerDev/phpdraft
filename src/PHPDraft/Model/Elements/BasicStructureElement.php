@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: smillernl
@@ -16,55 +17,55 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Object key.
      *
-     * @var string
+     * @var string|null
      */
     public $key;
     /**
      * Object JSON type.
      *
-     * @var mixed
+     * @var string|null
      */
     public $type;
     /**
      * Object description.
      *
-     * @var string
+     * @var string|null
      */
     public $description;
     /**
      * Type of element.
      *
-     * @var string
+     * @var string|null
      */
-    public $element = NULL;
+    public $element = null;
     /**
      * Object value.
      *
-     * @var mixed|ObjectStructureElement[]
+     * @var mixed
      */
-    public $value = NULL;
+    public $value = null;
     /**
      * Object status (required|optional).
      *
-     * @var string
+     * @var string|null
      */
     public $status = '';
     /**
      * List of object dependencies.
      *
-     * @var string[]
+     * @var string[]|null
      */
     public $deps;
 
     /**
      * Parse a JSON object to a structure.
      *
-     * @param stdClass $object       An object to parse
-     * @param array    $dependencies Dependencies of this object
+     * @param object $object       An object to parse
+     * @param array  $dependencies Dependencies of this object
      *
      * @return StructureElement self reference
      */
-    abstract public function parse($object, array &$dependencies): StructureElement;
+    abstract public function parse(object $object, array &$dependencies): StructureElement;
 
     /**
      * Print a string representation.
@@ -83,23 +84,23 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Parse common fields to give context.
      *
-     * @param mixed $object       APIB object
-     * @param array $dependencies Object dependencies
+     * @param object $object       APIB object
+     * @param array  $dependencies Object dependencies
      *
      * @return void
      */
-    protected function parse_common(stdClass $object, array &$dependencies): void
+    protected function parse_common(object $object, array &$dependencies): void
     {
-        $this->key          = $object->content->key->content ?? NULL;
-        $this->type         = $object->content->value->element ?? NULL;
-        $this->description  = NULL;
+        $this->key          = $object->content->key->content ?? null;
+        $this->type         = $object->content->value->element ?? null;
+        $this->description  = null;
         if (isset($object->meta->description->content)) {
             $this->description = htmlentities($object->meta->description->content);
         } elseif (isset($object->meta->description)) {
             $this->description = htmlentities($object->meta->description);
         }
 
-        $this->status  = NULL;
+        $this->status  = null;
         if (isset($object->attributes->typeAttributes->content)) {
             $data = array_map(function ($item) {
                 return $item->content;
@@ -129,7 +130,7 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Get a string representation of the value.
      *
-     * @return mixed|ObjectStructureElement|ObjectStructureElement[]
+     * @return string
      */
     public function string_value()
     {

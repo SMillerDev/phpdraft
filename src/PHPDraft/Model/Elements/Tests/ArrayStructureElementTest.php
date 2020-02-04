@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the ArrayStructureTest.php
  *
@@ -78,7 +79,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base3->element     = 'member';
         $base3->type        = 'array';
         $base3->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base3->deps        = NULL;
+        $base3->deps        = null;
 
         $return[] = [
             '{
@@ -166,7 +167,7 @@ class ArrayStructureElementTest extends LunrBaseTest
     public function testNewInstance(): void
     {
         $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(TRUE);
+        $method->setAccessible(true);
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ArrayStructureElement::class, $return);
     }

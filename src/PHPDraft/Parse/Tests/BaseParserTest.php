@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the BaseParserTest.php
  *
@@ -23,8 +24,12 @@ class BaseParserTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', function () {return TEST_STATICS;});
-        $this->mock_function('shell_exec', function () {return "/some/dir/drafter\n";});
+        $this->mock_function('sys_get_temp_dir', function () {
+            return TEST_STATICS;
+        });
+        $this->mock_function('shell_exec', function () {
+            return "/some/dir/drafter\n";
+        });
         $this->class      = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
                                  ->getMockForAbstractClass();
         $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
@@ -50,7 +55,7 @@ class BaseParserTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
@@ -73,7 +78,7 @@ class BaseParserTest extends LunrBaseTest
     {
         $this->class->expects($this->once())
                     ->method('parse')
-                    ->will($this->returnValue(NULL));
+                    ->will($this->returnValue(null));
         $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
@@ -88,7 +93,7 @@ class BaseParserTest extends LunrBaseTest
     {
         $this->class->expects($this->once())
                     ->method('parse')
-                    ->will($this->returnValue(NULL));
+                    ->will($this->returnValue(null));
         $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $this->class->json);
@@ -102,18 +107,18 @@ class BaseParserTest extends LunrBaseTest
     public function testParseToJSONMkTmp(): void
     {
         $tmp_dir = dirname(dirname(TEST_STATICS)) . '/build/tmp';
-        if (file_exists($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib')){
+        if (file_exists($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib')) {
             unlink($tmp_dir . DIRECTORY_SEPARATOR . 'index.apib');
         }
-        if (file_exists($tmp_dir)){
+        if (file_exists($tmp_dir)) {
             rmdir($tmp_dir);
         }
         $property = $this->reflection->getProperty('tmp_dir');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $property->setValue($this->class, $tmp_dir);
         $this->class->expects($this->once())
                     ->method('parse')
-                    ->will($this->returnValue(NULL));
+                    ->will($this->returnValue(null));
         $this->class->json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class->parseToJson();
         $this->assertDirectoryExists($tmp_dir);
@@ -129,14 +134,18 @@ class BaseParserTest extends LunrBaseTest
     {
         $this->class->expects($this->once())
                     ->method('parse')
-                    ->will($this->returnValue(NULL));
+                    ->will($this->returnValue(null));
 
         $this->expectException('\PHPDraft\Parse\ExecutionException');
         $this->expectExceptionMessage('Drafter generated invalid JSON (ERROR)');
         $this->expectExceptionCode(2);
 
-        $this->mock_function('json_last_error', function () {return JSON_ERROR_DEPTH;});
-        $this->mock_function('json_last_error_msg', function () {return "ERROR";});
+        $this->mock_function('json_last_error', function () {
+            return JSON_ERROR_DEPTH;
+        });
+        $this->mock_function('json_last_error_msg', function () {
+            return "ERROR";
+        });
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
         $this->unmock_function('json_last_error_msg');

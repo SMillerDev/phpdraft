@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the LegacyDrafter.php.
  *
@@ -23,7 +24,7 @@ class LegacyDrafter extends BaseParser
      *
      * @param string $apib API Blueprint text
      *
-     * @return \PHPDraft\Parse\Drafter
+     * @return \PHPDraft\Parse\BaseParser
      */
     public function init(string $apib): BaseParser
     {
@@ -43,7 +44,7 @@ class LegacyDrafter extends BaseParser
         $returnVal = shell_exec('which drafter 2> /dev/null');
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
-        return empty($returnVal) ? FALSE : $returnVal;
+        return empty($returnVal) ? false : $returnVal;
     }
 
     /**

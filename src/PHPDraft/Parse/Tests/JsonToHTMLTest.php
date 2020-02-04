@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the JsonToHTMLTest.php
  *
@@ -40,7 +41,9 @@ class JsonToHTMLTest extends LunrBaseTest
         $this->class->init($data);
 
         $this->reflection = new ReflectionClass('PHPDraft\Parse\LegacyHtmlGenerator');
-        $this->mock_function('microtime', function () { return 'sometime'; });
+        $this->mock_function('microtime', function () {
+            return 'sometime';
+        });
 
         $this->class->sorting = -1;
     }
@@ -61,7 +64,7 @@ class JsonToHTMLTest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('object');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $property->getValue($this->class));
     }
 
@@ -71,7 +74,7 @@ class JsonToHTMLTest extends LunrBaseTest
     public function testGetHTML(): void
     {
         $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/basic.html'));
         $this->class->get_html();
         $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
@@ -84,8 +87,9 @@ class JsonToHTMLTest extends LunrBaseTest
     {
         $this->markTestSkipped('Not testing.');
         $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
-        $class = new JsonToHTML(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
+        $class = new LegacyHtmlGenerator();
+        $class->init(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
         $class->get_html();
         $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
@@ -97,18 +101,10 @@ class JsonToHTMLTest extends LunrBaseTest
     public function testGetHTMLMaterial(): void
     {
         $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', TRUE);
+        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/material.html'));
         $this->class->get_html('material');
         $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
-    }
-
-    /**
-     * Tests if the constructor sets the property correctly
-     */
-    public function testToString(): void
-    {
-        $this->assertNotEmpty($this->class->__toString());
     }
 
     /**
@@ -120,5 +116,4 @@ class JsonToHTMLTest extends LunrBaseTest
         $this->assertSame([['test.css', 'index.css']], $return->css);
         $this->assertSame([['index.js', 'test.js']], $return->js);
     }
-
 }

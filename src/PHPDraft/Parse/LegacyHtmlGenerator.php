@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the LegacyHtmlGenerator.
  *
@@ -29,7 +30,7 @@ class LegacyHtmlGenerator extends BaseHtmlGenerator
      *
      * @return BaseTemplateGenerator HTML template to display
      */
-    public function get_html(string $template = 'default', ?string $image = NULL, ?string $css = NULL, ?string $js = NULL): BaseTemplateGenerator
+    public function get_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): BaseTemplateGenerator
     {
         $gen = new LegacyTemplateGenerator($template, $image);
 

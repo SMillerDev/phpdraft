@@ -1,0 +1,6 @@
+parameters:
+	bootstrap: tests/test.bootstrap.inc.php
+	ignoreErrors:
+		- '#Access to an undefined property object::\$[a-zA-Z0-9\\_]+#'
+		- '#Access to an undefined property PHPUnit\\Framework\\MockObject\\MockObject::\$[a-zA-Z0-9_]+#'
+		- '#Access to an undefined property PHPDraft\\Model\\HierarchyElement::\$[a-zA-Z0-9_]+#'

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the APIBlueprintElement class.
  *
@@ -43,7 +44,7 @@ abstract class HierarchyElement
      *
      * @var HierarchyElement|null
      */
-    protected $parent = NULL;
+    protected $parent = null;
 
     /**
      * Parse a JSON object to an element.
@@ -83,7 +84,7 @@ abstract class HierarchyElement
     public function get_href(): string
     {
         $seperator = '-';
-        $prep      = ($this->parent !== NULL) ? $this->parent->get_href() . $seperator : '';
+        $prep      = ($this->parent !== null) ? $this->parent->get_href() . $seperator : '';
 
         return $prep . str_replace(' ', '-', strtolower($this->title));
     }

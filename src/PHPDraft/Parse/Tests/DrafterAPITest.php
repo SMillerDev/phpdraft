@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains the DrafterAPITest.php
  *
@@ -10,7 +11,6 @@ namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Parse\DrafterAPI;
-
 use ReflectionClass;
 
 /**
@@ -24,7 +24,9 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', function() { return TEST_STATICS;});
+        $this->mock_function('sys_get_temp_dir', function () {
+            return TEST_STATICS;
+        });
         $this->class      = new DrafterAPI();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\DrafterAPI');
         $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
@@ -48,7 +50,7 @@ class DrafterAPITest extends LunrBaseTest
     public function testSetupCorrectly(): void
     {
         $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(TRUE);
+        $property->setAccessible(true);
         $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
     }
 
@@ -59,8 +61,12 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function testAvailableFails(): void
     {
-        $this->mock_function('curl_exec', function() { return "/some/dir/drafter\n";});
-        $this->mock_function('curl_errno', function() { return 1;});
+        $this->mock_function('curl_exec', function () {
+            return "/some/dir/drafter\n";
+        });
+        $this->mock_function('curl_errno', function () {
+            return 1;
+        });
 
         $this->assertFalse(DrafterAPI::available());
 
@@ -75,8 +81,12 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function testAvailableSuccess(): void
     {
-        $this->mock_function('curl_exec', function() { return "/some/dir/drafter\n";});
-        $this->mock_function('curl_errno', function() { return 0;});
+        $this->mock_function('curl_exec', function () {
+            return "/some/dir/drafter\n";
+        });
+        $this->mock_function('curl_errno', function () {
+            return 0;
+        });
 
         $this->assertFalse(DrafterAPI::available());
 
@@ -105,7 +115,9 @@ class DrafterAPITest extends LunrBaseTest
         $this->expectExceptionMessage('Drafter webservice failed to parse input');
         $this->expectExceptionCode(1);
 
-        $this->mock_function('curl_errno', function() { return 1;});
+        $this->mock_function('curl_errno', function () {
+            return 1;
+        });
         $this->class->parseToJson();
         $this->unmock_function('curl_errno');
     }
@@ -117,9 +129,15 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function testParseSuccess(): void
     {
-        $this->mock_function('json_last_error', function() { return 0;});
-        $this->mock_function('curl_errno', function() { return 0;});
-        $this->mock_function('curl_exec', function() { return '{"content":[{"element":"world"}]}';});
+        $this->mock_function('json_last_error', function () {
+            return 0;
+        });
+        $this->mock_function('curl_errno', function () {
+            return 0;
+        });
+        $this->mock_function('curl_exec', function () {
+            return '{"content":[{"element":"world"}]}';
+        });
         $this->class->parseToJson();
         $this->unmock_function('curl_exec');
         $this->unmock_function('curl_errno');
@@ -130,5 +148,4 @@ class DrafterAPITest extends LunrBaseTest
         $obj->content  = [ $obj2 ];
         $this->assertEquals($obj, $this->class->json);
     }
-
 }
