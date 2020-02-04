@@ -16,7 +16,8 @@ jobs:
       uses: shivammathur/setup-php@v1
       with:
         php-version: 7.4
-        extensions: curl,json,mbstring
+        extensions: curl,json,mbstring,uopz
+        tools: pecl
         coverage: none
 
     - name: Get Composer Cache Directory
