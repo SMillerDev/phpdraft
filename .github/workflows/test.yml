@@ -35,8 +35,8 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
         extensions: curl,json,mbstring,uopz
-        coverage: xdebug
-        pecl: true
+        coverage: pcov
+        tools: pecl
 
     - name: Get Composer Cache Directory
       id: composer-cache
@@ -57,6 +57,9 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Setup Problem Matchers for PHPUnit
+      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Upload coverage result
       uses: actions/upload-artifact@v1
