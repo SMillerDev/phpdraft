@@ -26,13 +26,13 @@ class ObjectStructureElement extends BasicStructureElement
      */
     public function parse($object, array &$dependencies): StructureElement
     {
-        if (!isset($object->content) && isset($object->meta)) {
-            $this->element = $object->element;
-            $this->parse_common($object, $dependencies);
+        if (empty($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) ) ) {
             return $this;
         }
 
-        if (empty($object) || !(isset($object->content) || isset($object->meta)) ) {
+        if (!isset($object->content) && isset($object->meta)) {
+            $this->element = $object->element;
+            $this->parse_common($object, $dependencies);
             return $this;
         }
 
