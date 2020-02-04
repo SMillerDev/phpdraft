@@ -47,9 +47,9 @@
             "authors": [
                 {
                     "name": "Lukas Oppermann",
-                    "role": "Developer",
                     "email": "lukas@vea.re",
-                    "homepage": "http://vea.re"
+                    "homepage": "http://vea.re",
+                    "role": "Developer"
                 }
             ],
             "description": "A minimal package for working with HTTP statuses.",
@@ -314,12 +314,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/M2Mobi/lunr.halo.git",
-                "reference": "fdf80f3337f58b7da444294f64b55e9809ef842a"
+                "reference": "ac94e9b4ad41a2f31874b3d114b2daed529a941c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M2Mobi/lunr.halo/zipball/fdf80f3337f58b7da444294f64b55e9809ef842a",
-                "reference": "fdf80f3337f58b7da444294f64b55e9809ef842a",
+                "url": "https://api.github.com/repos/M2Mobi/lunr.halo/zipball/ac94e9b4ad41a2f31874b3d114b2daed529a941c",
+                "reference": "ac94e9b4ad41a2f31874b3d114b2daed529a941c",
                 "shasum": ""
             },
             "require": {
@@ -348,7 +348,7 @@
                 "phpunit",
                 "unit tests"
             ],
-            "time": "2019-12-23T15:44:55+00:00"
+            "time": "2020-01-17T02:40:38+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -502,16 +502,16 @@
         },
         {
             "name": "phing/phing",
-            "version": "2.16.2",
+            "version": "2.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "d11c6328c450cb3cda4ffa6548aa9cd60f30dd17"
+                "reference": "b34c2bf9cd6abd39b4287dee31e68673784c8567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/d11c6328c450cb3cda4ffa6548aa9cd60f30dd17",
-                "reference": "d11c6328c450cb3cda4ffa6548aa9cd60f30dd17",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/b34c2bf9cd6abd39b4287dee31e68673784c8567",
+                "reference": "b34c2bf9cd6abd39b4287dee31e68673784c8567",
                 "shasum": ""
             },
             "require": {
@@ -591,7 +591,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2020-01-03T10:18:48+00:00"
+            "time": "2020-02-03T18:50:54+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
