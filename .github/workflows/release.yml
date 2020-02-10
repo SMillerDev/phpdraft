@@ -45,16 +45,16 @@ jobs:
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/out/phpdraft-${{ github.ref }}.phar
-        asset_name: phpdraft-${{ github.ref }}.phar
-        tag: ${{ github.ref }}
+        file: build/out/phpdraft-${{ github.event.release.tag_name }}.phar
+        asset_name: phpdraft-${{ github.event.release.tag_name }}.phar
+        tag: ${{ github.event.release.tag_name }}
         overwrite: false
 
     - name: Upload library to release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/out/phpdraft-library-${{ github.ref }}.phar
-        asset_name: phpdraft-library-${{ github.ref }}.phar
-        tag: ${{ github.ref }}
+        file: build/out/phpdraft-library-${{ github.event.release.tag_name }}.phar
+        asset_name: phpdraft-library-${{ github.event.release.tag_name }}.phar
+        tag: ${{ github.event.release.tag_name }}
         overwrite: false
