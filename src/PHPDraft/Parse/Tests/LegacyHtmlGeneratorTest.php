@@ -17,7 +17,7 @@ use ReflectionClass;
  * Class JsonToHTMLTest
  * @covers \PHPDraft\Parse\LegacyHtmlGenerator
  */
-class JsonToHTMLTest extends LunrBaseTest
+class LegacyHtmlGeneratorTest extends LunrBaseTest
 {
     /**
      * Test Class

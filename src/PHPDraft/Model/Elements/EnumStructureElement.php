@@ -26,8 +26,8 @@ class EnumStructureElement extends BasicStructureElement
 
         $this->parse_common($object, $dependencies);
 
-        $this->key   = is_null($this->key) ? $object->content : $this->key;
-        $this->type  = is_null($this->type) ? $object->element : $this->type;
+        $this->key   = $this->key ?? $object->content ?? 'UNKNOWN';
+        $this->type  = $this->type ?? $object->element;
 
         if (!isset($object->content->value->content)) {
             $this->value = $this->key;
@@ -41,7 +41,7 @@ class EnumStructureElement extends BasicStructureElement
                 $dependencies[] = $sub_item->element;
             }
 
-            $this->value[$sub_item->content] = (isset($sub_item->element)) ? $sub_item->element : '';
+            $this->value[$sub_item->content] = $sub_item->element ?? '';
         }
 
         $this->deps = $dependencies;

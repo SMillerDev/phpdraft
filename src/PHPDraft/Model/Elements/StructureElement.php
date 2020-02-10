@@ -10,8 +10,6 @@
 
 namespace PHPDraft\Model\Elements;
 
-use stdClass;
-
 interface StructureElement
 {
     /**

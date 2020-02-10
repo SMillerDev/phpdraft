@@ -31,7 +31,9 @@ try
         ->opt('header_image:i', 'Specifies an image to display in the header.', false, 'string')
         ->opt('css:c', 'Specifies a CSS file to include (value is put in a link element without checking).', false, 'string')
         ->opt('javascript:j', 'Specifies a JS file to include (value is put in a script element without checking).', false, 'string')
-        ->opt('version:v', 'Print the version for PHPDraft.', false);
+        ->opt('version:v', 'Print the version for PHPDraft.', false)
+        ->opt('debug-json-file', 'Input a rendered JSON file for debugging.', false, 'string')
+        ->opt('debug-json', 'Input a rendered JSON text for debugging.', false, 'string');
 
     // Parse and return cli args.
     $args = $cli->parse($argv, FALSE);
@@ -39,7 +41,7 @@ try
         Version::version();
         throw new ExecutionException('', 0);
     }
-    if (!isset($args['file'])) {
+    if (!(isset($args['file']) || isset($args['debug-json-file']) || isset($args['debug-json']))) {
         throw new ExecutionException('Missing required option: file', 1);
     }
 
@@ -48,20 +50,22 @@ try
         define('DRAFTER_ONLINE_MODE', 1);
     }
 
-    $apib    = new ApibFileParser($args->getOpt('file'));
-    $apib    = $apib->parse();
-    $offline = FALSE;
-    $online  = FALSE;
+    if (!isset($args['debug-json-file']) && !isset($args['debug-json'])) {
+        $apib = new ApibFileParser($args->getOpt('file'));
+        $apib = $apib->parse();
+        $offline = FALSE;
+        $online = FALSE;
 
-    try
-    {
-        $parser = ParserFactory::getDrafter();
-        $parser = $parser->init($apib);
-        $data   = $parser->parseToJson();
-    }
-    catch (ResourceException $exception)
-    {
-        throw new ExecutionException('No drafter available', 255);
+        try {
+            $parser = ParserFactory::getDrafter();
+            $parser = $parser->init($apib);
+            $data = $parser->parseToJson();
+        } catch (ResourceException $exception) {
+            throw new ExecutionException('No drafter available', 255);
+        }
+    } else {
+        $json_string = $args['debug-json'] ?? file_get_contents($args['debug-json-file']);
+        $data = json_decode($json_string);
     }
 
     $html          = ParserFactory::getJson()->init($data);
