@@ -32,9 +32,9 @@ abstract class BaseHtmlGenerator
     /**
      * JsonToHTML constructor.
      *
-     * @param stdClass $json JSON representation of an API Blueprint
+     * @param object $json JSON representation of an API Blueprint
      */
-    public function init(stdClass $json): self
+    public function init(object $json): self
     {
         $this->object = $json;
 

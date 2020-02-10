@@ -15,7 +15,7 @@
             <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/LegacyDrafterTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/JsonToHTMLTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/LegacyHtmlGeneratorTest.php</file>
         </testsuite>
         <testsuite name="Model">
             <file>../src/PHPDraft/Model/Tests/CategoryTest.php</file>

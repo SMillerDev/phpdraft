@@ -21,7 +21,7 @@ class ObjectStructureElement extends BasicStructureElement
      * Parse a JSON object to a data structure.
      *
      * @param mixed|null $object       An object to parse
-     * @param array       $dependencies Dependencies of this object
+     * @param array      $dependencies Dependencies of this object
      *
      * @return ObjectStructureElement self reference
      */
