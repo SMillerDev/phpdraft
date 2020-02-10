@@ -18,21 +18,6 @@
         <property name="clean.done" value="true"/>
     </target>
 
-    <target name="signed-phar" depends="phar"
-            description="Create signed PHAR archive of PHPDraft and all its dependencies">
-        <exec executable="gpg" failonerror="true">
-            <arg value="--armor"/>
-            <arg value="--detach-sign"/>
-            <arg path="${project.basedir}/build/phpdraft-library-${version}.phar"/>
-        </exec>
-
-        <exec executable="gpg" failonerror="true">
-            <arg value="--armor"/>
-            <arg value="--detach-sign"/>
-            <arg path="${project.basedir}/build/phpdraft-${version}.phar"/>
-        </exec>
-    </target>
-
     <target name="phar" depends="-phar-prepare"
             description="Create PHAR archive of PHPDraft and all its dependencies">
         <phingcall target="-phar-build">
@@ -160,7 +145,7 @@
     </target>
 
     <target name="validate-composer-json" unless="validate-composer-json.done" description="Validate composer.json">
-        <exec executable="composer" failonerror="true" taskname="composer">
+        <exec executable="composer" checkreturn="true" taskname="composer">
             <arg value="validate"/>
             <arg value="--no-check-lock"/>
             <arg value="--strict"/>

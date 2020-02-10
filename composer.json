@@ -39,8 +39,7 @@
       "vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml"
     ],
     "phar": [
-      "vendor/bin/phing phar-nightly",
-      "vendor/bin/phing signed-phar",
+      "vendor/bin/phing phar",
       "sha256sum build/out/*"
     ]
   },
