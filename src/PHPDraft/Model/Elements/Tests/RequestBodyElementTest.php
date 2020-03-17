@@ -111,14 +111,15 @@ class RequestBodyElementTest extends LunrBaseTest
      *
      * @covers       \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
-    public function testSuccesfulParse($object, $expected)
+    public function testSuccessfulParse($object, $expected)
     {
         $dep = [];
         $res = $this->class->parse(json_decode($object), $dep);
-        $this->assertEquals($res, $expected);
-        $this->assertSame($res->value, $expected->value);
-        $this->assertSame($res->element, $expected->element);
-        $this->assertSame($res->type, $expected->type);
+        $res->__clearForTest();
+        $this->assertEquals($expected, $res);
+        $this->assertSame($expected->value, $res->value);
+        $this->assertSame($expected->element, $res->element);
+        $this->assertSame($expected->type, $res->type);
     }
 
     /**
@@ -135,6 +136,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $base1->status      = 'optional';
         $base1->element     = 'member';
         $base1->type        = 'string';
+        $base1->is_variable = false;
         $base1->description = "<p>desc1</p>\n";
 
         $base2              = new RequestBodyElement();
@@ -143,10 +145,11 @@ class RequestBodyElementTest extends LunrBaseTest
         $base2->status      = 'required';
         $base2->element     = 'member';
         $base2->type        = 'string';
+        $base2->is_variable = false;
         $base2->description = "<p>desc2</p>\n";
 
         $base3              = clone $base2;
-        $base3->value       = 'test1 | test2 | test3';
+        $base3->value       = 'test1 (string) | test2 (string) | test3 (string)';
 
         $base4              = clone $base2;
         $base4->value       = null;
@@ -212,7 +215,7 @@ class RequestBodyElementTest extends LunrBaseTest
                     "value": {
                         "element": "string",
                         "attributes": 
-                            {"samples":["test1", "test2", "test3"]}
+                            {"samples": {"content": [{"element": "string", "content": "test1"}, {"element": "string", "content": "test2"}, {"element": "string", "content": "test3"}]}}
                     }
                 }
             }',
@@ -268,7 +271,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
         foreach ($return->value as $item) {
-            $this->assertInstanceOf(EnumStructureElement::class, $item);
+            $this->assertInstanceOf(RequestBodyElement::class, $item);
         }
     }
 
@@ -278,7 +281,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testArrayContentObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"object","content": [[]]}';
+        $object = '{"element":"object","content": [{"hello":"world"}]}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);

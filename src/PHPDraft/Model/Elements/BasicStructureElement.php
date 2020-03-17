@@ -1,16 +1,13 @@
 <?php
+declare(strict_types=1);
 
 /**
- * Created by PhpStorm.
- * User: smillernl
- * Date: 13-7-17
- * Time: 11:07.
+ * Basic structure element
  */
 
 namespace PHPDraft\Model\Elements;
 
 use Michelf\MarkdownExtra;
-use stdClass;
 
 abstract class BasicStructureElement implements StructureElement
 {
@@ -51,6 +48,18 @@ abstract class BasicStructureElement implements StructureElement
      */
     public $status = '';
     /**
+     * Parent structure.
+     *
+     * @var string|null
+     */
+    public $ref;
+    /**
+     * Is variable.
+     *
+     * @var boolean
+     */
+    public $is_variable;
+    /**
      * List of object dependencies.
      *
      * @var string[]|null
@@ -65,7 +74,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return StructureElement self reference
      */
-    abstract public function parse(object $object, array &$dependencies): StructureElement;
+    abstract public function parse(?object $object, array &$dependencies): StructureElement;
 
     /**
      * Print a string representation.
@@ -92,13 +101,22 @@ abstract class BasicStructureElement implements StructureElement
     protected function parse_common(object $object, array &$dependencies): void
     {
         $this->key          = $object->content->key->content ?? null;
-        $this->type         = $object->content->value->element ?? null;
+        $this->type         = $object->content->value->element
+            ?? $object->meta->title->content
+            ?? $object->meta->id->content
+            ?? null;
         $this->description  = null;
         if (isset($object->meta->description->content)) {
             $this->description = htmlentities($object->meta->description->content);
         } elseif (isset($object->meta->description)) {
             $this->description = htmlentities($object->meta->description);
         }
+        $this->ref = null;
+        if ($this->element === 'ref') {
+            $this->ref = $object->content;
+        }
+
+        $this->is_variable = $object->attributes->variable->content ?? false;
 
         $this->status  = null;
         if (isset($object->attributes->typeAttributes->content)) {
@@ -130,19 +148,24 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Get a string representation of the value.
      *
+     * @param bool $flat get a flat representation of the item.
+     *
      * @return string
      */
-    public function string_value()
+    public function string_value($flat = FALSE)
     {
         if (is_array($this->value)) {
             $key = rand(0, count($this->value));
-            if (is_subclass_of($this->value[$key], StructureElement::class)) {
-                return $this->value[$key]->string_value();
+            if (is_subclass_of($this->value[$key], StructureElement::class) && $flat === FALSE) {
+                return $this->value[$key]->string_value($flat);
             }
 
             return $this->value[$key];
         }
 
+        if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === TRUE) {
+            return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
+        }
         return $this->value;
     }
 }

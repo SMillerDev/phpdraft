@@ -12,14 +12,10 @@ use PHPDraft\Out\Minifier;
     <title><?= $this->base_data['TITLE']; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <?php foreach ($this->css as $style): ?>
-        <link rel="stylesheet" href="<?= $style ?>">
-    <?php endforeach; ?>
-    <style>
-        <?= Minifier::minify_css(file_get_contents($this->find_include_file($this->template, 'css'), true));?>
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <?php foreach ($this->css as $style): ?><link rel="stylesheet" href="<?= $style ?>"><?php endforeach; ?>
+    <style><?= Minifier::minify_css(file_get_contents($this->find_include_file($this->template, 'css'), true));?></style>
 </head>
 <body>
 <div class="container-fluid">
@@ -70,7 +66,7 @@ use PHPDraft\Out\Minifier;
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (!empty($this->base_structures)): ?>
-                <nav id="datastructures" class="navbar navbar-light structures">
+                <nav id="nav-datastructures" class="navbar navbar-light structures">
                     <a class="navbar-brand" href="#<?= $category->get_href(); ?>">Data Structures</a>
                     <?php foreach ($this->base_structures as $key => $structure): ?>
                         <nav class="nav nav-pills flex-column structure">
@@ -85,7 +81,7 @@ use PHPDraft\Out\Minifier;
             <?php foreach ($this->categories as &$category): ?>
                 <?php if (!empty($category->title)): ?>
                     <h2>
-                        <a id="<?= $category->get_href(); ?>"data-anchor-id="<?= $category->get_href(); ?>"><?= $category->title; ?></a>
+                        <a id="<?= $category->get_href(); ?>" data-anchor-id="<?= $category->get_href(); ?>"><?= $category->title; ?></a>
                     </h2>
                 <?php endif; ?>
                 <?php if (!empty($category->description)): ?>
@@ -102,6 +98,12 @@ use PHPDraft\Out\Minifier;
                     </h3>
                     <?php if (!empty($resource->description)): ?>
                         <p><?= $resource->description; ?></p>
+                    <?php endif; ?>
+                    <?php if ($resource->url_variables !== null): ?>
+                        <h5>URI Parameters</h5>
+                        <div class="row">
+                            <?= $resource->url_variables; ?>
+                        </div>
                     <?php endif; ?>
                     <?php foreach ($resource->children as $transition): ?>
                         <div
@@ -253,9 +255,8 @@ use PHPDraft\Out\Minifier;
 
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-<?= $href ?>" data-anchor-id="response-<?= $href ?>">
-                                                            <?= $value; ?>
-                                                        </pre>
+                                                             id="response-<?= $href ?>"
+                                                             data-anchor-id="response-<?= $href ?>"><?= $value; ?></pre>
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
@@ -306,10 +307,10 @@ if (!empty($extras)):
 <?php foreach ($this->js as $js): ?>
     <script src="<?= $js ?>"></script>
 <?php endforeach; ?>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" integrity="sha256-m1eTvwEHwmsw4+XKF7BshClVJEPwTVycveNl0CS0Mkk=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script><?= Minifier::minify_js(file_get_contents($this->find_include_file($this->template, 'js'), true)); ?></script>
 </body>
 </html>

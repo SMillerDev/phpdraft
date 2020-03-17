@@ -45,7 +45,7 @@ class HTTPResponseTest extends LunrBaseTest
         $this->parent            = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
                                         ->getMock();
         $this->mock_function('microtime', function () {
-            return 1000;
+            return '1000';
         });
         $this->class      = new HTTPResponse($this->parent_transition);
         $this->unmock_function('microtime');

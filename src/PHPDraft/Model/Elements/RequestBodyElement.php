@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the RequestBodyElement.
@@ -22,7 +23,7 @@ class RequestBodyElement extends ObjectStructureElement
      *
      * @return string Request body
      */
-    public function print_request(?string $type = 'application/x-www-form-urlencoded')
+    public function print_request(?string $type = 'application/x-www-form-urlencoded'): string
     {
         if (is_array($this->value)) {
             $return = '<code class="request-body">';

@@ -1,5 +1,10 @@
 parameters:
 	bootstrap: tests/test.bootstrap.inc.php
+	excludes_analyse:
+		- src/PHPDraft/Out/Version.php
+		- src/PHPDraft/Parse/Tests/BaseParserTest.php
+		- src/PHPDraft/Parse/Tests/DrafterTest.php
+		- src/PHPDraft/Parse/Tests/DrafterAPITest.php
 	ignoreErrors:
 		- '#Access to an undefined property object::\$[a-zA-Z0-9\\_]+#'
 		- '#Access to an undefined property PHPUnit\\Framework\\MockObject\\MockObject::\$[a-zA-Z0-9_]+#'

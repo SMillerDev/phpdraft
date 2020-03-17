@@ -152,12 +152,22 @@ Retrieves all posts.
 
     [Posts Collection][]
 
-## Stars [/stream/0/posts/{post_id}/star]
+## Stars [/stream/0/posts/{post_id}/star{?stuff,things}]
 A User’s stars are visible to others, but they are not automatically added to
 your followers’ streams.
 
 + Parameters
-    + post_id: `1` (string) - The id of the Post.
+    + things: `1` (string) - Info on things
+    + post_id: `1` (string, optional) - The id of the Post.
+        Some additional info
+        + Default: `0`
+    + stuff: `hello` (enum[string], optional) - Some stuff info
+        Some additional info
+        + Default: `world`
+        + Members
+            + `hello`
+            + `world`
+            + `tests`
 
 ### Star a Post [PATCH]
 Save a given Post to the current User’s stars. This is just a “save” action,
@@ -227,6 +237,8 @@ Remove a Star from a Post.
 
         {}
 
++ Response 204
+
 ## Users [/users{?limit}]
 Manipulate users.
 
@@ -281,18 +293,137 @@ Manipulate users.
 
         {}
 
+# Group Quiz
+
+## Questions [/question]
+
+### Create a New Question [POST]
+You may create your own question using this action. It takes a JSON object
+containing a question and a collection of answers in the form of choices.
+
++ Request (application/json)
+
+    + Attributes
+
+        + question: Favourite Language? (required)
+        + choices: Swift, `Objective-C` (array, required)
+
+    + Body
+
+            {
+              "question": "Favourite language?"
+              "choices": [
+                "Swift",
+                "Objective-C"
+              ]
+            }
+
+    + Schema
+
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string"
+                },
+                "choices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 2
+                }
+              }
+            }
+
++ Response 204
+
+## Question [/question/{id}]
+### View a Question Detail [GET]
++ Relation: self
+
++ Response 204
+
+### Delete a Question [DELETE]
++ Relation: delete
+
++ Response 204
+
+### Answer a Question [POST]
++ Attribute (Answer)
+
++ Response 204
+
+## Questions Collection [/questions]
+### List All Questions [GET]
++ Relation: self
+
++ Response 200
+
+        OK
+
+# My Resource [/resource]
+
++ Model (text/plain)
+
+        Hello World
+
+## Retrieve My Resource [GET]
+
++ Response 200
+
+    [My Resource][]
+
 # Data Structures
 
 
 ## Org
+An organization
+
+### Properties
 + name: Apiary
 
-## User
+## Company (Org)
++ vat: `1234556` (number, required) - VAT Number
+
+## Answer
++ user (Person, required)
++ value:`A` (string, required, nullable) - Answer
++ colors (array, fixed-type)
+    + red (string)
+
+## `formal_person` (object)
++ prefix: Mr
++ Include Person
+
+## Attribute key (string)
+Key for attributes
+
+## User (Person)
++ role (enum) - The user role
+    + admin (string)
++ attributes (Attributes)
+
+## Attributes
++ *rel (Attribute key)*: `value` (string, optional, nullable) - Some value
+
+## Role (string)
+The type of role
+
+## Address Decorator(*T*)
++ address
+
+## Person (object)
 User of the application
 
 ### Properties
 + username: pavan
++ `first_name`
 + id: 5 (number) - Id of the user
++ colors (array, fixed)
+    - red
+    - *green*
 + address
     + street
     + city
@@ -302,7 +433,9 @@ User of the application
     - 3
     - 4
     - 5
-+ inline array: 1,2,3 (array) - desc
++ inline variable: *value* (string, required) - Can be anything
++ inline array: 1,2,3,four (array[number,string]) - desc
++ inline enum: red,green,blue (enum) - colors
 + multilined description - some dummy text
 
     and it continue there
@@ -313,7 +446,7 @@ User of the application
     + string_l2 (string)            - String in L2
     + object_l2 (object)            - Object in L2
         + string_l3 (string)        - String in L3
-        + object_l3 (object)        - Object in L3
+        + object_l3 (object, fixed) - Object in L3
             + string1_l4 (string)   - String in L4
             + string2_l4 (string)   - String in L4
             + string3_l4 (string)   - String in L4

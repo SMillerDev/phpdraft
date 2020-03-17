@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the ${FILE_NAME}.
@@ -15,12 +16,12 @@ class EnumStructureElement extends BasicStructureElement
     /**
      * Parse an array object.
      *
-     * @param object $object       APIB Item to parse
-     * @param array  $dependencies List of dependencies build
+     * @param object|null $object       APIB Item to parse
+     * @param array       $dependencies List of dependencies build
      *
      * @return $this
      */
-    public function parse(object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): StructureElement
     {
         $this->element = (isset($object->element)) ? $object->element : 'enum';
 
@@ -72,14 +73,15 @@ class EnumStructureElement extends BasicStructureElement
             return '<span class="example-value pull-right">//list of options</span>';
         }
 
-        foreach ($this->value as $key => $item) {
-            $type = (in_array($item, self::DEFAULTS)) ? $key : '<a href="#object-' . str_replace(
+        foreach ($this->value as $value => $key) {
+            $type = (in_array($key, self::DEFAULTS)) ? "<code>$key</code>" : '<a href="#object-' . str_replace(
                 ' ',
                 '-',
-                strtolower($item)
+                strtolower($key)
             ) . '">' . $key . '</a>';
 
-            $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
+            $item = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
+            $return .= '<li class="list-group-item mdl-list__item">' . $type . $item . '</li>';
         }
 
         $return .= '</ul>';

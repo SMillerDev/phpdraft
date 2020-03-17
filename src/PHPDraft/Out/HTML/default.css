@@ -21,6 +21,14 @@ button.extra-info.btn {
     z-index: 999;
 }
 
+span.variable-info {
+    margin-left: 10px;
+    background: rgba(0,0,0,.5);
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 0.7em;
+}
+
 button.extra-info.btn:focus {
     border-width: 0px;
     box-shadow: none;

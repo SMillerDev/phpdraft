@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the LegacyDrafter.php.
@@ -10,6 +11,13 @@
 
 namespace PHPDraft\Parse;
 
+use PHPDraft\In\ApibFileParser;
+
+/**
+ * Class LegacyDrafter
+ *
+ * @deprecated No longer supported
+ */
 class LegacyDrafter extends BaseParser
 {
     /**
@@ -22,11 +30,11 @@ class LegacyDrafter extends BaseParser
     /**
      * ApibToJson constructor.
      *
-     * @param string $apib API Blueprint text
+     * @param ApibFileParser $apib API Blueprint text
      *
      * @return \PHPDraft\Parse\BaseParser
      */
-    public function init(string $apib): BaseParser
+    public function init(ApibFileParser $apib): BaseParser
     {
         parent::init($apib);
         $this->drafter = self::location();
@@ -41,25 +49,19 @@ class LegacyDrafter extends BaseParser
      */
     public static function location()
     {
-        $returnVal = shell_exec('which drafter 2> /dev/null');
-        $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
-
-        return empty($returnVal) ? false : $returnVal;
+        return false;
     }
 
     /**
      * Check if a given parser is available.
      *
+     * @deprecated V2 doesn't support drafter 3.
+     *
      * @return bool
      */
     public static function available(): bool
     {
-        $path = self::location();
-
-        $version = shell_exec('drafter -v 2> /dev/null');
-        $version = preg_match('/^v3/', $version);
-
-        return $path && $version === 1;
+        return false;
     }
 
     /**
@@ -69,7 +71,6 @@ class LegacyDrafter extends BaseParser
      */
     protected function parse(): void
     {
-        shell_exec($this->drafter . ' ' . $this->tmp_dir . '/index.apib -f json -o ' . $this->tmp_dir . '/index.json 2> /dev/null');
-        $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
+        return;
     }
 }

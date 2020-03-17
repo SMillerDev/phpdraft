@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the Drafter.php.
@@ -9,6 +10,8 @@
  */
 
 namespace PHPDraft\Parse;
+
+use PHPDraft\In\ApibFileParser;
 
 class Drafter extends BaseParser
 {
@@ -22,11 +25,11 @@ class Drafter extends BaseParser
     /**
      * ApibToJson constructor.
      *
-     * @param string $apib API Blueprint text
+     * @param ApibFileParser $apib API Blueprint text
      *
      * @return \PHPDraft\Parse\BaseParser
      */
-    public function init(string $apib): BaseParser
+    public function init(ApibFileParser $apib): BaseParser
     {
         parent::init($apib);
         $this->drafter = self::location();

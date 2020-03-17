@@ -10,6 +10,8 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\In\ApibFileParser;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
@@ -18,6 +20,13 @@ use ReflectionClass;
  */
 class BaseParserTest extends LunrBaseTest
 {
+
+    /**
+     * Shared instance of the file parser.
+     *
+     * @var ApibFileParser&MockObject
+     */
+    private $parser;
 
     /**
      * Set up
@@ -30,10 +39,18 @@ class BaseParserTest extends LunrBaseTest
         $this->mock_function('shell_exec', function () {
             return "/some/dir/drafter\n";
         });
-        $this->class      = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
-                                 ->getMockForAbstractClass();
-        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+
+        $this->parser = $this->getMockBuilder('\PHPDraft\In\ApibFileParser')
+                             ->disableOriginalConstructor()
+                             ->getMock();
+        $this->class  = $this->getMockBuilder('\PHPDraft\Parse\BaseParser')
+                             ->getMockForAbstractClass();
+
+        $this->parser->set_apib_content(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+
+        $this->class->init($this->parser);
         $this->reflection = new ReflectionClass($this->class);
+
         $this->unmock_function('shell_exec');
         $this->unmock_function('sys_get_temp_dir');
     }
@@ -45,24 +62,23 @@ class BaseParserTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
+        unset($this->parser);
     }
 
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(true);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
+        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->get_reflection_property_value('apib'));
     }
 
     /**
      * Check if the JSON is empty before parsing
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testPreRunStringIsEmpty(): void
     {
@@ -72,7 +88,7 @@ class BaseParserTest extends LunrBaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testParseToJSON(): void
     {
@@ -87,7 +103,7 @@ class BaseParserTest extends LunrBaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testParseToJSONMkDir(): void
     {
@@ -102,7 +118,7 @@ class BaseParserTest extends LunrBaseTest
     /**
      * Check if parsing the APIB to JSON gives the expected result
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testParseToJSONMkTmp(): void
     {
@@ -128,7 +144,7 @@ class BaseParserTest extends LunrBaseTest
     /**
      * Check if parsing the fails when invalid JSON
      *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
+     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
      */
     public function testParseToJSONWithInvalidJSON(): void
     {

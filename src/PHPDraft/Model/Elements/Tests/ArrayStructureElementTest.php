@@ -21,6 +21,7 @@ class ArrayStructureElementTest extends LunrBaseTest
 
     /**
      * Set up tests
+     *
      * @return void
      */
     public function setUp(): void
@@ -37,12 +38,13 @@ class ArrayStructureElementTest extends LunrBaseTest
      * @param string                $object   JSON Object
      * @param ArrayStructureElement $expected Expected Object output
      *
-     * @covers       \PHPDraft\Model\Elements\ArrayStructureElement::parse
+     * @covers \PHPDraft\Model\Elements\ArrayStructureElement::parse
      */
-    public function testSuccesfulParse($object, $expected)
+    public function testSuccessfulParse($object, $expected)
     {
         $dep = [];
-        $res = $this->class->parse(json_decode($object), $dep);
+        $obj = json_decode($object);
+        $res = $this->class->parse($obj, $dep);
         $this->assertEquals($expected, $res);
     }
 
@@ -56,19 +58,21 @@ class ArrayStructureElementTest extends LunrBaseTest
         $return             = [];
         $base1              = new ArrayStructureElement();
         $base1->key         = 'greet_list';
-        $base1->value       = ['hello'];
+        $base1->value       = [['' => 'string']];
         $base1->status      = 'required';
         $base1->element     = 'member';
         $base1->type        = 'array';
+        $base1->is_variable = false;
         $base1->description = "\n";
-        $base1->deps        = ['hello'];
+        $base1->deps        = [];
 
         $base2              = new ArrayStructureElement();
         $base2->key         = 'car_id_list';
-        $base2->value       = ['Car identifier'];
+        $base2->value       = [['Truck' => 'Car identifier']];
         $base2->status      = 'optional';
         $base2->element     = 'member';
         $base2->type        = 'array';
+        $base2->is_variable = false;
         $base2->description = "<p>List of car identifiers to retrieve</p>\n";
         $base2->deps        = ['Car identifier'];
 
@@ -78,10 +82,11 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base3->status      = 'optional';
         $base3->element     = 'member';
         $base3->type        = 'array';
+        $base3->is_variable = false;
         $base3->description = "<p>List of car identifiers to retrieve</p>\n";
         $base3->deps        = null;
 
-        $return[] = [
+        $return['generic value type'] = [
             '{
                 "element": "member",
                 "attributes": {
@@ -98,7 +103,7 @@ class ArrayStructureElementTest extends LunrBaseTest
                         "element": "array",
                         "content": [
                             {
-                                "element": "hello"
+                                "element": "string"
                             }
                         ]
                     }
@@ -106,7 +111,7 @@ class ArrayStructureElementTest extends LunrBaseTest
             }',
             $base1,
         ];
-        $return[] = [
+        $return['custom value type'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -126,7 +131,8 @@ class ArrayStructureElementTest extends LunrBaseTest
                         "element": "array",
                         "content": [
                             {
-                                "element": "Car identifier"
+                                "element": "Car identifier",
+                                "content": "Truck"
                             }
                         ]
                     }
@@ -186,9 +192,9 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithArray(): void
     {
-        $this->class->value = ['string', 'int'];
+        $this->class->value = [['string' => 'stuff'], ['int' => 'class']];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item"><a href="#object-int">int</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-stuff">stuff</a> - <span class="example-value pull-right">string</span></li><li class="list-group-item mdl-list__item"><a href="#object-class">class</a> - <span class="example-value pull-right">int</span></li></ul>', $return);
     }
 
     /**
@@ -206,8 +212,8 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
-        $this->class->value = ['Bike', 'car'];
+        $this->class->value = [['type'=>'Bike'], ['stuff'=>'car']];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">Bike</a></li><li class="list-group-item mdl-list__item"><a href="#object-car">car</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">Bike</a> - <span class="example-value pull-right">type</span></li><li class="list-group-item mdl-list__item"><a href="#object-car">car</a> - <span class="example-value pull-right">stuff</span></li></ul>', $return);
     }
 }

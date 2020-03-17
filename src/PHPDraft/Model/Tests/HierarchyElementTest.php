@@ -133,9 +133,8 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testGetHrefIsCalledWithParent(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('title', 'title');
 
         $this->parent->expects($this->once())
                      ->method('get_href')
@@ -143,7 +142,7 @@ class HierarchyElementTest extends LunrBaseTest
 
         $result = $this->class->get_href();
 
-        $this->assertSame($result, 'hello-');
+        $this->assertSame($result, 'hello-title');
     }
 
     /**
@@ -151,9 +150,10 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testGetHrefIsCalledWithoutParent(): void
     {
+        $this->set_reflection_property_value('title', 'title');
         $result = $this->class->get_href();
 
-        $this->assertSame($result, '');
+        $this->assertSame($result, 'title');
     }
 
     /**

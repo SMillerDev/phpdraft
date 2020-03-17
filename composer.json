@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": "~7.2",
+    "php": "^7.2",
     "ql/uri-template": "~1.0",
     "vanilla/garden-cli": "~2.0",
     "michelf/php-markdown": "~1.9",
@@ -32,7 +32,7 @@
     "theseer/autoload": "~1.0",
     "phing/phing": "~2.0",
     "phpstan/phpstan-phpunit": "^0.12.6",
-    "phpstan/phpstan": "^0.12.8"
+    "phpstan/phpstan": "^0.12.17"
   },
   "scripts": {
     "test": [

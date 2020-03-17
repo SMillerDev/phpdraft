@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the ArrayStructureElement.php.
@@ -18,14 +19,14 @@ class ArrayStructureElement extends BasicStructureElement
     /**
      * Parse an array object.
      *
-     * @param object $object       APIB Item to parse
-     * @param array  $dependencies List of dependencies build
+     * @param object|null $object       APIB Item to parse
+     * @param array       $dependencies List of dependencies build
      *
      * @return self Self reference
      */
-    public function parse(object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): StructureElement
     {
-        $this->element = (isset($object->element)) ? $object->element : 'array';
+        $this->element = $object->element ?? 'array';
 
         $this->parse_common($object, $dependencies);
 
@@ -40,7 +41,9 @@ class ArrayStructureElement extends BasicStructureElement
                 $dependencies[] = $sub_item->element;
             }
 
-            $this->value[] = (isset($sub_item->element)) ? $sub_item->element : '';
+            $key   = $sub_item->element ?? 'any';
+            $value = $sub_item->content ?? NULL;
+            $this->value[] = [$value => $key];
         }
 
         $this->deps = $dependencies;
@@ -62,13 +65,16 @@ class ArrayStructureElement extends BasicStructureElement
         }
 
         foreach ($this->value as $item) {
-            $type = (in_array($item, self::DEFAULTS)) ? $item : '<a href="#object-' . str_replace(
+            $value = key($item);
+            $key = $item[$value];
+            $type = (in_array($key, self::DEFAULTS)) ? "<code>$key</code>" : '<a href="#object-' . str_replace(
                 ' ',
                 '-',
-                strtolower($item)
-            ) . '">' . $item . '</a>';
+                strtolower($key)
+            ) . '">' . $key . '</a>';
 
-            $return .= '<li class="list-group-item mdl-list__item">' . $type . '</li>';
+            $value = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
+            $return .= '<li class="list-group-item mdl-list__item">' . $type . $value . '</li>';
         }
 
         $return .= '</ul>';

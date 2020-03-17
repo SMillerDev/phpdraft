@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the HTTPRequest.php.
@@ -87,7 +88,7 @@ class HTTPRequest implements Comparable
     public function __construct(Transition &$parent)
     {
         $this->parent = &$parent;
-        $this->id     = md5(microtime());
+        $this->id     = defined('ID_STATIC') ? ID_STATIC : md5(microtime());
     }
 
     /**
@@ -162,7 +163,7 @@ class HTTPRequest implements Comparable
     {
         $deps   = [];
         $struct = new RequestBodyElement();
-        $struct->parse($objects, $deps);
+        $struct->parse($objects->content, $deps);
         $struct->deps = $deps;
 
         $this->struct = $struct;
@@ -225,56 +226,5 @@ class HTTPRequest implements Comparable
     public function is_equal_to($b): bool
     {
         return ($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers);
-    }
-
-    /**
-     * Generate a URL for the hurl.it service.
-     *
-     * @param string $base_url   URL to the base server
-     * @param array  $additional Extra options to pass to the service
-     *
-     * @throws Exception
-     *
-     * @return string
-     */
-    public function get_hurl_link(string $base_url, array $additional = []): string
-    {
-        $options = [];
-
-        $type = (isset($this->headers['Content-Type'])) ? $this->headers['Content-Type'] : null;
-
-        $url = $this->parent->build_url($base_url, true);
-        $url = explode('?', $url);
-        if (isset($url[1])) {
-            $params = [];
-            foreach (explode('&', $url[1]) as $args) {
-                $arg             = explode('=', $args);
-                $params[$arg[0]] = [$arg[1]];
-            }
-            $options[] = 'args=' . urlencode(json_encode($params));
-        }
-        $options[] = 'url=' . urlencode($url[0]);
-        $options[] = 'method=' . strtoupper($this->method);
-        if (empty($this->body)) {
-            //NO-OP
-        } elseif (is_string($this->body)) {
-            $options[] = 'body=' . urlencode($this->body);
-        } elseif (is_array($this->body)) {
-            $options[] = 'body=' . urlencode(join(',', $this->body));
-        } elseif (is_subclass_of($this->struct, StructureElement::class)) {
-            foreach ($this->struct->value as $body) {
-                $options[] = 'body=' . urlencode(strip_tags($body->print_request($type)));
-            }
-        }
-        $headers = [];
-        if (!empty($this->headers)) {
-            foreach ($this->headers as $header => $value) {
-                $headers[$header] = [$value];
-            }
-            $options[] = 'headers=' . urlencode(json_encode($headers));
-        }
-        $options = array_merge($options, $additional);
-
-        return 'https://www.hurl.it/?' . join('&', $options);
     }
 }

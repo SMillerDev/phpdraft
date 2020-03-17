@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the ApibFileParser.
@@ -63,6 +64,16 @@ class ApibFileParser
         $this->full_apib = $this->get_apib($this->filename, $this->location);
 
         return $this;
+    }
+
+    /**
+     * Set apib content.
+     *
+     * @param string $content The content
+     */
+    public function set_apib_content(string $content): void
+    {
+        $this->full_apib = $content;
     }
 
     /**
@@ -153,12 +164,22 @@ class ApibFileParser
     }
 
     /**
+     * Return the value of the file.
+     *
+     * @return string
+     */
+    public function content(): string
+    {
+        return $this->full_apib;
+    }
+
+    /**
      * Return the value of the class.
      *
      * @return string
      */
     public function __toString(): string
     {
-        return $this->full_apib;
+        return $this->content();
     }
 }
