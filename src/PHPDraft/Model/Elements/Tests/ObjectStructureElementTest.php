@@ -59,10 +59,11 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $dep = [];
         $res = $this->class->parse(json_decode($object), $dep);
-        $this->assertEquals($res, $expected);
-        $this->assertSame($res->value, $expected->value);
-        $this->assertSame($res->element, $expected->element);
-        $this->assertSame($res->type, $expected->type);
+        $res->__clearForTest();
+        $this->assertEquals($expected, $res);
+        $this->assertSame($expected->value, $res->value);
+        $this->assertSame($expected->element, $res->element);
+        $this->assertSame($expected->type, $res->type);
     }
 
     /**
@@ -79,6 +80,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base1->status      = 'optional';
         $base1->element     = 'member';
         $base1->type        = 'string';
+        $base1->is_variable = false;
         $base1->description = "<p>desc1</p>\n";
 
         $base2              = new ObjectStructureElement();
@@ -87,15 +89,16 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base2->status      = 'required';
         $base2->element     = 'member';
         $base2->type        = 'string';
+        $base2->is_variable = false;
         $base2->description = "<p>desc2</p>\n";
 
         $base3              = clone $base2;
-        $base3->value       = 'test1 | test2 | test3';
+        $base3->value       = 'test1 (string) | test2 (int) | test3 (Cow)';
 
         $base4              = clone $base2;
         $base4->value       = null;
 
-        $return[] = [
+        $return['optional status & basic element'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -117,7 +120,7 @@ class ObjectStructureElementTest extends LunrBaseTest
             }',
             $base1,
         ];
-        $return[] = [
+        $return['required status & custom key'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -139,7 +142,7 @@ class ObjectStructureElementTest extends LunrBaseTest
             }',
             $base2,
         ];
-        $return[] = [
+        $return['sample values'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -156,13 +159,13 @@ class ObjectStructureElementTest extends LunrBaseTest
                     "value": {
                         "element": "string",
                         "attributes": 
-                            {"samples":["test1", "test2", "test3"]}
+                            {"samples": {"content": [{"element": "string", "content": "test1"}, {"element": "int", "content": "test2"}, {"element": "Cow", "content": "test3"}]}}
                     }
                 }
             }',
             $base3,
         ];
-        $return[] = [
+        $return['no value content'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -212,7 +215,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
         foreach ($return->value as $item) {
-            $this->assertInstanceOf(EnumStructureElement::class, $item);
+            $this->assertInstanceOf(ObjectStructureElement::class, $item);
         }
     }
 
@@ -222,7 +225,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testArrayContentObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"object","content": [[]]}';
+        $object = '{"element":"object","content": [{"hello":"world"}]}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -312,8 +315,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testToStringNullValue(): void
     {
         $this->class->key = 'hello';
+        $this->class->type = 'mixed';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
     }
 
     /**
@@ -323,8 +327,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = new ObjectStructureElement();
+        $this->class->type = 'object';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>object</code></td><td> <span class="status"></span></td><td></td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr>', $return);
     }
 
     /**
@@ -334,8 +339,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = new ArrayStructureElement();
+        $this->class->type = 'array';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><span class="example-value pull-right">[ ]</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>array</code></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><span class="example-value pull-right">[ ]</span></div></td></tr>', $return);
     }
 
     /**
@@ -345,8 +351,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = new EnumStructureElement();
+        $this->class->type = 'enum';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><span class="example-value pull-right">//list of options</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>enum</code></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><span class="example-value pull-right">//list of options</span></div></td></tr>', $return);
     }
 
     /**
@@ -356,8 +363,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = true;
+        $this->class->type = 'boolean';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">true</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">true</span></td></tr>', $return);
     }
 
     /**
@@ -367,8 +375,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = 'world';
+        $this->class->type = 'Cow';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-"></a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-cow">Cow</a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
     }
 
     /**

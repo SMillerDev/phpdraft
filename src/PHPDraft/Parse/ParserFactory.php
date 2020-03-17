@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
@@ -17,11 +18,11 @@ class ParserFactory
         if (Drafter::available()) {
             return new Drafter();
         }
-        if (LegacyDrafter::available()) {
-            return new LegacyDrafter();
-        }
         if (DrafterAPI::available()) {
             return new DrafterAPI();
+        }
+        if (LegacyDrafter::available()) {
+            throw new ResourceException('Drafter 3.x is no longer supported', 100);
         }
 
         throw new ResourceException("Couldn't get an apib parser", 255);
@@ -34,11 +35,11 @@ class ParserFactory
      */
     public static function getJson(): BaseHtmlGenerator
     {
-        if (LegacyDrafter::available()) {
-            return new LegacyHtmlGenerator();
-        }
         if (Drafter::available() || DrafterAPI::available()) {
             return new HtmlGenerator();
+        }
+        if (LegacyDrafter::available()) {
+            throw new ResourceException('Drafter 3.x is no longer supported', 100);
         }
 
         throw new ResourceException("Couldn't get a JSON parser", 255);

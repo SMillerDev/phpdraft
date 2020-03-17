@@ -10,7 +10,9 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\In\ApibFileParser;
 use PHPDraft\Parse\DrafterAPI;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
@@ -19,6 +21,14 @@ use ReflectionClass;
  */
 class DrafterAPITest extends LunrBaseTest
 {
+
+    /**
+     * Shared instance of the file parser.
+     *
+     * @var ApibFileParser|MockObject
+     */
+    private $parser;
+
     /**
      * Basic setup
      */
@@ -27,9 +37,18 @@ class DrafterAPITest extends LunrBaseTest
         $this->mock_function('sys_get_temp_dir', function () {
             return TEST_STATICS;
         });
+
+        $this->parser = $this->getMockBuilder('\PHPDraft\In\ApibFileParser')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->parser->set_apib_content(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+
         $this->class      = new DrafterAPI();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\DrafterAPI');
-        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+
+        $this->class->init($this->parser);
+
         $this->unmock_function('sys_get_temp_dir');
     }
 
@@ -40,6 +59,7 @@ class DrafterAPITest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
+        unset($this->parser);
     }
 
     /**
@@ -49,9 +69,7 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(true);
-        $this->assertEquals(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'), $property->getValue($this->class));
+        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->get_reflection_property_value('apib'));
     }
 
     /**

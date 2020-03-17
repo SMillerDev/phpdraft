@@ -65,7 +65,7 @@ class EnumStructureElementTest extends LunrBaseTest
     {
         $this->class->value = ['hello' => 'string', 'test' => 'int'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">hello</li><li class="list-group-item mdl-list__item"><a href="#object-int">test</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a href="#object-int">int</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
 
     /**
@@ -99,7 +99,7 @@ class EnumStructureElementTest extends LunrBaseTest
     {
         $this->class->value = ['hello' => 'bike', 'test' => 'Car'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">hello</a></li><li class="list-group-item mdl-list__item"><a href="#object-car">test</a></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">bike</a> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a href="#object-car">Car</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
 
     /**

@@ -51,16 +51,14 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testParseIsCalled(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = new \stdClass();
         $obj->content = [];
 
         $this->class->parse($obj);
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
     }
 
     /**
@@ -68,15 +66,13 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledResource(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $json = '{"content":[{"element":"resource", "content":[{"element":"copy", "content":""}]}]}';
 
         $this->class->parse(json_decode($json));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
         $cproperty = $this->reflection->getProperty('children');
         $cproperty->setAccessible(true);
@@ -88,15 +84,13 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledObject(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $json = '{"content":[{"element":"dataStructure", "content":{"key":{"content":"none"}, "value":{"element":"none"}}}]}';
 
         $this->class->parse(json_decode($json));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
         $s_property = $this->reflection->getProperty('structures');
         $s_property->setAccessible(true);
@@ -108,15 +102,13 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledObjectMetaID(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $json = '{"content":[{"element":"dataStructure", "content":[{"meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}]}]}';
+        $json = '{"content":[{"element":"dataStructure", "content":{"meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}}]}';
 
         $this->class->parse(json_decode($json));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
         $s_property = $this->reflection->getProperty('structures');
         $s_property->setAccessible(true);
@@ -128,23 +120,15 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledDef(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $json = '{"content":[{"element":"henk", "content":[{"element":"copy", "content":""}]}]}';
 
         $this->class->parse(json_decode($json));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $c_property = $this->reflection->getProperty('children');
-        $c_property->setAccessible(true);
-        $this->assertEmpty($c_property->getValue($this->class));
-
-        $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(true);
-        $this->assertEmpty($s_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertEmpty($this->get_reflection_property_value('children'));
+        $this->assertEmpty($this->get_reflection_property_value('structures'));
     }
 
     /**
@@ -152,9 +136,8 @@ class CategoryTest extends HierarchyElementChildTest
      */
     public function testGetHrefIsCalledWithParent(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('title', 'title');
 
         $this->parent->expects($this->once())
                      ->method('get_href')
@@ -162,6 +145,6 @@ class CategoryTest extends HierarchyElementChildTest
 
         $result = $this->class->get_href();
 
-        $this->assertSame($result, 'hello-');
+        $this->assertSame($result, 'hello-title');
     }
 }

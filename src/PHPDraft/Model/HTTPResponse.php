@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the HTTPResponse.php.
@@ -68,7 +69,7 @@ class HTTPResponse implements Comparable
     public function __construct(Transition $parent)
     {
         $this->parent = &$parent;
-        $this->id     = md5(microtime());
+        $this->id     = defined('ID_STATIC') ? ID_STATIC : md5(microtime());
     }
 
     /**

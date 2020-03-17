@@ -4,86 +4,122 @@
     {
       "element": "category",
       "meta": {
-        "classes": [
-          "api"
-        ],
-        "title": "Tesla Model S JSON API"
+        "classes": {
+          "element": "array",
+          "content": [
+            {
+              "element": "string",
+              "content": "api"
+            }
+          ]
+        },
+        "title": {
+          "element": "string",
+          "content": "Tesla Model S JSON API"
+        }
       },
       "attributes": {
-        "meta": [
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "FORMAT"
+        "metadata": {
+          "element": "array",
+          "content": [
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
               },
-              "value": {
-                "element": "string",
-                "content": "1A"
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "FORMAT"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "1A"
+                }
+              }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "HOST"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://owner-api.teslamotors.com"
+                }
+              }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "EXTRA_HOSTS"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "https://test.owner-api.teslamotors.com"
+                }
+              }
+            },
+            {
+              "element": "member",
+              "meta": {
+                "classes": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "user"
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "key": {
+                  "element": "string",
+                  "content": "SOMETHING"
+                },
+                "value": {
+                  "element": "string",
+                  "content": "INFO"
+                }
               }
             }
-          },
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "HOST"
-              },
-              "value": {
-                "element": "string",
-                "content": "https://owner-api.teslamotors.com"
-              }
-            }
-          },
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "EXTRA_HOSTS"
-              },
-              "value": {
-                "element": "string",
-                "content": "https://test.owner-api.teslamotors.com"
-              }
-            }
-          },
-          {
-            "element": "member",
-            "meta": {
-              "classes": [
-                "user"
-              ]
-            },
-            "content": {
-              "key": {
-                "element": "string",
-                "content": "SOMETHING"
-              },
-              "value": {
-                "element": "string",
-                "content": "INFO"
-              }
-            }
-          }
-        ]
+          ]
+        }
       },
       "content": [
         {
@@ -93,116 +129,147 @@
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "resourceGroup"
-            ],
-            "title": "Authentication"
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
+            "title": {
+              "element": "string",
+              "content": "Authentication"
+            }
           },
           "content": [
             {
               "element": "resource",
               "meta": {
-                "title": "Tokens"
+                "title": {
+                  "element": "string",
+                  "content": "Tokens"
+                }
               },
               "attributes": {
-                "href": "/oauth/token"
+                "href": {
+                  "element": "string",
+                  "content": "/oauth/token"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Get an Access Token"
+                    "title": {
+                      "element": "string",
+                      "content": "Get an Access Token"
+                    }
                   },
                   "attributes": {
                     "data": {
                       "element": "dataStructure",
-                      "content": [
-                        {
-                          "element": "object",
-                          "content": [
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The type of oAuth grant. Always \"password\""
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "grant_type"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "password"
-                                }
+                      "content": {
+                        "element": "object",
+                        "content": [
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The type of oAuth grant. Always \"password\""
                               }
                             },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The oAuth client ID"
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "grant_type"
                               },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "client_id"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "abc"
-                                }
-                              }
-                            },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The oAuth client secret"
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "client_secret"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "123"
-                                }
-                              }
-                            },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The email for my.teslamotors.com"
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "email"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "elon@teslamotors.com"
-                                }
-                              }
-                            },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The password for my.teslamotors.com"
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "password"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "edisonsux"
-                                }
+                              "value": {
+                                "element": "string",
+                                "content": "password"
                               }
                             }
-                          ]
-                        }
-                      ]
+                          },
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The oAuth client ID"
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "client_id"
+                              },
+                              "value": {
+                                "element": "string",
+                                "content": "abc"
+                              }
+                            }
+                          },
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The oAuth client secret"
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "client_secret"
+                              },
+                              "value": {
+                                "element": "string",
+                                "content": "123"
+                              }
+                            }
+                          },
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The email for my.teslamotors.com"
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "email"
+                              },
+                              "value": {
+                                "element": "string",
+                                "content": "elon@teslamotors.com"
+                              }
+                            }
+                          },
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The password for my.teslamotors.com"
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "password"
+                              },
+                              "value": {
+                                "element": "string",
+                                "content": "edisonsux"
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
                   },
                   "content": [
@@ -216,14 +283,20 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST"
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            }
                           },
                           "content": []
                         },
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -247,12 +320,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"access_token\": \"abc123\",\n  \"token_type\": \"bearer\",\n  \"expires_in\": 7776000,\n  \"created_at\": 1457385291\n}\n"
                             }
@@ -269,10 +351,19 @@
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "resourceGroup"
-            ],
-            "title": "Vehicles"
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
+            "title": {
+              "element": "string",
+              "content": "Vehicles"
+            }
           },
           "content": [
             {
@@ -282,16 +373,25 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Vehicle Collection"
+                "title": {
+                  "element": "string",
+                  "content": "Vehicle Collection"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "List all Vehicles"
+                    "title": {
+                      "element": "string",
+                      "content": "List all Vehicles"
+                    }
                   },
                   "content": [
                     {
@@ -304,7 +404,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -329,7 +432,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -353,12 +459,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": [{\n    \"color\": null,\n    \"display_name\": null,\n    \"id\": 321,\n    \"option_codes\": \"MS01,RENA,TM00,DRLH,PF00,BT85,PBCW,RFPO,WT19,IBMB,IDPB,TR00,SU01,SC01,TP01,AU01,CH00,HP00,PA00,PS00,AD02,X020,X025,X001,X003,X007,X011,X013\",\n    \"user_id\": 123,\n    \"vehicle_id\": 1234567890,\n    \"vin\": \"5YJSA1CN5CFP01657\",\n    \"tokens\": [\"x\", \"x\"],\n    \"state\": \"online\"\n  }],\n  \"count\":1\n}\n"
                             }
@@ -373,22 +488,41 @@
             {
               "element": "resource",
               "meta": {
-                "title": "State and Settings"
+                "title": {
+                  "element": "string",
+                  "content": "State and Settings"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}",
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}"
+                },
                 "hrefVariables": {
                   "element": "hrefVariables",
                   "content": [
                     {
                       "element": "member",
                       "meta": {
-                        "description": "The id of the Vehicle."
+                        "description": {
+                          "element": "string",
+                          "content": "The id of the Vehicle."
+                        },
+                        "title": {
+                          "element": "string",
+                          "content": "number"
+                        }
                       },
                       "attributes": {
-                        "typeAttributes": [
-                          "required"
-                        ]
+                        "typeAttributes": {
+                          "element": "array",
+                          "content": [
+                            {
+                              "element": "string",
+                              "content": "required"
+                            }
+                          ]
+                        }
                       },
                       "content": {
                         "key": {
@@ -396,8 +530,8 @@
                           "content": "vehicle_id"
                         },
                         "value": {
-                          "element": "number",
-                          "content": 1
+                          "element": "string",
+                          "content": "1"
                         }
                       }
                     }
@@ -412,22 +546,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Mobile Access"
+                    "title": {
+                      "element": "string",
+                      "content": "Mobile Access"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/mobile_enabled",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/mobile_enabled"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -435,8 +588,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -454,7 +607,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -479,7 +635,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -503,12 +662,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n    \"response\": true\n}\n"
                             }
@@ -521,22 +689,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Charge State"
+                    "title": {
+                      "element": "string",
+                      "content": "Charge State"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/data_request/charge_state",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/data_request/charge_state"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -544,8 +731,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -563,7 +750,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -588,7 +778,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -612,12 +805,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"charging_state\": \"Complete\",  // \"Charging\", ??\n    \"charge_to_max_range\": false,  // current std/max-range setting\n    \"max_range_charge_counter\": 0,\n    \"fast_charger_present\": false, // connected to Supercharger?\n    \"battery_range\": 239.02,       // rated miles\n    \"est_battery_range\": 155.79,   // range estimated from recent driving\n    \"ideal_battery_range\": 275.09, // ideal miles\n    \"battery_level\": 91,           // integer charge percentage\n    \"battery_current\": -0.6,       // current flowing into battery\n    \"charge_starting_range\": null,\n    \"charge_starting_soc\": null,\n    \"charger_voltage\": 0,          // only has value while charging\n    \"charger_pilot_current\": 40,   // max current allowed by charger & adapter\n    \"charger_actual_current\": 0,   // current actually being drawn\n    \"charger_power\": 0,            // kW (rounded down) of charger\n    \"time_to_full_charge\": null,   // valid only while charging\n    \"charge_rate\": -1.0,           // float mi/hr charging or -1 if not charging\n    \"charge_port_door_open\": true\n  }\n}\n"
                             }
@@ -630,22 +832,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Climate Settings"
+                    "title": {
+                      "element": "string",
+                      "content": "Climate Settings"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/data_request/climate_state",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/data_request/climate_state"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -653,8 +874,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -672,7 +893,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -697,7 +921,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -721,12 +948,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"inside_temp\": 17.0,          // degC inside car\n    \"outside_temp\": 9.5,          // degC outside car or null\n    \"driver_temp_setting\": 22.6,  // degC of driver temperature setpoint\n    \"passenger_temp_setting\": 22.6, // degC of passenger temperature setpoint\n    \"is_auto_conditioning_on\": false, // apparently even if on\n    \"is_front_defroster_on\": null, // null or boolean as integer?\n    \"is_rear_defroster_on\": false,\n    \"fan_status\": 0               // fan speed 0-6 or null\n  }\n}\n"
                             }
@@ -739,22 +975,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Driving and Position"
+                    "title": {
+                      "element": "string",
+                      "content": "Driving and Position"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/data_request/drive_state",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/data_request/drive_state"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -762,8 +1017,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -781,7 +1036,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -806,7 +1064,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -830,12 +1091,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"shift_state\": null,          //\n    \"speed\": null,                //\n    \"latitude\": 33.794839,        // degrees N of equator\n    \"longitude\": -84.401593,      // degrees W of the prime meridian\n    \"heading\": 4,                 // integer compass heading, 0-359\n    \"gps_as_of\": 1359863204       // Unix timestamp of GPS fix\n  }\n}\n"
                             }
@@ -848,22 +1118,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "GUI Settings"
+                    "title": {
+                      "element": "string",
+                      "content": "GUI Settings"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/data_request/gui_settings",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/data_request/gui_settings"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -871,8 +1160,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -890,7 +1179,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -915,7 +1207,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -939,12 +1234,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"gui_distance_units\": \"mi/hr\",\n    \"gui_temperature_units\": \"F\",\n    \"gui_charge_rate_units\": \"mi/hr\",\n    \"gui_24_hour_time\": false,\n    \"gui_range_display\": \"Rated\"\n  }\n}\n"
                             }
@@ -957,22 +1261,41 @@
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Vehicle State"
+                    "title": {
+                      "element": "string",
+                      "content": "Vehicle State"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/data_request/vehicle_state",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/data_request/vehicle_state"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -980,8 +1303,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -999,7 +1322,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "GET",
+                            "method": {
+                              "element": "string",
+                              "content": "GET"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1024,7 +1350,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1048,12 +1377,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"df\": false,                  // driver's side front door open\n    \"dr\": false,                  // driver's side rear door open\n    \"pf\": false,                  // passenger's side front door open\n    \"pr\": false,                  // passenger's side rear door open\n    \"ft\": false,                  // front trunk is open\n    \"rt\": false,                  // rear trunk is open\n    \"car_verson\": \"1.19.42\",      // car firmware version\n    \"locked\": true,               // car is locked\n    \"sun_roof_installed\": false,  // panoramic roof is installed\n    \"sun_roof_state\": \"unknown\",\n    \"sun_roof_percent_open\": 0,   // null if not installed\n    \"dark_rims\": false,           // gray rims installed\n    \"wheel_type\": \"Base19\",       // wheel type installed\n    \"has_spoiler\": false,         // spoiler is installed\n    \"roof_color\": \"Colored\",      // \"None\" for panoramic roof\n    \"perf_config\": \"Base\"\n  }\n}\n"
                             }
@@ -1070,10 +1408,19 @@
         {
           "element": "category",
           "meta": {
-            "classes": [
-              "resourceGroup"
-            ],
-            "title": "Vehicle Commands"
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "resourceGroup"
+                }
+              ]
+            },
+            "title": {
+              "element": "string",
+              "content": "Vehicle Commands"
+            }
           },
           "content": [
             {
@@ -1083,31 +1430,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Wake Up Car"
+                "title": {
+                  "element": "string",
+                  "content": "Wake Up Car"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/wake_up"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/wake_up"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Wake Up Car"
+                    "title": {
+                      "element": "string",
+                      "content": "Wake Up Car"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/wake_up",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/wake_up"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1115,8 +1487,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1134,7 +1506,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1159,7 +1534,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1183,12 +1561,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -1203,31 +1590,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Set Valet Mode"
+                "title": {
+                  "element": "string",
+                  "content": "Set Valet Mode"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Set Valet Mode"
+                    "title": {
+                      "element": "string",
+                      "content": "Set Valet Mode"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/set_valet_mode"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1235,8 +1647,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1244,45 +1656,49 @@
                     },
                     "data": {
                       "element": "dataStructure",
-                      "content": [
-                        {
-                          "element": "object",
-                          "content": [
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "Whether to enable or disable valet mode."
-                              },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "on"
-                                },
-                                "value": {
-                                  "element": "boolean",
-                                  "content": true
-                                }
+                      "content": {
+                        "element": "object",
+                        "content": [
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "Whether to enable or disable valet mode."
                               }
                             },
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "(optional) A 4 digit PIN code to unlock the car."
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "on"
                               },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "password"
-                                },
-                                "value": {
-                                  "element": "number",
-                                  "content": 1234
-                                }
+                              "value": {
+                                "element": "boolean",
+                                "content": true
                               }
                             }
-                          ]
-                        }
-                      ]
+                          },
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "(optional) A 4 digit PIN code to unlock the car."
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "password"
+                              },
+                              "value": {
+                                "element": "number",
+                                "content": 1234
+                              }
+                            }
+                          }
+                        ]
+                      }
                     }
                   },
                   "content": [
@@ -1296,7 +1712,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1321,7 +1740,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1345,12 +1767,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -1365,31 +1796,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Reset Valet PIN"
+                "title": {
+                  "element": "string",
+                  "content": "Reset Valet PIN"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Reset Valet PIN"
+                    "title": {
+                      "element": "string",
+                      "content": "Reset Valet PIN"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/reset_valet_pin"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1397,8 +1853,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1416,7 +1872,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1441,7 +1900,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1465,12 +1927,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -1485,31 +1956,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Open Charge Port"
+                "title": {
+                  "element": "string",
+                  "content": "Open Charge Port"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Open Charge Port"
+                    "title": {
+                      "element": "string",
+                      "content": "Open Charge Port"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/charge_port_door_open"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1517,8 +2013,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1536,7 +2032,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1561,7 +2060,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1585,12 +2087,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -1605,31 +2116,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Set Charge Limit to Standard"
+                "title": {
+                  "element": "string",
+                  "content": "Set Charge Limit to Standard"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/charge_standard"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/charge_standard"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Set Charge Limit to Standard"
+                    "title": {
+                      "element": "string",
+                      "content": "Set Charge Limit to Standard"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_standard",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/charge_standard"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1637,8 +2173,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1656,7 +2192,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1681,7 +2220,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1705,12 +2247,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": false,\n    \"reason\": \"already_standard\"\n  }\n}\n"
                             }
@@ -1725,31 +2276,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Set Charge Limit to Max Range"
+                "title": {
+                  "element": "string",
+                  "content": "Set Charge Limit to Max Range"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/charge_max_range"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/charge_max_range"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Set Charge Limit to Max Range"
+                    "title": {
+                      "element": "string",
+                      "content": "Set Charge Limit to Max Range"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_max_range",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/charge_max_range"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1757,8 +2333,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -1776,7 +2352,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1801,7 +2380,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1825,12 +2407,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": false,\n    \"reason\": \"already_max_range\"\n  }\n}\n"
                             }
@@ -1845,31 +2436,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Set Charge Limit"
+                "title": {
+                  "element": "string",
+                  "content": "Set Charge Limit"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Set Charge Limit"
+                    "title": {
+                      "element": "string",
+                      "content": "Set Charge Limit"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1877,20 +2493,33 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The percentage value"
+                            "description": {
+                              "element": "string",
+                              "content": "The percentage value"
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -1898,8 +2527,8 @@
                               "content": "limit_value"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 75
+                              "element": "string",
+                              "content": "75"
                             }
                           }
                         }
@@ -1917,7 +2546,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1942,7 +2574,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -1966,12 +2601,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -1986,31 +2630,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Start Charging"
+                "title": {
+                  "element": "string",
+                  "content": "Start Charging"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/charge_start"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/charge_start"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Start Charging"
+                    "title": {
+                      "element": "string",
+                      "content": "Start Charging"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_start",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/charge_start"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2018,8 +2687,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2037,7 +2706,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2062,7 +2734,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2086,12 +2761,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\" // \"already_started\" if a charge is in progress\n  }\n}\n"
                             }
@@ -2106,31 +2790,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Stop Charging"
+                "title": {
+                  "element": "string",
+                  "content": "Stop Charging"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/charge_stop"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/charge_stop"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Stop Charging"
+                    "title": {
+                      "element": "string",
+                      "content": "Stop Charging"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/charge_stop",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/charge_stop"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2138,8 +2847,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2157,7 +2866,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2182,7 +2894,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2206,12 +2921,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\" // \"not_charging\" if a charge was not in progress\n  }\n}\n"
                             }
@@ -2226,31 +2950,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Flash Lights"
+                "title": {
+                  "element": "string",
+                  "content": "Flash Lights"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/flash_lights"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/flash_lights"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Flash Lights"
+                    "title": {
+                      "element": "string",
+                      "content": "Flash Lights"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/flash_lights",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/flash_lights"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2258,8 +3007,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2277,7 +3026,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2302,7 +3054,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2326,12 +3081,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2346,31 +3110,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Honk Horn"
+                "title": {
+                  "element": "string",
+                  "content": "Honk Horn"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/honk_horn"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/honk_horn"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Honk Horn"
+                    "title": {
+                      "element": "string",
+                      "content": "Honk Horn"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/honk_horn",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/honk_horn"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2378,8 +3167,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2397,7 +3186,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2422,7 +3214,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2446,12 +3241,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2466,31 +3270,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Unlock Doors"
+                "title": {
+                  "element": "string",
+                  "content": "Unlock Doors"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/door_unlock"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/door_unlock"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Unlock Doors"
+                    "title": {
+                      "element": "string",
+                      "content": "Unlock Doors"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/door_unlock",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/door_unlock"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2498,8 +3327,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2517,7 +3346,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2542,7 +3374,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2566,12 +3401,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2586,31 +3430,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Lock Doors"
+                "title": {
+                  "element": "string",
+                  "content": "Lock Doors"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/door_lock"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/door_lock"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Lock Doors"
+                    "title": {
+                      "element": "string",
+                      "content": "Lock Doors"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/door_lock",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/door_lock"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2618,8 +3487,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2637,7 +3506,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2662,7 +3534,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2686,12 +3561,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2706,31 +3590,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Set Temperature"
+                "title": {
+                  "element": "string",
+                  "content": "Set Temperature"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Set Temperature"
+                    "title": {
+                      "element": "string",
+                      "content": "Set Temperature"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2738,20 +3647,33 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the driver's side in °C."
+                            "description": {
+                              "element": "string",
+                              "content": "The desired temperature on the driver's side in °C."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2759,20 +3681,33 @@
                               "content": "driver_degC"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 23.7
+                              "element": "string",
+                              "content": "23.7"
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The desired temperature on the passenger's side in °C."
+                            "description": {
+                              "element": "string",
+                              "content": "The desired temperature on the passenger's side in °C."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2780,8 +3715,8 @@
                               "content": "pass_degC"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 18.1
+                              "element": "string",
+                              "content": "18.1"
                             }
                           }
                         }
@@ -2799,7 +3734,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2824,7 +3762,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2848,12 +3789,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2868,31 +3818,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Start HVAC System"
+                "title": {
+                  "element": "string",
+                  "content": "Start HVAC System"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Start HVAC System"
+                    "title": {
+                      "element": "string",
+                      "content": "Start HVAC System"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -2900,8 +3875,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -2919,7 +3894,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2944,7 +3922,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -2968,12 +3949,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -2988,31 +3978,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Stop HVAC System"
+                "title": {
+                  "element": "string",
+                  "content": "Stop HVAC System"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Stop HVAC System"
+                    "title": {
+                      "element": "string",
+                      "content": "Stop HVAC System"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3020,8 +4035,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -3039,7 +4054,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3064,7 +4082,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3088,12 +4109,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -3108,31 +4138,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Move Pano Roof"
+                "title": {
+                  "element": "string",
+                  "content": "Move Pano Roof"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Move Pano Roof"
+                    "title": {
+                      "element": "string",
+                      "content": "Move Pano Roof"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3140,20 +4195,33 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "\nThe desired state of the panoramic roof. The approximate percent open values for each state are `open` = 100%, `close` = 0%, `comfort` = 80%, and `vent` = ~15%\n"
+                            "description": {
+                              "element": "string",
+                              "content": "\nThe desired state of the panoramic roof. The approximate percent open values for each state are `open` = 100%, `close` = 0%, `comfort` = 80%, and `vent` = ~15%\n"
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "string"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3163,49 +4231,61 @@
                             "value": {
                               "element": "enum",
                               "attributes": {
-                                "samples": [
-                                  [
+                                "enumerations": {
+                                  "element": "array",
+                                  "content": [
                                     {
                                       "element": "string",
                                       "content": "open"
+                                    },
+                                    {
+                                      "element": "string",
+                                      "content": "close"
+                                    },
+                                    {
+                                      "element": "string",
+                                      "content": "comfort"
+                                    },
+                                    {
+                                      "element": "string",
+                                      "content": "vent"
+                                    },
+                                    {
+                                      "element": "string",
+                                      "content": "move"
                                     }
                                   ]
-                                ]
-                              },
-                              "content": [
-                                {
-                                  "element": "string",
-                                  "content": "open"
-                                },
-                                {
-                                  "element": "string",
-                                  "content": "close"
-                                },
-                                {
-                                  "element": "string",
-                                  "content": "comfort"
-                                },
-                                {
-                                  "element": "string",
-                                  "content": "vent"
-                                },
-                                {
-                                  "element": "string",
-                                  "content": "move"
                                 }
-                              ]
+                              },
+                              "content": {
+                                "element": "string",
+                                "content": "open"
+                              }
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The percentage to move the roof to."
+                            "description": {
+                              "element": "string",
+                              "content": "The percentage to move the roof to."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "optional"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "optional"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3213,8 +4293,8 @@
                               "content": "percent"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 50
+                              "element": "string",
+                              "content": "50"
                             }
                           }
                         }
@@ -3232,7 +4312,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3257,7 +4340,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3281,12 +4367,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -3301,31 +4396,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Remote Start"
+                "title": {
+                  "element": "string",
+                  "content": "Remote Start"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Remote Start"
+                    "title": {
+                      "element": "string",
+                      "content": "Remote Start"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3333,20 +4453,33 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         },
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The password to the authenticated my.teslamotors.com account."
+                            "description": {
+                              "element": "string",
+                              "content": "The password to the authenticated my.teslamotors.com account."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "string"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3373,7 +4506,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3398,7 +4534,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3422,12 +4561,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -3442,31 +4590,56 @@
             {
               "element": "resource",
               "meta": {
-                "title": "Open Trunk/Frunk"
+                "title": {
+                  "element": "string",
+                  "content": "Open Trunk/Frunk"
+                }
               },
               "attributes": {
-                "href": "/api/1/vehicles/{vehicle_id}/command/trunk_open"
+                "href": {
+                  "element": "string",
+                  "content": "/api/1/vehicles/{vehicle_id}/command/trunk_open"
+                }
               },
               "content": [
                 {
                   "element": "transition",
                   "meta": {
-                    "title": "Open Trunk/Frunk"
+                    "title": {
+                      "element": "string",
+                      "content": "Open Trunk/Frunk"
+                    }
                   },
                   "attributes": {
-                    "href": "/api/1/vehicles/{vehicle_id}/command/trunk_open",
+                    "href": {
+                      "element": "string",
+                      "content": "/api/1/vehicles/{vehicle_id}/command/trunk_open"
+                    },
                     "hrefVariables": {
                       "element": "hrefVariables",
                       "content": [
                         {
                           "element": "member",
                           "meta": {
-                            "description": "The id of the Vehicle."
+                            "description": {
+                              "element": "string",
+                              "content": "The id of the Vehicle."
+                            },
+                            "title": {
+                              "element": "string",
+                              "content": "number"
+                            }
                           },
                           "attributes": {
-                            "typeAttributes": [
-                              "required"
-                            ]
+                            "typeAttributes": {
+                              "element": "array",
+                              "content": [
+                                {
+                                  "element": "string",
+                                  "content": "required"
+                                }
+                              ]
+                            }
                           },
                           "content": {
                             "key": {
@@ -3474,8 +4647,8 @@
                               "content": "vehicle_id"
                             },
                             "value": {
-                              "element": "number",
-                              "content": 1
+                              "element": "string",
+                              "content": "1"
                             }
                           }
                         }
@@ -3483,29 +4656,30 @@
                     },
                     "data": {
                       "element": "dataStructure",
-                      "content": [
-                        {
-                          "element": "object",
-                          "content": [
-                            {
-                              "element": "member",
-                              "meta": {
-                                "description": "The trunk to open. `rear` is the only one known currently."
+                      "content": {
+                        "element": "object",
+                        "content": [
+                          {
+                            "element": "member",
+                            "meta": {
+                              "description": {
+                                "element": "string",
+                                "content": "The trunk to open. `rear` is the only one known currently."
+                              }
+                            },
+                            "content": {
+                              "key": {
+                                "element": "string",
+                                "content": "which_trunk"
                               },
-                              "content": {
-                                "key": {
-                                  "element": "string",
-                                  "content": "which_trunk"
-                                },
-                                "value": {
-                                  "element": "string",
-                                  "content": "rear"
-                                }
+                              "value": {
+                                "element": "string",
+                                "content": "rear"
                               }
                             }
-                          ]
-                        }
-                      ]
+                          }
+                        ]
+                      }
                     }
                   },
                   "content": [
@@ -3519,7 +4693,10 @@
                         {
                           "element": "httpRequest",
                           "attributes": {
-                            "method": "POST",
+                            "method": {
+                              "element": "string",
+                              "content": "POST"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3544,7 +4721,10 @@
                         {
                           "element": "httpResponse",
                           "attributes": {
-                            "statusCode": "200",
+                            "statusCode": {
+                              "element": "string",
+                              "content": "200"
+                            },
                             "headers": {
                               "element": "httpHeaders",
                               "content": [
@@ -3568,12 +4748,21 @@
                             {
                               "element": "asset",
                               "meta": {
-                                "classes": [
-                                  "messageBody"
-                                ]
+                                "classes": {
+                                  "element": "array",
+                                  "content": [
+                                    {
+                                      "element": "string",
+                                      "content": "messageBody"
+                                    }
+                                  ]
+                                }
                               },
                               "attributes": {
-                                "contentType": "application/json"
+                                "contentType": {
+                                  "element": "string",
+                                  "content": "application/json"
+                                }
                               },
                               "content": "{\n  \"response\": {\n    \"result\": true,\n    \"reason\": \"\"\n  }\n}\n"
                             }
@@ -3591,4 +4780,3 @@
     }
   ]
 }
-

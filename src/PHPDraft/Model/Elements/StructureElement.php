@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the StructureElement.php.
@@ -13,7 +14,7 @@ namespace PHPDraft\Model\Elements;
 interface StructureElement
 {
     /**
-     * Default datatypes.
+     * Default data types.
      *
      * @var array
      */
@@ -22,12 +23,12 @@ interface StructureElement
     /**
      * Parse a JSON object to a structure.
      *
-     * @param object $object       An object to parse
-     * @param array  $dependencies Dependencies of this object
+     * @param object|null $object       An object to parse
+     * @param array       $dependencies Dependencies of this object
      *
      * @return self self reference
      */
-    public function parse(object $object, array &$dependencies): self;
+    public function parse(?object $object, array &$dependencies): self;
 
     /**
      * Print a string representation.
@@ -40,7 +41,9 @@ interface StructureElement
     /**
      * Get a string representation of the value.
      *
+     * @param bool $flat get a flat representation of the item.
+     *
      * @return string
      */
-    public function string_value();
+    public function string_value($flat = FALSE);
 }

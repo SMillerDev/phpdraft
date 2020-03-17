@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the Category.php.
@@ -55,10 +56,10 @@ class Category extends HierarchyElement
                     $deps         = [];
                     $struct       = new ObjectStructureElement();
                     $struct->deps = $deps;
-                    $struct->parse($item, $deps);
+                    $struct->parse($item->content, $deps);
 
-                    if (is_array($item->content) && isset($item->content[0]->meta->id)) {
-                        $this->structures[$item->content[0]->meta->id] = $struct;
+                    if (isset($item->content->content) && is_array($item->content->content) && isset($item->content->content[0]->meta->id)) {
+                        $this->structures[$item->content->content[0]->meta->id] = $struct;
                     } elseif (isset($item->content->meta->id->content)) {
                         $this->structures[$item->content->meta->id->content] = $struct;
                     } else {

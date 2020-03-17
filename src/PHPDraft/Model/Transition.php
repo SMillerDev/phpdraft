@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the Transition.
@@ -100,7 +101,7 @@ class Transition extends HierarchyElement
         if (isset($object->attributes->data)) {
             $deps                 = [];
             $struct               = new ObjectStructureElement();
-            $this->data_variables = $struct->parse($object->attributes->data, $deps);
+            $this->data_variables = $struct->parse($object->attributes->data->content, $deps);
         }
 
         if (!is_array($object->content)) {
@@ -164,9 +165,9 @@ class Transition extends HierarchyElement
         if ($url === false) {
             $url = $this->parent->href . $this->href;
         }
+        $tpl  = new UriTemplate($url);
+        $vars = [];
         if ($this->url_variables !== null) {
-            $tpl  = new UriTemplate($url);
-            $vars = [];
             foreach ($this->url_variables->value as $item) {
                 $urlvalue = $item->value;
                 if (is_subclass_of($item, BasicStructureElement::class)) {
@@ -175,8 +176,18 @@ class Transition extends HierarchyElement
 
                 $vars[$item->key] = $urlvalue;
             }
-            $url = $tpl->expand($vars);
         }
+        if ($this->parent->url_variables !== null) {
+            foreach ($this->parent->url_variables->value as $item) {
+                $urlvalue = $item->value;
+                if (is_subclass_of($item, BasicStructureElement::class)) {
+                    $urlvalue = $item->string_value(TRUE);
+                }
+
+                $vars[$item->key] = $urlvalue;
+            }
+        }
+        $url = $tpl->expand($vars);
 
         if ($clean) {
             return strip_tags($base_url . $url);
@@ -247,7 +258,7 @@ class Transition extends HierarchyElement
      */
     public function get_method(int $request = 0): string
     {
-        return (isset($this->requests[$request]->method)) ? $this->requests[$request]->method : 'NONE';
+        return $this->requests[$request]->method ?? 'NONE';
     }
 
     /**
@@ -266,23 +277,5 @@ class Transition extends HierarchyElement
         }
 
         return $this->requests[$key]->get_curl_command($base_url, $additional);
-    }
-
-    /**
-     * Generate a URL for the hurl.it service.
-     *
-     * @param string $base_url   base URL of the server
-     * @param array  $additional additional arguments to pass
-     * @param int    $key        number of the request to generate for
-     *
-     * @return string
-     */
-    public function get_hurl_link(string $base_url, array $additional = [], int $key = 0): string
-    {
-        if (!isset($this->requests[$key])) {
-            return '';
-        }
-
-        return $this->requests[$key]->get_hurl_link($base_url, $additional);
     }
 }

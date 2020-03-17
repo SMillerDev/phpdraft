@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the TemplateGenerator.php.
@@ -254,7 +255,7 @@ class TemplateGenerator extends BaseTemplateGenerator
     {
         if ($response <= 299) {
             return 'text-success';
-        } elseif (($response > 299) && ($response <= 399)) {
+        } elseif ($response <= 399) {
             return 'text-warning';
         } else {
             return 'text-error';

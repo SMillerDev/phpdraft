@@ -4,10 +4,9 @@
     <title>Tesla Model S JSON API</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-        <style>
-        var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;right:10px;border-radius:30px;z-index:999}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-card>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}div.card{margin:10px auto}.card-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.card-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.card-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}@media (min-width:768px){.method-nav{max-height:100vh;overflow-x:visible;overflow-y:scroll;top:0;box-shadow:0 -5px 5px -5px rgba(0,0,0,.2) inset,0 0 1px rgba(102,102,102,.4)}}.method-nav{padding:0 10px}.method-nav nav{width:100%}.method-nav nav.category,.method-nav nav.structures,.method-nav nav.structures a.nav-link,.method-nav nav.resource a.nav-link{padding-left:0}.method-nav nav.resource .transition a.nav-link{padding-left:.5rem}.method-nav a.nav-link{line-height:26px}.method-nav a.nav-link i{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.main-content{position:relative}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.card-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}body{--put-color:rgb(248,148,6);--post-color:rgb(98,196,98);--get-color:rgb(91,192,222);--delete-color:rgb(238,95,91);--head-color:rgb(222,121,91);--patch-color:rgb(196,98,196)}.PUT:not(.structure)>.card-header{background:var(--put-color)}span.PUT{color:var(--put-color)}.POST:not(.structure)>.card-header{background:var(--post-color)}span.POST{color:var(--post-color)}.GET:not(.structure)>.card-header{background:var(--get-color)}span.GET{color:var(--get-color)}.DELETE:not(.structure)>.card-header{background:var(--delete-color)}span.DELETE{color:var(--delete-color)}.HEAD:not(.structure)>.card-header{background:var(--head-color)}span.HEAD{color:var(--head-color)}.PATCH:not(.structure)>.card-header{background:var(--patch-color)}span.PATCH{color:var(--patch-color)}    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+        <style>var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;right:10px;border-radius:30px;z-index:999}span.variable-info{margin-left:10px;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:25px;font-size:.7em}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-card>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}div.card{margin:10px auto}.card-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.card-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.card-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}@media (min-width:768px){.method-nav{max-height:100vh;overflow-x:visible;overflow-y:scroll;top:0;box-shadow:0 -5px 5px -5px rgba(0,0,0,.2) inset,0 0 1px rgba(102,102,102,.4)}}.method-nav{padding:0 10px}.method-nav nav{width:100%}.method-nav nav.category,.method-nav nav.structures,.method-nav nav.structures a.nav-link,.method-nav nav.resource a.nav-link{padding-left:0}.method-nav nav.resource .transition a.nav-link{padding-left:.5rem}.method-nav a.nav-link{line-height:26px}.method-nav a.nav-link i{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.main-content{position:relative}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.card-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}body{--put-color:rgb(248,148,6);--post-color:rgb(98,196,98);--get-color:rgb(91,192,222);--delete-color:rgb(238,95,91);--head-color:rgb(222,121,91);--patch-color:rgb(196,98,196)}.PUT:not(.structure)>.card-header{background:var(--put-color)}span.PUT{color:var(--put-color)}.POST:not(.structure)>.card-header{background:var(--post-color)}span.POST{color:var(--post-color)}.GET:not(.structure)>.card-header{background:var(--get-color)}span.GET{color:var(--get-color)}.DELETE:not(.structure)>.card-header{background:var(--delete-color)}span.DELETE{color:var(--delete-color)}.HEAD:not(.structure)>.card-header{background:var(--head-color)}span.HEAD{color:var(--head-color)}.PATCH:not(.structure)>.card-header{background:var(--patch-color)}span.PATCH{color:var(--patch-color)}</style>
 </head>
 <body>
 <div class="container-fluid">
@@ -235,7 +234,7 @@
         </nav>
         <div class="col-md-10 main-content">
                                                 <h2>
-                        <a id="authentication"data-anchor-id="authentication">Authentication</a>
+                        <a id="authentication" data-anchor-id="authentication">Authentication</a>
                     </h2>
                                                                     <h3>
                         <a class="resource-title"
@@ -244,7 +243,7 @@
                             Tokens                        </a>
                         <small>/oauth/token</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -269,15 +268,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -294,12 +293,13 @@
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
 </td><td><span class="example-value pull-right">password</span></td></tr><tr><td><span>client_id</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client ID</p>
 </td><td><span class="example-value pull-right">abc</span></td></tr><tr><td><span>client_secret</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client secret</p>
 </td><td><span class="example-value pull-right">123</span></td></tr><tr><td><span>email</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The email for my.teslamotors.com</p>
 </td><td><span class="example-value pull-right">elon@teslamotors.com</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The password for my.teslamotors.com</p>
-</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table></table>                                                    </div>
+</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table>                                                    </div>
                                                                                             </div>
                                         </div>
                                                                                                                                                                                 <div class="card">
@@ -327,26 +327,26 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "access_token": "abc123",
   "token_type": "bearer",
   "expires_in": 7776000,
   "created_at": 1457385291
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
                                                                                                 </div>
                         </div>
                                                                                     <h2>
-                        <a id="vehicles"data-anchor-id="vehicles">Vehicles</a>
+                        <a id="vehicles" data-anchor-id="vehicles">Vehicles</a>
                     </h2>
                                                     <p>A logged in user can have multiple vehicles under their account. This resource is primarily responsible for listing the vehicles and the basic details about them.
 </p>
@@ -357,7 +357,7 @@
                             Vehicle Collection                        </a>
                         <small>/api/1/vehicles</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card GET">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -376,15 +376,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -434,13 +434,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": [{
     "color": null,
     "display_name": null,
@@ -454,7 +454,7 @@
   }],
   "count":1
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -469,6 +469,11 @@
                     </h3>
                                             <p>These resources are read-only and determine the state of the vehicle's various sub-systems.
 </p>
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr></table>                        </div>
                                                                 <div
                             class="card GET">
                             <div class="card-header">
@@ -488,15 +493,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -520,7 +525,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -550,16 +556,16 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
     "response": true
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -584,15 +590,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -616,7 +622,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -646,13 +653,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "charging_state": "Complete",  // "Charging", ??
     "charge_to_max_range": false,  // current std/max-range setting
@@ -674,7 +681,7 @@
     "charge_port_door_open": true
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -699,15 +706,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -731,7 +738,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -761,13 +769,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "inside_temp": 17.0,          // degC inside car
     "outside_temp": 9.5,          // degC outside car or null
@@ -779,7 +787,7 @@
     "fan_status": 0               // fan speed 0-6 or null
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -804,15 +812,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -836,7 +844,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -866,13 +875,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "shift_state": null,          //
     "speed": null,                //
@@ -882,7 +891,7 @@
     "gps_as_of": 1359863204       // Unix timestamp of GPS fix
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -907,15 +916,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -939,7 +948,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -969,13 +979,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "gui_distance_units": "mi/hr",
     "gui_temperature_units": "F",
@@ -984,7 +994,7 @@
     "gui_range_display": "Rated"
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1009,15 +1019,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1041,7 +1051,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1071,13 +1082,13 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "df": false,                  // driver's side front door open
     "dr": false,                  // driver's side rear door open
@@ -1097,14 +1108,14 @@
     "perf_config": "Base"
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
                                                                                                 </div>
                         </div>
                                                                                     <h2>
-                        <a id="vehicle-commands"data-anchor-id="vehicle-commands">Vehicle Commands</a>
+                        <a id="vehicle-commands" data-anchor-id="vehicle-commands">Vehicle Commands</a>
                     </h2>
                                                     <p>These commands alter the vehicles state, and return result (true/false) to indicate success, and if failure reason contains the cause of failure.
 </p>
@@ -1115,7 +1126,7 @@
                             Wake Up Car                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/wake_up</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1134,15 +1145,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1166,7 +1177,8 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1196,19 +1208,19 @@
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1221,7 +1233,7 @@
                             Set Valet Mode                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_valet_mode</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1243,15 +1255,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1275,14 +1287,16 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>on</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td><p>Whether to enable or disable valet mode.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>on</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td><p>Whether to enable or disable valet mode.</p>
 </td><td><span class="example-value pull-right">true</span></td></tr><tr><td><span>password</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>(optional) A 4 digit PIN code to unlock the car.</p>
-</td><td><span class="example-value pull-right">1234</span></td></tr></table></table>                                                    </div>
+</td><td><span class="example-value pull-right">1234</span></td></tr></table>                                                    </div>
                                                                                             </div>
                                         </div>
                                                                                                                                                                                 <div class="card">
@@ -1310,19 +1324,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1335,7 +1349,7 @@ locations in navigation.
                             Reset Valet PIN                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/reset_valet_pin</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1354,15 +1368,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1386,7 +1400,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1416,19 +1431,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1441,7 +1456,7 @@ locations in navigation.
                             Open Charge Port                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_port_door_open</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1460,15 +1475,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1492,7 +1507,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1522,19 +1538,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1547,7 +1563,7 @@ locations in navigation.
                             Set Charge Limit to Standard                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_standard</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1566,15 +1582,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1598,7 +1614,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1628,19 +1645,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": false,
     "reason": "already_standard"
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1653,7 +1670,7 @@ locations in navigation.
                             Set Charge Limit to Max Range                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_max_range</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1672,15 +1689,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1704,7 +1721,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1734,19 +1752,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": false,
     "reason": "already_max_range"
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1759,7 +1777,7 @@ locations in navigation.
                             Set Charge Limit                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1778,15 +1796,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1810,8 +1828,9 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>limit_value</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The percentage value</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>limit_value</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The percentage value</p>
 </td><td><span class="example-value pull-right">75</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1841,19 +1860,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1866,7 +1885,7 @@ locations in navigation.
                             Start Charging                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_start</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1885,15 +1904,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -1917,7 +1936,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -1947,19 +1967,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": "" // "already_started" if a charge is in progress
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -1972,7 +1992,7 @@ locations in navigation.
                             Stop Charging                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_stop</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1991,15 +2011,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2023,7 +2043,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2053,19 +2074,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": "" // "not_charging" if a charge was not in progress
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2078,7 +2099,7 @@ locations in navigation.
                             Flash Lights                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/flash_lights</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2097,15 +2118,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2129,7 +2150,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2159,19 +2181,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2184,7 +2206,7 @@ locations in navigation.
                             Honk Horn                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/honk_horn</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2203,15 +2225,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2235,7 +2257,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2265,19 +2288,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2290,7 +2313,7 @@ locations in navigation.
                             Unlock Doors                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/door_unlock</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2309,15 +2332,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2341,7 +2364,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2371,19 +2395,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2396,7 +2420,7 @@ locations in navigation.
                             Lock Doors                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/door_lock</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2415,15 +2439,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2447,7 +2471,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2477,19 +2502,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2502,7 +2527,7 @@ locations in navigation.
                             Set Temperature                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2521,15 +2546,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2553,9 +2578,10 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>driver_degC</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
-</td><td><span class="example-value pull-right">23.7</span></td></tr><tr><td><span>pass_degC</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>driver_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
+</td><td><span class="example-value pull-right">23.7</span></td></tr><tr><td><span>pass_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
 </td><td><span class="example-value pull-right">18.1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2585,19 +2611,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2610,7 +2636,7 @@ locations in navigation.
                             Start HVAC System                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2629,15 +2655,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2661,7 +2687,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2691,19 +2718,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2716,7 +2743,7 @@ locations in navigation.
                             Stop HVAC System                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2735,15 +2762,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2767,7 +2794,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2797,19 +2825,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2822,7 +2850,7 @@ locations in navigation.
                             Move Pano Roof                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2841,15 +2869,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2857,11 +2885,11 @@ locations in navigation.
                                                    data-placement="left"
                                                    data-toggle="popover"
                                                    data-html="true"
-                                                   data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E&amp;percent=50'</textarea>">
+                                                   data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Eopen%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Eclose%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Ecomfort%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Event%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Emove%3C%2Fspan%3E%3C%2Fli%3E%3C%2Ful%3E&amp;percent=50'</textarea>">
                                                     <i class="fas fa-copy"></i>
                                                 </a>
                                                                                                     <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eopen%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Eclose%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Ecomfort%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Event%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3Emove%3C%2Fli%3E%3C%2Ful%3E&percent=50</em>
+                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/sun_roof_control?state=%3Cul%20class%3D%22list-group%20mdl-list%22%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Eopen%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Eclose%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Ecomfort%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Event%3C%2Fspan%3E%3C%2Fli%3E%3Cli%20class%3D%22list-group-item%20mdl-list__item%22%3E%3Ccode%3Estring%3C%2Fcode%3E%20-%20%3Cspan%20class%3D%22example-value%20pull-right%22%3Emove%3C%2Fspan%3E%3C%2Fli%3E%3C%2Ful%3E&percent=50</em>
                                                                                                                                                     <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
@@ -2873,9 +2901,10 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status">required</span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
-</td><td><div class="enum-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">open</li><li class="list-group-item mdl-list__item">close</li><li class="list-group-item mdl-list__item">comfort</li><li class="list-group-item mdl-list__item">vent</li><li class="list-group-item mdl-list__item">move</li></ul></div></td></tr><tr><td><span>percent</span></td><td><code>number</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
+</td><td><div class="enum-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">open</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">close</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">comfort</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">vent</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">move</span></li></ul></div></td></tr><tr><td><span>percent</span></td><td><code>string</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
 </td><td><span class="example-value pull-right">50</span></td></tr></table>                                                    </div>
                                                 
                                                                                             </div>
@@ -2905,19 +2934,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -2930,7 +2959,7 @@ locations in navigation.
                             Remote Start                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2949,15 +2978,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -2981,7 +3010,8 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The password to the authenticated my.teslamotors.com account.</p>
 </td><td><span class="example-value pull-right">edisonsux</span></td></tr></table>                                                    </div>
                                                 
@@ -3012,19 +3042,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -3037,7 +3067,7 @@ locations in navigation.
                             Open Trunk/Frunk                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/trunk_open</small>
                     </h3>
-                                                                <div
+                                                                                    <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -3056,15 +3086,15 @@ locations in navigation.
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-2ac45426fe30662e1aeccb55d1a177e6">Request
+                                                    data-target="#request-coll-SOME_ID">Request
                                                                                                         <i class="fas indicator fa-angle-down float-right"></i>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-2ac45426fe30662e1aeccb55d1a177e6"
-                                                data-anchor-id="request-coll-2ac45426fe30662e1aeccb55d1a177e6">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -3088,13 +3118,15 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>number</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>which_trunk</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The trunk to open. <code>rear</code> is the only one known currently.</p>
-</td><td><span class="example-value pull-right">rear</span></td></tr></table></table>                                                    </div>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>which_trunk</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The trunk to open. <code>rear</code> is the only one known currently.</p>
+</td><td><span class="example-value pull-right">rear</span></td></tr></table>                                                    </div>
                                                                                             </div>
                                         </div>
                                                                                                                                                                                 <div class="card">
@@ -3122,19 +3154,19 @@ locations in navigation.
                                                                                                                                                                                                     <div>
                                                                                                                 <h5 class="response-body"
                                                             data-toggle="collapse"
-                                                            data-target="#response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
+                                                            data-target="#response-SOME_ID-200-application-json">
                                                             <i class="fas indicator fa-angle-up"></i>
                                                             application/json
                                                         </h5>
                                                         <pre class="collapse response-body"
-                                                             id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json" data-anchor-id="response-2ac45426fe30662e1aeccb55d1a177e6-200-application-json">
-                                                            {
+                                                             id="response-SOME_ID-200-application-json"
+                                                             data-anchor-id="response-SOME_ID-200-application-json">{
   "response": {
     "result": true,
     "reason": ""
   }
 }
-                                                        </pre>
+</pre>
                                                     </div>
                                                                                             </div>
                                         </div>
@@ -3153,10 +3185,10 @@ locations in navigation.
         data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
         <i class="fas fa-question-circle"></i>
     </button>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js" integrity="sha256-m1eTvwEHwmsw4+XKF7BshClVJEPwTVycveNl0CS0Mkk=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script>$(function(){$('[data-toggle="popover"]').popover();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")};$('table:not(.table)').each(function(){$(this).addClass('table')})});$('.collapse.request-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});$('.collapse.response-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>$(function(){$('[data-toggle="popover"]').popover();$('[data-toggle="tooltip"]').tooltip();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")};$('table:not(.table)').each(function(){$(this).addClass('table')})});$('.collapse.request-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});$('.collapse.response-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
 </body>
 </html>

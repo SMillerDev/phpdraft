@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the BaseParser.php.
@@ -10,7 +11,7 @@
 
 namespace PHPDraft\Parse;
 
-use stdClass;
+use PHPDraft\In\ApibFileParser;
 
 /**
  * Class BaseParser.
@@ -36,18 +37,18 @@ abstract class BaseParser
     /**
      * The API Blueprint input.
      *
-     * @var string
+     * @var ApibFileParser
      */
     protected $apib;
 
     /**
      * BaseParser constructor.
      *
-     * @param string $apib API Blueprint text
+     * @param ApibFileParser $apib API Blueprint text
      *
      * @return \PHPDraft\Parse\BaseParser
      */
-    public function init(string $apib): self
+    public function init(ApibFileParser $apib): self
     {
         $this->apib    = $apib;
         $this->tmp_dir = sys_get_temp_dir() . '/drafter';
@@ -78,7 +79,7 @@ abstract class BaseParser
             mkdir($this->tmp_dir, 0777, true);
         }
 
-        file_put_contents($this->tmp_dir . '/index.apib', $this->apib);
+        file_put_contents($this->tmp_dir . '/index.apib', $this->apib->content());
 
         $this->parse();
 

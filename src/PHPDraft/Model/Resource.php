@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the Resource.php.
@@ -10,6 +11,7 @@
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\ObjectStructureElement;
 use stdClass;
 
 class Resource extends HierarchyElement
@@ -20,6 +22,13 @@ class Resource extends HierarchyElement
      * @var string
      */
     public $href;
+
+    /**
+     * URL variables.
+     *
+     * @var ObjectStructureElement|null
+     */
+    public $url_variables = null;
 
     /**
      * Resource constructor.
@@ -44,6 +53,12 @@ class Resource extends HierarchyElement
 
         if (isset($object->attributes)) {
             $this->href = $object->attributes->href->content ?? $object->attributes->href;
+        }
+
+        if (isset($object->attributes->hrefVariables)) {
+            $deps                = [];
+            $struct              = new ObjectStructureElement();
+            $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
         }
 
         foreach ($object->content as $item) {

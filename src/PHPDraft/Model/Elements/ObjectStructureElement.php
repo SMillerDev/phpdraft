@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * This file contains the ObjectStructureElement.php.
@@ -10,42 +11,45 @@
 
 namespace PHPDraft\Model\Elements;
 
-use stdClass;
-
 /**
  * Class ObjectStructureElement.
  */
 class ObjectStructureElement extends BasicStructureElement
 {
+
+    private $object;
+
+    /**
+     * Unset object function.
+     * @internal Only for tests
+     */
+    public function __clearForTest(){$this->object = NULL;}
+
     /**
      * Parse a JSON object to a data structure.
      *
-     * @param mixed|null $object       An object to parse
+     * @param object|null $object       An object to parse
      * @param array      $dependencies Dependencies of this object
      *
      * @return ObjectStructureElement self reference
      */
-    public function parse($object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): StructureElement
     {
+        $this->object = $object;
         if (empty($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) )) {
             return $this;
         }
 
+        $this->element = $object->element;
+        $this->parse_common($object, $dependencies);
         if (!isset($object->content) && isset($object->meta)) {
-            $this->element = $object->element;
-            $this->parse_common($object, $dependencies);
             return $this;
         }
-
-        $this->element = $object->element;
 
         if (isset($object->content) && is_array($object->content)) {
             $this->parse_array_content($object, $dependencies);
-
             return $this;
         }
-
-        $this->parse_common($object, $dependencies);
 
         if (in_array($this->type, ['object', 'array', 'enum'], true) || !in_array($this->type, self::DEFAULTS, true)) {
             $this->parse_value_structure($object, $dependencies);
@@ -56,7 +60,10 @@ class ObjectStructureElement extends BasicStructureElement
         if (isset($object->content->value->content)) {
             $this->value = $object->content->value->content;
         } elseif (isset($object->content->value->attributes->samples)) {
-            $this->value = join(' | ', $object->content->value->attributes->samples);
+            $this->value = array_reduce($object->content->value->attributes->samples->content, function ($carry, $item) {
+                if ($carry === NULL) {return "$item->content ($item->element)"; }
+                return "$carry | $item->content ($item->element)";
+            });
         } else {
             $this->value = null;
         }
@@ -67,30 +74,27 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Parse $this->value as a structure based on given content.
      *
-     * @param mixed $object       APIB content
+     * @param mixed $value       APIB content
      * @param array $dependencies Object dependencies
      *
      * @return void
      */
-    protected function parse_value_structure($object, array &$dependencies)
+    protected function parse_value_structure($value, array &$dependencies)
     {
         switch ($this->type) {
             case 'array':
-                $struct      = new ArrayStructureElement();
-                $this->value = $struct->parse($object, $dependencies);
+                $struct = new ArrayStructureElement();
                 break;
             case 'enum':
-                $struct      = new EnumStructureElement();
-                $this->value = $struct->parse($object, $dependencies);
+                $struct = new EnumStructureElement();
                 break;
-            case 'object':
             default:
-                $value  = $object->content->value->content ?? null;
+            case 'object':
+                $value  = $value->content->value->content ?? null;
                 $struct = $this->new_instance();
-
-                $this->value = $struct->parse($value, $dependencies);
                 break;
         }
+        $this->value = $struct->parse($value, $dependencies);
 
         unset($struct);
         unset($value);
@@ -117,10 +121,17 @@ class ObjectStructureElement extends BasicStructureElement
     protected function parse_array_content($object, array &$dependencies): void
     {
         foreach ($object->content as $value) {
-            if ($this->element === 'enum') {
-                $struct = new EnumStructureElement();
-            } else {
-                $struct = $this->new_instance();
+            switch ($this->type){
+                case 'enum':
+                    $struct = new EnumStructureElement();
+                    break;
+                case 'array':
+                    $struct = new ArrayStructureElement();
+                    break;
+                default:
+                case 'object':
+                    $struct = $this->new_instance();
+                    break;
             }
 
             $this->value[] = $struct->parse($value, $dependencies);
@@ -137,8 +148,9 @@ class ObjectStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        if ($this->value === null && $this->key === null) {
-            return '<span class="example-value pull-right">{  }</span>';
+        $options = array_merge(self::DEFAULTS,['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
+        if (!empty($this->element) && !in_array($this->element, $options)) {
+            $this->description = '<p>Inherits from <a href="#object-' . strtolower($this->element) . '">' . $this->element . '</a></p>' . $this->description;
         }
 
         if (is_array($this->value)) {
@@ -151,7 +163,19 @@ class ObjectStructureElement extends BasicStructureElement
 
             $return .= '</table>';
 
-            return $return;
+            return $this->description . $return;
+        }
+
+        if ($this->ref !== null) {
+            return '<p>Inherits from <a href="#object-' . strtolower($this->ref) . '">' . $this->ref . '</a></p>' . $this->description;
+        }
+
+        if ($this->value === null && $this->key === null && $this->description !== null) {
+            return "<div class='description clearfix'>$this->description</div>";
+        }
+
+        if ($this->value === null && $this->key === null && $this->description === null) {
+            return '<span class="example-value pull-right">{  }</span>';
         }
 
         if (is_null($this->value)) {
@@ -191,6 +215,9 @@ class ObjectStructureElement extends BasicStructureElement
      */
     protected function construct_string_return(string $value): string
     {
+        if ($this->type === NULL) {
+            return $value;
+        }
         if (!in_array($this->type, self::DEFAULTS)) {
             $type = '<a class="code" href="#object-' . str_replace(
                 ' ',
@@ -200,16 +227,17 @@ class ObjectStructureElement extends BasicStructureElement
         } else {
             $type = '<code>' . $this->type . '</code>';
         }
+        $variable = '';
+        if ($this->is_variable) {
+            $variable = '<span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" title="This is a variable key"></span>';
+        }
 
-        $return =
-            '<tr>' .
-            '<td>' . '<span>' . $this->key . '</span>' . '</td>' .
+        return '<tr>' .
+            '<td>' . '<span>' . $this->key . '</span>' . $variable . '</td>' .
             '<td>' . $type . '</td>' .
             '<td> <span class="status">' . $this->status . '</span></td>' .
             '<td>' . $this->description . '</td>' .
             '<td>' . $value . '</td>' .
             '</tr>';
-
-        return $return;
     }
 }

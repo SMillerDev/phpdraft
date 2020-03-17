@@ -61,10 +61,7 @@ class TransitionTest extends HierarchyElementChildTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -72,19 +69,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIssetHrefVariables(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "hrefVariables":"hello"}, "content":[]}';
+        $json = '{"attributes":{"href":"something", "hrefVariables":{"hello":"world"}}, "content":[]}';
+        $obj = json_decode($json);
+        $this->class->parse($obj);
 
-        $this->class->parse(json_decode($obj));
-
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -92,19 +84,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIssetData(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -112,19 +99,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsNotArrayContent(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":""}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":""}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -132,19 +114,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentNoChild(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123"}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":{}}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -152,19 +129,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentWrongChild(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"test"}]}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"test"}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -172,19 +144,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentRequest(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}, "content":{}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -192,19 +159,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentResponse(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpResponse", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpResponse", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -212,19 +174,14 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentDefault(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -232,9 +189,7 @@ class TransitionTest extends HierarchyElementChildTest
      */
     public function testParseIsCalledIsArrayContentRequestList(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
                          ->disableOriginalConstructor()
@@ -247,15 +202,12 @@ class TransitionTest extends HierarchyElementChildTest
         $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
-        $obj = '{"attributes":{"href":"something", "data":"hello"}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
+        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('something', $this->get_reflection_property_value('href'));
     }
 
     /**
@@ -288,38 +240,6 @@ class TransitionTest extends HierarchyElementChildTest
         $return = $this->class->get_curl_command('https://ur.l');
 
         $this->assertSame('curl_command', $return);
-    }
-
-    /**
-     * Test basic get_hurl_link functions
-     */
-    public function testGetHurlURLNoKey(): void
-    {
-        $return = $this->class->get_hurl_link('https://ur.l');
-
-        $this->assertSame('', $return);
-    }
-
-    /**
-     * Test basic get_hurl_link functions
-     */
-    public function testGetHurlURLKey(): void
-    {
-        $mock_req = $this->getMockBuilder('\PHPDraft\Model\HTTPRequest')
-                         ->disableOriginalConstructor()
-                         ->getMock();
-        $mock_req->expects($this->once())
-                 ->method('get_hurl_link')
-                 ->with('https://ur.l', [])
-                 ->will($this->returnValue('https://hurl.it'));
-        $requests = [$mock_req];
-        $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, $requests);
-
-        $return = $this->class->get_hurl_link('https://ur.l');
-
-        $this->assertSame('https://hurl.it', $return);
     }
 
     /**
@@ -388,9 +308,7 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->method = '/url';
 
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $req_property = $this->reflection->getProperty('href');
         $req_property->setAccessible(true);
@@ -412,9 +330,7 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->method = '/url';
 
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $req_property = $this->reflection->getProperty('href');
         $req_property->setAccessible(true);
@@ -442,9 +358,7 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->method = '/url';
 
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $var1 = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
                      ->disableOriginalConstructor()

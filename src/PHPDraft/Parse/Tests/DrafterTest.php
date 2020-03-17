@@ -10,8 +10,10 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\In\ApibFileParser;
 use PHPDraft\Parse\Drafter;
 use PHPDraft\Parse\ExecutionException;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
@@ -21,6 +23,13 @@ use ReflectionClass;
  */
 class DrafterTest extends LunrBaseTest
 {
+
+    /**
+     * Shared instance of the file parser.
+     *
+     * @var ApibFileParser|MockObject
+     */
+    private $parser;
 
     /**
      * Set up
@@ -33,13 +42,18 @@ class DrafterTest extends LunrBaseTest
         $this->mock_function('shell_exec', function () {
             return "/some/dir/drafter\n";
         });
+
+        $this->parser = $this->getMockBuilder('\PHPDraft\In\ApibFileParser')
+                             ->disableOriginalConstructor()
+                             ->getMock();
+
+        $this->parser->set_apib_content(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
+
         $this->class      = new Drafter();
-        $this->reflection = new ReflectionClass('PHPDraft\Parse\Drafter');
-        try {
-            $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
-        } catch (ExecutionException $exception) {
-            // Nothing
-        }
+        $this->reflection = new ReflectionClass('\PHPDraft\Parse\Drafter');
+
+        $this->class->init($this->parser);
+
         $this->unmock_function('shell_exec');
         $this->unmock_function('sys_get_temp_dir');
     }
@@ -57,6 +71,7 @@ class DrafterTest extends LunrBaseTest
         }
         unset($this->class);
         unset($this->reflection);
+        unset($this->parser);
     }
 
     /**
@@ -66,13 +81,7 @@ class DrafterTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->class->init(file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'));
-        $property = $this->reflection->getProperty('apib');
-        $property->setAccessible(true);
-        $this->assertEquals(
-            file_get_contents(TEST_STATICS . '/drafter/apib/index.apib'),
-            $property->getValue($this->class)
-        );
+        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->get_reflection_property_value('apib'));
     }
 
     /**

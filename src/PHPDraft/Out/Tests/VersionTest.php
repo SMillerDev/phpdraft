@@ -37,12 +37,12 @@ class VersionTest extends LunrBaseTest
      */
     public function testReleaseIDIsNull(): void
     {
-        define('VERSION', '0');
+        $this->constant_redefine('VERSION', '0');
         $this->mock_function('exec', function () {
-            return 12;
+            return '12';
         });
         $return = $this->class->release_id();
-        $this->assertSame(12, $return);
+        $this->assertSame('12', $return);
         $this->unmock_function('exec');
     }
 
@@ -64,15 +64,6 @@ class VersionTest extends LunrBaseTest
         $this->constant_redefine('VERSION', '1.2.4');
         $this->class->version();
         $this->expectOutputString('PHPDraft: 1.2.4');
-    }
-
-    /**
-     * Test if the value the class is initialized with is correct
-     */
-    public function testHelp(): void
-    {
-        $this->class->help();
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/help.txt'));
     }
 
     /**

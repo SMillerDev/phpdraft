@@ -10,18 +10,18 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPDraft\Parse\LegacyHtmlGenerator;
+use PHPDraft\Parse\HtmlGenerator;
 use ReflectionClass;
 
 /**
  * Class JsonToHTMLTest
- * @covers \PHPDraft\Parse\LegacyHtmlGenerator
+ * @covers \PHPDraft\Parse\HtmlGenerator
  */
-class LegacyHtmlGeneratorTest extends LunrBaseTest
+class HtmlGeneratorTest extends LunrBaseTest
 {
     /**
      * Test Class
-     * @var LegacyHtmlGenerator
+     * @var HtmlGenerator
      */
     protected $class;
 
@@ -33,17 +33,17 @@ class LegacyHtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Set up
+     * @requires ext-uopz
      */
     public function setUp(): void
     {
-        $data        = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
-        $this->class = new LegacyHtmlGenerator();
-        $this->class->init($data);
+        define('ID_STATIC', 'SOME_ID');
+        $data             = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->class      = new HtmlGenerator();
+        $this->reflection = new ReflectionClass('PHPDraft\Parse\HtmlGenerator');
 
-        $this->reflection = new ReflectionClass('PHPDraft\Parse\LegacyHtmlGenerator');
-        $this->mock_function('microtime', function () {
-            return 'sometime';
-        });
+        $this->mock_function('microtime', function () { return 'sometime'; });
+        $this->class->init($data);
 
         $this->class->sorting = -1;
     }
@@ -54,6 +54,7 @@ class LegacyHtmlGeneratorTest extends LunrBaseTest
     public function tearDown(): void
     {
         $this->unmock_function('microtime');
+        uopz_undefine('ID_STATIC');
         unset($this->class);
         unset($this->reflection);
     }
@@ -88,7 +89,7 @@ class LegacyHtmlGeneratorTest extends LunrBaseTest
         $this->markTestSkipped('Not testing.');
         $old = THIRD_PARTY_ALLOWED;
         $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
-        $class = new LegacyHtmlGenerator();
+        $class = new HtmlGenerator();
         $class->init(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
         $class->get_html();
