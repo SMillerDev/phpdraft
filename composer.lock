@@ -1912,26 +1912,24 @@
         },
         {
             "name": "theseer/autoload",
-            "version": "1.25.8",
+            "version": "1.25.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/Autoload.git",
-                "reference": "7492afa5fa6724a4b136923a4aab2a713510ba68"
+                "reference": "7b667d946d897770e3285e52bb85d3b1f0be21a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/Autoload/zipball/7492afa5fa6724a4b136923a4aab2a713510ba68",
-                "reference": "7492afa5fa6724a4b136923a4aab2a713510ba68",
+                "url": "https://api.github.com/repos/theseer/Autoload/zipball/7b667d946d897770e3285e52bb85d3b1f0be21a3",
+                "reference": "7b667d946d897770e3285e52bb85d3b1f0be21a3",
                 "shasum": ""
             },
             "require": {
-                "theseer/directoryscanner": "~1.3",
-                "zetacomponents/console-tools": "~1.7"
+                "theseer/directoryscanner": "^1.3",
+                "zetacomponents/console-tools": "^1.7.1"
             },
             "require-dev": {
-                "php": ">=5.3",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-                "squizlabs/php_codesniffer": "~1.5"
+                "php": ">=5.3"
             },
             "bin": [
                 "composer/bin/phpab"
@@ -1953,7 +1951,7 @@
                 }
             ],
             "description": "A tool and library to generate autoload code.",
-            "time": "2019-11-22T23:23:17+00:00"
+            "time": "2020-03-20T12:57:35+00:00"
         },
         {
             "name": "theseer/directoryscanner",
@@ -2151,22 +2149,23 @@
         },
         {
             "name": "zetacomponents/console-tools",
-            "version": "1.7",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zetacomponents/ConsoleTools.git",
-                "reference": "30d67e9d04f458ac8cae4c49e50f81061460ff2c"
+                "reference": "1cee38174be119226727159bc8cf4ebb91b12a8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/30d67e9d04f458ac8cae4c49e50f81061460ff2c",
-                "reference": "30d67e9d04f458ac8cae4c49e50f81061460ff2c",
+                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/1cee38174be119226727159bc8cf4ebb91b12a8e",
+                "reference": "1cee38174be119226727159bc8cf4ebb91b12a8e",
                 "shasum": ""
             },
             "require": {
                 "zetacomponents/base": "~1.8"
             },
             "require-dev": {
+                "phpunit/phpunit": "~5.7",
                 "zetacomponents/unit-test": "*"
             },
             "type": "library",
@@ -2213,7 +2212,7 @@
             ],
             "description": "A set of classes to do different actions with the console (also called shell). It can render a progress bar, tables and a status bar and contains a class for parsing command line options.",
             "homepage": "https://github.com/zetacomponents",
-            "time": "2014-09-27T19:26:09+00:00"
+            "time": "2020-03-13T15:28:37+00:00"
         }
     ],
     "aliases": [],
