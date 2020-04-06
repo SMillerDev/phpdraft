@@ -90,7 +90,7 @@ class ObjectStructureElement extends BasicStructureElement
                 break;
             default:
             case 'object':
-                $value  = $value->content->value->content ?? null;
+                $value  = $value->content->value ?? null;
                 $struct = $this->new_instance();
                 break;
         }

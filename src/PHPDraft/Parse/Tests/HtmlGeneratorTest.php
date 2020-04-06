@@ -41,8 +41,6 @@ class HtmlGeneratorTest extends LunrBaseTest
         $data             = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $this->class      = new HtmlGenerator();
         $this->reflection = new ReflectionClass('PHPDraft\Parse\HtmlGenerator');
-
-        $this->mock_function('microtime', function () { return 'sometime'; });
         $this->class->init($data);
 
         $this->class->sorting = -1;
@@ -53,7 +51,6 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        $this->unmock_function('microtime');
         uopz_undefine('ID_STATIC');
         unset($this->class);
         unset($this->reflection);
@@ -74,26 +71,8 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTML(): void
     {
-        $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/basic.html'));
         $this->class->get_html();
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
-    }
-
-    /**
-     * Tests if the constructor sets the property correctly
-     */
-    public function testGetHTMLInheritance(): void
-    {
-        $this->markTestSkipped('Not testing.');
-        $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
-        $class = new HtmlGenerator();
-        $class->init(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')));
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/inheritance.html'));
-        $class->get_html();
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
     }
 
     /**
@@ -101,11 +80,8 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTMLMaterial(): void
     {
-        $old = THIRD_PARTY_ALLOWED;
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', true);
         $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/material.html'));
         $this->class->get_html('material');
-        $this->constant_redefine('THIRD_PARTY_ALLOWED', $old);
     }
 
     /**
