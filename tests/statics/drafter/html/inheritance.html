@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <title>Tesla Model S JSON API</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <style>
-        var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;left:10px;border-radius:30px}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-panel>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}.panel-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.panel-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.panel-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}.method-nav ul{padding-left:10px}.method-nav ul li{list-style:none}.method-nav ul li a{line-height:26px}.method-nav ul li a span{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.POST:not(.structure)>.panel-heading,span.POST{background:#62c462}.GET:not(.structure)>.panel-heading,span.GET{background:#5bc0de}.DELETE:not(.structure)>.panel-heading,span.DELETE{background:#ee5f5b}.PUT:not(.structure)>.panel-heading,span.PUT{background:#f89406}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.panel-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}h5.response-body,h4.request{cursor:pointer}    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+        <style>var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;right:10px;border-radius:30px;z-index:999}span.variable-info{margin-left:10px;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:25px;font-size:.7em}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-card>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}div.card{margin:10px auto}.card-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.card-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.card-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}@media (min-width:768px){.method-nav{max-height:100vh;overflow-x:visible;overflow-y:scroll;top:0;box-shadow:0 -5px 5px -5px rgba(0,0,0,.2) inset,0 0 1px rgba(102,102,102,.4)}}.method-nav{padding:0 10px}.method-nav nav{width:100%}.method-nav nav.category,.method-nav nav.structures,.method-nav nav.structures a.nav-link,.method-nav nav.resource a.nav-link{padding-left:0}.method-nav nav.resource .transition a.nav-link{padding-left:.5rem}.method-nav a.nav-link{line-height:26px}.method-nav a.nav-link i{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.main-content{position:relative}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.card-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}body{--put-color:rgb(248,148,6);--post-color:rgb(98,196,98);--get-color:rgb(91,192,222);--delete-color:rgb(238,95,91);--head-color:rgb(222,121,91);--patch-color:rgb(196,98,196)}.PUT:not(.structure)>.card-header{background:var(--put-color)}span.PUT{color:var(--put-color)}.POST:not(.structure)>.card-header{background:var(--post-color)}span.POST{color:var(--post-color)}.GET:not(.structure)>.card-header{background:var(--get-color)}span.GET{color:var(--get-color)}.DELETE:not(.structure)>.card-header{background:var(--delete-color)}span.DELETE{color:var(--delete-color)}.HEAD:not(.structure)>.card-header{background:var(--head-color)}span.HEAD{color:var(--head-color)}.PATCH:not(.structure)>.card-header{background:var(--patch-color)}span.PATCH{color:var(--patch-color)}</style>
 </head>
 <body>
 <div class="container-fluid">
@@ -19,98 +19,53 @@
         </div>
             </div>
     <div class="row">
-        <div class="col-md-2 method-nav">
-                                                <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a href="#authentication">Authentication</a>
-                                <a class="btn-xs pull-right" role="button" data-toggle="collapse"
-                                   href="#collapse-authentication" aria-expanded="false"
-                                   aria-controls="collapse-authentication">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="collapse collapsed in" id="collapse-authentication">
-                            <div class="panel-body">
-                                <ul class="list-unstyled">
-                                                                            <li>
-                                            <a href="#authentication/tokens">Tokens</a>
-                                        </li>
-                                        <ul>
-                                                                                            <li>
-                                                    <a href="#authentication/tokens/get/an/access/token">
-                                                        Get an Access Token                                                        <span
-                                                            class="pull-right glyphicon glyphicon-plus POST"></span>
-                                                    </a>
-                                                </li>
-                                                                                    </ul>
-                                                                    </ul>
-                            </div>
-                        </div>
-                    </div>
-                                                        <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <a href="#datastructures">Data Structures</a>
-                            <a class="btn-xs pull-right" role="button" data-toggle="collapse"
-                               href="#collapse-structures" aria-expanded="false"
-                               aria-controls="collapse-structures">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="collapse collapsed in" id="collapse-structures">
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
-                                                                    <li>
-                                        <a href="#object-org">Org</a>
-                                    </li>
-                                                                    <li>
-                                        <a href="#object-user">User</a>
-                                    </li>
-                                                            </ul>
-                        </div>
-                    </div>
-                </div>
-                        <div class="main-url">https://owner-api.teslamotors.com</div>
-        </div>
-        <div class="col-md-10">
-                                                <h2><a id="authentication">Authentication</a></h2>
+        <nav class="navbar col-md-2 method-nav sticky-top" id="navbar">
+                                                <nav id="navbar-Authentication" class="navbar navbar-light category">
+                        <a class="navbar-brand" href="#authentication">Authentication</a>
+                                                    <nav class="nav nav-pills flex-column resource">
+                                <a class="nav-link" href="#authentication/tokens">Tokens</a>
+                                                                    <nav class="nav nav-pills flex-column transition">
+                                        <a class="nav-link" href="#authentication/tokens/get/an/access/token">
+                                            Get an Access Token                                            <span class="float-right align-baseline fas POST fa-plus-square"></span>
+                                        </a>
+                                    </nav>
+                                                            </nav>
+                                            </nav>
+                                                        <nav id="nav-datastructures" class="navbar navbar-light structures">
+                    <a class="navbar-brand" href="#authentication">Data Structures</a>
+                                            <nav class="nav nav-pills flex-column structure">
+                            <a class="nav-link" href="#object-org">Org</a>
+                        </nav>
+                                            <nav class="nav nav-pills flex-column structure">
+                            <a class="nav-link" href="#object-user">User</a>
+                        </nav>
+                                    </nav>
+                        <a class="main-url nav-link">https://owner-api.teslamotors.com</a>
+        </nav>
+        <div class="col-md-10 main-content">
+                                                <h2>
+                        <a id="authentication" data-anchor-id="authentication">Authentication</a>
+                    </h2>
                                                                     <h3>
-                        <a id="authentication/tokens">Tokens</a>
+                        <a class="resource-title"
+                           id="authentication/tokens"
+                           data-anchor-id="authentication/tokens">
+                            Tokens                        </a>
                         <small>/oauth/token</small>
                     </h3>
-                    <p></p>
-                                            <div
-                            class="panel panel-default POST">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
+                                                                                    <div
+                            class="card POST">
+                            <div class="card-header">
+                                <h5 class="card-title">
                                     <var>POST</var>
                                     <code>/oauth/token</code>
-                                    <a class="pull-right transition-title"
-                                       id="authentication/tokens/get/an/access/token">Get an Access Token</a>
-                                </h3>
+                                    <a class="float-right transition-title"
+                                       id="authentication/tokens/get/an/access/token"
+                                       data-anchor-id="authentication/tokens/get/an/access/token">
+                                        Get an Access Token                                    </a>
+                                </h5>
                             </div>
-                            <div class="panel-body">
-                                <a class="btn btn-default curl"
-                                   role="button"
-                                   title="cURL command"
-                                   tabindex="0"
-                                   data-placement="left"
-                                   data-toggle="popover"
-                                   data-html="true"
-                                   data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
-                                    <span class="glyphicon glyphicon-copy"></span>
-                                </a>
-                                <a class="btn btn-default hurl"
-                                   role="button"
-                                   title="Try request"
-                                   target="_blank"
-                                   href="https://www.hurl.it/?url=https://owner-api.teslamotors.com/oauth/token&method=POST"
-                                   tabindex="0">
-                                    <span class="glyphicon glyphicon-play"></span>
-                                </a>
+                            <div class="card-body">
                                 <p class="lead">Performs the login. Takes in an plain text email and password, matching the owner's login information for <a href="https://my.teslamotors.com/user/login">https://my.teslamotors.com/user/login</a>.
 
 <p>Returns a <code>access_token</code> which is passed along as a header with all future requests to authenticate the user.</p>
@@ -119,49 +74,58 @@
 
 <p>The current client ID and secret are <a href="http://pastebin.com/fX6ejAHd">available here</a></p>
 </p>
-                                                                                                            <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="request panel-title"
+                                                                                                            <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-authentication-tokens-get-an-access-token">Request
-                                                    <span
-                                                        class="glyphicon indicator glyphicon-menu-down pull-right"></span>
-                                                </h4>
+                                                    data-target="#request-coll-cf811e997ac476342de0a3f3f363dfb5">Request
+                                                                                                        <i class="fas indicator fa-angle-down float-right"></i>
+                                                </h6>
                                             </div>
 
                                             <div
-                                                class="collapse in request-panel panel-body"
-                                                id="request-coll-authentication-tokens-get-an-access-token">
-                                                                                                                                                    <h5>Example URI</h5>
+                                                class="collapse show request-card card-body"
+                                                id="request-coll-cf811e997ac476342de0a3f3f363dfb5"
+                                                data-anchor-id="request-coll-cf811e997ac476342de0a3f3f363dfb5">
+                                                                                                <a class="btn btn-default curl"
+                                                   role="button"
+                                                   title="cURL command"
+                                                   tabindex="0"
+                                                   data-placement="left"
+                                                   data-toggle="popover"
+                                                   data-html="true"
+                                                   data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
+                                                    <i class="fas fa-copy"></i>
+                                                </a>
+                                                                                                    <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span><em>/oauth/token</em>
                                                                                                                                                                                                 
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
+                                                        
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>grant_type</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The type of oAuth grant. Always &quot;password&quot;</p>
 </td><td><span class="example-value pull-right">password</span></td></tr><tr><td><span>client_id</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client ID</p>
 </td><td><span class="example-value pull-right">abc</span></td></tr><tr><td><span>client_secret</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The oAuth client secret</p>
 </td><td><span class="example-value pull-right">123</span></td></tr><tr><td><span>email</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The email for my.teslamotors.com</p>
 </td><td><span class="example-value pull-right">elon@teslamotors.com</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The password for my.teslamotors.com</p>
-</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table></table>                                                    </div>
+</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table>                                                    </div>
                                                                                             </div>
                                         </div>
-                                                                                                                                                                                <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title response"
+                                                                                                                                                                                <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title response"
                                                     data-toggle="collapse"
                                                     data-target="#request-coll--authentication-tokens-get-an-access-token-204">
                                                     Response <var
                                                         class="text-success">204 No Content</var>
-                                                    <span
-                                                        class="glyphicon
-                                                        indicator
-                                                        glyphicon-menu-down                                                        pull-right"></span>
-                                                </h4>
+                                                    <i class="fas indicator fa-angle-down float-right"></i>
+                                                </h6>
                                             </div>
                                             <div
-                                                class="panel-body collapse in response-panel"
-                                                id="request-coll--authentication-tokens-get-an-access-token-204">
+                                                class="card-body collapse show response-card"
+                                                id="request-coll--authentication-tokens-get-an-access-token-204"
+                                                data-anchor-id="request-coll--authentication-tokens-get-an-access-token-204">
                                                                                                                                                     <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
@@ -174,37 +138,47 @@
                                         </div>
                                                                                                 </div>
                         </div>
-                                                                            <h2><a id="datastructures">Data structures</a></h2>
-                                    <div class="panel panel-default object-org structure">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a id="object-org">Org</a>
-                            </h3>
+                                                                            <h2><a data-anchor-id="datastructures" id="datastructures">Data structures</a></h2>
+                                    <div class="card object-org structure">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <a id="object-org" data-anchor-id="object-org">Org</a>
+                            </h5>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
-                                <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>name</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
-</td><td><span class="example-value pull-right">Apiary</span></td></tr></table></table>                            </div>
+                                
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>name</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
+</td><td><span class="example-value pull-right">Apiary</span></td></tr></table>                            </div>
                         </div>
                     </div>
-                                    <div class="panel panel-default object-user structure">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a id="object-user">User</a>
-                            </h3>
+                                    <div class="card object-user structure">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <a id="object-user" data-anchor-id="object-user">User</a>
+                            </h5>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
-                                <table class="table table-striped mdl-data-table mdl-js-data-table "><table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>username</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
+                                <p>User of the application</p>
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>username</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
 </td><td><span class="example-value pull-right">pavan</span></td></tr><tr><td><span>id</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>Id of the user</p>
 </td><td><span class="example-value pull-right">5</span></td></tr><tr><td><span>address</span></td><td><code>object</code></td><td> <span class="status"></span></td><td><p>The address of the user</p>
-</td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr><tr><td><span>array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>array description</p>
-</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li></ul></div></td></tr><tr><td><span>inline array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>desc</p>
-</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li><li class="list-group-item mdl-list__item">string</li></ul></div></td></tr><tr><td><span>multilined description</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>some dummy text</p>
+</td><td><div class="sub-struct">
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>street</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The street of the user</p>
+</td><td><span class="example-value pull-right">Heregracht 266</span></td></tr><tr><td><span>city</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>The city of the user</p>
+</td><td><span class="example-value pull-right">Amsterdam</span></td></tr><tr><td><span>zipcode</span></td><td><code>object</code></td><td> <span class="status"></span></td><td><p>zip description</p>
+</td><td><div class="sub-struct">
+<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>numbers</span></td><td><code>number</code></td><td> <span class="status"></span></td><td><p>zip numbers</p>
+</td><td><span class="example-value pull-right">1234</span></td></tr><tr><td><span>letters</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>zip letters</p>
+</td><td><span class="example-value pull-right">AB</span></td></tr></table></div></td></tr><tr><td><span>variable</span><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" title="This is a variable key"></span></td><td><code>string</code></td><td> <span class="status"></span></td><td>
+</td><td><span class="example-value pull-right">trololo</span></td></tr></table></div></td></tr><tr><td><span>array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>array description</p>
+</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">3</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">4</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">5</span></li></ul></div></td></tr><tr><td><span>inline array</span></td><td><code>array</code></td><td> <span class="status"></span></td><td><p>desc</p>
+</td><td><div class="array-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">1</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">2</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">3</span></li></ul></div></td></tr><tr><td><span>multilined description</span></td><td><code>string</code></td><td> <span class="status"></span></td><td><p>some dummy text</p>
 
 <p>and it continue there
 and will end there</p>
-</td><td></td></tr></table></table>                            </div>
+</td><td></td></tr></table>                            </div>
                         </div>
                     </div>
                                     </div>
@@ -218,14 +192,12 @@ and will end there</p>
         data-placement="top"
         data-html="true"
         data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
-        <span class="glyphicon glyphicon-question-sign"></span>
+        <i class="fas fa-question-circle"></i>
     </button>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-<script>$(function(){$('[data-toggle="popover"]').popover();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")}});$('.collapse.request-panel').on('shown.bs.collapse',function(){$(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h4.request .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up')});$('.collapse.response-panel').on('shown.bs.collapse',function(){$(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass("glyphicon-menu-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h4.response .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass("glyphicon-menu-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h5.response-body .glyphicon.indicator').removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up')});</script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>$(function(){$('[data-toggle="popover"]').popover();$('[data-toggle="tooltip"]').tooltip();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")};$('table:not(.table)').each(function(){$(this).addClass('table')})});$('.collapse.request-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});$('.collapse.response-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
 </body>
 </html>
