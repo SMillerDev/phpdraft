@@ -57,90 +57,74 @@ class ArrayStructureElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new ArrayStructureElement();
-        $base1->key         = 'greet_list';
-        $base1->value       = [['' => 'string']];
-        $base1->status      = 'required';
-        $base1->element     = 'member';
-        $base1->type        = 'array';
+        $base1->key         = NULL;
+        $base1->value       = [['Swift' => 'string'], ['Objective-C' => 'string']];
+        $base1->status      = NULL;
+        $base1->element     = 'array';
+        $base1->type        = NULL;
         $base1->is_variable = false;
         $base1->description = "\n";
         $base1->deps        = [];
 
         $base2              = new ArrayStructureElement();
-        $base2->key         = 'car_id_list';
-        $base2->value       = [['Truck' => 'Car identifier']];
-        $base2->status      = 'optional';
-        $base2->element     = 'member';
-        $base2->type        = 'array';
+        $base2->key         = NULL;
+        $base2->value       = [['item' => 'string'], ['another item' => 'string']];
+        $base2->status      = NULL;
+        $base2->element     = 'array';
+        $base2->type        = 'Some simple array';
         $base2->is_variable = false;
-        $base2->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base2->deps        = ['Car identifier'];
+        $base2->description = "\n";
+        $base2->deps        = ['Some simple array'];
 
         $base3              = new ArrayStructureElement();
         $base3->key         = 'car_id_list';
-        $base3->value       = [];
+        $base3->value       = [['car_id_list' => 'string'], ['' => 'array']];
         $base3->status      = 'optional';
         $base3->element     = 'member';
         $base3->type        = 'array';
         $base3->is_variable = false;
         $base3->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base3->deps        = null;
+        $base3->deps        = [];
 
         $return['generic value type'] = [
             '{
-                "element": "member",
-                "attributes": {
-                    "typeAttributes": [
-                        "required"
-                    ]
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "Swift"
                 },
-                "content": {
-                    "key": {
-                        "element": "string",
-                        "content": "greet_list"
-                    },
-                    "value": {
-                        "element": "array",
-                        "content": [
-                            {
-                                "element": "string"
-                            }
-                        ]
-                    }
+                {
+                  "element": "string",
+                  "content": "Objective-C"
                 }
+              ]
             }',
             $base1,
         ];
         $return['custom value type'] = [
             '{
-                "element": "member",
-                "meta": {
-                    "description": "List of car identifiers to retrieve"
-                },
-                "attributes": {
-                    "typeAttributes": [
-                        "optional"
-                    ]
-                },
-                "content": {
-                    "key": {
-                        "element": "string",
-                        "content": "car_id_list"
-                    },
-                    "value": {
-                        "element": "array",
-                        "content": [
-                            {
-                                "element": "Car identifier",
-                                "content": "Truck"
-                            }
-                        ]
-                    }
+              "element": "array",
+              "meta": {
+                "id": {
+                  "element": "string",
+                  "content": "Some simple array"
                 }
+              },
+              "content": [
+                {
+                  "element": "string",
+                  "content": "item"
+                },
+                {
+                  "element": "string",
+                  "content": "another item"
+                }
+              ]
             }',
             $base2,
         ];
-        $return[] = [
+        $return['other'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -181,30 +165,11 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToString(): void
-    {
-        $return = $this->class->__toString();
-        $this->assertSame('<span class="example-value pull-right">[ ]</span>', $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
     public function testToStringWithArray(): void
     {
         $this->class->value = [['string' => 'stuff'], ['int' => 'class']];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-stuff">stuff</a> - <span class="example-value pull-right">string</span></li><li class="list-group-item mdl-list__item"><a href="#object-class">class</a> - <span class="example-value pull-right">int</span></li></ul>', $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
-    public function testToStringWithString(): void
-    {
-        $this->class->value = 'hello';
-        $return = $this->class->__toString();
-        $this->assertSame('<span class="example-value pull-right">[ ]</span>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="stuff" href="#object-stuff">stuff</a> - <span class="example-value pull-right">string</span></li><li class="list-group-item mdl-list__item"><a class="code" title="class" href="#object-class">class</a> - <span class="example-value pull-right">int</span></li></ul>', $return);
     }
 
     /**
@@ -214,6 +179,6 @@ class ArrayStructureElementTest extends LunrBaseTest
     {
         $this->class->value = [['type'=>'Bike'], ['stuff'=>'car']];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">Bike</a> - <span class="example-value pull-right">type</span></li><li class="list-group-item mdl-list__item"><a href="#object-car">car</a> - <span class="example-value pull-right">stuff</span></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="Bike" href="#object-bike">Bike</a> - <span class="example-value pull-right">type</span></li><li class="list-group-item mdl-list__item"><a class="code" title="car" href="#object-car">car</a> - <span class="example-value pull-right">stuff</span></li></ul>', $return);
     }
 }

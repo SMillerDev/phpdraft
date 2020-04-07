@@ -129,7 +129,7 @@ class TemplateGenerator extends BaseTemplateGenerator
                 }
             }
 
-            $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? $object->content[0]->meta->title->content;
+            $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? '';
         }
 
         if (Sorting::sortStructures($this->sorting)) {

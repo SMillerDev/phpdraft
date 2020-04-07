@@ -30,13 +30,13 @@ class ArrayStructureElement extends BasicStructureElement
 
         $this->parse_common($object, $dependencies);
 
-        if (!isset($object->content->value->content)) {
+        if (!isset($object->content)) {
             $this->value = [];
 
             return $this;
         }
 
-        foreach ($object->content->value->content as $sub_item) {
+        foreach ($object->content as $sub_item) {
             if (!in_array($sub_item->element, self::DEFAULTS)) {
                 $dependencies[] = $sub_item->element;
             }
@@ -58,28 +58,22 @@ class ArrayStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        $return = '<ul class="list-group mdl-list">';
+        if (is_string($this->value)) {
+            $type = $this->get_element_as_html($this->element);
 
-        if (!is_array($this->value)) {
-            return '<span class="example-value pull-right">[ ]</span>';
+            return '<tr><td>' . $this->key . '</td><td>' . $type . '</td><td>' . $this->description . '</td></tr>';
         }
 
+        $return = '';
         foreach ($this->value as $item) {
             $value = key($item);
-            $key = $item[$value];
-            $type = (in_array($key, self::DEFAULTS)) ? "<code>$key</code>" : '<a href="#object-' . str_replace(
-                ' ',
-                '-',
-                strtolower($key)
-            ) . '">' . $key . '</a>';
+            $type = $this->get_element_as_html($item[$value]);
 
             $value = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
             $return .= '<li class="list-group-item mdl-list__item">' . $type . $value . '</li>';
         }
 
-        $return .= '</ul>';
-
-        return $return;
+        return '<ul class="list-group mdl-list">' . $return . '</ul>';
     }
 
     /**

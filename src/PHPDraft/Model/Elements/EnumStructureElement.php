@@ -23,21 +23,40 @@ class EnumStructureElement extends BasicStructureElement
      */
     public function parse(?object $object, array &$dependencies): StructureElement
     {
-        $this->element = (isset($object->element)) ? $object->element : 'enum';
+        $this->element = $object->element;
 
         $this->parse_common($object, $dependencies);
 
-        $this->key   = $this->key ?? $object->content ?? 'UNKNOWN';
-        $this->type  = $this->type ?? $object->element;
+        $this->key   = $this->key ?? $object->content->content ?? NULL;
+        $this->type  = $this->type ?? $object->content->element ?? NULL;
 
-        if (!isset($object->content->value->content)) {
+        if (!isset($object->content) && !isset($object->attributes)) {
             $this->value = $this->key;
 
             return $this;
         }
 
-        $enumerations = $object->content->value->attributes->enumerations->content ?? $object->content->value->content;
-        foreach ($enumerations as $sub_item) {
+        if (isset($object->attributes->default)) {
+            if (!in_array($object->attributes->default->content->element ?? '', self::DEFAULTS)) {
+                $dependencies[] = $object->attributes->default->content->element;
+            }
+            $this->value = $object->attributes->default->content->content;
+            $this->deps  = $dependencies;
+
+            return $this;
+        }
+
+        if (isset($object->content)) {
+            if (!in_array($object->content->element, self::DEFAULTS)) {
+                $dependencies[] = $object->content->element;
+            }
+            $this->value = $object->content->content;
+            $this->deps  = $dependencies;
+
+            return $this;
+        }
+
+        foreach ($object->attributes->enumerations->content as $sub_item) {
             if (!in_array($sub_item->element, self::DEFAULTS)) {
                 $dependencies[] = $sub_item->element;
             }
@@ -57,36 +76,21 @@ class EnumStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        $return = '<ul class="list-group mdl-list">';
-
         if (is_string($this->value)) {
-            $type = (in_array($this->element, self::DEFAULTS)) ? $this->element : '<a href="#object-' . str_replace(
-                ' ',
-                '-',
-                strtolower($this->element)
-            ) . '">' . $this->element . '</a>';
+            $type = $this->get_element_as_html($this->element);
 
-            return '<tr><td>' . $this->key . '</td><td><code>' . $type . '</code></td><td>' . $this->description . '</td></tr>';
+            return '<tr><td>' . $this->key . '</td><td>' . $type . '</td><td>' . $this->description . '</td></tr>';
         }
 
-        if (!is_array($this->value)) {
-            return '<span class="example-value pull-right">//list of options</span>';
-        }
-
+        $return = '';
         foreach ($this->value as $value => $key) {
-            $type = (in_array($key, self::DEFAULTS)) ? "<code>$key</code>" : '<a href="#object-' . str_replace(
-                ' ',
-                '-',
-                strtolower($key)
-            ) . '">' . $key . '</a>';
+            $type = $type = $this->get_element_as_html($key);
 
             $item = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
             $return .= '<li class="list-group-item mdl-list__item">' . $type . $item . '</li>';
         }
 
-        $return .= '</ul>';
-
-        return $return;
+        return '<ul class="list-group mdl-list">' . $return . '</ul>';
     }
 
     /**

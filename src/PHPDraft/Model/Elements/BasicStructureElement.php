@@ -130,7 +130,7 @@ abstract class BasicStructureElement implements StructureElement
 
         $this->description_as_html();
 
-        if (!in_array($this->type, self::DEFAULTS)) {
+        if (!in_array($this->type, self::DEFAULTS) && $this->type !== NULL) {
             $dependencies[] = $this->type;
         }
     }
@@ -146,6 +146,23 @@ abstract class BasicStructureElement implements StructureElement
     }
 
     /**
+     * Represent the element in HTML.
+     *
+     * @param string $element Element name
+     *
+     * @return string HTML string
+     */
+    protected function get_element_as_html($element): string
+    {
+        if (in_array($element, self::DEFAULTS)) {
+            return '<code>' . $element . '</code>';
+        }
+
+        $link_name = str_replace(' ', '-', strtolower($element));
+        return '<a class="code" title="' . $element . '" href="#object-' . $link_name . '">' . $element . '</a>';
+    }
+
+    /**
      * Get a string representation of the value.
      *
      * @param bool $flat get a flat representation of the item.
@@ -155,17 +172,42 @@ abstract class BasicStructureElement implements StructureElement
     public function string_value($flat = FALSE)
     {
         if (is_array($this->value)) {
-            $key = rand(0, count($this->value));
-            if (is_subclass_of($this->value[$key], StructureElement::class) && $flat === FALSE) {
-                return $this->value[$key]->string_value($flat);
+            $value_key = rand(0, count($this->value));
+            if (is_subclass_of($this->value[$value_key], StructureElement::class) && $flat === FALSE) {
+                return $this->value[$value_key]->string_value($flat);
             }
 
-            return $this->value[$key];
+            return $this->value[$value_key];
         }
 
         if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === TRUE) {
             return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
         }
         return $this->value;
+    }
+
+    /**
+     * Get what element to parse with.
+     *
+     * @param object $object The object to parse.
+     *
+     * @return BasicStructureElement The element to parse to
+     */
+    public static function get_class(object $object): BasicStructureElement
+    {
+        switch ($object->element) {
+            default:
+            case 'object':
+                $struct = new ObjectStructureElement();
+                break;
+            case 'array':
+                $struct = new ArrayStructureElement();
+                break;
+            case 'enum':
+                $struct = new EnumStructureElement();
+                break;
+        }
+
+        return $struct;
     }
 }

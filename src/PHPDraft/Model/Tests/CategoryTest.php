@@ -86,7 +86,7 @@ class CategoryTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $json = '{"content":[{"element":"dataStructure", "content":{"key":{"content":"none"}, "value":{"element":"none"}}}]}';
+        $json = '{"content":[{"element":"dataStructure", "content":{"element": "object", "key":{"content":"none"}, "value":{"element":"none"}}}]}';
 
         $this->class->parse(json_decode($json));
 
@@ -104,7 +104,7 @@ class CategoryTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $json = '{"content":[{"element":"dataStructure", "content":{"meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}}]}';
+        $json = '{"content":[{"element":"dataStructure", "content":{"element": "object","meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}}]}';
 
         $this->class->parse(json_decode($json));
 

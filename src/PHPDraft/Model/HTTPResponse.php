@@ -132,8 +132,8 @@ class HTTPResponse implements Comparable
             }
 
             if ($value->element === 'dataStructure') {
-                $content = is_array($value->content) ? $value->content : [$value->content];
-                $this->parse_structure($content);
+                $data_content = is_array($value->content) ? $value->content : [$value->content];
+                $this->parse_structure($data_content);
                 continue;
             }
 

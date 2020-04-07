@@ -210,7 +210,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testArrayContentEnumContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": [{"content":{"key":{"content":"key"},"value":{"element":"value"}}}]}';
+        $object = '{"element":"hrefVariables","content":[{"element":"member","meta":{"description":{"element":"string","content":"Info on things"},"title":{"element":"string","content":"string"}},"attributes":{"typeAttributes":{"element":"array","content":[{"element":"string","content":"required"}]}},"content":{"key":{"element":"string","content":"things"},"value":{"element":"string","content":"1"}}},{"element":"member","meta":{"description":{"element":"string","content":"The id of the Post.\nSome additional info\n"},"title":{"element":"string","content":"string"}},"attributes":{"typeAttributes":{"element":"array","content":[{"element":"string","content":"optional"}]}},"content":{"key":{"element":"string","content":"post_id"},"value":{"element":"string","attributes":{"default":{"element":"string","content":"0"}},"content":"1"}}},{"element":"member","meta":{"description":{"element":"string","content":"Some stuff info\nSome additional info\n"},"title":{"element":"string","content":"string"}},"attributes":{"typeAttributes":{"element":"array","content":[{"element":"string","content":"optional"}]}},"content":{"key":{"element":"string","content":"stuff"},"value":{"element":"enum","attributes":{"default":{"element":"enum","content":{"element":"string","content":"world"}},"enumerations":{"element":"array","content":[{"element":"string","content":"hello"},{"element":"string","content":"world"},{"element":"string","content":"tests"}]}},"content":{"element":"string","content":"hello"}}}}]}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -253,7 +253,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureArrayContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"array"}}}';
+        $object = '{"element":"array","content": {"element":"array","value": {"element": "array"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -266,7 +266,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
+        $object = '{"element":"object","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -279,7 +279,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParseContent(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object", "content":{}}}}';
+        $object = '{"element":"object","content": {"value":{"element":"object", "content":{}}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -304,9 +304,12 @@ class ObjectStructureElementTest extends LunrBaseTest
         $return = $this->class->__toString();
         $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table ">hello</table>', $return);
 
-        $this->class->value = [new ArrayStructureElement()];
+        $val = new ArrayStructureElement();
+        $val->element = 'things';
+        $val->value = 'stuff';
+        $this->class->value = [$val];
         $return = $this->class->__toString();
-        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table "><span class="example-value pull-right">[ ]</span></table>', $return);
+        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td></td><td><a class="code" title="things" href="#object-things">things</a></td><td></td></tr></table>', $return);
     }
 
     /**
@@ -317,7 +320,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->key = 'hello';
         $this->class->type = 'mixed';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="mixed" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
     }
 
     /**
@@ -339,9 +342,11 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = new ArrayStructureElement();
+        $this->class->value->element = 'value';
+        $this->class->value->value = 'value';
         $this->class->type = 'array';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>array</code></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><span class="example-value pull-right">[ ]</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>array</code></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><tr><td></td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div></td></tr>', $return);
     }
 
     /**
@@ -351,9 +356,11 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $this->class->key = 'hello';
         $this->class->value = new EnumStructureElement();
+        $this->class->value->element = 'value';
+        $this->class->value->value = 'value';
         $this->class->type = 'enum';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>enum</code></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><span class="example-value pull-right">//list of options</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>enum</code></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><tr><td></td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div></td></tr>', $return);
     }
 
     /**
@@ -377,7 +384,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value = 'world';
         $this->class->type = 'Cow';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" href="#object-cow">Cow</a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="Cow" href="#object-cow">Cow</a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
     }
 
     /**

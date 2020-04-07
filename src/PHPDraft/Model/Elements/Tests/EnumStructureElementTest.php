@@ -52,20 +52,11 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Test setup of new instances
      */
-    public function testToString(): void
-    {
-        $return = $this->class->__toString();
-        $this->assertSame('<span class="example-value pull-right">//list of options</span>', $return);
-    }
-
-    /**
-     * Test setup of new instances
-     */
     public function testToStringWithArray(): void
     {
         $this->class->value = ['hello' => 'string', 'test' => 'int'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a href="#object-int">int</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="int" href="#object-int">int</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
 
     /**
@@ -89,7 +80,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $this->class->key = 'key';
         $this->class->element = 'Car';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td>key</td><td><code><a href="#object-car">Car</a></code></td><td></td></tr>', $return);
+        $this->assertSame('<tr><td>key</td><td><a class="code" title="Car" href="#object-car">Car</a></td><td></td></tr>', $return);
     }
 
     /**
@@ -99,7 +90,7 @@ class EnumStructureElementTest extends LunrBaseTest
     {
         $this->class->value = ['hello' => 'bike', 'test' => 'Car'];
         $return = $this->class->__toString();
-        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a href="#object-bike">bike</a> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a href="#object-car">Car</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
+        $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="bike" href="#object-bike">bike</a> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="Car" href="#object-car">Car</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
 
     /**
@@ -110,7 +101,7 @@ class EnumStructureElementTest extends LunrBaseTest
      * @param string               $object   JSON Object
      * @param EnumStructureElement $expected Expected Object output
      *
-     * @covers       \PHPDraft\Model\Elements\EnumStructureElement::parse
+     * @covers \PHPDraft\Model\Elements\EnumStructureElement::parse
      */
     public function testSuccesfulParse($object, $expected)
     {
@@ -128,51 +119,76 @@ class EnumStructureElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new EnumStructureElement();
-        $base1->key         = 'greet_list';
-        $base1->value       = ['world' => 'hello'];
-        $base1->status      = 'required';
-        $base1->element     = 'member';
-        $base1->type        = 'array';
+        $base1->key         = NULL;
+        $base1->value       = [ 'item' => 'string', 'another item' => 'string'];
+        $base1->status      = NULL;
+        $base1->element     = 'enum';
+        $base1->type        = 'Some simple enum';
+        $base1->is_variable = false;
         $base1->description = "\n";
-        $base1->deps        = ['hello'];
+        $base1->deps        = ['Some simple enum'];
 
         $base2              = new EnumStructureElement();
         $base2->key         = 'car_id_list';
-        $base2->value       = ['world' => 'Car identifier'];
-        $base2->status      = 'optional';
-        $base2->element     = 'member';
-        $base2->type        = 'array';
-        $base2->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base2->deps        = ['Car identifier'];
+        $base2->value       = 'world';
+        $base2->status      = NULL;
+        $base2->element     = 'enum';
+        $base2->type        = 'string';
+        $base2->description = "\n";
+        $base2->is_variable = false;
+        $base2->deps        = [];
 
         $base3              = new EnumStructureElement();
-        $base3->key         = 'car_id_list';
-        $base3->value       = 'car_id_list';
+        $base3->key         = '5';
+        $base3->value       = '5';
         $base3->status      = 'optional';
         $base3->element     = 'member';
-        $base3->type        = 'array';
+        $base3->type        = 'number';
         $base3->description = "<p>List of car identifiers to retrieve</p>\n";
-        $base3->deps        = null;
+        $base3->is_variable = false;
+        $base3->deps        = [];
 
-        $return[] = [
+        $return['base enum'] = [
             '{
-                "element": "member",
-                "attributes": {
-                    "typeAttributes": [
-                        "required"
-                    ]
+                "element":"enum",
+                "meta":{
+                    "id":{
+                        "element":"string",
+                        "content":"Some simple enum"
+                    }
                 },
-                "content": {
-                    "key": {
-                        "element": "string",
-                        "content": "greet_list"
-                    },
-                    "value": {
-                        "element": "array",
-                        "content": [
+                "attributes":{
+                    "enumerations":{
+                        "element":"array",
+                        "content":[
                             {
-                                "element": "hello",
-                                "content": "world"
+                                "element":"string",
+                                "attributes":{
+                                    "typeAttributes":{
+                                        "element":"array",
+                                        "content":[
+                                            {
+                                                "element":"string",
+                                                "content":"fixed"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "content":"item"
+                            },
+                            {
+                                "element":"string",
+                                "attributes":{
+                                    "typeAttributes":{
+                                        "element":"array","content":[
+                                            {
+                                                "element":"string",
+                                                "content":"fixed"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "content":"another item"
                             }
                         ]
                     }
@@ -180,36 +196,43 @@ class EnumStructureElementTest extends LunrBaseTest
             }',
             $base1,
         ];
-        $return[] = [
+        $return['enum with default'] = [
             '{
-                "element": "member",
-                "meta": {
-                    "description": "List of car identifiers to retrieve"
+              "element": "enum",
+              "attributes": {
+                "default": {
+                  "element": "enum",
+                  "content": {
+                    "element": "string",
+                    "content": "world"
+                  }
                 },
-                "attributes": {
-                    "typeAttributes": [
-                        "optional"
-                    ]
-                },
-                "content": {
-                    "key": {
-                        "element": "string",
-                        "content": "car_id_list"
+                "enumerations": {
+                  "element": "array",
+                  "content": [
+                    {
+                      "element": "string",
+                      "content": "hello"
                     },
-                    "value": {
-                        "element": "array",
-                        "content": [
-                            {
-                                "element": "Car identifier",
-                                "content": "world"
-                            }
-                        ]
+                    {
+                      "element": "string",
+                      "content": "world"
+                    },
+                    {
+                      "element": "string",
+                      "content": "tests"
                     }
+                  ]
                 }
+              },
+              "content": {
+                "element": "string",
+                "content": "car_id_list"
+              }
             }',
             $base2,
         ];
-        $return[] = [
+        $return['basic enum'] = [
             '{
                 "element": "member",
                 "meta": {
@@ -221,13 +244,8 @@ class EnumStructureElementTest extends LunrBaseTest
                     ]
                 },
                 "content": {
-                    "key": {
-                        "element": "string",
-                        "content": "car_id_list"
-                    },
-                    "value": {
-                        "element": "array"
-                    }
+                    "element": "number",
+                    "content": "5"
                 }
             }',
             $base3,

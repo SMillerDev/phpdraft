@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use stdClass;
 
@@ -54,7 +55,7 @@ class Category extends HierarchyElement
                     break;
                 case 'dataStructure':
                     $deps         = [];
-                    $struct       = new ObjectStructureElement();
+                    $struct       = BasicStructureElement::get_class($item->content);
                     $struct->deps = $deps;
                     $struct->parse($item->content, $deps);
 

@@ -266,12 +266,12 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testArrayContentEnumContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": [{"content":{"key":{"content":"key"},"value":{"element":"value"}}}]}';
+        $object = '{"element":"enum","content": [{"element":"enum"}]}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
         foreach ($return->value as $item) {
-            $this->assertInstanceOf(RequestBodyElement::class, $item);
+            $this->assertInstanceOf(EnumStructureElement::class, $item);
         }
     }
 
@@ -296,7 +296,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureEnumContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"enum"}}}';
+        $object = '{"element":"enum","content": {"element":"enum","key":{"content":"key"},"value":{"element":"enum"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -309,7 +309,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureArrayContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"array"}}}';
+        $object = '{"element":"array","content": {"element":"array","key":{"content":"key"},"value":{"element":"array"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -322,20 +322,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
-
-        $return = $this->class->parse(json_decode($object), $deps);
-        $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        $this->assertInstanceOf(ObjectStructureElement::class, $return->value);
-    }
-
-    /**
-     * Test the setup of new instances
-     */
-    public function testValueStructureObjectContentParseContent(): void
-    {
-        $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"object", "content":{}}}}';
+        $object = '{"element":"object","content": {"element":"object","key":{"content":"key"},"value":{"element":"object"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);

@@ -161,12 +161,12 @@ class HTTPRequest implements Comparable
      */
     private function parse_structure(stdClass $objects): void
     {
-        $deps   = [];
-        $struct = new RequestBodyElement();
-        $struct->parse($objects->content, $deps);
-        $struct->deps = $deps;
+        $deps      = [];
+        $structure = new RequestBodyElement();
+        $structure->parse($objects->content, $deps);
+        $structure->deps = $deps;
 
-        $this->struct = $struct;
+        $this->struct = $structure;
     }
 
     public function get_id(): string

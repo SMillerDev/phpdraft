@@ -19,24 +19,24 @@
         </div>
             </div>
     <div class="row">
-        <nav class="navbar col-md-2 method-nav sticky-top" id="navbar">
-                                                <nav id="navbar-Authentication" class="navbar navbar-light category">
+        <nav class="navbar col-md-2 method-nav sticky-top" id="navbar" aria-label="Categories">
+                                                <nav id="navbar-Authentication" class="navbar navbar-light category" aria-label="Category Authentication">
                         <a class="navbar-brand" href="#authentication">Authentication</a>
-                                                    <nav class="nav nav-pills flex-column resource">
+                                                    <nav class="nav nav-pills flex-column resource" aria-label="Resource Authentication/Tokens">
                                 <a class="nav-link" href="#authentication/tokens">Tokens</a>
-                                                                    <nav class="nav nav-pills flex-column transition">
+                                                                    <nav class="nav nav-pills flex-column transition" aria-label="Transition Authentication/Tokens/Get an Access Token">
                                         <a class="nav-link" href="#authentication/tokens/get/an/access/token">
                                             Get an Access Token                                            <span class="float-right align-baseline fas POST fa-plus-square"></span>
                                         </a>
                                     </nav>
                                                             </nav>
                                             </nav>
-                                                        <nav id="nav-datastructures" class="navbar navbar-light structures">
+                                                        <nav id="nav-datastructures" class="navbar navbar-light structures" aria-label="Data structures">
                     <a class="navbar-brand" href="#authentication">Data Structures</a>
-                                            <nav class="nav nav-pills flex-column structure">
+                                            <nav class="nav nav-pills flex-column structure" aria-label="Structure Org">
                             <a class="nav-link" href="#object-org">Org</a>
                         </nav>
-                                            <nav class="nav nav-pills flex-column structure">
+                                            <nav class="nav nav-pills flex-column structure" aria-label="Structure User">
                             <a class="nav-link" href="#object-user">User</a>
                         </nav>
                                     </nav>
@@ -78,15 +78,15 @@
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
-                                                    data-target="#request-coll-cf811e997ac476342de0a3f3f363dfb5">Request
-                                                                                                        <i class="fas indicator fa-angle-down float-right"></i>
+                                                    data-target="#request-coll-SOME_ID">Request
+                                                                                                        <span class="fas indicator fa-angle-down float-right"></span>
                                                 </h6>
                                             </div>
 
                                             <div
                                                 class="collapse show request-card card-body"
-                                                id="request-coll-cf811e997ac476342de0a3f3f363dfb5"
-                                                data-anchor-id="request-coll-cf811e997ac476342de0a3f3f363dfb5">
+                                                id="request-coll-SOME_ID"
+                                                data-anchor-id="request-coll-SOME_ID">
                                                                                                 <a class="btn btn-default curl"
                                                    role="button"
                                                    title="cURL command"
@@ -95,7 +95,7 @@
                                                    data-toggle="popover"
                                                    data-html="true"
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
-                                                    <i class="fas fa-copy"></i>
+                                                    <span class="fas fa-copy"></span>
                                                 </a>
                                                                                                     <h5>Example URI</h5>
                                                     <span class="base-url">https://owner-api.teslamotors.com</span><em>/oauth/token</em>
@@ -119,7 +119,7 @@
                                                     data-target="#request-coll--authentication-tokens-get-an-access-token-204">
                                                     Response <var
                                                         class="text-success">204 No Content</var>
-                                                    <i class="fas indicator fa-angle-down float-right"></i>
+                                                    <span class="fas indicator fa-angle-down float-right"></span>
                                                 </h6>
                                             </div>
                                             <div
@@ -192,7 +192,7 @@ and will end there</p>
         data-placement="top"
         data-html="true"
         data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
-        <i class="fas fa-question-circle"></i>
+        <span class="fas fa-question-circle"></span>
     </button>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>

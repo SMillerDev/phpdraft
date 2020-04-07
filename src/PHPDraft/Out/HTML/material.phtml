@@ -35,7 +35,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
     </header>
     <div class="mdl-layout__drawer">
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="#"><b>Webservices</b></a>
+            <a class="mdl-navigation__link" href="#"><strong>Webservices</strong></a>
             <?php foreach ($this->categories as $category): ?>
                 <a class="mdl-navigation__link" href="#<?= $category->get_href(); ?>"><?= $category->title; ?></a>
                 <?php if ($category->children !== []): ?>
@@ -54,7 +54,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (!empty($this->base_structures)): ?>
-                <a class="mdl-navigation__link" href="#"><b>Objects</b></a>
+                <a class="mdl-navigation__link" href="#"><strong>Objects</strong></a>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
                     <a class="mdl-navigation__link"
                        href="#object-<?= $this->strip_link_spaces($key); ?>"><?= $key; ?></a>
@@ -97,7 +97,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                             <?php foreach ($transition->requests as $request): ?>
                                                 <a href="#request-panel-<?= $request->get_id(); ?>"
                                                    class="mdl-tabs__tab<?= ($i < 1) ? ' is-active' : '' ?>">
-                                                    <b>Request</b> <?= (empty($request->title) ? '' : ' ' . $request->title) ?>
+                                                    <strong>Request</strong> <?= (empty($request->title) ? '' : ' ' . $request->title) ?>
                                                 </a>
                                             <?php $i++; endforeach; ?>
                                         <?php endif; ?>
@@ -115,7 +115,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                     id="mdl-dialog-<?= $request->get_id(); ?>">
                                                 <h4 class="mdl-dialog__title">CURL Command</h4>
                                                 <div class="mdl-dialog__content">
-                                                    <b>This might be useful for debugging</b>
+                                                    <strong>This might be useful for debugging</strong>
                                                     <div class="mdl-textfield mdl-js-textfield">
                                                             <textarea class="mdl-textfield__input" rows="7"
                                                                       title="CURL Command"
@@ -250,7 +250,7 @@ if (!empty($extras)):
             data-placement="top"
             data-html="true"
             data-content="<?php foreach ($extras as $key => $value): ?><p><?= $key; ?>: <?= $value; ?></p><?php endforeach; ?>">
-        <i class="material-icons">help outline</i>
+        <span class="material-icons">help outline</span>
     </button>
 <?php endif; ?>
 <?php foreach ($this->js as $js): ?>
