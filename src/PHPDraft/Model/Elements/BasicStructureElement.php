@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -112,7 +113,7 @@ abstract class BasicStructureElement implements StructureElement
             $this->description = htmlentities($object->meta->description);
         }
         if ($this->description !== null) {
-            $encoded           = htmlentities($this->description, ENT_COMPAT, null, FALSE);
+            $encoded           = htmlentities($this->description, ENT_COMPAT, null, false);
             $this->description = MarkdownExtra::defaultTransform($encoded);
         }
 
@@ -133,7 +134,7 @@ abstract class BasicStructureElement implements StructureElement
             $this->status = join(', ', $object->attributes->typeAttributes);
         }
 
-        if (!in_array($this->type, self::DEFAULTS) && $this->type !== NULL) {
+        if (!in_array($this->type, self::DEFAULTS) && $this->type !== null) {
             $dependencies[] = $this->type;
         }
     }
@@ -162,18 +163,18 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return string
      */
-    public function string_value($flat = FALSE)
+    public function string_value($flat = false)
     {
         if (is_array($this->value)) {
             $value_key = rand(0, count($this->value));
-            if (is_subclass_of($this->value[$value_key], StructureElement::class) && $flat === FALSE) {
+            if (is_subclass_of($this->value[$value_key], StructureElement::class) && $flat === false) {
                 return $this->value[$value_key]->string_value($flat);
             }
 
             return $this->value[$value_key];
         }
 
-        if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === TRUE) {
+        if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === true) {
             return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
         }
         return $this->value;

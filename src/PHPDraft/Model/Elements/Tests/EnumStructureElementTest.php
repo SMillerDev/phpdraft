@@ -119,22 +119,22 @@ class EnumStructureElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new EnumStructureElement();
-        $base1->key         = NULL;
+        $base1->key         = null;
         $base1->value       = [ 'item' => 'string', 'another item' => 'string'];
-        $base1->status      = NULL;
+        $base1->status      = null;
         $base1->element     = 'enum';
         $base1->type        = 'Some simple enum';
         $base1->is_variable = false;
-        $base1->description = NULL;
+        $base1->description = null;
         $base1->deps        = ['Some simple enum'];
 
         $base2              = new EnumStructureElement();
         $base2->key         = 'car_id_list';
         $base2->value       = 'world';
-        $base2->status      = NULL;
+        $base2->status      = null;
         $base2->element     = 'enum';
         $base2->type        = 'string';
-        $base2->description = NULL;
+        $base2->description = null;
         $base2->is_variable = false;
         $base2->deps        = [];
 

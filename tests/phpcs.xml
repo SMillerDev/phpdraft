@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="PHPDraft Standard" namespace="PHPDraft\CS\Standard">
+    <rule ref="PSR12">
+        <exclude name="PSR12.Files.FileHeader" />
+        <exclude name="PSR12.Files.OpenTag" />
+        <exclude name="PSR1.Methods.CamelCapsMethodName" />
+        <exclude name="Generic.Files.LineLength" />
+    </rule>
+</ruleset>

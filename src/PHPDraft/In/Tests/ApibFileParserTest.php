@@ -93,10 +93,10 @@ class ApibFileParserTest extends LunrBaseTest
         $full_property->setAccessible(true);
 
         $text = "FORMAT: 1A\nHOST: https://owner-api.teslamotors.com\n";
-        $text .="EXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
+        $text .= "EXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
         $text .= "# Tesla Model S JSON API\nThis is unofficial documentation of the";
-        $text .=" Tesla Model S JSON API used by the iOS and Android apps. It features";
-        $text .=" functionality to monitor and control the Model S remotely.\n\nTEST";
+        $text .= " Tesla Model S JSON API used by the iOS and Android apps. It features";
+        $text .= " functionality to monitor and control the Model S remotely.\n\nTEST";
         $text .= "\n\n# Hello\nThis is a test.\nhello";
 
         $this->assertSame($text, $full_property->getValue($this->class));

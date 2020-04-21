@@ -57,23 +57,23 @@ class ArrayStructureElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new ArrayStructureElement();
-        $base1->key         = NULL;
+        $base1->key         = null;
         $base1->value       = [['Swift' => 'string'], ['Objective-C' => 'string']];
-        $base1->status      = NULL;
+        $base1->status      = null;
         $base1->element     = 'array';
-        $base1->type        = NULL;
+        $base1->type        = null;
         $base1->is_variable = false;
-        $base1->description = NULL;
+        $base1->description = null;
         $base1->deps        = [];
 
         $base2              = new ArrayStructureElement();
-        $base2->key         = NULL;
+        $base2->key         = null;
         $base2->value       = [['item' => 'string'], ['another item' => 'string']];
-        $base2->status      = NULL;
+        $base2->status      = null;
         $base2->element     = 'array';
         $base2->type        = 'Some simple array';
         $base2->is_variable = false;
-        $base2->description = NULL;
+        $base2->description = null;
         $base2->deps        = ['Some simple array'];
 
         $base3              = new ArrayStructureElement();
@@ -177,7 +177,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
-        $this->class->value = [['type'=>'Bike'], ['stuff'=>'car']];
+        $this->class->value = [['type' => 'Bike'], ['stuff' => 'car']];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="Bike" href="#object-bike">Bike</a> - <span class="example-value pull-right">type</span></li><li class="list-group-item mdl-list__item"><a class="code" title="car" href="#object-car">car</a> - <span class="example-value pull-right">stuff</span></li></ul>', $return);
     }

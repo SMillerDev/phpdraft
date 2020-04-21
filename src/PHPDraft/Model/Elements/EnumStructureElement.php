@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -27,8 +28,8 @@ class EnumStructureElement extends BasicStructureElement
 
         $this->parse_common($object, $dependencies);
 
-        $this->key   = $this->key ?? $object->content->content ?? NULL;
-        $this->type  = $this->type ?? $object->content->element ?? NULL;
+        $this->key   = $this->key ?? $object->content->content ?? null;
+        $this->type  = $this->type ?? $object->content->element ?? null;
 
         if (!isset($object->content) && !isset($object->attributes)) {
             $this->value = $this->key;

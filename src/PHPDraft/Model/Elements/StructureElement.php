@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -45,5 +46,5 @@ interface StructureElement
      *
      * @return string
      */
-    public function string_value($flat = FALSE);
+    public function string_value($flat = false);
 }

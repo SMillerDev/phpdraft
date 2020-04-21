@@ -54,7 +54,7 @@ jobs:
         run: phpstan analyse --level=4 --error-format=checkstyle src/ | cs2pr
 
       - name: PHPCS
-        run: phpcs --standard=PSR12 --ignore=\*/Tests/\*,\*Minifier.php --exclude=PSR1.Methods.CamelCapsMethodName,Generic.Files.LineLength src/ | cs2pr
+        run: phpcs --standard=tests/phpcs.xml --ignore=\*Minifier.php src/ | cs2pr
 
       - name: Upload coverage result
         uses: actions/upload-artifact@v1

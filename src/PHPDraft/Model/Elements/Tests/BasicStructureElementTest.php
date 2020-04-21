@@ -95,7 +95,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $answer = new ObjectStructureElement();
         $answer->key = 'key';
         $answer->type = 'cat';
-        $answer->description = NULL;
+        $answer->description = null;
 
         $method = $this->reflection->getMethod('parse_common');
         $method->setAccessible(true);

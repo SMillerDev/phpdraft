@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -42,7 +43,7 @@ class ArrayStructureElement extends BasicStructureElement
             }
 
             $key   = $sub_item->element ?? 'any';
-            $value = $sub_item->content ?? NULL;
+            $value = $sub_item->content ?? null;
             $this->value[] = [$value => $key];
         }
 

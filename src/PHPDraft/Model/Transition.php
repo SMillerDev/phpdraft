@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -45,7 +46,7 @@ class Transition extends HierarchyElement
      *
      * @var array|StructureElement|null
      */
-    public $data_variables = NULL;
+    public $data_variables = null;
 
     /**
      * The request.
@@ -181,7 +182,7 @@ class Transition extends HierarchyElement
             foreach ($this->parent->url_variables->value as $item) {
                 $urlvalue = $item->value;
                 if (is_subclass_of($item, BasicStructureElement::class)) {
-                    $urlvalue = $item->string_value(TRUE);
+                    $urlvalue = $item->string_value(true);
                 }
 
                 $vars[$item->key] = $urlvalue;

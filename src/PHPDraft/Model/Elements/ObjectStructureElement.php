@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -23,7 +24,10 @@ class ObjectStructureElement extends BasicStructureElement
      * Unset object function.
      * @internal Only for tests
      */
-    public function __clearForTest(){$this->object = NULL;}
+    public function __clearForTest()
+    {
+        $this->object = null;
+    }
 
     /**
      * Parse a JSON object to a data structure.
@@ -58,7 +62,9 @@ class ObjectStructureElement extends BasicStructureElement
             $this->value = $object->content->value->content;
         } elseif (isset($object->content->value->attributes->samples)) {
             $this->value = array_reduce($object->content->value->attributes->samples->content, function ($carry, $item) {
-                if ($carry === NULL) {return "$item->content ($item->element)"; }
+                if ($carry === null) {
+                    return "$item->content ($item->element)";
+                }
                 return "$carry | $item->content ($item->element)";
             });
         } else {
@@ -106,7 +112,7 @@ class ObjectStructureElement extends BasicStructureElement
      * Parse content formed as an array.
      *
      * @param object $object       APIB content
-     * @param array       $dependencies Object dependencies
+     * @param array  $dependencies Object dependencies
      *
      * @return void
      */
@@ -130,7 +136,7 @@ class ObjectStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        $options = array_merge(self::DEFAULTS,['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
+        $options = array_merge(self::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
         if (!empty($this->element) && !in_array($this->element, $options)) {
             $this->description = '<p>Inherits from <a href="#object-' . strtolower($this->element) . '">' . $this->element . '</a></p>' . $this->description;
         }
@@ -195,7 +201,7 @@ class ObjectStructureElement extends BasicStructureElement
      */
     protected function construct_string_return(string $value): string
     {
-        if ($this->type === NULL) {
+        if ($this->type === null) {
             return $value;
         }
 
