@@ -111,6 +111,11 @@ abstract class BasicStructureElement implements StructureElement
         } elseif (isset($object->meta->description)) {
             $this->description = htmlentities($object->meta->description);
         }
+        if ($this->description !== null) {
+            $encoded           = htmlentities($this->description, ENT_COMPAT, null, FALSE);
+            $this->description = MarkdownExtra::defaultTransform($encoded);
+        }
+
         $this->ref = null;
         if ($this->element === 'ref') {
             $this->ref = $object->content;
@@ -128,21 +133,9 @@ abstract class BasicStructureElement implements StructureElement
             $this->status = join(', ', $object->attributes->typeAttributes);
         }
 
-        $this->description_as_html();
-
         if (!in_array($this->type, self::DEFAULTS) && $this->type !== NULL) {
             $dependencies[] = $this->type;
         }
-    }
-
-    /**
-     * Parse the description to HTML.
-     *
-     * @return void
-     */
-    public function description_as_html(): void
-    {
-        $this->description = MarkdownExtra::defaultTransform($this->description);
     }
 
     /**
@@ -189,16 +182,16 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Get what element to parse with.
      *
-     * @param object $object The object to parse.
+     * @param string $element The string to parse.
      *
      * @return BasicStructureElement The element to parse to
      */
-    public static function get_class(object $object): BasicStructureElement
+    public function get_class(string $element): BasicStructureElement
     {
-        switch ($object->element) {
+        switch ($element) {
             default:
             case 'object':
-                $struct = new ObjectStructureElement();
+                $struct = $this->new_instance();
                 break;
             case 'array':
                 $struct = new ArrayStructureElement();

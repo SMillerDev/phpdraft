@@ -52,6 +52,7 @@
                 <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
                 <file>../src/PHPDraft/Out/Minifier.php</file>
                 <file>../src/PHPDraft/Parse/ResourceException.php</file>
+                <file>../src/PHPDraft/**Exception.php</file>
             </exclude>
         </whitelist>
     </filter>

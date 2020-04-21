@@ -48,20 +48,6 @@ class BasicStructureElementTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     */
-    public function testDescriptionAsHTML(): void
-    {
-        $property = $this->reflection->getProperty('description');
-        $property->setAccessible(true);
-        $property->setValue($this->class, '_Hello world_');
-
-        $this->class->description_as_html();
-
-        $this->assertSame('<p><em>Hello world</em></p>' . PHP_EOL, $property->getValue($this->class));
-    }
-
-    /**
-     * Test if the value the class is initialized with is correct
      *
      * @dataProvider stringValueProvider
      *
@@ -109,7 +95,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $answer = new ObjectStructureElement();
         $answer->key = 'key';
         $answer->type = 'cat';
-        $answer->description = PHP_EOL;
+        $answer->description = NULL;
 
         $method = $this->reflection->getMethod('parse_common');
         $method->setAccessible(true);

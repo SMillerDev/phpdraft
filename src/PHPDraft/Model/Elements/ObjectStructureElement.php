@@ -78,24 +78,14 @@ class ObjectStructureElement extends BasicStructureElement
      */
     protected function parse_value_structure(object $object, array &$dependencies)
     {
-        $type  = $this->element === 'member' ? $this->type : $this->element;
-        if (!isset($object->content->value) && !isset($object->attributes->enumerations)) {
+        if (isset($object->content->content) || in_array($this->element, ['boolean', 'string', 'number', 'ref'])) {
             return;
         }
 
         $value  = $object->content->value ?? $object;
-        switch ($type) {
-            default:
-            case 'object':
-                $struct = $this->new_instance();
-                break;
-            case 'array':
-                $struct = new ArrayStructureElement();
-                break;
-            case 'enum':
-                $struct = new EnumStructureElement();
-                break;
-        }
+        $type   = in_array($this->element, ['member']) ? $this->type : $this->element;
+        $struct = $this->get_class($type);
+
         $this->value = $struct->parse($value, $dependencies);
 
         unset($struct);
@@ -115,27 +105,16 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Parse content formed as an array.
      *
-     * @param object|null $object       APIB content
+     * @param object $object       APIB content
      * @param array       $dependencies Object dependencies
      *
      * @return void
      */
-    protected function parse_array_content(?object $object, array &$dependencies): void
+    protected function parse_array_content(object $object, array &$dependencies): void
     {
         foreach ($object->content as $value) {
-            $type  = $this->element === 'member' ? $this->type : $this->element;
-            switch ($type){
-                default:
-                case 'object':
-                    $struct = $this->new_instance();
-                    break;
-                case 'enum':
-                    $struct = new EnumStructureElement();
-                    break;
-                case 'array':
-                    $struct = new ArrayStructureElement();
-                    break;
-            }
+            $type   = $this->element === 'member' ? $this->type : $this->element;
+            $struct = $this->get_class($type);
 
             $this->value[] = $struct->parse($value, $dependencies);
             unset($struct);

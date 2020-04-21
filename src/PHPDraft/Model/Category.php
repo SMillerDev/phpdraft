@@ -55,7 +55,7 @@ class Category extends HierarchyElement
                     break;
                 case 'dataStructure':
                     $deps         = [];
-                    $struct       = BasicStructureElement::get_class($item->content);
+                    $struct       = (new ObjectStructureElement())->get_class($item->content->element);
                     $struct->deps = $deps;
                     $struct->parse($item->content, $deps);
 

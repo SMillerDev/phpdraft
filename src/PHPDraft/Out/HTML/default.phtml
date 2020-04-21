@@ -33,7 +33,9 @@ use PHPDraft\Out\Minifier;
                     <small><?= $this->base_data['HOST']; ?></small>
                 <?php endif; ?>
             </h1>
+            <?php if (key_exists('DESC', $this->base_data)):?>
             <p class="lead"><?= $this->base_data['DESC']; ?></p>
+            <?php endif;?>
         </div>
         <?php if (!empty($this->image)): ?>
             <div class="media-right">

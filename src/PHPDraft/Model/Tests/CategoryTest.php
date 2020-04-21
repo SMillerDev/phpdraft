@@ -104,7 +104,53 @@ class CategoryTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $json = '{"content":[{"element":"dataStructure", "content":{"element": "object","meta":{"id":4}, "key":{"content":"none"}, "value":{"element":"none"}}}]}';
+        $json = '{
+          "element": "category",
+          "meta": {
+            "classes": {
+              "element": "array",
+              "content": [
+                {
+                  "element": "string",
+                  "content": "dataStructures"
+                }
+              ]
+            }
+          },
+          "content": [
+            {
+              "element": "dataStructure",
+              "content": {
+                "element": "object",
+                "meta": {
+                  "id": {
+                    "element": "string",
+                    "content": "Org"
+                  },
+                  "description": {
+                    "element": "string",
+                    "content": "An organization"
+                  }
+                },
+                "content": [
+                  {
+                    "element": "member",
+                    "content": {
+                      "key": {
+                        "element": "string",
+                        "content": "name"
+                      },
+                      "value": {
+                        "element": "string",
+                        "content": "Apiary"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }';
 
         $this->class->parse(json_decode($json));
 

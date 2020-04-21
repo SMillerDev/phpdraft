@@ -125,7 +125,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base1->element     = 'enum';
         $base1->type        = 'Some simple enum';
         $base1->is_variable = false;
-        $base1->description = "\n";
+        $base1->description = NULL;
         $base1->deps        = ['Some simple enum'];
 
         $base2              = new EnumStructureElement();
@@ -134,7 +134,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base2->status      = NULL;
         $base2->element     = 'enum';
         $base2->type        = 'string';
-        $base2->description = "\n";
+        $base2->description = NULL;
         $base2->is_variable = false;
         $base2->deps        = [];
 

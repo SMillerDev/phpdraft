@@ -63,7 +63,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base1->element     = 'array';
         $base1->type        = NULL;
         $base1->is_variable = false;
-        $base1->description = "\n";
+        $base1->description = NULL;
         $base1->deps        = [];
 
         $base2              = new ArrayStructureElement();
@@ -73,7 +73,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base2->element     = 'array';
         $base2->type        = 'Some simple array';
         $base2->is_variable = false;
-        $base2->description = "\n";
+        $base2->description = NULL;
         $base2->deps        = ['Some simple array'];
 
         $base3              = new ArrayStructureElement();
