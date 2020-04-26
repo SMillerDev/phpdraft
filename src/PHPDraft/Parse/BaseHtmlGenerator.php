@@ -35,6 +35,8 @@ abstract class BaseHtmlGenerator
      * JsonToHTML constructor.
      *
      * @param object $json JSON representation of an API Blueprint
+     *
+     * @return self
      */
     public function init(object $json): self
     {

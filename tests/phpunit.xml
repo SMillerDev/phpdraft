@@ -15,6 +15,8 @@
             <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
             <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
             <file>../src/PHPDraft/Parse/Tests/HtmlGeneratorTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/BaseHtmlGeneratorTest.php</file>
+            <file>../src/PHPDraft/Parse/Tests/ParserFactoryTest.php</file>
         </testsuite>
         <testsuite name="Model">
             <file>../src/PHPDraft/Model/Tests/CategoryTest.php</file>
@@ -28,12 +30,14 @@
             <file>../src/PHPDraft/Model/Elements/Tests/ObjectStructureElementTest.php</file>
             <file>../src/PHPDraft/Model/Elements/Tests/ArrayStructureElementTest.php</file>
             <file>../src/PHPDraft/Model/Elements/Tests/RequestBodyElementTest.php</file>
+            <file>../src/PHPDraft/Model/Elements/Tests/ElementStructureElementTest.php</file>
         </testsuite>
         <testsuite name="In">
             <file>../src/PHPDraft/In/Tests/ApibFileParserTest.php</file>
         </testsuite>
         <testsuite name="Out">
             <file>../src/PHPDraft/Out/Tests/VersionTest.php</file>
+            <file>../src/PHPDraft/Out/Tests/SortingTest.php</file>
             <file>../src/PHPDraft/Out/Tests/TemplateGeneratorTest.php</file>
         </testsuite>
     </testsuites>

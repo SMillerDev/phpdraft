@@ -89,7 +89,7 @@ class TemplateGenerator extends BaseTemplateGenerator
         $this->base_data['COLOR_2'] = $template_parts[2] ?? 'light_green';
         $this->image                = $image;
         $this->http_status          = new Httpstatus();
-        $this->sorting              = Sorting::$PHPD_SORT_NONE;
+        $this->sorting              = Sorting::PHPD_SORT_NONE;
     }
 
     /**
