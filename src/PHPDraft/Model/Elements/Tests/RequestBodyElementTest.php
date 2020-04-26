@@ -11,6 +11,7 @@ namespace PHPDraft\Model\Elements\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\RequestBodyElement;
@@ -131,7 +132,9 @@ class RequestBodyElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new RequestBodyElement();
-        $base1->key         = 'name';
+        $base1->key         = new ElementStructureElement();
+        $base1->key->type   = 'string';
+        $base1->key->value  = 'name';
         $base1->value       = 'P10';
         $base1->status      = 'optional';
         $base1->element     = 'member';
@@ -140,7 +143,9 @@ class RequestBodyElementTest extends LunrBaseTest
         $base1->description = "<p>desc1</p>\n";
 
         $base2              = new RequestBodyElement();
-        $base2->key         = 'Auth2';
+        $base2->key         = new ElementStructureElement();
+        $base2->key->type   = 'string';
+        $base2->key->value  = 'Auth2';
         $base2->value       = 'something';
         $base2->status      = 'required';
         $base2->element     = 'member';
@@ -296,7 +301,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureEnumContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"element":"enum","key":{"content":"key"},"value":{"element":"enum"}}}';
+        $object = '{"element":"enum","content": {"element":"enum","key":{"element":"string","content":"key"},"value":{"element":"enum"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -309,7 +314,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureArrayContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"array","content": {"element":"array","key":{"content":"key"},"value":{"element":"array"}}}';
+        $object = '{"element":"array","content": {"element":"array","key":{"element":"string","content":"key"},"value":{"element":"array"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -322,7 +327,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"object","content": {"element":"object","key":{"content":"key"},"value":{"element":"object"}}}';
+        $object = '{"element":"object","content": {"element":"object","key":{"element":"string","content":"key"},"value":{"element":"object"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);

@@ -208,11 +208,12 @@ class ObjectStructureElement extends BasicStructureElement
         $type     = $this->get_element_as_html($this->type);
         $variable = '';
         if ($this->is_variable) {
-            $variable = '<span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" title="This is a variable key"></span>';
+            $link_name = str_replace(' ', '-', strtolower($this->key->type));
+            $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" title="This is a variable key of type &quot;' . $this->key->type . '&quot;"></span></a>';
         }
 
         return '<tr>' .
-            '<td>' . '<span>' . $this->key . '</span>' . $variable . '</td>' .
+            '<td>' . '<span>' . $this->key->value . '</span>' . $variable . '</td>' .
             '<td>' . $type . '</td>' .
             '<td> <span class="status">' . $this->status . '</span></td>' .
             '<td>' . $this->description . '</td>' .

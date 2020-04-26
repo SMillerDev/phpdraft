@@ -175,7 +175,7 @@ class Transition extends HierarchyElement
                     $urlvalue = $item->string_value();
                 }
 
-                $vars[$item->key] = $urlvalue;
+                $vars[$item->key->value] = $urlvalue;
             }
         }
         if ($this->parent->url_variables !== null) {
@@ -185,7 +185,7 @@ class Transition extends HierarchyElement
                     $urlvalue = $item->string_value(true);
                 }
 
-                $vars[$item->key] = $urlvalue;
+                $vars[$item->key->value] = $urlvalue;
             }
         }
         $url = $tpl->expand($vars);

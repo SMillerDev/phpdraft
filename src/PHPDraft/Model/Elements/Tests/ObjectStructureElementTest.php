@@ -11,6 +11,7 @@ namespace PHPDraft\Model\Elements\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use ReflectionClass;
@@ -77,7 +78,9 @@ class ObjectStructureElementTest extends LunrBaseTest
     {
         $return             = [];
         $base1              = new ObjectStructureElement();
-        $base1->key         = 'name';
+        $base1->key         = new ElementStructureElement();
+        $base1->key->type   = 'string';
+        $base1->key->value  = 'name';
         $base1->value       = 'P10';
         $base1->status      = 'optional';
         $base1->element     = 'member';
@@ -86,7 +89,9 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base1->description = "<p>desc1</p>\n";
 
         $base2              = new ObjectStructureElement();
-        $base2->key         = 'Auth2';
+        $base2->key         = new ElementStructureElement();
+        $base2->key->type   = 'string';
+        $base2->key->value  = 'Auth2';
         $base2->value       = 'something';
         $base2->status      = 'required';
         $base2->element     = 'member';
@@ -250,7 +255,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureEnumContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"enum","content": {"key":{"content":"key"},"value":{"element":"enum"}}}';
+        $object = '{"element":"enum","content": {"key":{"element": "string", "content":"key"},"value":{"element":"enum"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -280,7 +285,7 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParse(): void
     {
         $deps = [];
-        $object = '{"element":"object","content": {"key":{"content":"key"},"value":{"element":"object"}}}';
+        $object = '{"element":"object","content": {"key":{"element": "string", "content":"key"},"value":{"element":"object"}}}';
 
         $return = $this->class->parse(json_decode($object), $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
@@ -365,7 +370,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringNullValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->type = 'mixed';
         $return = $this->class->__toString();
         $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="mixed" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
@@ -378,7 +384,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringObjectValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = new ObjectStructureElement();
         $this->class->type = 'object';
         $return = $this->class->__toString();
@@ -392,7 +399,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringArrayValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = new ArrayStructureElement();
         $this->class->value->element = 'value';
         $this->class->value->value = 'value';
@@ -408,13 +416,17 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringEnumValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = new EnumStructureElement();
         $this->class->value->element = 'value';
         $this->class->value->value = 'value';
-        $this->class->type = 'enum';
+        $this->class->value->key = new ElementStructureElement();
+        $this->class->value->key->type = 'string';
+        $this->class->value->key->value = 'key';
+        $this->class->value->type = 'enum';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>enum</code></td><td> <span class="status"></span></td><td></td><td><div class="enum-struct"><tr><td></td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div></td></tr>', $return);
+        $this->assertSame('<div class="enum-struct"><tr><td>key</td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div>', $return);
     }
 
     /**
@@ -424,7 +436,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringBoolValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = true;
         $this->class->type = 'boolean';
         $return = $this->class->__toString();
@@ -438,7 +451,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringOtherValue(): void
     {
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = 'world';
         $this->class->type = 'Cow';
         $return = $this->class->__toString();
@@ -453,7 +467,8 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testToStringOtherValueTypeKnown(): void
     {
         $this->class->type = 'string';
-        $this->class->key = 'hello';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->value = 'hello';
         $this->class->value = 'world';
         $return = $this->class->__toString();
         $this->assertSame('<tr><td><span>hello</span></td><td><code>string</code></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);

@@ -15,7 +15,7 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Object key.
      *
-     * @var string|null
+     * @var ElementStructureElement|null
      */
     public $key;
     /**
@@ -101,8 +101,14 @@ abstract class BasicStructureElement implements StructureElement
      */
     protected function parse_common(object $object, array &$dependencies): void
     {
-        $this->key          = $object->content->key->content ?? null;
-        $this->type         = $object->content->value->element
+        $this->key = null;
+        if (isset($object->content->key)) {
+            $key = new ElementStructureElement();
+            $key->parse($object->content->key, $dependencies);
+            $this->key = $key;
+        }
+
+        $this->type = $object->content->value->element
             ?? $object->meta->title->content
             ?? $object->meta->id->content
             ?? null;

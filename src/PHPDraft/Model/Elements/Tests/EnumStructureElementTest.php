@@ -10,6 +10,7 @@
 namespace PHPDraft\Model\Elements\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 
 /**
@@ -54,7 +55,13 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithArray(): void
     {
-        $this->class->value = ['hello' => 'string', 'test' => 'int'];
+        $value1 = new ElementStructureElement();
+        $value1->value = 'hello';
+        $value1->type  = 'string';
+        $value2 = new ElementStructureElement();
+        $value2->value = 'test';
+        $value2->type  = 'int';
+        $this->class->value = [$value1, $value2];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="int" href="#object-int">int</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
@@ -65,7 +72,9 @@ class EnumStructureElementTest extends LunrBaseTest
     public function testToStringWithString(): void
     {
         $this->class->value = 'hello';
-        $this->class->key = 'key';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->type = 'string';
+        $this->class->key->value = 'key';
         $this->class->element = 'string';
         $return = $this->class->__toString();
         $this->assertSame('<tr><td>key</td><td><code>string</code></td><td></td></tr>', $return);
@@ -77,7 +86,9 @@ class EnumStructureElementTest extends LunrBaseTest
     public function testToStringWithStringComplex(): void
     {
         $this->class->value = 'hello';
-        $this->class->key = 'key';
+        $this->class->key = new ElementStructureElement();
+        $this->class->key->type = 'string';
+        $this->class->key->value = 'key';
         $this->class->element = 'Car';
         $return = $this->class->__toString();
         $this->assertSame('<tr><td>key</td><td><a class="code" title="Car" href="#object-car">Car</a></td><td></td></tr>', $return);
@@ -88,7 +99,13 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
-        $this->class->value = ['hello' => 'bike', 'test' => 'Car'];
+        $value1 = new ElementStructureElement();
+        $value1->value = 'hello';
+        $value1->type  = 'bike';
+        $value2 = new ElementStructureElement();
+        $value2->value = 'test';
+        $value2->type  = 'Car';
+        $this->class->value = [$value1, $value2];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="bike" href="#object-bike">bike</a> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="Car" href="#object-car">Car</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
     }
@@ -117,10 +134,17 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function parseObjectProvider(): array
     {
+        $value1 = new ElementStructureElement();
+        $value1->value = 'item';
+        $value1->type  = 'string';
+        $value2 = new ElementStructureElement();
+        $value2->value = 'another item';
+        $value2->type  = 'string';
+
         $return             = [];
         $base1              = new EnumStructureElement();
         $base1->key         = null;
-        $base1->value       = [ 'item' => 'string', 'another item' => 'string'];
+        $base1->value       = [ $value1, $value2 ];
         $base1->status      = null;
         $base1->element     = 'enum';
         $base1->type        = 'Some simple enum';
@@ -129,7 +153,9 @@ class EnumStructureElementTest extends LunrBaseTest
         $base1->deps        = ['Some simple enum'];
 
         $base2              = new EnumStructureElement();
-        $base2->key         = 'car_id_list';
+        $base2->key         = new ElementStructureElement();
+        $base2->key->type   = 'string';
+        $base2->key->value  = 'car_id_list';
         $base2->value       = 'world';
         $base2->status      = null;
         $base2->element     = 'enum';
@@ -139,7 +165,9 @@ class EnumStructureElementTest extends LunrBaseTest
         $base2->deps        = [];
 
         $base3              = new EnumStructureElement();
-        $base3->key         = '5';
+        $base3->key         = new ElementStructureElement();
+        $base3->key->type   = 'number';
+        $base3->key->value  = '5';
         $base3->value       = '5';
         $base3->status      = 'optional';
         $base3->element     = 'member';
