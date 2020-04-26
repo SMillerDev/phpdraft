@@ -72,7 +72,7 @@ class Drafter extends BaseParser
         $path = self::location();
 
         $version = shell_exec('drafter -v 2> /dev/null');
-        $version = preg_match('/^v4/', $version);
+        $version = preg_match('/^v([45])/', $version);
 
         return $path && $version === 1;
     }

@@ -38,13 +38,9 @@ class ArrayStructureElement extends BasicStructureElement
         }
 
         foreach ($object->content as $sub_item) {
-            if (!in_array($sub_item->element, self::DEFAULTS)) {
-                $dependencies[] = $sub_item->element;
-            }
-
-            $key   = $sub_item->element ?? 'any';
-            $value = $sub_item->content ?? null;
-            $this->value[] = [$value => $key];
+            $element = new ElementStructureElement();
+            $element->parse($sub_item, $dependencies);
+            $this->value[] = $element;
         }
 
         $this->deps = $dependencies;
@@ -67,11 +63,7 @@ class ArrayStructureElement extends BasicStructureElement
 
         $return = '';
         foreach ($this->value as $item) {
-            $value = key($item);
-            $type = $this->get_element_as_html($item[$value]);
-
-            $value = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
-            $return .= '<li class="list-group-item mdl-list__item">' . $type . $value . '</li>';
+            $return .= $item->__toString();
         }
 
         return '<ul class="list-group mdl-list">' . $return . '</ul>';

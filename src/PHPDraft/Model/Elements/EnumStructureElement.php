@@ -27,8 +27,10 @@ class EnumStructureElement extends BasicStructureElement
         $this->element = $object->element;
 
         $this->parse_common($object, $dependencies);
-
-        $this->key   = $this->key ?? $object->content->content ?? null;
+        if (!isset($this->key) && isset($object->content->content)) {
+            $this->key = new ElementStructureElement();
+            $this->key->parse($object->content, $dependencies);
+        }
         $this->type  = $this->type ?? $object->content->element ?? null;
 
         if (!isset($object->content) && !isset($object->attributes)) {
@@ -58,11 +60,9 @@ class EnumStructureElement extends BasicStructureElement
         }
 
         foreach ($object->attributes->enumerations->content as $sub_item) {
-            if (!in_array($sub_item->element, self::DEFAULTS)) {
-                $dependencies[] = $sub_item->element;
-            }
-
-            $this->value[$sub_item->content] = $sub_item->element ?? '';
+            $element = new ElementStructureElement();
+            $element->parse($sub_item, $dependencies);
+            $this->value[] = $element;
         }
 
         $this->deps = $dependencies;
@@ -80,15 +80,12 @@ class EnumStructureElement extends BasicStructureElement
         if (is_string($this->value)) {
             $type = $this->get_element_as_html($this->element);
 
-            return '<tr><td>' . $this->key . '</td><td>' . $type . '</td><td>' . $this->description . '</td></tr>';
+            return '<tr><td>' . $this->key->value . '</td><td>' . $type . '</td><td>' . $this->description . '</td></tr>';
         }
 
         $return = '';
-        foreach ($this->value as $value => $key) {
-            $type = $type = $this->get_element_as_html($key);
-
-            $item = empty($value) ? '' : " - <span class=\"example-value pull-right\">$value</span>";
-            $return .= '<li class="list-group-item mdl-list__item">' . $type . $item . '</li>';
+        foreach ($this->value as $item) {
+            $return .= $item->__toString();
         }
 
         return '<ul class="list-group mdl-list">' . $return . '</ul>';

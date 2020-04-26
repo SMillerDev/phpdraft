@@ -282,7 +282,7 @@ class TransitionTest extends HierarchyElementChildTest
                        ->disableOriginalConstructor()
                        ->getMock();
 
-        $parent->method = '/base';
+        $parent->href = '/base';
 
         $property = $this->reflection->getProperty('parent');
         $property->setAccessible(true);
@@ -294,7 +294,7 @@ class TransitionTest extends HierarchyElementChildTest
 
         $return = $this->class->build_url();
 
-        $this->assertSame('/url', $return);
+        $this->assertSame('/base/url', $return);
     }
 
     /**
@@ -306,7 +306,7 @@ class TransitionTest extends HierarchyElementChildTest
                        ->disableOriginalConstructor()
                        ->getMock();
 
-        $parent->method = '/url';
+        $parent->href = '/url';
 
         $this->set_reflection_property_value('parent', $this->parent);
 
@@ -328,7 +328,7 @@ class TransitionTest extends HierarchyElementChildTest
                        ->disableOriginalConstructor()
                        ->getMock();
 
-        $parent->method = '/url';
+        $parent->href = '/url';
 
         $this->set_reflection_property_value('parent', $this->parent);
 
@@ -356,7 +356,7 @@ class TransitionTest extends HierarchyElementChildTest
                        ->disableOriginalConstructor()
                        ->getMock();
 
-        $parent->method = '/url';
+        $parent->href = '/url';
 
         $this->set_reflection_property_value('parent', $this->parent);
 
@@ -364,10 +364,16 @@ class TransitionTest extends HierarchyElementChildTest
                      ->disableOriginalConstructor()
                      ->getMock();
 
+        $key1 = $this->getMockBuilder('\PHPDraft\Model\Elements\ElementStructureElement')
+                     ->disableOriginalConstructor()
+                     ->getMock();
+
+        $key1->value = 'KEY';
+
         $var1->expects($this->once())
              ->method('string_value')
              ->will($this->returnValue('STRING'));
-        $var1->key = 'KEY';
+        $var1->key = $key1;
 
         $vars = new \stdClass();
         $vars->value = [ $var1 ];

@@ -12,6 +12,7 @@ namespace PHPDraft\Model\Elements\Tests;
 use Lunr\Halo\LunrBaseTest;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\BasicStructureElement;
+use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use ReflectionClass;
 
@@ -90,10 +91,12 @@ class BasicStructureElementTest extends LunrBaseTest
     {
         $dep = [];
 
-        $json = '{"meta":{},"attributes":{},"content":{"key":{"content":"key"}, "value":{"element":"cat"}}}';
+        $json = '{"meta":{},"attributes":{},"content":{"key":{"element": "string", "content":"key"}, "value":{"element":"cat"}}}';
 
         $answer = new ObjectStructureElement();
-        $answer->key = 'key';
+        $answer->key = new ElementStructureElement();
+        $answer->key->type = 'string';
+        $answer->key->value = 'key';
         $answer->type = 'cat';
         $answer->description = null;
 
@@ -134,11 +137,13 @@ class BasicStructureElementTest extends LunrBaseTest
     {
         $return = [];
 
-        $json = '{"meta":{},"attributes":{},"content":{"key":{"content":"key"}, "value":{"element":"string"}}}';
+        $json = '{"meta":{},"attributes":{},"content":{"key":{"element": "string", "content":"key"}, "value":{"element":"string"}}}';
         $obj = json_decode($json);
 
         $answer = new ObjectStructureElement();
-        $answer->key = 'key';
+        $answer->key = new ElementStructureElement();
+        $answer->key->type = 'string';
+        $answer->key->value = 'key';
         $answer->type = 'string';
         $answer->description = PHP_EOL;
 
