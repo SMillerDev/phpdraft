@@ -112,6 +112,7 @@ class Transition extends HierarchyElement
             if (!isset($transition_item->content)) {
                 continue;
             }
+            $list = [];
             foreach ($transition_item->content as $item) {
                 $value = null;
                 if (!in_array($item->element, ['httpRequest', 'httpResponse'])) {
@@ -131,7 +132,7 @@ class Transition extends HierarchyElement
                 }
                 $value->parse($item);
 
-                if (empty($list)) {
+                if ($list === []) {
                     $list[] = $value;
                     continue;
                 }

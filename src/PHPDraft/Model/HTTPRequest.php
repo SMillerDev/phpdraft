@@ -104,7 +104,7 @@ class HTTPRequest implements Comparable
         $this->method = $object->attributes->method->content ?? $object->attributes->method;
         $this->title  = $object->meta->title->content ?? $object->meta->title ?? null;
 
-        if (!empty($object->content)) {
+        if (isset($object->content) && $object->content !== NULL) {
             foreach ($object->content as $value) {
                 if ($value->element === 'dataStructure') {
                     $this->parse_structure($value);
@@ -192,7 +192,7 @@ class HTTPRequest implements Comparable
         $type = $this->headers['Content-Type'] ?? null;
 
         $options[] = '-X' . $this->method;
-        if (empty($this->body)) {
+        if (is_null($this->body) || $this->body === []) {
             //NO-OP
         } elseif (is_string($this->body)) {
             $options[] = '--data-binary ' . escapeshellarg($this->body);
@@ -200,7 +200,7 @@ class HTTPRequest implements Comparable
             $options[] = '--data-binary ' . escapeshellarg(join('', $this->body));
         } elseif (is_subclass_of($this->struct, StructureElement::class)) {
             foreach ($this->struct->value as $body) {
-                if (empty($body)) {
+                if (is_null($body) || $body === []) {
                     continue;
                 }
                 $options[] = '--data-binary ' . escapeshellarg(strip_tags($body->print_request($type)));

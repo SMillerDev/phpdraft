@@ -40,7 +40,7 @@ class ObjectStructureElement extends BasicStructureElement
     public function parse(?object $object, array &$dependencies): StructureElement
     {
         $this->object = $object;
-        if (empty($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) )) {
+        if (is_null($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) )) {
             return $this;
         }
 
@@ -137,7 +137,7 @@ class ObjectStructureElement extends BasicStructureElement
     public function __toString(): string
     {
         $options = array_merge(self::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
-        if (!empty($this->element) && !in_array($this->element, $options)) {
+        if (!is_null($this->element) && !in_array($this->element, $options)) {
             $this->description = '<p>Inherits from <a href="#object-' . strtolower($this->element) . '">' . $this->element . '</a></p>' . $this->description;
         }
 

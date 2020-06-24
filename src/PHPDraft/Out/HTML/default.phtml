@@ -37,7 +37,7 @@ use PHPDraft\Out\Minifier;
             <p class="lead"><?= $this->base_data['DESC']; ?></p>
             <?php endif;?>
         </div>
-        <?php if (!empty($this->image)): ?>
+        <?php if (!is_null($this->image)): ?>
             <div class="media-right">
                 <a href="#">
                     <img class="media-object" src="<?= $this->image ?>" alt="Image">
@@ -67,7 +67,7 @@ use PHPDraft\Out\Minifier;
                     </nav>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <?php if (!empty($this->base_structures)): ?>
+            <?php if ($this->base_structures !== []): ?>
                 <nav id="nav-datastructures" class="navbar navbar-light structures" aria-label="Data structures">
                     <a class="navbar-brand" href="#<?= $category->get_href(); ?>">Data Structures</a>
                     <?php foreach ($this->base_structures as $key => $structure): ?>
@@ -81,12 +81,12 @@ use PHPDraft\Out\Minifier;
         </nav>
         <div class="col-md-10 main-content">
             <?php foreach ($this->categories as &$category): ?>
-                <?php if (!empty($category->title)): ?>
+                <?php if (!is_null($category->title)): ?>
                     <h2>
                         <a id="<?= $category->get_href(); ?>" data-anchor-id="<?= $category->get_href(); ?>"><?= $category->title; ?></a>
                     </h2>
                 <?php endif; ?>
-                <?php if (!empty($category->description)): ?>
+                <?php if (!is_null($category->description)): ?>
                     <p><?= $category->description; ?></p>
                 <?php endif; ?>
                 <?php foreach ($category->children as $resource): ?>
@@ -98,7 +98,7 @@ use PHPDraft\Out\Minifier;
                         </a>
                         <small><?= $resource->href; ?></small>
                     </h3>
-                    <?php if (!empty($resource->description)): ?>
+                    <?php if (!is_null($resource->description)): ?>
                         <p><?= $resource->description; ?></p>
                     <?php endif; ?>
                     <?php if ($resource->url_variables !== null): ?>
@@ -123,14 +123,14 @@ use PHPDraft\Out\Minifier;
                             </div>
                             <div class="card-body">
                                 <p class="lead"><?= $transition->description; ?></p>
-                                <?php if (!empty($transition->requests)): ?>
+                                <?php if ($transition->requests !== []): ?>
                                     <?php foreach ($transition->requests as $key => $request): ?>
                                         <div class="card">
                                             <div class="card-header">
                                                 <h6 class="request card-title"
                                                     data-toggle="collapse"
                                                     data-target="#request-coll-<?= $request->get_id(); ?>">Request
-                                                    <?php if (!empty($request->title)): ?>
+                                                    <?php if (!is_null($request->title)): ?>
                                                         <var><?= $request->title;?></var>
                                                     <?php endif;?>
                                                     <span class="fas indicator fa-angle-down float-right"></span>
@@ -168,7 +168,7 @@ use PHPDraft\Out\Minifier;
                                                         <?php endforeach; ?>
                                                     </ul>
                                                 <?php endif; ?>
-                                                <?php if (!empty($request->body)): ?>
+                                                <?php if ($request->body !== []): ?>
                                                     <h5>Body</h5>
                                                     <?php foreach ($request->body as $value): ?>
                                                         <?php if (is_string($value)): ?>
@@ -181,7 +181,7 @@ use PHPDraft\Out\Minifier;
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
-                                                <?php if (!empty($request->struct)): ?>
+                                                <?php if ($request->struct !== []): ?>
                                                     <h5>Structure</h5>
                                                     <div class="row">
                                                         <?= $request->struct ?>
@@ -294,7 +294,7 @@ use PHPDraft\Out\Minifier;
 <?php $extras = array_filter($this->base_data, function ($value) {
     return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
 }, ARRAY_FILTER_USE_KEY);
-if (!empty($extras)):
+if ($extras !== []):
     $extras['host'] = $this->base_data['HOST']; ?>
     <button
         type="button"
