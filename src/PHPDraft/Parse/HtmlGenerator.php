@@ -36,11 +36,11 @@ class HtmlGenerator extends BaseHtmlGenerator
     {
         $gen = new TemplateGenerator($template, $image);
 
-        if (!empty($css)) {
+        if (!is_null($css)) {
             $gen->css[] = explode(',', $css);
         }
 
-        if (!empty($js)) {
+        if (!is_null($js)) {
             $gen->js[] = explode(',', $js);
         }
 

@@ -53,7 +53,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <?php if (!empty($this->base_structures)): ?>
+            <?php if ($this->base_structures !== []): ?>
                 <a class="mdl-navigation__link" href="#"><strong>Objects</strong></a>
                 <?php foreach ($this->base_structures as $key => $structure): ?>
                     <a class="mdl-navigation__link"
@@ -65,10 +65,10 @@ use Enjoy\HttpStatusCode\Statuscodes;
     <main class="mdl-layout__content main-content">
         <div class="page-content">
             <?php foreach ($this->categories as $category): ?>
-                <?php if (!empty($category->title)): ?>
+                <?php if (!is_null($category->title)): ?>
                     <h3><a id="<?= $category->get_href(); ?>"><?= $category->title; ?></a></h3>
                 <?php endif; ?>
-                <?php if (!empty($category->description)): ?>
+                <?php if (!is_null($category->description)): ?>
                     <p><?= $category->description; ?></p>
                 <?php endif; ?>
                 <?php foreach ($category->children as $resource): ?>
@@ -76,7 +76,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                         <a id="<?= str_replace('-', '/', $resource->get_href()); ?>"><?= $resource->title; ?></a>
                         <small><?= $resource->href; ?></small>
                     </h4>
-                    <?php if (!empty($resource->description)): ?>
+                    <?php if (!is_null($resource->description)): ?>
                         <p><?= $resource->description; ?></p>
                     <?php endif; ?>
                     <?php foreach ($resource->children as $transition): ?>
@@ -90,18 +90,18 @@ use Enjoy\HttpStatusCode\Statuscodes;
                             </div>
                             <div class="mdl-card__supporting-text">
                                 <?= $transition->description; ?>
-                                <?php if (!empty($transition->requests) || !empty($transition->responses)): $i = 0;?>
+                                <?php if (!is_null($transition->requests) || !is_null($transition->responses)): $i = 0;?>
                                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                                     <div class="mdl-tabs__tab-bar">
-                                        <?php if (!empty($transition->requests)): ?>
+                                        <?php if ($transition->requests !== []): ?>
                                             <?php foreach ($transition->requests as $request): ?>
                                                 <a href="#request-panel-<?= $request->get_id(); ?>"
                                                    class="mdl-tabs__tab<?= ($i < 1) ? ' is-active' : '' ?>">
-                                                    <strong>Request</strong> <?= (empty($request->title) ? '' : ' ' . $request->title) ?>
+                                                    <strong>Request</strong> <?= is_null($request->title ? '' : ' ' . $request->title) ?>
                                                 </a>
                                             <?php $i++; endforeach; ?>
                                         <?php endif; ?>
-                                        <?php if (!empty($transition->responses)): ?>
+                                        <?php if ($transition->responses !== []): ?>
                                             <?php foreach ($transition->responses as $response): ?>
                                                 <a href="#response-panel-<?= $response->get_id(); ?>"
                                                    class="mdl-tabs__tab<?= ($i < 1) ? ' is-active' : '' ?> <?= $this->get_response_status($response->statuscode) ?>"
@@ -109,7 +109,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                             <?php $i++; endforeach; ?>
                                         <?php endif; ?>
                                     </div>
-                                    <?php $i = 0; if (!empty($transition->requests)): ?>
+                                    <?php $i = 0; if (!$transition->requests !== []): ?>
                                         <?php foreach ($transition->requests as $key => $request): ?>
                                             <dialog class="mdl-dialog"
                                                     id="mdl-dialog-<?= $request->get_id(); ?>">
@@ -148,7 +148,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <?php endforeach; ?>
                                                     </ul>
                                                 <?php endif; ?>
-                                                <?php if (!empty($request->body)): ?>
+                                                <?php if ($request->body !== []): ?>
                                                     <h5>Body</h5>
                                                     <?php foreach ($request->body as $value): ?>
                                                         <?php if (is_string($value)): ?>
@@ -161,7 +161,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
-                                                <?php if (!empty($request->struct)): ?>
+                                                <?php if ($request->struct !== []): ?>
                                                     <h5>Structure</h5>
                                                     <?= $request->struct ?>
                                                 <?php endif; ?>
@@ -176,7 +176,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                             </div>
                                         <?php $i++; endforeach; ?>
                                     <?php endif; ?>
-                                    <?php if (!empty($transition->responses)): ?>
+                                    <?php if ($transition->responses !== []): ?>
                                         <?php foreach ($transition->responses as $key => $response): ?>
                                             <div class="mdl-tabs__panel <?= ($i < 1) ? 'is-active' : '' ?>"
                                                  id="response-panel-<?= $response->get_id(); ?>">
@@ -201,9 +201,9 @@ use Enjoy\HttpStatusCode\Statuscodes;
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                                 <div class="mdl-grid">
-                                                    <?php foreach ($response->content as $key => $value): ?>
+                                                    <?php foreach ($response->content as $response_key => $value): ?>
                                                         <div class="mdl-cell mdl-cell--<?= 12 / count($response->content) ?>-col">
-                                                            <h5 class="response-body"><?= $key; ?></h5>
+                                                            <h5 class="response-body"><?= $response_key; ?></h5>
                                                             <pre class="response-body"
                                                                  id="request-<?= $response->get_id(); ?>"><?= $value; ?></pre>
                                                         </div>
@@ -240,7 +240,7 @@ use Enjoy\HttpStatusCode\Statuscodes;
 <?php $extras = array_filter($this->base_data, function ($value) {
     return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
 }, ARRAY_FILTER_USE_KEY);
-if (!empty($extras)):
+if ($extras !== []):
     $extras['host'] = $this->base_data['HOST']; ?>
     <button
             type="button"

@@ -15,6 +15,12 @@
             </fileset>
         </delete>
 
+        <mkdir dir="${project.basedir}/build/coverage"/>
+        <mkdir dir="${project.basedir}/build/logs"/>
+        <mkdir dir="${project.basedir}/build/phar"/>
+        <mkdir dir="${project.basedir}/build/out"/>
+        <mkdir dir="${project.basedir}/build/tmp"/>
+
         <property name="clean.done" value="true"/>
     </target>
 
