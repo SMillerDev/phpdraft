@@ -19,7 +19,7 @@ use PHPDraft\Parse\ParserFactory;
 use PHPDraft\Parse\ResourceException;
 
 define('VERSION', '0');
-#define('ID_STATIC', 'SOME_ID');
+//define('ID_STATIC', 'SOME_ID');
 try
 {
     // Define the cli options.

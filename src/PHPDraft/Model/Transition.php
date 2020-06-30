@@ -37,14 +37,14 @@ class Transition extends HierarchyElement
     /**
      * URL variables.
      *
-     * @var ObjectStructureElement|null
+     * @var StructureElement[]
      */
-    public $url_variables = null;
+    public $url_variables = [];
 
     /**
      * Data variables.
      *
-     * @var array|StructureElement|null
+     * @var StructureElement|null
      */
     public $data_variables = null;
 
@@ -65,7 +65,7 @@ class Transition extends HierarchyElement
     /**
      * Structures used (if any).
      *
-     * @var ObjectStructureElement[]
+     * @var StructureElement[]
      */
     public $structures = [];
 
@@ -74,7 +74,7 @@ class Transition extends HierarchyElement
      *
      * @param \PHPDraft\Model\Resource $parent A reference to the parent object
      */
-    public function __construct(Resource &$parent)
+    public function __construct(\PHPDraft\Model\Resource &$parent)
     {
         $this->parent = $parent;
     }
@@ -95,13 +95,15 @@ class Transition extends HierarchyElement
 
         if (isset($object->attributes->hrefVariables)) {
             $deps                = [];
-            $struct              = new ObjectStructureElement();
-            $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
+            foreach ($object->attributes->hrefVariables->content as $variable) {
+                $struct                = (new ObjectStructureElement())->get_class($variable->element);
+                $this->url_variables[] = $struct->parse($variable, $deps);
+            }
         }
 
         if (isset($object->attributes->data)) {
             $deps                 = [];
-            $struct               = new ObjectStructureElement();
+            $struct               = (new ObjectStructureElement())->get_class($object->element);
             $this->data_variables = $struct->parse($object->attributes->data->content, $deps);
         }
 
@@ -169,23 +171,23 @@ class Transition extends HierarchyElement
         }
         $tpl  = new UriTemplate($url);
         $vars = [];
-        if ($this->url_variables !== null) {
-            foreach ($this->url_variables->value as $item) {
-                $urlvalue = $item->value;
-                if (is_subclass_of($item, BasicStructureElement::class)) {
-                    $urlvalue = $item->string_value();
+        if ($this->url_variables !== []) {
+            foreach ($this->url_variables as $item) {
+                if (!is_subclass_of($item, BasicStructureElement::class)) {
+                    continue;
                 }
 
+                $urlvalue = $item->string_value();
                 $vars[$item->key->value] = $urlvalue;
             }
         }
-        if ($this->parent->url_variables !== null) {
-            foreach ($this->parent->url_variables->value as $item) {
-                $urlvalue = $item->value;
-                if (is_subclass_of($item, BasicStructureElement::class)) {
-                    $urlvalue = $item->string_value(true);
+        if ($this->parent->url_variables !== []) {
+            foreach ($this->parent->url_variables as $item) {
+                if (!is_subclass_of($item, BasicStructureElement::class)) {
+                    continue;
                 }
 
+                $urlvalue = $item->string_value();
                 $vars[$item->key->value] = $urlvalue;
             }
         }
