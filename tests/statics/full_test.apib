@@ -21,7 +21,8 @@ rich text and annotations which comprise all of the content a users sees in
 their feed. Posts are closely tied to the follow graph...
 
 + Parameters
-    + post_id: `1` (string) - The id of the Post.
+    + post_id: `1` (string, optional) - The id of the Post.
+        + Default: 2
 
 + Model (application/json)
 
@@ -85,7 +86,8 @@ Returns a specific Post.
 Updates a specific Post.
 
 + Parameters
-    + post_id: `2` (string) - The id of the Post.
+    + post_id: `2` (string, optional) - The id of the Post.
+        + Default: 1
 
 + Attributes
     + Key: `key` (string) - Key for the object
@@ -158,9 +160,8 @@ your followers’ streams.
 
 + Parameters
     + things: `1` (string) - Info on things
-    + post_id: `1` (string, optional) - The id of the Post.
+    + post_id: `1` (string) - The id of the Post.
         Some additional info
-        + Default: `0`
     + stuff: `hello` (enum[string], optional) - Some stuff info
         Some additional info
         + Default: `world`
@@ -408,10 +409,14 @@ Key for attributes
 
 ## Stuff
 + enum_thing (Some simple enum, required, nullable) - Things
++ example_enum_thing: `item` (Some simple enum, required, nullable) - Things
++ default_enum_thing: `item` (Some simple enum, optional, nullable) - Things
+    + Default: default item
 
 ## Some simple enum (enum)
 + item
 + another item
++ default item
 
 ## Some other enum (enum)
 With a description

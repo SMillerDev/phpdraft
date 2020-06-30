@@ -1,5 +1,8 @@
 $(function () {
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover({
+        html: true,
+        sanitize: false,
+    });
     $('[data-toggle="tooltip"]').tooltip();
     $('body').on('click', function (e) {
         $('[data-toggle="popover"]').each(function () {

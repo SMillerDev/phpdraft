@@ -123,7 +123,7 @@ class TemplateGenerator extends BaseTemplateGenerator
                 $cat = new Category();
                 $cat = $cat->parse($value);
 
-                if ($value->meta->classes->content[0]->content === 'dataStructures') {
+                if (isset($value->meta->classes->content[0]->content) && $value->meta->classes->content[0]->content === 'dataStructures') {
                     $this->base_structures = array_merge($this->base_structures, $cat->structures);
                 } else {
                     $this->categories[] = $cat;

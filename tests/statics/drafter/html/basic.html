@@ -4,7 +4,7 @@
     <title>Tesla Model S JSON API</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
         <style>var.url-param{font-weight:bold}var.url-value{color:#c90c00;padding:2px}div.main-url{text-align:justify;line-break:loose;word-break:break-all}button.extra-info.btn{position:fixed;bottom:10px;right:10px;border-radius:30px;z-index:999}span.variable-info{margin-left:10px;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:25px;font-size:.7em}button.extra-info.btn:focus{border-width:0;box-shadow:none;outline:0}.request-card>code,.popover-content{word-break:break-all}body .media h1.media-heading{margin-top:20px;margin-bottom:10px}body .media h1.media-heading .form-control{display:flex;width:auto;float:right}div.card{margin:10px auto}.card-title var,h4.response var{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block;background:rgba(0,0,0,.1)}h4.response.warning var{background:rgba(255,103,8,.2)}h4.response.error var{background:rgba(201,12,0,.1)}.card-title code{color:#000;background-color:rgba(255,255,255,.7);padding:1px 4px;margin-top:2px;border:1px solid transparent;border-radius:3px}.card-title a.transition-title{padding:6px 0}body .col-md-10 h2:first-child,body .col-md-10 h3:first-child{margin-top:0}@media (min-width:768px){.method-nav{max-height:100vh;overflow-x:visible;overflow-y:scroll;top:0;box-shadow:0 -5px 5px -5px rgba(0,0,0,.2) inset,0 0 1px rgba(102,102,102,.4)}}.method-nav{padding:0 10px}.method-nav nav{width:100%}.method-nav nav.category,.method-nav nav.structures,.method-nav nav.structures a.nav-link,.method-nav nav.resource a.nav-link{padding-left:0}.method-nav nav.resource .transition a.nav-link{padding-left:.5rem}.method-nav a.nav-link{line-height:26px}.method-nav a.nav-link i{color:#fff;padding:0 5px;box-sizing:padding-box;border-radius:15px;line-height:22px}.main-content{position:relative}.example-value{color:rgba(0,0,0,.4);text-align:right}a.code{padding:2px 4px;font-size:90%;background-color:#f9f2f4;border-radius:4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}.popover{width:auto;max-width:50%}.popover-content{width:auto;max-width:100%;line-break:normal;white-space:pre-wrap}.card-body{position:relative}.curl.btn,.hurl.btn{z-index:999;position:absolute;top:15px}.curl.btn{right:15px;border-top-left-radius:0;border-bottom-left-radius:0}.hurl.btn{right:54px;border-top-right-radius:0;border-bottom-right-radius:0}a.variable-key{color:inherit}body{--put-color:rgb(248,148,6);--post-color:rgb(98,196,98);--get-color:rgb(91,192,222);--delete-color:rgb(238,95,91);--head-color:rgb(222,121,91);--patch-color:rgb(196,98,196)}.PUT:not(.structure)>.card-header{background:var(--put-color)}span.PUT{color:var(--put-color)}.POST:not(.structure)>.card-header{background:var(--post-color)}span.POST{color:var(--post-color)}.GET:not(.structure)>.card-header{background:var(--get-color)}span.GET{color:var(--get-color)}.DELETE:not(.structure)>.card-header{background:var(--delete-color)}span.DELETE{color:var(--delete-color)}.HEAD:not(.structure)>.card-header{background:var(--head-color)}span.HEAD{color:var(--head-color)}.PATCH:not(.structure)>.card-header{background:var(--patch-color)}span.PATCH{color:var(--patch-color)}</style>
 </head>
@@ -243,7 +243,15 @@
                             Tokens                        </a>
                         <small>/oauth/token</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -287,9 +295,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST 'https://owner-api.teslamotors.com/oauth/token'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/oauth/token</em>
-                                                                                                                                                                                                
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/oauth/token</em>
+                                                                                                                                                
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
@@ -356,7 +364,15 @@
                             Vehicle Collection                        </a>
                         <small>/api/1/vehicles</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card GET">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -394,9 +410,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -470,8 +486,13 @@
 </p>
                                                                 <h5>URI Parameters</h5>
                         <div class="row">
-                            <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                        </div>
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                    <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                </tbody>
+                            </table>
+                        </div>
                                                                 <div
                             class="card GET">
                             <div class="card-header">
@@ -510,9 +531,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/mobile_enabled'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/mobile_enabled</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/mobile_enabled</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -523,8 +544,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -606,9 +632,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/charge_state'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/charge_state</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/charge_state</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -619,8 +645,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -721,9 +752,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/climate_state'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/climate_state</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/climate_state</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -734,8 +765,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -826,9 +862,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/drive_state'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/drive_state</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/drive_state</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -839,8 +875,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -929,9 +970,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/gui_settings'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/gui_settings</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/gui_settings</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -942,8 +983,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1031,9 +1077,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XGET -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/data_request/vehicle_state'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/vehicle_state</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/data_request/vehicle_state</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1044,8 +1090,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1118,7 +1169,15 @@
                             Wake Up Car                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/wake_up</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1156,9 +1215,9 @@
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/wake_up'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/wake_up</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/wake_up</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1169,8 +1228,13 @@
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1224,7 +1288,15 @@
                             Set Valet Mode                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_valet_mode</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1265,9 +1337,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_valet_mode'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_valet_mode</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_valet_mode</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1278,8 +1350,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
@@ -1338,7 +1415,15 @@ locations in navigation.
                             Reset Valet PIN                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/reset_valet_pin</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1376,9 +1461,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/reset_valet_pin'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/reset_valet_pin</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/reset_valet_pin</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1389,8 +1474,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1444,7 +1534,15 @@ locations in navigation.
                             Open Charge Port                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_port_door_open</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1482,9 +1580,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_port_door_open'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_port_door_open</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_port_door_open</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1495,8 +1593,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1550,7 +1653,15 @@ locations in navigation.
                             Set Charge Limit to Standard                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_standard</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1588,9 +1699,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_standard'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_standard</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_standard</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1601,8 +1712,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1656,7 +1772,15 @@ locations in navigation.
                             Set Charge Limit to Max Range                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_max_range</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1694,9 +1818,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_max_range'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_max_range</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_max_range</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1707,8 +1831,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1762,7 +1891,15 @@ locations in navigation.
                             Set Charge Limit                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_charge_limit?percent={limit_value}</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1800,9 +1937,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_charge_limit?percent=75'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_charge_limit?percent=75</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_charge_limit?percent=75</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1813,9 +1950,14 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>limit_value</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The percentage value</p>
-</td><td><span class="example-value pull-right">75</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                                <tr><td><span>limit_value</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The percentage value</p>
+</td><td><span class="example-value pull-right">75</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1869,7 +2011,15 @@ locations in navigation.
                             Start Charging                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_start</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -1907,9 +2057,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_start'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_start</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_start</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -1920,8 +2070,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -1975,7 +2130,15 @@ locations in navigation.
                             Stop Charging                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/charge_stop</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2013,9 +2176,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/charge_stop'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_stop</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/charge_stop</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2026,8 +2189,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2081,7 +2249,15 @@ locations in navigation.
                             Flash Lights                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/flash_lights</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2119,9 +2295,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/flash_lights'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/flash_lights</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/flash_lights</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2132,8 +2308,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2187,7 +2368,15 @@ locations in navigation.
                             Honk Horn                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/honk_horn</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2225,9 +2414,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/honk_horn'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/honk_horn</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/honk_horn</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2238,8 +2427,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2293,7 +2487,15 @@ locations in navigation.
                             Unlock Doors                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/door_unlock</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2331,9 +2533,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_unlock'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/door_unlock</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/door_unlock</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2344,8 +2546,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2399,7 +2606,15 @@ locations in navigation.
                             Lock Doors                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/door_lock</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2437,9 +2652,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/door_lock'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/door_lock</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/door_lock</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2450,8 +2665,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2505,7 +2725,15 @@ locations in navigation.
                             Set Temperature                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/set_temps?driver_temp={driver_degC}&passenger_temp={pass_degC}</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2543,9 +2771,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/set_temps?driver_temp=23.7&amp;passenger_temp=18.1'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_temps?driver_temp=23.7&passenger_temp=18.1</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/set_temps?driver_temp=23.7&passenger_temp=18.1</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2556,10 +2784,15 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>driver_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
-</td><td><span class="example-value pull-right">23.7</span></td></tr><tr><td><span>pass_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
-</td><td><span class="example-value pull-right">18.1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                                <tr><td><span>driver_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the driver's side in &deg;C.</p>
+</td><td><span class="example-value pull-right">23.7</span></td></tr>                                                                                                                                <tr><td><span>pass_degC</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The desired temperature on the passenger's side in &deg;C.</p>
+</td><td><span class="example-value pull-right">18.1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2613,7 +2846,15 @@ locations in navigation.
                             Start HVAC System                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/auto_conditioning_start</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2651,9 +2892,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_start'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/auto_conditioning_start</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/auto_conditioning_start</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2664,8 +2905,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2719,7 +2965,15 @@ locations in navigation.
                             Stop HVAC System                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2757,9 +3011,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/auto_conditioning_stop'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/auto_conditioning_stop</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/auto_conditioning_stop</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2770,8 +3024,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2825,7 +3084,15 @@ locations in navigation.
                             Move Pano Roof                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/sun_roof_control?state={state}&percent={percent}</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2863,9 +3130,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Ctr%3E%3Ctd%3Eopen%3C%2Ftd%3E%3Ctd%3E%3Ccode%3Eenum%3C%2Fcode%3E%3C%2Ftd%3E%3Ctd%3E%3C%2Ftd%3E%3C%2Ftr%3E&amp;percent=50'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/sun_roof_control?state=%3Ctr%3E%3Ctd%3Eopen%3C%2Ftd%3E%3Ctd%3E%3Ccode%3Eenum%3C%2Fcode%3E%3C%2Ftd%3E%3Ctd%3E%3C%2Ftd%3E%3C%2Ftr%3E&percent=50</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/sun_roof_control?state=%3Ctr%3E%3Ctd%3Eopen%3C%2Ftd%3E%3Ctd%3E%3Ccode%3Eenum%3C%2Fcode%3E%3C%2Ftd%3E%3Ctd%3E%3C%2Ftd%3E%3C%2Ftr%3E&percent=50</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2876,10 +3143,15 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status">required</span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
-</td><td><div class="enum-struct"><tr><td>open</td><td><code>enum</code></td><td></td></tr></div></td></tr><tr><td><span>percent</span></td><td><code>string</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
-</td><td><span class="example-value pull-right">50</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                                <tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status">required</span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
+</td><td><div class="enum-struct"><tr><td>open</td><td><code>enum</code></td><td></td></tr></div></td></tr>                                                                                                                                <tr><td><span>percent</span></td><td><code>string</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
+</td><td><span class="example-value pull-right">50</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -2933,7 +3205,15 @@ locations in navigation.
                             Remote Start                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/remote_start_drive?password={password}</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -2971,9 +3251,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/remote_start_drive?password=edisonsux'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/remote_start_drive?password=edisonsux</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/remote_start_drive?password=edisonsux</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -2984,9 +3264,14 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The password to the authenticated my.teslamotors.com account.</p>
-</td><td><span class="example-value pull-right">edisonsux</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                                <tr><td><span>password</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The password to the authenticated my.teslamotors.com account.</p>
+</td><td><span class="example-value pull-right">edisonsux</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                             </div>
                                         </div>
@@ -3040,7 +3325,15 @@ locations in navigation.
                             Open Trunk/Frunk                        </a>
                         <small>/api/1/vehicles/{vehicle_id}/command/trunk_open</small>
                     </h3>
-                                                                                    <div
+                                                                <h5>URI Parameters</h5>
+                        <div class="row">
+                            <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                <tbody>
+                                                                </tbody>
+                            </table>
+                        </div>
+                                                                <div
                             class="card POST">
                             <div class="card-header">
                                 <h5 class="card-title">
@@ -3078,9 +3371,9 @@ locations in navigation.
                                                    data-content="<textarea rows='8' cols='75'>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/trunk_open'</textarea>">
                                                     <span class="fas fa-copy"></span>
                                                 </a>
-                                                                                                    <h5>Example URI</h5>
-                                                    <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/trunk_open</em>
-                                                                                                                                                    <h5>Headers</h5>
+                                                <h5>Example URI</h5>
+                                                <span class="base-url">https://owner-api.teslamotors.com</span><em>/api/1/vehicles/1/command/trunk_open</em>
+                                                                                                    <h5>Headers</h5>
                                                     <ul class="headers list-unstyled">
                                                                                                                     <li>
                                                                 <code><span class="attr">Authorization</span>: <span
@@ -3091,8 +3384,13 @@ locations in navigation.
                                                                                                                                                 
                                                                                                     <h5>URI Parameters</h5>
                                                     <div class="row">
-                                                        <table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
-</td><td><span class="example-value pull-right">1</span></td></tr></table>                                                    </div>
+                                                        <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                                            <thead><tr><td>key</td><td>type</td><td>status</td><td>description</td><td>value</td></tr></thead>
+                                                            <tbody>
+                                                                                                                                <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
+</td><td><span class="example-value pull-right">1</span></td></tr>                                                                                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 
                                                                                                     <h5>Request object</h5>
                                                     <div class="row">
@@ -3156,10 +3454,11 @@ locations in navigation.
         data-content="<p>EXTRA_HOSTS: https://test.owner-api.teslamotors.com</p><p>SOMETHING: INFO</p><p>host: https://owner-api.teslamotors.com</p>">
         <span class="fas fa-question-circle"></span>
     </button>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha256-E4RlfxwyJVmkkk0szw7LYJxuPlp6evtPSBDlWHsYYL8=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script>$(function(){$('[data-toggle="popover"]').popover();$('[data-toggle="tooltip"]').tooltip();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")};$('table:not(.table)').each(function(){$(this).addClass('table')})});$('.collapse.request-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});$('.collapse.response-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script>$(function(){$('[data-toggle="popover"]').popover({html:!0,sanitize:!1});$('[data-toggle="tooltip"]').tooltip();$('body').on('click',function(e){$('[data-toggle="popover"]').each(function(){if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.popover').has(e.target).length===0){$(this).popover('hide')}})});var selectedhost=$('h1.media-heading select.form-control').val();$('h1.media-heading select.form-control').on('change',function(){var html=$('body>div>div.row').html();var re=new RegExp(escapeRegExp(selectedhost),'g');html=html.replace(re,$('h1.media-heading select.form-control').val());selectedhost=$('h1.media-heading select.form-control').val();$('body>div>div.row').html(html);$('[data-toggle="popover"]').popover()});function escapeRegExp(str){return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")};$('table:not(.table)').each(function(){$(this).addClass('table')})});$('.collapse.request-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.request .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});$('.collapse.response-card').on('shown.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-up').addClass("fa-angle-down")}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response .fas.indicator').removeClass('fa-angle-down').addClass("fa-angle-up")});$('pre.collapse.response-body').on('shown.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-up').addClass('fa-angle-down')}).on('hidden.bs.collapse',function(){$(this).parent().find('h6.response-body .fas.indicator').removeClass('fa-angle-down').addClass('fa-angle-up')});anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
 </body>
 </html>

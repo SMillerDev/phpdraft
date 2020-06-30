@@ -71,7 +71,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $json = '{"attributes":{"href":"something", "hrefVariables":{"hello":"world"}}, "content":[]}';
+        $json = '{"attributes":{"href":"something", "hrefVariables":{"content": [{"element": "member", "hello":"world"}]}}, "content":[]}';
         $obj = json_decode($json);
         $this->class->parse($obj);
 
@@ -86,7 +86,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -101,7 +101,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":""}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":""}';
 
         $this->class->parse(json_decode($obj));
 
@@ -116,7 +116,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":{}}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":{}}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -131,7 +131,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"test"}]}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"test"}]}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -146,7 +146,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}, "content":{}}]}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}, "content":{}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -161,7 +161,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpResponse", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpResponse", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -176,7 +176,7 @@ class TransitionTest extends HierarchyElementChildTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"Cow", "content":[], "attributes":{"statusCode":"1000", "headers":{"content":[]}}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -202,7 +202,7 @@ class TransitionTest extends HierarchyElementChildTest
         $req_property->setAccessible(true);
         $req_property->setValue($this->class, $requests);
 
-        $obj = '{"attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
+        $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -375,12 +375,9 @@ class TransitionTest extends HierarchyElementChildTest
              ->will($this->returnValue('STRING'));
         $var1->key = $key1;
 
-        $vars = new \stdClass();
-        $vars->value = [ $var1 ];
-
         $property = $this->reflection->getProperty('url_variables');
         $property->setAccessible(true);
-        $property->setValue($this->class, $vars);
+        $property->setValue($this->class, [$var1]);
 
         $req_property = $this->reflection->getProperty('href');
         $req_property->setAccessible(true);

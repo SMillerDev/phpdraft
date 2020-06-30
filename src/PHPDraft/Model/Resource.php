@@ -27,9 +27,9 @@ class Resource extends HierarchyElement
     /**
      * URL variables.
      *
-     * @var ObjectStructureElement|null
+     * @var ObjectStructureElement[]
      */
-    public $url_variables = null;
+    public $url_variables = [];
 
     /**
      * Resource constructor.
@@ -58,8 +58,10 @@ class Resource extends HierarchyElement
 
         if (isset($object->attributes->hrefVariables)) {
             $deps                = [];
-            $struct              = new ObjectStructureElement();
-            $this->url_variables = $struct->parse($object->attributes->hrefVariables, $deps);
+            foreach ($object->attributes->hrefVariables->content as $variable) {
+                $struct                = new ObjectStructureElement();
+                $this->url_variables[] = $struct->parse($variable, $deps);
+            }
         }
 
         foreach ($object->content as $item) {
