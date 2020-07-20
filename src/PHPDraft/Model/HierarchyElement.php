@@ -85,8 +85,8 @@ abstract class HierarchyElement
      */
     public function get_href(): string
     {
-        $seperator = '-';
-        $prep      = ($this->parent !== null) ? $this->parent->get_href() . $seperator : '';
+        $separator = '-';
+        $prep      = ($this->parent !== null) ? $this->parent->get_href() . $separator : '';
 
         return $prep . str_replace(' ', '-', strtolower($this->title));
     }

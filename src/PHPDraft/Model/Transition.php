@@ -177,8 +177,7 @@ class Transition extends HierarchyElement
                     continue;
                 }
 
-                $urlvalue = $item->string_value();
-                $vars[$item->key->value] = $urlvalue;
+                $vars[$item->key->value] = $item->string_value(true);
             }
         }
         if ($this->parent->url_variables !== []) {
@@ -187,8 +186,7 @@ class Transition extends HierarchyElement
                     continue;
                 }
 
-                $urlvalue = $item->string_value();
-                $vars[$item->key->value] = $urlvalue;
+                $vars[$item->key->value] = $item->string_value(true);
             }
         }
         $url = $tpl->expand($vars);

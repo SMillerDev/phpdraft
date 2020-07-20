@@ -2381,7 +2381,7 @@ locations in navigation.
                                                             <textarea class="mdl-textfield__input" rows="7"
                                                                       title="CURL Command"
                                                                       autofocus
-                                                                      readonly>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=%3Ctr%3E%3Ctd%3Eopen%3C%2Ftd%3E%3Ctd%3E%3Ccode%3Eenum%3C%2Fcode%3E%3C%2Ftd%3E%3Ctd%3E%3C%2Ftd%3E%3C%2Ftr%3E&amp;percent=50'</textarea>
+                                                                      readonly>curl -XPOST -H 'Authorization: Bearer {access_token}' 'https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=open&amp;percent=50'</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="mdl-dialog__actions">
@@ -2392,7 +2392,7 @@ locations in navigation.
                                                  id="request-panel-SOME_ID">
                                                                                                 <h5>Example URI</h5>
                                                 <span class="base-url">https://owner-api.teslamotors.com</span>
-                                                <em>/api/1/vehicles/1/command/sun_roof_control?state=%3Ctr%3E%3Ctd%3Eopen%3C%2Ftd%3E%3Ctd%3E%3Ccode%3Eenum%3C%2Fcode%3E%3C%2Ftd%3E%3Ctd%3E%3C%2Ftd%3E%3C%2Ftr%3E&percent=50</em>
+                                                <em>/api/1/vehicles/1/command/sun_roof_control?state=open&percent=50</em>
                                                                                                     <h5>Headers</h5>
                                                     <ul class="headers mdl-list">
                                                                                                                     <li class="mdl-list__item">
@@ -2640,6 +2640,6 @@ locations in navigation.
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script>
 
-anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');</script>
+function getParameters(){let result={};let tmp=[];if(location.search===''){return result}location.search.substr(1).split("&").forEach(function(item){tmp=item.split("=");result[tmp[0]]=decodeURIComponent(tmp[1])});return result};anchors.options={placement:'left',visible:'touch'};anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');$(function(){$('[data-toggle="tooltip"]').tooltip();let contentDom=$('body>div>div.row');let parameters=getParameters();Object.keys(parameters).forEach(function(key){let html=contentDom.html();const regex=`<span class="attr">${key}</span>:<span class="value">[a-zA-Z0-9\ \\\-\/]*</span>`;let list_re=new RegExp(regex,'g');const curl_regex=`-H '${key}: [a-zA-Z0-9\ \\\-\/]*'`;let curl_re=new RegExp(curl_regex,'g');let new_html=html.replace(list_re,`<span class="attr">${key}</span>:<span class="value">${parameters[key]}</span>`).replace(curl_re,`-H '${key}: ${parameters[key]}'`);contentDom.html(new_html)})});</script>
 </body>
 </html>
