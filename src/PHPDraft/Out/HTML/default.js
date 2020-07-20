@@ -1,8 +1,26 @@
-$(function () {
+function getParameters() {
+    let result = {};
+    let tmp = [];
+
+    if (location.search === '') { return result; }
+
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {tmp = item.split("="); result[tmp[0]] = decodeURIComponent(tmp[1]); });
+    return result;
+};
+
+function trigger_popover() {
     $('[data-toggle="popover"]').popover({
         html: true,
         sanitize: false,
     });
+}
+
+function escapeRegExp(str) { return str.replace(/[-\[\]/{}()*+?.\\^$|]/g, "\\$&"); };
+
+$(function () {
     $('[data-toggle="tooltip"]').tooltip();
     $('body').on('click', function (e) {
         $('[data-toggle="popover"]').each(function () {
@@ -11,22 +29,38 @@ $(function () {
             }
         });
     });
-    var selectedhost = $('h1.media-heading select.form-control').val();
-    $('h1.media-heading select.form-control').on('change', function () {
-        var html = $('body>div>div.row').html();
-        var re = new RegExp(escapeRegExp(selectedhost), 'g');
-        html = html.replace(re, $('h1.media-heading select.form-control').val());
-        selectedhost = $('h1.media-heading select.form-control').val();
-        $('body>div>div.row').html(html);
-        $('[data-toggle="popover"]').popover();
+    let contentDom = $('body>div>div.row');
+
+    let formControlDom = $('h1.media-heading select.form-control');
+    let selectedhost = formControlDom.val();
+    formControlDom.on('change', function () {
+        let html = contentDom.html();
+        let re = new RegExp(escapeRegExp(selectedhost), 'g');
+        let new_html = html.replace(re, formControlDom.val());
+        selectedhost = formControlDom.val();
+        contentDom.html(new_html);
+        trigger_popover();
     });
 
-    function escapeRegExp(str)
-    {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-    };
     $('table:not(.table)').each(function () {
-        $(this).addClass('table');});
+        $(this).addClass('table');
+    });
+
+    let parameters = getParameters();
+    Object.keys(parameters).forEach(function(key) {
+        let html = contentDom.html();
+
+        const regex = `<span class="attr">${key}</span>: <span class="value">[a-zA-Z0-9\ \\\-\/]*</span>`;
+        let list_re = new RegExp(regex, 'g');
+
+        const curl_regex = `-H '${key}: [a-zA-Z0-9\ \\\-\/]*'`;
+        let curl_re = new RegExp(curl_regex, 'g');
+
+        let new_html = html.replace(list_re, `<span class="attr">${key}</span>: <span class="value">${parameters[key]}</span>`)
+                           .replace(curl_re, `-H '${key}: ${parameters[key]}'`);
+        contentDom.html(new_html);
+    });
+    trigger_popover();
 });
 
 $('.collapse.request-card').on('shown.bs.collapse', function () {

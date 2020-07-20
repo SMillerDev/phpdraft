@@ -54,6 +54,10 @@ class ElementStructureElement implements StructureElement
 
     public function string_value($flat = false)
     {
+        if ($flat === true) {
+            return $this->value;
+        }
+
         return $this->__toString();
     }
 
