@@ -15,7 +15,7 @@ namespace PHPDraft\Out;
 use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 
-abstract class BaseTemplateGenerator
+abstract class BaseTemplateRenderer
 {
     /**
      * Type of sorting to do on objects.
@@ -59,12 +59,6 @@ abstract class BaseTemplateGenerator
      * @var array
      */
     protected $base_data;
-    /**
-     * The Http Status resolver.
-     *
-     * @var Httpstatus
-     */
-    protected $http_status;
     /**
      * Structures used in all data.
      *

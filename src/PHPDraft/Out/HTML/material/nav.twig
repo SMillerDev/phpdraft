@@ -1,0 +1,31 @@
+<div class="col s2 method-nav sticky-top" id="navbar" aria-label="Categories">
+    {% for category in categories %}
+        {% if category.children|length > 0 %}
+            <ul id="navbar-{{ category.title }}" class="collection with-header category" aria-label="Category {{ category.title }}">
+                <li class="collection-header"> <a href="#{{ category.get_href }}">{{ category.title }}</a></li>
+                {% for resource in category.children %}
+                    <li class="collection-item resource" aria-label="Resource {{category.title}}/{{resource.title}}">
+                        <b><a class="nav-link" href="#{{ resource.get_href|replace({'-': '/'}) }}">{{resource.title}}</a></b>
+                        {% for transition in resource.children %}
+                            <a class="nav-link" href="#{{ transition.get_href|replace({'-': '/'}) }}"
+                               aria-label="Transition {{category.title}}/{{resource.title}}/{{ transition.title }}">
+                                {{transition.title}}<span class="{{ transition.get_method|method_icon }}"></span>
+                            </a>
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+    {% if structures|length > 0 %}
+        <ul id="nav-datastructures" class="collection with-header structures" aria-label="Data structures">
+            <li class="collection-header"><a class="navbar-brand" href="#data-structures">Data Structures</a></li>
+            {% for title,structure in structures %}
+                <li class="collection-item" aria-label="Structure {{ title }}>">
+                    <a class="nav-link" href="#object-{{ title|strip_link_spaces }}">{{ title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a class="main-url nav-link">{{ data.HOST }}</a>
+</div>

@@ -1,0 +1,154 @@
+<section class="card {{ transition.get_method }} transition">
+    <div class="card-header">
+        <h5 class="card-title">
+            <var>{{ transition.get_method }}</var>
+            <code>{{ transition.href }}</code>
+            <a class="float-right transition-title"
+               id="{{ transition.get_href|replace({'-': '/'}) }}"
+               data-anchor-id="{{ transition.get_href|replace({'-': '/'}) }}">
+                {{ transition.title }}
+            </a>
+        </h5>
+    </div>
+    <div class="card-body">
+        {% if transition.description %}{{ transition.description|markdown_to_html }}{% endif %}
+        {% if transition.requests|length > 0 %}
+            {% for request in transition.requests %}
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="request card-title"
+                            data-toggle="collapse"
+                            data-target="#request-coll-{{ request.get_id }}">
+                            Request {% if request.title %}<var>{{ request.title }}</var>{% endif %}
+                            <span class="fas indicator fa-angle-{% if loop.first %}down{% else %}up{% endif %} float-right"></span>
+                        </h6>
+                    </div>
+
+                    <div class="collapse {% if loop.first %}show{% endif %} request-card card-body"
+                         id="request-coll-{{ request.get_id }}"
+                         data-anchor-id="request-coll-{{ request.get_id }}">
+                        {% if request.description %}{{ request.description|markdown_to_html }}{% endif %}
+                        <a class="btn btn-default curl"
+                           role="button"
+                           title="cURL command"
+                           tabindex="0"
+                           data-placement="left"
+                           data-toggle="popover"
+                           data-html="true"
+                           data-content="<textarea rows='8' cols='75'>{{ transition.get_curl_command(data.HOST)|raw }}</textarea>">
+                            <span class="fas fa-copy"></span>
+                        </a>
+                        <h5>Example URI</h5>
+                        <span class="base-url">{{ data.HOST }}</span><em>{{ transaction.build_url }}</em>
+                        {% if request.headers|length > 0 %}
+                            <h5>Headers</h5>
+                            <ul class="headers list-unstyled">
+                                {% for name,value in request.headers %}
+                                    <li>
+                                        <code>
+                                            <span class="attr">{{ name }}</span>: <span class="value">{{ value }}</span>
+                                        </code>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if request.body|length > 0 %}
+                            <h5>Body</h5>
+                            {% for value in request.body %}
+                                {% if value is iterable %}
+                                    {{ value.print_request(request.headers.Content-Type|default(null)) }}
+                                    {{ value }}
+                                {% else %}
+                                    <code class="request-body">{{ value }}</code>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if request.struct|length > 0 %}
+                            <h5>Structure</h5>
+                            <div class="row">{{ request.struct|raw }}</div>
+                        {% endif %}
+
+                        {% if transition.url_variables|length > 0 %}
+                            <h5>URI Parameters</h5>
+                            <div class="row">
+                                <table class="table table-striped mdl-data-table mdl-js-data-table ">
+                                    <thead>
+                                    <tr>
+                                        <td>key</td>
+                                        <td>type</td>
+                                        <td>status</td>
+                                        <td>description</td>
+                                        <td>value</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for url_variable in transition.url_variables %}{{ url_variable|raw }}{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+
+                        {% if transition.data_variables %}
+                            <h5>Request object</h5>
+                            <div class="row">
+                                {{ transition.data_variables|raw }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if transition.responses is iterable %}
+        {% for response in transition.responses %}
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title response"
+                    data-toggle="collapse"
+                    data-target="#request-coll--{{ transition.get_href }}-{{ response.statuscode }}-{{ loop.index }}">
+                    Response <var class="{{ response.statuscode|response_status }}">{{ response.statuscode }} {{ response.statuscode|status_reason }}</var>
+                    <span class="fas indicator fa-angle-{% if loop.first %}down{% else %}up{% endif %} float-right"></span>
+                </h6>
+            </div>
+            <div class="card-body collapse {% if loop.first %}show{% endif %} response-card"
+                 id="request-coll--{{ transition.get_href }}-{{ response.statuscode }}-{{ loop.index }}"
+                 data-anchor-id="request-coll--{{ transition.get_href }}-{{ response.statuscode }}-{{ loop.index }}">
+                {% if response.description %}{{ response.description|markdown_to_html }}{% endif %}
+                {% if response.headers|length > 0 %}
+                <h5>Headers</h5>
+                <ul class="headers list-unstyled">
+                    {% for name,value in response.headers %}
+                        <li>
+                            <code>
+                                <span class="attr">{{name}}</span>: <span class="value">{{ value }}</span>
+                            </code>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if response.structure|length > 0 %}
+                <h5>Data Structure</h5>
+                <div class="row">
+                    {% for value in response.structure %}{{ value|raw }}{% endfor %}
+                </div>
+                {% endif %}
+                {% for response_key,value in response.content %}
+                <div>
+                    {% set sanitize_key = response_key|replace({'/':'-','+':'-',';':'-','=':'-'}) %}
+                    {% set href = "#{response.get_id}-#{response.statuscode}-#{sanitize_key}" %}
+                    <h5 class="response-body"
+                        data-toggle="collapse"
+                        data-target="#response-{{ href }}">
+                        <span class="fas indicator fa-angle-up"></span>{{ response_key }}
+                    </h5>
+                    <pre class="collapse response-body"
+                         id="response-{{ href }}"
+                         data-anchor-id="response-{{ href }}">{{ value }}</pre>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</section>

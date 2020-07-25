@@ -97,9 +97,43 @@ Updates a specific Post.
 
 + Request (application/json)
 
+        {"test": true}
++ Request (application/xml)
+
+        <xml></xml>
++ Request Something (application/xml)
+
+        <xml></xml>
+
 + Response 200
 
     [Post][]
+
++ Response 204 (application/json)
+
++ Response 301 (application/json)
+
++ Response 302 (application/json)
+
++ Response 400 (application/json)
+
+            { "post" : "invalid data" }
+
+
++ Response 400 (text/xml)
+
+            Invalid DATA
+
+
++ Response 401 (application/json)
+
+            { "post" : "not allowed" }
+
+
++ Response 403 (application/json)
+
+            { "post" : "denied" }
+
 
 ### Delete a Post [DELETE]
 Delete a Post. The current user must be the same user who created the Post. It

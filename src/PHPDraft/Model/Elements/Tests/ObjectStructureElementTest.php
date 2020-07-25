@@ -86,7 +86,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base1->element     = 'member';
         $base1->type        = 'string';
         $base1->is_variable = false;
-        $base1->description = "<p>desc1</p>\n";
+        $base1->description = "desc1";
 
         $base2              = new ObjectStructureElement();
         $base2->key         = new ElementStructureElement();
@@ -97,7 +97,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base2->element     = 'member';
         $base2->type        = 'string';
         $base2->is_variable = false;
-        $base2->description = "<p>desc2</p>\n";
+        $base2->description = "desc2";
 
         $base3              = clone $base2;
         $base3->value       = 'test1 (string) | test2 (int) | test3 (Cow)';

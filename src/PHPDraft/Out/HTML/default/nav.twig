@@ -1,0 +1,33 @@
+<nav class="navbar col-md-2 method-nav sticky-top" id="navbar" aria-label="Categories">
+    {% for category in categories %}
+        {% if category.children|length > 0 %}
+            <nav id="navbar-{{ category.title }}" class="navbar navbar-light category" aria-label="Category {{ category.title }}">
+                <a class="navbar-brand" href="#{{ category.get_href }}">{{ category.title }}</a>
+                {% for resource in category.children %}
+                    <nav class="nav nav-pills flex-column resource" aria-label="Resource {{category.title}}/{{resource.title}}">
+                        <a class="nav-link" href="#{{ resource.get_href|replace({'-': '/'}) }}">{{resource.title}}</a>
+                        {% for transition in resource.children %}
+                            <nav class="nav nav-pills flex-column transition" aria-label="Transition {{category.title}}/{{resource.title}}/{{ transition.title }}">
+                                <a class="nav-link" href="#{{ transition.get_href|replace({'-': '/'}) }}">
+                                    {{transition.title}}
+                                    <span class="float-right align-baseline {{ transition.get_method|method_icon }}"></span>
+                                </a>
+                            </nav>
+                        {% endfor %}
+                    </nav>
+                {% endfor %}
+            </nav>
+        {% endif %}
+    {% endfor %}
+    {% if structures|length > 0 %}
+        <nav id="nav-datastructures" class="navbar navbar-light structures" aria-label="Data structures">
+            <a class="navbar-brand" href="#data-structures">Data Structures</a>
+            {% for title,structure in structures %}
+                <nav class="nav nav-pills flex-column structure" aria-label="Structure {{ title }}>">
+                    <a class="nav-link" href="#object-{{ title|strip_link_spaces }}">{{ title }}</a>
+                </nav>
+            {% endfor %}
+        </nav>
+    {% endif %}
+    <a class="main-url nav-link">{{ data.HOST }}</a>
+</nav>

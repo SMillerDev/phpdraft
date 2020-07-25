@@ -157,7 +157,7 @@ class BasicStructureElementTest extends LunrBaseTest
 
         $obj3 = clone $obj;
         $obj3->meta->description = '__hello__';
-        $answer->description = '<p><strong>hello</strong></p>' . PHP_EOL;
+        $answer->description = '__hello__';
 
         $return[] = [$obj3, $answer];
 

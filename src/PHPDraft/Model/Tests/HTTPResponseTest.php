@@ -83,19 +83,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalled(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"attributes":{"statusCode":1000, "headers":{"content":[]}}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('statuscode');
-        $href_property->setAccessible(true);
-        $this->assertSame(1000, $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame(1000, $this->get_reflection_property_value('statuscode'));
     }
 
     /**
@@ -103,19 +98,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledExtraHeaders(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"attributes":{"statusCode":1000, "headers":{"content":[{"content":{"key":{"content":"contentKEY"}, "value":{"content":"contentVALUE"}}}]}}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('headers');
-        $href_property->setAccessible(true);
-        $this->assertSame(['contentKEY' => 'contentVALUE'], $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame(['contentKEY' => 'contentVALUE'], $this->get_reflection_property_value('headers'));
     }
 
     /**
@@ -123,19 +113,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledWOAttributes(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('statuscode');
-        $href_property->setAccessible(true);
-        $this->assertNull($href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertNull($this->get_reflection_property_value('statuscode'));
     }
 
     /**
@@ -143,19 +128,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledCopyContent(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"content":[{"element":"copy", "content":""}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('description');
-        $href_property->setAccessible(true);
-        $this->assertSame('' . PHP_EOL, $href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame('', $this->get_reflection_property_value('description'));
     }
 
     /**
@@ -163,19 +143,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledStructContentEmpty(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"content":[{"element":"dataStructure", "content":[]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('structure');
-        $href_property->setAccessible(true);
-        $this->assertEmpty($href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertEmpty($this->get_reflection_property_value('structure'));
     }
 
     /**
@@ -183,19 +158,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledStructContent(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"content":[{"element":"dataStructure", "content":[{}]}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('structure');
-        $href_property->setAccessible(true);
-        $this->assertNotEmpty($href_property->getValue($this->class));
+        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertNotEmpty($this->get_reflection_property_value('structure'));
     }
 
     /**
@@ -203,20 +173,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testParseIsCalledStructContentHasAttr(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $obj = '{"content":[{"content":"hello", "attributes":{"contentType":"content"}, "element":"hello"}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $property->getValue($this->class));
-
-        $href_property = $this->reflection->getProperty('content');
-        $href_property->setAccessible(true);
-        $this->assertArrayHasKey('content', $href_property->getValue($this->class));
-        $this->assertSame('hello', $href_property->getValue($this->class)['content']);
+        $this->assertArrayHasKey('content', $this->get_reflection_property_value('content'));
+        $this->assertSame('hello', $this->get_reflection_property_value('content')['content']);
     }
 
     /**
@@ -224,9 +188,7 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testEqualOnStatusCode(): void
     {
-        $property = $this->reflection->getProperty('statuscode');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 200);
+        $this->set_reflection_property_value('statuscode', 200);
 
         $obj = '{"statuscode":200, "description":"hello"}';
 
@@ -240,9 +202,7 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testEqualOnDesc(): void
     {
-        $property = $this->reflection->getProperty('description');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 'hello');
+        $this->set_reflection_property_value('description', 'hello');
 
         $obj = '{"statuscode":300, "description":"hello"}';
 
@@ -256,17 +216,14 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function testEqualOnBoth(): void
     {
-        $s_property = $this->reflection->getProperty('statuscode');
-        $s_property->setAccessible(true);
-        $s_property->setValue($this->class, 200);
+        $this->set_reflection_property_value('statuscode', 200);
+        $this->set_reflection_property_value('description', 'hello');
 
-        $property = $this->reflection->getProperty('description');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 'hello');
+        $obj = '{"attributes":{"statusCode":200}, "content":[{"element":"copy", "content": "hello"}]}';
+        $b = new HTTPResponse($this->parent_transition);
+        $b->parse(json_decode($obj));
 
-        $obj = '{"statuscode":200, "description":"hello"}';
-
-        $return = $this->class->is_equal_to(json_decode($obj));
+        $return = $this->class->is_equal_to($b);
 
         $this->assertTrue($return);
     }

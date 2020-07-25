@@ -38,7 +38,7 @@
         <testsuite name="Out">
             <file>../src/PHPDraft/Out/Tests/VersionTest.php</file>
             <file>../src/PHPDraft/Out/Tests/SortingTest.php</file>
-            <file>../src/PHPDraft/Out/Tests/TemplateGeneratorTest.php</file>
+            <file>../src/PHPDraft/Out/Tests/TemplateRendererTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

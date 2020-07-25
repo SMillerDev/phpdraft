@@ -152,10 +152,6 @@ class ObjectStructureElement extends BasicStructureElement
             return "<table class=\"table table-striped mdl-data-table mdl-js-data-table \">$return</table>";
         }
 
-        if ($this->ref !== null) {
-            return '<p>Inherits from <a href="#object-' . strtolower($this->ref) . '">' . $this->ref . '</a></p>';
-        }
-
         if ($this->value === null && $this->key === null && $this->description !== null) {
             return '';
         }
@@ -209,7 +205,8 @@ class ObjectStructureElement extends BasicStructureElement
         $variable = '';
         if ($this->is_variable) {
             $link_name = str_replace(' ', '-', strtolower($this->key->type));
-            $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" title="This is a variable key of type &quot;' . $this->key->type . '&quot;"></span></a>';
+            $tooltip = 'This is a variable key of type &quot;' . $this->key->type . '&quot;';
+            $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" data-tooltip="' . $tooltip . '" title="' . $tooltip . '"></span></a>';
         }
 
         return '<tr>' .

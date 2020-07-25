@@ -160,7 +160,7 @@ a.code {
     position: relative;
 }
 
-.curl.btn, .hurl.btn {
+.curl.btn {
     z-index: 999;
     position: absolute;
     top: 15px;
@@ -170,12 +170,6 @@ a.code {
     right: 15px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px
-}
-
-.hurl.btn {
-    right: 54px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px
 }
 
 a.variable-key {

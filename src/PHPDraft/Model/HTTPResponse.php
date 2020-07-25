@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use stdClass;
 
@@ -128,7 +127,7 @@ class HTTPResponse implements Comparable
     {
         foreach ($object->content as $value) {
             if ($value->element === 'copy') {
-                $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
+                $this->description = $value->content;
                 continue;
             }
 
@@ -174,6 +173,18 @@ class HTTPResponse implements Comparable
      */
     public function is_equal_to($b): bool
     {
-        return ($this->statuscode === $b->statuscode) && ($this->description === $b->description);
+        if (!($b instanceof self)){
+            return false;
+        }
+        return ($this->statuscode === $b->statuscode)
+            && ($this->description === $b->description);
+    }
+
+    /**
+     * Convert class to string identifier
+     */
+    public function __toString()
+    {
+        return "{$this->statuscode}_{$this->description}";
     }
 }

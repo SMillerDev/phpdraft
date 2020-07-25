@@ -100,7 +100,7 @@ class HierarchyElementTest extends LunrBaseTest
 
         $href_property = $this->reflection->getProperty('description');
         $href_property->setAccessible(true);
-        $this->assertSame('hello' . PHP_EOL, $href_property->getValue($this->class));
+        $this->assertSame('hello', $href_property->getValue($this->class));
     }
 
     /**
@@ -124,7 +124,7 @@ class HierarchyElementTest extends LunrBaseTest
 
         $href_property = $this->reflection->getProperty('description');
         $href_property->setAccessible(true);
-        $this->assertSame('hello' . PHP_EOL, $href_property->getValue($this->class));
+        $this->assertSame('hello', $href_property->getValue($this->class));
     }
 
 

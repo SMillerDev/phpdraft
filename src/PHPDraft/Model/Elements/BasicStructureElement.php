@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
-use Michelf\MarkdownExtra;
-
 abstract class BasicStructureElement implements StructureElement
 {
     /**
@@ -120,7 +118,7 @@ abstract class BasicStructureElement implements StructureElement
         }
         if ($this->description !== null) {
             $encoded           = htmlentities($this->description, ENT_COMPAT, null, false);
-            $this->description = MarkdownExtra::defaultTransform($encoded);
+            $this->description = $encoded;
         }
 
         $this->ref = null;
