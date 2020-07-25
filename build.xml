@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="phpdrafter" default="setup">
+<project name="PHPDraft" default="setup">
     <target name="setup" depends="clean"/>
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
@@ -51,6 +51,7 @@
             <fileset dir="${project.basedir}/src/">
                 <exclude name="**/*Test.php*"/>
                 <include name="**/*.php"/>
+                <include name="**/*.twig"/>
                 <include name="**/*.phtml"/>
                 <include name="**/*.js*"/>
                 <include name="**/*.css*"/>
@@ -72,6 +73,32 @@
         </copy>
         <copy todir="${project.basedir}/build/phar/phpdraft/src/Garden/Cli">
             <fileset dir="vendor/vanilla/garden-cli/src">
+                <include name="**/*.php"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Twig">
+            <fileset dir="vendor/twig/twig/src">
+                <include name="**/*.php"/>
+                <exclude name="Test/**"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Twig/Extra/Markdown">
+            <fileset dir="vendor/twig/markdown-extra/src">
+                <include name="**/*.php"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/MatthiasMullie/Minify">
+            <fileset dir="vendor/matthiasmullie/minify/src">
+                <include name="**/*.php"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/MatthiasMullie/data">
+            <fileset dir="vendor/matthiasmullie/minify/data">
+                <include name="**/*.txt"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/MatthiasMullie/PathConverter">
+            <fileset dir="vendor/matthiasmullie/path-converter/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>

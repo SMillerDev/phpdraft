@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use Michelf\MarkdownExtra;
 use stdClass;
 
 /**
@@ -67,7 +66,7 @@ abstract class HierarchyElement
 
         foreach ($object->content as $key => $item) {
             if ($item->element === 'copy') {
-                $this->description = preg_replace('/(<\/?p>)/', '', MarkdownExtra::defaultTransform(htmlentities($item->content)), 2);
+                $this->description = $item->content;
                 unset($object->content[$key]);
                 continue;
             }

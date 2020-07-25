@@ -77,9 +77,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnStatusCode(): void
     {
-        $property = $this->reflection->getProperty('method');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 200);
+        $this->set_reflection_property_value('method', 'POST');
 
         $obj = '{"method":200, "body":"hello", "headers":[]}';
 
@@ -93,9 +91,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnDesc(): void
     {
-        $property = $this->reflection->getProperty('body');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 'hello');
+        $this->set_reflection_property_value('body', 'hello');
 
         $obj = '{"method":300, "body":"hello", "headers":[]}';
 
@@ -109,9 +105,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnHeaders(): void
     {
-        $property = $this->reflection->getProperty('headers');
-        $property->setAccessible(true);
-        $property->setValue($this->class, []);
+        $this->set_reflection_property_value('headers', []);
 
         $obj = '{"method":300, "body":"hello", "headers":[]}';
 
@@ -125,19 +119,14 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnBoth(): void
     {
-        $s_property = $this->reflection->getProperty('method');
-        $s_property->setAccessible(true);
-        $s_property->setValue($this->class, 200);
+        $this->set_reflection_property_value('method', 'GET');
+        $this->set_reflection_property_value('title', 'hello');
 
-        $property = $this->reflection->getProperty('body');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 'hello');
+        $obj = '{"attributes":{"method": "GET"}, "meta":{"title":"hello"}}';
+        $b   = new HTTPRequest($this->parent);
+        $b->parse(json_decode($obj));
 
-        $obj = '{"method":200, "body":"hello", "headers":[]}';
-
-        $return = $this->class->is_equal_to(json_decode($obj));
-
-        $this->assertTrue($return);
+        $this->assertTrue($this->class->is_equal_to($b));
     }
 
     /**
@@ -145,9 +134,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandNoKey(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -159,14 +146,10 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandWithHeaders(): void
     {
-        $property = $this->reflection->getProperty('parent');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $this->parent);
+        $this->set_reflection_property_value('parent', $this->parent);
 
         $headers = ['header' => 'value'];
-        $property = $this->reflection->getProperty('headers');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $headers);
+        $this->set_reflection_property_value('headers', $headers);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -194,9 +177,7 @@ class HTTPRequestTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
         $this->set_reflection_property_value('method', 'GET');
-        $property = $this->reflection->getProperty('body');
-        $property->setAccessible(true);
-        $property->setValue($this->class, ['this', 'is', 'a', 'body']);
+        $this->set_reflection_property_value('body', ['this', 'is', 'a', 'body']);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -210,9 +191,7 @@ class HTTPRequestTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
         $this->set_reflection_property_value('method', 'GET');
-        $property = $this->reflection->getProperty('body');
-        $property->setAccessible(true);
-        $property->setValue($this->class, 1000);
+        $this->set_reflection_property_value('body', 1000);
 
         $struct = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
                        ->disableOriginalConstructor()
@@ -227,10 +206,7 @@ class HTTPRequestTest extends LunrBaseTest
                   ->will($this->returnValue('TEST'));
 
         $struct->value = [ $struct_ar ];
-
-        $property = $this->reflection->getProperty('struct');
-        $property->setAccessible(true);
-        $property->setValue($this->class, $struct);
+        $this->set_reflection_property_value('struct', $struct);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -249,10 +225,7 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $href_property = $this->reflection->getProperty('method');
-        $href_property->setAccessible(true);
-        $this->assertSame('TEST', $href_property->getValue($this->class));
+        $this->assertSame('TEST', $this->get_reflection_property_value('method'));
     }
 
     /**
@@ -267,10 +240,7 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $href_property = $this->reflection->getProperty('headers');
-        $href_property->setAccessible(true);
-        $this->assertSame(['KEY' => 'VALUE'], $href_property->getValue($this->class));
+        $this->assertSame(['KEY' => 'VALUE'], $this->get_reflection_property_value('headers'));
     }
 
     /**
@@ -285,14 +255,8 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $struct_property = $this->reflection->getProperty('struct');
-        $struct_property->setAccessible(true);
-        $this->assertSame([], $struct_property->getValue($this->class));
-
-        $body_property = $this->reflection->getProperty('body');
-        $body_property->setAccessible(true);
-        $this->assertSame([], $body_property->getValue($this->class));
+        $this->assertSame([], $this->get_reflection_property_value('struct'));
+        $this->assertSame([], $this->get_reflection_property_value('body'));
     }
 
     /**
@@ -307,14 +271,8 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $struct_property = $this->reflection->getProperty('struct');
-        $struct_property->setAccessible(true);
-        $this->assertSame([], $struct_property->getValue($this->class));
-
-        $body_property = $this->reflection->getProperty('description');
-        $body_property->setAccessible(true);
-        $this->assertSame('<p>text</p>' . PHP_EOL, $body_property->getValue($this->class));
+        $this->assertEquals([], $this->get_reflection_property_value('struct'));
+        $this->assertEquals('text', $this->get_reflection_property_value('description'));
     }
 
     /**
@@ -329,10 +287,7 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $struct_property = $this->reflection->getProperty('struct');
-        $struct_property->setAccessible(true);
-        $this->assertNotEmpty($struct_property->getValue($this->class));
+        $this->assertNotEmpty($this->get_reflection_property_value('struct'));
     }
 
     /**
@@ -347,13 +302,7 @@ class HTTPRequestTest extends LunrBaseTest
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $struct_property = $this->reflection->getProperty('body');
-        $struct_property->setAccessible(true);
-        $this->assertSame(['something'], $struct_property->getValue($this->class));
-
-        $header_property = $this->reflection->getProperty('headers');
-        $header_property->setAccessible(true);
-        $this->assertSame(['Content-Type' => ''], $header_property->getValue($this->class));
+        $this->assertSame(['something'], $this->get_reflection_property_value('body'));
+        $this->assertSame(['Content-Type' => ''], $this->get_reflection_property_value('headers'));
     }
 }

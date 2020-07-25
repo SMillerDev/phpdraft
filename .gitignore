@@ -19,4 +19,4 @@ atlassian-ide-plugin.xml
 
 *.pem
 
-index.html
+/index.html

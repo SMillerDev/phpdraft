@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use Michelf\MarkdownExtra;
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\Exception;
@@ -112,7 +111,7 @@ class HTTPRequest implements Comparable
                 }
 
                 if ($value->element === 'copy') {
-                    $this->description = MarkdownExtra::defaultTransform(htmlentities($value->content));
+                    $this->description = $value->content;
                     continue;
                 }
 
@@ -226,6 +225,22 @@ class HTTPRequest implements Comparable
      */
     public function is_equal_to($b): bool
     {
-        return ($this->method === $b->method) && ($this->body === $b->body) && ($this->headers === $b->headers);
+        if (!($b instanceof self)){
+            return false;
+        }
+        return ($this->method === $b->method)
+            && ($this->body == $b->body)
+            && ($this->headers == $b->headers)
+            && ($this->title === $b->title);
+    }
+
+    /**
+     * Convert class to string identifier
+     */
+    public function __toString()
+    {
+        $headers = json_encode($this->headers);
+        $body = json_encode($this->body);
+        return "{$this->method}_{$body}_{$headers}";
     }
 }

@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
-use PHPDraft\Out\BaseTemplateGenerator;
-use PHPDraft\Out\TemplateGenerator;
+use PHPDraft\Out\BaseTemplateRenderer;
+use PHPDraft\Out\TemplateRenderer;
 
 /**
  * Class HtmlGenerator.
@@ -28,26 +28,34 @@ class HtmlGenerator extends BaseHtmlGenerator
      * @param string|null $css      CSS to load
      * @param string|null $js       JS to load
      *
-     * @throws ExecutionException As a runtime exception
+     * @return void HTML template to display
      *
-     * @return BaseTemplateGenerator HTML template to display
+     * @throws ExecutionException As a runtime exception
      */
-    public function get_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): BaseTemplateGenerator
+    public function build_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): void
     {
-        $gen = new TemplateGenerator($template, $image);
+        $gen = new TemplateRenderer($template, $image);
 
         if (!is_null($css)) {
-            $gen->css[] = explode(',', $css);
+            $gen->css = explode(',', $css);
         }
 
         if (!is_null($js)) {
-            $gen->js[] = explode(',', $js);
+            $gen->js = explode(',', $js);
         }
 
         $gen->sorting = $this->sorting;
 
-        $gen->get($this->object);
+        $this->html = $gen->get($this->object);
+    }
 
-        return $gen;
+    /**
+     * Returns the generated HTML.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->html;
     }
 }

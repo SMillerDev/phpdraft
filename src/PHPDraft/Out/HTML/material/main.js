@@ -1,7 +1,3 @@
-/**
- * Created by smillernl on 18-5-17.
- */
-
 function getParameters() {
     let result = {};
     let tmp = [];
@@ -13,17 +9,31 @@ function getParameters() {
         .split("&")
         .forEach(function (item) {tmp = item.split("="); result[tmp[0]] = decodeURIComponent(tmp[1]); });
     return result;
-};
+}
 
-anchors.options = {
-    placement: 'left',
-    visible: 'touch',
-};
-anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');
+function escapeRegExp(str) { return str.replace(/[-\[\]/{}()*+?.\\^$|]/g, "\\$&"); };
 
-$(function () {
+$(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
+    $('.collapsible').collapsible();
+    $('.modal').modal();
+    if (!localStorage.getItem('visited')) {
+        $('.tap-target').tapTarget().tapTarget('open');
+    }
+    localStorage.setItem('visited', true);
+
     let contentDom = $('body>div>div.row');
+
+    let formControlDom = $('h1.media-heading select.form-control');
+    let selectedhost = formControlDom.val();
+    formControlDom.on('change', function () {
+        let html = contentDom.html();
+        let re = new RegExp(escapeRegExp(selectedhost), 'g');
+        let new_html = html.replace(re, formControlDom.val());
+        selectedhost = formControlDom.val();
+        contentDom.html(new_html);
+        trigger_popover();
+    });
 
     let parameters = getParameters();
     Object.keys(parameters).forEach(function(key) {
@@ -40,3 +50,9 @@ $(function () {
         contentDom.html(new_html);
     });
 });
+
+anchors.options = {
+    placement: 'left',
+    visible: 'touch',
+};
+anchors.add('.main-content h1, .main-content h2, .main-content h3, .main-content .card-header a');

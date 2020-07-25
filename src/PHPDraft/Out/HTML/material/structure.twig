@@ -1,0 +1,32 @@
+<div class="card object-{{ name|strip_link_spaces }} structure">
+    <div class="card-header">
+        <h5 class="card-title">
+            <a id="object-{{ name|strip_link_spaces }}" data-anchor-id="object-{{ name|strip_link_spaces }}">{{ name }}</a>
+        </h5>
+    </div>
+    <div class="card-body">
+        {% if structure.ref %}
+            <p>Inherits from <a href="#object-{{ structure.ref|lower }}">{{ structure.ref }}</a></p>
+        {% endif %}
+        {% if structure.description %}{{ structure.description|markdown_to_html }}{% endif %}
+        <div>
+            {% if structure.value is iterable %}
+                {% if structure is object_type %}
+                    <table class="table table-striped mdl-data-table mdl-js-data-table">
+                        {% for value in structure.value %}
+                            {{ value|raw }}
+                        {% endfor %}
+                    </table>
+                {% elseif structure is array_type or structure is enum_type %}
+                    <ul class="list-group mdl-list">
+                        {% for value in structure.value %}
+                            {{ value|raw }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% else %}
+                {{ value|raw }}
+            {% endif %}
+        </div>
+    </div>
+</div>

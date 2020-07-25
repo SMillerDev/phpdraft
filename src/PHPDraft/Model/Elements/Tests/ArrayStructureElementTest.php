@@ -104,7 +104,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base3->element     = 'member';
         $base3->type        = 'array';
         $base3->is_variable = false;
-        $base3->description = "<p>List of car identifiers to retrieve</p>\n";
+        $base3->description = "List of car identifiers to retrieve";
         $base3->deps        = [];
 
         $return['generic value type'] = [

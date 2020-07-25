@@ -77,11 +77,14 @@ try
     $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
     $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');
     $colors        = (is_null($color1) || is_null($color2)) ? '' : '__' . $color1 . '__' . $color2;
-    $generator     = $html->get_html(
-            $args->getOpt('template', 'default') . $colors,
-            $args['header_image'],
-            $args['css'],
-            $args['javascript']);
+    $html->build_html(
+        $args->getOpt('template', 'default') . $colors,
+        $args['header_image'],
+        $args['css'],
+        $args['javascript']
+    );
+
+    echo $html;
 }
 catch (ExecutionException $exception)
 {

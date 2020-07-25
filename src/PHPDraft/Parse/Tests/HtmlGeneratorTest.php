@@ -71,8 +71,8 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTML(): void
     {
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/basic.html'));
-        $this->class->get_html();
+        $this->class->build_html();
+        $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/basic.html', $this->class->__toString());
     }
 
     /**
@@ -80,8 +80,8 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTMLMaterial(): void
     {
-        $this->expectOutputString(file_get_contents(TEST_STATICS . '/drafter/html/material.html'));
-        $this->class->get_html('material');
+        $this->class->build_html('material');
+        $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/material.html', $this->class->__toString());
     }
 
     /**
@@ -89,8 +89,9 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTMLAdvanced(): void
     {
-        $return = $this->class->get_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
-        $this->assertSame([['test.css', 'index.css']], $return->css);
-        $this->assertSame([['index.js', 'test.js']], $return->js);
+        $this->class->build_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
+
+        $this->assertMatchesRegularExpression('/<link rel="stylesheet" href="(test|index)\.css">/', $this->class->__toString());
+        $this->assertMatchesRegularExpression('/<script src="(test|index)\.js"><\/script>/', $this->class->__toString());
     }
 }

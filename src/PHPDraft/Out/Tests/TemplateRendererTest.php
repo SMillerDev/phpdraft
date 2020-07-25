@@ -10,14 +10,19 @@
 namespace PHPDraft\Out\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPDraft\Out\TemplateGenerator;
+use PHPDraft\Out\TemplateRenderer;
 
 /**
  * Class TemplateGeneratorTest
- * @covers \PHPDraft\Out\TemplateGenerator
+ *
+ * @covers \PHPDraft\Out\TemplateRenderer
  */
-class TemplateGeneratorTest extends LunrBaseTest
+class TemplateRendererTest extends LunrBaseTest
 {
+    /**
+     * @var TemplateRenderer
+     */
+    protected $class;
 
     /**
      * Set up tests
@@ -25,8 +30,8 @@ class TemplateGeneratorTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new TemplateGenerator('default', 'none');
-        $this->reflection = new \ReflectionClass('PHPDraft\Out\TemplateGenerator');
+        $this->class      = new TemplateRenderer('default', 'none');
+        $this->reflection = new \ReflectionClass('PHPDraft\Out\TemplateRenderer');
     }
 
     /**
@@ -34,12 +39,8 @@ class TemplateGeneratorTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('template');
-        $property->setAccessible(true);
-        $this->assertSame('default', $property->getValue($this->class));
-        $property = $this->reflection->getProperty('image');
-        $property->setAccessible(true);
-        $this->assertSame('none', $property->getValue($this->class));
+        $this->assertSame('default', $this->get_reflection_property_value('template'));
+        $this->assertEquals('none', $this->get_reflection_property_value('image'));
     }
 
     /**
@@ -48,7 +49,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testStripSpaces(): void
     {
         $return = $this->class->strip_link_spaces('hello world');
-        $this->assertSame('hello-world', $return);
+        $this->assertEquals('hello-world', $return);
     }
 
     /**
@@ -78,7 +79,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testResponseStatus($code, $text): void
     {
         $return = $this->class->get_response_status($code);
-        $this->assertSame($text, $return);
+        $this->assertEquals($text, $return);
     }
 
     /**
@@ -114,7 +115,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testRequestMethod($code, $text): void
     {
         $return = $this->class->get_method_icon($code);
-        $this->assertSame($text, $return);
+        $this->assertEquals($text, $return);
     }
 
     /**
@@ -123,7 +124,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testIncludeFileDefault(): void
     {
         $return = $this->class->find_include_file('default');
-        $this->assertSame('PHPDraft/Out/HTML/default.phtml', $return);
+        $this->assertEquals('PHPDraft/Out/HTML/default/main.twig', $return);
     }
 
     /**
@@ -132,7 +133,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testIncludeFileFallback(): void
     {
         $return = $this->class->find_include_file('gfsdfdsf');
-        $this->assertSame('PHPDraft/Out/HTML/default.phtml', $return);
+        $this->assertEquals('PHPDraft/Out/HTML/default/main.twig', $return);
     }
 
     /**
@@ -141,7 +142,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     public function testIncludeFileNone(): void
     {
         $return = $this->class->find_include_file('gfsdfdsf', 'xyz');
-        $this->assertSame(null, $return);
+        $this->assertEquals(null, $return);
     }
 
     /**
@@ -151,7 +152,7 @@ class TemplateGeneratorTest extends LunrBaseTest
     {
         set_include_path(TEST_STATICS . '/include_single:' . get_include_path());
         $return = $this->class->find_include_file('hello', 'txt');
-        $this->assertSame('hello.txt', $return);
+        $this->assertEquals('hello.txt', $return);
     }
 
     /**
@@ -161,12 +162,12 @@ class TemplateGeneratorTest extends LunrBaseTest
     {
         set_include_path(TEST_STATICS . '/include_folders:' . get_include_path());
         $return = $this->class->find_include_file('hello', 'txt');
-        $this->assertSame('hello/hello.txt', $return);
+        $this->assertEquals('hello/hello.txt', $return);
 
         $return = $this->class->find_include_file('test', 'txt');
-        $this->assertSame('templates/test.txt', $return);
+        $this->assertEquals('templates/test.txt', $return);
 
         $return = $this->class->find_include_file('text', 'txt');
-        $this->assertSame('templates/text/text.txt', $return);
+        $this->assertEquals('templates/text/text.txt', $return);
     }
 }

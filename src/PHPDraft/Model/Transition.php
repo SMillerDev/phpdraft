@@ -114,38 +114,28 @@ class Transition extends HierarchyElement
             if (!isset($transition_item->content)) {
                 continue;
             }
-            $list = [];
+
             foreach ($transition_item->content as $item) {
-                $value = null;
-                if (!in_array($item->element, ['httpRequest', 'httpResponse'])) {
-                    continue;
-                }
+                $parsable = null;
                 switch ($item->element) {
                     case 'httpRequest':
-                        $value = new HTTPRequest($this);
-                        $list  = &$this->requests;
+                        $parsable = new HTTPRequest($this);
+                        $val = $parsable->parse($item);
+                        foreach ($this->requests as $request) {
+                            if ($request->is_equal_to($val)) continue 3;
+                        }
+                        $this->requests[] = $val;
                         break;
                     case 'httpResponse':
-                        $value = new HTTPResponse($this);
-                        $list  = &$this->responses;
+                        $parsable = new HTTPResponse($this);
+                        $val = $parsable->parse($item);
+                        foreach ($this->responses as $response) {
+                            if ($response->is_equal_to($val)) continue 3;
+                        }
+                        $this->responses[] = $parsable->parse($item);
                         break;
                     default:
                         continue 2;
-                }
-                $value->parse($item);
-
-                if ($list === []) {
-                    $list[] = $value;
-                    continue;
-                }
-                $add = true;
-                foreach ($list as $existing_value) {
-                    if ($existing_value->is_equal_to($value)) {
-                        $add = false;
-                    }
-                }
-                if ($add) {
-                    $list[] = $value;
                 }
             }
         }
@@ -266,11 +256,13 @@ class Transition extends HierarchyElement
     /**
      * Generate a cURL request to run the transition.
      *
-     * @param string $base_url   base URL of the server
-     * @param array  $additional additional arguments to pass
-     * @param int    $key        number of the request to generate for
+     * @param string $base_url base URL of the server
+     * @param array $additional additional arguments to pass
+     * @param int $key number of the request to generate for
      *
      * @return string A cURL CLI command
+     *
+     * @throws \QL\UriTemplate\Exception If URL parts are invalid
      */
     public function get_curl_command(string $base_url, array $additional = [], int $key = 0): string
     {
