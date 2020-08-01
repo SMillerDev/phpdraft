@@ -41,6 +41,9 @@
     "test": [
       "vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml"
     ],
+    "test-sonar": [
+      "vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=./var/coverage/clover.xml"
+    ],
     "phar": [
       "vendor/bin/phing phar",
       "sha256sum build/out/*"

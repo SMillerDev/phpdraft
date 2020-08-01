@@ -65,9 +65,6 @@ class Resource extends HierarchyElement
         }
 
         foreach ($object->content as $item) {
-            if ($item->element === 'copy') {
-                continue;
-            }
             $transition       = new Transition($this);
             $this->children[] = $transition->parse($item);
         }

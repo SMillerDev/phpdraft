@@ -89,7 +89,7 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testGetHTMLAdvanced(): void
     {
-        $this->class->build_html('temp', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
+        $this->class->build_html('material', 'img.jpg', 'test.css,index.css', 'index.js,test.js');
 
         $this->assertMatchesRegularExpression('/<link rel="stylesheet" href="(test|index)\.css">/', $this->class->__toString());
         $this->assertMatchesRegularExpression('/<script src="(test|index)\.js"><\/script>/', $this->class->__toString());

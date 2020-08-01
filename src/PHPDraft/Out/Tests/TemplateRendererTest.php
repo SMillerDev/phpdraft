@@ -36,6 +36,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer
      */
     public function testSetupCorrectly(): void
     {
@@ -45,6 +47,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::strip_link_spaces
      */
     public function testStripSpaces(): void
     {
@@ -75,10 +79,12 @@ class TemplateRendererTest extends LunrBaseTest
      *
      * @param int    $code HTTP code
      * @param string $text Class to return
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::get_response_status
      */
     public function testResponseStatus($code, $text): void
     {
-        $return = $this->class->get_response_status($code);
+        $return = TemplateRenderer::get_response_status($code);
         $this->assertEquals($text, $return);
     }
 
@@ -111,15 +117,19 @@ class TemplateRendererTest extends LunrBaseTest
      *
      * @param int    $code HTTP Method
      * @param string $text Class to return
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::get_method_icon
      */
     public function testRequestMethod($code, $text): void
     {
-        $return = $this->class->get_method_icon($code);
+        $return = TemplateRenderer::get_method_icon($code);
         $this->assertEquals($text, $return);
     }
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
      */
     public function testIncludeFileDefault(): void
     {
@@ -129,6 +139,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
      */
     public function testIncludeFileFallback(): void
     {
@@ -138,6 +150,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
      */
     public function testIncludeFileNone(): void
     {
@@ -147,6 +161,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
      */
     public function testIncludeFileSingle(): void
     {
@@ -157,6 +173,8 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
+     *
+     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
      */
     public function testIncludeFileMultiple(): void
     {
@@ -169,5 +187,72 @@ class TemplateRendererTest extends LunrBaseTest
 
         $return = $this->class->find_include_file('text', 'txt');
         $this->assertEquals('templates/text/text.txt', $return);
+    }
+
+    /**
+     * @covers \PHPDraft\Out\TemplateRenderer::get
+     */
+    public function testGetTemplateFailsEmpty(): void {
+        $this->expectException('PHPDraft\Parse\ExecutionException');
+        $this->expectExceptionMessage('Couldn\'t find template \'cow\'');
+        $this->set_reflection_property_value('template', 'cow');
+        $json = '{"content": [{"content": "hello"}]}';
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
+    }
+
+    /**
+     * @covers \PHPDraft\Out\TemplateRenderer::get
+     */
+    public function testGetTemplate(): void {
+        $json = '{"content": [{"content": "hello"}]}';
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
+    }
+
+    /**
+     * @covers \PHPDraft\Out\TemplateRenderer::get
+     */
+    public function testGetTemplateSorting(): void {
+        $this->set_reflection_property_value('sorting', 3);
+        $json = '{"content": [{"content": "hello"}]}';
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
+    }
+
+    /**
+     * @covers \PHPDraft\Out\TemplateRenderer::get
+     */
+    public function testGetTemplateMetaData(): void {
+        $this->set_reflection_property_value('sorting', 3);
+        $json = <<<'TAG'
+{"content": [{"content": [], "attributes": {
+"metadata": {"content": [
+{"content":{"key": {"content": "key"}, "value": {"content": "value"}}}
+]},
+"meta": {"title": {"content": "title"}}
+}}]}
+TAG;
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/basic_html_template', $this->class->get(json_decode($json)));
+    }
+
+    /**
+     * @covers \PHPDraft\Out\TemplateRenderer::get
+     */
+    public function testGetTemplateCategories(): void {
+        $this->set_reflection_property_value('sorting', 3);
+        $json = <<<'TAG'
+{"content": [
+{"content": [{"element": "copy", "content": "__desc__"}, {"element": "category", "content": []}],
+ "attributes": {
+"metadata": {"content": [
+{"content":{"key": {"content": "key"}, "value": {"content": "value"}}}
+]},
+"meta": {"title": {"content": "title"}}
+}}]}
+TAG;
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/full_html_template', $this->class->get(json_decode($json)));
     }
 }

@@ -39,6 +39,7 @@
             <file>../src/PHPDraft/Out/Tests/VersionTest.php</file>
             <file>../src/PHPDraft/Out/Tests/SortingTest.php</file>
             <file>../src/PHPDraft/Out/Tests/TemplateRendererTest.php</file>
+            <file>../src/PHPDraft/Out/Tests/TwigFactoryTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

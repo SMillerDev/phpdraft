@@ -102,4 +102,14 @@ class ApibFileParserTest extends LunrBaseTest
         $this->assertSame($text, $full_property->getValue($this->class));
         $this->assertSame($text, $this->class->__toString());
     }
+
+    /**
+     * Test setting content
+     *
+     * @covers \PHPDraft\In\ApibFileParser::set_apib_content
+     */
+    public function testSetContent(){
+        $this->class->set_apib_content('content');
+        $this->assertEquals('content', $this->get_reflection_property_value('full_apib'));
+    }
 }

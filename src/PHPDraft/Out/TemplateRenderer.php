@@ -15,6 +15,7 @@ namespace PHPDraft\Out;
 use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
@@ -61,7 +62,7 @@ class TemplateRenderer extends BaseTemplateRenderer
      */
     public function get($object): string
     {
-        $include = $this->find_include_file($this->template);
+        $include = $this->find_include_file($this->template, 'twig', false);
         if ($include === null) {
             throw new ExecutionException("Couldn't find template '$this->template'", 1);
         }
@@ -73,24 +74,23 @@ class TemplateRenderer extends BaseTemplateRenderer
         }
 
         if (Sorting::sortServices($this->sorting)) {
-            usort($this->categories, function ($a, $b) {
-                return strcmp($a->title, $b->title);
-            });
+            usort($this->categories, function ($a, $b) { return strcmp($a->title, $b->title); });
             foreach ($this->categories as $category) {
-                usort($category->children, function ($a, $b) {
-                    return strcmp($a->title, $b->title);
-                });
+                usort($category->children, function ($a, $b) { return strcmp($a->title, $b->title); });
             }
         }
 
-        $loader   = new FilesystemLoader(stream_resolve_include_path(dirname($include)));
+        $loader   = new FilesystemLoader([]);
+        $loader->addPath(stream_resolve_include_path(dirname($include)));
+        $loader->addPath(stream_resolve_include_path(dirname($this->find_include_file('default', 'twig'))));
+
         $twig     = TwigFactory::get($loader);
         $template = $twig->load('main.twig');
 
         $extras = array_filter($this->base_data, function ($value) {
             return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
         }, ARRAY_FILTER_USE_KEY);
-        $extras['host'] = $this->base_data['HOST'];
+        $extras['host'] = $this->base_data['HOST'] ?? null;
 
         return $template->render([
             'data' => $this->base_data,
@@ -117,6 +117,8 @@ class TemplateRenderer extends BaseTemplateRenderer
             return;
         }
 
+        $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? '';
+
         foreach ($object->content[0]->attributes->metadata->content as $meta) {
             $this->base_data[$meta->content->key->content] = $meta->content->value->content;
         }
@@ -130,14 +132,12 @@ class TemplateRenderer extends BaseTemplateRenderer
             $cat = new Category();
             $cat = $cat->parse($value);
 
-            if (isset($value->meta->classes->content[0]->content) && $value->meta->classes->content[0]->content === 'dataStructures') {
+            if (($value->meta->classes->content[0]->content ?? null) === 'dataStructures') {
                 $this->base_structures = array_merge($this->base_structures, $cat->structures);
             } else {
                 $this->categories[] = $cat;
             }
         }
-
-        $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? '';
     }
 
     /**
@@ -148,7 +148,7 @@ class TemplateRenderer extends BaseTemplateRenderer
      *
      * @return null|string File path or null if not found
      */
-    public function find_include_file(string $template, string $extension = 'twig'): ?string
+    public function find_include_file(string $template, string $extension = 'twig', bool $fallback = true): ?string
     {
         $include    = null;
         $includes = [
@@ -167,7 +167,7 @@ class TemplateRenderer extends BaseTemplateRenderer
             return $include;
         }
 
-        if (in_array($extension, ['twig', 'js', 'css']) && $template !== 'default') {
+        if (in_array($extension, ['twig', 'js', 'css']) && $template !== 'default' && $fallback === true) {
             return $this->find_include_file('default', $extension);
         }
 

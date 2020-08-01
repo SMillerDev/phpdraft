@@ -60,6 +60,7 @@ class TwigFactory
                 if (MarkdownRuntime::class === $class) {
                     return new MarkdownRuntime(new DefaultMarkdown());
                 }
+                return null;
             }
         });
         $twig->addExtension(new MarkdownExtension());

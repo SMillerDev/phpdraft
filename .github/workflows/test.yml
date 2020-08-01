@@ -69,20 +69,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Download coverage
-        uses: actions/download-artifact@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          name: coverage
+          php-version: 7.4
+          coverage: pcov
+          extensions: curl,json,mbstring,uopz
+          tools: pecl,phpunit
+
+      - name: Install Composer deps
+        run: composer update --no-interaction --no-suggest
+
+      - name: Run test suite
+        run: composer run-script test-sonar
 
       - name: Code coverage Scan
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Change paths in clover.xml
+        run: |
+          sed -i 's+/home/runner/work/bundle-stripe/bundle-stripe+/github/workspace+g' ./var/coverage/clover.xml
+
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1.1
+        uses: sonarsource/sonarcloud-github-action@v1.3
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
