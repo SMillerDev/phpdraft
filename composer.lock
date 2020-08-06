@@ -471,16 +471,16 @@
         },
         {
             "name": "twig/markdown-extra",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/markdown-extra.git",
-                "reference": "32db423d2d359bd46591a3a8ac0cdc5935a394fc"
+                "reference": "1fe798d559665b64bda4b08eda10793427d7e3bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/markdown-extra/zipball/32db423d2d359bd46591a3a8ac0cdc5935a394fc",
-                "reference": "32db423d2d359bd46591a3a8ac0cdc5935a394fc",
+                "url": "https://api.github.com/repos/twigphp/markdown-extra/zipball/1fe798d559665b64bda4b08eda10793427d7e3bc",
+                "reference": "1fe798d559665b64bda4b08eda10793427d7e3bc",
                 "shasum": ""
             },
             "require": {
@@ -526,18 +526,6 @@
             ],
             "funding": [
                 {
-                    "url": "https://certification.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://live.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://symfony.com/cloud/",
-                    "type": "custom"
-                },
-                {
                     "url": "https://github.com/fabpot",
                     "type": "github"
                 },
@@ -546,7 +534,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-21T09:56:39+00:00"
+            "time": "2020-08-05T14:54:08+00:00"
         },
         {
             "name": "twig/twig",
