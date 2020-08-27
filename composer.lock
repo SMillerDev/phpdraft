@@ -729,12 +729,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/M2Mobi/lunr.halo.git",
-                "reference": "da031dbc9e2342da9b294d8c88e2aee221bc6feb"
+                "reference": "46c622e2cfe3a2635297b3e573c3f557c4cd0365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M2Mobi/lunr.halo/zipball/da031dbc9e2342da9b294d8c88e2aee221bc6feb",
-                "reference": "da031dbc9e2342da9b294d8c88e2aee221bc6feb",
+                "url": "https://api.github.com/repos/M2Mobi/lunr.halo/zipball/46c622e2cfe3a2635297b3e573c3f557c4cd0365",
+                "reference": "46c622e2cfe3a2635297b3e573c3f557c4cd0365",
                 "shasum": ""
             },
             "require": {
@@ -763,7 +763,7 @@
                 "phpunit",
                 "unit tests"
             ],
-            "time": "2020-05-28T14:39:57+00:00"
+            "time": "2020-08-14T12:46:30+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1278,16 +1278,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.39",
+            "version": "0.12.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "f970cab80f0a681019dc669bf8c72905845dadaa"
+                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f970cab80f0a681019dc669bf8c72905845dadaa",
-                "reference": "f970cab80f0a681019dc669bf8c72905845dadaa",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
+                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
                 "shasum": ""
             },
             "require": {
@@ -1330,7 +1330,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-24T21:34:53+00:00"
+            "time": "2020-08-26T19:06:20+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
