@@ -12,18 +12,43 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: PHP ${{ matrix.php-versions }}
+    continue-on-error: ${{ matrix.experimental }}
+    env:
+      extensions: curl,json,mbstring,uopz
+      key: cache-v1 # can be any string, change to clear the extension cache.
     strategy:
       matrix:
         php-versions: ['7.3', '7.4']
+        experimental: [ false ]
+        include:
+          - php-versions: 8.0
+            experimental: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: curl,json,mbstring,uopz
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
           coverage: pcov
           tools: pecl,phpstan,phpunit,cs2pr,phpcs
 
@@ -32,7 +57,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -42,7 +67,7 @@ jobs:
         run: composer validate
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
       - name: Run test suite
         run: composer run-script test
