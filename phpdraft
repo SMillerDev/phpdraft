@@ -43,7 +43,18 @@ try
         Version::version();
         throw new ExecutionException('', 0);
     }
-    if (!(isset($args['file']) || isset($args['debug-json-file']) || isset($args['debug-json']))) {
+
+    stream_set_blocking(STDIN, false);
+    $stdin = stream_get_contents(STDIN);
+    $file = $args->getOpt('file');
+    if (!empty($stdin) && $file !== NULL) {
+        throw new ExecutionException('ERROR: Passed data in both file and stdin', 2);
+    } elseif (!empty($stdin) && $file === NULL) {
+        $file = tempnam(sys_get_temp_dir(), 'phpdraft');
+        file_put_contents($file, $stdin);
+    }
+
+    if (!($file !== NULL || isset($args['debug-json-file']) || isset($args['debug-json']))) {
         throw new ExecutionException('Missing required option: file', 1);
     }
 
@@ -53,10 +64,10 @@ try
     }
 
     if (!isset($args['debug-json-file']) && !isset($args['debug-json'])) {
-        $apib = new ApibFileParser($args->getOpt('file'));
-        $apib = $apib->parse();
-        $offline = FALSE;
-        $online = FALSE;
+        $apib_parser = new ApibFileParser($file);
+        $apib        = $apib_parser->parse();
+        $offline     = FALSE;
+        $online      = FALSE;
 
         try {
             $parser = ParserFactory::getDrafter();
