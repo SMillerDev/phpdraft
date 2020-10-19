@@ -20,7 +20,7 @@
   "require": {
     "php": "^7.3",
     "ql/uri-template": "~1.0",
-    "vanilla/garden-cli": "~2.0",
+    "vanilla/garden-cli": "~3.0",
     "michelf/php-markdown": "~1.9",
     "lukasoppermann/http-status": "~2.0",
     "ext-json": "*",
