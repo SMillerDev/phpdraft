@@ -610,16 +610,16 @@
         },
         {
             "name": "vanilla/garden-cli",
-            "version": "v3.0.1",
+            "version": "v3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vanilla/garden-cli.git",
-                "reference": "5106872feeebcc52512d26abeccc6e4939b1b022"
+                "reference": "5050910c48d987d0a55b92c74ffe8daba00945cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vanilla/garden-cli/zipball/5106872feeebcc52512d26abeccc6e4939b1b022",
-                "reference": "5106872feeebcc52512d26abeccc6e4939b1b022",
+                "url": "https://api.github.com/repos/vanilla/garden-cli/zipball/5050910c48d987d0a55b92c74ffe8daba00945cb",
+                "reference": "5050910c48d987d0a55b92c74ffe8daba00945cb",
                 "shasum": ""
             },
             "require": {
@@ -657,7 +657,7 @@
                 }
             ],
             "description": "A full-featured, yet ridiculously simple commandline parser for your next php cli script. Stop fighting with getopt().",
-            "time": "2020-10-17T19:57:09+00:00"
+            "time": "2020-10-25T00:48:28+00:00"
         }
     ],
     "packages-dev": [
