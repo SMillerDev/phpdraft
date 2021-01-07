@@ -300,37 +300,37 @@ class ObjectStructureElementTest extends LunrBaseTest
     public function testValueStructureObjectContentParseContent(): void
     {
         $this->markTestSkipped('failing');
-        $deps = [];
-        $object = '{
-              "element": "dataStructure",
-              "content": {
-                "element": "Person",
-                "meta": {
-                  "id": {
-                    "element": "string",
-                    "content": "User"
-                  }
-                },
-                "content": [
-                  {
-                    "element": "member",
-                    "content": {
-                      "key": {
-                        "element": "string",
-                        "content": "attributes"
-                      },
-                      "value": {
-                        "element": "Attributes"
-                      }
-                    }
-                  }
-                ]
-              }
-            }';
+        //$deps = [];
+        //$object = '{
+        //      "element": "dataStructure",
+        //      "content": {
+        //        "element": "Person",
+        //        "meta": {
+        //          "id": {
+        //            "element": "string",
+        //            "content": "User"
+        //          }
+        //        },
+        //        "content": [
+        //          {
+        //            "element": "member",
+        //            "content": {
+        //              "key": {
+        //                "element": "string",
+        //                "content": "attributes"
+        //              },
+        //              "value": {
+        //                "element": "Attributes"
+        //              }
+        //            }
+        //          }
+        //        ]
+        //      }
+        //    }';
 
-        $return = $this->class->parse(json_decode($object), $deps);
-        $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        $this->assertInstanceOf(ObjectStructureElement::class, $return->value);
+        //$return = $this->class->parse(json_decode($object), $deps);
+        //$this->assertInstanceOf(ObjectStructureElement::class, $return);
+        //$this->assertInstanceOf(ObjectStructureElement::class, $return->value);
     }
 
     /**
