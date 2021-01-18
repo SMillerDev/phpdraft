@@ -1,4 +1,5 @@
-# PHPDraft [![Packagist Version](https://img.shields.io/packagist/v/smillerdev/phpdraft.svg)](https://github.com/SMillerDev/phpdraft/releases/latest) [![Sonar Coverage](https://img.shields.io/sonar/https/sonarcloud.io/SMillerDev_phpdraft/coverage.svg)](https://sonarcloud.io/dashboard?id=SMillerDev_phpdraft) [![Sonar Quality Gate](https://img.shields.io/sonar/https/sonarcloud.io/SMillerDev_phpdraft/alert_status.svg)](https://sonarcloud.io/dashboard?id=SMillerDev_phpdraft) [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)](https://github.com/SMillerDev/phpdraft/commits/master) 
+# PHPDraft [![Packagist Version](https://img.shields.io/packagist/v/smillerdev/phpdraft.svg)](https://github.com/SMillerDev/phpdraft/releases/latest) [![Sonar Coverage](https://img.shields.io/sonar/https/sonarcloud.io/SMillerDev_phpdraft/coverage.svg)](https://sonarcloud.io/dashboard?id=SMillerDev_phpdraft) [![Sonar Quality Gate](https://img.shields.io/sonar/https/sonarcloud.io/SMillerDev_phpdraft/alert_status.svg)](https://sonarcloud.io/dashboard?id=SMillerDev_phpdraft) [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)](https://github.com/SMillerDev/phpdraft/commits/master) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSMillerDev%2Fphpdraft.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSMillerDev%2Fphpdraft?ref=badge_shield)
+
 This is a parser for API Blueprint files in PHP.[1](#dependencies)
 
 ## Dependencies
@@ -77,3 +78,7 @@ Run `phing phar` or `phing phar-nightly`
 ## Libraries
 This app usage the following libraries:
 * https://github.com/michelf/php-markdown.git
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSMillerDev%2Fphpdraft.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSMillerDev%2Fphpdraft?ref=badge_large)
