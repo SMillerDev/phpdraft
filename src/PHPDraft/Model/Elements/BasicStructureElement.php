@@ -68,8 +68,8 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Parse a JSON object to a structure.
      *
-     * @param object $object       An object to parse
-     * @param array  $dependencies Dependencies of this object
+     * @param object|null $object       An object to parse
+     * @param array       $dependencies Dependencies of this object
      *
      * @return StructureElement self reference
      */
@@ -150,7 +150,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return string HTML string
      */
-    protected function get_element_as_html($element): string
+    protected function get_element_as_html(string $element): string
     {
         if (in_array($element, self::DEFAULTS)) {
             return '<code>' . $element . '</code>';
@@ -167,7 +167,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return string
      */
-    public function string_value($flat = false)
+    public function string_value(bool $flat = false)
     {
         if (is_array($this->value)) {
             $value_key = rand(0, count($this->value));
