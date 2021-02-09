@@ -8,6 +8,7 @@
         {% if structure.ref %}
             <p>Inherits from <a href="#object-{{ structure.ref|lower }}">{{ structure.ref }}</a></p>
         {% endif %}
+        {% if structure is inheriting %}<p>Inherits from <a href="#object-{{ structure.element|lower }}">{{ structure.element }}</a></p>{% endif %}
         {% if structure.description %}{{ structure.description|markdown_to_html }}{% endif %}
         <div class="row">
             {% if structure.value is iterable %}

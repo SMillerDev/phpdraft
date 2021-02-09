@@ -1,0 +1,31 @@
+{% if value is bool %}
+    <span class="example-value pull-right">{% if value %}true{% else %}false{% endif %}</span>
+{% elseif value is array_type %}
+    <div class="array-struct">
+    {% if value.value is iterable %}
+        <ul class="list-group mdl-list">
+            {% for value in value.value %}
+                {% include 'value.twig' %}
+            {% endfor %}
+        </ul>
+    {% elseif value.value is string %}
+        <tr><td>{{ value.key }}</td><td>{{ value.get_element_as_html(value.type) }}</td><td>{{ value.description }}</td></tr>
+    {% endif %}
+    </div>
+{% elseif value is enum_type %}
+    <div class="enum-struct">
+    {% if value.value is iterable %}
+        <ul class="list-group mdl-list">
+            {% for value in value.value %}
+                {% include 'value.twig' %}
+            {% endfor %}
+        </ul>
+    {% elseif value.value is string %}
+        <tr><td>{{ value.key.value }}</td><td>{{ value.get_element_as_html(value.type) }}</td><td>{{ value.description }}</td></tr>
+    {% endif %}
+    </div>
+{% elseif value is string %}
+    <span class="example-value pull-right">{{ value }}</span>
+{% else %}
+    {{ value|raw }}
+{% endif %}
