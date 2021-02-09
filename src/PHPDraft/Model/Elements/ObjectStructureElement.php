@@ -136,11 +136,6 @@ class ObjectStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        $options = array_merge(self::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
-        if (!is_null($this->element) && !in_array($this->element, $options)) {
-            $this->description = '<p>Inherits from <a href="#object-' . strtolower($this->element) . '">' . $this->element . '</a></p>' . $this->description;
-        }
-
         if (is_array($this->value)) {
             $return = '';
             foreach ($this->value as $object) {
@@ -203,7 +198,7 @@ class ObjectStructureElement extends BasicStructureElement
 
         $type     = $this->get_element_as_html($this->type);
         $variable = '';
-        if ($this->is_variable) {
+        if ($this->is_variable === TRUE) {
             $link_name = str_replace(' ', '-', strtolower($this->key->type));
             $tooltip = 'This is a variable key of type &quot;' . $this->key->type . '&quot;';
             $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" data-tooltip="' . $tooltip . '" title="' . $tooltip . '"></span></a>';

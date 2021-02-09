@@ -8,6 +8,7 @@ use Lukasoppermann\Httpstatus\Httpstatus;
 use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
 use PHPDraft\Model\Elements\ArrayStructureElement;
+use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use Twig\Environment;
@@ -55,6 +56,21 @@ class TwigFactory
         $twig->addTest(new TwigTest('array_type', function ($object) {
             return $object instanceof ArrayStructureElement;
         }));
+        $twig->addTest(new TwigTest('bool', function ($object) {
+            return is_bool($object);
+        }));
+        $twig->addTest(new TwigTest('string', function ($object) {
+            return is_string($object);
+        }));
+
+        $twig->addTest(new TwigTest('inheriting', function (BasicStructureElement $object) {
+            $options = array_merge(ObjectStructureElement::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
+            return !(is_null($object->element) || in_array($object->element, $options));
+        }));
+        $twig->addTest(new TwigTest('variable_type', function (BasicStructureElement $object) {
+            return $object->is_variable;
+        }));
+
         $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
             public function load($class) {
                 if (MarkdownRuntime::class === $class) {

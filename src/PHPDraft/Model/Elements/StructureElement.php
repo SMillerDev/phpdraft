@@ -46,5 +46,5 @@ interface StructureElement
      *
      * @return string
      */
-    public function string_value($flat = false);
+    public function string_value(bool $flat = false);
 }
