@@ -41,7 +41,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      *
      * @covers \PHPDraft\Model\Elements\ArrayStructureElement::parse
      */
-    public function testSuccessfulParse($object, $expected)
+    public function testSuccessfulParse(string $object, ArrayStructureElement $expected): void
     {
         $dep = [];
         $obj = json_decode($object);

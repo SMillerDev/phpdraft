@@ -26,13 +26,13 @@ abstract class BaseTemplateRenderer
     /**
      * CSS Files to load.
      *
-     * @var array
+     * @var string[]
      */
     public $css = [];
     /**
      * JS Files to load.
      *
-     * @var array
+     * @var string[]
      */
     public $js = [];
     /**
@@ -56,7 +56,7 @@ abstract class BaseTemplateRenderer
     /**
      * The base data of the API.
      *
-     * @var array
+     * @var array<mixed>
      */
     protected $base_data;
     /**

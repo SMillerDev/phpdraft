@@ -120,7 +120,7 @@ class EnumStructureElementTest extends LunrBaseTest
      *
      * @covers \PHPDraft\Model\Elements\EnumStructureElement::parse
      */
-    public function testSuccesfulParse($object, $expected)
+    public function testSuccesfulParse(string $object, EnumStructureElement $expected): void
     {
         $dep = [];
         $res = $this->class->parse(json_decode($object), $dep);

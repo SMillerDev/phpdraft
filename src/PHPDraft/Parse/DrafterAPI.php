@@ -53,7 +53,7 @@ class DrafterAPI extends BaseParser
      *
      * @param string $message API blueprint to parse
      *
-     * @return false|resource
+     * @return false|resource|\CurlHandle
      */
     public static function curl_init_drafter(string $message)
     {

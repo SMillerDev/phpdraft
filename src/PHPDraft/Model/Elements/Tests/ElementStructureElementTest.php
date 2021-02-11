@@ -34,7 +34,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::parse
      */
-    public function testParse()
+    public function testParse(): void
     {
         $json = '{"element": "Cow", "content": "stuff", "meta": {"description": {"content": "desc"}}}';
         $dep  = [];
@@ -49,7 +49,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::string_value
      */
-    public function testStringValue()
+    public function testStringValue(): void
     {
         $this->assertSame('<li class="list-group-item mdl-list__item"><a class="code" title="" href="#object-"></a></li>', $this->class->string_value());
     }
@@ -57,7 +57,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::__toString
      */
-    public function testToString()
+    public function testToString(): void
     {
         $this->set_reflection_property_value('type', 'string');
 
@@ -67,7 +67,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::__toString
      */
-    public function testToStringCustomType()
+    public function testToStringCustomType(): void
     {
         $this->set_reflection_property_value('type', 'Cow');
 
@@ -77,7 +77,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::__toString
      */
-    public function testToStringDescription()
+    public function testToStringDescription(): void
     {
         $this->set_reflection_property_value('type', 'Cow');
         $this->set_reflection_property_value('description', 'Something');
@@ -88,7 +88,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::__toString
      */
-    public function testToStringValue()
+    public function testToStringValue(): void
     {
         $this->set_reflection_property_value('type', 'Cow');
         $this->set_reflection_property_value('value', 'stuff');
@@ -99,7 +99,7 @@ class ElementStructureElementTest extends LunrBaseTest
     /**
      * @covers  \PHPDraft\Model\Elements\ElementStructureElement::__toString
      */
-    public function testToStringDescriptionAndValue()
+    public function testToStringDescriptionAndValue(): void
     {
         $this->set_reflection_property_value('type', 'Cow');
         $this->set_reflection_property_value('value', 'stuff');

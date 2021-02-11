@@ -72,7 +72,7 @@ class TwigFactory
         }));
 
         $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
-            public function load($class) {
+            public function load(string $class) {
                 if (MarkdownRuntime::class === $class) {
                     return new MarkdownRuntime(new DefaultMarkdown());
                 }

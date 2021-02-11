@@ -58,7 +58,7 @@ class ObjectStructureElementTest extends LunrBaseTest
      *
      * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
-    public function testSuccesfulParse($object, $expected)
+    public function testSuccesfulParse(string $object, ObjectStructureElement $expected): void
     {
         $dep = [];
         $res = $this->class->parse(json_decode($object), $dep);

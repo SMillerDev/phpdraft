@@ -17,7 +17,7 @@ interface StructureElement
     /**
      * Default data types.
      *
-     * @var array
+     * @var string[]
      */
     public const DEFAULTS = ['boolean', 'string', 'number', 'object', 'array', 'enum'];
 
