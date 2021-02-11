@@ -145,7 +145,7 @@ class HTTPResponseTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"content":[{"element":"dataStructure", "content":[]}]}';
+        $obj = '{"content":[{"element":"dataStructure", "content":{"content": {}}}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -160,7 +160,7 @@ class HTTPResponseTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"content":[{"element":"dataStructure", "content":[{}]}]}';
+        $obj = '{"content":[{"element":"dataStructure", "content":{"content": [{}]}}]}';
 
         $this->class->parse(json_decode($obj));
 
@@ -175,12 +175,12 @@ class HTTPResponseTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = '{"content":[{"content":"hello", "attributes":{"contentType":"content"}, "element":"hello"}]}';
+        $obj = '{"content":[{"content":"hello", "attributes":{"contentType":"content"}, "element":"asset"}]}';
 
         $this->class->parse(json_decode($obj));
-
-        $this->assertArrayHasKey('content', $this->get_reflection_property_value('content'));
-        $this->assertSame('hello', $this->get_reflection_property_value('content')['content']);
+        $prop = $this->get_reflection_property_value('content');
+        $this->assertArrayHasKey('content', $prop);
+        $this->assertSame('hello', $prop['content']);
     }
 
     /**

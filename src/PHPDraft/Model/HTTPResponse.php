@@ -90,7 +90,9 @@ class HTTPResponse implements Comparable
             $this->parse_headers($object->attributes->headers);
         }
 
-        $this->parse_content($object);
+        foreach ($object->content as $value) {
+            $this->parse_content($value);
+        }
 
         return $this;
     }
@@ -119,49 +121,54 @@ class HTTPResponse implements Comparable
     /**
      * Parse request content.
      *
-     * @param stdClass $object An object to parse for content
+     * @param stdClass $value An object to parse for content
      *
      * @return void
      */
-    protected function parse_content(stdClass $object): void
+    protected function parse_content(stdClass $value): void
     {
-        foreach ($object->content as $value) {
-            if ($value->element === 'copy') {
-                $this->description = $value->content;
-                continue;
-            }
+        if ($value->element === 'copy') {
+            $this->description = $value->content;
+            return;
+        }
 
-            if ($value->element === 'dataStructure') {
-                $data_content = is_array($value->content) ? $value->content : [$value->content];
-                $this->parse_structure($data_content);
-                continue;
-            }
-
+        if ($value->element === 'asset') {
             if (isset($value->attributes->contentType->content)) {
                 $this->content[$value->attributes->contentType->content] = $value->content;
             } elseif (isset($value->attributes->contentType)) {
                 $this->content[$value->attributes->contentType] = $value->content;
             }
+            return;
+        }
+
+        if ($value->element === 'dataStructure') {
+            foreach ($value->content->content as $object) {
+                $this->parse_structure($object);
+            }
+            return;
         }
     }
 
     /**
      * Parse structure of the content.
      *
-     * @param stdClass[] $objects Objects containing the structure
+     * @param stdClass $object Objects containing the structure
      *
      * @return void
      */
-    protected function parse_structure(array $objects): void
+    protected function parse_structure(stdClass $object): void
     {
-        foreach ($objects as $object) {
-            $deps   = [];
-            $struct = new ObjectStructureElement();
-            $struct->parse($object, $deps);
-            $struct->deps = $deps;
-
-            $this->structure[] = $struct;
+        $deps   = [];
+        $struct = new ObjectStructureElement();
+        $struct->parse($object, $deps);
+        $struct->deps = $deps;
+        foreach ($this->structure as $prev) {
+            if ($struct->__toString() === $prev->__toString()) {
+                return;
+            }
         }
+
+        $this->structure[] = $struct;
     }
 
     /**

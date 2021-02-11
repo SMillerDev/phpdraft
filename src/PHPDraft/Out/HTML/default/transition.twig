@@ -129,7 +129,9 @@
                 {% if response.structure|length > 0 %}
                 <h5>Data Structure</h5>
                 <div class="row">
+                    <table class="table table-striped mdl-data-table mdl-js-data-table">
                     {% for value in response.structure %}{{ value|raw }}{% endfor %}
+                    </table>
                 </div>
                 {% endif %}
                 {% for response_key,value in response.content %}
