@@ -14,15 +14,17 @@ jobs:
     name: PHP ${{ matrix.php-versions }}
     continue-on-error: ${{ matrix.experimental }}
     env:
-      extensions: curl,json,mbstring,uopz
+      extensions: curl,json,mbstring,${{ matrix.uopz }}
       key: cache-v1 # can be any string, change to clear the extension cache.
     strategy:
       matrix:
         php-versions: ['7.3', '7.4']
         experimental: [ false ]
+        uopz: [ 'uopz' ]
         include:
           - php-versions: 8.0
             experimental: true
+            uopz: 'uopz-snapshot'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -69,14 +71,14 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
-      - name: Run test suite
-        run: composer run-script test
-
       - name: Setup Problem Matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Run test suite
+        run: composer run-script test
+
       - name: PHPStan
-        run: phpstan analyse --level=4 --error-format=checkstyle src/ | cs2pr
+        run: phpstan analyse --level=5 src/
 
       - name: PHPCS
         run: phpcs --standard=tests/phpcs.xml --ignore=\*Minifier.php src/ | cs2pr
