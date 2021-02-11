@@ -189,6 +189,6 @@
     </target>
 
     <target name="-phar-determine-version">
-        <exec command="php ${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}'" outputproperty="version"/>
+        <exec command="php ${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}-?(rc|beta)?[0-9]?'" outputproperty="version"/>
     </target>
 </project>
