@@ -83,8 +83,8 @@
             </fileset>
         </copy>
         <copy todir="${project.basedir}/build/phar/phpdraft/src/Twig/Extra/Markdown">
-            <fileset dir="vendor/twig/markdown-extra/src">
-                <include name="**/*.php"/>
+            <fileset dir="vendor/twig/markdown-extra">
+                <include name="*.php"/>
             </fileset>
         </copy>
         <copy todir="${project.basedir}/build/phar/phpdraft/src/MatthiasMullie/Minify">
