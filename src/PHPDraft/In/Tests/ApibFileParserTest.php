@@ -108,7 +108,8 @@ class ApibFileParserTest extends LunrBaseTest
      *
      * @covers \PHPDraft\In\ApibFileParser::set_apib_content
      */
-    public function testSetContent(){
+    public function testSetContent(): void
+    {
         $this->class->set_apib_content('content');
         $this->assertEquals('content', $this->get_reflection_property_value('full_apib'));
     }

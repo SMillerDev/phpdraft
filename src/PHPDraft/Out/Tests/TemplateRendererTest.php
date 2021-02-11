@@ -58,6 +58,7 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Provide HTTP status codes
+     * @return array<int, array<int, int|string>>
      */
     public function responseStatusProvider(): array
     {
@@ -90,6 +91,7 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * Provide HTTP methods
+     * @return array<int, array<int, string>>
      */
     public function requestMethodProvider(): array
     {
@@ -115,14 +117,14 @@ class TemplateRendererTest extends LunrBaseTest
      *
      * @dataProvider requestMethodProvider
      *
-     * @param int    $code HTTP Method
+     * @param string $method HTTP Method
      * @param string $text Class to return
      *
      * @covers \PHPDraft\Out\TemplateRenderer::get_method_icon
      */
-    public function testRequestMethod($code, $text): void
+    public function testRequestMethod(string $method, string $text): void
     {
-        $return = TemplateRenderer::get_method_icon($code);
+        $return = TemplateRenderer::get_method_icon($method);
         $this->assertEquals($text, $return);
     }
 

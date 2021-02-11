@@ -35,7 +35,7 @@ class BaseHtmlGeneratorTest extends LunrBaseTest
     /**
      * * @covers  \PHPDraft\Parse\BaseHtmlGenerator::init
      */
-    public function testInit()
+    public function testInit(): void
     {
         $data = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
         $init = $this->class->init($data);

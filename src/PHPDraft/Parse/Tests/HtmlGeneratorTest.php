@@ -51,13 +51,15 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        uopz_undefine('ID_STATIC');
+        $this->constant_undefine('ID_STATIC');
         unset($this->class);
         unset($this->reflection);
     }
 
     /**
      * Tests if the constructor sets the property correctly
+     *
+     * @requires ext-uopz
      */
     public function testSetupCorrectly(): void
     {
@@ -68,6 +70,7 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Tests if the constructor sets the property correctly
+     * @requires ext-uopz
      */
     public function testGetHTML(): void
     {
@@ -77,6 +80,7 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Tests if the constructor sets the property correctly
+     * @requires ext-uopz
      */
     public function testGetHTMLMaterial(): void
     {
@@ -86,6 +90,7 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Tests if the constructor sets the property correctly
+     * @requires ext-uopz
      */
     public function testGetHTMLAdvanced(): void
     {

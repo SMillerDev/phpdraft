@@ -15,7 +15,7 @@ class ParserFactoryTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getDrafter
      */
-    public function testGetDrafter()
+    public function testGetDrafter(): void
     {
         $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
             return true;
@@ -29,7 +29,7 @@ class ParserFactoryTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getDrafter
      */
-    public function testGetDrafterAPI()
+    public function testGetDrafterAPI(): void
     {
         $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
             return false;
@@ -47,7 +47,7 @@ class ParserFactoryTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getDrafter
      */
-    public function testGetDrafterFails()
+    public function testGetDrafterFails(): void
     {
         $this->expectException('\PHPDraft\Parse\ResourceException');
         $this->expectExceptionMessage('Couldn\'t get an APIB parser');
@@ -67,7 +67,7 @@ class ParserFactoryTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getJson
      */
-    public function testGetJson()
+    public function testGetJson(): void
     {
         $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
             return false;
@@ -85,7 +85,7 @@ class ParserFactoryTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getJson
      */
-    public function testGetJsonFails()
+    public function testGetJsonFails(): void
     {
         $this->expectException('\PHPDraft\Parse\ResourceException');
         $this->expectExceptionMessage('Couldn\'t get a JSON parser');

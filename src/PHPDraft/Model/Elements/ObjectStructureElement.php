@@ -18,13 +18,17 @@ namespace PHPDraft\Model\Elements;
 class ObjectStructureElement extends BasicStructureElement
 {
 
+    /**
+     * Object representation before parsing
+     * @var \stdClass
+     */
     private $object;
 
     /**
      * Unset object function.
      * @internal Only for tests
      */
-    public function __clearForTest()
+    public function __clearForTest(): void
     {
         $this->object = null;
     }

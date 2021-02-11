@@ -53,9 +53,9 @@ class BasicStructureElementTest extends LunrBaseTest
      * @dataProvider stringValueProvider
      *
      * @param mixed  $value        Value to set to the class
-     * @param string $string_value Expected string representation
+     * @param mixed $string_value Expected string representation
      */
-    public function testStringValue($value, $string_value)
+    public function testStringValue($value, $string_value): void
     {
         $this->set_reflection_property_value('value', $value);
 
@@ -119,7 +119,7 @@ class BasicStructureElementTest extends LunrBaseTest
      * @param mixed                 $value          Value to set to the class
      * @param BasicStructureElement $expected_value Expected string representation
      */
-    public function testParseCommon($value, $expected_value)
+    public function testParseCommon($value, BasicStructureElement $expected_value): void
     {
         $dep = [];
         $method = $this->reflection->getMethod('parse_common');
