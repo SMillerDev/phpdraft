@@ -24,6 +24,7 @@ class TwigFactory
 {
     public static function get(LoaderInterface $loader): Environment {
         $twig = new Environment($loader);
+        $twig->setCache(sys_get_temp_dir() . '/drafter/twig_cache');
 
         $twig->addFilter(new TwigFilter('minify_css', function ($string) {
             $minify =  new Css();
