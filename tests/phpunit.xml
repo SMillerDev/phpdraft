@@ -1,74 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit    bootstrap="test.bootstrap.inc.php"
-            backupGlobals="false"
-            backupStaticAttributes="false"
-            forceCoversAnnotation="true"
-            colors="true"
-            verbose="true">
-    <php>
-        <ini name="zend.enable_gc" value="1" />
-    </php>
-    <testsuites>
-        <testsuite name="Parse">
-            <file>../src/PHPDraft/Parse/Tests/BaseParserTest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/HtmlGeneratorTest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/BaseHtmlGeneratorTest.php</file>
-            <file>../src/PHPDraft/Parse/Tests/ParserFactoryTest.php</file>
-        </testsuite>
-        <testsuite name="Model">
-            <file>../src/PHPDraft/Model/Tests/CategoryTest.php</file>
-            <file>../src/PHPDraft/Model/Tests/HierarchyElementTest.php</file>
-            <file>../src/PHPDraft/Model/Tests/HTTPRequestTest.php</file>
-            <file>../src/PHPDraft/Model/Tests/HTTPResponseTest.php</file>
-            <file>../src/PHPDraft/Model/Tests/ResourceTest.php</file>
-            <file>../src/PHPDraft/Model/Tests/TransitionTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/BasicStructureElementTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/EnumStructureElementTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/ObjectStructureElementTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/ArrayStructureElementTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/RequestBodyElementTest.php</file>
-            <file>../src/PHPDraft/Model/Elements/Tests/ElementStructureElementTest.php</file>
-        </testsuite>
-        <testsuite name="In">
-            <file>../src/PHPDraft/In/Tests/ApibFileParserTest.php</file>
-        </testsuite>
-        <testsuite name="Out">
-            <file>../src/PHPDraft/Out/Tests/VersionTest.php</file>
-            <file>../src/PHPDraft/Out/Tests/SortingTest.php</file>
-            <file>../src/PHPDraft/Out/Tests/TemplateRendererTest.php</file>
-            <file>../src/PHPDraft/Out/Tests/TwigFactoryTest.php</file>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist>
-            <directory>../src/PHPDraft/</directory>
-            <exclude>
-                <directory>../src/PHPDraft/Core/</directory>
-                <directory>../src/PHPDraft/In/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
-                <directory>../src/PHPDraft/Out/Tests/</directory>
-                <directory>../src/PHPDraft/Out/HTML/</directory>
-                <directory>../src/PHPDraft/Parse/Tests/</directory>
-                <file>../src/PHPDraft/Model/Comparable.php</file>
-                <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
-                <file>../src/PHPDraft/Out/Minifier.php</file>
-                <file>../src/PHPDraft/Parse/ResourceException.php</file>
-                <file>../src/PHPDraft/**Exception.php</file>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log    type="coverage-html"
-                target="../build/coverage"
-                lowUpperBound="35"
-                highLowerBound="70"/>
-        <log    type="coverage-clover"
-                target="../build/logs/clover.xml"/>
-        <log    type="junit"
-                target="../build/logs/junit.xml"/>
-    </logging>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="test.bootstrap.inc.php" backupGlobals="false" backupStaticAttributes="false" forceCoversAnnotation="true" colors="true" verbose="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory>../src/PHPDraft/</directory>
+    </include>
+    <exclude>
+      <directory>../src/PHPDraft/Core/</directory>
+      <directory>../src/PHPDraft/In/Tests/</directory>
+      <directory>../src/PHPDraft/Model/Tests/</directory>
+      <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
+      <directory>../src/PHPDraft/Out/Tests/</directory>
+      <directory>../src/PHPDraft/Out/HTML/</directory>
+      <directory>../src/PHPDraft/Parse/Tests/</directory>
+      <file>../src/PHPDraft/Model/Comparable.php</file>
+      <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
+      <file>../src/PHPDraft/Out/Minifier.php</file>
+      <file>../src/PHPDraft/Parse/ResourceException.php</file>
+      <file>../src/PHPDraft/**Exception.php</file>
+    </exclude>
+    <report>
+      <clover outputFile="../build/logs/clover.xml"/>
+      <html outputDirectory="../build/coverage" lowUpperBound="35" highLowerBound="70"/>
+    </report>
+  </coverage>
+  <php>
+    <ini name="zend.enable_gc" value="1"/>
+  </php>
+  <testsuites>
+    <testsuite name="Parse">
+      <file>../src/PHPDraft/Parse/Tests/BaseParserTest.php</file>
+      <file>../src/PHPDraft/Parse/Tests/DrafterTest.php</file>
+      <file>../src/PHPDraft/Parse/Tests/DrafterAPITest.php</file>
+      <file>../src/PHPDraft/Parse/Tests/HtmlGeneratorTest.php</file>
+      <file>../src/PHPDraft/Parse/Tests/BaseHtmlGeneratorTest.php</file>
+      <file>../src/PHPDraft/Parse/Tests/ParserFactoryTest.php</file>
+    </testsuite>
+    <testsuite name="Model">
+      <file>../src/PHPDraft/Model/Tests/CategoryTest.php</file>
+      <file>../src/PHPDraft/Model/Tests/HierarchyElementTest.php</file>
+      <file>../src/PHPDraft/Model/Tests/HTTPRequestTest.php</file>
+      <file>../src/PHPDraft/Model/Tests/HTTPResponseTest.php</file>
+      <file>../src/PHPDraft/Model/Tests/ResourceTest.php</file>
+      <file>../src/PHPDraft/Model/Tests/TransitionTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/BasicStructureElementTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/EnumStructureElementTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/ObjectStructureElementTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/ArrayStructureElementTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/RequestBodyElementTest.php</file>
+      <file>../src/PHPDraft/Model/Elements/Tests/ElementStructureElementTest.php</file>
+    </testsuite>
+    <testsuite name="In">
+      <file>../src/PHPDraft/In/Tests/ApibFileParserTest.php</file>
+    </testsuite>
+    <testsuite name="Out">
+      <file>../src/PHPDraft/Out/Tests/VersionTest.php</file>
+      <file>../src/PHPDraft/Out/Tests/SortingTest.php</file>
+      <file>../src/PHPDraft/Out/Tests/TemplateRendererTest.php</file>
+      <file>../src/PHPDraft/Out/Tests/TwigFactoryTest.php</file>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <junit outputFile="../build/logs/junit.xml"/>
+  </logging>
 </phpunit>
