@@ -14,7 +14,7 @@ jobs:
     name: PHP ${{ matrix.php-versions }}
     continue-on-error: ${{ matrix.experimental }}
     env:
-      extensions: curl,json,mbstring,${{ matrix.uopz }}
+      extensions: curl,json,mbstring,xdebug,${{ matrix.uopz }}
       key: cache-v1 # can be any string, change to clear the extension cache.
     strategy:
       matrix:
@@ -51,6 +51,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
+          ini-values: xdebug.mode=debug
           coverage: pcov
           tools: pecl,phpstan,phpunit,cs2pr,phpcs
 
