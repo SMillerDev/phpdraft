@@ -26,12 +26,6 @@ class HtmlGeneratorTest extends LunrBaseTest
     protected $class;
 
     /**
-     * Test reflection
-     * @var ReflectionClass
-     */
-    protected $reflection;
-
-    /**
      * Set up
      * @requires ext-uopz
      */

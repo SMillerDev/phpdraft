@@ -117,7 +117,7 @@ abstract class BasicStructureElement implements StructureElement
             $this->description = htmlentities($object->meta->description);
         }
         if ($this->description !== null) {
-            $encoded           = htmlentities($this->description, ENT_COMPAT, null, false);
+            $encoded           = htmlentities($this->description, ENT_COMPAT, 'ISO-8859-1', false);
             $this->description = $encoded;
         }
 

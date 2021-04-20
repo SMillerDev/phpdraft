@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PHPDraft\Out;
-
 
 use Lukasoppermann\Httpstatus\Httpstatus;
 use MatthiasMullie\Minify\CSS;

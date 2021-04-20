@@ -1,5 +1,6 @@
 FORMAT: 1A
 HOST: https://alpha-api.app.net
+ALT_HOST: https://acc.alpha-api.app.net, https://alpha-api.app.net
 EXTRA_HOST: https://test.alpha-api.app.net
 
 # Real World API
@@ -12,6 +13,11 @@ Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 
 NOTE: This document is a **work in progress**.
 
+|Header1 |Header2  | Header3|
+--- | --- | ---
+|data1|data2|data3|
+|data11|data12|data13|
+
 # Group Posts
 This section groups App.net post resources.
 
@@ -21,7 +27,7 @@ rich text and annotations which comprise all of the content a users sees in
 their feed. Posts are closely tied to the follow graph...
 
 + Parameters
-    + post_id: `1` (string, optional) - The id of the Post.
+    + post_id: `1` (string, optional) - The [id](#id) of the Post.
         + Default: 2
 
 + Model (application/json)
