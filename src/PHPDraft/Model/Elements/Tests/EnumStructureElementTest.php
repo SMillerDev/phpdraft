@@ -77,7 +77,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $this->class->key->value = 'key';
         $this->class->element = 'string';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td>key</td><td><code>string</code></td><td></td></tr>', $return);
+        $this->assertSame('<tr><td>key</td><td><code>string</code></td><td>' . PHP_EOL . '</td></tr>', $return);
     }
 
     /**
@@ -91,7 +91,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $this->class->key->value = 'key';
         $this->class->element = 'Car';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td>key</td><td><a class="code" title="Car" href="#object-car">Car</a></td><td></td></tr>', $return);
+        $this->assertSame('<tr><td>key</td><td><a class="code" title="Car" href="#object-car">Car</a></td><td>' . PHP_EOL . '</td></tr>', $return);
     }
 
     /**

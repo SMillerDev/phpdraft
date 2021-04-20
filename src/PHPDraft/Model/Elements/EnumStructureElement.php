@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
+use Michelf\MarkdownExtra;
+
 class EnumStructureElement extends BasicStructureElement
 {
     /**
@@ -80,7 +82,7 @@ class EnumStructureElement extends BasicStructureElement
         if (is_string($this->value)) {
             $type = $this->get_element_as_html($this->element);
 
-            return '<tr><td>' . $this->key->value . '</td><td>' . $type . '</td><td>' . $this->description . '</td></tr>';
+            return '<tr><td>' . $this->key->value . '</td><td>' . $type . '</td><td>' . MarkdownExtra::defaultTransform($this->description) . '</td></tr>';
         }
 
         $return = '';

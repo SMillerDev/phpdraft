@@ -226,3 +226,23 @@ span.HEAD {
 span.PATCH {
     color: var(--patch-color);
 }
+
+h1.media-heading {
+    max-width: 80%;
+    word-break: break-word;
+}
+
+.host-information {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.host-information label.host-dropdown {
+}
+
+.host-information label.host-dropdown select {
+    border: 0 none rgba(0,0,0,0);
+    display: inherit;
+    width: auto;
+}

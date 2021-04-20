@@ -205,6 +205,7 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @group twig
      */
     public function testGetTemplate(): void {
         $json = '{"content": [{"content": "hello"}]}';
@@ -214,6 +215,7 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @group twig
      */
     public function testGetTemplateSorting(): void {
         $this->set_reflection_property_value('sorting', 3);
@@ -224,6 +226,7 @@ class TemplateRendererTest extends LunrBaseTest
 
     /**
      * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @group twig
      */
     public function testGetTemplateMetaData(): void {
         $this->set_reflection_property_value('sorting', 3);
@@ -241,6 +244,7 @@ TAG;
 
     /**
      * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @group twig
      */
     public function testGetTemplateCategories(): void {
         $this->set_reflection_property_value('sorting', 3);

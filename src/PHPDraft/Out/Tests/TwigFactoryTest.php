@@ -13,6 +13,7 @@ class TwigFactoryTest extends LunrBaseTest
      * Check factory
      *
      * @covers \PHPDraft\Out\TwigFactory::get
+     * @group twig
      */
     public function testFactory(): void
     {

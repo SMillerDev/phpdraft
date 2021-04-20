@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
+use Michelf\MarkdownExtra;
+
 /**
  * Class ObjectStructureElement.
  */
@@ -20,7 +22,7 @@ class ObjectStructureElement extends BasicStructureElement
 
     /**
      * Object representation before parsing
-     * @var \stdClass
+     * @var \stdClass|null
      */
     private $object;
 
@@ -212,7 +214,7 @@ class ObjectStructureElement extends BasicStructureElement
             '<td>' . '<span>' . $this->key->value . '</span>' . $variable . '</td>' .
             '<td>' . $type . '</td>' .
             '<td> <span class="status">' . $this->status . '</span></td>' .
-            '<td>' . $this->description . '</td>' .
+            '<td>' . MarkdownExtra::defaultTransform($this->description) . '</td>' .
             '<td>' . $value . '</td>' .
             '</tr>';
     }
