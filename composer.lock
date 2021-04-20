@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb9d0a0a7eab53f74cf84afe1da29daa",
+    "content-hash": "2f2f96de3d23d4323b8d5298c759c741",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
@@ -794,12 +794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/M2mobi/lunr.halo.git",
-                "reference": "93d137979b153e9d9c181e7315df4bd2522d4606"
+                "reference": "65bbbc8d2905c837c0f76c4b092eb6c083fa124c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M2mobi/lunr.halo/zipball/93d137979b153e9d9c181e7315df4bd2522d4606",
-                "reference": "93d137979b153e9d9c181e7315df4bd2522d4606",
+                "url": "https://api.github.com/repos/M2mobi/lunr.halo/zipball/65bbbc8d2905c837c0f76c4b092eb6c083fa124c",
+                "reference": "65bbbc8d2905c837c0f76c4b092eb6c083fa124c",
                 "shasum": ""
             },
             "require": {
@@ -833,7 +833,7 @@
                 "issues": "https://github.com/M2mobi/lunr.halo/issues",
                 "source": "https://github.com/M2mobi/lunr.halo/tree/master"
             },
-            "time": "2020-11-16T13:53:44+00:00"
+            "time": "2021-03-26T14:04:13+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1514,16 +1514,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.5",
+            "version": "9.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1"
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f3e026641cc91909d421802dd3ac7827ebfd97e1",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f6293e1b30a2354e8428e004689671b83871edde",
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde",
                 "shasum": ""
             },
             "require": {
@@ -1579,7 +1579,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.5"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.6"
             },
             "funding": [
                 {
@@ -1587,7 +1587,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-28T06:44:49+00:00"
+            "time": "2021-03-28T07:26:59+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3253,7 +3253,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3||^8.0",
+        "php": "^7.4||^8.0",
         "ext-json": "*",
         "ext-curl": "*"
     },
