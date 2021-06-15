@@ -2903,16 +2903,16 @@
         },
         {
             "name": "theseer/autoload",
-            "version": "1.26.0",
+            "version": "1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/Autoload.git",
-                "reference": "a760231431ec7c3a8c00029f196b9881de356e05"
+                "reference": "9a5f7b0ded5377fb30bbd7d9f67d0cfd5a056698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/Autoload/zipball/a760231431ec7c3a8c00029f196b9881de356e05",
-                "reference": "a760231431ec7c3a8c00029f196b9881de356e05",
+                "url": "https://api.github.com/repos/theseer/Autoload/zipball/9a5f7b0ded5377fb30bbd7d9f67d0cfd5a056698",
+                "reference": "9a5f7b0ded5377fb30bbd7d9f67d0cfd5a056698",
                 "shasum": ""
             },
             "require": {
@@ -2945,7 +2945,7 @@
             "description": "A tool and library to generate autoload code.",
             "support": {
                 "issues": "https://github.com/theseer/Autoload/issues",
-                "source": "https://github.com/theseer/Autoload/tree/1.26.0"
+                "source": "https://github.com/theseer/Autoload/tree/1.26.1"
             },
             "funding": [
                 {
@@ -2953,7 +2953,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-27T21:09:50+00:00"
+            "time": "2021-06-14T20:51:16+00:00"
         },
         {
             "name": "theseer/directoryscanner",
