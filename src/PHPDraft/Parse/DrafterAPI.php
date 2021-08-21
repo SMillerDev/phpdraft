@@ -53,13 +53,16 @@ class DrafterAPI extends BaseParser
      *
      * @param string $message API blueprint to parse
      *
-     * @return false|resource
+     * @return resource|\CurlHandle
      */
-    public static function curl_init_drafter(string $message)
+    protected static function curl_init_drafter(string $message)
     {
-        $ch = curl_init();
+        $ch = curl_init('https://api.apiblueprint.org/parser');
+        if ($ch === FALSE)
+        {
+            throw new ResourceException('Failed to initialize cURL API!');
+        }
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.apiblueprint.org/parser');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
 
