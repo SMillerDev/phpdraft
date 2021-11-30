@@ -68,7 +68,6 @@ abstract class HierarchyElement
             if ($item->element === 'copy') {
                 $this->description = $item->content;
                 unset($object->content[$key]);
-                continue;
             }
         }
 

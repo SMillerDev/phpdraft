@@ -155,7 +155,7 @@ class Transition extends HierarchyElement
      *
      * @throws \QL\UriTemplate\Exception
      *
-     * @return string a HTML representation of the transition URL
+     * @return string HTML representation of the transition URL
      */
     public function build_url(string $base_url = '', bool $clean = false): string
     {
@@ -228,7 +228,7 @@ class Transition extends HierarchyElement
         $return = [];
         $sl1    = strlen($str1);
         $sl2    = strlen($str2);
-        $max    = $sl1 > $sl2 ? $sl2 : $sl1;
+        $max    = min($sl1, $sl2);
         $i      = 1;
         while ($i <= $max) {
             $s1 = substr($str1, -$i);

@@ -52,7 +52,14 @@ class ElementStructureElement implements StructureElement
         return '<li class="list-group-item mdl-list__item">' . $type . $desc . $value . '</li>';
     }
 
-    public function string_value($flat = false)
+    /**
+     * Get a string representation of the value.
+     *
+     * @param bool $flat get a flat representation of the item.
+     *
+     * @return string
+     */
+    public function string_value(bool $flat = false)
     {
         if ($flat === true) {
             return $this->value;
@@ -64,12 +71,17 @@ class ElementStructureElement implements StructureElement
     /**
      * Represent the element in HTML.
      *
-     * @param string $element Element name
+     * @param string|null $element Element name
      *
      * @return string HTML string
      */
-    protected function get_element_as_html($element): string
+    protected function get_element_as_html(?string $element): string
     {
+        if ($element === null)
+        {
+            return '<code>null</code>';
+        }
+
         if (in_array($element, self::DEFAULTS)) {
             return '<code>' . $element . '</code>';
         }

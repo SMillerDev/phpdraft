@@ -58,9 +58,7 @@ class BasicStructureElementTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('value', $value);
 
-        $this->mock_function('rand', function () {
-            return 0;
-        });
+        $this->mock_function('rand', fn() => 0);
         $return = $this->class->string_value();
         $this->unmock_function('rand');
 

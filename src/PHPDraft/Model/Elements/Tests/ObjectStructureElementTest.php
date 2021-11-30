@@ -359,7 +359,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $val->value = 'stuff';
         $this->class->value = [$val];
         $return = $this->class->__toString();
-        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td></td><td><a class="code" title="things" href="#object-things">things</a></td><td>' . PHP_EOL . '</td></tr></table>', $return);
+        $this->assertSame('<table class="table table-striped mdl-data-table mdl-js-data-table "><tr><td></td><td><a class="code" title="things" href="#object-things">things</a></td><td></td></tr></table>', $return);
     }
 
     /**
@@ -373,7 +373,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->key->value = 'hello';
         $this->class->type = 'mixed';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="mixed" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="mixed" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
     }
 
     /**
@@ -388,7 +388,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value = new ObjectStructureElement();
         $this->class->type = 'object';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>object</code></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>object</code></td><td> <span class="status"></span></td><td></td><td><div class="sub-struct"><span class="example-value pull-right">{  }</span></div></td></tr>', $return);
     }
 
     /**
@@ -405,7 +405,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value->value = 'value';
         $this->class->type = 'array';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>array</code></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td><div class="array-struct"><tr><td></td><td><a class="code" title="value" href="#object-value">value</a></td><td>' . PHP_EOL . '</td></tr></div></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>array</code></td><td> <span class="status"></span></td><td></td><td><div class="array-struct"><tr><td></td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div></td></tr>', $return);
     }
 
     /**
@@ -425,7 +425,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value->key->value = 'key';
         $this->class->value->type = 'enum';
         $return = $this->class->__toString();
-        $this->assertSame('<div class="enum-struct"><tr><td>key</td><td><a class="code" title="value" href="#object-value">value</a></td><td>' . PHP_EOL . '</td></tr></div>', $return);
+        $this->assertSame('<div class="enum-struct"><tr><td>key</td><td><a class="code" title="value" href="#object-value">value</a></td><td></td></tr></div>', $return);
     }
 
     /**
@@ -440,7 +440,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value = true;
         $this->class->type = 'boolean';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td><span class="example-value pull-right">true</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>boolean</code></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">true</span></td></tr>', $return);
     }
 
     /**
@@ -455,7 +455,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->value = 'world';
         $this->class->type = 'Cow';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="Cow" href="#object-cow">Cow</a></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="Cow" href="#object-cow">Cow</a></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
     }
 
     /**
@@ -470,6 +470,6 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->key->value = 'hello';
         $this->class->value = 'world';
         $return = $this->class->__toString();
-        $this->assertSame('<tr><td><span>hello</span></td><td><code>string</code></td><td> <span class="status"></span></td><td>' . PHP_EOL . '</td><td><span class="example-value pull-right">world</span></td></tr>', $return);
+        $this->assertSame('<tr><td><span>hello</span></td><td><code>string</code></td><td> <span class="status"></span></td><td></td><td><span class="example-value pull-right">world</span></td></tr>', $return);
     }
 }
