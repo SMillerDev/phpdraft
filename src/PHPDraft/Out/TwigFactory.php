@@ -9,6 +9,7 @@ use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Model\Elements\StructureElement;
 use Twig\Environment;
 use Twig\Extra\Markdown\DefaultMarkdown;
 use Twig\Extra\Markdown\MarkdownExtension;
@@ -64,7 +65,7 @@ class TwigFactory
         }));
 
         $twig->addTest(new TwigTest('inheriting', function (BasicStructureElement $object) {
-            $options = array_merge(ObjectStructureElement::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
+            $options = array_merge(StructureElement::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
             return !(is_null($object->element) || in_array($object->element, $options));
         }));
         $twig->addTest(new TwigTest('variable_type', function (BasicStructureElement $object) {

@@ -210,9 +210,9 @@ class HTTPRequest implements Comparable
         }
 
         $options = array_merge($options, $additional);
-        $url     = escapeshellarg($this->parent->build_url($base_url, true);
+        $url     = escapeshellarg($this->parent->build_url($base_url, true));
 
-        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . $url), ENT_NOQUOTES | ENT_SUBSTITUTE);
+        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . $url, ENT_NOQUOTES | ENT_SUBSTITUTE);
     }
 
     /**

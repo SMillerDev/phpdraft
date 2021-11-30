@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace PHPDraft\Model\Elements;
 
 use Michelf\MarkdownExtra;
+use stdClass;
 
 /**
  * Class ObjectStructureElement.
@@ -21,7 +22,7 @@ class ObjectStructureElement extends BasicStructureElement
 {
     /**
      * Object representation before parsing
-     * @var \stdClass|null
+     * @var stdClass|null
      * @phpstan-ignore-next-line
      */
     private $object;
@@ -209,13 +210,12 @@ class ObjectStructureElement extends BasicStructureElement
             $tooltip = 'This is a variable key of type &quot;' . $this->key->type . '&quot;';
             $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" data-tooltip="' . $tooltip . '" title="' . $tooltip . '"></span></a>';
         }
+        $desc = '';
+        if ($this->description !== NULL)
+        {
+            $desc = MarkdownExtra::defaultTransform($this->description);
+        }
 
-        return '<tr>' .
-            '<td>' . '<span>' . $this->key->value . '</span>' . $variable . '</td>' .
-            '<td>' . $type . '</td>' .
-            '<td> <span class="status">' . $this->status . '</span></td>' .
-            '<td>' . MarkdownExtra::defaultTransform($this->description) . '</td>' .
-            '<td>' . $value . '</td>' .
-            '</tr>';
+        return "<tr><td><span>{$this->key->value}</span>{$variable}</td><td>{$type}</td><td> <span class=\"status\">{$this->status}</span></td><td>{$desc}</td><td>{$value}</td></tr>";
     }
 }

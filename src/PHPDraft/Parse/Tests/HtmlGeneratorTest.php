@@ -69,7 +69,11 @@ class HtmlGeneratorTest extends LunrBaseTest
     public function testGetHTML(): void
     {
         $this->class->build_html();
-        $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/basic.html', $this->class->__toString());
+        if (version_compare(PHP_VERSION, '8.1.0', '>=')) {
+            $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/basic.html', $this->class->__toString());
+        } else {
+            $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/basic_old.html', $this->class->__toString());
+        }
     }
 
     /**
@@ -79,7 +83,11 @@ class HtmlGeneratorTest extends LunrBaseTest
     public function testGetHTMLMaterial(): void
     {
         $this->class->build_html('material');
-        $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/material.html', $this->class->__toString());
+        if (version_compare(PHP_VERSION, '8.1.0', '>=')) {
+            $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/material.html', $this->class->__toString());
+        } else {
+            $this->assertStringEqualsFile(TEST_STATICS . '/drafter/html/material_old.html', $this->class->__toString());
+        }
     }
 
     /**

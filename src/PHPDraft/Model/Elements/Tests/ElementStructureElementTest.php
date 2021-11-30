@@ -50,7 +50,7 @@ class ElementStructureElementTest extends LunrBaseTest
      */
     public function testStringValue(): void
     {
-        $this->assertSame('<li class="list-group-item mdl-list__item"><a class="code" title="" href="#object-"></a></li>', $this->class->string_value());
+        $this->assertSame('<li class="list-group-item mdl-list__item"><code>null</code></li>', $this->class->string_value());
     }
 
     /**
