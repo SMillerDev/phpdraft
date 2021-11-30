@@ -208,12 +208,11 @@ class HTTPRequest implements Comparable
         foreach ($this->headers as $header => $value) {
             $options[] = '-H ' . escapeshellarg($header . ': ' . $value);
         }
-        $options = array_merge($options, $additional);
 
-        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . escapeshellarg($this->parent->build_url(
-            $base_url,
-            true
-        )));
+        $options = array_merge($options, $additional);
+        $url     = escapeshellarg($this->parent->build_url($base_url, true);
+
+        return htmlspecialchars('curl ' . join(' ', $options) . ' ' . $url), ENT_NOQUOTES | ENT_SUBSTITUTE);
     }
 
     /**
