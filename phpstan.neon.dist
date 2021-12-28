@@ -1,11 +1,13 @@
 parameters:
+    phpVersion: 70400
     bootstrapFiles:
         - tests/test.bootstrap.inc.php
-    excludes_analyse:
+    excludePaths:
         - src/PHPDraft/Out/Version.php
         - src/PHPDraft/Parse/Tests/BaseParserTest.php
         - src/PHPDraft/Parse/Tests/DrafterTest.php
         - src/PHPDraft/Parse/Tests/DrafterAPITest.php
+        - src/PHPDraft/**/Tests/*
     ignoreErrors:
         - '#Access to an undefined property object::\$[a-zA-Z0-9\\_]+#'
         - '#Access to an undefined property PHPDraft\\Model\\HierarchyElement::\$[a-zA-Z0-9_]+#'
