@@ -55,7 +55,7 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Is variable.
      *
-     * @var boolean
+     * @var bool
      */
     public $is_variable;
     /**

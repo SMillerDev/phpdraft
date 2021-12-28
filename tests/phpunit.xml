@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit    bootstrap="test.bootstrap.inc.php"
-            backupGlobals="false"
-            backupStaticAttributes="false"
-            forceCoversAnnotation="true"
-            colors="true"
-            verbose="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="test.bootstrap.inc.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         forceCoversAnnotation="true"
+         colors="true"
+         verbose="true">
     <php>
         <ini name="zend.enable_gc" value="1" />
     </php>
@@ -42,33 +43,30 @@
             <file>../src/PHPDraft/Out/Tests/TwigFactoryTest.php</file>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
+    <coverage>
+        <include>
             <directory>../src/PHPDraft/</directory>
-            <exclude>
-                <directory>../src/PHPDraft/Core/</directory>
-                <directory>../src/PHPDraft/In/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Tests/</directory>
-                <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
-                <directory>../src/PHPDraft/Out/Tests/</directory>
-                <directory>../src/PHPDraft/Out/HTML/</directory>
-                <directory>../src/PHPDraft/Parse/Tests/</directory>
-                <file>../src/PHPDraft/Model/Comparable.php</file>
-                <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
-                <file>../src/PHPDraft/Out/Minifier.php</file>
-                <file>../src/PHPDraft/Parse/ResourceException.php</file>
-                <file>../src/PHPDraft/**Exception.php</file>
-            </exclude>
-        </whitelist>
-    </filter>
+        </include>
+        <exclude>
+            <directory>../src/PHPDraft/Core/</directory>
+            <directory>../src/PHPDraft/In/Tests/</directory>
+            <directory>../src/PHPDraft/Model/Tests/</directory>
+            <directory>../src/PHPDraft/Model/Elements/Tests/</directory>
+            <directory>../src/PHPDraft/Out/Tests/</directory>
+            <directory>../src/PHPDraft/Out/HTML/</directory>
+            <directory>../src/PHPDraft/Parse/Tests/</directory>
+            <file>../src/PHPDraft/Model/Comparable.php</file>
+            <file>../src/PHPDraft/Model/Elements/StructureElement.php</file>
+            <file>../src/PHPDraft/Out/Minifier.php</file>
+            <file>../src/PHPDraft/Parse/ResourceException.php</file>
+            <file>../src/PHPDraft/**Exception.php</file>
+        </exclude>
+        <report>
+            <clover outputFile="../build/logs/clover.xml"/>
+            <html outputDirectory="../build/coverage" lowUpperBound="35" highLowerBound="70"/>
+        </report>
+    </coverage>
     <logging>
-        <log    type="coverage-html"
-                target="../build/coverage"
-                lowUpperBound="35"
-                highLowerBound="70"/>
-        <log    type="coverage-clover"
-                target="../build/logs/clover.xml"/>
-        <log    type="junit"
-                target="../build/logs/junit.xml"/>
+        <junit outputFile="../build/logs/junit.xml"/>
     </logging>
 </phpunit>

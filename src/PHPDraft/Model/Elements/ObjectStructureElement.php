@@ -23,6 +23,7 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Object representation before parsing
      * @var \stdClass|null
+     * @phpstan-ignore-next-line
      */
     private $object;
 

@@ -75,10 +75,10 @@ jobs:
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Run test suite
-        run: ./vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml --exclude-group twig
+        run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml --exclude-group twig
 
       - name: PHPStan
-        run: ./vendor/bin/phpstan analyse --level=5 src/
+        run: ./vendor/phpstan/phpstan/phpstan analyse --level=5 src/
 
       - name: PHPCS
         run: phpcs --standard=tests/phpcs.xml --ignore=\*Minifier.php src/ | cs2pr
@@ -110,7 +110,7 @@ jobs:
         run: composer update --no-interaction --no-suggest
 
       - name: Run test suite
-        run: ./vendor/bin/phpunit --configuration tests/phpunit.xml --exclude-group twig --coverage-clover=./var/coverage/clover.xml
+        run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --exclude-group twig --coverage-clover=./var/coverage/clover.xml
 
       - name: Code coverage Scan
         uses: codecov/codecov-action@v1

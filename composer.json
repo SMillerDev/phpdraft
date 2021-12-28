@@ -34,8 +34,8 @@
     "phpunit/phpunit": "~9.0",
     "theseer/autoload": "~1.0",
     "phing/phing": "~2.0",
-    "phpstan/phpstan-phpunit": "^0.12.6",
-    "phpstan/phpstan": "^0.12.17"
+    "phpstan/phpstan": "^1.2.0",
+    "phpstan/phpstan-phpunit": "^1.0.0"
   },
   "scripts": {
     "phar": [
