@@ -20,7 +20,6 @@ use ReflectionClass;
  */
 class BaseParserTest extends LunrBaseTest
 {
-
     /**
      * Shared instance of the file parser.
      *

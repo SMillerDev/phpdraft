@@ -73,5 +73,4 @@ abstract class BaseHtmlGenerator
      * @return string
      */
     abstract public function __toString();
-
 }

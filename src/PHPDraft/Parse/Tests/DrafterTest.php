@@ -23,7 +23,6 @@ use ReflectionClass;
  */
 class DrafterTest extends LunrBaseTest
 {
-
     /**
      * Shared instance of the file parser.
      *

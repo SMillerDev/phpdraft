@@ -21,7 +21,6 @@ use ReflectionClass;
  */
 class SortingTest extends LunrBaseTest
 {
-
     /**
      * Test if service sorting is determined correctly.
      *

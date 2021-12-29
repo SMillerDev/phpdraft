@@ -30,7 +30,6 @@ use Twig\TwigTest;
 
 class TemplateRenderer extends BaseTemplateRenderer
 {
-
     /**
      * TemplateGenerator constructor.
      *
@@ -74,9 +73,9 @@ class TemplateRenderer extends BaseTemplateRenderer
         }
 
         if (Sorting::sortServices($this->sorting)) {
-            usort($this->categories, function ($a, $b) { return strcmp($a->title, $b->title); });
+            usort($this->categories, fn($a, $b) => strcmp($a->title, $b->title));
             foreach ($this->categories as $category) {
-                usort($category->children, function ($a, $b) { return strcmp($a->title, $b->title); });
+                usort($category->children, fn($a, $b)=> strcmp($a->title, $b->title));
             }
         }
 

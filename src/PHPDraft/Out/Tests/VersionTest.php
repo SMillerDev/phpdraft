@@ -20,7 +20,6 @@ use ReflectionClass;
  */
 class VersionTest extends LunrBaseTest
 {
-
     /**
      * Set up tests
      *

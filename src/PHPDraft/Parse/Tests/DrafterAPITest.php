@@ -21,7 +21,6 @@ use ReflectionClass;
  */
 class DrafterAPITest extends LunrBaseTest
 {
-
     /**
      * Shared instance of the file parser.
      *

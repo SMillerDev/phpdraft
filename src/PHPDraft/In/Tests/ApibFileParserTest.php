@@ -19,7 +19,6 @@ use ReflectionClass;
  */
 class ApibFileParserTest extends LunrBaseTest
 {
-
     /**
      * Set up tests.
      *

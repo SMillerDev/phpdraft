@@ -103,7 +103,7 @@ class HTTPRequest implements Comparable
         $this->method = $object->attributes->method->content ?? $object->attributes->method;
         $this->title  = $object->meta->title->content ?? $object->meta->title ?? null;
 
-        if (isset($object->content) && $object->content !== NULL) {
+        if (isset($object->content) && $object->content !== null) {
             foreach ($object->content as $value) {
                 if ($value->element === 'dataStructure') {
                     $this->parse_structure($value);
@@ -225,7 +225,7 @@ class HTTPRequest implements Comparable
      */
     public function is_equal_to($b): bool
     {
-        if (!($b instanceof self)){
+        if (!($b instanceof self)) {
             return false;
         }
         return ($this->method === $b->method)
