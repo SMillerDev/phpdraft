@@ -20,7 +20,8 @@ use Twig\TwigTest;
 
 class TwigFactory
 {
-    public static function get(LoaderInterface $loader): Environment {
+    public static function get(LoaderInterface $loader): Environment
+    {
         $twig = new Environment($loader);
 
         $twig->addFilter(new TwigFilter('minify_css', function ($string) {
@@ -43,7 +44,8 @@ class TwigFactory
             return TemplateRenderer::get_response_status($string);
         }));
         $twig->addFilter(new TwigFilter('status_reason', function ($string) {
-            return (new Httpstatus())->getReasonPhrase($string);;
+            return (new Httpstatus())->getReasonPhrase($string);
+            ;
         }));
         $twig->addTest(new TwigTest('enum_type', function ($object) {
             return $object instanceof EnumStructureElement;
@@ -70,7 +72,8 @@ class TwigFactory
         }));
 
         $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
-            public function load(string $class) {
+            public function load(string $class)
+            {
                 if (MarkdownRuntime::class === $class) {
                     return new MarkdownRuntime(new DefaultMarkdown());
                 }

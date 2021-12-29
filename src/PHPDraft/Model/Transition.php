@@ -122,7 +122,9 @@ class Transition extends HierarchyElement
                         $parsable = new HTTPRequest($this);
                         $val = $parsable->parse($item);
                         foreach ($this->requests as $request) {
-                            if ($request->is_equal_to($val)) continue 3;
+                            if ($request->is_equal_to($val)) {
+                                continue 3;
+                            }
                         }
                         $this->requests[] = $val;
                         break;
@@ -130,7 +132,9 @@ class Transition extends HierarchyElement
                         $parsable = new HTTPResponse($this);
                         $val = $parsable->parse($item);
                         foreach ($this->responses as $response) {
-                            if ($response->is_equal_to($val)) continue 3;
+                            if ($response->is_equal_to($val)) {
+                                continue 3;
+                            }
                         }
                         $this->responses[] = $parsable->parse($item);
                         break;

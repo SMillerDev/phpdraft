@@ -22,7 +22,6 @@ use PHPDraft\Model\Elements\RequestBodyElement;
  */
 class RequestBodyElementTest extends LunrBaseTest
 {
-
     /**
      * Set up tests
      * @return void

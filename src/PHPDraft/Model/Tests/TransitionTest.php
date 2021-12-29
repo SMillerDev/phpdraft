@@ -18,7 +18,6 @@ use ReflectionClass;
  */
 class TransitionTest extends HierarchyElementChildTest
 {
-
     /**
      * Set up
      */

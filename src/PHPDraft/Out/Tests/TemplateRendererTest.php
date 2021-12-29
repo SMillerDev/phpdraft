@@ -194,7 +194,8 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * @covers \PHPDraft\Out\TemplateRenderer::get
      */
-    public function testGetTemplateFailsEmpty(): void {
+    public function testGetTemplateFailsEmpty(): void
+    {
         $this->expectException('PHPDraft\Parse\ExecutionException');
         $this->expectExceptionMessage('Couldn\'t find template \'cow\'');
         $this->set_reflection_property_value('template', 'cow');
@@ -207,7 +208,8 @@ class TemplateRendererTest extends LunrBaseTest
      * @covers \PHPDraft\Out\TemplateRenderer::get
      * @group twig
      */
-    public function testGetTemplate(): void {
+    public function testGetTemplate(): void
+    {
         $json = '{"content": [{"content": "hello"}]}';
 
         $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
@@ -217,7 +219,8 @@ class TemplateRendererTest extends LunrBaseTest
      * @covers \PHPDraft\Out\TemplateRenderer::get
      * @group twig
      */
-    public function testGetTemplateSorting(): void {
+    public function testGetTemplateSorting(): void
+    {
         $this->set_reflection_property_value('sorting', 3);
         $json = '{"content": [{"content": "hello"}]}';
 
@@ -228,7 +231,8 @@ class TemplateRendererTest extends LunrBaseTest
      * @covers \PHPDraft\Out\TemplateRenderer::get
      * @group twig
      */
-    public function testGetTemplateMetaData(): void {
+    public function testGetTemplateMetaData(): void
+    {
         $this->set_reflection_property_value('sorting', 3);
         $json = <<<'TAG'
 {"content": [{"content": [], "attributes": {
@@ -246,7 +250,8 @@ TAG;
      * @covers \PHPDraft\Out\TemplateRenderer::get
      * @group twig
      */
-    public function testGetTemplateCategories(): void {
+    public function testGetTemplateCategories(): void
+    {
         $this->set_reflection_property_value('sorting', 3);
         $json = <<<'TAG'
 {"content": [

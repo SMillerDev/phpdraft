@@ -19,7 +19,6 @@ use Michelf\MarkdownExtra;
  */
 class ObjectStructureElement extends BasicStructureElement
 {
-
     /**
      * Object representation before parsing
      * @var \stdClass|null
@@ -205,7 +204,7 @@ class ObjectStructureElement extends BasicStructureElement
 
         $type     = $this->get_element_as_html($this->type);
         $variable = '';
-        if ($this->is_variable === TRUE) {
+        if ($this->is_variable === true) {
             $link_name = str_replace(' ', '-', strtolower($this->key->type));
             $tooltip = 'This is a variable key of type &quot;' . $this->key->type . '&quot;';
             $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" data-tooltip="' . $tooltip . '" title="' . $tooltip . '"></span></a>';

@@ -11,7 +11,6 @@ use PHPDraft\Parse\ParserFactory;
  */
 class ParserFactoryTest extends LunrBaseTest
 {
-
     /**
      * @covers \PHPDraft\Parse\ParserFactory::getDrafter
      */

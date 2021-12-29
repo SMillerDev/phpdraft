@@ -12,7 +12,6 @@ use ReflectionClass;
  */
 class ElementStructureElementTest extends LunrBaseTest
 {
-
     /**
      * Set up
      */

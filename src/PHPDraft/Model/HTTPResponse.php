@@ -180,7 +180,7 @@ class HTTPResponse implements Comparable
      */
     public function is_equal_to($b): bool
     {
-        if (!($b instanceof self)){
+        if (!($b instanceof self)) {
             return false;
         }
         return ($this->statuscode === $b->statuscode)

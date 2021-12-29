@@ -19,7 +19,6 @@ use PHPDraft\Model\Elements\ElementStructureElement;
  */
 class ArrayStructureElementTest extends LunrBaseTest
 {
-
     /**
      * Set up tests
      *
