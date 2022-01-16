@@ -25,55 +25,34 @@ class TwigFactory
     {
         $twig = new Environment($loader);
 
-        $twig->addFilter(new TwigFilter('minify_css', function ($string) {
+        $twig->addFilter(new TwigFilter('method_icon', fn(string $string) => TemplateRenderer::get_method_icon($string)));
+        $twig->addFilter(new TwigFilter('strip_link_spaces', fn(string $string) => TemplateRenderer::strip_link_spaces($string)));
+        $twig->addFilter(new TwigFilter('response_status', fn(string $string) => TemplateRenderer::get_response_status((int) $string)));
+        $twig->addFilter(new TwigFilter('status_reason', fn(string $string) => (new Httpstatus())->getReasonPhrase($string)));
+        $twig->addFilter(new TwigFilter('minify_css', function (string $string) {
             $minify =  new Css();
             $minify->add($string);
             return $minify->minify();
         }));
-        $twig->addFilter(new TwigFilter('minify_js', function ($string) {
+        $twig->addFilter(new TwigFilter('minify_js', function (string $string) {
             $minify =  new JS();
             $minify->add($string);
             return $minify->minify();
         }));
-        $twig->addFilter(new TwigFilter('method_icon', function ($string) {
-            return TemplateRenderer::get_method_icon($string);
-        }));
-        $twig->addFilter(new TwigFilter('strip_link_spaces', function ($string) {
-            return TemplateRenderer::strip_link_spaces($string);
-        }));
-        $twig->addFilter(new TwigFilter('response_status', function ($string) {
-            return TemplateRenderer::get_response_status($string);
-        }));
-        $twig->addFilter(new TwigFilter('status_reason', function ($string) {
-            return (new Httpstatus())->getReasonPhrase($string);
-            ;
-        }));
-        $twig->addTest(new TwigTest('enum_type', function ($object) {
-            return $object instanceof EnumStructureElement;
-        }));
-        $twig->addTest(new TwigTest('object_type', function ($object) {
-            return $object instanceof ObjectStructureElement;
-        }));
-        $twig->addTest(new TwigTest('array_type', function ($object) {
-            return $object instanceof ArrayStructureElement;
-        }));
-        $twig->addTest(new TwigTest('bool', function ($object) {
-            return is_bool($object);
-        }));
-        $twig->addTest(new TwigTest('string', function ($object) {
-            return is_string($object);
-        }));
 
-        $twig->addTest(new TwigTest('inheriting', function (BasicStructureElement $object) {
+        $twig->addTest(new TwigTest('enum_type', fn(object $object) => $object instanceof EnumStructureElement));
+        $twig->addTest(new TwigTest('object_type', fn(object $object) => $object instanceof ObjectStructureElement));
+        $twig->addTest(new TwigTest('array_type', fn(object $object) => $object instanceof ArrayStructureElement));
+        $twig->addTest(new TwigTest('bool', fn($object) => is_bool($object)));
+        $twig->addTest(new TwigTest('string', fn($object) => is_string($object)));
+        $twig->addTest(new TwigTest('variable_type', fn(BasicStructureElement $object) => $object->is_variable));
+        $twig->addTest(new TwigTest('inheriting', function (BasicStructureElement $object): bool {
             $options = array_merge(StructureElement::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
             return !(is_null($object->element) || in_array($object->element, $options));
         }));
-        $twig->addTest(new TwigTest('variable_type', function (BasicStructureElement $object) {
-            return $object->is_variable;
-        }));
 
         $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
-            public function load(string $class)
+            public function load(string $class): ?object
             {
                 if (MarkdownRuntime::class === $class) {
                     return new MarkdownRuntime(new DefaultMarkdown());
