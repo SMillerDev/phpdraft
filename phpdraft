@@ -25,20 +25,25 @@ try
     // Define the cli options.
     $cli = new Cli();
     $cli->description('Parse API Blueprint files.')
-        ->opt('file:f', 'Specifies the file to parse.', false, 'string')
-        ->opt('yes:y', 'Always accept using the online mode.', false)
-        ->opt('online:o', 'Always use the online mode.', false)
-        ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false, 'string')
-        ->opt('sort:s', 'Sort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file).', false, 'string')
-        ->opt('header_image:i', 'Specifies an image to display in the header.', false, 'string')
-        ->opt('css:c', 'Specifies a CSS file to include (value is put in a link element without checking).', false, 'string')
-        ->opt('javascript:j', 'Specifies a JS file to include (value is put in a script element without checking).', false, 'string')
+        ->opt('help:h', 'This help text', false)
         ->opt('version:v', 'Print the version for PHPDraft.', false)
-        ->opt('debug-json-file', 'Input a rendered JSON file for debugging.', false, 'string')
-        ->opt('debug-json', 'Input a rendered JSON text for debugging.', false, 'string');
+        ->opt('file:f', 'Specifies the file to parse.', false)
+        ->opt('yes:y', 'Always accept using the online mode.', false, 'bool')
+        ->opt('online:o', 'Always use the online mode.', false, 'bool')
+        ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false)
+        ->opt('sort:s', 'Sort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file).', false)
+        ->opt('header_image:i', 'Specifies an image to display in the header.', false)
+        ->opt('css:c', 'Specifies a CSS file to include (value is put in a link element without checking).', false)
+        ->opt('javascript:j', 'Specifies a JS file to include (value is put in a script element without checking).', false)
+        ->opt('debug-json-file', 'Input a rendered JSON file for debugging.', false)
+        ->opt('debug-json', 'Input a rendered JSON text for debugging.', false);
 
     // Parse and return cli args.
     $args = $cli->parse($argv, FALSE);
+    if (isset($args['help']) || empty($args->getOpts())) {
+        $cli->writeHelp();
+        throw new ExecutionException('', 0);
+    }
     if (isset($args['version'])) {
         Version::version();
         throw new ExecutionException('', 0);
@@ -52,6 +57,10 @@ try
     } elseif (!empty($stdin) && $file === NULL) {
         $file = tempnam(sys_get_temp_dir(), 'phpdraft');
         file_put_contents($file, $stdin);
+    }
+    if ($file === NULL || $file === '')
+    {
+        throw new ExecutionException('ERROR: File does not exist', 200);
     }
 
     if (!($file !== NULL || isset($args['debug-json-file']) || isset($args['debug-json']))) {
@@ -97,12 +106,7 @@ try
 
     echo $html;
 }
-catch (ExecutionException $exception)
-{
-    file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
-    exit($exception->getCode());
-}
-catch (Exception $exception)
+catch (ExecutionException|Exception $exception)
 {
     file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
     exit($exception->getCode());
