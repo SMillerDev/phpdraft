@@ -75,16 +75,6 @@ class BaseParserTest extends LunrBaseTest
     }
 
     /**
-     * Check if the JSON is empty before parsing
-     *
-     * @covers \PHPDraft\Parse\BaseParser::parseToJson()
-     */
-    public function testPreRunStringIsEmpty(): void
-    {
-        $this->assertEmpty($this->class->json);
-    }
-
-    /**
      * Check if parsing the APIB to JSON gives the expected result
      *
      * @covers \PHPDraft\Parse\BaseParser::parseToJson()

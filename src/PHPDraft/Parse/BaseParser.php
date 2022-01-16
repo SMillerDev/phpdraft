@@ -24,30 +24,30 @@ abstract class BaseParser
     /**
      * The API Blueprint output (JSON).
      *
-     * @var object
+     * @var object|null
      */
-    public $json;
+    public ?object $json;
 
     /**
      * Temp directory.
      *
      * @var string
      */
-    protected $tmp_dir;
+    protected string $tmp_dir;
 
     /**
      * The API Blueprint input.
      *
      * @var ApibFileParser
      */
-    protected $apib;
+    protected ApibFileParser $apib;
 
     /**
      * BaseParser constructor.
      *
      * @param ApibFileParser $apib API Blueprint text
      *
-     * @return \PHPDraft\Parse\BaseParser
+     * @return self
      */
     public function init(ApibFileParser $apib): self
     {
@@ -114,7 +114,7 @@ abstract class BaseParser
      *
      * @return void
      */
-    abstract protected function parse();
+    abstract protected function parse(): void;
 
     /**
      * Check if a given parser is available.

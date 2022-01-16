@@ -57,9 +57,8 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('object');
-        $property->setAccessible(true);
-        $this->assertEquals(json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')), $property->getValue($this->class));
+        $json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->assertEquals($json, $this->get_reflection_property_value('object'));
     }
 
     /**

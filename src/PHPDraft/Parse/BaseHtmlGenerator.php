@@ -22,21 +22,21 @@ abstract class BaseHtmlGenerator
      *
      * @var int
      */
-    public $sorting;
+    public int $sorting;
 
     /**
      * JSON representation of an API Blueprint.
      *
-     * @var stdClass
+     * @var object
      */
-    protected $object;
+    protected object $object;
 
     /**
      * Rendered HTML
      *
      * @var string
      */
-    protected $html;
+    protected string $html;
 
     /**
      * Constructor.
