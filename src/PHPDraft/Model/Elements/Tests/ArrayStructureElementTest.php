@@ -70,6 +70,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base1->type        = null;
         $base1->is_variable = false;
         $base1->description = null;
+        $base1->ref         = null;
         $base1->deps        = [];
 
         $base2              = new ArrayStructureElement();
@@ -87,6 +88,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base2->is_variable = false;
         $base2->description = null;
         $base2->deps        = ['Some simple array'];
+        $base2->ref         = null;
 
         $base3              = new ArrayStructureElement();
         $base3->key = new ElementStructureElement();
@@ -105,6 +107,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $base3->is_variable = false;
         $base3->description = "List of car identifiers to retrieve";
         $base3->deps        = [];
+        $base3->ref         = null;
 
         $return['generic value type'] = [
             '{
@@ -190,6 +193,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $val1 = new ElementStructureElement();
         $val1->type = 'string';
         $val1->value = 'stuff';
+        $val1->description = null;
         $val2 = new ElementStructureElement();
         $val2->type = 'int';
         $val2->value = 'class';
@@ -207,6 +211,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $val1 = new ElementStructureElement();
         $val1->type = 'Bike';
         $val1->value = 'type';
+        $val1->description = null;
         $val2 = new ElementStructureElement();
         $val2->type = 'car';
         $val2->value = 'stuff';

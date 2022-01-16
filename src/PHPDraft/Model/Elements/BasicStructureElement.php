@@ -15,25 +15,25 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var ElementStructureElement|null
      */
-    public $key;
+    public ?ElementStructureElement $key = null;
     /**
      * Object JSON type.
      *
      * @var string|null
      */
-    public $type;
+    public ?string $type;
     /**
      * Object description.
      *
      * @var string|null
      */
-    public $description;
+    public ?string $description = null;
     /**
      * Type of element.
      *
      * @var string|null
      */
-    public $element = null;
+    public ?string $element = null;
     /**
      * Object value.
      *
@@ -45,31 +45,31 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var string|null
      */
-    public $status = '';
+    public ?string $status = '';
     /**
      * Parent structure.
      *
      * @var string|null
      */
-    public $ref;
+    public ?string $ref;
     /**
      * Is variable.
      *
      * @var bool
      */
-    public $is_variable;
+    public bool $is_variable = false;
     /**
      * List of object dependencies.
      *
      * @var string[]|null
      */
-    public $deps;
+    public ?array $deps;
 
     /**
      * Parse a JSON object to a structure.
      *
      * @param object|null $object       An object to parse
-     * @param array       $dependencies Dependencies of this object
+     * @param string[]    $dependencies Dependencies of this object
      *
      * @return StructureElement self reference
      */
@@ -92,8 +92,8 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Parse common fields to give context.
      *
-     * @param object $object       APIB object
-     * @param array  $dependencies Object dependencies
+     * @param object   $object       APIB object
+     * @param string[] $dependencies Object dependencies
      *
      * @return void
      */

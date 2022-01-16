@@ -23,7 +23,7 @@ class ArrayStructureElement extends BasicStructureElement
      * Parse an array object.
      *
      * @param object|null $object       APIB Item to parse
-     * @param array       $dependencies List of dependencies build
+     * @param string[]    $dependencies List of dependencies build
      *
      * @return self Self reference
      */
@@ -60,8 +60,7 @@ class ArrayStructureElement extends BasicStructureElement
         if (is_string($this->value)) {
             $type = $this->get_element_as_html($this->element);
             $desc = '';
-            if ($this->description !== NULL)
-            {
+            if ($this->description !== null) {
                 $desc = MarkdownExtra::defaultTransform($this->description);
             }
 

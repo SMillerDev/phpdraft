@@ -35,22 +35,6 @@ class HierarchyElementChildTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      */
-    public function testTitleSetup(): void
-    {
-        $this->assertSame(null, $this->class->title);
-    }
-
-    /**
-     * Test if the value the class is initialized with is correct
-     */
-    public function testDescriptionSetup(): void
-    {
-        $this->assertSame(null, $this->class->description);
-    }
-
-    /**
-     * Test if the value the class is initialized with is correct
-     */
     public function testChildrenSetup(): void
     {
         $this->assertSame([], $this->class->children);

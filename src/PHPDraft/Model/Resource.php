@@ -13,23 +13,22 @@ declare(strict_types=1);
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use stdClass;
 
 class Resource extends HierarchyElement
 {
     /**
      * Location relative to the base URL.
      *
-     * @var string
+     * @var string|null
      */
-    public $href;
+    public ?string $href = null;
 
     /**
      * URL variables.
      *
      * @var ObjectStructureElement[]
      */
-    public $url_variables = [];
+    public array $url_variables = [];
 
     /**
      * Resource constructor.
@@ -44,11 +43,11 @@ class Resource extends HierarchyElement
     /**
      * Fill class values based on JSON object.
      *
-     * @param stdClass $object JSON object
+     * @param object $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse(stdClass $object): self
+    public function parse(object $object): self
     {
         parent::parse($object);
 

@@ -16,9 +16,9 @@ interface Comparable
     /**
      * Check if item is the same as other item.
      *
-     * @param self $b Object to compare to
+     * @param object $b Object to compare to
      *
      * @return bool
      */
-    public function is_equal_to($b): bool;
+    public function is_equal_to(object $b): bool;
 }

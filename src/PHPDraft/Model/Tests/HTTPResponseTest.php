@@ -42,11 +42,10 @@ class HTTPResponseTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->parent_transition = $this->createMock('\PHPDraft\Model\Transition');
-        $this->parent            = $this->getMockBuilder('\PHPDraft\Model\HierarchyElement')
+        $this->parent            = $this->getMockBuilder('\PHPDraft\Model\Transition')
+                                        ->disableOriginalConstructor()
                                         ->getMock();
-        $this->mock_function('microtime', function () {
-            return '1000';
-        });
+        $this->mock_function('microtime', fn() => '1000');
         $this->class      = new HTTPResponse($this->parent_transition);
         $this->unmock_function('microtime');
         $this->reflection = new ReflectionClass('\PHPDraft\Model\HTTPResponse');
@@ -114,13 +113,14 @@ class HTTPResponseTest extends LunrBaseTest
     public function testParseIsCalledWOAttributes(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('statuscode', 200);
 
         $obj = '{"content":[]}';
 
         $this->class->parse(json_decode($obj));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertNull($this->get_reflection_property_value('statuscode'));
+        $this->assertSame($this->get_reflection_property_value('statuscode'), 200);
     }
 
     /**

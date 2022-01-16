@@ -12,9 +12,7 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use stdClass;
 
 /**
  * Class Category.
@@ -26,27 +24,18 @@ class Category extends HierarchyElement
      *
      * @var ObjectStructureElement[]
      */
-    public $structures = [];
-
-    /**
-     * Category type.
-     *
-     * @var ?string
-     */
-    public $type = null;
+    public array $structures = [];
 
     /**
      * Fill class values based on JSON object.
      *
-     * @param stdClass $object JSON object
+     * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
-    public function parse(stdClass $object)
+    public function parse(object $object): self
     {
         parent::parse($object);
-
-        $this->type = $object->meta->classes->content ?? null;
 
         foreach ($object->content as $item) {
             switch ($item->element) {

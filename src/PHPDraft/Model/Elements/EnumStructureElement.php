@@ -20,7 +20,7 @@ class EnumStructureElement extends BasicStructureElement
      * Parse an array object.
      *
      * @param object|null $object       APIB Item to parse
-     * @param array       $dependencies List of dependencies build
+     * @param string[]    $dependencies List of dependencies build
      *
      * @return $this
      */
@@ -79,23 +79,19 @@ class EnumStructureElement extends BasicStructureElement
      */
     public function __toString(): string
     {
-        if (is_string($this->value)) {
-            $type = $this->get_element_as_html($this->element);
-            $desc = '';
-            if ($this->description !== NULL)
-            {
-                $desc = MarkdownExtra::defaultTransform($this->description);
+        if (is_iterable($this->value)) {
+            $return = '';
+            foreach ($this->value as $item) {
+                $return .= $item->__toString();
             }
 
-            return "<tr><td>{$this->key->value}</td><td>{$type}</td><td>{$desc}</td></tr>";
+            return '<ul class="list-group mdl-list">' . $return . '</ul>';
         }
 
-        $return = '';
-        foreach ($this->value as $item) {
-            $return .= $item->__toString();
-        }
+        $type = $this->get_element_as_html($this->element);
+        $desc = $this->description === null ? '' : MarkdownExtra::defaultTransform($this->description);
 
-        return '<ul class="list-group mdl-list">' . $return . '</ul>';
+        return "<tr><td>{$this->key->value}</td><td>{$type}</td><td>{$desc}</td></tr>";
     }
 
     /**
