@@ -86,6 +86,8 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base1->type        = 'string';
         $base1->is_variable = false;
         $base1->description = "desc1";
+        $base1->ref         = null;
+        $base1->__clearForTest();
 
         $base2              = new ObjectStructureElement();
         $base2->key         = new ElementStructureElement();
@@ -97,6 +99,8 @@ class ObjectStructureElementTest extends LunrBaseTest
         $base2->type        = 'string';
         $base2->is_variable = false;
         $base2->description = "desc2";
+        $base2->ref         = null;
+        $base2->__clearForTest();
 
         $base3              = clone $base2;
         $base3->value       = 'test1 (string) | test2 (int) | test3 (Cow)';
@@ -339,6 +343,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringBasic(): void
     {
+        $this->set_reflection_property_value('description', null);
+
         $return = $this->class->__toString();
         $this->assertSame('<span class="example-value pull-right">{  }</span>', $return);
     }
@@ -372,6 +378,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $this->class->key = new ElementStructureElement();
         $this->class->key->value = 'hello';
         $this->class->type = 'mixed';
+        $this->class->is_variable = false;
         $return = $this->class->__toString();
         $this->assertSame('<tr><td><span>hello</span></td><td><a class="code" title="mixed" href="#object-mixed">mixed</a></td><td> <span class="status"></span></td><td></td><td></td></tr>', $return);
     }
@@ -415,6 +422,7 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testToStringEnumValue(): void
     {
+        $this->class->type = null;
         $this->class->key = new ElementStructureElement();
         $this->class->key->value = 'hello';
         $this->class->value = new EnumStructureElement();

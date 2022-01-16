@@ -35,6 +35,8 @@ class ResourceTest extends LunrBaseTest
     {
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Category')
                                  ->getMock();
+
+        $this->parent->href = null;
         $this->class      = new Resource($this->parent);
         $this->reflection = new ReflectionClass('PHPDraft\Model\Resource');
     }
@@ -74,18 +76,19 @@ class ResourceTest extends LunrBaseTest
 
     /**
      * Test basic parse functions
+     *
+     * @covers \PHPDraft\Model\Resource::parse
      */
     public function testParseIsCalledNoHREF(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('href', null);
 
         $obj = '{"content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertNull($href_property->getValue($this->class));
+        $this->assertNull($this->get_reflection_property_value('href'));
     }
 
     /**
@@ -94,6 +97,7 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalledIsCopy(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('href', null);
 
         $obj = '{"content":[{"element":"copy", "content":""},{"element":"hello", "content":""}, {"element":"hello", "content":""}]}';
 
@@ -108,6 +112,7 @@ class ResourceTest extends LunrBaseTest
     public function testParseIsCalledIsNotCopy(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('href', null);
         $this->assertEmpty($this->get_reflection_property_value('children'));
 
         $obj = '{"content":[{"element":"hello", "content":""}]}';

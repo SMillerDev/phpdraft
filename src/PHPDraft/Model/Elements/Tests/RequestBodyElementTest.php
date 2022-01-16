@@ -58,7 +58,9 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testPrintBasic(): void
     {
-        $this->class->key = 'key';
+        $key = new ElementStructureElement();
+        $key->value = 'key';
+        $this->class->key = $key;
         $return = $this->class->print_request();
         $this->assertSame('key=<span>?</span>', $return);
     }
@@ -68,7 +70,9 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testPrintBasicArray(): void
     {
-        $this->class->key = 'key';
+        $key = new ElementStructureElement();
+        $key->value = 'key';
+        $this->class->key = $key;
         $this->class->value = 'value';
         $c1 = clone $this->class;
         $c2 = clone $this->class;
@@ -82,7 +86,9 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testPrintJson(): void
     {
-        $this->class->key = 'key';
+        $key = new ElementStructureElement();
+        $key->value = 'key';
+        $this->class->key = $key;
         $return = $this->class->print_request('application/json');
         $this->assertSame('{"key":"?"}', $return);
     }
@@ -92,7 +98,9 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testPrintJsonArray(): void
     {
-        $this->class->key = 'key';
+        $key = new ElementStructureElement();
+        $key->value = 'key';
+        $this->class->key = $key;
         $this->class->value = 'value';
         $c1 = clone $this->class;
         $c2 = clone $this->class;
@@ -134,23 +142,29 @@ class RequestBodyElementTest extends LunrBaseTest
         $base1->key         = new ElementStructureElement();
         $base1->key->type   = 'string';
         $base1->key->value  = 'name';
+        $base1->key->description  = null;
         $base1->value       = 'P10';
         $base1->status      = 'optional';
         $base1->element     = 'member';
         $base1->type        = 'string';
         $base1->is_variable = false;
         $base1->description = "desc1";
+        $base1->ref = null;
+        $base1->__clearForTest();
 
         $base2              = new RequestBodyElement();
         $base2->key         = new ElementStructureElement();
         $base2->key->type   = 'string';
         $base2->key->value  = 'Auth2';
+        $base2->key->description  = null;
         $base2->value       = 'something';
         $base2->status      = 'required';
         $base2->element     = 'member';
         $base2->type        = 'string';
         $base2->is_variable = false;
         $base2->description = "desc2";
+        $base2->ref = null;
+        $base2->__clearForTest();
 
         $base3              = clone $base2;
         $base3->value       = 'test1 (string) | test2 (string) | test3 (string)';

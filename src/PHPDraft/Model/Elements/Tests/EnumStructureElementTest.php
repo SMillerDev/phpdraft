@@ -55,12 +55,16 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithArray(): void
     {
+        $this->set_reflection_property_value('description', null);
+
         $value1 = new ElementStructureElement();
         $value1->value = 'hello';
         $value1->type  = 'string';
+        $value1->description = null;
         $value2 = new ElementStructureElement();
         $value2->value = 'test';
         $value2->type  = 'int';
+        $value2->description = null;
         $this->class->value = [$value1, $value2];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="int" href="#object-int">int</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
@@ -75,6 +79,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $this->class->key = new ElementStructureElement();
         $this->class->key->type = 'string';
         $this->class->key->value = 'key';
+        $this->class->key->description = null;
         $this->class->element = 'string';
         $return = $this->class->__toString();
         $this->assertSame('<tr><td>key</td><td><code>string</code></td><td></td></tr>', $return);
@@ -99,12 +104,16 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
+        $this->set_reflection_property_value('description', null);
+
         $value1 = new ElementStructureElement();
         $value1->value = 'hello';
         $value1->type  = 'bike';
+        $value1->description = null;
         $value2 = new ElementStructureElement();
         $value2->value = 'test';
         $value2->type  = 'Car';
+        $value2->description = null;
         $this->class->value = [$value1, $value2];
         $return = $this->class->__toString();
         $this->assertSame('<ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><a class="code" title="bike" href="#object-bike">bike</a> - <span class="example-value pull-right">hello</span></li><li class="list-group-item mdl-list__item"><a class="code" title="Car" href="#object-car">Car</a> - <span class="example-value pull-right">test</span></li></ul>', $return);
@@ -150,6 +159,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base1->type        = 'Some simple enum';
         $base1->is_variable = false;
         $base1->description = null;
+        $base1->ref = null;
         $base1->deps        = ['Some simple enum'];
 
         $base2              = new EnumStructureElement();
@@ -161,6 +171,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base2->element     = 'enum';
         $base2->type        = 'string';
         $base2->description = null;
+        $base2->ref = null;
         $base2->is_variable = false;
         $base2->deps        = [];
 
@@ -173,6 +184,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base3->element     = 'member';
         $base3->type        = 'number';
         $base3->description = "List of car identifiers to retrieve";
+        $base3->ref = null;
         $base3->is_variable = false;
         $base3->deps        = [];
 

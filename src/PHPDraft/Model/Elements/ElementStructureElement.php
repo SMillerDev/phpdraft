@@ -7,16 +7,16 @@ class ElementStructureElement implements StructureElement
     /**
      * Object JSON type.
      *
-     * @var string|null
+     * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * Object description.
      *
      * @var string|null
      */
-    public $description;
+    public ?string $description = null;
 
     /**
      * Object value.
@@ -26,11 +26,14 @@ class ElementStructureElement implements StructureElement
     public $value = null;
 
     /**
-     * @param object|null $object
-     * @param array $dependencies
-     * @return StructureElement
+     * Parse a JSON object to a structure.
+     *
+     * @param object|null $object       An object to parse
+     * @param string[]    $dependencies Dependencies of this object
+     *
+     * @return self self reference
      */
-    public function parse(?object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): self
     {
         if (!in_array($object->element, self::DEFAULTS)) {
             $dependencies[] = $object->element;
@@ -77,8 +80,7 @@ class ElementStructureElement implements StructureElement
      */
     protected function get_element_as_html(?string $element): string
     {
-        if ($element === null)
-        {
+        if ($element === null) {
             return '<code>null</code>';
         }
 

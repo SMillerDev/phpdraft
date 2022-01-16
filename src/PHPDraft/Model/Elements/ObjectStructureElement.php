@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace PHPDraft\Model\Elements;
 
 use Michelf\MarkdownExtra;
-use stdClass;
 
 /**
  * Class ObjectStructureElement.
@@ -22,10 +21,10 @@ class ObjectStructureElement extends BasicStructureElement
 {
     /**
      * Object representation before parsing
-     * @var stdClass|null
+     * @var object|null
      * @phpstan-ignore-next-line
      */
-    private $object;
+    private ?object $object;
 
     /**
      * Unset object function.
@@ -40,7 +39,7 @@ class ObjectStructureElement extends BasicStructureElement
      * Parse a JSON object to a data structure.
      *
      * @param object|null $object       An object to parse
-     * @param array      $dependencies Dependencies of this object
+     * @param string[]    $dependencies Dependencies of this object
      *
      * @return ObjectStructureElement self reference
      */
@@ -84,8 +83,8 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Parse $this->value as a structure based on given content.
      *
-     * @param object $object       APIB content
-     * @param array  $dependencies Object dependencies
+     * @param object   $object       APIB content
+     * @param string[] $dependencies Object dependencies
      *
      * @return void
      */
@@ -118,8 +117,8 @@ class ObjectStructureElement extends BasicStructureElement
     /**
      * Parse content formed as an array.
      *
-     * @param object $object       APIB content
-     * @param array  $dependencies Object dependencies
+     * @param object   $object       APIB content
+     * @param string[] $dependencies Object dependencies
      *
      * @return void
      */
@@ -211,8 +210,7 @@ class ObjectStructureElement extends BasicStructureElement
             $variable = '<a class="variable-key" title="' . $this->key->type . '" href="#object-' . $link_name . '"><span class="fas fa-info variable-info" data-toggle="tooltip" data-placement="top" data-tooltip="' . $tooltip . '" title="' . $tooltip . '"></span></a>';
         }
         $desc = '';
-        if ($this->description !== NULL)
-        {
+        if ($this->description !== null) {
             $desc = MarkdownExtra::defaultTransform($this->description);
         }
 

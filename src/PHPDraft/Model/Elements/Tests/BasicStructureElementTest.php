@@ -119,8 +119,7 @@ class BasicStructureElementTest extends LunrBaseTest
     public function testParseCommon($value, BasicStructureElement $expected_value): void
     {
         $dep = [];
-        $method = $this->reflection->getMethod('parse_common');
-        $method->setAccessible(true);
+        $method = $this->get_accessible_reflection_method('parse_common');
         $method->invokeArgs($this->class, [$value, &$dep]);
 
         $this->assertEquals($expected_value->key, $this->class->key);

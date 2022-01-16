@@ -16,7 +16,6 @@ use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\UriTemplate;
-use stdClass;
 
 class Transition extends HierarchyElement
 {
@@ -25,56 +24,56 @@ class Transition extends HierarchyElement
      *
      * @var string
      */
-    public $method;
+    public string $method;
 
     /**
      * URI.
      *
-     * @var string
+     * @var string|null
      */
-    public $href;
+    public ?string $href = null;
 
     /**
      * URL variables.
      *
      * @var StructureElement[]
      */
-    public $url_variables = [];
+    public array $url_variables = [];
 
     /**
      * Data variables.
      *
      * @var StructureElement|null
      */
-    public $data_variables = null;
+    public ?StructureElement $data_variables = null;
 
     /**
      * The request.
      *
      * @var HTTPRequest[]
      */
-    public $requests = [];
+    public array $requests = [];
 
     /**
      * The responses.
      *
      * @var HTTPResponse[]
      */
-    public $responses = [];
+    public array $responses = [];
 
     /**
      * Structures used (if any).
      *
      * @var StructureElement[]
      */
-    public $structures = [];
+    public array $structures = [];
 
     /**
      * Transition constructor.
      *
-     * @param \PHPDraft\Model\Resource $parent A reference to the parent object
+     * @param Resource $parent A reference to the parent object
      */
-    public function __construct(\PHPDraft\Model\Resource &$parent)
+    public function __construct(Resource &$parent)
     {
         $this->parent = $parent;
     }
@@ -82,16 +81,16 @@ class Transition extends HierarchyElement
     /**
      * Fill class values based on JSON object.
      *
-     * @param stdClass $object JSON object
+     * @param object $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse(stdClass $object): self
+    public function parse(object $object): self
     {
         parent::parse($object);
 
-        $this->href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
-        $this->href = $this->href->content ?? $this->href;
+        $href = (isset($object->attributes->href)) ? $object->attributes->href : $this->parent->href;
+        $this->href = $href->content ?? $href;
 
         if (isset($object->attributes->hrefVariables)) {
             $deps                = [];
@@ -221,7 +220,7 @@ class Transition extends HierarchyElement
      * @param string $str1 First part
      * @param string $str2 Second part
      *
-     * @return array|bool
+     * @return array<string>|bool
      */
     private function find_overlap(string $str1, string $str2)
     {
@@ -260,8 +259,8 @@ class Transition extends HierarchyElement
     /**
      * Generate a cURL request to run the transition.
      *
-     * @param string $base_url base URL of the server
-     * @param array $additional additional arguments to pass
+     * @param string        $base_url base URL of the server
+     * @param array<string> $additional additional arguments to pass
      * @param int $key number of the request to generate for
      *
      * @return string A cURL CLI command

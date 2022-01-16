@@ -25,7 +25,7 @@ interface StructureElement
      * Parse a JSON object to a structure.
      *
      * @param object|null $object       An object to parse
-     * @param array       $dependencies Dependencies of this object
+     * @param string[]    $dependencies Dependencies of this object
      *
      * @return self self reference
      */

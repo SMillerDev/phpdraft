@@ -15,44 +15,43 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\Exception;
-use stdClass;
 
 class HTTPRequest implements Comparable
 {
     /**
      * HTTP Headers.
      *
-     * @var array
+     * @var array<string, string>
      */
-    public $headers = [];
+    public array $headers = [];
 
     /**
      * The HTTP Method.
      *
      * @var string
      */
-    public $method;
+    public string $method;
 
     /**
      * Title of the request.
      *
-     * @var string
+     * @var string|null
      */
-    public $title;
+    public ?string $title;
 
     /**
      * Description of the request.
      *
      * @var string
      */
-    public $description;
+    public string $description;
 
     /**
      * Parent class.
      *
      * @var Transition
      */
-    public $parent;
+    public Transition $parent;
 
     /**
      * Body of the request.
@@ -64,9 +63,9 @@ class HTTPRequest implements Comparable
     /**
      * Schema of the body of the request.
      *
-     * @var mixed
+     * @var string|null
      */
-    public $body_schema = null;
+    public ?string $body_schema = null;
     /**
      * Structure of the request.
      *
@@ -78,7 +77,7 @@ class HTTPRequest implements Comparable
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * HTTPRequest constructor.
@@ -157,9 +156,9 @@ class HTTPRequest implements Comparable
     /**
      * Parse the objects into a request body.
      *
-     * @param stdClass $objects JSON objects
+     * @param object $objects JSON objects
      */
-    private function parse_structure(stdClass $objects): void
+    private function parse_structure(object $objects): void
     {
         $deps      = [];
         $structure = new RequestBodyElement();
@@ -177,8 +176,8 @@ class HTTPRequest implements Comparable
     /**
      * Generate a cURL command for the HTTP request.
      *
-     * @param string $base_url   URL to the base server
-     * @param array  $additional Extra options to pass to cURL
+     * @param string        $base_url   URL to the base server
+     * @param array<string> $additional Extra options to pass to cURL
      *
      * @throws Exception
      *
@@ -218,11 +217,11 @@ class HTTPRequest implements Comparable
     /**
      * Check if item is the same as other item.
      *
-     * @param self $b Object to compare to
+     * @param object $b Object to compare to
      *
      * @return bool
      */
-    public function is_equal_to($b): bool
+    public function is_equal_to(object $b): bool
     {
         if (!($b instanceof self)) {
             return false;
@@ -236,10 +235,10 @@ class HTTPRequest implements Comparable
     /**
      * Convert class to string identifier
      */
-    public function __toString()
+    public function __toString(): string
     {
         $headers = json_encode($this->headers);
         $body = json_encode($this->body);
-        return "{$this->method}_{$body}_{$headers}";
+        return sprintf("%s_%s_%s", $this->method, $body, $headers);
     }
 }

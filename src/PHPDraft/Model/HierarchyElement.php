@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use stdClass;
-
 /**
  * Class HierarchyElement.
  */
@@ -24,37 +22,37 @@ abstract class HierarchyElement
      *
      * @var string
      */
-    public $title;
+    public string $title;
 
     /**
      * Description of the element.
      *
      * @var string
      */
-    public $description;
+    public string $description;
 
     /**
      * Child elements.
      *
      * @var HierarchyElement[]
      */
-    public $children = [];
+    public array $children = [];
 
     /**
      * Parent Element.
      *
      * @var HierarchyElement|null
      */
-    protected $parent = null;
+    protected ?HierarchyElement $parent = null;
 
     /**
      * Parse a JSON object to an element.
      *
-     * @param stdClass $object an object to parse
+     * @param object $object an object to parse
      *
      * @return void
      */
-    public function parse(stdClass $object)
+    public function parse(object $object)
     {
         if (isset($object->meta) && isset($object->meta->title)) {
             $this->title = $object->meta->title->content ?? $object->meta->title;

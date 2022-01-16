@@ -307,11 +307,8 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->href = '/url';
 
-        $this->set_reflection_property_value('parent', $this->parent);
-
-        $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, '/url/level');
+        $this->set_reflection_property_value('parent', $parent);
+        $this->set_reflection_property_value('href', '/url/level');
 
         $return = $this->class->build_url();
 
@@ -329,15 +326,10 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->href = '/url';
 
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('parent', $parent);
+        $this->set_reflection_property_value('href', '/url/level');
 
-        $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, '/url/level');
-
-        $this->mock_function('strip_tags', function () {
-            return "STRIPPED";
-        });
+        $this->mock_function('strip_tags', fn () => "STRIPPED");
 
         $return = $this->class->build_url('', true);
 
@@ -357,8 +349,6 @@ class TransitionTest extends HierarchyElementChildTest
 
         $parent->href = '/url';
 
-        $this->set_reflection_property_value('parent', $this->parent);
-
         $var1 = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
                      ->disableOriginalConstructor()
                      ->getMock();
@@ -372,15 +362,12 @@ class TransitionTest extends HierarchyElementChildTest
         $var1->expects($this->once())
              ->method('string_value')
              ->will($this->returnValue('STRING'));
+
         $var1->key = $key1;
 
-        $property = $this->reflection->getProperty('url_variables');
-        $property->setAccessible(true);
-        $property->setValue($this->class, [$var1]);
-
-        $req_property = $this->reflection->getProperty('href');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, '/url/level');
+        $this->set_reflection_property_value('parent', $parent);
+        $this->set_reflection_property_value('url_variables', [$var1]);
+        $this->set_reflection_property_value('href', '/url/level');
 
         $return = $this->class->build_url();
 

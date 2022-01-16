@@ -50,7 +50,9 @@ class ElementStructureElementTest extends LunrBaseTest
      */
     public function testStringValue(): void
     {
-        $this->assertSame('<li class="list-group-item mdl-list__item"><code>null</code></li>', $this->class->string_value());
+        $this->set_reflection_property_value('type', 'string');
+        $this->set_reflection_property_value('description', null);
+        $this->assertSame('<li class="list-group-item mdl-list__item"><code>string</code></li>', $this->class->string_value());
     }
 
     /**
@@ -59,6 +61,7 @@ class ElementStructureElementTest extends LunrBaseTest
     public function testToString(): void
     {
         $this->set_reflection_property_value('type', 'string');
+        $this->set_reflection_property_value('description', null);
 
         $this->assertSame('<li class="list-group-item mdl-list__item"><code>string</code></li>', $this->class->__toString());
     }
@@ -69,6 +72,7 @@ class ElementStructureElementTest extends LunrBaseTest
     public function testToStringCustomType(): void
     {
         $this->set_reflection_property_value('type', 'Cow');
+        $this->set_reflection_property_value('description', null);
 
         $this->assertSame('<li class="list-group-item mdl-list__item"><a class="code" title="Cow" href="#object-cow">Cow</a></li>', $this->class->__toString());
     }
@@ -91,6 +95,7 @@ class ElementStructureElementTest extends LunrBaseTest
     {
         $this->set_reflection_property_value('type', 'Cow');
         $this->set_reflection_property_value('value', 'stuff');
+        $this->set_reflection_property_value('description', null);
 
         $this->assertSame('<li class="list-group-item mdl-list__item"><a class="code" title="Cow" href="#object-cow">Cow</a> - <span class="example-value pull-right">stuff</span></li>', $this->class->__toString());
     }

@@ -135,6 +135,7 @@ class HTTPRequestTest extends LunrBaseTest
     public function testGetCurlCommandNoKey(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('method', '');
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -147,6 +148,7 @@ class HTTPRequestTest extends LunrBaseTest
     public function testGetCurlCommandWithHeaders(): void
     {
         $this->set_reflection_property_value('parent', $this->parent);
+        $this->set_reflection_property_value('method', '');
 
         $headers = ['header' => 'value'];
         $this->set_reflection_property_value('headers', $headers);

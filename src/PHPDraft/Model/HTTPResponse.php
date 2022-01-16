@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use stdClass;
 
 class HTTPResponse implements Comparable
 {
@@ -22,49 +21,49 @@ class HTTPResponse implements Comparable
      *
      * @var int
      */
-    public $statuscode;
+    public int $statuscode;
 
     /**
      * Description of the object.
      *
-     * @var string
+     * @var string|null
      */
-    public $description;
+    public ?string $description = null;
 
     /**
      * Identifier for the request.
      *
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * Response headers.
      *
-     * @var array
+     * @var array<string, string>
      */
-    public $headers = [];
+    public array $headers = [];
 
     /**
      * Response bodies.
      *
-     * @var array
+     * @var array<string, string>
      */
-    public $content = [];
+    public array $content = [];
 
     /**
      * Response structure.
      *
      * @var ObjectStructureElement[]
      */
-    public $structure = [];
+    public array $structure = [];
 
     /**
      * Parent entity.
      *
      * @var Transition
      */
-    protected $parent;
+    protected Transition $parent;
 
     public function __construct(Transition $parent)
     {
@@ -75,11 +74,11 @@ class HTTPResponse implements Comparable
     /**
      * Fill class values based on JSON object.
      *
-     * @param stdClass $object JSON object
+     * @param object $object JSON object
      *
      * @return $this self-reference
      */
-    public function parse(stdClass $object): self
+    public function parse(object $object): self
     {
         if (isset($object->attributes->statusCode->content)) {
             $this->statuscode = intval($object->attributes->statusCode->content);
@@ -105,11 +104,11 @@ class HTTPResponse implements Comparable
     /**
      * Parse request headers.
      *
-     * @param stdClass $object An object to parse for headers
+     * @param object $object An object to parse for headers
      *
      * @return void
      */
-    protected function parse_headers(stdClass $object): void
+    protected function parse_headers(object $object): void
     {
         foreach ($object->content as $value) {
             if (isset($value->content)) {
@@ -121,11 +120,11 @@ class HTTPResponse implements Comparable
     /**
      * Parse request content.
      *
-     * @param stdClass $value An object to parse for content
+     * @param object $value An object to parse for content
      *
      * @return void
      */
-    protected function parse_content(stdClass $value): void
+    protected function parse_content(object $value): void
     {
         if ($value->element === 'copy') {
             $this->description = $value->content;
@@ -145,18 +144,17 @@ class HTTPResponse implements Comparable
             foreach ($value->content->content as $object) {
                 $this->parse_structure($object);
             }
-            return;
         }
     }
 
     /**
      * Parse structure of the content.
      *
-     * @param stdClass $object Objects containing the structure
+     * @param object $object Objects containing the structure
      *
      * @return void
      */
-    protected function parse_structure(stdClass $object): void
+    protected function parse_structure(object $object): void
     {
         $deps   = [];
         $struct = new ObjectStructureElement();
@@ -174,11 +172,11 @@ class HTTPResponse implements Comparable
     /**
      * Check if item is the same as other item.
      *
-     * @param self $b Object to compare to
+     * @param object $b Object to compare to
      *
      * @return bool
      */
-    public function is_equal_to($b): bool
+    public function is_equal_to(object $b): bool
     {
         if (!($b instanceof self)) {
             return false;
@@ -190,7 +188,7 @@ class HTTPResponse implements Comparable
     /**
      * Convert class to string identifier
      */
-    public function __toString()
+    public function __toString(): string
     {
         return "{$this->statuscode}_{$this->description}";
     }
