@@ -22,47 +22,47 @@ abstract class BaseTemplateRenderer
      *
      * @var int
      */
-    public $sorting;
+    public int $sorting;
     /**
      * CSS Files to load.
      *
      * @var string[]
      */
-    public $css = [];
+    public array $css = [];
     /**
      * JS Files to load.
      *
      * @var string[]
      */
-    public $js = [];
+    public array $js = [];
     /**
      * JSON object of the API blueprint.
      *
-     * @var mixed
+     * @var array<object>
      */
-    protected $categories = [];
+    protected array $categories = [];
     /**
      * The template file to load.
      *
      * @var string
      */
-    protected $template;
+    protected string $template;
     /**
      * The image to use as a logo.
      *
      * @var string|null
      */
-    protected $image = null;
+    protected ?string $image = null;
     /**
      * The base data of the API.
      *
-     * @var array<mixed>
+     * @var array<string, mixed>
      */
-    protected $base_data;
+    protected array $base_data;
     /**
      * Structures used in all data.
      *
      * @var ObjectStructureElement[]
      */
-    protected $base_structures = [];
+    protected array $base_structures = [];
 }

@@ -49,7 +49,7 @@ class TemplateRenderer extends BaseTemplateRenderer
     /**
      * Pre-parse objects needed and print HTML.
      *
-     * @param mixed $object JSON to parse from
+     * @param object $object JSON to parse from
      *
      * @return string
      *
@@ -59,7 +59,7 @@ class TemplateRenderer extends BaseTemplateRenderer
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function get($object): string
+    public function get(object $object): string
     {
         $include = $this->find_include_file($this->template, 'twig', false);
         if ($include === null) {
@@ -86,9 +86,11 @@ class TemplateRenderer extends BaseTemplateRenderer
         $twig     = TwigFactory::get($loader);
         $template = $twig->load('main.twig');
 
-        $extras = array_filter($this->base_data, function ($value) {
-            return !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']);
-        }, ARRAY_FILTER_USE_KEY);
+        $extras = array_filter(
+            $this->base_data,
+            fn($value) => !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']),
+            ARRAY_FILTER_USE_KEY
+        );
         $extras['host'] = $this->base_data['HOST'] ?? null;
 
         return $template->render([
