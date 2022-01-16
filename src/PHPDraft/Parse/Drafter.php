@@ -21,7 +21,7 @@ class Drafter extends BaseParser
      *
      * @var string
      */
-    protected $drafter;
+    protected string $drafter;
 
     /**
      * ApibToJson constructor.
@@ -33,7 +33,11 @@ class Drafter extends BaseParser
     public function init(ApibFileParser $apib): BaseParser
     {
         parent::init($apib);
-        $this->drafter = self::location();
+        $loc = self::location();
+        if ($loc === false) {
+            throw new \UnexpectedValueException("Could not find drafter location!");
+        }
+        $this->drafter = $loc;
 
         return $this;
     }
@@ -41,7 +45,7 @@ class Drafter extends BaseParser
     /**
      * Return drafter location if found.
      *
-     * @return bool|string
+     * @return false|string
      */
     public static function location()
     {
@@ -59,7 +63,12 @@ class Drafter extends BaseParser
     protected function parse(): void
     {
         shell_exec("{$this->drafter} {$this->tmp_dir}/index.apib -f json -o {$this->tmp_dir}/index.json 2> /dev/null");
-        $this->json = json_decode(file_get_contents($this->tmp_dir . '/index.json'));
+        $content = file_get_contents($this->tmp_dir . '/index.json');
+        if (!is_string($content)) {
+            throw new \RuntimeException('Could not read intermediary APIB file!');
+        }
+
+        $this->json = json_decode($content);
     }
 
     /**

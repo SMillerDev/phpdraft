@@ -112,16 +112,6 @@ class DrafterAPITest extends LunrBaseTest
     }
 
     /**
-     * Check if the JSON is empty before parsing
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
-     */
-    public function testPreRunStringIsEmpty(): void
-    {
-        $this->assertEmpty($this->class->json);
-    }
-
-    /**
      * Check if parsing the fails without drafter
      *
      * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
