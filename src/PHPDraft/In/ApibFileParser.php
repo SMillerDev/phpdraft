@@ -22,21 +22,21 @@ class ApibFileParser
      *
      * @var string
      */
-    protected $full_apib;
+    protected string $full_apib;
 
     /**
      * Location of the API Blueprint to parse.
      *
      * @var string
      */
-    protected $location;
+    protected string $location;
 
     /**
      * Filename to parse.
      *
      * @var string
      */
-    private $filename;
+    private string $filename;
 
     /**
      * FileParser constructor.
