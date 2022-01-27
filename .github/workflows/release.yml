@@ -16,8 +16,8 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 7.4
-        ini-values: phar.readonly=0
-        extensions: curl,json,mbstring,uopz
+        ini-values: assert.exception=1, phar.readonly=0, zend.assertions=1
+        extensions: curl, json, phar, mbstring, uopz
         tools: pecl
         coverage: none
 
