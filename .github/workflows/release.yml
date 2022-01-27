@@ -7,7 +7,6 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    name: Release
     steps:
     - name: Checkout
       uses: actions/checkout@v1
@@ -17,8 +16,8 @@ jobs:
       with:
         php-version: 7.4
         ini-values: assert.exception=1, phar.readonly=0, zend.assertions=1
-        extensions: curl, json, phar, mbstring, uopz
-        tools: pecl
+        extensions: curl, json, phar, mbstring, gzip, bzip2, openssl
+        tools: pecl, phing
         coverage: none
 
     - name: Get Composer Cache Directory
@@ -36,10 +35,13 @@ jobs:
       run: composer validate
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
+      run: composer install --prefer-dist --no-progress --ignore-platform-reqs
 
     - name: Compile phar
-      run: composer run-script phar
+      run: phing phar
+
+    - name: Shasum builds
+      run: sha256sum build/out/*
 
     - name: Upload binary to release
       uses: svenstaro/upload-release-action@v1-release

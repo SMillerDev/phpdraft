@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
-if (version_compare('7.1.0', PHP_VERSION, '>')) {
+if (version_compare('___PHPMINVER___', PHP_VERSION, '>')) {
     fwrite(
         STDERR,
-        'This version of PHPDraft requires PHP 7.1; using the latest version of PHP is highly recommended.' . PHP_EOL
+        'This version of PHPDraft requires PHP ___PHPMINVER___; using the latest version of PHP is highly recommended.' . PHP_EOL
     );
 
     die(1);

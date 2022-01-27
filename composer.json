@@ -37,12 +37,6 @@
     "phpstan/phpstan": "^1.2.0",
     "phpstan/phpstan-phpunit": "^1.0.0"
   },
-  "scripts": {
-    "phar": [
-      "vendor/bin/phing phar",
-      "sha256sum build/out/*"
-    ]
-  },
   "autoload": {
     "psr-4": { "PHPDraft\\": "src/PHPDraft" }
   },
