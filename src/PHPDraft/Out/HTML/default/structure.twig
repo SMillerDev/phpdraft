@@ -14,6 +14,7 @@
             {% if structure.value is iterable %}
                 {% if structure is object_type %}
                     <table class="table table-striped mdl-data-table mdl-js-data-table">
+                        <caption>Object: {{ name }}</caption>
                         {% for value in structure.value %}
                             {{ value|raw }}
                         {% endfor %}

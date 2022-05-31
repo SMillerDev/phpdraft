@@ -5,7 +5,7 @@
                 <li class="collection-header"> <a href="#{{ category.get_href }}">{{ category.title }}</a></li>
                 {% for resource in category.children %}
                     <li class="collection-item resource" aria-label="Resource {{category.title}}/{{resource.title}}">
-                        <b><a class="nav-link" href="#{{ resource.get_href|replace({'-': '/'}) }}">{{resource.title}}</a></b>
+                        <strong><a class="nav-link" href="#{{ resource.get_href|replace({'-': '/'}) }}">{{resource.title}}</a></strong>
                         {% for transition in resource.children %}
                             <a class="nav-link" href="#{{ transition.get_href|replace({'-': '/'}) }}"
                                aria-label="Transition {{category.title}}/{{resource.title}}/{{ transition.title }}">
