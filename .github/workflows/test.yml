@@ -92,20 +92,55 @@ jobs:
     needs: test
     if: success()
     runs-on: ubuntu-latest
+    env:
+      extensions: curl,json,mbstring,uopz
+      key: cache-v1 # can be any string, change to clear the extension cache.
+    strategy:
+      matrix:
+        php-versions: ['8.1']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
           coverage: pcov
-          extensions: curl,json,mbstring,uopz
           tools: pecl,phpunit
 
-      - name: Install Composer deps
-        run: composer update --no-interaction --no-suggest
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
       - name: Run test suite
         run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --exclude-group twig --coverage-clover=./var/coverage/clover.xml
