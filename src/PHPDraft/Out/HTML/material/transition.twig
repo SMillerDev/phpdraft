@@ -30,7 +30,7 @@
                             <div id="modal-{{ request.get_id }}" class="modal">
                                 <div class="modal-content">
                                     <label> Example cURL request:
-                                        <textarea rows='75' cols='75'>{{ transition.get_curl_command(data.HOST)|raw }}</textarea>
+                                        <textarea rows='75' cols='75'>{{ transition.get_curl_command(data.HOST) }}</textarea>
                                     </label>
                                 </div>
                                 <div class="modal-footer">
