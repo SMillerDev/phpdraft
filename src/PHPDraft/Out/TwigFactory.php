@@ -28,7 +28,7 @@ class TwigFactory
         $twig->addFilter(new TwigFilter('method_icon', fn(string $string) => TemplateRenderer::get_method_icon($string)));
         $twig->addFilter(new TwigFilter('strip_link_spaces', fn(string $string) => TemplateRenderer::strip_link_spaces($string)));
         $twig->addFilter(new TwigFilter('response_status', fn(string $string) => TemplateRenderer::get_response_status((int) $string)));
-        $twig->addFilter(new TwigFilter('status_reason', fn(string $string) => (new Httpstatus())->getReasonPhrase($string)));
+        $twig->addFilter(new TwigFilter('status_reason', fn(int $code) => (new Httpstatus())->getReasonPhrase($code)));
         $twig->addFilter(new TwigFilter('minify_css', function (string $string) {
             $minify =  new Css();
             $minify->add($string);
