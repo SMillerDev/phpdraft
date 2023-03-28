@@ -138,7 +138,7 @@ abstract class BasicStructureElement implements StructureElement
             $this->status = join(', ', $object->attributes->typeAttributes);
         }
 
-        if (!in_array($this->type, self::DEFAULTS) && $this->type !== null) {
+        if (!in_array($this->type, self::DEFAULTS, true) && $this->type !== null) {
             $dependencies[] = $this->type;
         }
     }
@@ -152,7 +152,7 @@ abstract class BasicStructureElement implements StructureElement
      */
     protected function get_element_as_html(string $element): string
     {
-        if (in_array($element, self::DEFAULTS)) {
+        if (in_array($element, self::DEFAULTS, true)) {
             return '<code>' . $element . '</code>';
         }
 

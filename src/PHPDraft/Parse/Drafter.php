@@ -52,7 +52,7 @@ class Drafter extends BaseParser
         $returnVal = shell_exec('which drafter 2> /dev/null');
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
-        return empty($returnVal) ? false : $returnVal;
+        return $returnVal === null || $returnVal === '' ? false : $returnVal;
     }
 
     /**

@@ -6,7 +6,7 @@ This is a parser for API Blueprint files in PHP.[1](#dependencies)
 PHPDraft requires [drafter](https://github.com/apiaryio/drafter) to be installed. Refer to the drafter page for the installation details. If you don't want to install drafter, you can pass `-o` to the command to make it use [https://api.apiblueprint.org/parser](https://api.apiblueprint.org/parser)
 
 ## Usage
-Requires PHP 7.0+ to run. Unittests require runkit or uopz
+Requires PHP 8.1+ to run. Unittests require runkit or uopz
 For direct usage you can run:
 ```bash
 $ ./phpdraft.phar -f blueprint-file.apib > blueprint-webpage.html

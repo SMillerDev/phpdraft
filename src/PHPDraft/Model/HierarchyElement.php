@@ -69,7 +69,7 @@ abstract class HierarchyElement
             }
         }
 
-        if (!empty($object->content)) {
+        if ($object->content !== null && $object->content !== []) {
             $object->content = array_slice($object->content, 0);
         }
     }

@@ -90,12 +90,12 @@ class ObjectStructureElement extends BasicStructureElement
      */
     protected function parse_value_structure(object $object, array &$dependencies)
     {
-        if (isset($object->content->content) || in_array($this->element, ['boolean', 'string', 'number', 'ref'])) {
+        if (isset($object->content->content) || in_array($this->element, ['boolean', 'string', 'number', 'ref'], true)) {
             return;
         }
 
         $value  = $object->content->value ?? $object;
-        $type   = in_array($this->element, ['member']) ? $this->type : $this->element;
+        $type   = in_array($this->element, ['member'], true) ? $this->type : $this->element;
         $struct = $this->get_class($type);
 
         $this->value = $struct->parse($value, $dependencies);

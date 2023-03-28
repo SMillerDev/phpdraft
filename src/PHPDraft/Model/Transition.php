@@ -237,7 +237,7 @@ class Transition extends HierarchyElement
             }
             $i++;
         }
-        if (!empty($return)) {
+        if ($return !== []) {
             return $return;
         }
 

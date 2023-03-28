@@ -1,7 +1,7 @@
 FROM apiaryio/drafter:latest as drafter
 FROM composer:latest as composer
 
-FROM php:7.4-cli-alpine as build
+FROM php:8.1-cli-alpine as build
 RUN apk add --no-cache \
 		$PHPIZE_DEPS \
 		openssl-dev
@@ -15,7 +15,7 @@ RUN /usr/bin/composer install
 RUN vendor/bin/phing phar-nightly
 COPY build/out/phpdraft-nightly.phar /usr/local/bin/phpdraft
 
-FROM php:7.4-cli-alpine
+FROM php:8.1-cli-alpine
 LABEL maintainer="Sean Molenaar sean@seanmolenaar.eu"
 RUN apk add --no-cache gcc
 COPY --from=drafter /usr/local/bin/drafter /usr/local/bin/drafter
