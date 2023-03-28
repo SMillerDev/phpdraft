@@ -18,7 +18,7 @@ jobs:
       key: cache-v1 # can be any string, change to clear the extension cache.
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
+        php-versions: ['8.1', '8.2']
         experimental: [ false ]
         include:
           - php-versions: 8.3
@@ -76,7 +76,7 @@ jobs:
         run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml --exclude-group twig
 
       - name: PHPStan
-        run: ./vendor/phpstan/phpstan/phpstan analyse --level=5 src/
+        run: ./vendor/phpstan/phpstan/phpstan analyse --level=6 src/
 
       - name: PHPCS
         run: phpcs --standard=tests/phpcs.xml --ignore=\*Minifier.php src/ | cs2pr

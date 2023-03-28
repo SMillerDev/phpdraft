@@ -88,7 +88,7 @@ class TemplateRenderer extends BaseTemplateRenderer
 
         $extras = array_filter(
             $this->base_data,
-            fn($value) => !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2']),
+            fn($value) => !in_array($value, ['HOST', 'TITLE', 'ALT_HOST', 'FORMAT', 'DESC', 'COLOR_1', 'COLOR_2'], true),
             ARRAY_FILTER_USE_KEY
         );
         $extras['host'] = $this->base_data['HOST'] ?? null;
@@ -151,7 +151,6 @@ class TemplateRenderer extends BaseTemplateRenderer
      */
     public function find_include_file(string $template, string $extension = 'twig', bool $fallback = true): ?string
     {
-        $include    = null;
         $includes = [
             'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . $template . ".{$extension}",
             'templates' . DIRECTORY_SEPARATOR . $template . DIRECTORY_SEPARATOR . 'main' . ".{$extension}",
@@ -168,7 +167,7 @@ class TemplateRenderer extends BaseTemplateRenderer
             return $include;
         }
 
-        if (in_array($extension, ['twig', 'js', 'css']) && $template !== 'default' && $fallback === true) {
+        if (in_array($extension, ['twig', 'js', 'css'], true) && $template !== 'default' && $fallback === true) {
             return $this->find_include_file('default', $extension);
         }
 

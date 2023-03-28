@@ -48,7 +48,7 @@ class TwigFactory
         $twig->addTest(new TwigTest('variable_type', fn(BasicStructureElement $object) => $object->is_variable));
         $twig->addTest(new TwigTest('inheriting', function (BasicStructureElement $object): bool {
             $options = array_merge(StructureElement::DEFAULTS, ['member', 'select', 'option', 'ref', 'T', 'hrefVariables']);
-            return !(is_null($object->element) || in_array($object->element, $options));
+            return !(is_null($object->element) || in_array($object->element, $options, true));
         }));
 
         $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {

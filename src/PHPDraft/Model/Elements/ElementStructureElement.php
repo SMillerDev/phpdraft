@@ -35,7 +35,7 @@ class ElementStructureElement implements StructureElement
      */
     public function parse(?object $object, array &$dependencies): self
     {
-        if (!in_array($object->element, self::DEFAULTS)) {
+        if (!in_array($object->element, self::DEFAULTS, true)) {
             $dependencies[] = $object->element;
         }
 
@@ -84,7 +84,7 @@ class ElementStructureElement implements StructureElement
             return '<code>null</code>';
         }
 
-        if (in_array($element, self::DEFAULTS)) {
+        if (in_array($element, self::DEFAULTS, true)) {
             return '<code>' . $element . '</code>';
         }
 

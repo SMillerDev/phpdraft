@@ -49,7 +49,7 @@ class RequestBodyElement extends ObjectStructureElement
             return $return;
         }
 
-        $value = (empty($this->value)) ? '?' : $this->value;
+        $value = ($this->value === null || $this->value === '') ? '?' : $this->value;
 
         switch ($type) {
             case 'application/x-www-form-urlencoded':

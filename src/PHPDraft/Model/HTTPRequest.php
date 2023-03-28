@@ -117,7 +117,7 @@ class HTTPRequest implements Comparable
                 if ($value->element !== 'asset') {
                     continue;
                 }
-                if (is_array($value->meta->classes) && in_array('messageBody', $value->meta->classes)) {
+                if (is_array($value->meta->classes) && in_array('messageBody', $value->meta->classes, true)) {
                     $this->body[]                  = (isset($value->content)) ? $value->content : null;
                     $this->headers['Content-Type'] = (isset($value->attributes->contentType)) ? $value->attributes->contentType : '';
                     continue;

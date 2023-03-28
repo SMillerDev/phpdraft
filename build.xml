@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PHPDraft" default="setup">
     <target name="setup" depends="clean"/>
-    <property name="min-php-version" value="7.4.0"/>
+    <property name="min-php-version" value="8.1.0"/>
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
         <delete dir="${project.basedir}/build/coverage"/>

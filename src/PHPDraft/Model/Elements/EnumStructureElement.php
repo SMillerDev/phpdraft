@@ -42,7 +42,7 @@ class EnumStructureElement extends BasicStructureElement
         }
 
         if (isset($object->attributes->default)) {
-            if (!in_array($object->attributes->default->content->element ?? '', self::DEFAULTS)) {
+            if (!in_array($object->attributes->default->content->element ?? '', self::DEFAULTS, true)) {
                 $dependencies[] = $object->attributes->default->content->element;
             }
             $this->value = $object->attributes->default->content->content;
@@ -52,7 +52,7 @@ class EnumStructureElement extends BasicStructureElement
         }
 
         if (isset($object->content)) {
-            if (!in_array($object->content->element, self::DEFAULTS)) {
+            if (!in_array($object->content->element, self::DEFAULTS, true)) {
                 $dependencies[] = $object->content->element;
             }
             $this->value = $object->content->content;

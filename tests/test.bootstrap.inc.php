@@ -5,10 +5,8 @@
  *
  * Set include path and initialize autoloader.
  *
- * PHP Version 5.6
- *
  * @package    PHPDraft\Core
- * @author     Sean Molenaar <sean@m2mobi.com>
+ * @author     Sean Molenaar <sean@seanmolenaar.eu>
  * @license    https://github.com/SMillerDev/phpdraft/blob/master/LICENSE GPLv3 License
  */
 
