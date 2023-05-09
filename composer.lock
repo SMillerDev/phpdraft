@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "lukasoppermann/http-status",
-            "version": "3.2.2",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lukasoppermann/http-status.git",
-                "reference": "9bde369b9fc2fb2a7e13408ed0b800634286d08c"
+                "reference": "2953f21aa1a223112b0225a7bc9b2d84f4498075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lukasoppermann/http-status/zipball/9bde369b9fc2fb2a7e13408ed0b800634286d08c",
-                "reference": "9bde369b9fc2fb2a7e13408ed0b800634286d08c",
+                "url": "https://api.github.com/repos/lukasoppermann/http-status/zipball/2953f21aa1a223112b0225a7bc9b2d84f4498075",
+                "reference": "2953f21aa1a223112b0225a7bc9b2d84f4498075",
                 "shasum": ""
             },
             "require": {
@@ -60,9 +60,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lukasoppermann/http-status/issues",
-                "source": "https://github.com/lukasoppermann/http-status/tree/3.2.2"
+                "source": "https://github.com/lukasoppermann/http-status/tree/3.3.0"
             },
-            "time": "2023-01-17T07:38:28+00:00"
+            "time": "2023-05-09T10:06:47+00:00"
         },
         {
             "name": "matthiasmullie/minify",
