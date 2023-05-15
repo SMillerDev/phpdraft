@@ -146,7 +146,7 @@ jobs:
         run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --exclude-group twig --coverage-clover=./var/coverage/clover.xml
 
       - name: Code coverage Scan
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
