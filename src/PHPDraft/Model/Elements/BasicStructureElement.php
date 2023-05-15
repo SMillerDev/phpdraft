@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
+use Stringable;
+
 abstract class BasicStructureElement implements StructureElement
 {
     /**
@@ -39,7 +41,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var mixed
      */
-    public $value = null;
+    public mixed $value = null;
     /**
      * Object status (required|optional).
      *
@@ -71,7 +73,7 @@ abstract class BasicStructureElement implements StructureElement
      * @param object|null $object       An object to parse
      * @param string[]    $dependencies Dependencies of this object
      *
-     * @return StructureElement self reference
+     * @return self self reference
      */
     abstract public function parse(?object $object, array &$dependencies): StructureElement;
 
@@ -181,6 +183,7 @@ abstract class BasicStructureElement implements StructureElement
         if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === true) {
             return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
         }
+
         return $this->value;
     }
 
@@ -193,19 +196,10 @@ abstract class BasicStructureElement implements StructureElement
      */
     public function get_class(string $element): BasicStructureElement
     {
-        switch ($element) {
-            default:
-            case 'object':
-                $struct = $this->new_instance();
-                break;
-            case 'array':
-                $struct = new ArrayStructureElement();
-                break;
-            case 'enum':
-                $struct = new EnumStructureElement();
-                break;
-        }
-
-        return $struct;
+        return match ($element) {
+            default => $this->new_instance(),
+            'array' => new ArrayStructureElement(),
+            'enum' => new EnumStructureElement(),
+        };
     }
 }

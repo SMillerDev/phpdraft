@@ -12,7 +12,9 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
-interface StructureElement
+use Stringable;
+
+interface StructureElement extends Stringable
 {
     /**
      * Default data types.
@@ -30,13 +32,6 @@ interface StructureElement
      * @return self self reference
      */
     public function parse(?object $object, array &$dependencies): self;
-
-    /**
-     * Print a string representation.
-     *
-     * @return string
-     */
-    public function __toString(): string;
 
 
     /**

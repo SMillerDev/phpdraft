@@ -11,11 +11,12 @@
 namespace PHPDraft\In;
 
 use PHPDraft\Parse\ExecutionException;
+use Stringable;
 
 /**
  * Class ApibFileParser.
  */
-class ApibFileParser
+class ApibFileParser implements Stringable
 {
     /**
      * Complete API Blueprint.
@@ -56,7 +57,7 @@ class ApibFileParser
      *
      * @throws ExecutionException
      *
-     * @return $this self reference.
+     * @return self self reference.
      */
     public function parse(): self
     {

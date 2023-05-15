@@ -28,7 +28,7 @@ class DrafterTest extends LunrBaseTest
      *
      * @var ApibFileParser|MockObject
      */
-    private $parser;
+    private mixed $parser;
 
     /**
      * Set up

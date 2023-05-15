@@ -122,7 +122,7 @@ body .col-md-10 h3:first-child {
 .method-nav a.nav-link i {
     color: #fff;
     padding: 0 5px;
-    box-sizing: padding-box;
+    box-sizing: content-box;
     border-radius: 15px;
     line-height: 22px;
 }

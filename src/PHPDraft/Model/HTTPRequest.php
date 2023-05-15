@@ -58,7 +58,7 @@ class HTTPRequest implements Comparable
      *
      * @var mixed
      */
-    public $body = null;
+    public mixed $body = null;
 
     /**
      * Schema of the body of the request.
@@ -71,7 +71,7 @@ class HTTPRequest implements Comparable
      *
      * @var RequestBodyElement[]|RequestBodyElement
      */
-    public $struct = [];
+    public mixed $struct = [];
     /**
      * Identifier for the request.
      *
@@ -95,7 +95,7 @@ class HTTPRequest implements Comparable
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {
@@ -190,11 +190,9 @@ class HTTPRequest implements Comparable
         $type = $this->headers['Content-Type'] ?? null;
 
         $options[] = '-X' . $this->method;
-        if (is_null($this->body) || $this->body === []) {
-            //NO-OP
-        } elseif (is_string($this->body)) {
+        if (is_string($this->body)) {
             $options[] = '--data-binary ' . escapeshellarg($this->body);
-        } elseif (is_array($this->body)) {
+        } elseif (is_array($this->body) && $this->body !== []) {
             $options[] = '--data-binary ' . escapeshellarg(join('', $this->body));
         } elseif (is_subclass_of($this->struct, StructureElement::class)) {
             foreach ($this->struct->value as $body) {

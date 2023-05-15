@@ -35,14 +35,10 @@ class RequestBodyElement extends ObjectStructureElement
                 }
             }
 
-            switch ($type) {
-                case 'application/x-www-form-urlencoded':
-                    $return .= join('&', $list);
-                    break;
-                default:
-                    $return .= join(PHP_EOL, $list);
-                    break;
-            }
+            $return .= match ($type) {
+                'application/x-www-form-urlencoded' => join('&', $list),
+                default => join(PHP_EOL, $list),
+            };
 
             $return .= '</code>';
 

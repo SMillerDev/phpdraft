@@ -2,6 +2,8 @@
 
 namespace PHPDraft\Model\Elements;
 
+use Stringable;
+
 class ElementStructureElement implements StructureElement
 {
     /**
@@ -23,7 +25,7 @@ class ElementStructureElement implements StructureElement
      *
      * @var mixed
      */
-    public $value = null;
+    public mixed $value = null;
 
     /**
      * Parse a JSON object to a structure.

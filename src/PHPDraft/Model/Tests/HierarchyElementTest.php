@@ -25,7 +25,7 @@ class HierarchyElementTest extends LunrBaseTest
      *
      * @var HierarchyElement|MockObject
      */
-    protected $parent;
+    protected mixed $parent;
 
     /**
      * Set up

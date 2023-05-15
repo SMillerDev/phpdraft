@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace PHPDraft\Out;
 
 use Lukasoppermann\Httpstatus\Httpstatus;
+use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 
 abstract class BaseTemplateRenderer
@@ -36,11 +37,11 @@ abstract class BaseTemplateRenderer
      */
     public array $js = [];
     /**
-     * JSON object of the API blueprint.
+     * The image to use as a logo.
      *
-     * @var array<object>
+     * @var string|null
      */
-    protected array $categories = [];
+    protected ?string $image = null;
     /**
      * The template file to load.
      *
@@ -48,17 +49,17 @@ abstract class BaseTemplateRenderer
      */
     protected string $template;
     /**
-     * The image to use as a logo.
-     *
-     * @var string|null
-     */
-    protected ?string $image = null;
-    /**
      * The base data of the API.
      *
      * @var array<string, mixed>
      */
     protected array $base_data;
+    /**
+     * JSON object of the API blueprint.
+     *
+     * @var Category[]
+     */
+    protected array $categories = [];
     /**
      * Structures used in all data.
      *

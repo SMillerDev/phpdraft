@@ -28,7 +28,7 @@ class Drafter extends BaseParser
      *
      * @param ApibFileParser $apib API Blueprint text
      *
-     * @return \PHPDraft\Parse\BaseParser
+     * @return BaseParser
      */
     public function init(ApibFileParser $apib): BaseParser
     {
