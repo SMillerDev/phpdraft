@@ -61,7 +61,7 @@ class Version
      */
     public function getReleaseChannel(): string
     {
-        if (strpos(self::release_id(), '-') !== false) {
+        if (str_contains(self::release_id(), '-')) {
             return '-nightly';
         }
 

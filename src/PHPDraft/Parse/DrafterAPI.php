@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
+use CurlHandle;
 use PHPDraft\In\ApibFileParser;
 
 class DrafterAPI extends BaseParser
@@ -21,7 +22,7 @@ class DrafterAPI extends BaseParser
      *
      * @param ApibFileParser $apib API Blueprint text
      *
-     * @return \PHPDraft\Parse\BaseParser
+     * @return BaseParser
      */
     public function init(ApibFileParser $apib): BaseParser
     {
@@ -53,9 +54,9 @@ class DrafterAPI extends BaseParser
      *
      * @param string $message API blueprint to parse
      *
-     * @return \CurlHandle
+     * @return CurlHandle
      */
-    public static function curl_init_drafter(string $message)
+    public static function curl_init_drafter(string $message): CurlHandle
     {
         $ch = curl_init();
 

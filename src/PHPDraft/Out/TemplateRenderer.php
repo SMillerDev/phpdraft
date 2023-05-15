@@ -184,39 +184,20 @@ class TemplateRenderer extends BaseTemplateRenderer
     public static function get_method_icon(string $method): string
     {
         $class = ['fas', strtoupper($method)];
-        switch (strtolower($method)) {
-            case 'post':
-                $class[] = 'fa-plus-square';
-                break;
-            case 'put':
-                $class[] = 'fa-pen-square';
-                break;
-            case 'get':
-                $class[] = 'fa-arrow-circle-down';
-                break;
-            case 'delete':
-                $class[] = 'fa-minus-square';
-                break;
-            case 'head':
-                $class[] = 'fa-info';
-                break;
-            case 'connect':
-                $class[] = 'fa-ethernet';
-                break;
-            case 'options':
-                $class[] = 'fa-sliders-h';
-                break;
-            case 'trace':
-                $class[] = 'fa-route';
-                break;
-            case 'patch':
-                $class[] = 'fa-band-aid';
-                break;
-            default:
-                break;
-        }
+        $class[] = match (strtoupper($method)) {
+            'POST' => 'fa-plus-square',
+            'PUT' => 'fa-pen-square',
+            'GET' => 'fa-arrow-circle-down',
+            'DELETE' => 'fa-minus-square',
+            'HEAD' => 'fa-info',
+            'CONNECT' => 'fa-ethernet',
+            'OPTIONS' => 'fa-sliders-h',
+            'TRACE' => 'fa-route',
+            'PATCH' => 'fa-band-aid',
+            default => ''
+        };
 
-        return join(' ', $class);
+        return trim(join(' ', $class));
     }
 
     /**
@@ -229,13 +210,11 @@ class TemplateRenderer extends BaseTemplateRenderer
     public static function get_response_status(int $response): string
     {
         $http = new Httpstatus();
-        if ($http->getResponseClass($response) == Httpstatus::CLASS_SUCCESS) {
-            return 'text-success';
-        } elseif ($http->getResponseClass($response) == Httpstatus::CLASS_REDIRECTION) {
-            return 'text-warning';
-        } else {
-            return 'text-error';
-        }
+        return match ($http->getResponseClass($response)) {
+            Httpstatus::CLASS_SUCCESS => 'text-success',
+            Httpstatus::CLASS_REDIRECTION => 'text-warning',
+            default => 'text-error',
+        };
     }
 
     /**

@@ -26,7 +26,7 @@ class HTTPRequestTest extends LunrBaseTest
      *
      * @var HierarchyElement|MockObject
      */
-    protected $parent;
+    protected mixed $parent;
 
     /**
      * Set up

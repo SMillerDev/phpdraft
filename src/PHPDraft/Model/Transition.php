@@ -15,6 +15,7 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\StructureElement;
+use PHPDraft\Model\Resource as HttpResource;
 use QL\UriTemplate\UriTemplate;
 
 class Transition extends HierarchyElement
@@ -71,9 +72,9 @@ class Transition extends HierarchyElement
     /**
      * Transition constructor.
      *
-     * @param Resource $parent A reference to the parent object
+     * @param HttpResource $parent A reference to the parent object
      */
-    public function __construct(Resource &$parent)
+    public function __construct(HttpResource &$parent)
     {
         $this->parent = $parent;
     }
@@ -83,7 +84,7 @@ class Transition extends HierarchyElement
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {
@@ -197,11 +198,11 @@ class Transition extends HierarchyElement
      * @param string $str1 First part
      * @param string $str2 Second part
      *
-     * @return bool|string
+     * @return false|string
      *
      * @see http://stackoverflow.com/questions/2945446/built-in-function-to-combine-overlapping-string-sequences-in-php
      */
-    private function overlap_urls(string $str1, string $str2)
+    private function overlap_urls(string $str1, string $str2): false|string
     {
         if ($overlap = $this->find_overlap($str1, $str2)) {
             $overlap = $overlap[count($overlap) - 1];
@@ -220,9 +221,9 @@ class Transition extends HierarchyElement
      * @param string $str1 First part
      * @param string $str2 Second part
      *
-     * @return array<string>|bool
+     * @return array<string>|false
      */
-    private function find_overlap(string $str1, string $str2)
+    private function find_overlap(string $str1, string $str2): false|array
     {
         $return = [];
         $sl1    = strlen($str1);

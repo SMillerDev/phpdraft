@@ -54,7 +54,7 @@ class BasicStructureElementTest extends LunrBaseTest
      * @param mixed  $value        Value to set to the class
      * @param mixed $string_value Expected string representation
      */
-    public function testStringValue($value, $string_value): void
+    public function testStringValue(mixed $value, mixed $string_value): void
     {
         $this->set_reflection_property_value('value', $value);
 
@@ -65,6 +65,11 @@ class BasicStructureElementTest extends LunrBaseTest
         $this->assertSame($string_value, $return);
     }
 
+    /**
+     * Provide string values
+     *
+     * @return array
+     */
     public function stringValueProvider(): array
     {
         $return = [];

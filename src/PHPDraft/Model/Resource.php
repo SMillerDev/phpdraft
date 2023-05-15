@@ -45,7 +45,7 @@ class Resource extends HierarchyElement
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {

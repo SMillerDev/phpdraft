@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
-use PHPDraft\Out\BaseTemplateRenderer;
 use PHPDraft\Out\TemplateRenderer;
 
 /**
@@ -24,13 +23,16 @@ class HtmlGenerator extends BaseHtmlGenerator
      * Get the HTML representation of the JSON object.
      *
      * @param string      $template Type of template to display.
-     * @param string|null $image    Image to use as a logo
-     * @param string|null $css      CSS to load
-     * @param string|null $js       JS to load
+     * @param string|null $image Image to use as a logo
+     * @param string|null $css CSS to load
+     * @param string|null $js JS to load
      *
      * @return void HTML template to display
      *
      * @throws ExecutionException As a runtime exception
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function build_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): void
     {

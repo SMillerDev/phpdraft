@@ -27,14 +27,14 @@ class HTTPResponseTest extends LunrBaseTest
      *
      * @var HierarchyElement|MockObject
      */
-    protected $parent;
+    protected mixed $parent;
 
     /**
      * Mock of the parent class
      *
      * @var Transition|MockObject
      */
-    protected $parent_transition;
+    protected mixed $parent_transition;
 
     /**
      * Set up

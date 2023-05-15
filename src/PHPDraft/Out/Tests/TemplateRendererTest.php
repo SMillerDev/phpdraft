@@ -83,7 +83,7 @@ class TemplateRendererTest extends LunrBaseTest
      *
      * @covers \PHPDraft\Out\TemplateRenderer::get_response_status
      */
-    public function testResponseStatus($code, $text): void
+    public function testResponseStatus(int $code, string $text): void
     {
         $return = TemplateRenderer::get_response_status($code);
         $this->assertEquals($text, $return);

@@ -26,7 +26,7 @@ class DrafterAPITest extends LunrBaseTest
      *
      * @var ApibFileParser|MockObject
      */
-    private $parser;
+    private mixed $parser;
 
     /**
      * Basic setup
