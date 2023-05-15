@@ -155,7 +155,7 @@ jobs:
           sed -i 's+/home/runner/work/bundle-stripe/bundle-stripe+/github/workspace+g' ./var/coverage/clover.xml
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1.3
+        uses: sonarsource/sonarcloud-github-action@v1.9
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
