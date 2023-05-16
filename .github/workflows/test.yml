@@ -153,6 +153,7 @@ jobs:
       - name: Change paths in clover.xml
         run: |
           sed -i 's+/home/runner/work/bundle-stripe/bundle-stripe+/github/workspace+g' ./var/coverage/clover.xml
+          mv ./var/coverage/clover.xml coverage.xml
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v1.9
