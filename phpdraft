@@ -92,7 +92,7 @@ try
 
     $html          = ParserFactory::getJson()->init($data);
     $name          = 'PHPD_SORT_' . strtoupper($args->getOpt('sort', ''));
-    $html->sorting = Sorting::${$name} ?? -1;
+    $html->sorting = Sorting::${$name} ?? Sorting::PHPD_SORT_NONE->value;
 
     $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
     $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');

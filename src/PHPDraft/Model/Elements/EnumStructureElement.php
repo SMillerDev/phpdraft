@@ -99,7 +99,7 @@ class EnumStructureElement extends BasicStructureElement
      *
      * @return self
      */
-    protected function new_instance(): StructureElement
+    protected function new_instance(): self
     {
         return new self();
     }

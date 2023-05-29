@@ -43,7 +43,7 @@ class TemplateRenderer extends BaseTemplateRenderer
         $this->base_data['COLOR_1'] = $template_parts[1] ?? 'green';
         $this->base_data['COLOR_2'] = $template_parts[2] ?? 'light_green';
         $this->image                = $image;
-        $this->sorting              = Sorting::PHPD_SORT_NONE;
+        $this->sorting              = Sorting::PHPD_SORT_NONE->value;
     }
 
     /**

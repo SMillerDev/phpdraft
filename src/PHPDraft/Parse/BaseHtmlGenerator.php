@@ -14,8 +14,9 @@ namespace PHPDraft\Parse;
 
 use PHPDraft\Out\BaseTemplateRenderer;
 use stdClass;
+use \Stringable;
 
-abstract class BaseHtmlGenerator
+abstract class BaseHtmlGenerator implements Stringable
 {
     /**
      * Type of sorting to do.
@@ -72,5 +73,5 @@ abstract class BaseHtmlGenerator
      *
      * @return string
      */
-    abstract public function __toString();
+    abstract public function __toString(): string;
 }

@@ -109,7 +109,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return ObjectStructureElement
      */
-    protected function new_instance(): StructureElement
+    protected function new_instance(): self
     {
         return new self();
     }

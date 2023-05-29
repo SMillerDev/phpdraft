@@ -63,7 +63,7 @@ class RequestBodyElement extends ObjectStructureElement
      *
      * @return RequestBodyElement
      */
-    protected function new_instance(): StructureElement
+    protected function new_instance(): self
     {
         return new self();
     }
