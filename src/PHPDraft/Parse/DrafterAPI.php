@@ -42,7 +42,7 @@ class DrafterAPI extends BaseParser
 
         $response = curl_exec($ch);
 
-        if (curl_errno($ch) !== 0) {
+        if (curl_errno($ch) !== 0 || is_bool($response)) {
             throw new ResourceException('Drafter webservice failed to parse input', 1);
         }
 

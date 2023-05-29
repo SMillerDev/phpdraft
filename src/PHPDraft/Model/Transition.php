@@ -37,7 +37,7 @@ class Transition extends HierarchyElement
     /**
      * URL variables.
      *
-     * @var StructureElement[]
+     * @var array<StructureElement>
      */
     public array $url_variables = [];
 
@@ -51,21 +51,21 @@ class Transition extends HierarchyElement
     /**
      * The request.
      *
-     * @var HTTPRequest[]
+     * @var array<HTTPRequest>
      */
     public array $requests = [];
 
     /**
      * The responses.
      *
-     * @var HTTPResponse[]
+     * @var array<HTTPResponse>
      */
     public array $responses = [];
 
     /**
      * Structures used (if any).
      *
-     * @var StructureElement[]
+     * @var array<StructureElement>
      */
     public array $structures = [];
 
@@ -176,7 +176,7 @@ class Transition extends HierarchyElement
         }
         if ($this->parent->url_variables !== []) {
             foreach ($this->parent->url_variables as $item) {
-                if (!is_subclass_of($item, BasicStructureElement::class)) {
+                if (!is_subclass_of($item, BasicStructureElement::class, false)) {
                     continue;
                 }
 
@@ -204,7 +204,8 @@ class Transition extends HierarchyElement
      */
     private function overlap_urls(string $str1, string $str2): false|string
     {
-        if ($overlap = $this->find_overlap($str1, $str2)) {
+        $overlap = $this->find_overlap($str1, $str2);
+        if (is_array($overlap)) {
             $overlap = $overlap[count($overlap) - 1];
             $str1    = substr($str1, 0, -strlen($overlap));
             $str2    = substr($str2, strlen($overlap));

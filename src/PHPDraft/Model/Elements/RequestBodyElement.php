@@ -54,7 +54,8 @@ class RequestBodyElement extends ObjectStructureElement
                 $object             = [];
                 $object[$this->key->value] = $value;
 
-                return json_encode($object);
+                $encoded = json_encode($object);
+                return is_string($encoded) ? $encoded : '';
         }
     }
 
@@ -63,7 +64,7 @@ class RequestBodyElement extends ObjectStructureElement
      *
      * @return RequestBodyElement
      */
-    protected function new_instance(): StructureElement
+    protected function new_instance(): self
     {
         return new self();
     }
