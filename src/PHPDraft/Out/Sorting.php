@@ -15,35 +15,27 @@ namespace PHPDraft\Out;
 /**
  * Sorting constants.
  */
-class Sorting
+enum Sorting: int
 {
     /**
      * Sets sorting to all parts.
-     *
-     * @var int
      */
-    public const PHPD_SORT_ALL = 3;
+    case PHPD_SORT_ALL = 3;
 
     /**
      * Sets sorting to all webservices.
-     *
-     * @var int
      */
-    public const PHPD_SORT_WEBSERVICES = 2;
+    case PHPD_SORT_WEBSERVICES = 2;
 
     /**
      * Sets sorting to all data structures.
-     *
-     * @var int
      */
-    public const PHPD_SORT_STRUCTURES = 1;
+    case PHPD_SORT_STRUCTURES = 1;
 
     /**
      * Sets sorting to no data structures.
-     *
-     * @var int
      */
-    public const PHPD_SORT_NONE = -1;
+    case PHPD_SORT_NONE = -1;
 
     /**
      * Check if structures should be sorted.
@@ -54,7 +46,7 @@ class Sorting
      */
     public static function sortStructures(int $sort): bool
     {
-        return $sort === self::PHPD_SORT_ALL || $sort === self::PHPD_SORT_STRUCTURES;
+        return $sort === Sorting::PHPD_SORT_ALL->value || $sort === Sorting::PHPD_SORT_STRUCTURES->value;
     }
 
     /**
@@ -66,6 +58,6 @@ class Sorting
      */
     public static function sortServices(int $sort): bool
     {
-        return $sort === self::PHPD_SORT_ALL || $sort === self::PHPD_SORT_WEBSERVICES;
+        return $sort === Sorting::PHPD_SORT_ALL->value || $sort === Sorting::PHPD_SORT_WEBSERVICES->value;
     }
 }

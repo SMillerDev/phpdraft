@@ -89,7 +89,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return self
      */
-    abstract protected function new_instance(): StructureElement;
+    abstract protected function new_instance(): self;
 
     /**
      * Parse common fields to give context.
