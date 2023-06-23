@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd0780bbb3a25e28babe03efd3fd4f1a",
+    "content-hash": "4bed93ba7f0cef9f746bcb1595005e28",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
-            "version": "3.3.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lukasoppermann/http-status.git",
-                "reference": "2953f21aa1a223112b0225a7bc9b2d84f4498075"
+                "reference": "8ef0326965cee820293071604990c83577ebf4de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lukasoppermann/http-status/zipball/2953f21aa1a223112b0225a7bc9b2d84f4498075",
-                "reference": "2953f21aa1a223112b0225a7bc9b2d84f4498075",
+                "url": "https://api.github.com/repos/lukasoppermann/http-status/zipball/8ef0326965cee820293071604990c83577ebf4de",
+                "reference": "8ef0326965cee820293071604990c83577ebf4de",
                 "shasum": ""
             },
             "require": {
@@ -60,9 +60,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lukasoppermann/http-status/issues",
-                "source": "https://github.com/lukasoppermann/http-status/tree/3.3.0"
+                "source": "https://github.com/lukasoppermann/http-status/tree/4.0.0"
             },
-            "time": "2023-05-09T10:06:47+00:00"
+            "time": "2023-06-23T18:39:48+00:00"
         },
         {
             "name": "matthiasmullie/minify",
