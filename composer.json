@@ -22,7 +22,7 @@
     "ql/uri-template": "~1.0",
     "vanilla/garden-cli": "~4.0",
     "michelf/php-markdown": "~2.0",
-    "lukasoppermann/http-status": "~3.1",
+    "lukasoppermann/http-status": "~4.0",
     "ext-json": "*",
     "ext-curl": "*",
     "twig/twig": "^3.0",
