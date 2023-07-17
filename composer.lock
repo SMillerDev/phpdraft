@@ -717,12 +717,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunr-php/lunr.halo.git",
-                "reference": "b7f450eae024ae815efcf109199766821d703bf0"
+                "reference": "13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/b7f450eae024ae815efcf109199766821d703bf0",
-                "reference": "b7f450eae024ae815efcf109199766821d703bf0",
+                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc",
+                "reference": "13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc",
                 "shasum": ""
             },
             "require": {
@@ -732,6 +732,7 @@
             "require-dev": {
                 "ext-xdebug": ">=3.0",
                 "phpunit/phpunit": ">=9.0 <9.6",
+                "psr/container": ">=2.0.2",
                 "psr/log": ">=1.1"
             },
             "default-branch": true,
@@ -756,7 +757,7 @@
                 "issues": "https://github.com/lunr-php/lunr.halo/issues",
                 "source": "https://github.com/lunr-php/lunr.halo/tree/master"
             },
-            "time": "2023-05-06T19:34:06+00:00"
+            "time": "2023-07-05T13:45:49+00:00"
         },
         {
             "name": "myclabs/deep-copy",

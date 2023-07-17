@@ -53,7 +53,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider(): array
+    public static function parseObjectProvider(): array
     {
         $return             = [];
         $base1              = new ArrayStructureElement();
