@@ -16,36 +16,57 @@ use Lunr\Halo\LunrBaseTest;
  */
 class ObjectElementTest extends LunrBaseTest
 {
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testKeySetup(): void
     {
         $this->assertSame(null, $this->class->key);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testTypeSetup(): void
     {
         $this->assertSame(null, $this->class->type);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testDescriptionSetup(): void
     {
         $this->assertSame(null, $this->class->description);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testElementSetup(): void
     {
         $this->assertSame(null, $this->class->element);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testValueSetup(): void
     {
         $this->assertSame(null, $this->class->value);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testStatusSetup(): void
     {
-        $this->assertSame('', $this->class->status);
+        $this->assertSame(null, $this->class->status);
     }
 
+    /**
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement
+     */
     public function testDepsSetup(): void
     {
         $this->assertSame(null, $this->class->deps);

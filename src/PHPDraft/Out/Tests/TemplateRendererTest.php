@@ -60,7 +60,7 @@ class TemplateRendererTest extends LunrBaseTest
      * Provide HTTP status codes
      * @return array<int, array<int, int|string>>
      */
-    public function responseStatusProvider(): array
+    public static function responseStatusProvider(): array
     {
         $return = [];
 
@@ -93,7 +93,7 @@ class TemplateRendererTest extends LunrBaseTest
      * Provide HTTP methods
      * @return array<int, array<int, string>>
      */
-    public function requestMethodProvider(): array
+    public static function requestMethodProvider(): array
     {
         $return = [];
 

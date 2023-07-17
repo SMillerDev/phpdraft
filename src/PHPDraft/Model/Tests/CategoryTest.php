@@ -16,7 +16,7 @@ use ReflectionClass;
  * Class CategoryTest
  * @covers \PHPDraft\Model\Category
  */
-class CategoryTest extends HierarchyElementChildTest
+class CategoryTest extends HierarchyElementChildTestBase
 {
     /**
      * Set up
@@ -36,6 +36,23 @@ class CategoryTest extends HierarchyElementChildTest
         unset($this->class);
         unset($this->parent);
         unset($this->reflection);
+    }
+
+    /**
+     * Test if the value the class is initialized with is correct
+     * @covers \PHPDraft\Model\HierarchyElement
+     */
+    public function testChildrenSetup(): void
+    {
+        $this->assertSame([], $this->class->children);
+    }
+
+    /**
+     * Test if the value the class is initialized with is correct
+     */
+    public function testSetupCorrectly(): void
+    {
+        $this->assertPropertySame('parent', null);
     }
 
     /**

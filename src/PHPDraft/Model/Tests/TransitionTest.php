@@ -16,7 +16,7 @@ use ReflectionClass;
  * Class TransitionTest
  * @covers \PHPDraft\Model\Transition
  */
-class TransitionTest extends HierarchyElementChildTest
+class TransitionTest extends HierarchyElementChildTestBase
 {
     /**
      * Set up
@@ -38,6 +38,16 @@ class TransitionTest extends HierarchyElementChildTest
         unset($this->class);
         unset($this->reflection);
         unset($this->parent);
+    }
+
+
+    /**
+     * Test if the value the class is initialized with is correct
+     * @covers \PHPDraft\Model\HierarchyElement
+     */
+    public function testChildrenSetup(): void
+    {
+        $this->assertSame([], $this->class->children);
     }
 
     /**

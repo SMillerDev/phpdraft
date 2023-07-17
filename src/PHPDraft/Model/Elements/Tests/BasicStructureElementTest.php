@@ -70,7 +70,7 @@ class BasicStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function stringValueProvider(): array
+    public static function stringValueProvider(): array
     {
         $return = [];
 
@@ -134,7 +134,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $this->assertEquals([], $dep);
     }
 
-    public function parseValueProvider(): array
+    public static function parseValueProvider(): array
     {
         $return = [];
 

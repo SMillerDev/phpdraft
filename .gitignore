@@ -1,5 +1,6 @@
 /.idea/
 /.phpintel/
+/tests/.phpunit.cache/**
 /tests/.phpunit.result.cache
 
 # IntelliJ

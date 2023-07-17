@@ -141,7 +141,7 @@ class EnumStructureElementTest extends LunrBaseTest
      *
      * @return array
      */
-    public function parseObjectProvider(): array
+    public static function parseObjectProvider(): array
     {
         $value1 = new ElementStructureElement();
         $value1->value = 'item';
