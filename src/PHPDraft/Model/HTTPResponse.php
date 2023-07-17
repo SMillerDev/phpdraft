@@ -13,8 +13,9 @@ declare(strict_types=1);
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\ObjectStructureElement;
+use Stringable;
 
-class HTTPResponse implements Comparable
+class HTTPResponse implements Comparable, Stringable
 {
     /**
      * HTTP Status code.
@@ -76,7 +77,7 @@ class HTTPResponse implements Comparable
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {
@@ -131,7 +132,7 @@ class HTTPResponse implements Comparable
             return;
         }
 
-        if ($value->element === 'asset') {
+        if ($value->element === 'asset' && property_exists($value, 'content')) {
             if (isset($value->attributes->contentType->content)) {
                 $this->content[$value->attributes->contentType->content] = $value->content;
             } elseif (isset($value->attributes->contentType)) {

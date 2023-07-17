@@ -30,36 +30,29 @@ class RequestBodyElement extends ObjectStructureElement
             $return = '<code class="request-body">';
             $list   = [];
             foreach ($this->value as $object) {
-                if (get_class($object) === self::class) {
-                    $list[] = $object->print_request($type);
+                if (get_class($object) !== self::class) {
+                    continue;
                 }
+                $list[] = $object->print_request($type);
             }
 
-            switch ($type) {
-                case 'application/x-www-form-urlencoded':
-                    $return .= join('&', $list);
-                    break;
-                default:
-                    $return .= join(PHP_EOL, $list);
-                    break;
-            }
+            $return .= match ($type)
+            {
+                'application/x-www-form-urlencoded' => join('&', $list),
+                default => join(PHP_EOL, $list),
+            };
 
             $return .= '</code>';
 
             return $return;
         }
 
-        $value = (empty($this->value)) ? '?' : $this->value;
+        $value = $this->value ?? '?';
 
-        switch ($type) {
-            case 'application/x-www-form-urlencoded':
-                return "{$this->key->value}=<span>$value</span>";
-            default:
-                $object             = [];
-                $object[$this->key->value] = $value;
-
-                return json_encode($object);
-        }
+        return match ($type) {
+            'application/x-www-form-urlencoded' => "{$this->key->value}=<span>$value</span>",
+            default => json_encode([$this->key->value => $value]),
+        };
     }
 
     /**

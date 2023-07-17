@@ -19,21 +19,6 @@ use Michelf\MarkdownExtra;
  */
 class ObjectStructureElement extends BasicStructureElement
 {
-    /**
-     * Object representation before parsing
-     * @var object|null
-     * @phpstan-ignore-next-line
-     */
-    private ?object $object;
-
-    /**
-     * Unset object function.
-     * @internal Only for tests
-     */
-    public function __clearForTest(): void
-    {
-        $this->object = null;
-    }
 
     /**
      * Parse a JSON object to a data structure.
@@ -43,9 +28,8 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return ObjectStructureElement self reference
      */
-    public function parse(?object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): self
     {
-        $this->object = $object;
         if (is_null($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) )) {
             return $this;
         }

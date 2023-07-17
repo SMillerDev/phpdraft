@@ -63,9 +63,7 @@ class ApibFileParserTest extends LunrBaseTest
         $this->expectExceptionMessageMatches('/API File not found: .*\/drafter\/non_existing_including_apib/');
         $this->expectExceptionCode(1);
 
-        $property = $this->reflection->getProperty('filename');
-        $property->setAccessible(true);
-        $property->setValue($this->class, TEST_STATICS . '/drafter/non_existing_including_apib');
+        $this->set_reflection_property_value('filename', TEST_STATICS . '/drafter/non_existing_including_apib');
         $this->class->parse();
     }
 

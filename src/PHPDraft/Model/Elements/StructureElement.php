@@ -31,13 +31,6 @@ interface StructureElement
      */
     public function parse(?object $object, array &$dependencies): self;
 
-    /**
-     * Print a string representation.
-     *
-     * @return string
-     */
-    public function __toString(): string;
-
 
     /**
      * Get a string representation of the value.
@@ -46,5 +39,5 @@ interface StructureElement
      *
      * @return string
      */
-    public function string_value(bool $flat = false);
+    public function string_value(bool $flat = false): string;
 }

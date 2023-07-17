@@ -15,6 +15,7 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\StructureElement;
+use QL\UriTemplate\Exception as UrlException;
 use QL\UriTemplate\UriTemplate;
 
 class Transition extends HierarchyElement
@@ -73,9 +74,9 @@ class Transition extends HierarchyElement
      *
      * @param Resource $parent A reference to the parent object
      */
-    public function __construct(Resource &$parent)
+    public function __construct(protected Resource $parent)
     {
-        $this->parent = $parent;
+        $this->parent = &$parent;
     }
 
     /**
@@ -83,7 +84,7 @@ class Transition extends HierarchyElement
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {
@@ -100,7 +101,7 @@ class Transition extends HierarchyElement
             }
         }
 
-        if (isset($object->attributes->data)) {
+        if (isset($object->attributes->data) && property_exists($object, 'element')) {
             $deps                 = [];
             $struct               = (new ObjectStructureElement())->get_class($object->element);
             $this->data_variables = $struct->parse($object->attributes->data->content, $deps);
@@ -152,14 +153,14 @@ class Transition extends HierarchyElement
      * @param string $base_url the URL to which the URL variables apply
      * @param bool   $clean    Get the URL without HTML
      *
-     * @throws \QL\UriTemplate\Exception
-     *
      * @return string HTML representation of the transition URL
+     *@throws UrlException
+     *
      */
     public function build_url(string $base_url = '', bool $clean = false): string
     {
         $url = $this->overlap_urls($this->parent->href ?? '', $this->href);
-        if ($url === false) {
+        if ($url === NULL) {
             $url = $this->parent->href . $this->href;
         }
         $tpl  = new UriTemplate($url);
@@ -197,21 +198,22 @@ class Transition extends HierarchyElement
      * @param string $str1 First part
      * @param string $str2 Second part
      *
-     * @return bool|string
+     * @return null|string
      *
      * @see http://stackoverflow.com/questions/2945446/built-in-function-to-combine-overlapping-string-sequences-in-php
      */
-    private function overlap_urls(string $str1, string $str2)
+    private function overlap_urls(string $str1, string $str2): ?string
     {
-        if ($overlap = $this->find_overlap($str1, $str2)) {
-            $overlap = $overlap[count($overlap) - 1];
-            $str1    = substr($str1, 0, -strlen($overlap));
-            $str2    = substr($str2, strlen($overlap));
-
-            return $str1 . $overlap . $str2;
+        $overlap = $this->find_overlap($str1, $str2);
+        if ($overlap === NULL) {
+            return NULL;
         }
 
-        return false;
+        $overlap = $overlap[count($overlap) - 1];
+        $str1    = substr($str1, 0, -strlen($overlap));
+        $str2    = substr($str2, strlen($overlap));
+
+        return $str1 . $overlap . $str2;
     }
 
     /**
@@ -220,9 +222,9 @@ class Transition extends HierarchyElement
      * @param string $str1 First part
      * @param string $str2 Second part
      *
-     * @return array<string>|bool
+     * @return array<string>|null
      */
-    private function find_overlap(string $str1, string $str2)
+    private function find_overlap(string $str1, string $str2): ?array
     {
         $return = [];
         $sl1    = strlen($str1);
@@ -241,7 +243,7 @@ class Transition extends HierarchyElement
             return $return;
         }
 
-        return false;
+        return NULL;
     }
 
     /**
@@ -261,11 +263,11 @@ class Transition extends HierarchyElement
      *
      * @param string        $base_url base URL of the server
      * @param array<string> $additional additional arguments to pass
-     * @param int $key number of the request to generate for
+     * @param int           $key number of the request to generate for
      *
      * @return string A cURL CLI command
      *
-     * @throws \QL\UriTemplate\Exception If URL parts are invalid
+     * @throws UrlException If URL parts are invalid
      */
     public function get_curl_command(string $base_url, array $additional = [], int $key = 0): string
     {

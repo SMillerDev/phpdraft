@@ -13,16 +13,18 @@ declare(strict_types=1);
 namespace PHPDraft\Parse;
 
 use PHPDraft\Out\BaseTemplateRenderer;
+use PHPDraft\Out\Sorting;
 use stdClass;
+use Stringable;
 
-abstract class BaseHtmlGenerator
+abstract class BaseHtmlGenerator implements Stringable
 {
     /**
      * Type of sorting to do.
      *
-     * @var int
+     * @var Sorting
      */
-    public int $sorting;
+    public Sorting $sorting;
 
     /**
      * JSON representation of an API Blueprint.
@@ -65,12 +67,4 @@ abstract class BaseHtmlGenerator
      * @throws ExecutionException As a runtime exception
      */
     abstract public function build_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): void;
-
-
-    /**
-     * Get the HTML representation of the object.
-     *
-     * @return string
-     */
-    abstract public function __toString();
 }

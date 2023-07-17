@@ -10,6 +10,7 @@
 namespace PHPDraft\Parse\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\Out\Sorting;
 use PHPDraft\Parse\HtmlGenerator;
 use ReflectionClass;
 
@@ -37,7 +38,7 @@ class HtmlGeneratorTest extends LunrBaseTest
         $this->reflection = new ReflectionClass('PHPDraft\Parse\HtmlGenerator');
         $this->class->init($data);
 
-        $this->class->sorting = -1;
+        $this->class->sorting = Sorting::PHPD_SORT_NONE;
     }
 
     /**

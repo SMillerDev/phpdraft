@@ -35,9 +35,9 @@ class Resource extends HierarchyElement
      *
      * @param Category $parent A reference to the parent object
      */
-    public function __construct(Category &$parent)
+    public function __construct(protected Category $parent)
     {
-        $this->parent = $parent;
+        $this->parent = &$parent;
     }
 
     /**
@@ -45,7 +45,7 @@ class Resource extends HierarchyElement
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {

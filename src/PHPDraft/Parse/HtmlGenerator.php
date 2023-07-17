@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
-use PHPDraft\Out\BaseTemplateRenderer;
 use PHPDraft\Out\TemplateRenderer;
 
 /**
@@ -54,7 +53,7 @@ class HtmlGenerator extends BaseHtmlGenerator
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->html;
     }

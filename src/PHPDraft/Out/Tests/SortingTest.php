@@ -28,11 +28,10 @@ class SortingTest extends LunrBaseTest
      */
     public function testSortsServicesIfNeeded(): void
     {
-        $this->assertTrue(Sorting::sortServices(3));
-        $this->assertTrue(Sorting::sortServices(2));
-        $this->assertFalse(Sorting::sortServices(-1));
-        $this->assertFalse(Sorting::sortServices(1));
-        $this->assertFalse(Sorting::sortServices(0));
+        $this->assertTrue(Sorting::sortServices(Sorting::PHPD_SORT_ALL));
+        $this->assertTrue(Sorting::sortServices(Sorting::PHPD_SORT_WEBSERVICES));
+        $this->assertFalse(Sorting::sortServices(Sorting::PHPD_SORT_NONE));
+        $this->assertFalse(Sorting::sortServices(Sorting::PHPD_SORT_STRUCTURES));
     }
 
     /**
@@ -42,10 +41,9 @@ class SortingTest extends LunrBaseTest
      */
     public function testSortsStructureIfNeeded(): void
     {
-        $this->assertTrue(Sorting::sortStructures(3));
-        $this->assertTrue(Sorting::sortStructures(1));
-        $this->assertFalse(Sorting::sortStructures(-1));
-        $this->assertFalse(Sorting::sortStructures(2));
-        $this->assertFalse(Sorting::sortStructures(0));
+        $this->assertTrue(Sorting::sortStructures(Sorting::PHPD_SORT_ALL));
+        $this->assertTrue(Sorting::sortStructures(Sorting::PHPD_SORT_STRUCTURES));
+        $this->assertFalse(Sorting::sortStructures(Sorting::PHPD_SORT_NONE));
+        $this->assertFalse(Sorting::sortStructures(Sorting::PHPD_SORT_WEBSERVICES));
     }
 }

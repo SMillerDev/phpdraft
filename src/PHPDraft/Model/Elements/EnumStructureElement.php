@@ -22,9 +22,9 @@ class EnumStructureElement extends BasicStructureElement
      * @param object|null $object       APIB Item to parse
      * @param string[]    $dependencies List of dependencies build
      *
-     * @return $this
+     * @return self self reference
      */
-    public function parse(?object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): self
     {
         $this->element = $object->element;
 

@@ -10,6 +10,7 @@
 namespace PHPDraft\Out\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\Out\Sorting;
 use PHPDraft\Out\TemplateRenderer;
 
 /**
@@ -221,7 +222,7 @@ class TemplateRendererTest extends LunrBaseTest
      */
     public function testGetTemplateSorting(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->set_reflection_property_value('sorting', Sorting::PHPD_SORT_ALL);
         $json = '{"content": [{"content": "hello"}]}';
 
         $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
@@ -233,7 +234,7 @@ class TemplateRendererTest extends LunrBaseTest
      */
     public function testGetTemplateMetaData(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->set_reflection_property_value('sorting', Sorting::PHPD_SORT_ALL);
         $json = <<<'TAG'
 {"content": [{"content": [], "attributes": {
 "metadata": {"content": [
@@ -252,7 +253,7 @@ TAG;
      */
     public function testGetTemplateCategories(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->set_reflection_property_value('sorting', Sorting::PHPD_SORT_ALL);
         $json = <<<'TAG'
 {"content": [
 {"content": [{"element": "copy", "content": "__desc__"}, {"element": "category", "content": []}],

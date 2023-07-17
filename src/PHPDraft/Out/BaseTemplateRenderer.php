@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace PHPDraft\Out;
 
 use Lukasoppermann\Httpstatus\Httpstatus;
+use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 
 abstract class BaseTemplateRenderer
@@ -20,9 +21,9 @@ abstract class BaseTemplateRenderer
     /**
      * Type of sorting to do on objects.
      *
-     * @var int
+     * @var Sorting
      */
-    public int $sorting;
+    public Sorting $sorting;
     /**
      * CSS Files to load.
      *
@@ -62,7 +63,7 @@ abstract class BaseTemplateRenderer
     /**
      * Structures used in all data.
      *
-     * @var ObjectStructureElement[]
+     * @var BasicStructureElement[]
      */
     protected array $base_structures = [];
 }

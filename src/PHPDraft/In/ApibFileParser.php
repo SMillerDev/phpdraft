@@ -11,11 +11,12 @@
 namespace PHPDraft\In;
 
 use PHPDraft\Parse\ExecutionException;
+use Stringable;
 
 /**
  * Class ApibFileParser.
  */
-class ApibFileParser
+class ApibFileParser implements Stringable
 {
     /**
      * Complete API Blueprint.
@@ -32,20 +33,12 @@ class ApibFileParser
     protected string $location;
 
     /**
-     * Filename to parse.
-     *
-     * @var string
-     */
-    private string $filename;
-
-    /**
      * FileParser constructor.
      *
      * @param string $filename File to parse
      */
-    public function __construct(string $filename = 'index.apib')
+    public function __construct(private string $filename = 'index.apib')
     {
-        $this->filename = $filename;
         $this->location = pathinfo($this->filename, PATHINFO_DIRNAME) . '/';
 
         set_include_path(get_include_path() . ':' . $this->location);
@@ -56,7 +49,7 @@ class ApibFileParser
      *
      * @throws ExecutionException
      *
-     * @return $this self reference.
+     * @return self self reference.
      */
     public function parse(): self
     {

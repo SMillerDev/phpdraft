@@ -20,6 +20,9 @@ use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Extra\Markdown\DefaultMarkdown;
 use Twig\Extra\Markdown\MarkdownExtension;
 use Twig\Extra\Markdown\MarkdownRuntime;
@@ -55,9 +58,9 @@ class TemplateRenderer extends BaseTemplateRenderer
      *
      * @throws ExecutionException When template is not found
      *
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function get(object $object): string
     {
@@ -185,39 +188,20 @@ class TemplateRenderer extends BaseTemplateRenderer
     public static function get_method_icon(string $method): string
     {
         $class = ['fas', strtoupper($method)];
-        switch (strtolower($method)) {
-            case 'post':
-                $class[] = 'fa-plus-square';
-                break;
-            case 'put':
-                $class[] = 'fa-pen-square';
-                break;
-            case 'get':
-                $class[] = 'fa-arrow-circle-down';
-                break;
-            case 'delete':
-                $class[] = 'fa-minus-square';
-                break;
-            case 'head':
-                $class[] = 'fa-info';
-                break;
-            case 'connect':
-                $class[] = 'fa-ethernet';
-                break;
-            case 'options':
-                $class[] = 'fa-sliders-h';
-                break;
-            case 'trace':
-                $class[] = 'fa-route';
-                break;
-            case 'patch':
-                $class[] = 'fa-band-aid';
-                break;
-            default:
-                break;
-        }
+        $class[] = match (strtolower($method)) {
+            'post' => 'fa-plus-square',
+            'put' => 'fa-pen-square',
+            'get' => 'fa-arrow-circle-down',
+            'delete' => 'fa-minus-square',
+            'head' => 'fa-info',
+            'connect' => 'fa-ethernet',
+            'options' => 'fa-sliders-h',
+            'trace' => 'fa-route',
+            'patch' => 'fa-band-aid',
+            default => NULL,
+        };
 
-        return join(' ', $class);
+        return trim(join(' ', $class));
     }
 
     /**

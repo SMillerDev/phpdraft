@@ -28,13 +28,13 @@ class Drafter extends BaseParser
      *
      * @param ApibFileParser $apib API Blueprint text
      *
-     * @return \PHPDraft\Parse\BaseParser
+     * @return BaseParser
      */
     public function init(ApibFileParser $apib): BaseParser
     {
         parent::init($apib);
         $loc = self::location();
-        if ($loc === false) {
+        if ($loc === NULL) {
             throw new \UnexpectedValueException("Could not find drafter location!");
         }
         $this->drafter = $loc;
@@ -45,14 +45,18 @@ class Drafter extends BaseParser
     /**
      * Return drafter location if found.
      *
-     * @return false|string
+     * @return null|string
      */
-    public static function location()
+    public static function location(): ?string
     {
         $returnVal = shell_exec('which drafter 2> /dev/null');
+        if ($returnVal === NULL || $returnVal === FALSE) {
+            return NULL;
+        }
+
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
-        return empty($returnVal) ? false : $returnVal;
+        return empty($returnVal) ? NULL : $returnVal;
     }
 
     /**

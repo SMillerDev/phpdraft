@@ -15,8 +15,9 @@ namespace PHPDraft\Model;
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
 use QL\UriTemplate\Exception;
+use Stringable;
 
-class HTTPRequest implements Comparable
+class HTTPRequest implements Comparable, Stringable
 {
     /**
      * HTTP Headers.
@@ -95,14 +96,14 @@ class HTTPRequest implements Comparable
      *
      * @param object $object JSON object
      *
-     * @return $this self-reference
+     * @return self self-reference
      */
     public function parse(object $object): self
     {
         $this->method = $object->attributes->method->content ?? $object->attributes->method;
         $this->title  = $object->meta->title->content ?? $object->meta->title ?? null;
 
-        if (isset($object->content) && $object->content !== null) {
+        if (isset($object->content)) {
             foreach ($object->content as $value) {
                 if ($value->element === 'dataStructure') {
                     $this->parse_structure($value);

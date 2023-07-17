@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
-abstract class BasicStructureElement implements StructureElement
+use Stringable;
+
+abstract class BasicStructureElement implements StructureElement, Stringable
 {
     /**
      * Object key.
@@ -39,7 +41,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var mixed
      */
-    public $value = null;
+    public mixed $value = null;
     /**
      * Object status (required|optional).
      *
@@ -71,16 +73,9 @@ abstract class BasicStructureElement implements StructureElement
      * @param object|null $object       An object to parse
      * @param string[]    $dependencies Dependencies of this object
      *
-     * @return StructureElement self reference
+     * @return self self reference
      */
-    abstract public function parse(?object $object, array &$dependencies): StructureElement;
-
-    /**
-     * Print a string representation.
-     *
-     * @return string
-     */
-    abstract public function __toString(): string;
+    abstract public function parse(?object $object, array &$dependencies): self;
 
     /**
      * Get a new instance of a class.
@@ -167,21 +162,21 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return string
      */
-    public function string_value(bool $flat = false)
+    public function string_value(bool $flat = false): string
     {
         if (is_array($this->value)) {
             $value_key = rand(0, count($this->value));
             if (is_subclass_of($this->value[$value_key], StructureElement::class) && $flat === false) {
-                return $this->value[$value_key]->string_value($flat);
+                return $this->value[$value_key]->string_value();
             }
 
-            return $this->value[$value_key];
+            return $this->value[$value_key] ?? '';
         }
 
         if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === true) {
             return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
         }
-        return $this->value;
+        return $this->value ?? '';
     }
 
     /**
@@ -193,19 +188,10 @@ abstract class BasicStructureElement implements StructureElement
      */
     public function get_class(string $element): BasicStructureElement
     {
-        switch ($element) {
-            default:
-            case 'object':
-                $struct = $this->new_instance();
-                break;
-            case 'array':
-                $struct = new ArrayStructureElement();
-                break;
-            case 'enum':
-                $struct = new EnumStructureElement();
-                break;
-        }
-
-        return $struct;
+        return match ($element) {
+            'array' => new ArrayStructureElement(),
+            'enum' => new EnumStructureElement(),
+            default => $this->new_instance(),
+        };
     }
 }
