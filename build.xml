@@ -5,7 +5,6 @@
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
         <delete dir="${project.basedir}/build/coverage"/>
-        <delete dir="${project.basedir}/build/logs"/>
         <delete dir="${project.basedir}/build/phar"/>
         <delete dir="${project.basedir}/build/out"/>
         <delete dir="${project.basedir}/build/tmp"/>
@@ -17,7 +16,6 @@
         </delete>
 
         <mkdir dir="${project.basedir}/build/coverage"/>
-        <mkdir dir="${project.basedir}/build/logs"/>
         <mkdir dir="${project.basedir}/build/phar"/>
         <mkdir dir="${project.basedir}/build/out"/>
         <mkdir dir="${project.basedir}/build/tmp"/>
@@ -104,7 +102,7 @@
             </fileset>
         </copy>
         <copy todir="${project.basedir}/build/phar/phpdraft/src/Psr/Log">
-            <fileset dir="vendor/psr/log/Psr/Log">
+            <fileset dir="vendor/psr/log/src">
                 <include name="**/*.php"/>
                 <exclude name="**/*Test.php*"/>
             </fileset>
