@@ -49,6 +49,7 @@
         <copy todir="${project.basedir}/build/phar/phpdraft/src">
             <fileset dir="${project.basedir}/src/">
                 <exclude name="**/*Test.php*"/>
+                <exclude name="**/*TestBase.php*"/>
                 <include name="**/*.php"/>
                 <include name="**/*.twig"/>
                 <include name="**/*.phtml"/>
