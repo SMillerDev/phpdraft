@@ -80,8 +80,14 @@ class TemplateRenderer extends BaseTemplateRenderer
         }
 
         $loader   = new FilesystemLoader([]);
-        $loader->addPath(stream_resolve_include_path(dirname($include)));
-        $loader->addPath(stream_resolve_include_path(dirname($this->find_include_file('default', 'twig'))));
+        $dirpath = stream_resolve_include_path(dirname($include));
+        if ($dirpath !== FALSE) {
+            $loader->addPath($dirpath);
+        }
+        $twig_path = stream_resolve_include_path(dirname($this->find_include_file('default', 'twig')));
+        if ($twig_path !== FALSE) {
+            $loader->addPath($twig_path);
+        }
 
         $twig     = TwigFactory::get($loader);
         $template = $twig->load('main.twig');
@@ -161,7 +167,7 @@ class TemplateRenderer extends BaseTemplateRenderer
             'PHPDraft/Out/HTML/' . $template . DIRECTORY_SEPARATOR . 'main' . ".{$extension}",
         ];
         foreach ($includes as $include) {
-            if (!stream_resolve_include_path($include)) {
+            if (stream_resolve_include_path($include) === FALSE) {
                 continue;
             }
             return $include;

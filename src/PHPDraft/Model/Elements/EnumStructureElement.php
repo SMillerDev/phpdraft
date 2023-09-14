@@ -61,10 +61,12 @@ class EnumStructureElement extends BasicStructureElement
             return $this;
         }
 
-        foreach ($object->attributes->enumerations->content as $sub_item) {
-            $element = new ElementStructureElement();
-            $element->parse($sub_item, $dependencies);
-            $this->value[] = $element;
+        if (isset($object->attributes->enumerations)) {
+            foreach ($object->attributes->enumerations->content as $sub_item) {
+                $element = new ElementStructureElement();
+                $element->parse($sub_item, $dependencies);
+                $this->value[] = $element;
+            }
         }
 
         $this->deps = $dependencies;

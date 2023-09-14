@@ -51,7 +51,7 @@ abstract class BaseTemplateRenderer
     /**
      * The base data of the API.
      *
-     * @var array<string, mixed>
+     * @var array<int|string, mixed>
      */
     protected array $base_data;
     /**

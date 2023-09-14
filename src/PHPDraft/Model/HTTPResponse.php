@@ -40,14 +40,14 @@ class HTTPResponse implements Comparable
     /**
      * Response headers.
      *
-     * @var array<string, string>
+     * @var array<int|string, string>
      */
     public array $headers = [];
 
     /**
      * Response bodies.
      *
-     * @var array<string, string>
+     * @var array<int|string, string>
      */
     public array $content = [];
 
