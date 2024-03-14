@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bed93ba7f0cef9f746bcb1595005e28",
+    "content-hash": "8ebe7e79091d4ea7bf612b39ca602f4b",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
@@ -295,33 +295,29 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
-            "name": "ql/uri-template",
-            "version": "1.1.3",
+            "name": "rize/uri-template",
+            "version": "0.3.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/QuickenLoans/uri-template.git",
-                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616"
+                "url": "https://github.com/rize/UriTemplate.git",
+                "reference": "34efe65c79710eed0883884f2285ae6d4a0aad19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/QuickenLoans/uri-template/zipball/948f14d8e288641b72bd0c1de6647d2c9ccae616",
-                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616",
+                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/34efe65c79710eed0883884f2285ae6d4a0aad19",
+                "reference": "34efe65c79710eed0883884f2285ae6d4a0aad19",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.4.0"
+                "php": ">=5.3.0"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "^1.0||^2.0",
-                "phpunit/php-invoker": "*",
-                "phpunit/phpunit": "^4.8||^5.7||^6.5||^7.0"
+                "phpunit/phpunit": "~4.8.36"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "QL\\UriTemplate\\": "src"
+                    "Rize\\": "src/Rize"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -330,38 +326,48 @@
             ],
             "authors": [
                 {
-                    "name": "Matt Nagi",
-                    "email": "mattnagi@quickenloans.com"
+                    "name": "Marut K",
+                    "homepage": "http://twitter.com/rezigned"
                 }
             ],
-            "description": "An implementation of RFC 6570 level 4",
-            "homepage": "https://github.com/QuickenLoans/uri-template",
+            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
             "keywords": [
-                "URI Template",
-                "rfc6570",
+                "RFC 6570",
                 "template",
-                "uri",
-                "url"
+                "uri"
             ],
             "support": {
-                "email": "mattnagi@quickenloans.com",
-                "issues": "https://github.com/QuickenLoans/uri-template/issues",
-                "source": "https://github.com/QuickenLoans/uri-template"
+                "issues": "https://github.com/rize/UriTemplate/issues",
+                "source": "https://github.com/rize/UriTemplate/tree/0.3.6"
             },
-            "time": "2018-06-10T16:08:54+00:00"
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rezigned",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/rezigned",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/rize-uri-template",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2024-03-10T08:07:49+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "ea208ce43cbb04af6867b4fdddb1bdbf84cc28cb"
+                "reference": "ef4d7e442ca910c4764bce785146269b30cb5fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/ea208ce43cbb04af6867b4fdddb1bdbf84cc28cb",
-                "reference": "ea208ce43cbb04af6867b4fdddb1bdbf84cc28cb",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/ef4d7e442ca910c4764bce785146269b30cb5fc4",
+                "reference": "ef4d7e442ca910c4764bce785146269b30cb5fc4",
                 "shasum": ""
             },
             "require": {
@@ -375,9 +381,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -414,7 +417,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -430,20 +433,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "42292d99c55abe617799667f454222c54c60e229"
+                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/42292d99c55abe617799667f454222c54c60e229",
-                "reference": "42292d99c55abe617799667f454222c54c60e229",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
+                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
                 "shasum": ""
             },
             "require": {
@@ -457,9 +460,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -497,7 +497,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -513,20 +513,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-28T09:04:16+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5"
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
                 "shasum": ""
             },
             "require": {
@@ -534,9 +534,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -580,7 +577,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -596,7 +593,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "twig/markdown-extra",
@@ -797,21 +794,21 @@
     "packages-dev": [
         {
             "name": "lunr/halo",
-            "version": "dev-master",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunr-php/lunr.halo.git",
-                "reference": "13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc"
+                "reference": "ce5f1c55a5666b299f670a154a3ec3b476b52d57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc",
-                "reference": "13d4cdbad2109e4e74d7ddfc2a4181dd95505dcc",
+                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/ce5f1c55a5666b299f670a154a3ec3b476b52d57",
+                "reference": "ce5f1c55a5666b299f670a154a3ec3b476b52d57",
                 "shasum": ""
             },
             "require": {
-                "ext-uopz": ">=6.1",
-                "php": ">=7.4"
+                "ext-uopz": ">=7.1.1",
+                "php": ">=8.1"
             },
             "require-dev": {
                 "ext-xdebug": ">=3.0",
@@ -819,7 +816,6 @@
                 "psr/container": ">=2.0.2",
                 "psr/log": ">=1.1"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -839,9 +835,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lunr-php/lunr.halo/issues",
-                "source": "https://github.com/lunr-php/lunr.halo/tree/master"
+                "source": "https://github.com/lunr-php/lunr.halo/tree/0.8.1"
             },
-            "time": "2023-07-05T13:45:49+00:00"
+            "time": "2023-11-21T15:17:44+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3005,23 +3001,23 @@
         },
         {
             "name": "zetacomponents/console-tools",
-            "version": "1.7.3",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zetacomponents/ConsoleTools.git",
-                "reference": "fbc31f1be66ccd178c68d846d7c0ae09dbb97c89"
+                "reference": "c487720bffd26e74a297c3baa31a9b90580759b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/fbc31f1be66ccd178c68d846d7c0ae09dbb97c89",
-                "reference": "fbc31f1be66ccd178c68d846d7c0ae09dbb97c89",
+                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/c487720bffd26e74a297c3baa31a9b90580759b2",
+                "reference": "c487720bffd26e74a297c3baa31a9b90580759b2",
                 "shasum": ""
             },
             "require": {
                 "zetacomponents/base": "~1.8"
             },
             "require-dev": {
-                "phpunit/phpunit": "~8.0",
+                "phpunit/phpunit": "~9.0",
                 "zetacomponents/unit-test": "*"
             },
             "type": "library",
@@ -3070,16 +3066,14 @@
             "homepage": "https://github.com/zetacomponents",
             "support": {
                 "issues": "https://github.com/zetacomponents/ConsoleTools/issues",
-                "source": "https://github.com/zetacomponents/ConsoleTools/tree/1.7.3"
+                "source": "https://github.com/zetacomponents/ConsoleTools/tree/1.7.4"
             },
-            "time": "2022-01-19T11:16:04+00:00"
+            "time": "2024-01-31T10:09:19+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lunr/halo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
