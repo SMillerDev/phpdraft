@@ -61,8 +61,8 @@
                 <exclude name="**/Readme.php"/>
             </fileset>
         </copy>
-        <copy todir="${project.basedir}/build/phar/phpdraft/src/QL">
-            <fileset dir="vendor/ql/uri-template/src">
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/Rize">
+            <fileset dir="vendor/rize/uri-template/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>
