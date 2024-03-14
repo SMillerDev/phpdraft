@@ -14,7 +14,6 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
-use QL\UriTemplate\Exception;
 
 class HTTPRequest implements Comparable
 {
@@ -178,8 +177,6 @@ class HTTPRequest implements Comparable
      *
      * @param string        $base_url   URL to the base server
      * @param array<string> $additional Extra options to pass to cURL
-     *
-     * @throws Exception
      *
      * @return string An executable cURL command
      */

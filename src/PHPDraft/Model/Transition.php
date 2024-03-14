@@ -153,8 +153,6 @@ class Transition extends HierarchyElement
      * @param string $base_url the URL to which the URL variables apply
      * @param bool   $clean    Get the URL without HTML
      *
-     * @throws \QL\UriTemplate\Exception
-     *
      * @return string HTML representation of the transition URL
      */
     public function build_url(string $base_url = '', bool $clean = false): string
@@ -265,8 +263,6 @@ class Transition extends HierarchyElement
      * @param int $key number of the request to generate for
      *
      * @return string A cURL CLI command
-     *
-     * @throws \QL\UriTemplate\Exception If URL parts are invalid
      */
     public function get_curl_command(string $base_url, array $additional = [], int $key = 0): string
     {
