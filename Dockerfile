@@ -1,23 +1,45 @@
-FROM apiaryio/drafter:latest as drafter
-FROM composer:latest as composer
+FROM debian:bullseye-slim AS drafter-build
+RUN apt-get update && \
+    apt-get install --yes curl ca-certificates
 
-FROM php:8.1-cli-alpine as build
-RUN apk add --no-cache \
-		$PHPIZE_DEPS \
-		openssl-dev
-RUN pecl install uopz \
-    && docker-php-ext-enable uopz
-RUN echo "phar.readonly = 0" > "$PHP_INI_DIR/conf.d/phar.ini"
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY . /usr/src/phpdraft
+RUN curl -L --fail -o drafter.tar.gz https://github.com/apiaryio/drafter/releases/download/v5.1.0/drafter-v5.1.0.tar.gz
+RUN install -d /usr/src/drafter
+RUN tar -xvf drafter.tar.gz --strip-components=1 --directory /usr/src/drafter
+
+WORKDIR /usr/src/drafter
+
+RUN apt-get install --yes cmake g++
+
+RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+RUN cmake --build build
+RUN cmake --install build
+
+CMD drafter
+
+FROM composer:latest AS composer
+
 WORKDIR /usr/src/phpdraft
-RUN /usr/bin/composer install
-RUN vendor/bin/phing phar-nightly
-COPY build/out/phpdraft-nightly.phar /usr/local/bin/phpdraft
+COPY . /usr/src/phpdraft/
+RUN composer install --ignore-platform-req=ext-uopz
 
-FROM php:8.1-cli-alpine
+FROM php:8.3-cli-bullseye AS phpdraft-build
+
+
+
+COPY --from=composer /usr/src/phpdraft /usr/src/phpdraft
+WORKDIR /usr/src/phpdraft
+
+RUN ./vendor/bin/phing phar-nightly
+COPY /usr/src/phpdraft/build/out/phpdraft-nightly.phar /usr/local/bin/phpdraft
+RUN chmod +x /usr/local/bin/phpdraft
+
+FROM php:8.3-cli-bullseye AS phpdraft
+
 LABEL maintainer="Sean Molenaar sean@seanmolenaar.eu"
-RUN apk add --no-cache gcc
-COPY --from=drafter /usr/local/bin/drafter /usr/local/bin/drafter
-COPY --from=build /usr/local/bin/phpdraft /usr/local/bin/phpdraft
-ENTRYPOINT /usr/local/bin/phpdraft -f /tmp/drafter/full_test.apib
+
+COPY --from=phpdraft-build /usr/local/bin/phpdraft /usr/local/bin/phpdraft
+COPY --from=drafter-build /usr/local/bin/drafter /usr/local/bin/drafter
+
+RUN ls -al /usr/local/bin/phpdraft
+
+CMD phpdraft
