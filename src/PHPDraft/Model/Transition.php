@@ -16,7 +16,7 @@ use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\StructureElement;
 use PHPDraft\Model\Resource as HttpResource;
-use QL\UriTemplate\UriTemplate;
+use Rize\UriTemplate;
 
 class Transition extends HierarchyElement
 {
@@ -153,8 +153,6 @@ class Transition extends HierarchyElement
      * @param string $base_url the URL to which the URL variables apply
      * @param bool   $clean    Get the URL without HTML
      *
-     * @throws \QL\UriTemplate\Exception
-     *
      * @return string HTML representation of the transition URL
      */
     public function build_url(string $base_url = '', bool $clean = false): string
@@ -163,7 +161,7 @@ class Transition extends HierarchyElement
         if ($url === false) {
             $url = $this->parent->href . $this->href;
         }
-        $tpl  = new UriTemplate($url);
+        $tpl  = new UriTemplate();
         $vars = [];
         if ($this->url_variables !== []) {
             foreach ($this->url_variables as $item) {
@@ -183,7 +181,7 @@ class Transition extends HierarchyElement
                 $vars[$item->key->value] = $item->string_value(true);
             }
         }
-        $url = $tpl->expand($vars);
+        $url = $tpl->expand($url, $vars);
 
         if ($clean) {
             return strip_tags($base_url . $url);
@@ -265,8 +263,6 @@ class Transition extends HierarchyElement
      * @param int $key number of the request to generate for
      *
      * @return string A cURL CLI command
-     *
-     * @throws \QL\UriTemplate\Exception If URL parts are invalid
      */
     public function get_curl_command(string $base_url, array $additional = [], int $key = 0): string
     {
