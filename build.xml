@@ -130,6 +130,22 @@
         <echo message="Building version: ${version}, type: ${type}, output: ${_version}"/>
         <fail unless="_version" message="Could not construct version parameter!" />
 
+        <exec executable="php" outputProperty="_pharReadonly">
+            <arg value="-r"/>
+            <arg value="echo ini_get('phar.readonly');"/>
+        </exec>
+
+        <echo message="Phar: ${_pharReadonly}"/>
+        <fail message="No PHAR creation allowed">
+            <condition>
+                <or>
+                    <equals arg1="${_pharReadonly}" arg2="1"/>
+                    <equals arg1="${_pharReadonly}" arg2="true"/>
+                    <equals arg1="${_pharReadonly}" arg2="On"/>
+                </or>
+            </condition>
+        </fail>
+
         <exec executable="${project.basedir}/vendor/bin/phpab" taskname="phpab">
             <arg value="--all"/>
             <arg value="--static"/>

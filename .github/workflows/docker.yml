@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          fetch-depth: 0
 
       - name: Log in to the Container registry
         uses: docker/login-action@master
@@ -28,33 +31,42 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (tags, labels) for Drafter
         id: meta-drafter
         uses: docker/metadata-action@master
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/drafter
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@master
-        with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}
-
-      - name: Build and push Docker image
+      - name: Build and push drafter Docker image
         uses: docker/build-push-action@master
         with:
           context: .
           push: true
           tags: ${{ steps.meta-drafter.outputs.tags }}
           labels: ${{ steps.meta-drafter.outputs.labels }}
-          target: drafter-build
+          target: drafter
+          no-cache-filters: drafter-build,drafter
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/drafter:latest
 
-      - name: Build and push Docker image
+      - name: Extract metadata (tags, labels) for PHPDraft
+        id: meta
+        uses: docker/metadata-action@master
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+
+      - name: Last tag
+        id: tag-info
+        run: |
+          echo "latest=$(git describe --tags --always --abbrev=0)" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push PHPDraft Docker image
         uses: docker/build-push-action@master
         with:
-          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: phpdraft
+          no-cache-filters: composer,phpdraft-build,phpdraft
+          build-args: |
+            BUILDKIT_CONTEXT_KEEP_GIT_DIR=true
+            PHPDRAFT_RELEASE_ID=${{ steps.tag-info.outputs.latest }}
