@@ -35,7 +35,12 @@ class Version
      */
     public static function release_id(): string
     {
-        return (VERSION === '0') ? @exec('git describe --tags 2>&1') : VERSION;
+        $env_id = getenv('PHPDRAFT_RELEASE_ID');
+        if ($env_id !== FALSE) {
+            return $env_id;
+        }
+
+        return VERSION !== '0' ? VERSION : @exec('git describe --tags 2>&1');
     }
 
     /**
