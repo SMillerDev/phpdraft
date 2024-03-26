@@ -82,7 +82,7 @@ jobs:
       - name: Upload coverage result
         uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: coverage-${{ matrix.php-versions }}
           path: coverage.xml
 
   analytics:
