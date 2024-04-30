@@ -2855,19 +2855,20 @@
         },
         {
             "name": "theseer/autoload",
-            "version": "1.29.0",
+            "version": "1.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/Autoload.git",
-                "reference": "af2f9e622bdd0a61d94f0b142cba996d9567cc61"
+                "reference": "abb83aaae55eacb3582e1a888a6f74ff14a331d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/Autoload/zipball/af2f9e622bdd0a61d94f0b142cba996d9567cc61",
-                "reference": "af2f9e622bdd0a61d94f0b142cba996d9567cc61",
+                "url": "https://api.github.com/repos/theseer/Autoload/zipball/abb83aaae55eacb3582e1a888a6f74ff14a331d7",
+                "reference": "abb83aaae55eacb3582e1a888a6f74ff14a331d7",
                 "shasum": ""
             },
             "require": {
+                "ext-openssl": "*",
                 "php": ">=5.3",
                 "theseer/directoryscanner": "^1.3.3",
                 "zetacomponents/console-tools": "^1.7"
@@ -2897,7 +2898,7 @@
             "description": "A tool and library to generate autoload code.",
             "support": {
                 "issues": "https://github.com/theseer/Autoload/issues",
-                "source": "https://github.com/theseer/Autoload/tree/1.29.0"
+                "source": "https://github.com/theseer/Autoload/tree/1.29.1"
             },
             "funding": [
                 {
@@ -2905,7 +2906,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-18T19:05:36+00:00"
+            "time": "2024-04-29T19:12:07+00:00"
         },
         {
             "name": "theseer/directoryscanner",
