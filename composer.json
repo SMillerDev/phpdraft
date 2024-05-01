@@ -33,7 +33,7 @@
     "lunr/halo": "~0.8.0",
     "phpunit/phpunit": "~10.0",
     "theseer/autoload": "~1.0",
-    "phing/phing": "~2.0",
+    "phing/phing": "~3.0",
     "phpstan/phpstan": "^1.2.0",
     "phpstan/phpstan-phpunit": "^1.0.0",
     "phpstan/phpstan-strict-rules": "^1.5",
