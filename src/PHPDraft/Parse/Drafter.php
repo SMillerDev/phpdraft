@@ -50,6 +50,10 @@ class Drafter extends BaseParser
     public static function location()
     {
         $returnVal = shell_exec('which drafter 2> /dev/null');
+        if (!is_string($returnVal)) {
+            return false;
+        }
+
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
 
         return $returnVal === null || $returnVal === '' ? false : $returnVal;
@@ -79,10 +83,15 @@ class Drafter extends BaseParser
     public static function available(): bool
     {
         $path = self::location();
+        if ($path === FALSE) {
+            return FALSE;
+        }
 
         $version = shell_exec('drafter -v 2> /dev/null');
-        $version = preg_match('/^v([45])/', $version);
+        if (!is_string($version)) {
+            return FALSE;
+        }
 
-        return $path && $version === 1;
+        return preg_match('/^v([45])/', $version) === 1;
     }
 }

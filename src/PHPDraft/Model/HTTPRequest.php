@@ -20,7 +20,7 @@ class HTTPRequest implements Comparable
     /**
      * HTTP Headers.
      *
-     * @var array<string, string>
+     * @var array<int|string, string>
      */
     public array $headers = [];
 
@@ -68,7 +68,7 @@ class HTTPRequest implements Comparable
     /**
      * Structure of the request.
      *
-     * @var RequestBodyElement[]|RequestBodyElement
+     * @var array<RequestBodyElement>|RequestBodyElement
      */
     public mixed $struct = [];
     /**
@@ -191,7 +191,7 @@ class HTTPRequest implements Comparable
             $options[] = '--data-binary ' . escapeshellarg($this->body);
         } elseif (is_array($this->body) && $this->body !== []) {
             $options[] = '--data-binary ' . escapeshellarg(join('', $this->body));
-        } elseif (is_subclass_of($this->struct, StructureElement::class)) {
+        } elseif (!is_array($this->struct)) {
             foreach ($this->struct->value as $body) {
                 if (is_null($body) || $body === []) {
                     continue;

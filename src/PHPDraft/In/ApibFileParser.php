@@ -91,6 +91,9 @@ class ApibFileParser implements Stringable
     {
         $path    = $this->file_path($filename, $rel_path);
         $file    = file_get_contents($path);
+        if ($file === FALSE) {
+            throw new ExecutionException("API File not readable: $filename", 1);
+        }
         $matches = [];
         preg_match_all('<!-- include\(([\S\s]*?)(\.[a-z]*?)\) -->', $file, $matches);
         for ($i = 0; $i < count($matches[1]); $i++) {
@@ -159,6 +162,10 @@ class ApibFileParser implements Stringable
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         $result = curl_exec($ch);
         curl_close($ch);
+
+        if (is_bool($result)) {
+            throw new ExecutionException("Could not retreive schema from: $url", 1);
+        }
 
         return $result;
     }

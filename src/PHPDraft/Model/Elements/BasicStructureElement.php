@@ -173,14 +173,14 @@ abstract class BasicStructureElement implements StructureElement
     {
         if (is_array($this->value)) {
             $value_key = rand(0, count($this->value));
-            if (is_subclass_of($this->value[$value_key], StructureElement::class) && $flat === false) {
+            if (is_subclass_of($this->value[$value_key], StructureElement::class, false) && $flat === false) {
                 return $this->value[$value_key]->string_value($flat);
             }
 
             return $this->value[$value_key];
         }
 
-        if (is_subclass_of($this->value, BasicStructureElement::class) && $flat === true) {
+        if (is_subclass_of($this->value, BasicStructureElement::class, false) && $flat === true) {
             return is_array($this->value->value) ? array_keys($this->value->value)[0] : $this->value->value;
         }
 

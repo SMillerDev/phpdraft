@@ -26,7 +26,7 @@ class Resource extends HierarchyElement
     /**
      * URL variables.
      *
-     * @var ObjectStructureElement[]
+     * @var array<ObjectStructureElement>
      */
     public array $url_variables = [];
 
