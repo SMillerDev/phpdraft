@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
+use PHPDraft\Out\OpenAPI\OpenApiRenderer;
+
 /**
  * Class ParserFactory.
  */
@@ -38,5 +40,14 @@ class ParserFactory
         }
 
         throw new ResourceException("Couldn't get a JSON parser", 255);
+    }
+
+    public static function getOpenAPI(): OpenApiRenderer
+    {
+        if (Drafter::available() || DrafterAPI::available()) {
+            return new OpenApiRenderer();
+        }
+
+        throw new ResourceException("Couldn't get an OpenAPI renderer", 255);
     }
 }

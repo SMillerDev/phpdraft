@@ -28,6 +28,7 @@ try
         ->opt('help:h', 'This help text', false)
         ->opt('version:v', 'Print the version for PHPDraft.', false)
         ->opt('file:f', 'Specifies the file to parse.', false)
+        ->opt('openapi:a', 'Output location for an OpenAPI file.', false)
         ->opt('yes:y', 'Always accept using the online mode.', false, 'bool')
         ->opt('online:o', 'Always use the online mode.', false, 'bool')
         ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false)
@@ -88,6 +89,11 @@ try
     } else {
         $json_string = $args['debug-json'] ?? file_get_contents($args['debug-json-file']);
         $data = json_decode($json_string);
+    }
+
+    if (isset($args['openapi'])) {
+        $openapi = ParserFactory::getOpenAPI()->init($data);
+        $openapi->write($args['openapi']);
     }
 
     $html          = ParserFactory::getJson()->init($data);

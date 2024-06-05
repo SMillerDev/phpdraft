@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
+use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\RequestBodyElement;
 use PHPDraft\Model\Elements\StructureElement;
 
@@ -43,7 +44,7 @@ class HTTPRequest implements Comparable
      *
      * @var string
      */
-    public string $description;
+    public string $description = '';
 
     /**
      * Parent class.
@@ -68,9 +69,10 @@ class HTTPRequest implements Comparable
     /**
      * Structure of the request.
      *
-     * @var RequestBodyElement[]|RequestBodyElement
+     * @var RequestBodyElement[]|RequestBodyElement|ObjectStructureElement
      */
-    public mixed $struct = [];
+    public RequestBodyElement|ObjectStructureElement|array|null $struct = [];
+
     /**
      * Identifier for the request.
      *

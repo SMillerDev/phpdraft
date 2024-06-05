@@ -31,8 +31,36 @@ use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\TwigFilter;
 use Twig\TwigTest;
 
-class TemplateRenderer extends BaseTemplateRenderer
+class HtmlTemplateRenderer extends BaseTemplateRenderer
 {
+
+
+    /**
+     * CSS Files to load.
+     *
+     * @var string[]
+     */
+    public array $css = [];
+
+    /**
+     * JS Files to load.
+     *
+     * @var string[]
+     */
+    public array $js = [];
+    /**
+     * The image to use as a logo.
+     *
+     * @var string|null
+     */
+    protected ?string $image = null;
+    /**
+     * The template file to load.
+     *
+     * @var string
+     */
+    protected string $template;
+
     /**
      * TemplateGenerator constructor.
      *
@@ -107,41 +135,6 @@ class TemplateRenderer extends BaseTemplateRenderer
             'template_css' => file_get_contents($this->find_include_file($this->template, 'css'), true),
             'template_js' => file_get_contents($this->find_include_file($this->template, 'js'), true),
         ]);
-    }
-
-    /**
-     * Parse base data
-     *
-     * @param object $object
-     */
-    private function parse_base_data(object $object): void
-    {
-        //Prepare base data
-        if (!is_array($object->content[0]->content)) {
-            return;
-        }
-
-        $this->base_data['TITLE'] = $object->content[0]->meta->title->content ?? '';
-
-        foreach ($object->content[0]->attributes->metadata->content as $meta) {
-            $this->base_data[$meta->content->key->content] = $meta->content->value->content;
-        }
-
-        foreach ($object->content[0]->content as $value) {
-            if ($value->element === 'copy') {
-                $this->base_data['DESC'] = $value->content;
-                continue;
-            }
-
-            $cat = new Category();
-            $cat = $cat->parse($value);
-
-            if (($value->meta->classes->content[0]->content ?? null) === 'dataStructures') {
-                $this->base_structures = array_merge($this->base_structures, $cat->structures);
-            } else {
-                $this->categories[] = $cat;
-            }
-        }
     }
 
     /**
