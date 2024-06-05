@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
-use PHPDraft\Out\BaseTemplateRenderer;
-use stdClass;
 use \Stringable;
 
 abstract class BaseHtmlGenerator implements Stringable

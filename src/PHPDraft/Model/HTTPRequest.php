@@ -43,7 +43,7 @@ class HTTPRequest implements Comparable
      *
      * @var string
      */
-    public string $description;
+    public string $description = '';
 
     /**
      * Parent class.
