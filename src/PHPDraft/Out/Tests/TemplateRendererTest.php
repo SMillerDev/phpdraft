@@ -10,17 +10,17 @@
 namespace PHPDraft\Out\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use PHPDraft\Out\TemplateRenderer;
+use PHPDraft\Out\HtmlTemplateRenderer;
 
 /**
  * Class TemplateGeneratorTest
  *
- * @covers \PHPDraft\Out\TemplateRenderer
+ * @covers \PHPDraft\Out\HtmlTemplateRenderer
  */
 class TemplateRendererTest extends LunrBaseTest
 {
     /**
-     * @var TemplateRenderer
+     * @var HtmlTemplateRenderer
      */
     protected $class;
 
@@ -30,14 +30,14 @@ class TemplateRendererTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new TemplateRenderer('default', 'none');
-        $this->reflection = new \ReflectionClass('PHPDraft\Out\TemplateRenderer');
+        $this->class      = new HtmlTemplateRenderer('default', 'none');
+        $this->reflection = new \ReflectionClass('PHPDraft\Out\HtmlTemplateRenderer');
     }
 
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer
      */
     public function testSetupCorrectly(): void
     {
@@ -48,7 +48,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::strip_link_spaces
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::strip_link_spaces
      */
     public function testStripSpaces(): void
     {
@@ -81,11 +81,11 @@ class TemplateRendererTest extends LunrBaseTest
      * @param int    $code HTTP code
      * @param string $text Class to return
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::get_response_status
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get_response_status
      */
     public function testResponseStatus(int $code, string $text): void
     {
-        $return = TemplateRenderer::get_response_status($code);
+        $return = HtmlTemplateRenderer::get_response_status($code);
         $this->assertEquals($text, $return);
     }
 
@@ -120,18 +120,18 @@ class TemplateRendererTest extends LunrBaseTest
      * @param string $method HTTP Method
      * @param string $text Class to return
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::get_method_icon
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get_method_icon
      */
     public function testRequestMethod(string $method, string $text): void
     {
-        $return = TemplateRenderer::get_method_icon($method);
+        $return = HtmlTemplateRenderer::get_method_icon($method);
         $this->assertEquals($text, $return);
     }
 
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileDefault(): void
     {
@@ -142,7 +142,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileFallback(): void
     {
@@ -153,7 +153,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileNone(): void
     {
@@ -164,7 +164,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileSingle(): void
     {
@@ -176,7 +176,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @covers \PHPDraft\Out\TemplateRenderer::find_include_file
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileMultiple(): void
     {
@@ -192,7 +192,7 @@ class TemplateRendererTest extends LunrBaseTest
     }
 
     /**
-     * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
      */
     public function testGetTemplateFailsEmpty(): void
     {
@@ -205,7 +205,7 @@ class TemplateRendererTest extends LunrBaseTest
     }
 
     /**
-     * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
      * @group twig
      */
     public function testGetTemplate(): void
@@ -216,7 +216,7 @@ class TemplateRendererTest extends LunrBaseTest
     }
 
     /**
-     * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
      * @group twig
      */
     public function testGetTemplateSorting(): void
@@ -228,7 +228,7 @@ class TemplateRendererTest extends LunrBaseTest
     }
 
     /**
-     * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
      * @group twig
      */
     public function testGetTemplateMetaData(): void
@@ -247,7 +247,7 @@ TAG;
     }
 
     /**
-     * @covers \PHPDraft\Out\TemplateRenderer::get
+     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
      * @group twig
      */
     public function testGetTemplateCategories(): void

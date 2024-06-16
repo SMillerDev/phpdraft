@@ -11,7 +11,6 @@
 /build/out
 /build/*.phar
 /tests/statics/index.*
-src/Michelf/*
 src/.gitignore
 vendor/**
 
@@ -24,3 +23,4 @@ atlassian-ide-plugin.xml
 
 /coverage.xml
 /event.json
+!/src/PHPDraft/Out/
