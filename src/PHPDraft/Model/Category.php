@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model;
 
-use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Model\Elements\BasicStructureElement;
 
 /**
  * Class Category.
@@ -22,7 +22,7 @@ class Category extends HierarchyElement
     /**
      * API Structure element.
      *
-     * @var ObjectStructureElement[]
+     * @var BasicStructureElement[]
      */
     public array $structures = [];
 
