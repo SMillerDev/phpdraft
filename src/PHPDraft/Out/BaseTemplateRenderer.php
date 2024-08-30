@@ -14,7 +14,7 @@ namespace PHPDraft\Out;
 
 use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPDraft\Model\Category;
-use PHPDraft\Model\Elements\ObjectStructureElement;
+use PHPDraft\Model\Elements\BasicStructureElement;
 
 abstract class BaseTemplateRenderer
 {
@@ -63,7 +63,7 @@ abstract class BaseTemplateRenderer
     /**
      * Structures used in all data.
      *
-     * @var ObjectStructureElement[]
+     * @var BasicStructureElement[]
      */
     protected array $base_structures = [];
 }
