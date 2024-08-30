@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\BasicStructureElement;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
 /**
  * Class Category.
