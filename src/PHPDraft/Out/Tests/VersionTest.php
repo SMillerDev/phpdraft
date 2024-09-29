@@ -37,9 +37,7 @@ class VersionTest extends LunrBaseTest
     public function testReleaseIDIsNull(): void
     {
         $this->constant_redefine('VERSION', '0');
-        $this->mock_function('exec', function () {
-            return '12';
-        });
+        $this->mock_function('exec', fn() => '12');
         $return = $this->class->release_id();
         $this->assertSame('12', $return);
         $this->unmock_function('exec');

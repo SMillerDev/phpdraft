@@ -21,6 +21,9 @@ use ReflectionClass;
  */
 class HTTPRequestTest extends LunrBaseTest
 {
+
+    private HTTPRequest $class;
+
     /**
      * Mock of the parent class
      *
@@ -33,17 +36,17 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $parent           = $this->createMock('\PHPDraft\Model\Transition');
+        $parent           = $this->getMockBuilder('\PHPDraft\Model\Transition')
+                                 ->disableOriginalConstructor()
+                                 ->getMock();
 
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->mock_function('microtime', function () {
-            return '1000';
-        });
+        $this->mock_function('microtime', fn() => '1000');
         $this->class      = new HTTPRequest($parent);
         $this->unmock_function('microtime');
-        $this->reflection = new ReflectionClass('PHPDraft\Model\HTTPRequest');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -51,8 +54,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->class);
-        unset($this->reflection);
+        parent::tearDown();
     }
 
     /**
@@ -205,7 +207,7 @@ class HTTPRequestTest extends LunrBaseTest
         $struct_ar->expects($this->once())
                   ->method('print_request')
                   ->with(null)
-                  ->will($this->returnValue('TEST'));
+                  ->willReturn('TEST');
 
         $struct->value = [ $struct_ar ];
         $this->set_reflection_property_value('struct', $struct);

@@ -64,7 +64,7 @@ class ArrayStructureElement extends BasicStructureElement
                 $desc = MarkdownExtra::defaultTransform($this->description);
             }
 
-            return "<tr><td>{$this->key}</td><td>{$type}</td><td>{$desc}</td></tr>";
+            return "<tr><td>$this->key</td><td>$type</td><td>$desc</td></tr>";
         }
 
         $return = '';

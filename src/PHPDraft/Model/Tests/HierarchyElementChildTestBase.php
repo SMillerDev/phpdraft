@@ -24,7 +24,7 @@ abstract class HierarchyElementChildTestBase extends LunrBaseTest
      *
      * @var HierarchyElement|MockObject
      */
-    protected $parent;
+    protected HierarchyElement|MockObject $parent;
 
     public function setUp(): void
     {

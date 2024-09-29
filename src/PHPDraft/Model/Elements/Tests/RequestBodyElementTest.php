@@ -29,7 +29,7 @@ class RequestBodyElementTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->class      = new RequestBodyElement();
-        $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\RequestBodyElement');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -37,9 +37,7 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('element');
-        $property->setAccessible(true);
-        $this->assertNull($property->getValue($this->class));
+        $this->assertPropertyEquals('element', NULL);
     }
 
     /**
@@ -47,9 +45,9 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(true);
+        $method = $this->get_reflection_method('new_instance');
         $return = $method->invoke($this->class);
+
         $this->assertInstanceOf(RequestBodyElement::class, $return);
     }
 
@@ -117,7 +115,7 @@ class RequestBodyElementTest extends LunrBaseTest
      * @param string                 $object   JSON Object
      * @param ObjectStructureElement $expected Expected Object output
      *
-     * @covers       \PHPDraft\Model\Elements\ObjectStructureElement::parse
+     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testSuccessfulParse(string $object, ObjectStructureElement $expected): void
     {
@@ -272,7 +270,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $deps = [];
         $return = $this->class->parse(null, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        $object = new \stdClass();
+        $object = (object) [];
         $object->key = 'key';
         $return = $this->class->parse($object, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);

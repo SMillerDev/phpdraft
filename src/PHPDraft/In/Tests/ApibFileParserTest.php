@@ -19,6 +19,9 @@ use ReflectionClass;
  */
 class ApibFileParserTest extends LunrBaseTest
 {
+
+    private ApibFileParser $class;
+
     /**
      * Set up tests.
      *
@@ -26,8 +29,8 @@ class ApibFileParserTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new ApibFileParser(__DIR__ . '/ApibFileParserTest.php');
-        $this->reflection = new ReflectionClass('PHPDraft\In\ApibFileParser');
+        $this->class = new ApibFileParser(__DIR__ . '/ApibFileParserTest.php');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -36,9 +39,7 @@ class ApibFileParserTest extends LunrBaseTest
      */
     public function testLocationSetup(): void
     {
-        $property = $this->reflection->getProperty('location');
-        $property->setAccessible(true);
-        $this->assertSame(__DIR__ . '/', $property->getValue($this->class));
+        $this->assertPropertyEquals('location', __DIR__ . '/');
     }
 
     /**
@@ -47,9 +48,7 @@ class ApibFileParserTest extends LunrBaseTest
      */
     public function testFilenameSetup(): void
     {
-        $property = $this->reflection->getProperty('filename');
-        $property->setAccessible(true);
-        $this->assertSame(__DIR__ . '/ApibFileParserTest.php', $property->getValue($this->class));
+        $this->assertPropertySame('filename', __DIR__ . '/ApibFileParserTest.php');
     }
 
     /**
@@ -63,9 +62,7 @@ class ApibFileParserTest extends LunrBaseTest
         $this->expectExceptionMessageMatches('/API File not found: .*\/drafter\/non_existing_including_apib/');
         $this->expectExceptionCode(1);
 
-        $property = $this->reflection->getProperty('filename');
-        $property->setAccessible(true);
-        $property->setValue($this->class, TEST_STATICS . '/drafter/non_existing_including_apib');
+        $this->set_reflection_property_value('filename', TEST_STATICS . '/drafter/non_existing_including_apib');
         $this->class->parse();
     }
 
@@ -75,21 +72,15 @@ class ApibFileParserTest extends LunrBaseTest
      */
     public function testParseBasic(): void
     {
-        $property = $this->reflection->getProperty('filename');
-        $property->setAccessible(true);
-        $property->setValue($this->class, TEST_STATICS . '/drafter/apib/including.apib');
-        $loc_property = $this->reflection->getProperty('location');
-        $loc_property->setAccessible(true);
-        $loc_property->setValue($this->class, TEST_STATICS . '/drafter/apib/');
+        $this->set_reflection_property_value('filename', TEST_STATICS . '/drafter/apib/including.apib');
+        $this->set_reflection_property_value('location', TEST_STATICS . '/drafter/apib/');
 
-        $this->mock_function('curl_exec', function () {
-            return 'hello';
-        });
+
+        $this->mock_function('curl_exec', fn() => 'hello');
+
         $this->class->parse();
-        $this->unmock_function('curl_exec');
 
-        $full_property = $this->reflection->getProperty('full_apib');
-        $full_property->setAccessible(true);
+        $this->unmock_function('curl_exec');
 
         $text = "FORMAT: 1A\nHOST: https://owner-api.teslamotors.com\n";
         $text .= "EXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
@@ -98,7 +89,7 @@ class ApibFileParserTest extends LunrBaseTest
         $text .= " functionality to monitor and control the Model S remotely.\n\nTEST";
         $text .= "\n\n# Hello\nThis is a test.\nhello";
 
-        $this->assertSame($text, $full_property->getValue($this->class));
+        $this->assertPropertyEquals('full_apib', $text);
         $this->assertSame($text, $this->class->__toString());
     }
 

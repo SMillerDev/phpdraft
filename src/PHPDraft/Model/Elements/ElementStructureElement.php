@@ -52,8 +52,8 @@ class ElementStructureElement implements StructureElement
     {
         $type = $this->get_element_as_html($this->type);
 
-        $desc  = is_null($this->description) ? '' : " - <span class=\"description\">{$this->description}</span>";
-        $value = is_null($this->value) ? '' : " - <span class=\"example-value pull-right\">{$this->value}</span>";
+        $desc  = is_null($this->description) ? '' : " - <span class=\"description\">$this->description</span>";
+        $value = is_null($this->value) ? '' : " - <span class=\"example-value pull-right\">$this->value</span>";
         return '<li class="list-group-item mdl-list__item">' . $type . $desc . $value . '</li>';
     }
 

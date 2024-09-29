@@ -22,7 +22,7 @@ class TemplateRendererTest extends LunrBaseTest
     /**
      * @var TemplateRenderer
      */
-    protected $class;
+    protected TemplateRenderer $class;
 
     /**
      * Set up tests
@@ -30,8 +30,8 @@ class TemplateRendererTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new TemplateRenderer('default', 'none');
-        $this->reflection = new \ReflectionClass('PHPDraft\Out\TemplateRenderer');
+        $this->class = new TemplateRenderer('default', 'none');
+        $this->baseSetUp($this->class);
     }
 
     /**

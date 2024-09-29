@@ -91,7 +91,7 @@ class EnumStructureElement extends BasicStructureElement
         $type = $this->get_element_as_html($this->element);
         $desc = $this->description === null ? '' : MarkdownExtra::defaultTransform($this->description);
 
-        return "<tr><td>{$this->key->value}</td><td>{$type}</td><td>{$desc}</td></tr>";
+        return "<tr><td>{$this->key->value}</td><td>$type</td><td>$desc</td></tr>";
     }
 
     /**

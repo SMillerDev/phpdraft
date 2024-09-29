@@ -22,6 +22,9 @@ use ReflectionClass;
  */
 class HTTPResponseTest extends LunrBaseTest
 {
+
+    private HTTPResponse $class;
+
     /**
      * Mock of the parent class
      *
@@ -41,14 +44,16 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->parent_transition = $this->createMock('\PHPDraft\Model\Transition');
+        $this->parent_transition = $this->getMockBuilder('\PHPDraft\Model\Transition')
+                                        ->disableOriginalConstructor()
+                                        ->getMock();
         $this->parent            = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                         ->disableOriginalConstructor()
                                         ->getMock();
         $this->mock_function('microtime', fn() => '1000');
         $this->class      = new HTTPResponse($this->parent_transition);
         $this->unmock_function('microtime');
-        $this->reflection = new ReflectionClass('\PHPDraft\Model\HTTPResponse');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -56,8 +61,7 @@ class HTTPResponseTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->class);
-        unset($this->reflection);
+        parent::tearDown();
     }
 
     /**

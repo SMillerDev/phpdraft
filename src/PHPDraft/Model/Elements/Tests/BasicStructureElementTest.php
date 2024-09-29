@@ -22,18 +22,19 @@ use ReflectionClass;
  */
 class BasicStructureElementTest extends LunrBaseTest
 {
+    private BasicStructureElement $class;
+
     /**
      * Set up tests
      *
      * @return void
-     * @throws \ReflectionException
      */
     public function setUp(): void
     {
         $this->class      = $this->getMockBuilder('\PHPDraft\Model\Elements\BasicStructureElement')
                                  ->disableOriginalConstructor()
                                  ->getMockForAbstractClass();
-        $this->reflection = new ReflectionClass($this->class);
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -41,9 +42,7 @@ class BasicStructureElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('element');
-        $property->setAccessible(true);
-        $this->assertNull($property->getValue($this->class));
+        $this->assertPropertyEquals('element', NULL);
     }
 
     /**
@@ -102,8 +101,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $answer->type = 'cat';
         $answer->description = null;
 
-        $method = $this->reflection->getMethod('parse_common');
-        $method->setAccessible(true);
+        $method = $this->get_reflection_method('parse_common');
         $method->invokeArgs($this->class, [json_decode($json), &$dep]);
 
         $this->assertEquals($answer->key, $this->class->key);
@@ -124,7 +122,7 @@ class BasicStructureElementTest extends LunrBaseTest
     public function testParseCommon($value, BasicStructureElement $expected_value): void
     {
         $dep = [];
-        $method = $this->get_accessible_reflection_method('parse_common');
+        $method = $this->get_reflection_method('parse_common');
         $method->invokeArgs($this->class, [$value, &$dep]);
 
         $this->assertEquals($expected_value->key, $this->class->key);

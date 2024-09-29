@@ -10,12 +10,34 @@
 namespace PHPDraft\Model\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPDraft\Model\Elements\ObjectStructureElement;
 
 /**
  * Class ObjectElementTest
  */
 class ObjectElementTest extends LunrBaseTest
 {
+
+    private ObjectStructureElement $class;
+
+    /**
+     * Set up
+     */
+    public function setUp(): void
+    {
+        $this->class = new ObjectStructureElement();
+        $this->baseSetUp($this->class);
+    }
+
+    /**
+     * Tear down
+     */
+    public function tearDown(): void
+    {
+        unset($this->parent);
+        parent::tearDown();
+    }
+
     /**
      * @covers \PHPDraft\Model\Elements\ObjectStructureElement
      */
@@ -61,7 +83,7 @@ class ObjectElementTest extends LunrBaseTest
      */
     public function testStatusSetup(): void
     {
-        $this->assertSame(null, $this->class->status);
+        $this->assertSame('', $this->class->status);
     }
 
     /**

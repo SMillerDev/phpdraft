@@ -25,8 +25,8 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new EnumStructureElement();
-        $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\EnumStructureElement');
+        $this->class = new EnumStructureElement();
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -34,9 +34,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $property = $this->reflection->getProperty('element');
-        $property->setAccessible(true);
-        $this->assertNull($property->getValue($this->class));
+        $this->assertPropertyEquals('element', NULL);
     }
 
     /**
@@ -44,8 +42,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(true);
+        $method = $this->get_reflection_method('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(EnumStructureElement::class, $return);
     }
