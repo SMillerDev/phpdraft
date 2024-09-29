@@ -12,13 +12,15 @@ use ReflectionClass;
  */
 class ElementStructureElementTest extends LunrBaseTest
 {
+    private ElementStructureElement $class;
+
     /**
      * Set up
      */
     public function setUp(): void
     {
-        $this->class      = new ElementStructureElement();
-        $this->reflection = new ReflectionClass('PHPDraft\Model\Elements\ElementStructureElement');
+        $this->class = new ElementStructureElement();
+        $this->baseSetUp($this->class);
     }
 
     /**

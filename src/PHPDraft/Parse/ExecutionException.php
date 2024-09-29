@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
+use Exception;
+
 /**
  * Class ExecutionException.
  *
  * @package Parse
  */
-class ExecutionException extends \Exception
+class ExecutionException extends Exception
 {
 }

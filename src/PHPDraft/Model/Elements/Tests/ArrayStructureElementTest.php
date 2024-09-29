@@ -26,8 +26,8 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new ArrayStructureElement();
-        $this->reflection = new \ReflectionClass('PHPDraft\Model\Elements\ArrayStructureElement');
+        $this->class = new ArrayStructureElement();
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -179,8 +179,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(true);
+        $method = $this->get_reflection_method('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ArrayStructureElement::class, $return);
     }

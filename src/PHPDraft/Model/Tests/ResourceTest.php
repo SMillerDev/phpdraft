@@ -21,6 +21,8 @@ use ReflectionClass;
  */
 class ResourceTest extends LunrBaseTest
 {
+    private Resource $class;
+
     /**
      * Mock of the parent class
      *
@@ -38,7 +40,7 @@ class ResourceTest extends LunrBaseTest
 
         $this->parent->href = null;
         $this->class      = new Resource($this->parent);
-        $this->reflection = new ReflectionClass('PHPDraft\Model\Resource');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -46,8 +48,7 @@ class ResourceTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->class);
-        unset($this->reflection);
+        parent::tearDown();
     }
 
     /**
@@ -69,9 +70,7 @@ class ResourceTest extends LunrBaseTest
 
         $this->class->parse(json_decode($obj));
 
-        $href_property = $this->reflection->getProperty('href');
-        $href_property->setAccessible(true);
-        $this->assertSame('something', $href_property->getValue($this->class));
+        $this->assertPropertyEquals('href', 'something');
     }
 
     /**

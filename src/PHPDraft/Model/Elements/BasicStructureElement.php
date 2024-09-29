@@ -23,7 +23,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var string|null
      */
-    public ?string $type;
+    public ?string $type = null;
     /**
      * Object description.
      *
@@ -65,7 +65,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @var string[]|null
      */
-    public ?array $deps;
+    public ?array $deps = null;
 
     /**
      * Parse a JSON object to a structure.

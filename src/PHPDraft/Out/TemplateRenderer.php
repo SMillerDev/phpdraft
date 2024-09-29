@@ -20,6 +20,9 @@ use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Extra\Markdown\DefaultMarkdown;
 use Twig\Extra\Markdown\MarkdownExtension;
 use Twig\Extra\Markdown\MarkdownRuntime;
@@ -55,9 +58,9 @@ class TemplateRenderer extends BaseTemplateRenderer
      *
      * @throws ExecutionException When template is not found
      *
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function get(object $object): string
     {

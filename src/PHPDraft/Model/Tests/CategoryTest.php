@@ -18,14 +18,16 @@ use ReflectionClass;
  */
 class CategoryTest extends HierarchyElementChildTestBase
 {
+    private Category $class;
+
     /**
      * Set up
      */
     public function setUp(): void
     {
         parent::setUp();
-        $this->class      = new Category();
-        $this->reflection = new ReflectionClass('\PHPDraft\Model\Category');
+        $this->class = new Category();
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -33,9 +35,8 @@ class CategoryTest extends HierarchyElementChildTestBase
      */
     public function tearDown(): void
     {
-        unset($this->class);
         unset($this->parent);
-        unset($this->reflection);
+        parent::tearDown();
     }
 
     /**
@@ -70,7 +71,7 @@ class CategoryTest extends HierarchyElementChildTestBase
     {
         $this->set_reflection_property_value('parent', $this->parent);
 
-        $obj = new \stdClass();
+        $obj = (object) [];
         $obj->content = [];
 
         $this->class->parse($obj);
@@ -91,9 +92,7 @@ class CategoryTest extends HierarchyElementChildTestBase
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
 
-        $cproperty = $this->reflection->getProperty('children');
-        $cproperty->setAccessible(true);
-        $this->assertNotEmpty($cproperty->getValue($this->class));
+        $this->assertNotEmpty($this->get_reflection_property_value('children'));
     }
 
     /**
@@ -108,10 +107,7 @@ class CategoryTest extends HierarchyElementChildTestBase
         $this->class->parse(json_decode($json));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(true);
-        $this->assertNotEmpty($s_property->getValue($this->class));
+        $this->assertNotEmpty($this->get_reflection_property_value('structures'));
     }
 
     /**
@@ -172,10 +168,7 @@ class CategoryTest extends HierarchyElementChildTestBase
         $this->class->parse(json_decode($json));
 
         $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-
-        $s_property = $this->reflection->getProperty('structures');
-        $s_property->setAccessible(true);
-        $this->assertNotEmpty($s_property->getValue($this->class));
+        $this->assertNotEmpty($this->get_reflection_property_value('structures'));
     }
 
     /**
@@ -204,7 +197,7 @@ class CategoryTest extends HierarchyElementChildTestBase
 
         $this->parent->expects($this->once())
                      ->method('get_href')
-                     ->will($this->returnValue('hello'));
+                     ->willReturn('hello');
 
         $result = $this->class->get_href();
 

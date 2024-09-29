@@ -16,9 +16,7 @@ class ParserFactoryTest extends LunrBaseTest
      */
     public function testGetDrafter(): void
     {
-        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
-            return true;
-        });
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => true);
 
         $this->assertInstanceOf('\PHPDraft\Parse\Drafter', ParserFactory::getDrafter());
 
@@ -30,12 +28,8 @@ class ParserFactoryTest extends LunrBaseTest
      */
     public function testGetDrafterAPI(): void
     {
-        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
-            return false;
-        });
-        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], function () {
-            return true;
-        });
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => true);
 
         $this->assertInstanceOf('\PHPDraft\Parse\DrafterAPI', ParserFactory::getDrafter());
 
@@ -50,12 +44,8 @@ class ParserFactoryTest extends LunrBaseTest
     {
         $this->expectException('\PHPDraft\Parse\ResourceException');
         $this->expectExceptionMessage('Couldn\'t get an APIB parser');
-        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
-            return false;
-        });
-        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], function () {
-            return false;
-        });
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => false);
 
         ParserFactory::getDrafter();
 
@@ -68,12 +58,8 @@ class ParserFactoryTest extends LunrBaseTest
      */
     public function testGetJson(): void
     {
-        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
-            return false;
-        });
-        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], function () {
-            return true;
-        });
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => true);
 
         $this->assertInstanceOf('\PHPDraft\Parse\HtmlGenerator', ParserFactory::getJson());
 
@@ -88,12 +74,8 @@ class ParserFactoryTest extends LunrBaseTest
     {
         $this->expectException('\PHPDraft\Parse\ResourceException');
         $this->expectExceptionMessage('Couldn\'t get a JSON parser');
-        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], function () {
-            return false;
-        });
-        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], function () {
-            return false;
-        });
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => false);
 
         ParserFactory::getJson();
 

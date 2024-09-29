@@ -18,6 +18,8 @@ use ReflectionClass;
  */
 class TransitionTest extends HierarchyElementChildTestBase
 {
+    private Transition $class;
+
     /**
      * Set up
      */
@@ -25,9 +27,11 @@ class TransitionTest extends HierarchyElementChildTestBase
     {
         parent::setUp();
 
-        $this->parent     = $this->createMock('\PHPDraft\Model\Resource');
+        $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Resource')
+                                 ->disableOriginalConstructor()
+                                 ->getMock();
         $this->class      = new Transition($this->parent);
-        $this->reflection = new ReflectionClass('PHPDraft\Model\Transition');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -35,8 +39,7 @@ class TransitionTest extends HierarchyElementChildTestBase
      */
     public function tearDown(): void
     {
-        unset($this->class);
-        unset($this->reflection);
+        parent::tearDown();
         unset($this->parent);
     }
 
@@ -205,11 +208,10 @@ class TransitionTest extends HierarchyElementChildTestBase
                          ->getMock();
         $mock_req->expects($this->once())
                  ->method('is_equal_to')
-                 ->will($this->returnValue(true));
+                 ->willReturn(true);
+
         $requests = [$mock_req];
-        $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, $requests);
+        $this->set_reflection_property_value('requests', $requests);
 
         $obj = '{"element": "dataStructure", "attributes":{"href":"something", "data":{"content":{"hello":"world"}}}, "content":[{"element":"123", "content":[{"element":"httpRequest", "attributes":{"method":"TEST"}}]}]}';
 
@@ -240,11 +242,10 @@ class TransitionTest extends HierarchyElementChildTestBase
         $mock_req->expects($this->once())
                  ->method('get_curl_command')
                  ->with('https://ur.l', [])
-                 ->will($this->returnValue('curl_command'));
+                 ->willReturn('curl_command');
+
         $requests = [$mock_req];
-        $req_property = $this->reflection->getProperty('requests');
-        $req_property->setAccessible(true);
-        $req_property->setValue($this->class, $requests);
+        $this->set_reflection_property_value('requests', $requests);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -371,7 +372,7 @@ class TransitionTest extends HierarchyElementChildTestBase
 
         $var1->expects($this->once())
              ->method('string_value')
-             ->will($this->returnValue('STRING'));
+             ->willReturn('STRING');
 
         $var1->key = $key1;
 

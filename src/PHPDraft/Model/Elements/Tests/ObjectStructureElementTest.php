@@ -23,6 +23,8 @@ use ReflectionClass;
  */
 class ObjectStructureElementTest extends LunrBaseTest
 {
+    private ObjectStructureElement $class;
+
     /**
      * Set up tests
      *
@@ -30,8 +32,8 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->class      = new ObjectStructureElement();
-        $this->reflection = new ReflectionClass('PHPDraft\Model\Elements\ObjectStructureElement');
+        $this->class = new ObjectStructureElement();
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -41,8 +43,7 @@ class ObjectStructureElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->reflection->getMethod('new_instance');
-        $method->setAccessible(true);
+        $method = $this->get_reflection_method('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
     }
@@ -210,7 +211,7 @@ class ObjectStructureElementTest extends LunrBaseTest
         $deps = [];
         $return = $this->class->parse(null, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
-        $object = new \stdClass();
+        $object = (object)[];
         $object->key = 'key';
         $return = $this->class->parse($object, $deps);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);

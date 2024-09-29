@@ -23,7 +23,7 @@ class HtmlGeneratorTest extends LunrBaseTest
      * Test Class
      * @var HtmlGenerator
      */
-    protected $class;
+    protected HtmlGenerator $class;
 
     /**
      * Set up
@@ -32,9 +32,10 @@ class HtmlGeneratorTest extends LunrBaseTest
     public function setUp(): void
     {
         define('ID_STATIC', 'SOME_ID');
-        $data             = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
-        $this->class      = new HtmlGenerator();
-        $this->reflection = new ReflectionClass('PHPDraft\Parse\HtmlGenerator');
+        $data        = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
+        $this->class = new HtmlGenerator();
+
+        $this->baseSetUp($this->class);
         $this->class->init($data);
 
         $this->class->sorting = -1;

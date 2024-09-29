@@ -13,6 +13,9 @@ declare(strict_types=1);
 namespace PHPDraft\Parse;
 
 use PHPDraft\Out\TemplateRenderer;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class HtmlGenerator.
@@ -30,9 +33,9 @@ class HtmlGenerator extends BaseHtmlGenerator
      * @return void HTML template to display
      *
      * @throws ExecutionException As a runtime exception
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function build_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): void
     {

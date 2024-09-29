@@ -30,7 +30,7 @@
     "rize/uri-template": "*"
   },
   "require-dev": {
-    "lunr/halo": "~0.8.0",
+    "lunr/halo": "~0.10.0",
     "phpunit/phpunit": "~10.0",
     "theseer/autoload": "~1.0",
     "phing/phing": "~3.0",

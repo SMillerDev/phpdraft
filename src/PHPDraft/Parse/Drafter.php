@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace PHPDraft\Parse;
 
 use PHPDraft\In\ApibFileParser;
+use RuntimeException;
+use UnexpectedValueException;
 
 class Drafter extends BaseParser
 {
@@ -35,7 +37,7 @@ class Drafter extends BaseParser
         parent::init($apib);
         $loc = self::location();
         if ($loc === false) {
-            throw new \UnexpectedValueException("Could not find drafter location!");
+            throw new UnexpectedValueException("Could not find drafter location!");
         }
         $this->drafter = $loc;
 
@@ -47,7 +49,7 @@ class Drafter extends BaseParser
      *
      * @return false|string
      */
-    public static function location()
+    public static function location(): false|string
     {
         $returnVal = shell_exec('which drafter 2> /dev/null');
         $returnVal = preg_replace('/^\s+|\n|\r|\s+$/m', '', $returnVal);
@@ -62,10 +64,10 @@ class Drafter extends BaseParser
      */
     protected function parse(): void
     {
-        shell_exec("{$this->drafter} {$this->tmp_dir}/index.apib -f json -o {$this->tmp_dir}/index.json 2> /dev/null");
+        shell_exec("$this->drafter $this->tmp_dir/index.apib -f json -o $this->tmp_dir/index.json 2> /dev/null");
         $content = file_get_contents($this->tmp_dir . '/index.json');
         if (!is_string($content)) {
-            throw new \RuntimeException('Could not read intermediary APIB file!');
+            throw new RuntimeException('Could not read intermediary APIB file!');
         }
 
         $this->json = json_decode($content);

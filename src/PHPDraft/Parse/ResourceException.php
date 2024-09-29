@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
+use RuntimeException;
+
 /**
  * Class ResourceException.
  *
  * @package Parse
  */
-class ResourceException extends \RuntimeException
+class ResourceException extends RuntimeException
 {
 }
