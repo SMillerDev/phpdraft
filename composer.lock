@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a038d1c8e4da28a90c1e0ba72b967e7",
+    "content-hash": "b8e5ae8f736d4ff65d6d9cb918af30dc",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
@@ -868,16 +868,16 @@
     "packages-dev": [
         {
             "name": "lunr/halo",
-            "version": "0.8.1",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunr-php/lunr.halo.git",
-                "reference": "ce5f1c55a5666b299f670a154a3ec3b476b52d57"
+                "reference": "995985e039518b2544349c934da7b7c86ffdb18b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/ce5f1c55a5666b299f670a154a3ec3b476b52d57",
-                "reference": "ce5f1c55a5666b299f670a154a3ec3b476b52d57",
+                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/995985e039518b2544349c934da7b7c86ffdb18b",
+                "reference": "995985e039518b2544349c934da7b7c86ffdb18b",
                 "shasum": ""
             },
             "require": {
@@ -909,9 +909,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lunr-php/lunr.halo/issues",
-                "source": "https://github.com/lunr-php/lunr.halo/tree/0.8.1"
+                "source": "https://github.com/lunr-php/lunr.halo/tree/0.10.0"
             },
-            "time": "2023-11-21T15:17:44+00:00"
+            "time": "2024-08-05T09:50:50+00:00"
         },
         {
             "name": "myclabs/deep-copy",
