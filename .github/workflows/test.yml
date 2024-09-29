@@ -85,6 +85,89 @@ jobs:
           name: coverage-${{ matrix.php-versions }}
           path: coverage.xml
 
+  openapi:
+    name: File generation
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      PHPDRAFT_THIRD_PARTY: 1
+      extensions: curl,json,mbstring,uopz
+      key: cache-v1 # can be any string, change to clear the extension cache.
+    strategy:
+      matrix:
+        php-versions: [ '8.3' ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
+          coverage: pcov
+          tools: pecl,phpunit
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --ignore-platform-reqs
+
+      - name: Generate OpenAPI definition and HTML
+        run: php ./phpdraft --online --file tests/statics/full_test.apib --openapi openapi.json > out.html 2> error.txt || true
+
+      - name: Install check-jsonschema
+        run: pipx install check-jsonschema
+
+      - name: Validate OpenAPI spec
+        run: |
+          if [ -s "error.txt" ]; then
+            echo "The file 'error.txt' is not empty."
+            cat error.txt
+            exit 1
+          fi
+
+          if [ ! -s "index.html" ]; then
+            echo "The file 'index.html' is empty."
+            exit 1
+          fi
+          
+          if [ ! -s "openapi.json" ]; then
+            echo "The file 'openapi.json' is empty."
+            exit 1
+          fi
+          
+          check-jsonschema --schemafile https://spec.openapis.org/oas/3.1/schema/latest openapi.json
+
   analytics:
     name: Analytics
     needs: test

@@ -82,4 +82,34 @@ class ParserFactoryTest extends LunrBaseTest
         $this->unmock_method(['\PHPDraft\Parse\Drafter', 'available']);
         $this->unmock_method(['\PHPDraft\Parse\DrafterAPI', 'available']);
     }
+
+    /**
+     * @covers \PHPDraft\Parse\ParserFactory::getOpenAPI
+     */
+    public function testGetOpenAPI(): void
+    {
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => true);
+
+        $this->assertInstanceOf('\PHPDraft\Out\OpenAPI\OpenApiRenderer', ParserFactory::getOpenAPI());
+
+        $this->unmock_method(['\PHPDraft\Parse\Drafter', 'available']);
+        $this->unmock_method(['\PHPDraft\Parse\DrafterAPI', 'available']);
+    }
+
+    /**
+     * @covers \PHPDraft\Parse\ParserFactory::getOpenAPI
+     */
+    public function testGetOpenAPIFails(): void
+    {
+        $this->expectException('\PHPDraft\Parse\ResourceException');
+        $this->expectExceptionMessage('Couldn\'t get an OpenAPI renderer');
+        $this->mock_method(['\PHPDraft\Parse\Drafter', 'available'], fn() => false);
+        $this->mock_method(['\PHPDraft\Parse\DrafterAPI', 'available'], fn() => false);
+
+        ParserFactory::getOpenAPI();
+
+        $this->unmock_method(['\PHPDraft\Parse\Drafter', 'available']);
+        $this->unmock_method(['\PHPDraft\Parse\DrafterAPI', 'available']);
+    }
 }

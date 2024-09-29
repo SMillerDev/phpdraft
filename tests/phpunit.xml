@@ -13,6 +13,7 @@
     </testsuite>
     <testsuite name="Out">
       <directory>../src/PHPDraft/Out/Tests/</directory>
+      <directory>../src/PHPDraft/Out/OpenAPI/Tests/</directory>
     </testsuite>
     <testsuite name="Parse">
       <directory>../src/PHPDraft/Parse/Tests/</directory>

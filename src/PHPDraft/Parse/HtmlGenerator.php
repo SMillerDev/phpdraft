@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace PHPDraft\Parse;
 
-use PHPDraft\Out\TemplateRenderer;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use PHPDraft\Out\HtmlTemplateRenderer;
 
 /**
  * Class HtmlGenerator.
@@ -39,7 +39,7 @@ class HtmlGenerator extends BaseHtmlGenerator
      */
     public function build_html(string $template = 'default', ?string $image = null, ?string $css = null, ?string $js = null): void
     {
-        $gen = new TemplateRenderer($template, $image);
+        $gen = new HtmlTemplateRenderer($template, $image);
 
         if (!is_null($css)) {
             $gen->css = explode(',', $css);

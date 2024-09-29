@@ -1,0 +1,23 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": null,
+        "version": "1.0.0",
+        "summary": " generated from API Blueprint",
+        "description": null
+    },
+    "servers": [
+        {
+            "url": null,
+            "description": "Main host"
+        },
+        {
+            "url": ""
+        }
+    ],
+    "paths": {},
+    "webhooks": {},
+    "components": {},
+    "security": [],
+    "tags": []
+}

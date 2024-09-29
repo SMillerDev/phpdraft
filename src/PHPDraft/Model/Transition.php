@@ -23,9 +23,9 @@ class Transition extends HierarchyElement
     /**
      * HTTP method used.
      *
-     * @var string
+     * @var string|null
      */
-    public string $method;
+    public ?string $method = NULL;
 
     /**
      * URI.
