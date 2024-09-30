@@ -208,6 +208,15 @@
     </target>
 
     <target name="-phar-determine-version">
-        <exec command="php ${project.basedir}/phpdraft --version | grep -ohE '([0-9]{1,}\.)+[0-9]{1,}-?(rc|beta)?[0-9]?'" outputproperty="version"/>
+        <exec executable="php" outputProperty="preVersion">
+            <arg path="${project.basedir}/phpdraft"/>
+            <arg value="--version"/>
+        </exec>
+        <echo message="${preVersion}"/>
+        <propertyregex property="version"
+                       subject="${preVersion}"
+                       pattern="([0-9]{1,}\.)+[0-9]{1,}-?(rc|beta)?[0-9]?"
+                       match="$0"/>
+        <echo message="${version}"/>
     </target>
 </project>
