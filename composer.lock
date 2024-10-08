@@ -3569,16 +3569,16 @@
         },
         {
             "name": "theseer/autoload",
-            "version": "1.29.1",
+            "version": "1.29.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/Autoload.git",
-                "reference": "abb83aaae55eacb3582e1a888a6f74ff14a331d7"
+                "reference": "6ac38edd83856019e70d1c904a2450c8e042ad28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/Autoload/zipball/abb83aaae55eacb3582e1a888a6f74ff14a331d7",
-                "reference": "abb83aaae55eacb3582e1a888a6f74ff14a331d7",
+                "url": "https://api.github.com/repos/theseer/Autoload/zipball/6ac38edd83856019e70d1c904a2450c8e042ad28",
+                "reference": "6ac38edd83856019e70d1c904a2450c8e042ad28",
                 "shasum": ""
             },
             "require": {
@@ -3612,7 +3612,7 @@
             "description": "A tool and library to generate autoload code.",
             "support": {
                 "issues": "https://github.com/theseer/Autoload/issues",
-                "source": "https://github.com/theseer/Autoload/tree/1.29.1"
+                "source": "https://github.com/theseer/Autoload/tree/1.29.2"
             },
             "funding": [
                 {
@@ -3620,7 +3620,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-29T19:12:07+00:00"
+            "time": "2024-10-06T21:35:44+00:00"
         },
         {
             "name": "theseer/directoryscanner",
@@ -3790,16 +3790,16 @@
         },
         {
             "name": "zetacomponents/console-tools",
-            "version": "1.7.4",
+            "version": "1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zetacomponents/ConsoleTools.git",
-                "reference": "c487720bffd26e74a297c3baa31a9b90580759b2"
+                "reference": "de081f422b574d638e62e15661bf833d80fac61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/c487720bffd26e74a297c3baa31a9b90580759b2",
-                "reference": "c487720bffd26e74a297c3baa31a9b90580759b2",
+                "url": "https://api.github.com/repos/zetacomponents/ConsoleTools/zipball/de081f422b574d638e62e15661bf833d80fac61a",
+                "reference": "de081f422b574d638e62e15661bf833d80fac61a",
                 "shasum": ""
             },
             "require": {
@@ -3855,9 +3855,9 @@
             "homepage": "https://github.com/zetacomponents",
             "support": {
                 "issues": "https://github.com/zetacomponents/ConsoleTools/issues",
-                "source": "https://github.com/zetacomponents/ConsoleTools/tree/1.7.4"
+                "source": "https://github.com/zetacomponents/ConsoleTools/tree/1.7.5"
             },
-            "time": "2024-01-31T10:09:19+00:00"
+            "time": "2024-10-04T15:51:48+00:00"
         }
     ],
     "aliases": [],
