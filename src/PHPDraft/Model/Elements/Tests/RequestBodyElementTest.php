@@ -142,7 +142,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $base1->key->value  = 'name';
         $base1->key->description  = null;
         $base1->value       = 'P10';
-        $base1->status      = 'optional';
+        $base1->status      = ['optional'];
         $base1->element     = 'member';
         $base1->type        = 'string';
         $base1->is_variable = false;
@@ -156,7 +156,7 @@ class RequestBodyElementTest extends LunrBaseTest
         $base2->key->value  = 'Auth2';
         $base2->key->description  = null;
         $base2->value       = 'something';
-        $base2->status      = 'required';
+        $base2->status      = ['required'];
         $base2->element     = 'member';
         $base2->type        = 'string';
         $base2->is_variable = false;

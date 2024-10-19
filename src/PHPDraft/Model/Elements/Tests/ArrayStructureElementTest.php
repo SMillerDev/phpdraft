@@ -65,7 +65,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $val2->value = 'Objective-C';
         $val2->type = 'string';
         $base1->value       = [$val1, $val2];
-        $base1->status      = null;
+        $base1->status      = [];
         $base1->element     = 'array';
         $base1->type        = null;
         $base1->is_variable = false;
@@ -82,7 +82,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $val2->value = 'another item';
         $val2->type = 'string';
         $base2->value       = [$val1, $val2];
-        $base2->status      = null;
+        $base2->status      = [];
         $base2->element     = 'array';
         $base2->type        = 'Some simple array';
         $base2->is_variable = false;
@@ -101,7 +101,7 @@ class ArrayStructureElementTest extends LunrBaseTest
         $val2->value = null;
         $val2->type = 'array';
         $base3->value       = [$val1, $val2];
-        $base3->status      = 'optional';
+        $base3->status      = ['optional'];
         $base3->element     = 'member';
         $base3->type        = 'array';
         $base3->is_variable = false;

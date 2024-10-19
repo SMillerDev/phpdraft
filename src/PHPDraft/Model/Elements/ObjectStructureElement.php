@@ -214,6 +214,7 @@ class ObjectStructureElement extends BasicStructureElement
             $desc = MarkdownExtra::defaultTransform($this->description);
         }
 
-        return "<tr><td><span>{$this->key->value}</span>{$variable}</td><td>{$type}</td><td> <span class=\"status\">{$this->status}</span></td><td>{$desc}</td><td>{$value}</td></tr>";
+        $status_string = join(', ', $this->status);
+        return "<tr><td><span>{$this->key->value}</span>{$variable}</td><td>{$type}</td><td> <span class=\"status\">{$status_string}</span></td><td>{$desc}</td><td>{$value}</td></tr>";
     }
 }

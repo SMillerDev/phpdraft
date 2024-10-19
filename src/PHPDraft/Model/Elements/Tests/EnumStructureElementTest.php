@@ -151,7 +151,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base1              = new EnumStructureElement();
         $base1->key         = null;
         $base1->value       = [ $value1, $value2 ];
-        $base1->status      = null;
+        $base1->status      = [];
         $base1->element     = 'enum';
         $base1->type        = 'Some simple enum';
         $base1->is_variable = false;
@@ -164,7 +164,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base2->key->type   = 'string';
         $base2->key->value  = 'car_id_list';
         $base2->value       = 'world';
-        $base2->status      = null;
+        $base2->status      = [];
         $base2->element     = 'enum';
         $base2->type        = 'string';
         $base2->description = null;
@@ -177,7 +177,7 @@ class EnumStructureElementTest extends LunrBaseTest
         $base3->key->type   = 'number';
         $base3->key->value  = '5';
         $base3->value       = '5';
-        $base3->status      = 'optional';
+        $base3->status      = ['optional'];
         $base3->element     = 'member';
         $base3->type        = 'number';
         $base3->description = "List of car identifiers to retrieve";

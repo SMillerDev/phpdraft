@@ -17,7 +17,9 @@
     ],
     "paths": {},
     "webhooks": {},
-    "components": {},
+    "components": {
+        "schemas": []
+    },
     "security": [],
     "tags": []
 }

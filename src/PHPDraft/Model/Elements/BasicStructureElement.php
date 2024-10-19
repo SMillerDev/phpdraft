@@ -45,9 +45,9 @@ abstract class BasicStructureElement implements StructureElement
     /**
      * Object status (required|optional).
      *
-     * @var string|null
+     * @var string[]
      */
-    public ?string $status = '';
+    public array $status = [];
     /**
      * Parent structure.
      *
@@ -130,14 +130,13 @@ abstract class BasicStructureElement implements StructureElement
 
         $this->is_variable = $object->attributes->variable->content ?? false;
 
-        $this->status  = null;
         if (isset($object->attributes->typeAttributes->content)) {
             $data = array_map(function ($item) {
                 return $item->content;
             }, $object->attributes->typeAttributes->content);
-            $this->status = join(', ', $data);
+            $this->status = $data;
         } elseif (isset($object->attributes->typeAttributes)) {
-            $this->status = join(', ', $object->attributes->typeAttributes);
+            $this->status = $object->attributes->typeAttributes;
         }
 
         if (!in_array($this->type, self::DEFAULTS, true) && $this->type !== null) {
