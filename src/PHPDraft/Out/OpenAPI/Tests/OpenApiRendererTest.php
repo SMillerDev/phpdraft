@@ -56,7 +56,7 @@ class OpenApiRendererTest extends LunrBaseTest
         $method = $this->get_reflection_method('getComponents');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals((object)[],$result);
+        $this->assertEquals((object)['schemas' => []],$result);
     }
 
     public function testGetDocs(): void

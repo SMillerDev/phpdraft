@@ -27,9 +27,9 @@ abstract class HierarchyElement
     /**
      * Description of the element.
      *
-     * @var string
+     * @var string|null
      */
-    public string $description;
+    public ?string $description = NULL;
 
     /**
      * Child elements.

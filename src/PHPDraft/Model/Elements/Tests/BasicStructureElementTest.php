@@ -150,7 +150,7 @@ class BasicStructureElementTest extends LunrBaseTest
 
         $obj2 = clone $obj;
         $obj2->attributes->typeAttributes = [1, 2];
-        $answer->status = '1, 2';
+        $answer->status = [1, 2];
 
         $return[] = [$obj2, $answer];
 

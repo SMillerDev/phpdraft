@@ -83,7 +83,7 @@ class ObjectElementTest extends LunrBaseTest
      */
     public function testStatusSetup(): void
     {
-        $this->assertSame('', $this->class->status);
+        $this->assertSame([], $this->class->status);
     }
 
     /**

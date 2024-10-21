@@ -2,10 +2,14 @@
 
 namespace PHPDraft\Out\OpenAPI;
 
+use PHPDraft\Model\Elements\BasicStructureElement;
+use PHPDraft\Model\Elements\ElementStructureElement;
+use PHPDraft\Model\Elements\StructureElement;
 use PHPDraft\Model\HTTPRequest;
 use PHPDraft\Model\HTTPResponse;
+use PHPDraft\Model\Resource;
+use PHPDraft\Model\Transition;
 use PHPDraft\Out\BaseTemplateRenderer;
-use stdClass;
 
 class OpenApiRenderer extends BaseTemplateRenderer {
 
@@ -18,7 +22,7 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
     public function write(string $filename): void
     {
-        $output = json_encode($this->toOpenApiObject(), JSON_PRETTY_PRINT);
+        $output = json_encode($this->toOpenApiObject(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         file_put_contents($filename, $output);
     }
 
@@ -92,21 +96,43 @@ class OpenApiRenderer extends BaseTemplateRenderer {
     private function getPaths(): object {
         $return = [];
         foreach ($this->categories as $category) {
+            /** @var Resource $resource */
             foreach ($category->children ?? [] as $resource) {
+                /** @var Transition $transition */
                 foreach ($resource->children ?? [] as $transition) {
                     $transition_return = [];
-                    $transition_return['parameters'] = [];
+                    $parameters = [];
                     if ($transition->url_variables !== []) {
-                        $transition_return['parameters'] = $this->toParameters($transition->url_variables, $transition->href);
+                        $parameters += $this->toParameters($transition->url_variables, $transition->href);
                     }
+                    if ($transition->data_variables !== NULL)
+                    {
+                        $parameters += $this->toParameters([$transition->data_variables], $transition->href);
+                    }
+                    $transition_return['parameters'] = $parameters;
 
-                    foreach ($transition->requests as $request) {
+                    /** @var HTTPRequest $request */
+                    foreach ($transition->requests as $request)
+                    {
                         $request_return = [
                                 'operationId' => $request->get_id(),
                                 'responses' => $this->toResponses($transition->responses),
+                                'summary' => $request->title ?? $transition->title,
+                                'description' => $request->description ?? $transition->description,
                         ];
+
+                        $parameters = [];
+                        if ($request->struct !== NULL) {
+                            if (is_array($request->struct))
+                            {
+                                $parameters += $this->toParameters($request->struct, $transition->href);
+                            } else {
+                                $parameters += $this->toParameters([$request->struct], $transition->href);
+                            }
+                        }
+                        $request_return['tags'] = [$category->title];
                         if (isset($transition_return['parameters']) && $transition_return['parameters'] !== []) {
-                            $request_return['parameters'] = $transition_return['parameters'];
+                            $request_return['parameters'] = array_merge($transition_return['parameters'], $parameters);
                         }
                         if ($request->body !== NULL) {
                             $request_return['requestBody'] = $this->toBody($request);
@@ -141,14 +167,22 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         $return = [];
 
         foreach ($objects as $variable) {
+            if ($variable->key === NULL)
+            {
+                continue;
+            }
+
             $return_tmp = [
                     'name' => $variable->key->value,
                     'in'   => str_contains($href, '{' . $variable->key->value . '}') ? 'path' : 'query',
                     'required' => $variable->status === 'required',
-                    'schema' => [
-                            'type' => $variable->type,
-                    ],
+                    'schema' => [],
             ];
+            if ($this->isRef($variable->type)) {
+                $return_tmp['schema']['$ref'] = '#/components/schemas/' . $variable->type;
+            } else {
+                $return_tmp['schema']['type'] = $variable->type;
+            }
 
             if (isset($variable->value))
             {
@@ -165,47 +199,9 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         return $return;
     }
 
-    /**
-     * Convert a HTTP Request into an OpenAPI body
-     *
-     * @param HTTPRequest $request Request to convert
-     *
-     * @return array<string,array<string,mixed>> OpenAPI style body
-     */
-    private function toBody(HTTPRequest $request): array
+    private function isRef(string $type): bool
     {
-        $return = [];
-
-        if (!is_array($request->struct)) {
-            $return['description'] = $request->struct->description;
-        }
-
-        $content_type = $request->headers['Content-Type'] ?? 'text/plain';
-        if (isset($request->struct) && $request->struct !== [])
-        {
-            $return['content'] = [
-                    $content_type => [
-                            'schema' => [
-                                'type' => $request->struct->element,
-                                'properties' => array_map(fn($value) => [$value->key->value => ['type' => $value->type]], $request->struct->value),
-                            ],
-                    ],
-            ];
-        } else {
-            $return['content'] = [
-                    $content_type => [
-                            'schema' => [
-                                    'type' => 'string',
-                            ],
-                    ],
-            ];
-        }
-
-        if ($request->body !== NULL && $request->body !== []) {
-            $return['content'][$content_type]['example'] = $request->body[0];
-        }
-
-        return $return;
+        return !in_array($type, ["array", "boolean", "integer", "null", "number", "object", "string"], TRUE);
     }
 
     /**
@@ -227,17 +223,21 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                     'schema' => [
                         'type' => 'string',
                         'example' => $value,
-                    ]
+                    ],
                 ];
             }
 
             $content = [];
             foreach ($response->content as $key => $contents) {
                 $content[$key] = [
-                        "schema"=> [
-                                "type"=> "string",
-                                "example"=> $contents
-                        ]
+                    'schema' => [
+                        'type' => "string",
+                    ],
+                    'examples' => [
+                            'base' => [
+                                    'value' => $contents,
+                            ],
+                    ],
                 ];
             }
             foreach ($response->structure as $structure) {
@@ -248,10 +248,12 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                                 "properties"=> [
                                         $structure->key->value => [
                                                 "type" => $structure->type,
-                                                'example' => $structure->value,
-                                        ]
-                                ]
-                        ]
+                                        ],
+                                ],
+                                'example' => [
+                                        $structure->key->value => $structure->value,
+                                ],
+                        ],
                 ];
             }
             $return[$response->statuscode] = [
@@ -259,6 +261,53 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                     'headers' => (object) $headers,
                     'content' => (object) $content,
             ];
+        }
+
+        return $return;
+    }
+
+    /**
+     * Convert a HTTP Request into an OpenAPI body
+     *
+     * @param HTTPRequest $request Request to convert
+     *
+     * @return array<string,array<string,mixed>> OpenAPI style body
+     */
+    private function toBody(HTTPRequest $request): array
+    {
+        $return = [];
+
+        if (!is_array($request->struct) && $request->struct->description !== NULL) {
+            $return['description'] = $request->struct->description;
+        }
+
+        $content_type = $request->headers['Content-Type'] ?? 'text/plain';
+        if (isset($request->struct) && $request->struct !== [])
+        {
+            $properties = [];
+            foreach ($request->struct->value as $value) {
+                $properties[$value->key->value] = ['type' => $value->type];
+            }
+            $return['content'] = [
+                    $content_type => [
+                            'schema' => [
+                                'type' => $request->struct->element,
+                                'properties' => $properties,
+                            ],
+                    ],
+            ];
+        } else {
+            $return['content'] = [
+                    $content_type => [
+                            'schema' => [
+                                    'type' => 'string',
+                            ],
+                    ],
+            ];
+        }
+
+        if ($request->body !== NULL && $request->body !== []) {
+            $return['content'][$content_type]['examples']['base']['value'] = $request->body[0];
         }
 
         return $return;
@@ -274,7 +323,130 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      * Get component information for the API.
      * @return object
      */
-    private function getComponents(): object { return (object) []; }
+    private function getComponents(): object {
+        $return = [];
+        foreach ($this->base_structures as $structure)
+        {
+          $object = $this->getComponent($structure);
+
+          if ($structure->ref !== NULL) {
+            $return[$structure->type] = [
+              'allOf' => [
+                ['$ref' => "#/components/schemas/$structure->ref"],
+                $object,
+              ],
+            ];
+          } else {
+            $return[$structure->type] = $object;
+          }
+        }
+        return (object) ['schemas' => $return ];
+    }
+
+  /**
+   * Get a component
+   *
+   * @param BasicStructureElement $structure
+   *
+   * @return array<string, mixed>
+   */
+    private function getComponent(BasicStructureElement $structure): array
+    {
+      $required = [];
+      $properties = [];
+      if ($structure->value !== NULL)
+      {
+        /** @var BasicStructureElement $value */
+        foreach ($structure->value as $value)
+        {
+          $propery_data = $this->getSchemaProperty($value);
+          if ($propery_data === NULL) { continue; }
+          if (in_array('required', $value->status, TRUE)) { $required[] = $value->key->value;}
+
+          $properties[$value->key->value] = $propery_data;
+        }
+      }
+
+      $object = [
+        'type' => $structure->element,
+      ];
+      switch ($structure->element) {
+        case 'enum':
+        case 'array':
+          $object['items'] = $properties;
+          break;
+        case 'object':
+          $object['properties'] = $properties;
+          $object['required'] = $required;
+          break;
+        default:
+          break;
+      }
+
+      if ($structure->description !== NULL) {
+        $object['description'] = $structure->description;
+      }
+
+      return $object;
+    }
+
+  /**
+   * Get property in a schema
+   *
+   * @param BasicStructureElement|ElementStructureElement $value Data to convert
+   *
+   * @return array<string,mixed>|null
+   */
+    private function getSchemaProperty(BasicStructureElement|ElementStructureElement $value): ?array
+    {
+      //TODO: Check this case
+      if ($value instanceof ElementStructureElement || $value->key === NULL)
+      {
+        return NULL;
+      }
+
+      $propery_data = [];
+      if ($value->description !== NULL) {
+        $propery_data['description'] = $value->description;
+      }
+
+      if ($this->isRef($value->type) && $value->type !== 'enum')
+      {
+        $propery_data['$ref'] = '#/components/schemas/' . $value->type;
+        return $propery_data;
+      }
+
+      if ($value->type === 'enum') {
+        $propery_data['type'] = in_array('nullable', $value->status, TRUE) ? [ $value->type, 'null' ] : $value->type;
+        $options = [];
+        foreach ($value->value->value as $option) {
+          if ($option instanceof ElementStructureElement) {
+            $options[] = ['const' => $option->value, 'title' => $option->value];
+          }
+        }
+        $propery_data['oneOf'] = $options;
+
+        return $propery_data;
+      }
+
+      if ($value->type === 'array') {
+        $propery_data['type'] = array_unique(array_map(fn($item) => $item->type,$value->value->value));
+        $propery_data['example'] = array_merge(array_filter(array_map(fn($item) => $item->value,$value->value->value)));
+
+        return $propery_data;
+      }
+
+      if ($value->type === 'object') {
+        $propery_data['type'] = $value->type;
+        $propery_data['properties'] = $this->getComponent($value->value)['properties'];
+
+        return $propery_data;
+      }
+
+      $propery_data['type'] = in_array('nullable', $value->status, TRUE) ? [ $value->type, 'null' ] : $value->type;
+
+      return $propery_data;
+    }
 
     /**
      * Get security information for the API
@@ -282,12 +454,26 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      */
     private function getSecurity(): array { return []; }
 
+//    private function getDocs(): object { return (object) []; }
+
     /**
      * Get tags for the API
-     * @return string[]
+     * @return array<array<string, string>>
      */
-    private function getTags(): array { return []; }
+    private function getTags(): array {
+        $return = [];
+        foreach ($this->categories as $category) {
+            $data = [
+                'name' => $category->title,
+            ];
+            if ($category->description !== NULL) {
+                $data['description'] = $category->description;
+            }
 
-//    private function getDocs(): object { return (object) []; }
+            $return[] = $data;
+        }
+
+        return $return;
+    }
 
 }
