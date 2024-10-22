@@ -109,42 +109,20 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                     {
                         $parameters += $this->toParameters([$transition->data_variables], $transition->href);
                     }
-                    $transition_return['parameters'] = $parameters;
+                    if ($transition->structures !== [])
+                    {
+                        $parameters += $this->toParameters($transition->structures, $transition->href);
+                    }
+                    if ($parameters !== [])
+                    {
+                        $transition_return['parameters'] = $parameters;
+                    }
 
                     /** @var HTTPRequest $request */
                     foreach ($transition->requests as $request)
                     {
-                        $request_return = [
-                                'operationId' => $request->get_id(),
-                                'responses' => $this->toResponses($transition->responses),
-                                'summary' => $request->title ?? $transition->title,
-                                'description' => $request->description ?? $transition->description,
-                        ];
-
-                        $parameters = [];
-                        if ($request->struct !== NULL) {
-                            if (is_array($request->struct))
-                            {
-                                $parameters += $this->toParameters($request->struct, $transition->href);
-                            } else {
-                                $parameters += $this->toParameters([$request->struct], $transition->href);
-                            }
-                        }
-                        $request_return['tags'] = [$category->title];
-                        if (isset($transition_return['parameters']) && $transition_return['parameters'] !== []) {
-                            $request_return['parameters'] = array_merge($transition_return['parameters'], $parameters);
-                        }
-                        if ($request->body !== NULL) {
-                            $request_return['requestBody'] = $this->toBody($request);
-                        }
-
-                        if ($request->title !== NULL) {
-                            $request_return['summary'] = $request->title;
-                        }
-                        if ($request->description !== '') {
-                            $request_return['description'] = $request->description;
-                        }
-
+                        $request_return = $this->toOperation(request: $request, transition: $transition, tags: [$category->title]);
+                        $request_return['responses'] = $this->toResponses($transition->responses);
                         $transition_return[strtolower($request->method)] = (object) $request_return;
                     }
                     $return[$transition->href] = (object) $transition_return;
@@ -156,10 +134,67 @@ class OpenApiRenderer extends BaseTemplateRenderer {
     }
 
     /**
+     * @param HTTPRequest $request
+     * @param Transition  $transition
+     * @param string[]    $tags
+     *
+     * @return array<string,mixed>
+     */
+    private function toOperation(HTTPRequest $request, Transition $transition, array $tags): array {
+        $operation = [
+            'operationId' => $request->get_id(),
+            'summary' => $request->title ?? $transition->title,
+            'tags' => $tags,
+        ];
+        $description = $request->description ?? $transition->description;
+        if ($description !== NULL)
+        {
+            $operation['description'] = $description;
+        }
+
+        $parameters = [];
+        if ($request->struct !== NULL) {
+            if (is_array($request->struct))
+            {
+                $parameters += $this->toParameters($request->struct, $transition->href);
+            } else {
+                $parameters += $this->toParameters([$request->struct], $transition->href);
+            }
+        }
+
+        foreach ($request->headers as $name => $value) {
+            if ($name === 'Content-Type') { continue; }
+            if ($name === $this->base_data['API_KEY_HEADER']) {
+                $operation['security'] = [["api_key" => []]];
+                continue;
+            }
+
+            $parameters[] = [
+                'name' => $name,
+                'in' => 'header',
+                'schema' => ['type' => 'string'],
+                'example' => $value
+            ];
+        }
+
+        if ($parameters !== []) {
+            $operation['parameters'] = $parameters;
+        }
+
+        $body = $this->toBody($request);
+        if ($body !== []) {
+            $body['required'] = TRUE;
+            $operation['requestBody'] = $body;
+        }
+
+        return $operation;
+    }
+
+    /**
      * Convert objects into parameters.
      *
-     * @param object[] $objects List of objects to convert
-     * @param string   $href    Base URL
+     * @param BasicStructureElement[] $objects List of objects to convert
+     * @param string                  $href    Base URL
      *
      * @return array<array<string,mixed>>
      */
@@ -167,15 +202,12 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         $return = [];
 
         foreach ($objects as $variable) {
-            if ($variable->key === NULL)
-            {
-                continue;
-            }
+            if ($variable->key === NULL) { continue; }
 
             $return_tmp = [
                     'name' => $variable->key->value,
                     'in'   => str_contains($href, '{' . $variable->key->value . '}') ? 'path' : 'query',
-                    'required' => $variable->status === 'required',
+                    'required' => in_array('required', $variable->status, TRUE),
                     'schema' => [],
             ];
             if ($this->isRef($variable->type)) {
@@ -240,22 +272,12 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                     ],
                 ];
             }
+
             foreach ($response->structure as $structure) {
                 if ($structure->key === NULL) { continue; }
-                $content[$response->headers['Content-Type'] ?? 'text/plain'] = [
-                        "schema"=> [
-                                "type"=> "object",
-                                "properties"=> [
-                                        $structure->key->value => [
-                                                "type" => $structure->type,
-                                        ],
-                                ],
-                                'example' => [
-                                        $structure->key->value => $structure->value,
-                                ],
-                        ],
-                ];
+                $content[$response->headers['Content-Type'] ?? 'text/plain'] = ['schema' => $this->getComponent($structure)];
             }
+
             $return[$response->statuscode] = [
                     'description' => $response->description ?? $response->title ?? '',
                     'headers' => (object) $headers,
@@ -284,26 +306,19 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         $content_type = $request->headers['Content-Type'] ?? 'text/plain';
         if (isset($request->struct) && $request->struct !== [])
         {
-            $properties = [];
-            foreach ($request->struct->value as $value) {
-                $properties[$value->key->value] = ['type' => $value->type];
-            }
+            $content = $this->getComponent($request->struct);
+            unset($content['required']);
             $return['content'] = [
-                    $content_type => [
-                            'schema' => [
-                                'type' => $request->struct->element,
-                                'properties' => $properties,
-                            ],
-                    ],
+                $content_type => ['schema' => $content],
             ];
         } else {
-            $return['content'] = [
-                    $content_type => [
-                            'schema' => [
-                                    'type' => 'string',
-                            ],
-                    ],
-            ];
+//            $return['content'] = [
+//                    $content_type => [
+//                            'schema' => [
+//                                    'type' => 'string',
+//                            ],
+//                    ],
+//            ];
         }
 
         if ($request->body !== NULL && $request->body !== []) {
@@ -340,7 +355,18 @@ class OpenApiRenderer extends BaseTemplateRenderer {
             $return[$structure->type] = $object;
           }
         }
-        return (object) ['schemas' => $return ];
+        $return_object = ['schemas' => $return ];
+        if (isset($this->base_data['API_KEY_HEADER'])) {
+            $return_object['securitySchemes'] = [
+                'api_key' => [
+                    "type" => "apiKey",
+                    "name" => $this->base_data['API_KEY_HEADER'],
+                    "in" => "header",
+                ]
+            ];
+        }
+
+        return (object) $return_object;
     }
 
   /**
@@ -354,7 +380,7 @@ class OpenApiRenderer extends BaseTemplateRenderer {
     {
       $required = [];
       $properties = [];
-      if ($structure->value !== NULL)
+      if (is_array($structure->value))
       {
         /** @var BasicStructureElement $value */
         foreach ($structure->value as $value)
@@ -371,16 +397,19 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         'type' => $structure->element,
       ];
       switch ($structure->element) {
-        case 'enum':
-        case 'array':
-          $object['items'] = $properties;
-          break;
-        case 'object':
-          $object['properties'] = $properties;
-          $object['required'] = $required;
-          break;
+          case 'enum':
+          case 'array':
+              $object['items'] = $properties;
+              break;
+          case 'object':
+              $object['properties'] = $properties;
+              $object['required'] = $required;
+              break;
+          case 'member':
+            //TODO: Check this case
+            break;
         default:
-          break;
+            break;
       }
 
       if ($structure->description !== NULL) {
@@ -407,22 +436,22 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
       $propery_data = [];
       if ($value->description !== NULL) {
-        $propery_data['description'] = $value->description;
+          $propery_data['description'] = $value->description;
       }
 
       if ($this->isRef($value->type) && $value->type !== 'enum')
       {
-        $propery_data['$ref'] = '#/components/schemas/' . $value->type;
-        return $propery_data;
+          $propery_data['$ref'] = '#/components/schemas/' . $value->type;
+          return $propery_data;
       }
 
       if ($value->type === 'enum') {
         $propery_data['type'] = in_array('nullable', $value->status, TRUE) ? [ $value->type, 'null' ] : $value->type;
         $options = [];
         foreach ($value->value->value as $option) {
-          if ($option instanceof ElementStructureElement) {
-            $options[] = ['const' => $option->value, 'title' => $option->value];
-          }
+            if ($option instanceof ElementStructureElement) {
+                $options[] = ['const' => $option->value, 'title' => $option->value];
+            }
         }
         $propery_data['oneOf'] = $options;
 
@@ -450,9 +479,15 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
     /**
      * Get security information for the API
-     * @return string[]
+     * @return array<array<string, array<string, mixed>>>
      */
-    private function getSecurity(): array { return []; }
+    private function getSecurity(): array {
+        if (isset($this->base_data['API_KEY_LOCK_ALL']) && filter_var($this->base_data['API_KEY_LOCK_ALL'], FILTER_VALIDATE_BOOLEAN)) {
+            return [["api_key" => []]];
+        }
+
+        return [];
+    }
 
 //    private function getDocs(): object { return (object) []; }
 

@@ -37,16 +37,16 @@ class Transition extends HierarchyElement
     /**
      * URL variables.
      *
-     * @var StructureElement[]
+     * @var BasicStructureElement[]
      */
     public array $url_variables = [];
 
     /**
      * Data variables.
      *
-     * @var StructureElement|null
+     * @var ObjectStructureElement|BasicStructureElement|null
      */
-    public ?StructureElement $data_variables = null;
+    public ?BasicStructureElement $data_variables = null;
 
     /**
      * The request.
@@ -65,7 +65,7 @@ class Transition extends HierarchyElement
     /**
      * Structures used (if any).
      *
-     * @var StructureElement[]
+     * @var BasicStructureElement[]
      */
     public array $structures = [];
 
@@ -94,7 +94,7 @@ class Transition extends HierarchyElement
         $this->href = $href->content ?? $href;
 
         if (isset($object->attributes->hrefVariables)) {
-            $deps                = [];
+            $deps = [];
             foreach ($object->attributes->hrefVariables->content as $variable) {
                 $struct                = (new ObjectStructureElement())->get_class($variable->element);
                 $this->url_variables[] = $struct->parse($variable, $deps);
@@ -165,10 +165,6 @@ class Transition extends HierarchyElement
         $vars = [];
         if ($this->url_variables !== []) {
             foreach ($this->url_variables as $item) {
-                if (!is_subclass_of($item, BasicStructureElement::class)) {
-                    continue;
-                }
-
                 $vars[$item->key->value] = $item->string_value(true);
             }
         }

@@ -41,9 +41,9 @@ class ObjectStructureElement extends BasicStructureElement
      * @param object|null $object       An object to parse
      * @param string[]    $dependencies Dependencies of this object
      *
-     * @return ObjectStructureElement self reference
+     * @return self self reference
      */
-    public function parse(?object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): self
     {
         $this->object = $object;
         if (is_null($object) || !isset($object->element) || !(isset($object->content) || isset($object->meta) )) {

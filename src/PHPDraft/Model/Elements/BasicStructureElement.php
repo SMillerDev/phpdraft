@@ -75,7 +75,7 @@ abstract class BasicStructureElement implements StructureElement
      *
      * @return self self reference
      */
-    abstract public function parse(?object $object, array &$dependencies): StructureElement;
+    abstract public function parse(?object $object, array &$dependencies): self;
 
     /**
      * Print a string representation.

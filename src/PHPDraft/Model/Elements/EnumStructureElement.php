@@ -24,7 +24,7 @@ class EnumStructureElement extends BasicStructureElement
      *
      * @return self
      */
-    public function parse(?object $object, array &$dependencies): StructureElement
+    public function parse(?object $object, array &$dependencies): self
     {
         $this->element = $object->element;
 
