@@ -2,6 +2,8 @@ FORMAT: 1A
 HOST: https://alpha-api.app.net
 ALT_HOST: https://acc.alpha-api.app.net, https://alpha-api.app.net
 EXTRA_HOST: https://test.alpha-api.app.net
+API_KEY_HEADER: X-API-Key
+API_KEY_LOCK_ALL: false
 
 # Real World API
 This API Blueprint demonstrates a real world example documenting a portion of
@@ -272,6 +274,7 @@ Remove a Star from a Post.
 + Request(application/json)
     + Headers
 
+            X-API-Key: fdskhgfdskhgfhs
             X-server: nginx
 
 + Response 200 (application/json)

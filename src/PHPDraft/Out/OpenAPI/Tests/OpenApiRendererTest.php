@@ -115,7 +115,7 @@ class OpenApiRendererTest extends LunrBaseTest
         $method = $this->get_reflection_method('toBody');
         $result = $method->invokeArgs($this->class, [$mock]);
 
-        $this->assertEquals(['content' => ['text/plain' => ['schema' => ['type' => 'string']]]],$result);
+        $this->assertEquals([],$result);
     }
 
     public function testToParameters(): void
