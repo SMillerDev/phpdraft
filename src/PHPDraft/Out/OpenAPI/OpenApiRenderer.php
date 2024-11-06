@@ -164,7 +164,8 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
         foreach ($request->headers as $name => $value) {
             if ($name === 'Content-Type') { continue; }
-            if ($name === $this->base_data['API_KEY_HEADER']) {
+            if (isset($this->base_data['API_KEY_HEADER']) 
+                && $this->base_data['API_KEY_HEADER'] === $name) {
                 $operation['security'] = [["api_key" => []]];
                 continue;
             }
