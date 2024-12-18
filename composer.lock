@@ -871,16 +871,16 @@
     "packages-dev": [
         {
             "name": "lunr/halo",
-            "version": "0.10.0",
+            "version": "0.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunr-php/lunr.halo.git",
-                "reference": "995985e039518b2544349c934da7b7c86ffdb18b"
+                "reference": "80e493a019c5fe29a1d798fe76ae7b9917cd52b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/995985e039518b2544349c934da7b7c86ffdb18b",
-                "reference": "995985e039518b2544349c934da7b7c86ffdb18b",
+                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/80e493a019c5fe29a1d798fe76ae7b9917cd52b6",
+                "reference": "80e493a019c5fe29a1d798fe76ae7b9917cd52b6",
                 "shasum": ""
             },
             "require": {
@@ -912,9 +912,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lunr-php/lunr.halo/issues",
-                "source": "https://github.com/lunr-php/lunr.halo/tree/0.10.0"
+                "source": "https://github.com/lunr-php/lunr.halo/tree/0.10.1"
             },
-            "time": "2024-08-05T09:50:50+00:00"
+            "time": "2024-12-05T11:12:59+00:00"
         },
         {
             "name": "myclabs/deep-copy",
