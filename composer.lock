@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8e5ae8f736d4ff65d6d9cb918af30dc",
+    "content-hash": "1b08bff0cff4e63116d9d4519358e312",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
@@ -794,16 +794,16 @@
     "packages-dev": [
         {
             "name": "lunr/halo",
-            "version": "0.10.1",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunr-php/lunr.halo.git",
-                "reference": "80e493a019c5fe29a1d798fe76ae7b9917cd52b6"
+                "reference": "3a794ab2bba893a32c8b4e4cf2c2ab4a771b336a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/80e493a019c5fe29a1d798fe76ae7b9917cd52b6",
-                "reference": "80e493a019c5fe29a1d798fe76ae7b9917cd52b6",
+                "url": "https://api.github.com/repos/lunr-php/lunr.halo/zipball/3a794ab2bba893a32c8b4e4cf2c2ab4a771b336a",
+                "reference": "3a794ab2bba893a32c8b4e4cf2c2ab4a771b336a",
                 "shasum": ""
             },
             "require": {
@@ -812,7 +812,7 @@
             },
             "require-dev": {
                 "ext-xdebug": ">=3.0",
-                "phpunit/phpunit": ">=9.0 <9.6",
+                "phpunit/phpunit": ">=10.5 <11.0",
                 "psr/container": ">=2.0.2",
                 "psr/log": ">=1.1"
             },
@@ -834,10 +834,9 @@
                 "unit tests"
             ],
             "support": {
-                "issues": "https://github.com/lunr-php/lunr.halo/issues",
-                "source": "https://github.com/lunr-php/lunr.halo/tree/0.10.1"
+                "source": "https://github.com/lunr-php/lunr.halo/tree/0.11.0"
             },
-            "time": "2024-12-05T11:12:59+00:00"
+            "time": "2025-02-08T20:26:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",
