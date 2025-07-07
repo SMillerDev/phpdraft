@@ -44,7 +44,7 @@ jobs:
       run: sha256sum build/out/*
 
     - name: Upload binary to release
-      uses: svenstaro/upload-release-action@2.11.0
+      uses: svenstaro/upload-release-action@2.11.2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/out/phpdraft-${{ github.event.release.tag_name }}.phar
@@ -53,7 +53,7 @@ jobs:
         overwrite: false
 
     - name: Upload library to release
-      uses: svenstaro/upload-release-action@2.11.0
+      uses: svenstaro/upload-release-action@2.11.2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/out/phpdraft-library-${{ github.event.release.tag_name }}.phar
