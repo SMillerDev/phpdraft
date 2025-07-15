@@ -9,16 +9,20 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class EnumStructureElementTest
- * @covers \PHPDraft\Model\Elements\EnumStructureElement
  */
-class EnumStructureElementTest extends LunrBaseTest
+#[CoversClass(EnumStructureElement::class)]
+class EnumStructureElementTest extends LunrBaseTestCase
 {
+    private EnumStructureElement $class;
+
     /**
      * Set up tests
      * @return void
@@ -34,7 +38,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertPropertyEquals('element', NULL);
+        $this->assertPropertyEquals('element', null);
     }
 
     /**
@@ -42,7 +46,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->get_reflection_method('new_instance');
+        $method = $this->getReflectionMethod('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(EnumStructureElement::class, $return);
     }
@@ -52,7 +56,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithArray(): void
     {
-        $this->set_reflection_property_value('description', null);
+        $this->setReflectionPropertyValue('description', null);
 
         $value1 = new ElementStructureElement();
         $value1->value = 'hello';
@@ -101,7 +105,7 @@ class EnumStructureElementTest extends LunrBaseTest
      */
     public function testToStringWithComplexArray(): void
     {
-        $this->set_reflection_property_value('description', null);
+        $this->setReflectionPropertyValue('description', null);
 
         $value1 = new ElementStructureElement();
         $value1->value = 'hello';
@@ -119,13 +123,10 @@ class EnumStructureElementTest extends LunrBaseTest
     /**
      * Parse different objects
      *
-     * @dataProvider parseObjectProvider
-     *
      * @param string               $object   JSON Object
      * @param EnumStructureElement $expected Expected Object output
-     *
-     * @covers \PHPDraft\Model\Elements\EnumStructureElement::parse
      */
+    #[DataProvider('parseObjectProvider')]
     public function testSuccessfulParse(string $object, EnumStructureElement $expected): void
     {
         $dep = [];

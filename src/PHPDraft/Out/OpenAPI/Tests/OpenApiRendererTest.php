@@ -1,14 +1,13 @@
 <?php
 namespace PHPDraft\Out\OpenAPI\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\HTTPRequest;
 use PHPDraft\Out\OpenAPI\OpenApiRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \PHPDraft\Out\OpenAPI\OpenApiRenderer
- */
-class OpenApiRendererTest extends LunrBaseTest
+#[CoversClass(OpenApiRenderer::class)]
+class OpenApiRendererTest extends LunrBaseTestCase
 {
     private OpenApiRenderer $class;
 
@@ -37,7 +36,7 @@ class OpenApiRendererTest extends LunrBaseTest
 
     public function testGetTags(): void
     {
-        $method = $this->get_reflection_method('getTags');
+        $method = $this->getReflectionMethod('getTags');
         $result = $method->invokeArgs($this->class, []);
 
         $this->assertArrayEmpty($result);
@@ -45,7 +44,7 @@ class OpenApiRendererTest extends LunrBaseTest
 
     public function testGetSecurity(): void
     {
-        $method = $this->get_reflection_method('getSecurity');
+        $method = $this->getReflectionMethod('getSecurity');
         $result = $method->invokeArgs($this->class, []);
 
         $this->assertArrayEmpty($result);
@@ -53,41 +52,41 @@ class OpenApiRendererTest extends LunrBaseTest
 
     public function testGetComponents(): void
     {
-        $method = $this->get_reflection_method('getComponents');
+        $method = $this->getReflectionMethod('getComponents');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals((object)['schemas' => []],$result);
+        $this->assertEquals((object)['schemas' => []], $result);
     }
 
     public function testGetDocs(): void
     {
         $this->markTestSkipped('Not implemented');
 
-        $method = $this->get_reflection_method('getDocs');
+        $method = $this->getReflectionMethod('getDocs');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals((object)[],$result);
+        $this->assertEquals((object)[], $result);
     }
 
     public function testGetPaths(): void
     {
-        $method = $this->get_reflection_method('getPaths');
+        $method = $this->getReflectionMethod('getPaths');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals((object)[],$result);
+        $this->assertEquals((object)[], $result);
     }
 
     public function testGetServers(): void
     {
-        $method = $this->get_reflection_method('getServers');
+        $method = $this->getReflectionMethod('getServers');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals([['url' => null,'description' => 'Main host'], ['url' => '']],$result);
+        $this->assertEquals([['url' => null,'description' => 'Main host'], ['url' => '']], $result);
     }
 
     public function testGetApiInfo(): void
     {
-        $method = $this->get_reflection_method('getApiInfo');
+        $method = $this->getReflectionMethod('getApiInfo');
         $result = $method->invokeArgs($this->class, []);
 
         $this->assertEquals([
@@ -95,15 +94,15 @@ class OpenApiRendererTest extends LunrBaseTest
                                     'version' => '1.0.0',
                                     'summary' => ' generated from API Blueprint',
                                     'description' => null,
-                            ],$result);
+                            ], $result);
     }
 
     public function testToResponses(): void
     {
-        $method = $this->get_reflection_method('toResponses');
+        $method = $this->getReflectionMethod('toResponses');
         $result = $method->invokeArgs($this->class, [[]]);
 
-        $this->assertEquals([],$result);
+        $this->assertEquals([], $result);
     }
 
     public function testToBody(): void
@@ -112,21 +111,17 @@ class OpenApiRendererTest extends LunrBaseTest
                      ->disableOriginalConstructor()
                      ->getMock();
 
-        $method = $this->get_reflection_method('toBody');
+        $method = $this->getReflectionMethod('toBody');
         $result = $method->invokeArgs($this->class, [$mock]);
 
-        $this->assertEquals([],$result);
+        $this->assertEquals([], $result);
     }
 
     public function testToParameters(): void
     {
-        $mock = $this->getMockBuilder(HttpRequest::class)
-                     ->disableOriginalConstructor()
-                     ->getMock();
-
-        $method = $this->get_reflection_method('toParameters');
+        $method = $this->getReflectionMethod('toParameters');
         $result = $method->invokeArgs($this->class, [[], 'href']);
 
-        $this->assertEquals([],$result);
+        $this->assertEquals([], $result);
     }
 }

@@ -9,16 +9,20 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\ElementStructureElement;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class ArrayStructureTest
- * @covers \PHPDraft\Model\Elements\ArrayStructureElement
  */
-class ArrayStructureElementTest extends LunrBaseTest
+#[CoversClass(ArrayStructureElement::class)]
+class ArrayStructureElementTest extends LunrBaseTestCase
 {
+    private ArrayStructureElement $class;
+
     /**
      * Set up tests
      *
@@ -33,13 +37,10 @@ class ArrayStructureElementTest extends LunrBaseTest
     /**
      * Parse different objects
      *
-     * @dataProvider parseObjectProvider
-     *
      * @param string                $object   JSON Object
      * @param ArrayStructureElement $expected Expected Object output
-     *
-     * @covers \PHPDraft\Model\Elements\ArrayStructureElement::parse
      */
+    #[DataProvider('parseObjectProvider')]
     public function testSuccessfulParse(string $object, ArrayStructureElement $expected): void
     {
         $dep = [];
@@ -179,7 +180,7 @@ class ArrayStructureElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->get_reflection_method('new_instance');
+        $method = $this->getReflectionMethod('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ArrayStructureElement::class, $return);
     }

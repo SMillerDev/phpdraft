@@ -9,15 +9,17 @@
 
 namespace PHPDraft\Out\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Out\HtmlTemplateRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Class TemplateGeneratorTest
- *
- * @covers \PHPDraft\Out\HtmlTemplateRenderer
  */
-class HtmlTemplateRendererTest extends LunrBaseTest
+#[CoversClass(HtmlTemplateRenderer::class)]
+class HtmlTemplateRendererTest extends LunrBaseTestCase
 {
     /**
      * @var HtmlTemplateRenderer
@@ -47,7 +49,7 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
                         ],
                 ],
-            $expected_base + ['TITLE' => 'Title'],
+                $expected_base + ['TITLE' => 'Title'],
         ];
 
         $return['title and metadata'] = [
@@ -80,7 +82,7 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
                         ],
                 ],
-            $expected_base + ['TITLE' => 'Title', 'Some_key' => 'Value', 'Some_key2' => 'Value2'],
+                $expected_base + ['TITLE' => 'Title', 'Some_key' => 'Value', 'Some_key2' => 'Value2'],
         ];
 
         $return['title and metadata and description'] = [
@@ -118,7 +120,7 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
                         ],
                 ],
-            $expected_base + ['TITLE' => 'Title', 'Some_key' => 'Value', 'Some_key2' => 'Value2', 'DESC' => 'Some description'],
+                $expected_base + ['TITLE' => 'Title', 'Some_key' => 'Value', 'Some_key2' => 'Value2', 'DESC' => 'Some description'],
         ];
 
         return $return;
@@ -179,19 +181,15 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertSame('default', $this->get_reflection_property_value('template'));
-        $this->assertEquals('none', $this->get_reflection_property_value('image'));
+        $this->assertSame('default', $this->getReflectionPropertyValue('template'));
+        $this->assertEquals('none', $this->getReflectionPropertyValue('image'));
     }
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::strip_link_spaces
      */
     public function testStripSpaces(): void
     {
@@ -202,13 +200,10 @@ class HtmlTemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @dataProvider responseStatusProvider
-     *
      * @param int    $code HTTP code
      * @param string $text Class to return
-     *
-     * @covers       \PHPDraft\Out\HtmlTemplateRenderer::get_response_status
      */
+    #[DataProvider('responseStatusProvider')]
     public function testResponseStatus(int $code, string $text): void
     {
         $return = HtmlTemplateRenderer::get_response_status($code);
@@ -218,13 +213,10 @@ class HtmlTemplateRendererTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @dataProvider requestMethodProvider
-     *
      * @param string $method HTTP Method
      * @param string $text   Class to return
-     *
-     * @covers       \PHPDraft\Out\HtmlTemplateRenderer::get_method_icon
      */
+    #[DataProvider('requestMethodProvider')]
     public function testRequestMethod(string $method, string $text): void
     {
         $return = HtmlTemplateRenderer::get_method_icon($method);
@@ -233,8 +225,6 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileDefault(): void
     {
@@ -244,8 +234,6 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileFallback(): void
     {
@@ -255,19 +243,15 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileNone(): void
     {
         $return = $this->class->find_include_file('gfsdfdsf', 'xyz');
-        $this->assertEquals(NULL, $return);
+        $this->assertEquals(null, $return);
     }
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileSingle(): void
     {
@@ -278,8 +262,6 @@ class HtmlTemplateRendererTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::find_include_file
      */
     public function testIncludeFileMultiple(): void
     {
@@ -294,23 +276,17 @@ class HtmlTemplateRendererTest extends LunrBaseTest
         $this->assertEquals('templates/text/text.txt', $return);
     }
 
-    /**
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
-     */
     public function testGetTemplateFailsEmpty(): void
     {
         $this->expectException('PHPDraft\Parse\ExecutionException');
         $this->expectExceptionMessage('Couldn\'t find template \'cow\'');
-        $this->set_reflection_property_value('template', 'cow');
+        $this->setReflectionPropertyValue('template', 'cow');
         $json = '{"content": [{"content": "hello"}]}';
 
         $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
     }
 
-    /**
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
-     * @group  twig
-     */
+    #[Group('twig')]
     public function testGetTemplate(): void
     {
         $json = '{"content": [{"content": "hello"}]}';
@@ -318,25 +294,19 @@ class HtmlTemplateRendererTest extends LunrBaseTest
         $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
     }
 
-    /**
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
-     * @group  twig
-     */
+    #[Group('twig')]
     public function testGetTemplateSorting(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->setReflectionPropertyValue('sorting', 3);
         $json = '{"content": [{"content": "hello"}]}';
 
         $this->assertStringEqualsFile(TEST_STATICS . '/empty_html_template', $this->class->get(json_decode($json)));
     }
 
-    /**
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
-     * @group  twig
-     */
+    #[Group('twig')]
     public function testGetTemplateMetaData(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->setReflectionPropertyValue('sorting', 3);
         $json = <<<'TAG'
 {"content": [{"content": [], "attributes": {
 "metadata": {"content": [
@@ -349,13 +319,10 @@ TAG;
         $this->assertStringEqualsFile(TEST_STATICS . '/basic_html_template', $this->class->get(json_decode($json)));
     }
 
-    /**
-     * @covers \PHPDraft\Out\HtmlTemplateRenderer::get
-     * @group  twig
-     */
+    #[Group('twig')]
     public function testGetTemplateCategories(): void
     {
-        $this->set_reflection_property_value('sorting', 3);
+        $this->setReflectionPropertyValue('sorting', 3);
         $json = <<<'TAG'
 {"content": [
 {"content": [{"element": "copy", "content": "__desc__"}, {"element": "category", "content": []}],
@@ -370,13 +337,10 @@ TAG;
         $this->assertStringEqualsFile(TEST_STATICS . '/full_html_template', $this->class->get(json_decode($json)));
     }
 
-    /**
-     * @covers       \PHPDraft\Out\BaseTemplateRenderer::parse_base_data
-     * @dataProvider parsableDataProvider
-     */
+    #[DataProvider('parsableDataProvider')]
     public function testParseBaseData(array $input, array $expected): void
     {
-        $method = $this->get_reflection_method('parse_base_data');
+        $method = $this->getReflectionMethod('parse_base_data');
         $method->invokeArgs($this->class, [ json_decode(json_encode($input)) ]);
 
         $this->assertPropertyEquals('base_data', $expected);

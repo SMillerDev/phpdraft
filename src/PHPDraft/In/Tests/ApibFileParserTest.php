@@ -9,23 +9,20 @@
 
 namespace PHPDraft\In\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\In\ApibFileParser;
-use ReflectionClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ApibFileParserTest
- * @covers \PHPDraft\In\ApibFileParser
  */
-class ApibFileParserTest extends LunrBaseTest
+#[CoversClass(ApibFileParser::class)]
+class ApibFileParserTest extends LunrBaseTestCase
 {
-
     private ApibFileParser $class;
 
     /**
      * Set up tests.
-     *
-     * @return void Test is now set up.
      */
     public function setUp(): void
     {
@@ -35,7 +32,6 @@ class ApibFileParserTest extends LunrBaseTest
 
     /**
      * Test if setup is successful
-     * @return void
      */
     public function testLocationSetup(): void
     {
@@ -44,7 +40,6 @@ class ApibFileParserTest extends LunrBaseTest
 
     /**
      * Test if setup is successful
-     * @return void
      */
     public function testFilenameSetup(): void
     {
@@ -53,8 +48,6 @@ class ApibFileParserTest extends LunrBaseTest
 
     /**
      * Test if exception when the file doesn't exist
-     *
-     * @return void
      */
     public function testFilenameSetupWrong(): void
     {
@@ -62,25 +55,24 @@ class ApibFileParserTest extends LunrBaseTest
         $this->expectExceptionMessageMatches('/API File not found: .*\/drafter\/non_existing_including_apib/');
         $this->expectExceptionCode(1);
 
-        $this->set_reflection_property_value('filename', TEST_STATICS . '/drafter/non_existing_including_apib');
+        $this->setReflectionPropertyValue('filename', TEST_STATICS . '/drafter/non_existing_including_apib');
         $this->class->parse();
     }
 
     /**
      * Test if setup is successful
-     * @return void
      */
     public function testParseBasic(): void
     {
-        $this->set_reflection_property_value('filename', TEST_STATICS . '/drafter/apib/including.apib');
-        $this->set_reflection_property_value('location', TEST_STATICS . '/drafter/apib/');
+        $this->setReflectionPropertyValue('filename', TEST_STATICS . '/drafter/apib/including.apib');
+        $this->setReflectionPropertyValue('location', TEST_STATICS . '/drafter/apib/');
 
 
-        $this->mock_function('curl_exec', fn() => 'hello');
+        $this->mockFunction('curl_exec', fn() => 'hello');
 
         $this->class->parse();
 
-        $this->unmock_function('curl_exec');
+        $this->unmockFunction('curl_exec');
 
         $text = "FORMAT: 1A\nHOST: https://owner-api.teslamotors.com\n";
         $text .= "EXTRA_HOSTS: https://test.owner-api.teslamotors.com\nSOMETHING: INFO\n\n";
@@ -95,12 +87,10 @@ class ApibFileParserTest extends LunrBaseTest
 
     /**
      * Test setting content
-     *
-     * @covers \PHPDraft\In\ApibFileParser::set_apib_content
      */
     public function testSetContent(): void
     {
         $this->class->set_apib_content('content');
-        $this->assertEquals('content', $this->get_reflection_property_value('full_apib'));
+        $this->assertEquals('content', $this->getReflectionPropertyValue('full_apib'));
     }
 }

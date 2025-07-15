@@ -2,8 +2,6 @@
 
 namespace PHPDraft\Model\Elements;
 
-use Stringable;
-
 class ElementStructureElement implements StructureElement
 {
     /**

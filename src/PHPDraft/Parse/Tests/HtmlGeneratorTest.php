@@ -9,15 +9,16 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Parse\HtmlGenerator;
-use ReflectionClass;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 
 /**
- * Class JsonToHTMLTest
- * @covers \PHPDraft\Parse\HtmlGenerator
+ * Class HtmlGeneratorTest
  */
-class HtmlGeneratorTest extends LunrBaseTest
+#[CoversClass(HtmlGenerator::class)]
+class HtmlGeneratorTest extends LunrBaseTestCase
 {
     /**
      * Test Class
@@ -27,8 +28,8 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Set up
-     * @requires ext-uopz
      */
+    #[RequiresPhpExtension('uopz')]
     public function setUp(): void
     {
         define('ID_STATIC', 'SOME_ID');
@@ -46,26 +47,25 @@ class HtmlGeneratorTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        $this->constant_undefine('ID_STATIC');
+        $this->undefineConstant('ID_STATIC');
         unset($this->class);
         unset($this->reflection);
     }
 
     /**
      * Tests if the constructor sets the property correctly
-     *
-     * @requires ext-uopz
      */
+    #[RequiresPhpExtension('uopz')]
     public function testSetupCorrectly(): void
     {
         $json = json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json'));
-        $this->assertEquals($json, $this->get_reflection_property_value('object'));
+        $this->assertEquals($json, $this->getReflectionPropertyValue('object'));
     }
 
     /**
      * Tests if the constructor sets the property correctly
-     * @requires ext-uopz
      */
+    #[RequiresPhpExtension('uopz')]
     public function testGetHTML(): void
     {
         $this->class->build_html();
@@ -78,8 +78,8 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Tests if the constructor sets the property correctly
-     * @requires ext-uopz
      */
+    #[RequiresPhpExtension('uopz')]
     public function testGetHTMLMaterial(): void
     {
         $this->class->build_html('material');
@@ -92,8 +92,8 @@ class HtmlGeneratorTest extends LunrBaseTest
 
     /**
      * Tests if the constructor sets the property correctly
-     * @requires ext-uopz
      */
+    #[RequiresPhpExtension('uopz')]
     public function testGetHTMLAdvanced(): void
     {
         $this->class->build_html('material', 'img.jpg', 'test.css,index.css', 'index.js,test.js');

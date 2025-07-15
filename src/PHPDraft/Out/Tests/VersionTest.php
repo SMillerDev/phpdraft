@@ -9,16 +9,16 @@
 
 namespace PHPDraft\Out\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Out\Version;
+use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 
 /**
  * Class VersionTest
- *
- * @covers \PHPDraft\Out\Version
  */
-class VersionTest extends LunrBaseTest
+#[CoversClass(Version::class)]
+class VersionTest extends LunrBaseTestCase
 {
     /**
      * Set up tests
@@ -28,7 +28,7 @@ class VersionTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->class      = new Version();
-        $this->reflection = new ReflectionClass('PHPDraft\Out\Version');
+        $this->baseSetUp($this->class);
     }
 
     /**
@@ -36,11 +36,11 @@ class VersionTest extends LunrBaseTest
      */
     public function testReleaseIDIsNull(): void
     {
-        $this->constant_redefine('VERSION', '0');
-        $this->mock_function('exec', fn() => '12');
+        $this->redefineConstant('VERSION', '0');
+        $this->mockFunction('exec', fn() => '12');
         $return = $this->class->release_id();
         $this->assertSame('12', $return);
-        $this->unmock_function('exec');
+        $this->unmockFunction('exec');
     }
 
     /**
@@ -48,7 +48,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testReleaseIDIsNotNull(): void
     {
-        $this->constant_redefine('VERSION', '1.2.3');
+        $this->redefineConstant('VERSION', '1.2.3');
         $return = $this->class->release_id();
         $this->assertSame('1.2.3', $return);
     }
@@ -58,7 +58,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testVersion(): void
     {
-        $this->constant_redefine('VERSION', '1.2.4');
+        $this->redefineConstant('VERSION', '1.2.4');
         $this->class->version();
         $this->expectOutputString('PHPDraft: 1.2.4');
     }
@@ -68,7 +68,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testSeries(): void
     {
-        $this->constant_redefine('VERSION', '1.2.4');
+        $this->redefineConstant('VERSION', '1.2.4');
         $return = $this->class->series();
         $this->assertSame('1.2', $return);
     }
@@ -78,7 +78,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testReleaseChannel(): void
     {
-        $this->constant_redefine('VERSION', '1.2.4-beta');
+        $this->redefineConstant('VERSION', '1.2.4-beta');
         $return = $this->class->getReleaseChannel();
         $this->assertSame('-nightly', $return);
     }
@@ -88,7 +88,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testReleaseChannelNormal(): void
     {
-        $this->constant_redefine('VERSION', '1.2.4');
+        $this->redefineConstant('VERSION', '1.2.4');
         $return = $this->class->getReleaseChannel();
         $this->assertSame('', $return);
     }
@@ -98,7 +98,7 @@ class VersionTest extends LunrBaseTest
      */
     public function testSeriesNightly(): void
     {
-        $this->constant_redefine('VERSION', '1.2.4-beta');
+        $this->redefineConstant('VERSION', '1.2.4-beta');
         $return = $this->class->series();
         $this->assertSame('1.2', $return);
     }

@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Out;
 
-use Lukasoppermann\Httpstatus\Httpstatus;
 use PHPDraft\Model\Category;
 use PHPDraft\Model\Elements\BasicStructureElement;
 

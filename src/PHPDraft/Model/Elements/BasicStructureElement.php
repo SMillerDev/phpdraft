@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace PHPDraft\Model\Elements;
 
-use Stringable;
-
 abstract class BasicStructureElement implements StructureElement
 {
     /**

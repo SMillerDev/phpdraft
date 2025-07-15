@@ -4,15 +4,14 @@ namespace PHPDraft\Out\OpenAPI;
 
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ElementStructureElement;
-use PHPDraft\Model\Elements\StructureElement;
 use PHPDraft\Model\HTTPRequest;
 use PHPDraft\Model\HTTPResponse;
 use PHPDraft\Model\Resource;
 use PHPDraft\Model\Transition;
 use PHPDraft\Out\BaseTemplateRenderer;
 
-class OpenApiRenderer extends BaseTemplateRenderer {
-
+class OpenApiRenderer extends BaseTemplateRenderer
+{
     public function init(object $json): self
     {
         $this->object = $json;
@@ -53,12 +52,13 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      * Get generic info for the API
      * @return array<string,string>
      */
-    private function getApiInfo(): array {
+    private function getApiInfo(): array
+    {
         return [
-            "title"=> $this->base_data['TITLE'],
-            "version"=> $this->base_data['VERSION'] ?? '1.0.0',
-            "summary"=> $this->base_data['TITLE'] . ' generated from API Blueprint',
-            "description"=> $this->base_data['DESC'],
+            "title" => $this->base_data['TITLE'],
+            "version" => $this->base_data['VERSION'] ?? '1.0.0',
+            "summary" => $this->base_data['TITLE'] . ' generated from API Blueprint',
+            "description" => $this->base_data['DESC'],
 //            "termsOfService"=> "https://example.com/terms/",
 //            "contact"=> [
 //                "name"=> "API Support",
@@ -77,7 +77,8 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      *
      * @return array<array<string,string>>
      */
-    private function getServers(): array {
+    private function getServers(): array
+    {
         $return = [];
         $return[] = ['url' => $this->base_data['HOST'], 'description' => 'Main host'];
 
@@ -93,7 +94,8 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      *
      * @return object
      */
-    private function getPaths(): object {
+    private function getPaths(): object
+    {
         $return = [];
         foreach ($this->categories as $category) {
             /** @var Resource $resource */
@@ -105,22 +107,18 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                     if ($transition->url_variables !== []) {
                         $parameters += $this->toParameters($transition->url_variables, $transition->href);
                     }
-                    if ($transition->data_variables !== NULL)
-                    {
+                    if ($transition->data_variables !== null) {
                         $parameters += $this->toParameters([$transition->data_variables], $transition->href);
                     }
-                    if ($transition->structures !== [])
-                    {
+                    if ($transition->structures !== []) {
                         $parameters += $this->toParameters($transition->structures, $transition->href);
                     }
-                    if ($parameters !== [])
-                    {
+                    if ($parameters !== []) {
                         $transition_return['parameters'] = $parameters;
                     }
 
                     /** @var HTTPRequest $request */
-                    foreach ($transition->requests as $request)
-                    {
+                    foreach ($transition->requests as $request) {
                         $request_return = $this->toOperation(request: $request, transition: $transition, tags: [$category->title]);
                         $request_return['responses'] = $this->toResponses($transition->responses);
                         $transition_return[strtolower($request->method)] = (object) $request_return;
@@ -140,22 +138,21 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      *
      * @return array<string,mixed>
      */
-    private function toOperation(HTTPRequest $request, Transition $transition, array $tags): array {
+    private function toOperation(HTTPRequest $request, Transition $transition, array $tags): array
+    {
         $operation = [
             'operationId' => $request->get_id(),
             'summary' => $request->title ?? $transition->title,
             'tags' => $tags,
         ];
         $description = $request->description ?? $transition->description;
-        if ($description !== NULL)
-        {
+        if ($description !== null) {
             $operation['description'] = $description;
         }
 
         $parameters = [];
-        if ($request->struct !== NULL) {
-            if (is_array($request->struct))
-            {
+        if ($request->struct !== null) {
+            if (is_array($request->struct)) {
                 $parameters += $this->toParameters($request->struct, $transition->href);
             } else {
                 $parameters += $this->toParameters([$request->struct], $transition->href);
@@ -163,9 +160,13 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         }
 
         foreach ($request->headers as $name => $value) {
-            if ($name === 'Content-Type') { continue; }
-            if (isset($this->base_data['API_KEY_HEADER']) 
-                && $this->base_data['API_KEY_HEADER'] === $name) {
+            if ($name === 'Content-Type') {
+                continue;
+            }
+            if (
+                isset($this->base_data['API_KEY_HEADER'])
+                && $this->base_data['API_KEY_HEADER'] === $name
+            ) {
                 $operation['security'] = [["api_key" => []]];
                 continue;
             }
@@ -184,7 +185,7 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
         $body = $this->toBody($request);
         if ($body !== []) {
-            $body['required'] = TRUE;
+            $body['required'] = true;
             $operation['requestBody'] = $body;
         }
 
@@ -199,16 +200,19 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      *
      * @return array<array<string,mixed>>
      */
-    private function toParameters(array $objects, string $href): array {
+    private function toParameters(array $objects, string $href): array
+    {
         $return = [];
 
         foreach ($objects as $variable) {
-            if ($variable->key === NULL) { continue; }
+            if ($variable->key === null) {
+                continue;
+            }
 
             $return_tmp = [
                     'name' => $variable->key->value,
                     'in'   => str_contains($href, '{' . $variable->key->value . '}') ? 'path' : 'query',
-                    'required' => in_array('required', $variable->status, TRUE),
+                    'required' => in_array('required', $variable->status, true),
                     'schema' => [],
             ];
             if ($this->isRef($variable->type)) {
@@ -217,13 +221,11 @@ class OpenApiRenderer extends BaseTemplateRenderer {
                 $return_tmp['schema']['type'] = $variable->type;
             }
 
-            if (isset($variable->value))
-            {
+            if (isset($variable->value)) {
                 $return_tmp['example'] = $variable->value;
             }
 
-            if (isset($variable->description))
-            {
+            if (isset($variable->description)) {
                 $return_tmp['description'] = $variable->description;
             }
             $return[] = $return_tmp;
@@ -234,7 +236,7 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
     private function isRef(string $type): bool
     {
-        return !in_array($type, ["array", "boolean", "integer", "null", "number", "object", "string"], TRUE);
+        return !in_array($type, ["array", "boolean", "integer", "null", "number", "object", "string"], true);
     }
 
     /**
@@ -251,7 +253,9 @@ class OpenApiRenderer extends BaseTemplateRenderer {
         foreach ($responses as $response) {
             $headers = [];
             foreach ($response->headers as $header => $value) {
-                if ($header === 'Content-Type') { continue; }
+                if ($header === 'Content-Type') {
+                    continue;
+                }
                 $headers[$header] = [
                     'schema' => [
                         'type' => 'string',
@@ -275,7 +279,9 @@ class OpenApiRenderer extends BaseTemplateRenderer {
             }
 
             foreach ($response->structure as $structure) {
-                if ($structure->key === NULL) { continue; }
+                if ($structure->key === null) {
+                    continue;
+                }
                 $content[$response->headers['Content-Type'] ?? 'text/plain'] = ['schema' => $this->getComponent($structure)];
             }
 
@@ -300,13 +306,12 @@ class OpenApiRenderer extends BaseTemplateRenderer {
     {
         $return = [];
 
-        if (!is_array($request->struct) && $request->struct->description !== NULL) {
+        if (!is_array($request->struct) && $request->struct->description !== null) {
             $return['description'] = $request->struct->description;
         }
 
         $content_type = $request->headers['Content-Type'] ?? 'text/plain';
-        if (isset($request->struct) && $request->struct !== [])
-        {
+        if (isset($request->struct) && $request->struct !== []) {
             $content = $this->getComponent($request->struct);
             unset($content['required']);
             $return['content'] = [
@@ -322,7 +327,7 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 //            ];
         }
 
-        if ($request->body !== NULL && $request->body !== []) {
+        if ($request->body !== null && $request->body !== []) {
             $return['content'][$content_type]['examples']['base']['value'] = $request->body[0];
         }
 
@@ -333,28 +338,31 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      * Get webhook information for the API.
      * @return object
      */
-    private function getWebhooks(): object { return (object) []; }
+    private function getWebhooks(): object
+    {
+        return (object) [];
+    }
 
     /**
      * Get component information for the API.
      * @return object
      */
-    private function getComponents(): object {
+    private function getComponents(): object
+    {
         $return = [];
-        foreach ($this->base_structures as $structure)
-        {
-          $object = $this->getComponent($structure);
+        foreach ($this->base_structures as $structure) {
+            $object = $this->getComponent($structure);
 
-          if ($structure->ref !== NULL) {
-            $return[$structure->type] = [
-              'allOf' => [
+            if ($structure->ref !== null) {
+                $return[$structure->type] = [
+                'allOf' => [
                 ['$ref' => "#/components/schemas/$structure->ref"],
                 $object,
-              ],
-            ];
-          } else {
-            $return[$structure->type] = $object;
-          }
+                ],
+                ];
+            } else {
+                $return[$structure->type] = $object;
+            }
         }
         $return_object = ['schemas' => $return ];
         if (isset($this->base_data['API_KEY_HEADER'])) {
@@ -379,45 +387,47 @@ class OpenApiRenderer extends BaseTemplateRenderer {
    */
     private function getComponent(BasicStructureElement $structure): array
     {
-      $required = [];
-      $properties = [];
-      if (is_array($structure->value))
-      {
-        /** @var BasicStructureElement $value */
-        foreach ($structure->value as $value)
-        {
-          $propery_data = $this->getSchemaProperty($value);
-          if ($propery_data === NULL) { continue; }
-          if (in_array('required', $value->status, TRUE)) { $required[] = $value->key->value;}
+        $required = [];
+        $properties = [];
+        if (is_array($structure->value)) {
+          /** @var BasicStructureElement $value */
+            foreach ($structure->value as $value) {
+                $propery_data = $this->getSchemaProperty($value);
+                if ($propery_data === null) {
+                    continue;
+                }
+                if (in_array('required', $value->status, true)) {
+                    $required[] = $value->key->value;
+                }
 
-          $properties[$value->key->value] = $propery_data;
+                $properties[$value->key->value] = $propery_data;
+            }
         }
-      }
 
-      $object = [
+        $object = [
         'type' => $structure->element,
-      ];
-      switch ($structure->element) {
-          case 'enum':
-          case 'array':
-              $object['items'] = $properties;
-              break;
-          case 'object':
-              $object['properties'] = $properties;
-              $object['required'] = $required;
-              break;
-          case 'member':
-            //TODO: Check this case
-            break;
-        default:
-            break;
-      }
+        ];
+        switch ($structure->element) {
+            case 'enum':
+            case 'array':
+                $object['items'] = $properties;
+                break;
+            case 'object':
+                $object['properties'] = $properties;
+                $object['required'] = $required;
+                break;
+            case 'member':
+              //TODO: Check this case
+                break;
+            default:
+                break;
+        }
 
-      if ($structure->description !== NULL) {
-        $object['description'] = $structure->description;
-      }
+        if ($structure->description !== null) {
+            $object['description'] = $structure->description;
+        }
 
-      return $object;
+        return $object;
     }
 
   /**
@@ -430,59 +440,58 @@ class OpenApiRenderer extends BaseTemplateRenderer {
     private function getSchemaProperty(BasicStructureElement|ElementStructureElement $value): ?array
     {
       //TODO: Check this case
-      if ($value instanceof ElementStructureElement || $value->key === NULL)
-      {
-        return NULL;
-      }
-
-      $propery_data = [];
-      if ($value->description !== NULL) {
-          $propery_data['description'] = $value->description;
-      }
-
-      if ($this->isRef($value->type) && $value->type !== 'enum')
-      {
-          $propery_data['$ref'] = '#/components/schemas/' . $value->type;
-          return $propery_data;
-      }
-
-      if ($value->type === 'enum') {
-        $propery_data['type'] = in_array('nullable', $value->status, TRUE) ? [ $value->type, 'null' ] : $value->type;
-        $options = [];
-        foreach ($value->value->value as $option) {
-            if ($option instanceof ElementStructureElement) {
-                $options[] = ['const' => $option->value, 'title' => $option->value];
-            }
+        if ($value instanceof ElementStructureElement || $value->key === null) {
+            return null;
         }
-        $propery_data['oneOf'] = $options;
+
+        $propery_data = [];
+        if ($value->description !== null) {
+            $propery_data['description'] = $value->description;
+        }
+
+        if ($this->isRef($value->type) && $value->type !== 'enum') {
+            $propery_data['$ref'] = '#/components/schemas/' . $value->type;
+            return $propery_data;
+        }
+
+        if ($value->type === 'enum') {
+            $propery_data['type'] = in_array('nullable', $value->status, true) ? [ $value->type, 'null' ] : $value->type;
+            $options = [];
+            foreach ($value->value->value as $option) {
+                if ($option instanceof ElementStructureElement) {
+                    $options[] = ['const' => $option->value, 'title' => $option->value];
+                }
+            }
+            $propery_data['oneOf'] = $options;
+
+            return $propery_data;
+        }
+
+        if ($value->type === 'array') {
+            $propery_data['type'] = array_unique(array_map(fn($item) => $item->type, $value->value->value));
+            $propery_data['example'] = array_merge(array_filter(array_map(fn($item) => $item->value, $value->value->value)));
+
+            return $propery_data;
+        }
+
+        if ($value->type === 'object') {
+            $propery_data['type'] = $value->type;
+            $propery_data['properties'] = $this->getComponent($value->value)['properties'];
+
+            return $propery_data;
+        }
+
+        $propery_data['type'] = in_array('nullable', $value->status, true) ? [ $value->type, 'null' ] : $value->type;
 
         return $propery_data;
-      }
-
-      if ($value->type === 'array') {
-        $propery_data['type'] = array_unique(array_map(fn($item) => $item->type,$value->value->value));
-        $propery_data['example'] = array_merge(array_filter(array_map(fn($item) => $item->value,$value->value->value)));
-
-        return $propery_data;
-      }
-
-      if ($value->type === 'object') {
-        $propery_data['type'] = $value->type;
-        $propery_data['properties'] = $this->getComponent($value->value)['properties'];
-
-        return $propery_data;
-      }
-
-      $propery_data['type'] = in_array('nullable', $value->status, TRUE) ? [ $value->type, 'null' ] : $value->type;
-
-      return $propery_data;
     }
 
     /**
      * Get security information for the API
      * @return array<array<string, array<string, mixed>>>
      */
-    private function getSecurity(): array {
+    private function getSecurity(): array
+    {
         if (isset($this->base_data['API_KEY_LOCK_ALL']) && filter_var($this->base_data['API_KEY_LOCK_ALL'], FILTER_VALIDATE_BOOLEAN)) {
             return [["api_key" => []]];
         }
@@ -496,13 +505,14 @@ class OpenApiRenderer extends BaseTemplateRenderer {
      * Get tags for the API
      * @return array<array<string, string>>
      */
-    private function getTags(): array {
+    private function getTags(): array
+    {
         $return = [];
         foreach ($this->categories as $category) {
             $data = [
                 'name' => $category->title,
             ];
-            if ($category->description !== NULL) {
+            if ($category->description !== null) {
                 $data['description'] = $category->description;
             }
 
@@ -511,5 +521,4 @@ class OpenApiRenderer extends BaseTemplateRenderer {
 
         return $return;
     }
-
 }

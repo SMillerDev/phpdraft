@@ -9,15 +9,14 @@
 
 namespace PHPDraft\Model\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\HierarchyElement;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class HierarchyElementChildTest
- * @package PHPDraft\Model\Tests
  */
-abstract class HierarchyElementChildTestBase extends LunrBaseTest
+abstract class HierarchyElementChildTestBase extends LunrBaseTestCase
 {
     /**
      * Mock of the parent class

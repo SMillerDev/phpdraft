@@ -9,24 +9,24 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\In\ApibFileParser;
 use PHPDraft\Parse\DrafterAPI;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
 
 /**
  * Class DrafterAPITest
- * @covers \PHPDraft\Parse\DrafterAPI
  */
-class DrafterAPITest extends LunrBaseTest
+#[CoversClass(DrafterAPI::class)]
+class DrafterAPITest extends LunrBaseTestCase
 {
     /**
      * Shared instance of the file parser.
      *
-     * @var ApibFileParser|MockObject
+     * @var ApibFileParser&MockObject
      */
-    private mixed $parser;
+    private ApibFileParser&MockObject $parser;
 
     private DrafterAPI $class;
 
@@ -35,7 +35,7 @@ class DrafterAPITest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', fn() => TEST_STATICS);
+        $this->mockFunction('sys_get_temp_dir', fn() => TEST_STATICS);
 
         $this->parser = $this->getMockBuilder('\PHPDraft\In\ApibFileParser')
             ->disableOriginalConstructor()
@@ -48,7 +48,7 @@ class DrafterAPITest extends LunrBaseTest
 
         $this->class->init($this->parser);
 
-        $this->unmock_function('sys_get_temp_dir');
+        $this->unmockFunction('sys_get_temp_dir');
     }
 
     /**
@@ -62,50 +62,42 @@ class DrafterAPITest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->get_reflection_property_value('apib'));
+        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->getReflectionPropertyValue('apib'));
     }
 
     /**
      * Test if the drafter api can be used
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testAvailableFails(): void
     {
-        $this->mock_function('curl_exec', fn() => "/some/dir/drafter\n");
-        $this->mock_function('curl_errno', fn() => 1);
+        $this->mockFunction('curl_exec', fn() => "/some/dir/drafter\n");
+        $this->mockFunction('curl_errno', fn() => 1);
 
         $this->assertFalse(DrafterAPI::available());
 
-        $this->unmock_function('curl_errno');
-        $this->unmock_function('curl_exec');
+        $this->unmockFunction('curl_errno');
+        $this->unmockFunction('curl_exec');
     }
 
     /**
      * Test if the drafter api can be used
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testAvailableSuccess(): void
     {
-        $this->mock_function('curl_exec', fn() => "/some/dir/drafter\n");
-        $this->mock_function('curl_errno', fn() => 0);
+        $this->mockFunction('curl_exec', fn() => "/some/dir/drafter\n");
+        $this->mockFunction('curl_errno', fn() => 0);
 
         $this->assertFalse(DrafterAPI::available());
 
-        $this->unmock_function('curl_errno');
-        $this->unmock_function('curl_exec');
+        $this->unmockFunction('curl_errno');
+        $this->unmockFunction('curl_exec');
     }
 
     /**
      * Check if parsing the fails without drafter
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testParseWithFailingWebservice(): void
     {
@@ -113,27 +105,25 @@ class DrafterAPITest extends LunrBaseTest
         $this->expectExceptionMessage('Drafter webservice failed to parse input');
         $this->expectExceptionCode(1);
 
-        $this->mock_function('curl_errno', fn() => 1);
+        $this->mockFunction('curl_errno', fn() => 1);
         $this->class->parseToJson();
-        $this->unmock_function('curl_errno');
+        $this->unmockFunction('curl_errno');
     }
 
     /**
      * Check if parsing the succeeds
-     *
-     * @covers \PHPDraft\Parse\DrafterAPI::parseToJson()
      */
     public function testParseSuccess(): void
     {
-        $this->mock_function('json_last_error', fn() => 0);
-        $this->mock_function('curl_errno', fn() => 0);
-        $this->mock_function('curl_exec', fn() => '{"content":[{"element":"world"}]}');
+        $this->mockFunction('json_last_error', fn() => 0);
+        $this->mockFunction('curl_errno', fn() => 0);
+        $this->mockFunction('curl_exec', fn() => '{"content":[{"element":"world"}]}');
 
         $this->class->parseToJson();
 
-        $this->unmock_function('curl_exec');
-        $this->unmock_function('curl_errno');
-        $this->unmock_function('json_last_error');
+        $this->unmockFunction('curl_exec');
+        $this->unmockFunction('curl_errno');
+        $this->unmockFunction('json_last_error');
 
         $obj           = (object)[];
         $obj2          = (object)[];

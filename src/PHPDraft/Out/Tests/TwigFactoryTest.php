@@ -2,19 +2,20 @@
 
 namespace PHPDraft\Out\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Out\TwigFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
-class TwigFactoryTest extends LunrBaseTest
+#[CoversClass(TwigFactory::class)]
+class TwigFactoryTest extends LunrBaseTestCase
 {
     /**
      * Check factory
-     *
-     * @covers \PHPDraft\Out\TwigFactory::get
-     * @group twig
      */
+    #[Group('twig')]
     public function testFactory(): void
     {
         $loader = new ArrayLoader();

@@ -36,7 +36,7 @@ class Version
     public static function release_id(): string
     {
         $env_id = getenv('PHPDRAFT_RELEASE_ID');
-        if ($env_id !== FALSE) {
+        if ($env_id !== false) {
             return $env_id;
         }
 

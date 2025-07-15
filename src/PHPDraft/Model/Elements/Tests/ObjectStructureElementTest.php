@@ -9,19 +9,19 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use ReflectionClass;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class ObjectStructureElementTest
- *
- * @covers \PHPDraft\Model\Elements\ObjectStructureElement
  */
-class ObjectStructureElementTest extends LunrBaseTest
+#[CoversClass(ObjectStructureElement::class)]
+class ObjectStructureElementTest extends LunrBaseTestCase
 {
     private ObjectStructureElement $class;
 
@@ -38,12 +38,10 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::new_instance
      */
     public function testNewInstance(): void
     {
-        $method = $this->get_reflection_method('new_instance');
+        $method = $this->getReflectionMethod('new_instance');
         $return = $method->invoke($this->class);
         $this->assertInstanceOf(ObjectStructureElement::class, $return);
     }
@@ -51,13 +49,10 @@ class ObjectStructureElementTest extends LunrBaseTest
     /**
      * Parse different objects
      *
-     * @dataProvider parseObjectProvider
-     *
      * @param string                 $object   JSON Object
      * @param ObjectStructureElement $expected Expected Object output
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
+    #[DataProvider('parseObjectProvider')]
     public function testSuccessfulParse(string $object, ObjectStructureElement $expected): void
     {
         $dep = [];
@@ -203,8 +198,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testEmptyParse(): void
     {
@@ -219,8 +212,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testArrayContentEnumContentParse(): void
     {
@@ -236,8 +227,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testArrayContentObjectContentParse(): void
     {
@@ -253,8 +242,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testValueStructureEnumContentParse(): void
     {
@@ -268,8 +255,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testValueStructureArrayContentParse(): void
     {
@@ -283,8 +268,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testValueStructureObjectContentParse(): void
     {
@@ -298,8 +281,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
     public function testValueStructureObjectContentParseContent(): void
     {
@@ -339,12 +320,10 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringBasic(): void
     {
-        $this->set_reflection_property_value('description', null);
+        $this->setReflectionPropertyValue('description', null);
 
         $return = $this->class->__toString();
         $this->assertSame('<span class="example-value pull-right">{  }</span>', $return);
@@ -352,8 +331,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringArray(): void
     {
@@ -371,8 +348,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringNullValue(): void
     {
@@ -386,8 +361,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringObjectValue(): void
     {
@@ -401,8 +374,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringArrayValue(): void
     {
@@ -418,8 +389,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringEnumValue(): void
     {
@@ -439,8 +408,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringBoolValue(): void
     {
@@ -454,8 +421,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringOtherValue(): void
     {
@@ -469,8 +434,6 @@ class ObjectStructureElementTest extends LunrBaseTest
 
     /**
      * Test the setup of new instances
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::__toString
      */
     public function testToStringOtherValueTypeKnown(): void
     {

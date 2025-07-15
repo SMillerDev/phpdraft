@@ -14,7 +14,6 @@ namespace PHPDraft\Model;
 
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use PHPDraft\Model\Elements\StructureElement;
 use PHPDraft\Model\Resource as HttpResource;
 use Rize\UriTemplate;
 
@@ -25,7 +24,7 @@ class Transition extends HierarchyElement
      *
      * @var string|null
      */
-    public ?string $method = NULL;
+    public ?string $method = null;
 
     /**
      * URI.

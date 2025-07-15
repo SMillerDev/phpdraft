@@ -9,19 +9,18 @@
 
 namespace PHPDraft\Model\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\HTTPRequest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
 
 /**
  * Class HTTPRequestTest
- * @covers \PHPDraft\Model\HTTPRequest
  */
-class HTTPRequestTest extends LunrBaseTest
+#[CoversClass(HttpRequest::class)]
+class HTTPRequestTest extends LunrBaseTestCase
 {
-
     private HTTPRequest $class;
 
     /**
@@ -43,9 +42,9 @@ class HTTPRequestTest extends LunrBaseTest
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->mock_function('microtime', fn() => '1000');
+        $this->mockFunction('microtime', fn() => '1000');
         $this->class      = new HTTPRequest($parent);
-        $this->unmock_function('microtime');
+        $this->unmockFunction('microtime');
         $this->baseSetUp($this->class);
     }
 
@@ -62,8 +61,8 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertIsObject($this->get_reflection_property_value('parent'));
-        $this->assertEquals('a9b7ba70783b617e9998dc4dd82eb3c5', $this->get_reflection_property_value('id'));
+        $this->assertIsObject($this->getReflectionPropertyValue('parent'));
+        $this->assertEquals('a9b7ba70783b617e9998dc4dd82eb3c5', $this->getReflectionPropertyValue('id'));
     }
 
     /**
@@ -79,7 +78,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnStatusCode(): void
     {
-        $this->set_reflection_property_value('method', 'POST');
+        $this->setReflectionPropertyValue('method', 'POST');
 
         $obj = '{"method":200, "body":"hello", "headers":[]}';
 
@@ -93,7 +92,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnDesc(): void
     {
-        $this->set_reflection_property_value('body', 'hello');
+        $this->setReflectionPropertyValue('body', 'hello');
 
         $obj = '{"method":300, "body":"hello", "headers":[]}';
 
@@ -107,7 +106,7 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnHeaders(): void
     {
-        $this->set_reflection_property_value('headers', []);
+        $this->setReflectionPropertyValue('headers', []);
 
         $obj = '{"method":300, "body":"hello", "headers":[]}';
 
@@ -121,8 +120,8 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testEqualOnBoth(): void
     {
-        $this->set_reflection_property_value('method', 'GET');
-        $this->set_reflection_property_value('title', 'hello');
+        $this->setReflectionPropertyValue('method', 'GET');
+        $this->setReflectionPropertyValue('title', 'hello');
 
         $obj = '{"attributes":{"method": "GET"}, "meta":{"title":"hello"}}';
         $b   = new HTTPRequest($this->parent);
@@ -136,8 +135,8 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandNoKey(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('method', '');
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('method', '');
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -149,11 +148,11 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandWithHeaders(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('method', '');
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('method', '');
 
         $headers = ['header' => 'value'];
-        $this->set_reflection_property_value('headers', $headers);
+        $this->setReflectionPropertyValue('headers', $headers);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -165,9 +164,9 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandStringBody(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('body', 'body');
-        $this->set_reflection_property_value('method', 'GET');
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('body', 'body');
+        $this->setReflectionPropertyValue('method', 'GET');
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -179,9 +178,9 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandArrayBody(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('method', 'GET');
-        $this->set_reflection_property_value('body', ['this', 'is', 'a', 'body']);
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('method', 'GET');
+        $this->setReflectionPropertyValue('body', ['this', 'is', 'a', 'body']);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -193,9 +192,9 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testGetCurlCommandStructBodyFilled(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('method', 'GET');
-        $this->set_reflection_property_value('body', 1000);
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('method', 'GET');
+        $this->setReflectionPropertyValue('body', 1000);
 
         $struct = $this->getMockBuilder('\PHPDraft\Model\Elements\ObjectStructureElement')
                        ->disableOriginalConstructor()
@@ -210,7 +209,7 @@ class HTTPRequestTest extends LunrBaseTest
                   ->willReturn('TEST');
 
         $struct->value = [ $struct_ar ];
-        $this->set_reflection_property_value('struct', $struct);
+        $this->setReflectionPropertyValue('struct', $struct);
 
         $return = $this->class->get_curl_command('https://ur.l');
 
@@ -222,14 +221,14 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalled(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"TEST"}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertSame('TEST', $this->get_reflection_property_value('method'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertSame('TEST', $this->getReflectionPropertyValue('method'));
     }
 
     /**
@@ -237,14 +236,14 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalledWithHeaders(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"TEST", "headers":{"content":[{"content":{"key":{"content":"KEY"}, "value":{"content":"VALUE"}}}]}}, "content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertSame(['KEY' => 'VALUE'], $this->get_reflection_property_value('headers'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertSame(['KEY' => 'VALUE'], $this->getReflectionPropertyValue('headers'));
     }
 
     /**
@@ -252,15 +251,15 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalledWithPOST(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"POST"}, "content":[{"element":"gold"}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertSame([], $this->get_reflection_property_value('struct'));
-        $this->assertSame([], $this->get_reflection_property_value('body'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertSame([], $this->getReflectionPropertyValue('struct'));
+        $this->assertSame([], $this->getReflectionPropertyValue('body'));
     }
 
     /**
@@ -268,15 +267,15 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalledWithPOSTCopy(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"POST"}, "content":[{"element":"copy", "content":"text"}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertEquals([], $this->get_reflection_property_value('struct'));
-        $this->assertEquals('text', $this->get_reflection_property_value('description'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertEquals([], $this->getReflectionPropertyValue('struct'));
+        $this->assertEquals('text', $this->getReflectionPropertyValue('description'));
     }
 
     /**
@@ -284,14 +283,14 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalledWithPOSTStruct(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"POST"}, "content":[{"element":"dataStructure", "content": {}}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertNotEmpty($this->get_reflection_property_value('struct'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertNotEmpty($this->getReflectionPropertyValue('struct'));
     }
 
     /**
@@ -299,14 +298,14 @@ class HTTPRequestTest extends LunrBaseTest
      */
     public function testParseIsCalledWithPOSTAsset(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"method":"POST"}, "content":[{"content":"something", "element":"asset", "meta":{"classes":["messageBody"]}}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertSame(['something'], $this->get_reflection_property_value('body'));
-        $this->assertSame(['Content-Type' => ''], $this->get_reflection_property_value('headers'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertSame(['something'], $this->getReflectionPropertyValue('body'));
+        $this->assertSame(['Content-Type' => ''], $this->getReflectionPropertyValue('headers'));
     }
 }

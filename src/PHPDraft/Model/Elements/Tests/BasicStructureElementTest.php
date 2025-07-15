@@ -9,31 +9,44 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\BasicStructureElement;
 use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
-use ReflectionClass;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class BasicStructureElementTest
- * @covers \PHPDraft\Model\Elements\BasicStructureElement
  */
-class BasicStructureElementTest extends LunrBaseTest
+#[CoversClass(BasicStructureElement::class)]
+class BasicStructureElementTest extends LunrBaseTestCase
 {
     private BasicStructureElement $class;
 
     /**
      * Set up tests
-     *
-     * @return void
      */
     public function setUp(): void
     {
-        $this->class      = $this->getMockBuilder('\PHPDraft\Model\Elements\BasicStructureElement')
-                                 ->disableOriginalConstructor()
-                                 ->getMockForAbstractClass();
+        $this->class      = new class extends BasicStructureElement {
+            public function parse(?object $object, array &$dependencies): BasicStructureElement
+            {
+                return $this;
+            }
+
+            public function __toString(): string
+            {
+                return '';
+            }
+
+            protected function new_instance(): BasicStructureElement
+            {
+                return new self();
+            }
+        };
+
         $this->baseSetUp($this->class);
     }
 
@@ -42,24 +55,23 @@ class BasicStructureElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertPropertyEquals('element', NULL);
+        $this->assertPropertyEquals('element', null);
     }
 
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @dataProvider stringValueProvider
-     *
      * @param mixed  $value        Value to set to the class
      * @param mixed $string_value Expected string representation
      */
+    #[DataProvider('stringValueProvider')]
     public function testStringValue(mixed $value, mixed $string_value): void
     {
-        $this->set_reflection_property_value('value', $value);
+        $this->setReflectionPropertyValue('value', $value);
 
-        $this->mock_function('rand', fn() => 0);
+        $this->mockFunction('rand', fn() => 0);
         $return = $this->class->string_value();
-        $this->unmock_function('rand');
+        $this->unmockFunction('rand');
 
         $this->assertSame($string_value, $return);
     }
@@ -101,7 +113,7 @@ class BasicStructureElementTest extends LunrBaseTest
         $answer->type = 'cat';
         $answer->description = null;
 
-        $method = $this->get_reflection_method('parse_common');
+        $method = $this->getReflectionMethod('parse_common');
         $method->invokeArgs($this->class, [json_decode($json), &$dep]);
 
         $this->assertEquals($answer->key, $this->class->key);
@@ -114,15 +126,14 @@ class BasicStructureElementTest extends LunrBaseTest
     /**
      * Test if the value the class is initialized with is correct
      *
-     * @dataProvider parseValueProvider
-     *
      * @param mixed                 $value          Value to set to the class
      * @param BasicStructureElement $expected_value Expected string representation
      */
-    public function testParseCommon($value, BasicStructureElement $expected_value): void
+    #[DataProvider('parseValueProvider')]
+    public function testParseCommon(mixed $value, BasicStructureElement $expected_value): void
     {
         $dep = [];
-        $method = $this->get_reflection_method('parse_common');
+        $method = $this->getReflectionMethod('parse_common');
         $method->invokeArgs($this->class, [$value, &$dep]);
 
         $this->assertEquals($expected_value->key, $this->class->key);
