@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Setup PHP
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e # 2.34.1
       with:
         php-version: 8.2
         ini-values: assert.exception=1, phar.readonly=0, zend.assertions=1
@@ -25,7 +25,7 @@ jobs:
       run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
     - name: Cache dependencies
-      uses: actions/cache@v4
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -44,7 +44,7 @@ jobs:
       run: sha256sum build/out/*
 
     - name: Upload binary to release
-      uses: svenstaro/upload-release-action@2.11.2
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/out/phpdraft-${{ github.event.release.tag_name }}.phar
@@ -53,7 +53,7 @@ jobs:
         overwrite: false
 
     - name: Upload library to release
-      uses: svenstaro/upload-release-action@2.11.2
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/out/phpdraft-library-${{ github.event.release.tag_name }}.phar
