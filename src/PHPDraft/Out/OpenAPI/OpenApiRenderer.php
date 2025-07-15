@@ -175,7 +175,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
                 'name' => $name,
                 'in' => 'header',
                 'schema' => ['type' => 'string'],
-                'example' => $value
+                'example' => $value,
             ];
         }
 
@@ -371,7 +371,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
                     "type" => "apiKey",
                     "name" => $this->base_data['API_KEY_HEADER'],
                     "in" => "header",
-                ]
+                ],
             ];
         }
 
@@ -475,7 +475,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
             return $propery_data;
         } elseif ($value->type === 'object') {
             $propery_data['type'] = $value->type;
-            $propery_data['properties'] = $this->getComponent($value->value)['properties'];
+            $propery_data['properties'] = $this->getComponent($value->value)['properties'] ?? new class{};
 
             return $propery_data;
         }
