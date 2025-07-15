@@ -190,6 +190,6 @@ class HTTPResponse implements Comparable
      */
     public function __toString(): string
     {
-        return "{$this->statuscode}_{$this->description}";
+        return "{$this->statuscode}_$this->description";
     }
 }

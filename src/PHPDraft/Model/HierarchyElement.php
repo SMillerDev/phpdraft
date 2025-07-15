@@ -50,16 +50,16 @@ abstract class HierarchyElement
      *
      * @param object $object an object to parse
      *
-     * @return void
+     * @return self
      */
-    public function parse(object $object)
+    public function parse(object $object): self
     {
-        if (isset($object->meta) && isset($object->meta->title)) {
+        if (isset($object->meta->title)) {
             $this->title = $object->meta->title->content ?? $object->meta->title;
         }
 
         if (!isset($object->content) || !is_array($object->content)) {
-            return;
+            return $this;
         }
 
         foreach ($object->content as $key => $item) {
@@ -72,6 +72,8 @@ abstract class HierarchyElement
         if ($object->content !== null && $object->content !== []) {
             $object->content = array_slice($object->content, 0);
         }
+
+        return $this;
     }
 
     /**
