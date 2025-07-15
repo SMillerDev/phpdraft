@@ -23,25 +23,25 @@ jobs:
             experimental: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Setup cache environment
         id: extcache
-        uses: shivammathur/cache-extensions@v1
+        uses: shivammathur/cache-extensions@270463ea3e30925f5661b16e508feab532dbf309 # 1.12.0
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
           key: ${{ env.key }}
 
       - name: Cache extensions
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
           restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e # 2.34.1
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -55,7 +55,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -80,7 +80,7 @@ jobs:
         run: phpcs --standard=tests/phpcs.xml --ignore=\*Minifier.php src/ | cs2pr
 
       - name: Upload coverage result
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: coverage-${{ matrix.php-versions }}
           path: coverage.xml
@@ -98,27 +98,27 @@ jobs:
         php-versions: [ '8.3' ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Setup cache environment
         id: extcache
-        uses: shivammathur/cache-extensions@v1
+        uses: shivammathur/cache-extensions@270463ea3e30925f5661b16e508feab532dbf309 # 1.12.0
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
           key: ${{ env.key }}
 
       - name: Cache extensions
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
           restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e # 2.34.1
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
@@ -130,7 +130,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -181,27 +181,27 @@ jobs:
         php-versions: ['8.3']
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Setup cache environment
         id: extcache
-        uses: shivammathur/cache-extensions@v1
+        uses: shivammathur/cache-extensions@270463ea3e30925f5661b16e508feab532dbf309 # 1.12.0
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
           key: ${{ env.key }}
 
       - name: Cache extensions
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
           restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e # 2.34.1
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
@@ -213,7 +213,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -229,7 +229,7 @@ jobs:
         run: ./vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --exclude-group twig --coverage-clover=./var/coverage/clover.xml
 
       - name: Code coverage Scan
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -239,7 +239,7 @@ jobs:
           mv ./var/coverage/clover.xml coverage.xml
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v5.0
+        uses: sonarsource/sonarqube-scan-action@2500896589ef8f7247069a56136f8dc177c27ccf # v5.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
