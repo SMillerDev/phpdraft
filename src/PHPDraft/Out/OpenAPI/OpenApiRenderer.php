@@ -456,25 +456,24 @@ class OpenApiRenderer extends BaseTemplateRenderer
 
         if ($value->type === 'enum') {
             $propery_data['type'] = in_array('nullable', $value->status, true) ? [ $value->type, 'null' ] : $value->type;
-            $options = [];
+            $options              = [];
+            if (!is_iterable($value->value->value)) {
+                return $propery_data;
+            }
             foreach ($value->value->value as $option) {
                 if ($option instanceof ElementStructureElement) {
-                    $options[] = ['const' => $option->value, 'title' => $option->value];
+                    $options[] = [ 'const' => $option->value, 'title' => $option->value ];
                 }
             }
             $propery_data['oneOf'] = $options;
 
             return $propery_data;
-        }
-
-        if ($value->type === 'array') {
+        } elseif ($value->type === 'array') {
             $propery_data['type'] = array_unique(array_map(fn($item) => $item->type, $value->value->value));
             $propery_data['example'] = array_merge(array_filter(array_map(fn($item) => $item->value, $value->value->value)));
 
             return $propery_data;
-        }
-
-        if ($value->type === 'object') {
+        } elseif ($value->type === 'object') {
             $propery_data['type'] = $value->type;
             $propery_data['properties'] = $this->getComponent($value->value)['properties'];
 

@@ -4,7 +4,7 @@ print 'phpdraft/phpdraft: ';
 
 $tag = @exec('git describe --tags 2>&1');
 
-if (strpos($tag, '-') === false && strpos($tag, 'No names found') === false) {
+if (!str_contains($tag, '-') && !str_contains($tag, 'No names found')) {
     print $tag;
 } else {
     $branch = @exec('git rev-parse --abbrev-ref HEAD');
