@@ -88,7 +88,7 @@ class ObjectStructureElement extends BasicStructureElement
      *
      * @return void
      */
-    protected function parse_value_structure(object $object, array &$dependencies)
+    protected function parse_value_structure(object $object, array &$dependencies): void
     {
         if (isset($object->content->content) || in_array($this->element, ['boolean', 'string', 'number', 'ref'], true)) {
             return;

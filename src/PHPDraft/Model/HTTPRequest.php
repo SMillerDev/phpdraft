@@ -44,7 +44,7 @@ class HTTPRequest implements Comparable
      *
      * @var string|null
      */
-    public ?string $description = NULL;
+    public ?string $description = null;
 
     /**
      * Parent class.

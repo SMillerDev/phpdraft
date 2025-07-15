@@ -9,16 +9,16 @@
 
 namespace PHPDraft\Model\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\HierarchyElement;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
 
 /**
  * Class HierarchyElementTest
- * @covers \PHPDraft\Model\HierarchyElement
  */
-class HierarchyElementTest extends LunrBaseTest
+#[CoversClass(HierarchyElement::class)]
+class HierarchyElementTest extends LunrBaseTestCase
 {
     private HierarchyElement $class;
 
@@ -38,7 +38,8 @@ class HierarchyElementTest extends LunrBaseTest
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Transition')
                                  ->disableOriginalConstructor()
                                  ->getMock();
-        $this->class      = $this->getMockForAbstractClass('PHPDraft\Model\HierarchyElement');
+        $this->class      = new class extends HierarchyElement {
+        };
         $this->baseSetUp($this->class);
     }
 
@@ -55,7 +56,7 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertPropertyEquals('parent', NULL);
+        $this->assertPropertyEquals('parent', null);
     }
 
     /**
@@ -63,7 +64,7 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testParseIsCalled(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":""}';
 
@@ -78,7 +79,7 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testParseIsCalledLoop(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":[{"element":"copy", "content":"hello"}]}';
 
@@ -94,7 +95,7 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testParseIsCalledSlice(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"meta":{"title":"TEST"}, "content":[{"element":"copy", "content":"hello"}, {"element":"test", "content":"hello"}]}';
 
@@ -111,8 +112,8 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testGetHrefIsCalledWithParent(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('title', 'title');
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('title', 'title');
 
         $this->parent->expects($this->once())
                      ->method('get_href')
@@ -128,7 +129,7 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testGetHrefIsCalledWithoutParent(): void
     {
-        $this->set_reflection_property_value('title', 'title');
+        $this->setReflectionPropertyValue('title', 'title');
         $result = $this->class->get_href();
 
         $this->assertSame($result, 'title');
@@ -139,8 +140,8 @@ class HierarchyElementTest extends LunrBaseTest
      */
     public function testGetHrefIsCalledWithTitleWithSpaces(): void
     {
-        $this->set_reflection_property_value('title', 'some title');
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('title', 'some title');
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $this->parent->expects($this->once())
                      ->method('get_href')

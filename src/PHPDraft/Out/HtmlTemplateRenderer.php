@@ -13,28 +13,14 @@ declare(strict_types=1);
 namespace PHPDraft\Out;
 
 use Lukasoppermann\Httpstatus\Httpstatus;
-use PHPDraft\Model\Category;
-use PHPDraft\Model\Elements\ArrayStructureElement;
-use PHPDraft\Model\Elements\ElementStructureElement;
-use PHPDraft\Model\Elements\EnumStructureElement;
-use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Parse\ExecutionException;
-use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-use Twig\Extra\Markdown\DefaultMarkdown;
-use Twig\Extra\Markdown\MarkdownExtension;
-use Twig\Extra\Markdown\MarkdownRuntime;
 use Twig\Loader\FilesystemLoader;
-use Twig\RuntimeLoader\RuntimeLoaderInterface;
-use Twig\TwigFilter;
-use Twig\TwigTest;
 
 class HtmlTemplateRenderer extends BaseTemplateRenderer
 {
-
-
     /**
      * CSS Files to load.
      *

@@ -9,19 +9,23 @@
 
 namespace PHPDraft\Model\Elements\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\Model\Elements\ArrayStructureElement;
 use PHPDraft\Model\Elements\ElementStructureElement;
 use PHPDraft\Model\Elements\EnumStructureElement;
 use PHPDraft\Model\Elements\ObjectStructureElement;
 use PHPDraft\Model\Elements\RequestBodyElement;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class RequestBodyElementTest
- * @covers \PHPDraft\Model\Elements\RequestBodyElement
  */
-class RequestBodyElementTest extends LunrBaseTest
+#[CoversClass(RequestBodyElement::class)]
+class RequestBodyElementTest extends LunrBaseTestCase
 {
+    private RequestBodyElement $class;
+
     /**
      * Set up tests
      * @return void
@@ -37,7 +41,7 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertPropertyEquals('element', NULL);
+        $this->assertPropertyEquals('element', null);
     }
 
     /**
@@ -45,7 +49,7 @@ class RequestBodyElementTest extends LunrBaseTest
      */
     public function testNewInstance(): void
     {
-        $method = $this->get_reflection_method('new_instance');
+        $method = $this->getReflectionMethod('new_instance');
         $return = $method->invoke($this->class);
 
         $this->assertInstanceOf(RequestBodyElement::class, $return);
@@ -110,13 +114,10 @@ class RequestBodyElementTest extends LunrBaseTest
     /**
      * Parse different objects
      *
-     * @dataProvider parseObjectProvider
-     *
      * @param string                 $object   JSON Object
      * @param ObjectStructureElement $expected Expected Object output
-     *
-     * @covers \PHPDraft\Model\Elements\ObjectStructureElement::parse
      */
+    #[DataProvider('parseObjectProvider')]
     public function testSuccessfulParse(string $object, ObjectStructureElement $expected): void
     {
         $dep = [];

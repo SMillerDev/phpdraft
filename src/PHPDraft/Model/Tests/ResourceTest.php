@@ -9,26 +9,27 @@
 
 namespace PHPDraft\Model\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
+use PHPDraft\Model\Category;
 use PHPDraft\Model\HierarchyElement;
 use PHPDraft\Model\Resource;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
 
 /**
  * Class ResourceTest
- * @covers \PHPDraft\Model\Resource
  */
-class ResourceTest extends LunrBaseTest
+#[CoversClass(Resource::class)]
+class ResourceTest extends LunrBaseTestCase
 {
     private Resource $class;
 
     /**
      * Mock of the parent class
      *
-     * @var HierarchyElement|MockObject
+     * @var Category&MockObject
      */
-    protected mixed $parent;
+    protected Category&MockObject $parent;
 
     /**
      * Set up
@@ -38,7 +39,6 @@ class ResourceTest extends LunrBaseTest
         $this->parent     = $this->getMockBuilder('\PHPDraft\Model\Category')
                                  ->getMock();
 
-        $this->parent->href = null;
         $this->class      = new Resource($this->parent);
         $this->baseSetUp($this->class);
     }
@@ -56,7 +56,7 @@ class ResourceTest extends LunrBaseTest
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ResourceTest extends LunrBaseTest
      */
     public function testParseIsCalled(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
+        $this->setReflectionPropertyValue('parent', $this->parent);
 
         $obj = '{"attributes":{"href": "something", "hrefVariables":{"content": [{}]}}, "content":[]}';
 
@@ -75,19 +75,17 @@ class ResourceTest extends LunrBaseTest
 
     /**
      * Test basic parse functions
-     *
-     * @covers \PHPDraft\Model\Resource::parse
      */
     public function testParseIsCalledNoHREF(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('href', null);
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('href', null);
 
         $obj = '{"content":[]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertNull($this->get_reflection_property_value('href'));
+        $this->assertNull($this->getReflectionPropertyValue('href'));
     }
 
     /**
@@ -95,14 +93,14 @@ class ResourceTest extends LunrBaseTest
      */
     public function testParseIsCalledIsCopy(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('href', null);
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('href', null);
 
         $obj = '{"content":[{"element":"copy", "content":""},{"element":"hello", "content":""}, {"element":"hello", "content":""}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertNull($this->get_reflection_property_value('href'));
+        $this->assertNull($this->getReflectionPropertyValue('href'));
     }
 
     /**
@@ -110,15 +108,15 @@ class ResourceTest extends LunrBaseTest
      */
     public function testParseIsCalledIsNotCopy(): void
     {
-        $this->set_reflection_property_value('parent', $this->parent);
-        $this->set_reflection_property_value('href', null);
-        $this->assertEmpty($this->get_reflection_property_value('children'));
+        $this->setReflectionPropertyValue('parent', $this->parent);
+        $this->setReflectionPropertyValue('href', null);
+        $this->assertEmpty($this->getReflectionPropertyValue('children'));
 
         $obj = '{"content":[{"element":"hello", "content":""}]}';
 
         $this->class->parse(json_decode($obj));
 
-        $this->assertSame($this->parent, $this->get_reflection_property_value('parent'));
-        $this->assertNotEmpty($this->get_reflection_property_value('children'));
+        $this->assertSame($this->parent, $this->getReflectionPropertyValue('parent'));
+        $this->assertNotEmpty($this->getReflectionPropertyValue('children'));
     }
 }

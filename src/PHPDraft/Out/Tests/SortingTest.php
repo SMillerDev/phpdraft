@@ -9,22 +9,20 @@
 
 namespace PHPDraft\Out\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
+use PHPDraft\Model\Category;
 use PHPDraft\Out\Sorting;
-use PHPDraft\Out\Version;
-use ReflectionClass;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 
 /**
  * Class SortingTest
- *
- * @covers \PHPDraft\Out\Sorting
  */
-class SortingTest extends LunrBaseTest
+#[CoversClass(Sorting::class)]
+class SortingTest extends LunrBaseTestCase
 {
     /**
      * Test if service sorting is determined correctly.
-     *
-     * @covers \PHPDraft\Out\Sorting::sortServices
      */
     public function testSortsServicesIfNeeded(): void
     {
@@ -37,8 +35,6 @@ class SortingTest extends LunrBaseTest
 
     /**
      * Test if structure sorting is determined correctly.
-     *
-     * @covers \PHPDraft\Out\Sorting::sortStructures
      */
     public function testSortsStructureIfNeeded(): void
     {

@@ -29,7 +29,7 @@ abstract class HierarchyElement
      *
      * @var string|null
      */
-    public ?string $description = NULL;
+    public ?string $description = null;
 
     /**
      * Child elements.

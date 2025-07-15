@@ -52,8 +52,7 @@ class Drafter extends BaseParser
     public static function location(): false|string
     {
         $returnVal = shell_exec('which drafter 2> /dev/null');
-        if ($returnVal === NULL)
-        {
+        if ($returnVal === null) {
             return false;
         }
 
@@ -88,8 +87,7 @@ class Drafter extends BaseParser
         $path = self::location();
 
         $version = shell_exec('drafter -v 2> /dev/null');
-        if ($version === NULL)
-        {
+        if ($version === null) {
             return false;
         }
 

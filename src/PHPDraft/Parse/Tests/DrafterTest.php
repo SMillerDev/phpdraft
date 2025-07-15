@@ -9,34 +9,34 @@
 
 namespace PHPDraft\Parse\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPDraft\In\ApibFileParser;
 use PHPDraft\Parse\Drafter;
-use PHPDraft\Parse\ExecutionException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
 
 /**
  * Class DrafterTest
- *
- * @covers \PHPDraft\Parse\Drafter
  */
-class DrafterTest extends LunrBaseTest
+#[CoversClass(Drafter::class)]
+class DrafterTest extends LunrBaseTestCase
 {
     /**
      * Shared instance of the file parser.
      *
-     * @var ApibFileParser|MockObject
+     * @var ApibFileParser&MockObject
      */
-    private mixed $parser;
+    private ApibFileParser&MockObject $parser;
+
+    private Drafter $class;
 
     /**
      * Set up
      */
     public function setUp(): void
     {
-        $this->mock_function('sys_get_temp_dir', fn() => TEST_STATICS);
-        $this->mock_function('shell_exec', fn() => "/some/dir/drafter\n");
+        $this->mockFunction('sys_get_temp_dir', fn() => TEST_STATICS);
+        $this->mockFunction('shell_exec', fn() => "/some/dir/drafter\n");
 
         $this->parser = $this->getMockBuilder('\PHPDraft\In\ApibFileParser')
                              ->disableOriginalConstructor()
@@ -49,8 +49,8 @@ class DrafterTest extends LunrBaseTest
 
         $this->class->init($this->parser);
 
-        $this->unmock_function('shell_exec');
-        $this->unmock_function('sys_get_temp_dir');
+        $this->unmockFunction('shell_exec');
+        $this->unmockFunction('sys_get_temp_dir');
     }
 
     /**
@@ -71,12 +71,10 @@ class DrafterTest extends LunrBaseTest
 
     /**
      * Test if the value the class is initialized with is correct
-     *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testSetupCorrectly(): void
     {
-        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->get_reflection_property_value('apib'));
+        $this->assertInstanceOf('\PHPDraft\In\ApibFileParser', $this->getReflectionPropertyValue('apib'));
     }
 
     /**
@@ -84,8 +82,8 @@ class DrafterTest extends LunrBaseTest
      */
     public function testParseToJSON(): void
     {
-        $this->mock_function('json_last_error', fn() => JSON_ERROR_NONE);
-        $this->mock_function('shell_exec', fn() => "");
+        $this->mockFunction('json_last_error', fn() => JSON_ERROR_NONE);
+        $this->mockFunction('shell_exec', fn() => "");
         file_put_contents(
             TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json/index.json')
@@ -95,19 +93,17 @@ class DrafterTest extends LunrBaseTest
             json_decode(file_get_contents(TEST_STATICS . '/drafter/json/index.json')),
             $this->class->json
         );
-        $this->unmock_function('shell_exec');
-        $this->unmock_function('json_last_error');
+        $this->unmockFunction('shell_exec');
+        $this->unmockFunction('json_last_error');
     }
 
     /**
      * Check if parsing the APIB to JSON gives the expected result with inheritance
-     *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONInheritance(): void
     {
-        $this->mock_function('json_last_error', fn() => JSON_ERROR_NONE);
-        $this->mock_function('shell_exec', fn() => '');
+        $this->mockFunction('json_last_error', fn() => JSON_ERROR_NONE);
+        $this->mockFunction('shell_exec', fn() => '');
         file_put_contents(
             TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')
@@ -117,14 +113,12 @@ class DrafterTest extends LunrBaseTest
             json_decode(file_get_contents(TEST_STATICS . '/drafter/json/inheritance.json')),
             $this->class->json
         );
-        $this->unmock_function('shell_exec');
-        $this->unmock_function('json_last_error');
+        $this->unmockFunction('shell_exec');
+        $this->unmockFunction('json_last_error');
     }
 
     /**
      * Check if parsing the APIB to JSON gives the expected result
-     *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONWithErrors(): void
     {
@@ -132,32 +126,28 @@ class DrafterTest extends LunrBaseTest
         $this->expectExceptionMessage('Parsing encountered errors and stopped');
         $this->expectExceptionCode(2);
 
-        $this->mock_function('shell_exec', fn() => '');
+        $this->mockFunction('shell_exec', fn() => '');
         file_put_contents(
             TEST_STATICS . '/drafter/index.json',
             file_get_contents(TEST_STATICS . '/drafter/json/error.json')
         );
         $this->class->parseToJson();
         $this->expectOutputString("WARNING: ignoring unrecognized block\nWARNING: no headers specified\nWARNING: ignoring unrecognized block\nWARNING: empty request message-body");
-        $this->unmock_function('shell_exec');
+        $this->unmockFunction('shell_exec');
     }
 
     /**
      * Check if parsing the fails without drafter
-     *
-     * @covers \PHPDraft\Parse\Drafter::available()
      */
     public function testSetupWithoutDrafter(): void
     {
-        $this->mock_function('shell_exec', fn() => '');
+        $this->mockFunction('shell_exec', fn() => '');
         $this->assertFalse(Drafter::available());
-        $this->unmock_function('shell_exec');
+        $this->unmockFunction('shell_exec');
     }
 
     /**
      * Check if parsing the fails when invalid JSON
-     *
-     * @covers \PHPDraft\Parse\Drafter::parseToJson()
      */
     public function testParseToJSONWithInvalidJSON(): void
     {
@@ -165,12 +155,12 @@ class DrafterTest extends LunrBaseTest
         $this->expectExceptionMessage('Drafter generated invalid JSON (ERROR)');
         $this->expectExceptionCode(2);
 
-        $this->mock_function('json_last_error', fn() => JSON_ERROR_DEPTH);
-        $this->mock_function('json_last_error_msg', fn() => 'ERROR');
+        $this->mockFunction('json_last_error', fn() => JSON_ERROR_DEPTH);
+        $this->mockFunction('json_last_error_msg', fn() => 'ERROR');
         file_put_contents(TEST_STATICS . '/drafter/index.json', '["hello: \'world}');
         $this->class->parseToJson();
         $this->expectOutputString('ERROR: invalid json in /tmp/drafter/index.json');
-        $this->unmock_function('json_last_error_msg');
-        $this->unmock_function('json_last_error');
+        $this->unmockFunction('json_last_error_msg');
+        $this->unmockFunction('json_last_error');
     }
 }
