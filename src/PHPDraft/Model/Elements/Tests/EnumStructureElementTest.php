@@ -186,6 +186,19 @@ class EnumStructureElementTest extends LunrBaseTestCase
         $base3->is_variable = false;
         $base3->deps        = [];
 
+        $base4              = new EnumStructureElement();
+        $base4->key         = new ElementStructureElement();
+        $base4->value       = [ $value1 ];
+        $base4->key->type   = 'string';
+        $base4->key->value  = 'item';
+        $base4->status      = [];
+        $base4->element     = 'enum';
+        $base4->type        = 'Some simple enum';
+        $base4->is_variable = false;
+        $base4->description = null;
+        $base4->ref = null;
+        $base4->deps        = ['Some simple enum'];
+
         $return['base enum'] = [
             '{
                 "element":"enum",
@@ -287,6 +300,44 @@ class EnumStructureElementTest extends LunrBaseTestCase
                 }
             }',
             $base3,
+        ];
+        $return['enum with single enumeration and content'] = [
+            '{
+                "element":"enum",
+                "meta":{
+                    "id":{
+                        "element":"string",
+                        "content":"Some simple enum"
+                    }
+                },
+                "attributes":{
+                    "enumerations":{
+                        "element":"array",
+                        "content":[
+                            {
+                                "element":"string",
+                                "attributes":{
+                                    "typeAttributes":{
+                                        "element":"array",
+                                        "content":[
+                                            {
+                                                "element":"string",
+                                                "content":"fixed"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "content":"item"
+                            }
+                        ]
+                    }
+                },
+                "content": {
+                    "element": "string",
+                    "content": "item"
+                }
+            }',
+            $base4,
         ];
 
         return $return;
