@@ -50,7 +50,7 @@ class Category extends HierarchyElement
                     $struct->deps = $deps;
                     $struct->parse($item->content, $deps);
 
-                    if (isset($item->content->content[0]->meta->id)) {
+                    if (isset($item->content->content) && is_array($item->content->content) && isset($item->content->content[0]->meta->id)) {
                         $this->structures[$item->content->content[0]->meta->id] = $struct;
                     } elseif (isset($item->content->meta->id->content)) {
                         $this->structures[$item->content->meta->id->content] = $struct;

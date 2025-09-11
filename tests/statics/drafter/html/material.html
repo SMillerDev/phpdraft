@@ -3153,7 +3153,7 @@ locations in navigation.</p>
                             <div id="modal-SOME_ID" class="modal">
                                 <div class="modal-content">
                                     <label> Example cURL request:
-                                        <textarea rows='75' cols='75'>curl -XPOST -H &#039;Authorization: Bearer {access_token}&#039; &#039;https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=open&amp;amp;percent=50&#039;</textarea>
+                                        <textarea rows='75' cols='75'>curl -XPOST -H &#039;Authorization: Bearer {access_token}&#039; &#039;https://owner-api.teslamotors.com/api/1/vehicles/1/command/sun_roof_control?state=0&amp;amp;percent=50&#039;</textarea>
                                     </label>
                                 </div>
                                 <div class="modal-footer">
@@ -3188,7 +3188,7 @@ locations in navigation.</p>
                                         <tbody>
                                         <tr><td><span>vehicle_id</span></td><td><code>string</code></td><td> <span class="status">required</span></td><td><p>The id of the Vehicle.</p>
 </td><td><span class="example-value pull-right">1</span></td></tr><tr><td><span>state</span></td><td><code>enum</code></td><td> <span class="status">required</span></td><td><p>The desired state of the panoramic roof. The approximate percent open values for each state are <code>open</code> = 100%, <code>close</code> = 0%, <code>comfort</code> = 80%, and <code>vent</code> = ~15%</p>
-</td><td><div class="enum-struct"><tr><td>open</td><td><code>enum</code></td><td></td></tr></div></td></tr><tr><td><span>percent</span></td><td><code>string</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
+</td><td><div class="enum-struct"><ul class="list-group mdl-list"><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">open</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">close</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">comfort</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">vent</span></li><li class="list-group-item mdl-list__item"><code>string</code> - <span class="example-value pull-right">move</span></li></ul></div></td></tr><tr><td><span>percent</span></td><td><code>string</code></td><td> <span class="status">optional</span></td><td><p>The percentage to move the roof to.</p>
 </td><td><span class="example-value pull-right">50</span></td></tr>                                        </tbody>
                                     </table>
                                 </div>
