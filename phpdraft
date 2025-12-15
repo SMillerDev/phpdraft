@@ -10,109 +10,16 @@ set_include_path(get_include_path() . ":" . __DIR__ . '/src/');
  */
 require_once 'vendor/autoload.php';
 
-use Garden\Cli\Cli;
-use PHPDraft\In\ApibFileParser;
-use PHPDraft\Out\Sorting;
-use PHPDraft\Out\Version;
-use PHPDraft\Parse\ExecutionException;
-use PHPDraft\Parse\ParserFactory;
-use PHPDraft\Parse\ResourceException;
+use PHPDraft\In\CLI;
 
 define('VERSION', '0');
 //define('ID_STATIC', 'SOME_ID');
 try
 {
-    // Define the cli options.
     $cli = new Cli();
-    $cli->description('Parse API Blueprint files.')
-        ->opt('help:h', 'This help text', false)
-        ->opt('version:v', 'Print the version for PHPDraft.', false)
-        ->opt('file:f', 'Specifies the file to parse.', false)
-        ->opt('openapi:a', 'Output location for an OpenAPI file.', false)
-        ->opt('yes:y', 'Always accept using the online mode.', false, 'bool')
-        ->opt('online:o', 'Always use the online mode.', false, 'bool')
-        ->opt('template:t', 'Specifies the template to use. (defaults to \'default\').', false)
-        ->opt('sort:s', 'Sort displayed values [All|None|Structures|Webservices] (defaults to the way the objects are in the file).', false)
-        ->opt('header_image:i', 'Specifies an image to display in the header.', false)
-        ->opt('css:c', 'Specifies a CSS file to include (value is put in a link element without checking).', false)
-        ->opt('javascript:j', 'Specifies a JS file to include (value is put in a script element without checking).', false)
-        ->opt('debug-json-file', 'Input a rendered JSON file for debugging.', false)
-        ->opt('debug-json', 'Input a rendered JSON text for debugging.', false);
-
-    // Parse and return cli args.
-    $args = $cli->parse($argv, FALSE);
-    if (isset($args['help']) || empty($args->getOpts())) {
-        $cli->writeHelp();
-        throw new ExecutionException('', 0);
-    }
-    if (isset($args['version'])) {
-        Version::version();
-        throw new ExecutionException('', 0);
-    }
-
-    stream_set_blocking(STDIN, false);
-    $stdin = stream_get_contents(STDIN);
-    $file = $args->getOpt('file');
-    if (!empty($stdin) && $file !== NULL) {
-        throw new ExecutionException('ERROR: Passed data in both file and stdin', 2);
-    } elseif (!empty($stdin) && $file === NULL) {
-        $file = tempnam(sys_get_temp_dir(), 'phpdraft');
-        file_put_contents($file, $stdin);
-    }
-    if ($file === NULL || $file === '')
-    {
-        throw new ExecutionException('ERROR: File does not exist', 200);
-    }
-
-    if (!($file !== NULL || isset($args['debug-json-file']) || isset($args['debug-json']))) {
-        throw new ExecutionException('Missing required option: file', 1);
-    }
-
-    define('THIRD_PARTY_ALLOWED', getenv('PHPDRAFT_THIRD_PARTY') !== '0');
-    if ((isset($args['y']) || isset($args['o'])) && THIRD_PARTY_ALLOWED) {
-        define('DRAFTER_ONLINE_MODE', 1);
-    }
-
-    if (!isset($args['debug-json-file']) && !isset($args['debug-json'])) {
-        $apib_parser = new ApibFileParser($file);
-        $apib        = $apib_parser->parse();
-        $offline     = FALSE;
-        $online      = FALSE;
-
-        try {
-            $parser = ParserFactory::getDrafter();
-            $parser = $parser->init($apib);
-            $data = $parser->parseToJson();
-        } catch (ResourceException $exception) {
-            throw new ExecutionException('No drafter available', 255);
-        }
-    } else {
-        $json_string = $args['debug-json'] ?? file_get_contents($args['debug-json-file']);
-        $data = json_decode($json_string);
-    }
-
-    if (isset($args['openapi'])) {
-        $openapi = ParserFactory::getOpenAPI()->init($data);
-        $openapi->write($args['openapi']);
-    }
-
-    $html          = ParserFactory::getJson()->init($data);
-    $name          = 'PHPD_SORT_' . strtoupper($args->getOpt('sort', ''));
-    $html->sorting = Sorting::${$name} ?? Sorting::PHPD_SORT_NONE->value;
-
-    $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
-    $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');
-    $colors        = (is_null($color1) || is_null($color2)) ? '' : '__' . $color1 . '__' . $color2;
-    $html->build_html(
-        $args->getOpt('template', 'default') . $colors,
-        $args['header_image'],
-        $args['css'],
-        $args['javascript']
-    );
-
-    echo $html;
+    $cli->run();
 }
-catch (ExecutionException|Exception $exception)
+catch (Exception $exception)
 {
     file_put_contents('php://stderr', $exception->getMessage() . PHP_EOL);
     exit($exception->getCode());
