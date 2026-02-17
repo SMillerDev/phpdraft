@@ -38,7 +38,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/drafter
 
       - name: Build and push drafter Docker image
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           context: .
           push: true
@@ -60,7 +60,7 @@ jobs:
           echo "latest=$(git describe --tags --always --abbrev=0)" >> "$GITHUB_OUTPUT"
 
       - name: Build and push PHPDraft Docker image
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
