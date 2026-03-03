@@ -160,6 +160,9 @@ class ApibFileParser implements Stringable
         $result = curl_exec($ch);
         curl_close($ch);
 
+        if ($result === false) {
+            throw new ExecutionException("Schema could not be fetched: $url", 1);
+        }
         return $result;
     }
 
