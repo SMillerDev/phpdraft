@@ -37,27 +37,32 @@ class CLI extends BaseCLI
     protected function main(Options $options): void
     {
         $args = $options->getOpt();
-        if ($options->getOpt('version', NULL) !== NULL) {
+        if ($options->getOpt('version') !== FALSE) {
             Version::version();
             throw new ExecutionException('', 0);
         }
 
         stream_set_blocking(STDIN, false);
+        /** @var false|string $stdin */
         $stdin = stream_get_contents(STDIN);
-        $file = $options->getOpt('file', NULL);
-        if (!empty($stdin) && $file !== NULL) {
-            throw new ExecutionException('ERROR: Passed data in both file and stdin', 2);
-        } elseif (!empty($stdin) && $file === NULL) {
-            $file = tempnam(sys_get_temp_dir(), 'phpdraft');
-            file_put_contents($file, $stdin);
+        $tmp_file_name = NULL;
+        if ($stdin !== FALSE && $stdin !== '') {
+            $tmp_file_name = tempnam(sys_get_temp_dir(), 'phpdraft');
+            file_put_contents($tmp_file_name, $stdin);
         }
-        if ($file === NULL || $file === '')
-        {
-            throw new ExecutionException('ERROR: File does not exist', 200);
+        /** @var false|string $file_name */
+        $file_name = $options->getOpt('file');
+        if ($tmp_file_name !== NULL && $file_name !== FALSE) {
+            throw new ExecutionException('ERROR: Passed data in both file and stdin', 2);
         }
 
-        if (!($file !== NULL || $options->getOpt('debug-json-file') === FALSE || $options->getOpt('debug-json') === FALSE)) {
+        if (!($options->getOpt('debug-json-file') === FALSE || $options->getOpt('debug-json') === FALSE || $file_name !== FALSE)) {
             throw new ExecutionException('Missing required option: file', 1);
+        }
+
+        if ($file_name === FALSE || $file_name === '')
+        {
+            throw new ExecutionException('ERROR: File does not exist', 200);
         }
 
         define('THIRD_PARTY_ALLOWED', getenv('PHPDRAFT_THIRD_PARTY') !== '0');
@@ -66,7 +71,7 @@ class CLI extends BaseCLI
         }
 
         if (!isset($args['debug-json-file']) && !isset($args['debug-json'])) {
-            $apib_parser = new ApibFileParser($file);
+            $apib_parser = new ApibFileParser($file_name);
             $apib        = $apib_parser->parse();
 
             try {
@@ -88,7 +93,7 @@ class CLI extends BaseCLI
 
         $html          = ParserFactory::getJson()->init($data);
         $name          = 'PHPD_SORT_' . strtoupper($options->getOpt('sort', ''));
-        $html->sorting = Sorting::${$name} ?? Sorting::PHPD_SORT_NONE->value;
+        $html->sorting = defined("Sorting::$name") ? Sorting::{$name} : Sorting::PHPD_SORT_NONE->value;
 
         $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
         $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00ae3c2461e27a91a90c1cd02a451988",
+    "content-hash": "3eedefe2b86599a32d7b9462e99f07be",
     "packages": [
         {
             "name": "lukasoppermann/http-status",
@@ -3995,7 +3995,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1",
+        "php": "^8.3",
         "ext-json": "*",
         "ext-curl": "*"
     },

@@ -358,7 +358,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
      *
      * @param HTTPRequest $request Request to convert
      *
-     * @return array<string,array<string,mixed>>|null OpenAPI style body
+     * @return null|array<string,mixed> OpenAPI style body
      */
     private function toBody(HTTPRequest $request): ?array
     {
