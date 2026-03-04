@@ -10,15 +10,12 @@
         {
             "url": null,
             "description": "Main host"
-        },
-        {
-            "url": ""
         }
     ],
     "paths": {},
     "webhooks": {},
     "components": {
-        "schemas": []
+        "schemas": {}
     },
     "security": [],
     "tags": []

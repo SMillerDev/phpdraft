@@ -1,5 +1,5 @@
 parameters:
-    phpVersion: 80100
+    phpVersion: 80300
     bootstrapFiles:
         - tests/test.bootstrap.inc.php
     excludePaths:

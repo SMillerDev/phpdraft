@@ -25,6 +25,7 @@ class OpenApiRendererTest extends LunrBaseTestCase
         parent::tearDown();
     }
 
+
     public function testWrite(): void
     {
         $this->class->init((object)[]);
@@ -55,7 +56,7 @@ class OpenApiRendererTest extends LunrBaseTestCase
         $method = $this->getReflectionMethod('getComponents');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals((object)['schemas' => []], $result);
+        $this->assertEquals((object)['schemas' => (object)[]], $result);
     }
 
     public function testGetDocs(): void
@@ -81,7 +82,7 @@ class OpenApiRendererTest extends LunrBaseTestCase
         $method = $this->getReflectionMethod('getServers');
         $result = $method->invokeArgs($this->class, []);
 
-        $this->assertEquals([['url' => null,'description' => 'Main host'], ['url' => '']], $result);
+        $this->assertEquals([['url' => null,'description' => 'Main host']], $result);
     }
 
     public function testGetApiInfo(): void
@@ -110,11 +111,13 @@ class OpenApiRendererTest extends LunrBaseTestCase
         $mock = $this->getMockBuilder(HttpRequest::class)
                      ->disableOriginalConstructor()
                      ->getMock();
+        $mock->method = 'PUT';
 
         $method = $this->getReflectionMethod('toBody');
         $result = $method->invokeArgs($this->class, [$mock]);
 
-        $this->assertEquals([], $result);
+        $this->assertEquals(['content' => (object)[],
+    'description' => 'No description provided'], $result);
     }
 
     public function testToParameters(): void
