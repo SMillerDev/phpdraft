@@ -12,7 +12,6 @@ use splitbrain\phpcli\Options;
 
 class CLI extends BaseCLI
 {
-
     protected function setup(Options $options): void
     {
         $options->setHelp('Usage: phpdraft [options]');
@@ -37,7 +36,7 @@ class CLI extends BaseCLI
     protected function main(Options $options): void
     {
         $args = $options->getOpt();
-        if ($options->getOpt('version') !== FALSE) {
+        if ($options->getOpt('version') !== false) {
             Version::version();
             throw new ExecutionException('', 0);
         }
@@ -45,23 +44,22 @@ class CLI extends BaseCLI
         stream_set_blocking(STDIN, false);
         /** @var false|string $stdin */
         $stdin = stream_get_contents(STDIN);
-        $tmp_file_name = NULL;
-        if ($stdin !== FALSE && $stdin !== '') {
+        $tmp_file_name = null;
+        if ($stdin !== false && $stdin !== '') {
             $tmp_file_name = tempnam(sys_get_temp_dir(), 'phpdraft');
             file_put_contents($tmp_file_name, $stdin);
         }
         /** @var false|string $file_name */
         $file_name = $options->getOpt('file');
-        if ($tmp_file_name !== NULL && $file_name !== FALSE) {
+        if ($tmp_file_name !== null && $file_name !== false) {
             throw new ExecutionException('ERROR: Passed data in both file and stdin', 2);
         }
 
-        if (!($options->getOpt('debug-json-file') === FALSE || $options->getOpt('debug-json') === FALSE || $file_name !== FALSE)) {
+        if (!($options->getOpt('debug-json-file') === false || $options->getOpt('debug-json') === false || $file_name !== false)) {
             throw new ExecutionException('Missing required option: file', 1);
         }
 
-        if ($file_name === FALSE || $file_name === '')
-        {
+        if ($file_name === false || $file_name === '') {
             throw new ExecutionException('ERROR: File does not exist', 200);
         }
 
@@ -95,14 +93,14 @@ class CLI extends BaseCLI
         $name          = 'PHPD_SORT_' . strtoupper($options->getOpt('sort', ''));
         $html->sorting = defined("Sorting::$name") ? Sorting::{$name} : Sorting::PHPD_SORT_NONE->value;
 
-        $color1        = getenv('COLOR_PRIMARY') === FALSE ? NULL : getenv('COLOR_PRIMARY');
-        $color2        = getenv('COLOR_SECONDARY') === FALSE ? NULL : getenv('COLOR_SECONDARY');
+        $color1        = getenv('COLOR_PRIMARY') === false ? null : getenv('COLOR_PRIMARY');
+        $color2        = getenv('COLOR_SECONDARY') === false ? null : getenv('COLOR_SECONDARY');
         $colors        = (is_null($color1) || is_null($color2)) ? '' : '__' . $color1 . '__' . $color2;
         $html->build_html(
             $options->getOpt('template', 'default') . $colors,
-            $args['header-image'] ?? NULL,
-            $args['css'] ?? NULL,
-            $args['javascript'] ?? NULL,
+            $args['header-image'] ?? null,
+            $args['css'] ?? null,
+            $args['javascript'] ?? null,
         );
 
         if (isset($args['html'])) {
