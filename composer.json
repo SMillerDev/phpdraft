@@ -27,7 +27,8 @@
     "twig/markdown-extra": "^3.0",
     "matthiasmullie/minify": "^1.3",
     "rize/uri-template": "*",
-    "splitbrain/php-cli": "^1.3"
+    "splitbrain/php-cli": "^1.3",
+    "psr/log": "^2.0"
   },
   "require-dev": {
     "lunr/halo": "dev-master",

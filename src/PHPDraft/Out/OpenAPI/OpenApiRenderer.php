@@ -12,7 +12,7 @@ use PHPDraft\Out\BaseTemplateRenderer;
 
 class OpenApiRenderer extends BaseTemplateRenderer
 {
-    const NO_DESCRIPTION_PROVIDED = 'No description provided';
+    private const NO_DESCRIPTION_PROVIDED = 'No description provided';
 
     public function init(object $json): self
     {
@@ -131,24 +131,26 @@ class OpenApiRenderer extends BaseTemplateRenderer
                     }
                     $cleaned_href = preg_replace('/{\?.*}/', '', $transition->href);
                     $cleaned_href = rtrim($cleaned_href, "/");
-                    $optional_paths = array_filter($parameters, fn ($parameter) => $parameter['in'] === 'path' && $parameter['required'] === FALSE);
+                    $optional_paths = array_filter($parameters, fn ($parameter) => $parameter['in'] === 'path' && $parameter['required'] === false);
                     if ($optional_paths === []) {
                         $return[$cleaned_href] = (object) $transition_return;
                         continue;
                     }
 
                     $cleaned_parameters = [];
-                    $optional_href = NULL;
+                    $optional_href = null;
                     foreach ($parameters as $key => $parameter) {
-                        if ($parameter['in'] === 'path' && $parameter['required'] === TRUE) {
+                        if ($parameter['in'] === 'path' && $parameter['required'] === true) {
                             $cleaned_parameters[] = $parameter;
                             continue;
                         }
 
-                        if ($parameter['in'] !== 'path') { continue; }
+                        if ($parameter['in'] !== 'path') {
+                            continue;
+                        }
 
                         $optional_href = str_replace("/{{$parameter["name"]}}", '', $cleaned_href);
-                        $parameters[$key]['required'] = TRUE;
+                        $parameters[$key]['required'] = true;
                     }
 
                     //Full path
@@ -230,7 +232,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
         }
 
         $body = $this->toBody($request);
-        if ($body === NULL) {
+        if ($body === null) {
             return $operation;
         }
 
@@ -363,7 +365,7 @@ class OpenApiRenderer extends BaseTemplateRenderer
     private function toBody(HTTPRequest $request): ?array
     {
         if (in_array($request->method, ['GET', 'DELETE'], true)) {
-            return NULL;
+            return null;
         }
 
         $return = ['content' => []];
@@ -446,7 +448,8 @@ class OpenApiRenderer extends BaseTemplateRenderer
     {
         $object = [];
         if ($this->isRef($structure->element) && $structure->element !== 'enum') {
-            $object['$ref'] = '#/components/schemas/' . $this->refIdFromType($structure->element === 'member' ? $structure->type : $structure->element);;
+            $object['$ref'] = '#/components/schemas/' . $this->refIdFromType($structure->element === 'member' ? $structure->type : $structure->element);
+            ;
             return $object;
         }
 
@@ -471,7 +474,8 @@ class OpenApiRenderer extends BaseTemplateRenderer
             case 'enum':
 //                $object['type'] = $structure->type;;
             case 'array':
-                $object['items'] = (object) $properties;;
+                $object['items'] = (object) $properties;
+                ;
                 break;
             case 'object':
                 $object['properties'] = $properties;
@@ -544,7 +548,8 @@ class OpenApiRenderer extends BaseTemplateRenderer
             return $propery_data;
         } elseif ($value->type === 'object') {
             $propery_data['type'] = $value->type;
-            $propery_data['properties'] = $this->getComponent($value->value)['properties'] ?? new class{};
+            $propery_data['properties'] = $this->getComponent($value->value)['properties'] ?? new class {
+            };
 
             return $propery_data;
         }
@@ -590,8 +595,8 @@ class OpenApiRenderer extends BaseTemplateRenderer
         return $return;
     }
 
-    private function refIdFromType(string $type): string {
+    private function refIdFromType(string $type): string
+    {
         return str_replace(' ', '_', $type);
     }
-
 }

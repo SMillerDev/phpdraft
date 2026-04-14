@@ -117,7 +117,7 @@ class OpenApiRendererTest extends LunrBaseTestCase
         $result = $method->invokeArgs($this->class, [$mock]);
 
         $this->assertEquals(['content' => (object)[],
-    'description' => 'No description provided'], $result);
+        'description' => 'No description provided'], $result);
     }
 
     public function testToParameters(): void
