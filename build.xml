@@ -71,8 +71,8 @@
                 <include name="**/*.php"/>
             </fileset>
         </copy>
-        <copy todir="${project.basedir}/build/phar/phpdraft/src/Garden/Cli">
-            <fileset dir="vendor/vanilla/garden-cli/src">
+        <copy todir="${project.basedir}/build/phar/phpdraft/src/splitbrain/phpcli">
+            <fileset dir="vendor/splitbrain/php-cli/src">
                 <include name="**/*.php"/>
             </fileset>
         </copy>
